@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="SQLite - Teamspeak Settings" uuid="ee89a04a-915f-4ade-b75e-8d712ddfce61">
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="SQLite - Teamspeak URLs" uuid="612d4cca-03bd-4fc2-be66-aebf5cd1f2c5">
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+    </data-source>
+  </component>
+</project>
