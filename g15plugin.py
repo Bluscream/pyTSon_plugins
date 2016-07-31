@@ -2,8 +2,6 @@ from ts3plugin import ts3plugin
 
 import os, sys
 
-sys.path.append("/usr/lib64/python3.4/")
-
 import ts3, ts3defines
 import g15daemon
 
