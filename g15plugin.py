@@ -1,3 +1,4 @@
+#if you wanna use this, you'll need the g15daemon module and ressources (font) from https://github.com/pathmann/g15mediadaemon; g15daemon has additional dependencies: freetype
 from ts3plugin import ts3plugin
 
 import os, sys
