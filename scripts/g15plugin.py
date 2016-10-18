@@ -21,7 +21,7 @@ if sys.platform == 'linux':
         description = "Display information on the g15 connected to g15daemon"
         offersConfigure = False
         commandKeyword = ""
-        infoTitle = ""
+        infoTitle = None
         menuItems = []
         hotkeys = []
       

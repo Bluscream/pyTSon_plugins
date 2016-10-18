@@ -10,7 +10,7 @@ class testhelper(ts3plugin):
     description = "Just a helper to test pyTSon"
     offersConfigure = False
     commandKeyword = ""
-    infoTitle = ""
+    infoTitle = None
     menuItems = []
     hotkeys = []
     

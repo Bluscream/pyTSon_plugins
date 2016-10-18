@@ -13,7 +13,7 @@ class autopoke(ts3plugin):
     description = "Kick my zombie eg after a crash"
     offersConfigure = False
     commandKeyword = ""
-    infoTitle = ""
+    infoTitle = None
     menuItems = []
     hotkeys = []
   

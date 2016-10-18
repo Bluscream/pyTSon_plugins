@@ -11,7 +11,7 @@ class autopoke(ts3plugin):
     description = "Ignore pokes and automatically poke back"
     offersConfigure = False
     commandKeyword = ""
-    infoTitle = ""
+    infoTitle = None
     menuItems = []
     hotkeys = []
   

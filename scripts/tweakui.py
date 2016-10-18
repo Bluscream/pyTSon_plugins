@@ -12,7 +12,7 @@ class tweakui(ts3plugin):
     description = "Tweak the client UI to use DockingWidgets, just to show possibilities of pyTSon in conjunction with PythonQt"
     offersConfigure = False
     commandKeyword = ""
-    infoTitle = ""
+    infoTitle = None
     menuItems = []
     hotkeys = []
 
