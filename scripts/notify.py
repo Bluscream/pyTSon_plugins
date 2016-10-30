@@ -77,7 +77,7 @@ class notify(ts3plugin):
                             ts3.requestSendPrivateTextMsg(serverConnectionHandlerID, "[color=orange]Hinweis[/color]:\n\nDu hast [color=blue]eine[/color] ungelesene Offline Nachricht.\nDu kannst sie nachlesen indem du auf \"Extras\" => \"Offline Nachrichten\" klickst oder einfach [STRG]+[O] auf deiner Tastatur drückst.", clientID)
                             self._sent.extend([_uid])
                         else:
-                            ts3.requestSendPrivateTextMsg(serverConnectionHandlerID, "[color=orange]Reminder[/color]:\n\nYou have [color=blue]eine[/color] unread offline message.\nYou can read it by clicking on \"Tools\" => \"Offline Messages\" or pressing [CTRL]+[O] on your keyboard.", clientID)
+                            ts3.requestSendPrivateTextMsg(serverConnectionHandlerID, "[color=orange]Reminder[/color]:\n\nYou have [color=blue]one[/color] unread offline message.\nYou can read it by clicking on \"Tools\" => \"Offline Messages\" or pressing [CTRL]+[O] on your keyboard.", clientID)
                             self._sent.extend([_uid])
                     elif messages == 1:
                         (error, country) = ts3.getClientVariableAsString(serverConnectionHandlerID, clientID, ts3defines.ClientPropertiesRare.CLIENT_COUNTRY)
