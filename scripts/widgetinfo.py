@@ -1,9 +1,10 @@
 from ts3plugin import ts3plugin
 
-from PythonQt.QtGui import QApplication, QCursor, QDialog, QSplitter, QTreeView, QTableView, QHBoxLayout, QVBoxLayout, QCheckBox, QWidget, QItemSelectionModel
+from PythonQt.QtGui import QApplication, QCursor, QDialog, QSplitter, QTreeView, QTableView, QHBoxLayout, QVBoxLayout, QCheckBox, QWidget, QItemSelectionModel, QMenu
 from PythonQt.QtCore import Qt, QAbstractItemModel, QModelIndex
 
 import ts3, ts3defines
+
 
 class PropertyModel(QAbstractItemModel):
     def __init__(self, parent=None):
@@ -181,7 +182,7 @@ class InfoDialog(QDialog):
         self.splitter.addWidget(self.table)
         
         self.hlayout = QHBoxLayout(self)
-        self.hlayout.addWidget(self.splitter)
+        self.hlayout.addWidget(self.splitter)   
         
         self.treemodel = WidgetModel(self.tree)
         self.tree.setModel(self.treemodel)
@@ -190,9 +191,10 @@ class InfoDialog(QDialog):
         self.table.setModel(self.tablemodel)
         
         self.stylesheet = None
-                
+
         self.connect("finished(int)", self.onClosed)
         self.tree.selectionModel().connect("currentChanged(const QModelIndex&, const QModelIndex&)", self.onTreeSelectionChanged)
+        self.tree.connect("doubleClicked(const QModelIndex&)", self.onTreeDoubleClicked)
         self.checkbox.connect("toggled(bool)", self.onCheckBoxClicked)
         
         self.resize(800, 500)
@@ -220,6 +222,13 @@ class InfoDialog(QDialog):
             index = index.parent()
         
         self.tablemodel.setWidget(widg)
+        
+    def onTreeDoubleClicked(self, index):
+        obj = self.treemodel.nodes[index.internalId()].obj
+        
+        if obj.inherits("QMenu"):
+            obj.popup(QCursor.pos())
+
         
     def onTreeSelectionChanged(self, cur, prev):
         obj = self.treemodel.nodes[cur.internalId()].obj
