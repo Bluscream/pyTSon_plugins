@@ -38,7 +38,7 @@ class answercontacts(ts3plugin):
 
         if q.next():
             val = q.value("value")
-            print("value: %s" % val)
+
             for l in val.split('\n'):
                 if l.startswith('Friend='):
                     ret = int(l[-1])
@@ -52,15 +52,15 @@ class answercontacts(ts3plugin):
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
         (err, myid) = ts3.getClientID(schid)
-        ts3.printMessageToCurrentTab("err: %s" % err)
+
         if err == ts3defines.ERROR_ok:
             #only in private messages
-            #if toID == myid:
-            f = self.contactStatus(fromUniqueIdentifier)
-            if f == 0:
-                err = ts3.requestSendPrivateTextMsg(schid, "Hello, my friend!", fromID)
-            elif f == 1:
-                err = ts3.requestSendPrivateTextMsg(schid, "I don't like you!", fromID)
-            else:
-                err = ts3.requestSendPrivateTextMsg(schid, "Do I know you?", fromID)
+            if toID == myid:
+                f = self.contactStatus(fromUniqueIdentifier)
+                if f == 0:
+                    err = ts3.requestSendPrivateTextMsg(schid, "Hello, my friend!", fromID)
+                elif f == 1:
+                    err = ts3.requestSendPrivateTextMsg(schid, "I don't like you!", fromID)
+                else:
+                    err = ts3.requestSendPrivateTextMsg(schid, "Do I know you?", fromID)
 
