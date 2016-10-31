@@ -4,7 +4,7 @@ import ts3, ts3defines, datetime
 
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
-    apiVersion = 20
+    apiVersion = 21
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"

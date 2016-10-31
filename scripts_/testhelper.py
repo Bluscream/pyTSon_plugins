@@ -3,7 +3,7 @@ import sys
 
 class testhelper(ts3plugin):
     name = "testhelper"
-    apiVersion = 20
+    apiVersion = 21
     requestAutoload = False
     version = "1.0"
     author = "Thomas \"PLuS\" Pathmann"

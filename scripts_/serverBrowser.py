@@ -5,7 +5,7 @@ import ts3, ts3defines, datetime, os
 
 class serverBrowser(ts3plugin):
     name = "PlanetTeamspeak Server Browser"
-    apiVersion = 20
+    apiVersion = 21
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"

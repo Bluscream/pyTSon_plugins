@@ -4,7 +4,7 @@ import ts3, ts3defines, datetime, sqlite3, re
 
 class channelWatcher(ts3plugin):
     name = "Channel Watcher"
-    apiVersion = 20
+    apiVersion = 21
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"

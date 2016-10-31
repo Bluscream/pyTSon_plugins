@@ -6,7 +6,7 @@ class autopoke(ts3plugin):
     name = "autopokeback"
     requestAutoload = False
     version = "1.0"
-    apiVersion = 20
+    apiVersion = 21
     author = "Thomas \"PLuS\" Pathmann"
     description = "Ignore pokes and automatically poke back"
     offersConfigure = False

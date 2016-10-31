@@ -1,18 +1,19 @@
 from ts3plugin import ts3plugin, PluginHost
 import ts3, ts3defines, datetime
-
+from PythonQt.QtGui import QDialog
+from pytsonui import getValues, ValueType
 
 class info(ts3plugin):
     name = "Extended Info"
-    apiVersion = 20
+    apiVersion = 21
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"
-    description = "Shows you more informations.\nBest to use together with a Extended Info Theme.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
-    offersConfigure = False
+    description = "Shows you more informations.\nBest to use together with a Extended Info Theme.\nClick on \"Settings\" to select what items you want to see :)\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
+    offersConfigure = True
     commandKeyword = ""
-    infoTitle = "Extended Info"
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Extended Info -> Toggle Colors", "icon.png"),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Extended Info -> Toggle Meta", "icon.png")]
+    infoTitle = "[b]Extended Info[/b]:"
+    menuItems = []
     hotkeys = []
     colored = False
     meta = False
@@ -21,13 +22,35 @@ class info(ts3plugin):
     def __init__(self):
         ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/Bluscream]Bluscream[/url] loaded.")
 
-    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if menuItemID == 0:
-            info.colored = not info.colored
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Set Colored Infos to [color=yellow]"+str(autoCommander.toggle)+"[/color]")
-        elif menuItemID == 1:
-            info.meta = not info.meta
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Set Meta Data to [color=yellow]"+str(autoCommander.toggle)+"[/color]")
+    def configDialogClosed(self, r, vals):
+        if r == QDialog.Accepted:
+            ts3.printMessageToCurrentTab("the user has chosen, that debug is now: %s" % vals['debug'])
+
+    def configure(self, qParentWidget):
+        d = dict()
+        d['debug'] = (ValueType.boolean, "Debug", False, None, None)
+        d['colored'] = (ValueType.boolean, "Colored InfoData", False, None, None)
+        d['server'] = (ValueType.listitem, "Server", (
+            [
+                "Date/Time", "Name", "Phonetic Name", "Version", "Platform", "Clients", "Channels", "Connections", "Uptime", "Address", "Resolved IP",
+                "Icon ID", "License", "UID", "ID", "Machine ID", "Autostart", "Password", "Codec Encrypted", "Default Groups", "Max Bandwith", "Banner",
+                "Hostbutton", "Complaint Settings", "Clients for forced Silence", "Priority speaker dimm", "Antiflood", "Up/Download Quota",
+                "Month Bytes Transfered", "Total Bytes Transfered", "Needed Security Level", "Log Settings", "Min Client Version", "Weblist Status",
+                "Privilege Key", "Delete Channels after"
+            ], [2,9,10,11,13,14,15,28,29,32]), 0, 0)
+        d['channel'] = (ValueType.listitem, "Channel", (
+            [
+                "Date/Time", "Name", "Phonetic Name", "Topic", "Clients", "Needed Talk Power", "Order", "Codec", "Flags", "Subscribed",
+                "Encrypted", "Description", "Icon ID", "Delete Delay", "Filepath"
+            ], [2,8,12]), 0, 0)
+        d['client'] = (ValueType.listitem, "Client", (
+            [
+                "Date/Time", "Name", "Phonetic Name", "Version", "Platform", "Country", "Client ID", "Database ID", "UID", "Is Talking", "Audio Status",
+                "Idle Time", "Default Channel", "Server Password", "Volume Modifcator", "Version Sign", "Security Hash", "Last Var Request", "Login Credentials",
+                "Group ID's", "First Connection", "Last Connection", "Total Connections", "Away", "Talk Power", "Talk Power Request", "Description", "Is Talker",
+                "Month Bytes Transfered", "Total Bytes Transfered", "Is Priority Speaker", "Unread Offline Messages", "Needed ServerQuery View Power", "Default Token"
+            ], [2,6,7,8,11,15,16,19,24,28,29,31,32]), 0, 0)
+        widgets = getValues(None, "Extended Info Configuration", d, self.configDialogClosed)
 
     def infoData(cls, schid, id, atype):
         i = []
@@ -79,7 +102,7 @@ class info(ts3plugin):
                 i.append("Ping: "+ping+"ms")
             (error, icon) = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ICON_ID)
             if error == ts3defines.ERROR_ok:
-                i.append("Icon ID: "+icon)
+                i.append('Icon ID: '+icon)
             (error, aptr) = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
             if error == ts3defines.ERROR_ok:
                 i.append("Points per tick: "+aptr)

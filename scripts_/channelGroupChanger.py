@@ -4,7 +4,7 @@ import ts3, ts3defines, datetime
 
 class channelGroupChanger(ts3plugin):
     name = "Channel Group Changer"
-    apiVersion = 20
+    apiVersion = 21
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"
