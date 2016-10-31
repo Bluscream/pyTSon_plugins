@@ -220,3 +220,4 @@ pathmann.git/*
 docs/*
 include/*
 ressources/pyTSon-configdialog.ui
+scripts/ts3plugin.py
