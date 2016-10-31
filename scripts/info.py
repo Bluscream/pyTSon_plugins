@@ -9,10 +9,10 @@ class info(ts3plugin):
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"
-    description = "Shows you more informations.\nBest to use together with a Extended Info Theme.\nClick on \"Settings\" to select what items you want to see :)\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
+    description = "Shows you more informations.\nBest to use together with a Extended Info Theme.\nClick on \"Settings\" to select what items you want to see :)\n\nHomepage: https://github.com/Bluscream/Extended-Info-Plugin\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
     offersConfigure = True
     commandKeyword = ""
-    infoTitle = "[b]Extended Info[/b]:"
+    infoTitle = "[b]"+name+":[/b]"
     menuItems = []
     hotkeys = []
     colored = False
