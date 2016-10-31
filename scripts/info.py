@@ -40,7 +40,7 @@ class info(ts3plugin):
             ], [2,9,10,11,13,14,15,28,29,32]), 0, 0)
         d['channel'] = (ValueType.listitem, "Channel", (
             [
-                "Date/Time", "Name", "Phonetic Name", "Topic", "Clients", "Needed Talk Power", "Order", "Codec", "Flags", "Subscribed",
+                "Date/Time", "Name", "Phonetic Name", "ID", "Topic", "Clients", "Needed Talk Power", "Order", "Codec", "Flags", "Subscribed",
                 "Encrypted", "Description", "Icon ID", "Delete Delay", "Filepath"
             ], [2,8,12]), 0, 0)
         d['client'] = (ValueType.listitem, "Client", (
