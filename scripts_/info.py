@@ -1,5 +1,5 @@
 from ts3plugin import ts3plugin, PluginHost
-import ts3, ts3defines, datetime
+import ts3, ts3defines, datetime, configparser, os.path
 from PythonQt.QtGui import QDialog
 from pytsonui import getValues, ValueType
 
@@ -15,11 +15,35 @@ class info(ts3plugin):
     infoTitle = "[b]"+name+":[/b]"
     menuItems = []
     hotkeys = []
+    debug = False
     colored = False
     meta = False
-
+    ini = ts3.getConfigPath()+"extended_info.ini"
 
     def __init__(self):
+        config = configparser.ConfigParser()
+        if os.path.isfile(self.ini):
+            config.read(self.ini)
+            self.SERVER = config['SERVER'].items()
+            for key in self.SERVER:
+                ts3.printMessageToCurrentTab(str(key[0])+": "+str(key[1]))
+        else:
+            config['SERVER'] = {
+                'datetime': 'False', 'name': 'False', 'phoneticname': 'True', 'version': 'False', 'platform': 'False', 'clients': 'False', 'channels': 'False', 'connections': 'False',
+                'uptime': 'False', 'address': 'False', 'resolved': 'False', 'iconid': 'False', 'license': 'False', 'uid': 'False', 'id': 'False', 'mid': 'False',
+                'autostart': 'False', 'password': 'False', 'codec_encrypted': 'False', 'defaultgroups': 'False', 'maxbandwith': 'False', 'banner': 'False', 'hostbutton': 'False', 'complaints': 'False',
+                'forcedsilence': 'False', 'priorityspeaker': 'False', 'antiflood': 'False', 'updownquota': 'False', 'monthbytestransfered': 'False', 'totalbytestransfered': 'False', 'securitylevel': 'False',
+                'logsettings': 'False', 'minclientversion': 'False', 'weblist': 'False', 'privilegekey': 'False', 'deletechannelsafter': 'False'
+            }
+            config['CHANNEL'] = {
+                'datetime': 'true'
+            }
+            config['CLIENT'] = {
+                'datetime': 'true'
+            }
+            with open(self.ini, 'w') as configfile:
+                config.write(configfile)
+
         ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/Bluscream]Bluscream[/url] loaded.")
 
     def configDialogClosed(self, r, vals):
@@ -28,9 +52,9 @@ class info(ts3plugin):
 
     def configure(self, qParentWidget):
         d = dict()
-        d['debug'] = (ValueType.boolean, "Debug", False, None, None)
-        d['colored'] = (ValueType.boolean, "Colored InfoData", False, None, None)
-        d['server'] = (ValueType.listitem, "Server", (
+        d['bool_debug'] = (ValueType.boolean, "Debug", False, None, None)
+        #d['colored'] = (ValueType.boolean, "Colored InfoData", False, None, None)
+        d['list_server'] = (ValueType.listitem, "Server", (
             [
                 "Date/Time", "Name", "Phonetic Name", "Version", "Platform", "Clients", "Channels", "Connections", "Uptime", "Address", "Resolved IP",
                 "Icon ID", "License", "UID", "ID", "Machine ID", "Autostart", "Password", "Codec Encrypted", "Default Groups", "Max Bandwith", "Banner",
@@ -38,12 +62,12 @@ class info(ts3plugin):
                 "Month Bytes Transfered", "Total Bytes Transfered", "Needed Security Level", "Log Settings", "Min Client Version", "Weblist Status",
                 "Privilege Key", "Delete Channels after"
             ], [2,9,10,11,13,14,15,28,29,32]), 0, 0)
-        d['channel'] = (ValueType.listitem, "Channel", (
+        d['list_channel'] = (ValueType.listitem, "Channel", (
             [
                 "Date/Time", "Name", "Phonetic Name", "ID", "Topic", "Clients", "Needed Talk Power", "Order", "Codec", "Flags", "Subscribed",
                 "Encrypted", "Description", "Icon ID", "Delete Delay", "Filepath"
             ], [2,8,12]), 0, 0)
-        d['client'] = (ValueType.listitem, "Client", (
+        d['list_client'] = (ValueType.listitem, "Client", (
             [
                 "Date/Time", "Name", "Phonetic Name", "Version", "Platform", "Country", "Client ID", "Database ID", "UID", "Is Talking", "Audio Status",
                 "Idle Time", "Default Channel", "Server Password", "Volume Modifcator", "Version Sign", "Security Hash", "Last Var Request", "Login Credentials",

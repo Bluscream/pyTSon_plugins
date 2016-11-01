@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QListView" name="reasons"/>
+    <widget class="QListWidget" name="reasons"/>
    </item>
    <item>
     <widget class="QLineEdit" name="customreason"/>

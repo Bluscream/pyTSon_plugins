@@ -52,9 +52,9 @@ class ReportDialog(QDialog):
 
     def setupList(self):
         #self.reasons.clear()
-        _list = QListWidget(self.reasons)
+        #_list = QListWidget(self.reasons)
         for reason in self.CONF_REASONS:
-            item = QListWidgetItem(_list)
+            item = QListWidgetItem(self.reasons)
             item.setText(reason)
             item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
             #item.setCheckState(Qt.Unchecked)
