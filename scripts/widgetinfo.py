@@ -241,12 +241,10 @@ class widgetinfo(ts3plugin):
         self.dlg.activateWindow()
        
     def onHotkeyEvent(self, keyword):
-        ts3.printMessageToCurrentTab("muhaha23")
         if keyword == "info":
             self.showInfo(QApplication.instance().widgetAt(QCursor.pos()))
             
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        ts3.printMessageToCurrentTab("hallo234")
         if menuItemID == 0:
             self.showInfo(None)
 
