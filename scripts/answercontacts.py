@@ -10,7 +10,7 @@ class answercontacts(ts3plugin):
     version = "1.0"
     apiVersion = 21
     author = "Thomas \"PLuS\" Pathmann"
-    description = "Autoanswer contact status"
+    description = "Autoanswer contact status (friend, neutral, blocked)"
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None

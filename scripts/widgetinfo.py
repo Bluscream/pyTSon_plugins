@@ -55,97 +55,43 @@ class PropertyModel(QAbstractItemModel):
             return "Property"
         else:
             return "Value"
-        
-  
-class TreeNode(object):
-    def __init__(self, row, parent, obj, aid):
-        self.row = row
-        self.parent = parent
-        self.obj = obj
-        self.id = aid
     
 class WidgetModel(QAbstractItemModel):
     def __init__(self, parent=None):
         super(QAbstractItemModel, self).__init__(parent)
         
-        self.nodes = {}  
-        self.nextid = 1
-        
-        self._getNodes(None)
-        
-    def cleanup(self):
-        for n in self.nodes:
-            self.nodes[n].obj.setProperty("pyTSon_widgetinfo", None)
-
-        self.nodes = {}
-
-    def _getNodes(self, pnode=None):
-        if pnode is None:
-            for i, w in enumerate(QApplication.topLevelWidgets()):
-                node = TreeNode(i, None, w, self.nextid)
-                self.nodes[self.nextid] = node
-                
-                w.setProperty("pyTSon_widgetinfo", self.nextid)
-                self.nextid += 1
-                
-                self._getNodes(node)
-        else:
-            for i, w in enumerate(pnode.obj.children()):
-                node = TreeNode(i, pnode, w, self.nextid)
-                self.nodes[self.nextid] = node
-                
-                w.setProperty("pyTSon_widgetinfo", self.nextid)
-                self.nextid += 1
-                
-                self._getNodes(node)
-
-    def _getNode(self, row, parent):
-        if not parent.isValid():
-            obj = QApplication.topLevelWidgets()[row]
-            objid = obj.property("pyTSon_widgetinfo")
-            
-            if objid is None:
-                obj.setProperty("pyTSon_widgetinfo", self.nextid)
-                objid = self.nextid
-                self.nextid += 1
-                
-                self.nodes[objid] = TreeNode(row, None, obj, objid)
-            return self.nodes[objid]
-        else:
-            pnode = self.nodes[parent.internalId()]
-            obj = pnode.obj.children()[row]
-            objid = obj.property("pyTSon_widgetinfo")
-            
-            if objid is None:
-                obj.setProperty("pyTSon_widgetinfo", self.nextid)
-                objid = self.nextid
-                self.nextid += 1
-                
-                self.nodes[objid] = TreeNode(row, pnode, obj, objid)
-            return self.nodes[objid]                
-        
     def index(self, row, column, parent):
-        node = self._getNode(row, parent)
-        return self.createIndex(row, column, node.id)
+        if not parent.isValid():
+            if len(QApplication.topLevelWidgets()) <= row:
+                return QModelIndex()
+            else:
+                return self.createIndex(row, column, QApplication.topLevelWidgets()[row])
+        else:
+            if len(parent.internalPointer().children()) <= row:
+                return QModelIndex()
+            else:
+                return self.createIndex(row, column, parent.internalPointer().children()[row])
         
     def parent(self, index):
         if not index.isValid():
             return QModelIndex()
-            
-        if index.internalId() not in self.nodes:
-            return QModelIndex()
-            
-        node = self.nodes[index.internalId()]
-        if node.parent is None:
+           
+        obj = index.internalPointer()
+        tlw = QApplication.topLevelWidgets()
+        
+        if obj in tlw:
             return QModelIndex()
         else:
-            return self.createIndex(node.parent.row, 0, node.parent.id)
+            if obj.parent() in tlw:
+                return self.createIndex(tlw.index(obj.parent()), 0, obj.parent())
+            else:
+                return self.createIndex(obj.parent().children().index(obj), 0, obj.parent()) 
         
     def rowCount(self, parent):
         if not parent.isValid():
             return len(QApplication.topLevelWidgets())
         else:
-            return len(self.nodes[parent.internalId()].obj.children())    
+            return len(parent.internalPointer().children())    
         
     def columnCount(self, parent):
         return 1
@@ -154,11 +100,10 @@ class WidgetModel(QAbstractItemModel):
         if not index.isValid() or role != Qt.DisplayRole:
             return None
        
-        node = self.nodes[index.internalId()]
-        if node.obj.objectName == "":
-            return "Class: %s" % node.obj.className()
+        if index.internalPointer().objectName == "":
+            return "Class: %s" % index.internalPointer().className()
         else:
-            return node.obj.objectName
+            return index.internalPointer().objectName
 
 
 class InfoDialog(QDialog):
@@ -203,17 +148,21 @@ class InfoDialog(QDialog):
         if self.checkbox.isChecked() and self.stylesheet is not None:
             index = self.tree.selectionModel().currentIndex
             if index.isValid():
-                obj = self.treemodel.nodes[index.internalId()].obj 
+                obj = index.internalPointer() 
                 if hasattr(obj, "setStyleSheet"):
                     obj.setStyleSheet(self.stylesheet)
     
-        self.treemodel.cleanup()
         
     def setWidget(self, widg):
         self.widget = widg
         
-        node = self.treemodel.nodes[widg.property("pyTSon_widgetinfo")]
-        index = self.treemodel.createIndex(node.row, 0, node.id)
+        tlw = QApplication.topLevelWidgets()
+        
+        if widg in tlw:
+            index = self.treemodel.createIndex(tlw.index(widg), 0, widg)
+        else:
+            index = self.treemodel.createIndex(widg.parent().children().index(widg), 0, widg)
+            
         self.tree.selectionModel().select(index, QItemSelectionModel.ClearAndSelect)
         self.tree.scrollTo(index)
         
@@ -224,20 +173,20 @@ class InfoDialog(QDialog):
         self.tablemodel.setWidget(widg)
         
     def onTreeDoubleClicked(self, index):
-        obj = self.treemodel.nodes[index.internalId()].obj
+        obj = index.internalPointer()
         
         if obj.inherits("QMenu"):
             obj.popup(QCursor.pos())
 
         
     def onTreeSelectionChanged(self, cur, prev):
-        obj = self.treemodel.nodes[cur.internalId()].obj
+        obj = cur.internalPointer()
     
         self.tablemodel.setWidget(obj)
     
         if self.checkbox.isChecked():
             if prev.isValid() and self.stylesheet is not None:
-                oldobj = self.treemodel.nodes[prev.internalId()].obj
+                oldobj = prev.internalPointer()
                 if hasattr(oldobj, "setStyleSheet"):
                     oldobj.setStyleSheet(self.stylesheet)
     
@@ -250,7 +199,7 @@ class InfoDialog(QDialog):
         if not index.isValid():
             return
             
-        obj = self.treemodel.nodes[index.internalId()].obj 
+        obj = index.internalPointer()
         if not hasattr(obj, "setStyleSheet"):
             return
             
