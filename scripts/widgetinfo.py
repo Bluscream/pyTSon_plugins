@@ -100,10 +100,11 @@ class WidgetModel(QAbstractItemModel):
         if not index.isValid() or role != Qt.DisplayRole:
             return None
        
-        if index.internalPointer().objectName == "":
-            return "Class: %s" % index.internalPointer().className()
+        obj = index.internalPointer()
+        if obj.objectName == "":
+            return "Class: %s" % obj.className()
         else:
-            return index.internalPointer().objectName
+            return "%s (Class: %s)" % (obj.objectName, obj.className())
 
 
 class InfoDialog(QDialog):
