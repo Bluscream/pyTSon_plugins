@@ -9,7 +9,7 @@ class tweakui(ts3plugin):
     version = "1.0"
     apiVersion = 21
     author = "Thomas \"PLuS\" Pathmann"
-    description = "Tweak the client UI to use DockingWidgets, just to show possibilities of pyTSon in conjunction with PythonQt"
+    description = "Tweak the client UI to use DockingWidgets, just to show possibilities of pyTSon in conjunction with PythonQt. There is no warranty!"
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None

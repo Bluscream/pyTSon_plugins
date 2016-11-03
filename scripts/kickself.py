@@ -8,7 +8,7 @@ class autopoke(ts3plugin):
     name = "kickoldself"
     requestAutoload = False
     version = "1.0"
-    apiVersion = 21
+    apiVersion = 20
     author = "Thomas \"PLuS\" Pathmann"
     description = "Kick my zombie eg after a crash"
     offersConfigure = False
@@ -32,7 +32,7 @@ class autopoke(ts3plugin):
                 for cli in clis:
                     (err, nick) = ts3.getClientVariableAsString(schid, cli, ts3defines.ClientProperties.CLIENT_NICKNAME)
                     if err == ts3defines.ERROR_ok and nick == sp[0]:
-                        ts3.requestClientKickFromServer(schid, cli, "Connection timed out.")
+                        ts3.requestClientKickFromServer(schid, cli, "Bye bye, old me")
                         ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, sp[0])
                         ts3.flushClientSelfUpdates(schid)
                         return
