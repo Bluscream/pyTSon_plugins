@@ -2,7 +2,8 @@ from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi, getValues, ValueType
 from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor
 from PythonQt.QtCore import Qt
-import ts3, ts3defines, datetime, os, requests, json, configparser, webbrowser, traceback, urllib.parse
+from datetime import datetime
+import ts3, ts3defines, os, requests, json, configparser, webbrowser, traceback, urllib.parse
 
 
 class serverBrowser(ts3plugin):
@@ -27,7 +28,7 @@ class serverBrowser(ts3plugin):
             #for key, value in self.config["FILTERS"].items():
                 #ts3.printMessageToCurrentTab(str(key).title()+": "+str(value))
         else:
-            self.config['GENERAL'] = { "debug": "False", "api": "https://api.planetteamspeak.com/", "morerequests": "False" }
+            self.config['GENERAL'] = { "debug": "False", "api": "https://api.planetteamspeak.com/", "morerequests": "False", "serversperpage": "100" }
             self.config['FILTERS'] = {
                 "serverNameModifier": "Contains", "filterServerName": "", "countryBox": "",
                 "hideEmpty": "False", "hideFull": "False", "maxUsers": "False", "maxUsersMin": "0", "maxUsersMax": "0",
@@ -36,18 +37,21 @@ class serverBrowser(ts3plugin):
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
 
-        ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/Bluscream]Bluscream[/url] loaded.")
+        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        if self.config['GENERAL']['debug'] == "True":
+            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]Bluscream[/url] loaded.")
 
     def configure(self, qParentWidget):
         d = dict()
         d['debug'] = (ValueType.boolean, "Debug", self.config['GENERAL']['debug'] == "True", None, None)
         d['morerequests'] = (ValueType.boolean, "Fast Connection", self.config['GENERAL']['morerequests'] == "True", None, None)
+        d['serversperpage'] = (ValueType.integer, "Servers per page:", int(self.config['GENERAL']['serversperpage']), 0, 250)
         d['api'] = (ValueType.string, "API Base URL:", self.config['GENERAL']['api'], None, 1)
         widgets = getValues(None, "Server Browser Settings", d, self.configDialogClosed)
 
     def configDialogClosed(self, r, vals):
         if r == QDialog.Accepted:
-            self.config['GENERAL'] = { "debug": vals['debug'], "api": vals['api'], "morerequests": vals['morerequests'] }
+            self.config['GENERAL'] = { "debug": str(vals['debug']), "api": vals['api'], "morerequests": str(vals['morerequests']), "serversperpage": str(vals['serversperpage']) }
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
 
@@ -221,9 +225,10 @@ class ServersDialog(QDialog):
                 name = name.split(" (")[0]
             return [c for c in self.countries if c[1]==name][0][0]
         except:
-            return '-'
+            return '--'
 
     def getCountryNamebyID(self, cid):
+        try:
             return [c for c in self.countries if c[0]==cid][0][1]
         except:
             return 'Unknown'
@@ -260,11 +265,7 @@ class ServersDialog(QDialog):
         # f = { 'eventName' : 'myEvent', 'eventDescription' : "cool event"}
         # urllib.urlencode(f)
         _filters = self.serverBrowser.config["FILTERS"]
-        url = self.serverBrowser.config['GENERAL']['api']+"serverlist/?page="+str(self.page)
-        if self.buhl(self.serverBrowser.config['GENERAL']['morerequests']):
-            url += "&limit=50"
-        else:
-            url += "&limit=999"
+        url = self.serverBrowser.config['GENERAL']['api']+"serverlist/?page="+str(self.page)+"&limit="+str(self.serverBrowser.config['GENERAL']['serversperpage'])
         if _filters["filterPassword"] == "none":
             url += "&password=false"
         elif _filters["filterPassword"] == "only":
@@ -279,10 +280,11 @@ class ServersDialog(QDialog):
             url += "&minslots="+str(_filters["maxSlotsMin"])+"&maxslots="+str(_filters["maxSlotsMax"])
         if _filters["filterServerName"] and _filters["filterServerName"] != "":
             url += "&search="+urllib.parse.quote_plus(_filters["filterServerName"])
-        ts3.printMessageToCurrentTab(_filters["countryBox"])
-        if _filters["countryBox"] != "All":
-            url+= "&country="+self.getCountryIDbyName(_filters["countryBox"])
-        ts3.printMessageToCurrentTab(url)
+        cid = self.getCountryIDbyName(_filters["countryBox"])
+        if _filters["countryBox"] != "All" and cid != '--':
+            url+= "&country="+cid
+        if self.serverBrowser.config["GENERAL"]["debug"] == "True":
+            ts3.printMessageToCurrentTab(url)
         return url
 
     def requestServers(self, url):
@@ -295,10 +297,8 @@ class ServersDialog(QDialog):
         _servers = servers.content.decode('utf-8')
         __servers = json.loads(_servers)
         return __servers
-    i = 0
+
     def listServers(self):
-        self.i = self.i+1
-        ts3.printMessageToCurrentTab(str(self.i))
         url = self.setupURL()
         servers = self.requestServers(url)
         self.status.setText("Status: "+servers["status"].title())
