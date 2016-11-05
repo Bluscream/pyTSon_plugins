@@ -216,13 +216,17 @@ class ServersDialog(QDialog):
         ts3.printMessageToCurrentTab("index : " + str(id_us))
 
     def getCountryIDbyName(self, name):
-        if name.__contains__(" ("):
-            name = name.split(" (")[0]
-        return [c for c in self.countries if c[1]==name][0][0]
+        try:
+            if name.__contains__(" ("):
+                name = name.split(" (")[0]
+            return [c for c in self.countries if c[1]==name][0][0]
+        except:
+            return '-'
 
-    def getCountryNamebyID(self, idd):
-        if [c for c in self.countries if c[0]==idd]:
-            return ctries[0][1]
+    def getCountryNamebyID(self, cid):
+            return [c for c in self.countries if c[0]==cid][0][1]
+        except:
+            return 'Unknown'
 
     def requestAvailableCountries(self):
         countries = requests.get(self.serverBrowser.config['GENERAL']['api']+"servercountries")
