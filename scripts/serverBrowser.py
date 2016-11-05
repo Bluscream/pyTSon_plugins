@@ -1,6 +1,6 @@
 from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi, getValues, ValueType
-from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApp
+from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication
 from PythonQt.QtCore import Qt
 from datetime import datetime
 import ts3, ts3defines, os, requests, json, configparser, webbrowser, traceback, urllib.parse
@@ -36,6 +36,7 @@ class serverBrowser(ts3plugin):
             }
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
+        ts3.printMessageToCurrentTab(str(QApplication.instance()))
 
         ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.config['GENERAL']['debug'] == "True":
