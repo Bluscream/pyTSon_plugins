@@ -28,8 +28,6 @@ class info(ts3plugin):
             #self.SERVER = config['SERVER'].items()
             self.CHANNEL = config['CHANNEL'].items()
             #self.CLIENT = config['CLIENT'].items()
-            for key in self.CHANNEL:
-                ts3.printMessageToCurrentTab(str(key[0]).title()+": "+str(key[1]))
         else:
             config['GENERAL'] = { "Debug": "False", "Colored": "False" }
             config['SERVER'] = {
