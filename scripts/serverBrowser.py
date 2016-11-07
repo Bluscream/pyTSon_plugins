@@ -232,7 +232,7 @@ class ServersDialog(QDialog):
         try:
             return [c for c in self.countries if c[0]==cid][0][1]
         except:
-            return 'Unknown'
+            return 'Unknown ('+cid+')'
 
     def requestAvailableCountries(self):
         countries = requests.get(self.serverBrowser.config['GENERAL']['api']+"servercountries")
@@ -348,7 +348,7 @@ class ServersDialog(QDialog):
                     palette = QPalette()
                     palette.setColor(QPalette.Foreground,Qt.red)
                     _list.setPalette(palette)
-                _list.setItem(rowPosition, 2, QTableWidgetItem(str(key['country'])))
+                _list.setItem(rowPosition, 2, QTableWidgetItem(self.getCountryNamebyID(key['country'])))
                 if key['createchannels']:
                     _list.setItem(rowPosition, 3, QTableWidgetItem("Yes"))
                 else:
