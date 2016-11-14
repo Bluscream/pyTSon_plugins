@@ -192,10 +192,29 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="first">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>25</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>&lt;&lt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="previous">
          <property name="maximumSize">
           <size>
-           <width>50</width>
+           <width>40</width>
            <height>16777215</height>
           </size>
          </property>
@@ -205,30 +224,24 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="pageLabel">
+        <widget class="QToolButton" name="pageLabel">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
          <property name="maximumSize">
           <size>
-           <width>70</width>
+           <width>16777215</width>
            <height>16777215</height>
           </size>
          </property>
          <property name="text">
           <string/>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+         <property name="autoRaise">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -236,7 +249,7 @@
         <widget class="QPushButton" name="next">
          <property name="maximumSize">
           <size>
-           <width>50</width>
+           <width>40</width>
            <height>16777215</height>
           </size>
          </property>
@@ -245,6 +258,25 @@
          </property>
          <property name="checkable">
           <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="last">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>25</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>&gt;&gt;</string>
          </property>
         </widget>
        </item>

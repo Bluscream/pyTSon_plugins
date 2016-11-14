@@ -193,6 +193,12 @@ try:
                 if hasattr(obj, "setStyleSheet"):
                     self.stylesheet = obj.styleSheet
                     obj.setStyleSheet("background: red;")
+                if hasattr(obj, "setEnabled"):
+                    obj.setEnabled(True)
+                if hasattr(obj, "setEditable"):
+                    obj.setEditable(True)
+                #if hasattr(obj, "visible"):
+                    #obj.visible = True
 
         def onCheckBoxClicked(self, act):
             index = self.tree.selectionModel().currentIndex
