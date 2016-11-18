@@ -223,3 +223,6 @@ ressources/pyTSon-configdialog.ui
 scripts/ts3plugin.py
 python35.dll
 scripts/serverBrowser/cfg/serverBrowser.ini
+ressources/repository.ui
+ressources/repository-manager.ui
+ressources/repositorymaster.json
