@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Better Server Browser",
+        "author": "Bluscream",
+        "version": "0.5 alpha",
+        "apiVersion": "21",
+        "description": "A better serverlist provided by PlanetTeamspeak.",
+        "url": "https://github.com/Bluscream/pyTSon_plugins/blob/master/scripts/.py",
+        "dependencies": []
+    }
+]
