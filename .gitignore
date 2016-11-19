@@ -218,7 +218,12 @@ pip-log.txt
 #Custom Entries
 pathmann.git/*
 docs/*
-include/*
+include/apps
+include/Lib_win64
+include/pytsonui.py
+include/ts3defines.py
+include/ts3help.py
+include/ts3plugin.py
 ressources/pyTSon-configdialog.ui
 scripts/ts3plugin.py
 python35.dll
