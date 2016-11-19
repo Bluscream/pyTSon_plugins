@@ -3,6 +3,7 @@ from datetime import datetime
 from ts3 import *
 from ts3plugin import *
 from ts3help import *
+from ts3query import *
 from pytsonui import *
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
@@ -14,6 +15,10 @@ def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
         if PluginHost.shell:
             PluginHost.shell.appendLine(_f)
         print(_f)
+
+def toggle(boolean):
+    boolean = not boolean
+    return boolean
 
 def alert(message, title="pyTSon"):
     _a = QMessageBox()
@@ -53,8 +58,9 @@ def urlResponse(reply):
 
 i = QApplication.instance()
 
+print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.datetime.now()))
 for item in sys.path:
-    print(item)
+    print('"'+item+'"')
 print("")
 print(sys.flags)
 print("")

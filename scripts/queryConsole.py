@@ -2,7 +2,7 @@ from ts3plugin import ts3plugin, PluginHost
 import ts3, ts3defines, datetime, ts3query
 
 
-class ts3query(ts3plugin):
+class queryConsole(ts3plugin):
     name = "TS3 Query Console"
     apiVersion = 21
     requestAutoload = True
@@ -24,11 +24,34 @@ class ts3query(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:
-            self.toggle = not self.toggle
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Set Auto Channel Commander to [color=yellow]"+str(self.toggle)+"[/color]")
+            with ts3.query.TS3Connection("localhost") as ts3conn:
+                # Note, that the client will wait for the response and raise a
+                # **TS3QueryError** if the error id of the response is not 0.
+                try:
+                        ts3conn.login(
+                                client_login_name="serveradmin",
+                        )
+                except ts3.query.TS3QueryError as err:
+                        print("Login failed:", err.resp.error["msg"])
+                        exit(1)
+
+                ts3conn.use(sid=1)
+
+                # Each query method will return a **TS3QueryResponse** instance,
+                # with the response.
+                resp = ts3conn.clientlist()
+                print("Clients on the server:", resp.parsed)
+                print("Error:", resp.error["id"], resp.error["msg"])
+
+                # Note, the TS3Response class and therefore the TS3QueryResponse
+                # class too, can work as a rudimentary container. So, these two
+                # commands are equal:
+                for client in resp.parsed:
+                        print(client)
+                for client in resp:
+                        print(client)
 
     def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
         if self.toggle:
             if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING:
-                self.requested = True
-                ts3.requestChannelGroupList(ts3.getCurrentServerConnectionHandlerID())
+                print("hi")
