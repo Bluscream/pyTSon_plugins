@@ -30,6 +30,7 @@ class queryConsole(ts3plugin):
                 try:
                         ts3conn.login(
                                 client_login_name="serveradmin",
+                                client_login_password=""
                         )
                 except ts3.query.TS3QueryError as err:
                         print("Login failed:", err.resp.error["msg"])

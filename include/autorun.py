@@ -58,13 +58,22 @@ def urlResponse(reply):
 
 i = QApplication.instance()
 
-print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.datetime.now()))
+# def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+#     print(errorMessage)
+#
+# def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+#     print(errorMessage)
+
+import eventlog
+eventlog.__init__()
+
+print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.now()))
 for item in sys.path:
     print('"'+item+'"')
 print("")
 print(sys.flags)
 print("")
-print(sys.executable+" "+sys.platform+" "+sys.version+"API: "+str(sys.api_version))
+print(sys.executable+" "+sys.platform+" "+sys.version+" API: "+str(sys.api_version))
 print("")
 
 

@@ -220,6 +220,7 @@ pathmann.git/*
 docs/*
 include/apps
 include/Lib_win64
+include/pip
 include/pytsonui.py
 include/ts3defines.py
 include/ts3help.py
@@ -231,3 +232,6 @@ scripts/serverBrowser/cfg/serverBrowser.ini
 ressources/repository.ui
 ressources/repository-manager.ui
 ressources/repositorymaster.json
+include/devtools.py
+include/eventlog.py
+ressources/installer.ui
