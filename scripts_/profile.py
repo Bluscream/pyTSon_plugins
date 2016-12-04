@@ -16,12 +16,17 @@ class profile(ts3plugin):
     hotkeys = []
     ini = os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "profile", "cfg", "profile.ini")
     config = configparser.ConfigParser()
+    META_START = '<profile>'
+    META_DIVIDER = '##$#'
+    META_COLON = '§$#'
+    META_STOP = '</profile>'
 
     def __init__(self):
         if os.path.isfile(self.ini):
             self.config.read(self.ini)
         else:
             self.config['GENERAL'] = { "Debug": "False" }
+            self.config['PROFILE'] = { "Test": "[url=https://google.com]Google[/url]"}
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
         ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
@@ -39,8 +44,14 @@ class profile(ts3plugin):
         schid = ts3.getCurrentServerConnectionHandlerID()
         if atype == 2:
             (error, meta) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientProperties.CLIENT_META_DATA)
-            if error == ts3defines.ERROR_ok and meta != "":
-
+            if error == ts3defines.ERROR_ok and meta != "" and self.META_START in meta and self.META_STOP in meta:
+                _tmp = ""; meta = meta.split(self.META_START)[1];meta = meta.split(self.META_STOP)[0];meta = meta.split(self.META_DIVIDER)
+                for item in meta:
+                    item = item.split(self.META_COLON)
+                    ts3.printMessageToCurrentTab("item: "+str(item))
+                    _tmp += item[0]+": "+item[1]
+                if not _tmp == "":
+                    return _tmp.replace("\n", "").replace("\r", "")
 
 class MainWindow(QDialog):
     def __init__(self,cfg, parent=None):

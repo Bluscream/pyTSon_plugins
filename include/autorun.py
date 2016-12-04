@@ -102,7 +102,6 @@ print("")
 print(sys.executable+" "+sys.platform+" "+sys.version+" API: "+str(sys.api_version))
 print("")
 
-
 # void enumerateMenu(QMenu *menu)
 # {
 #     foreach (QAction *action, menu->actions()) {
