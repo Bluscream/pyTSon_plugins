@@ -9,11 +9,15 @@ from PythonQt.QtGui import *
 from PythonQt.QtCore import *
 
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
-        _f = '[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" ("+str(channel)+") Console> "+message
+        message = str(message)
+        _f = '[{:%H:%M:%S}]'.format(datetime.now())+" ("+str(channel)+") "
+        if server > 0:
+            _f += "#"+str(server)+" "
+        _f += "Console> "+message
         ts3.logMessage(message, channel, "pyTSon Console", server)
         ts3.printMessageToCurrentTab(_f)
-        if PluginHost.shell:
-            PluginHost.shell.appendLine(_f)
+        # if PluginHost.shell:
+        #     PluginHost.shell.appendLine(_f)
         print(_f)
 
 def toggle(boolean):
@@ -57,15 +61,37 @@ def urlResponse(reply):
     urlrequest = None
 
 i = QApplication.instance()
-
+schid = ts3.getCurrentServerConnectionHandlerID()
+error, ownid = ts3.getClientID(schid)
+if error == ts3defines.ERROR_ok:
+    error, ownnick = ts3.getClientDisplayName(schid, ownid)
+    if error == ts3defines.ERROR_ok:
+        def pcmd(cmd):
+            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_MAX, [])
+            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_CURRENT_CHANNEL_SUBSCRIBED_CLIENTS, [])
+            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_CLIENT, [ownid])
+            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_SERVER, [])
+            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_CURRENT_CHANNEL, [])
+            log(cmd, ts3defines.LogLevel.LogLevel_INFO, schid)
+        def p(c, cmd="test command%$%test command%$%"):
+            if c == 0:
+                print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL")
+            elif c == 1:
+                print("Sent command "+cmd+" to PluginCommandTarget_SERVER")
+            elif c == 2:
+                print("Sent command "+cmd+" to PluginCommandTarget_CLIENT")
+                ts3.sendPluginCommand(schid, cmd, c, [ownid])
+                return
+            elif c == 3:
+                print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL_SUBSCRIBED_CLIENTS")
+            elif c == 4:
+                print("Sent command "+cmd+" to PluginCommandTarget_MAX")
+            ts3.sendPluginCommand(schid, cmd, c, [])
 # def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
 #     print(errorMessage)
 #
 # def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
 #     print(errorMessage)
-
-import eventlog
-eventlog.__init__()
 
 print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.now()))
 for item in sys.path:
