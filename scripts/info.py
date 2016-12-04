@@ -42,7 +42,8 @@ class info(ts3plugin):
                 "Last Requested": "False", "Name": "False", "Phonetic Name": "False", "Version": "False", "Platform": "False", "Country": "False", "Client ID": "False", "Database ID": "False", "UID": "False", "Is Talking": "False", "Audio Status": "False",
                 "Idle Time": "False", "Default Channel": "False", "Server Password": "False", "Volume Modifcator": "False", "Version Sign": "False", "Security Hash": "False", "Last Var Request": "False", "Login Credentials": "False",
                 "Group ID's": "False", "First Connection": "False", "Last Connection": "False", "Total Connections": "False", "Away": "False", "Talk Power": "False", "Talk Power Request": "False", "Description": "False", "Is Talker": "False",
-                "Month Bytes Transfered": "False", "Total Bytes Transfered": "False", "Is Priority Speaker": "False", "Unread Offline Messages": "False", "Needed ServerQuery View Power": "False", "Default Token": "False", "Meta Data": "False"
+                "Month Bytes Transfered": "False", "Total Bytes Transfered": "False", "Is Priority Speaker": "False", "Unread Offline Messages": "False", "Needed ServerQuery View Power": "False", "Default Token": "False", "Meta Data": "False",
+                "Icon ID": "True", "Channel Group ID": "False", "Server Group IDs": "False", "Avatar Flag": "True", "Badges": "True"
             }
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
@@ -120,7 +121,7 @@ class info(ts3plugin):
                 i.append('{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
             i.append('Type: [b]Server[/b]')
             if self.config['SERVER']['Name'] == "True":
-                (error, name) = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_NAME)
+                (error, name) = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
                 if error == ts3defines.ERROR_ok:
                     i.append("Name: "+name)
             if self.config['SERVER']['Name'] == "True":
@@ -194,9 +195,9 @@ class info(ts3plugin):
                 i.append('{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
             i.append('Type: [b]Channel[/b]')
             if self.config['CHANNEL']['Name'] == "True":
-                (error, nick) = ts3.getChannelVariableAsString(schid, id, ts3defines.ChannelPropertiesRare.CHANNEL_NAME)
+                (error, nick) = ts3.getChannelVariableAsString(schid, id, ts3defines.ChannelProperties.CHANNEL_NAME)
                 if error == ts3defines.ERROR_ok and nick != "":
-                    i.append("Nickname: "+nick)
+                    i.append("Name: "+nick)
             if self.config['CHANNEL']['Phonetic Name'] == "True":
                 (error, phonick) = ts3.getChannelVariableAsString(schid, id, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC)
                 if error == ts3defines.ERROR_ok and phonick != "":
@@ -248,54 +249,66 @@ class info(ts3plugin):
                     i.append('Type: [b]ServerQuery[/b]')
                 else:
                     i.append('Type: [b]Unknown ('+str(type)+')[/b]')
-
-            (error, country) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_COUNTRY)
-            if error == ts3defines.ERROR_ok:
-                #if colored:
-                    i.append("Country: [color=darkgreen]"+country+"[/color]")
-                #else:
-                    #i.append("Country: "+country)
-            (error, phonick) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
-            if error == ts3defines.ERROR_ok and phonick != "":
-                i.append("Phonetic Nick: "+phonick)
-            (error, unread) = ts3.getClientVariableAsInt(schid, id, ts3defines.ClientPropertiesRare.CLIENT_UNREAD_MESSAGES)
-            if error == ts3defines.ERROR_ok:
-                if unread == 0:
-                    i.append("No unread offline messages.")
-                else:
-                    i.append("[color=blue][b]"+str(unread)+"[/b][/color] unread offline messages")
-            (error, icon) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_ICON_ID)
-            if error == ts3defines.ERROR_ok and icon != "0":
-                i.append("Icon ID: "+icon)
-            (error, tp) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TALK_POWER)
-            if error == ts3defines.ERROR_ok:
-                i.append("Talk Power: "+tp)
-            (error, avatar) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR)
-            if error == ts3defines.ERROR_ok and avatar != "":
-                i.append("Avatar Flag: "+avatar)
-            (error, cgid) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
-            if error == ts3defines.ERROR_ok:
-                i.append("Channel Group: "+cgid)
-            (error, sgids) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-            if error == ts3defines.ERROR_ok:
-                i.append("Server Groups: "+sgids)
-            (error, sqnvp) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_NEEDED_SERVERQUERY_VIEW_POWER)
-            if error == ts3defines.ERROR_ok:
-                i.append("Needed SQ View Power: "+sqnvp)
-            (error, clb) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
-            if error == ts3defines.ERROR_ok and clb != "Overwolf=0":
-                i.append("Badges: "+clb)
-            (error, mmbu) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_MONTH_BYTES_UPLOADED)
-            (error, mmbd) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_MONTH_BYTES_DOWNLOADED)
-            if error == ts3defines.ERROR_ok and mmbu != "0" and mmbd != "0":
-                i.append("Monthly Traffic: Up: [color=blue]"+mmbu+"[/color] B | Down: [color=red]"+mmbd+"[/color] B")
-            (error, tmbu) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TOTAL_BYTES_UPLOADED)
-            (error, tmbd) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TOTAL_BYTES_DOWNLOADED)
-            if error == ts3defines.ERROR_ok and tmbu != "0" and tmbd != "0":
-                i.append("Total Traffic: Up: [color=darkblue]"+tmbu+"[/color] B | Down: [color=firebrick]"+tmbd+"[/color] B")
-            (error, version) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientProperties.CLIENT_VERSION)
-            if error == ts3defines.ERROR_ok:
-                i.append("Version: "+version)
+            if self.config['CLIENT']['Country'] == "True":
+                (error, country) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_COUNTRY)
+                if error == ts3defines.ERROR_ok:
+                    #if colored:
+                        i.append("Country: [color=darkgreen]"+country+"[/color]")
+                    #else:
+                        #i.append("Country: "+country)
+            if self.config['CLIENT']['Phonetic Name'] == "True":
+                (error, phonick) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
+                if error == ts3defines.ERROR_ok and phonick != "":
+                    i.append("Phonetic Nick: "+phonick)
+            if self.config['CLIENT']['Unread Offline Messages'] == "True":
+                (error, unread) = ts3.getClientVariableAsInt(schid, id, ts3defines.ClientPropertiesRare.CLIENT_UNREAD_MESSAGES)
+                if error == ts3defines.ERROR_ok:
+                    if unread == 0:
+                        i.append("No unread offline messages.")
+                    else:
+                        i.append("[color=blue][b]"+str(unread)+"[/b][/color] unread offline messages")
+            if self.config['CLIENT']['Icon ID'] == "True":
+                (error, icon) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_ICON_ID)
+                if error == ts3defines.ERROR_ok and icon != "0":
+                    i.append("Icon ID: "+icon)
+            if self.config['CLIENT']['Talk Power'] == "True":
+                (error, tp) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TALK_POWER)
+                if error == ts3defines.ERROR_ok:
+                    i.append("Talk Power: "+tp)
+            if self.config['CLIENT']['Avatar Flag'] == "True":
+                (error, avatar) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR)
+                if error == ts3defines.ERROR_ok and avatar != "":
+                    i.append("Avatar Flag: "+avatar)
+            if self.config['CLIENT']['Channel Group ID'] == "True":
+                (error, cgid) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
+                if error == ts3defines.ERROR_ok:
+                    i.append("Channel Group: "+cgid)
+            if self.config['CLIENT']['Server Group IDs'] == "True":
+                (error, sgids) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+                if error == ts3defines.ERROR_ok:
+                    i.append("Server Groups: "+sgids)
+            if self.config['CLIENT']['Needed ServerQuery View Power'] == "True":
+                (error, sqnvp) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_NEEDED_SERVERQUERY_VIEW_POWER)
+                if error == ts3defines.ERROR_ok:
+                    i.append("Needed SQ View Power: "+sqnvp)
+            if self.config['CLIENT']['Badges'] == "True":
+                (error, clb) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
+                if error == ts3defines.ERROR_ok and clb != "Overwolf=0":
+                    i.append("Badges: "+clb)
+            if self.config['CLIENT']['Month Bytes Transfered'] == "True":
+                (error, mmbu) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_MONTH_BYTES_UPLOADED)
+                (error, mmbd) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_MONTH_BYTES_DOWNLOADED)
+                if error == ts3defines.ERROR_ok and mmbu != "0" and mmbd != "0":
+                    i.append("Monthly Traffic: Up: [color=blue]"+mmbu+"[/color] B | Down: [color=red]"+mmbd+"[/color] B")
+            if self.config['CLIENT']['Total Bytes Transfered'] == "True":
+                (error, tmbu) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TOTAL_BYTES_UPLOADED)
+                (error, tmbd) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TOTAL_BYTES_DOWNLOADED)
+                if error == ts3defines.ERROR_ok and tmbu != "0" and tmbd != "0":
+                    i.append("Total Traffic: Up: [color=darkblue]"+tmbu+"[/color] B | Down: [color=firebrick]"+tmbd+"[/color] B")
+            if self.config['CLIENT']['Version'] == "True":
+                (error, version) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientProperties.CLIENT_VERSION)
+                if error == ts3defines.ERROR_ok:
+                    i.append("Version: "+version)
             if self.config['CLIENT']['Meta Data'] == "True":
                 (error, meta) = ts3.getClientVariableAsString(schid, id, ts3defines.ClientProperties.CLIENT_META_DATA)
                 if error == ts3defines.ERROR_ok and meta != "":
