@@ -263,8 +263,9 @@ class SettingsDialog(QDialog):
         super(QDialog, self).__init__(parent)
         setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
         self.setWindowTitle("Extended Info Settings")
-        self.chk_arsv.setChecked(info.cfg.getboolean('general', 'Debug'))
-        self.chk_arcv.setChecked(info.cfg.getboolean('general', 'Colored'))
+        ts3.printMessageToCurrentTab(str(info.cfg.getboolean('general', 'Debug')))
+        self.chk_debug.setChecked(info.cfg.getboolean('general', 'Debug'))
+        self.chk_colored.setChecked(info.cfg.getboolean('general', 'Colored'))
         self.chk_arsv.setChecked(info.cfg.getboolean('general', 'Autorequest Server Variables'))
         self.chk_arcv.setChecked(info.cfg.getboolean('general', 'Autorequest Client Variables'))
         for name, value in info.cfg['VirtualServerProperties'].items():
@@ -323,3 +324,12 @@ class SettingsDialog(QDialog):
             if value.lower() == "true": _item.setCheckState(Qt.Checked)
             else: _item.setCheckState(Qt.Unchecked)
             _item.setText(name.replace('CONNECTION_', '').replace('_', ' ').title())
+    def on_btn_apply_clicked(self):
+        ts3.printMessageToCurrentTab("on_btn_apply_clicked")
+        info.cfg.set('general', 'Debug', str(self.chk_debug.isChecked()))
+        info.cfg.set('general', 'Colored', str(self.chk_colored.isChecked()))
+        info.cfg.set('general', 'Autorequest Server Variables', str(self.chk_arsv.isChecked()))
+        info.cfg.set('general', 'Autorequest Client Variables', str(self.chk_arcv.isChecked()))
+        # for
+        with open(info.ini, 'w') as configfile:
+            info.cfg.write(configfile)

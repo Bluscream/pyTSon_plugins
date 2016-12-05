@@ -1,7 +1,8 @@
 from ts3plugin import ts3plugin
+from pytsonui import setupUi
 from PythonQt.QtGui import QApplication, QCursor, QDialog, QSplitter, QTreeView, QTableView, QHBoxLayout, QVBoxLayout, QCheckBox, QWidget, QItemSelectionModel, QMenu
 from PythonQt.QtCore import Qt, QAbstractItemModel, QModelIndex
-import ts3, ts3defines
+import ts3, ts3defines, os
 
 try:
 
@@ -215,6 +216,10 @@ try:
             elif self.stylesheet is not None:
                 obj.setStyleSheet(self.stylesheet)
 
+    class TestDialog(QDialog):
+        def __init__(self,this, parent=None):
+            super(QDialog, self).__init__(parent)
+            setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "ressources", "test.ui"))
 
     class widgetinfo(ts3plugin):
         name = "widgetinfo"
@@ -226,7 +231,7 @@ try:
         offersConfigure = False
         commandKeyword = ""
         infoTitle = None
-        menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Widget info", "")]
+        menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Widget info", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Test Widget", "")]
         hotkeys = [("info", "Show widget info")]
 
         def __init__(self):
@@ -253,6 +258,11 @@ try:
         def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
             if menuItemID == 0:
                 self.showInfo(None)
+            elif menuItemID == 1:
+                self.tdlg = TestDialog(self)
+                self.tdlg.show()
+                self.tdlg.raise_()
+                self.tdlg.activateWindow()
 
 except:
     print("Exception caught!")

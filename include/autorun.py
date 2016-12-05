@@ -28,20 +28,6 @@ def alert(message, title="pyTSon"):
     _a = QMessageBox()
     _a.show()
 
-def m():
-    self = PythonConsole()
-    _a = QInputDialog.getMultiLineText(self, "pyTSon", "Eval:")
-    if _a != "":
-        try:
-            try:
-                res = eval(cmd, self.globals)
-                if res != None:
-                    self.appendLine(repr(res))
-            except SyntaxError:
-                exec(cmd, self.globals)
-        except:
-            self.appendLine(traceback.format_exc())
-
 urlrequest = False
 def url(url):
     from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
@@ -66,21 +52,14 @@ error, ownid = ts3.getClientID(schid)
 if error == ts3defines.ERROR_ok:
     error, ownnick = ts3.getClientDisplayName(schid, ownid)
     if error == ts3defines.ERROR_ok:
-        def pcmd(cmd):
-            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_MAX, [])
-            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_CURRENT_CHANNEL_SUBSCRIBED_CLIENTS, [])
-            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_CLIENT, [ownid])
-            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_SERVER, [])
-            ts3.sendPluginCommand(schid, cmd, ts3defines.PluginTargetMode.PluginCommandTarget_CURRENT_CHANNEL, [])
-            log(cmd, ts3defines.LogLevel.LogLevel_INFO, schid)
-        def p(c, cmd="test command%$%test command%$%"):
+        def p(c, cmd="test", clid=0):
             if c == 0:
                 print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL")
             elif c == 1:
                 print("Sent command "+cmd+" to PluginCommandTarget_SERVER")
             elif c == 2:
                 print("Sent command "+cmd+" to PluginCommandTarget_CLIENT")
-                ts3.sendPluginCommand(schid, cmd, c, [ownid])
+                ts3.sendPluginCommand(schid, cmd, c, [clid])
                 return
             elif c == 3:
                 print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL_SUBSCRIBED_CLIENTS")
@@ -101,19 +80,3 @@ print(sys.flags)
 print("")
 print(sys.executable+" "+sys.platform+" "+sys.version+" API: "+str(sys.api_version))
 print("")
-
-# void enumerateMenu(QMenu *menu)
-# {
-#     foreach (QAction *action, menu->actions()) {
-#         if (action->isSeparator()) {
-#             qDebug("this action is a separator");
-#         } else if (action->menu()) {
-#             qDebug("action: %s", qUtf8Printable(action->text()));
-#             qDebug(">>> this action is associated with a submenu, iterating it recursively...");
-#             enumerateMenu(action->menu());
-#             qDebug("<<< finished iterating the submenu");
-#         } else {
-#             qDebug("action: %s", qUtf8Printable(action->text()));
-#         }
-#     }
-# }
