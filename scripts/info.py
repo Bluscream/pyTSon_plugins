@@ -1,7 +1,8 @@
 from ts3plugin import ts3plugin, PluginHost
 import ts3, ts3defines, datetime, configparser, os.path
-from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget
-from pytsonui import getValues, ValueType
+from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
+from PythonQt.QtCore import Qt
+from pytsonui import setupUi
 from collections import OrderedDict
 from inspect import getmembers
 
@@ -23,6 +24,7 @@ class info(ts3plugin):
     runs = 0
 
     def __init__(self):
+        self.dlg = None
         if os.path.isfile(self.ini):
             self.cfg.read(self.ini)
         else:
@@ -31,21 +33,21 @@ class info(ts3plugin):
             self.cfg.add_section('ChannelProperties');self.cfg.add_section('ChannelPropertiesRare');
             self.cfg.add_section('ClientProperties');self.cfg.add_section('ClientPropertiesRare');
             self.cfg.add_section('ConnectionProperties');self.cfg.add_section('ConnectionPropertiesRare')
-            self.cfg.set("VirtualServerProperties", "LAST_REQUESTED", "TRUE");self.cfg.set("VirtualServerProperties", "TYPE", "TRUE")
+            self.cfg.set("VirtualServerProperties", "LAST_REQUESTED", "True");self.cfg.set("VirtualServerProperties", "TYPE", "True")
             for name, value in getmembers(ts3defines.VirtualServerProperties):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER'):
                     self.cfg.set("VirtualServerProperties", name, "False")
             for name, value in getmembers(ts3defines.VirtualServerPropertiesRare):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER_RARE'):
                     self.cfg.set("VirtualServerPropertiesRare", name, "False")
-            self.cfg.set("ChannelProperties", "LAST_REQUESTED", "TRUE");self.cfg.set("ChannelProperties", "TYPE", "TRUE")
+            self.cfg.set("ChannelProperties", "LAST_REQUESTED", "True");self.cfg.set("ChannelProperties", "TYPE", "True")
             for name, value in getmembers(ts3defines.ChannelProperties):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER'):
                     self.cfg.set("ChannelProperties", name, "False")
             for name, value in getmembers(ts3defines.ChannelPropertiesRare):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER_RARE'):
                     self.cfg.set("ChannelPropertiesRare", name, "False")
-            self.cfg.set("ClientProperties", "LAST_REQUESTED", "TRUE");self.cfg.set("ClientProperties", "TYPE", "TRUE")
+            self.cfg.set("ClientProperties", "LAST_REQUESTED", "True");self.cfg.set("ClientProperties", "TYPE", "True")
             for name, value in getmembers(ts3defines.ClientProperties):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER'):
                     self.cfg.set("ClientProperties", name, "False")
@@ -83,16 +85,11 @@ class info(ts3plugin):
 
     def configure(self, qParentWidget):
         try:
-            d = dict()
-            d['Debug'] = (ValueType.boolean, "Debug", self.cfg.getboolean('general', 'Debug'), None, None)
-            # d['Colored'] = (ValueType.boolean, "Colored", self.cfg.getboolean('general', 'Colored'), None, None)
-            d['Autorequest Server Variables'] = (ValueType.boolean, "Autorequest Server Variables", self.cfg.getboolean('general', 'Autorequest Server Variables'), None, None)
-            d['Autorequest Client Variables'] = (ValueType.boolean, "Autorequest Client Variables", self.cfg.getboolean('general', 'Autorequest Client Variables'), None, None)
-            d['VirtualServerProperties'] = (ValueType.listitem, "Server", ([key for key in self.cfg['VirtualServerProperties']], [i for i, key in enumerate(self.cfg['VirtualServerProperties']) if self.cfg.getboolean('VirtualServerProperties', key)]), 0, 0)
-            d['ChannelProperties'] = (ValueType.listitem, "Channel", ([key for key in self.cfg['ChannelProperties']], [i for i, key in enumerate(self.cfg['ChannelProperties']) if self.cfg.getboolean('ChannelProperties', key)]), 0, 0)
-            d['ClientProperties'] = (ValueType.listitem, "Client", ([key for key in self.cfg['ClientProperties']], [i for i, key in enumerate(self.cfg['ClientProperties']) if self.cfg.getboolean('ClientProperties', key)]), 0, 0)
-            d['ConnectionProperties'] = (ValueType.listitem, "Connection", ([key for key in self.cfg['ConnectionProperties']], [i for i, key in enumerate(self.cfg['ConnectionProperties']) if self.cfg.getboolean('ConnectionProperties', key)]), 0, 0)
-            widgets = getValues(None, "Extended Info Configuration", d, self.configDialogClosed)
+            if not self.dlg:
+                self.dlg = SettingsDialog(self)
+            self.dlg.show()
+            self.dlg.raise_()
+            self.dlg.activateWindow()
         except:
             from traceback import format_exc
             ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
@@ -149,7 +146,7 @@ class info(ts3plugin):
         i = []
         schid = ts3.getCurrentServerConnectionHandlerID()
         if atype == 0:
-            if self.cfg.getboolean('GENERAL', 'Autorequest Server Variables'):
+            if self.cfg.getboolean('general', 'Autorequest Server Variables'):
                 ts3.requestServerVariables(schid)
             for name in self.cfg['VirtualServerProperties']:
                 if name == 'LAST_REQUESTED':
@@ -205,7 +202,7 @@ class info(ts3plugin):
                     continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             return i
         elif atype == 2:
-            if self.cfg.getboolean('GENERAL', 'Autorequest Client Variables'):
+            if self.cfg.getboolean('general', 'Autorequest Client Variables'):
                 ts3.requestClientVariables(schid, id)
             for name in self.cfg['ClientProperties']:
                 if name == 'LAST_REQUESTED':
@@ -260,3 +257,69 @@ class info(ts3plugin):
             return i
         else:
             return ["ItemType \""+str(atype)+"\" unknown."]
+
+class SettingsDialog(QDialog):
+    def __init__(self,info, parent=None):
+        super(QDialog, self).__init__(parent)
+        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
+        self.setWindowTitle("Extended Info Settings")
+        self.chk_arsv.setChecked(info.cfg.getboolean('general', 'Debug'))
+        self.chk_arcv.setChecked(info.cfg.getboolean('general', 'Colored'))
+        self.chk_arsv.setChecked(info.cfg.getboolean('general', 'Autorequest Server Variables'))
+        self.chk_arcv.setChecked(info.cfg.getboolean('general', 'Autorequest Client Variables'))
+        for name, value in info.cfg['VirtualServerProperties'].items():
+            _item = QListWidgetItem(self.lst_server)
+            _item.setToolTip(name)
+            _item.setStatusTip('VirtualServerProperties')
+            if value.lower() == "true": _item.setCheckState(Qt.Checked)
+            else: _item.setCheckState(Qt.Unchecked)
+            _item.setText(name.replace('VIRTUALSERVER_', '').replace('_', ' ').title())
+        for name, value in info.cfg['VirtualServerPropertiesRare'].items():
+            _item = QListWidgetItem(self.lst_server)
+            _item.setToolTip(name)
+            _item.setStatusTip('VirtualServerPropertiesRare')
+            if value.lower() == "true": _item.setCheckState(Qt.Checked)
+            else: _item.setCheckState(Qt.Unchecked)
+            _item.setText(name.replace('VIRTUALSERVER_', '').replace('_', ' ').title())
+        for name, value in info.cfg['ChannelProperties'].items():
+            _item = QListWidgetItem(self.lst_channel)
+            _item.setToolTip(name)
+            _item.setStatusTip('ChannelProperties')
+            if value.lower() == "true": _item.setCheckState(Qt.Checked)
+            else: _item.setCheckState(Qt.Unchecked)
+            _item.setText(name.replace('CHANNEL_', '').replace('_', ' ').title())
+        for name, value in info.cfg['ChannelPropertiesRare'].items():
+            _item = QListWidgetItem(self.lst_channel)
+            _item.setToolTip(name)
+            _item.setStatusTip('ChannelPropertiesRare')
+            if value.lower() == "true": _item.setCheckState(Qt.Checked)
+            else: _item.setCheckState(Qt.Unchecked)
+            _item.setText(name.replace('CHANNEL_', '').replace('_', ' ').title())
+        for name, value in info.cfg['ClientProperties'].items():
+            _item = QListWidgetItem(self.lst_client)
+            _item.setToolTip(name)
+            _item.setStatusTip('ClientProperties')
+            if value.lower() == "true": _item.setCheckState(Qt.Checked)
+            else: _item.setCheckState(Qt.Unchecked)
+            _item.setText(name.replace('CLIENT_', '').replace('_', ' ').title())
+        for name, value in info.cfg['ClientPropertiesRare'].items():
+            _item = QListWidgetItem(self.lst_client)
+            _item.setToolTip(name)
+            _item.setStatusTip('ClientPropertiesRare')
+            if value.lower() == "true": _item.setCheckState(Qt.Checked)
+            else: _item.setCheckState(Qt.Unchecked)
+            _item.setText(name.replace('CLIENT_', '').replace('_', ' ').title())
+        for name, value in info.cfg['ConnectionProperties'].items():
+            _item = QListWidgetItem(self.lst_client)
+            _item.setToolTip(name)
+            _item.setStatusTip('ConnectionProperties')
+            if value.lower() == "true": _item.setCheckState(Qt.Checked)
+            else: _item.setCheckState(Qt.Unchecked)
+            _item.setText(name.replace('CONNECTION_', '').replace('_', ' ').title())
+        for name, value in info.cfg['ConnectionPropertiesRare'].items():
+            _item = QListWidgetItem(self.lst_client)
+            _item.setToolTip(name)
+            _item.setStatusTip('ConnectionPropertiesRare')
+            if value.lower() == "true": _item.setCheckState(Qt.Checked)
+            else: _item.setCheckState(Qt.Unchecked)
+            _item.setText(name.replace('CONNECTION_', '').replace('_', ' ').title())
