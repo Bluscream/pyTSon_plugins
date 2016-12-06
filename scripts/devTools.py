@@ -1,6 +1,6 @@
 from ts3plugin import ts3plugin
 from pytsonui import setupUi
-from PythonQt.QtGui import QApplication, QCursor, QDialog, QSplitter, QTreeView, QTableView, QHBoxLayout, QVBoxLayout, QCheckBox, QWidget, QItemSelectionModel, QMenu
+from PythonQt.QtGui import QApplication, QCursor, QDialog, QSplitter, QTreeView, QTableView, QHBoxLayout, QVBoxLayout, QCheckBox, QWidget, QItemSelectionModel, QMenu, QMessageBox, QFileDialog
 from PythonQt.QtCore import Qt, QAbstractItemModel, QModelIndex
 import ts3, ts3defines, os
 
@@ -219,20 +219,55 @@ try:
     class TestDialog(QDialog):
         def __init__(self,this, parent=None):
             super(QDialog, self).__init__(parent)
-            setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "ressources", "test.ui"))
+            setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "devTools", "test.ui"))
 
-    class widgetinfo(ts3plugin):
-        name = "widgetinfo"
+    class qssDialog(QDialog):
+        def __init__(self, arg, parent=None):
+            super(QDialog, self).__init__(parent)
+            setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "devTools", "editor.ui"))
+            self.resize(1000, 900)
+            self.setWindowTitle('Teamspeak Stylesheet Editor : : Developer Tools')
+            self.stylesheet = QApplication.instance().styleSheet
+            self.qssEditor.setPlainText(self.stylesheet)
+            self.lastSave = None
+        def on_btn_apply_clicked(self):
+            QApplication.instance().styleSheet = self.qssEditor.toPlainText()
+        def on_btn_insert_clicked(self):
+            self.qssEditor.appendPlainText("\n{\n\t:\n}")
+        def on_btn_reset_clicked(self):
+            if QMessageBox(QMessageBox.Warning, "Reset QSS?", "This will reset your changes to the initial Stylesheet! Continue?", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Ok:
+                QApplication.instance().styleSheet = self.stylesheet
+                self.qssEditor.setPlainText(self.stylesheet)
+        def on_btn_save_clicked(self):
+            _file = None
+            if self.lastSave:
+                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", self.lastSave, ".qss")
+            else:
+                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", "", ".qss")
+            if _file == None: return
+            if not _file.endswith('.qss'): _file += '.qss'
+            self.lastSave = _file
+            with open(_file, "w") as text_file:
+                print(self.stylesheet, file=text_file)
+
+    class devTools(ts3plugin):
+        name = "Developer Tools"
         requestAutoload = False
-        version = "1.0"
-        apiVersion = 20
-        author = "Thomas \"PLuS\" Pathmann"
-        description = "Show information of the client's ui elements"
+        version = "1.3"
+        apiVersion = 21
+        author = "Thomas \"PLuS\" Pathmann, Bluscream"
+        description =  "Show information of the client's ui elements.\n"
+        description += "Originally called widgetInfo.\n"
+        description += "I enhanced this version a lot :)\n\n"
+        description += "Features:\n"
+        description += "- Browser like inspect element function\n"
+        description += "- Test widget containing all possible UI elements to test styles\n"
+        description += "- Runtime QSS Editor to view changes in realtime.\n"
         offersConfigure = False
         commandKeyword = ""
         infoTitle = None
-        menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Widget info", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Test Widget", "")]
-        hotkeys = [("info", "Show widget info")]
+        menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Inspect Element", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "QSS Editor", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Test Widget", "")]
+        hotkeys = [("info", "Inspect Element")]
 
         def __init__(self):
             self.dlg = None
@@ -259,6 +294,11 @@ try:
             if menuItemID == 0:
                 self.showInfo(None)
             elif menuItemID == 1:
+                self.edlg = qssDialog(self)
+                self.edlg.show()
+                self.edlg.raise_()
+                self.edlg.activateWindow()
+            elif menuItemID == 2:
                 self.tdlg = TestDialog(self)
                 self.tdlg.show()
                 self.tdlg.raise_()

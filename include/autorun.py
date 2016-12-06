@@ -48,29 +48,24 @@ def urlResponse(reply):
 
 i = QApplication.instance()
 schid = ts3.getCurrentServerConnectionHandlerID()
-error, ownid = ts3.getClientID(schid)
-if error == ts3defines.ERROR_ok:
-    error, ownnick = ts3.getClientDisplayName(schid, ownid)
-    if error == ts3defines.ERROR_ok:
-        def p(c, cmd="test", clid=0):
-            if c == 0:
-                print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL")
-            elif c == 1:
-                print("Sent command "+cmd+" to PluginCommandTarget_SERVER")
-            elif c == 2:
-                print("Sent command "+cmd+" to PluginCommandTarget_CLIENT")
-                ts3.sendPluginCommand(schid, cmd, c, [clid])
-                return
-            elif c == 3:
-                print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL_SUBSCRIBED_CLIENTS")
-            elif c == 4:
-                print("Sent command "+cmd+" to PluginCommandTarget_MAX")
-            ts3.sendPluginCommand(schid, cmd, c, [])
-# def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-#     print(errorMessage)
-#
-# def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
-#     print(errorMessage)
+(error, ownid) = ts3.getClientID(schid)
+#if error == 0:
+    #error, ownnick = ts3.getClientDisplayName(schid, ownid)
+    # if error == 0:
+    #     def p(c, cmd="test", clid=0):
+    #         if c == 0:
+    #             print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL")
+    #         elif c == 1:
+    #             print("Sent command "+cmd+" to PluginCommandTarget_SERVER")
+    #         elif c == 2:
+    #             print("Sent command "+cmd+" to PluginCommandTarget_CLIENT")
+    #             ts3.sendPluginCommand(schid, cmd, c, [clid])
+    #             return
+    #         elif c == 3:
+    #             print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL_SUBSCRIBED_CLIENTS")
+    #         elif c == 4:
+    #             print("Sent command "+cmd+" to PluginCommandTarget_MAX")
+    #         ts3.sendPluginCommand(schid, cmd, c, [])
 
 print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.now()))
 for item in sys.path:
