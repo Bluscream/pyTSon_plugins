@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+ <author>Bluscream</author>
  <class>Form</class>
  <widget class="QWidget" name="Form">
   <property name="geometry">
@@ -59,6 +60,16 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chk_live">
+       <property name="text">
+        <string>Live Edit</string>
+       </property>
+       <property name="tristate">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btn_save">

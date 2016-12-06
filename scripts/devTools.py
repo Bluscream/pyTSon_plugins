@@ -230,6 +230,16 @@ try:
             self.stylesheet = QApplication.instance().styleSheet
             self.qssEditor.setPlainText(self.stylesheet)
             self.lastSave = None
+        def on_chk_live_stateChanged(self, state):
+            if state == Qt.Checked:
+                self.qssEditor.connect('textChanged()', self.onQSSChanged)
+                self.btn_apply.setEnabled(False)
+            else:
+                self.qssEditor.disconnect(self.onQSSChanged)
+                self.btn_apply.setEnabled(True)
+        def onQSSChanged(self):
+                self.stylesheet = self.qssEditor.toPlainText()
+                QApplication.instance().styleSheet = self.stylesheet
         def on_btn_apply_clicked(self):
             QApplication.instance().styleSheet = self.qssEditor.toPlainText()
         def on_btn_insert_clicked(self):
