@@ -253,10 +253,10 @@ try:
             except:
                 import traceback;QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_();return # _p = "";for item in sys.path: _p += str(item)+"\n" #"Python package \"css_html_js_minify\" could not be loaded from one of the following locations:\n\n"+_p
             _old = self.qssEditor.toPlainText()
-            _minified = css_minify(_old, comments=False)
+            _minified = css_minify(_old, encode=False)
             QApplication.instance().styleSheet = _minified
             self.qssEditor.setPlainText(_minified)
-            if QMessageBox(QMessageBox.Warning, "Use minified QSS?", "Your minified QSS code has been applied.\nIf you encounter any issues with the minified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
+            if QMessageBox(QMessageBox.Warning, "Use minified QSS?", "Your minified QSS code has been applied.\n\nIf you encounter any issues with the minified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
                 QApplication.instance().styleSheet = _old
                 self.qssEditor.setPlainText(_old)
         def on_btn_save_clicked(self):

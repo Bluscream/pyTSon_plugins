@@ -316,7 +316,7 @@ def unquote_selectors(css):
     return re.compile('([a-zA-Z]+)="([a-zA-Z0-9-_\.]+)"]').sub(r'\1=\2]', css)
 
 
-def css_minify(css, wrap=False, comments=False, sort=False):
+def css_minify(css, wrap=False, comments=False, sort=False, encode=False):
     """Minify CSS main function."""
     log.info("Compressing CSS...")
     css = remove_comments(css) if not comments else css
@@ -337,7 +337,7 @@ def css_minify(css, wrap=False, comments=False, sort=False):
     css = condense_border_none(css)
     css = wrap_css_lines(css, 80) if wrap else css
     css = condense_semicolons(css)
-    css = add_encoding(css)
+    css = add_encoding(css) if encode else css
     css = restore_needed_space(css)
     log.info("Finished compressing CSS !.")
     return css.strip()
