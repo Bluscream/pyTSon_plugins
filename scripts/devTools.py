@@ -238,8 +238,7 @@ try:
                 self.qssEditor.disconnect(self.onQSSChanged)
                 self.btn_apply.setEnabled(True)
         def onQSSChanged(self):
-                self.stylesheet = self.qssEditor.toPlainText()
-                QApplication.instance().styleSheet = self.stylesheet
+            QApplication.instance().styleSheet = self.qssEditor.toPlainText()
         def on_btn_apply_clicked(self):
             QApplication.instance().styleSheet = self.qssEditor.toPlainText()
         def on_btn_insert_clicked(self):
@@ -248,17 +247,29 @@ try:
             if QMessageBox(QMessageBox.Warning, "Reset QSS?", "This will reset your changes to the initial Stylesheet! Continue?", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Ok:
                 QApplication.instance().styleSheet = self.stylesheet
                 self.qssEditor.setPlainText(self.stylesheet)
+        def on_btn_minify_clicked(self):
+            try:
+                from css_html_js_minify import css_minify
+            except:
+                import traceback;QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_();return # _p = "";for item in sys.path: _p += str(item)+"\n" #"Python package \"css_html_js_minify\" could not be loaded from one of the following locations:\n\n"+_p
+            _old = self.qssEditor.toPlainText()
+            _minified = css_minify(_old, comments=False)
+            QApplication.instance().styleSheet = _minified
+            self.qssEditor.setPlainText(_minified)
+            if QMessageBox(QMessageBox.Warning, "Use minified QSS?", "Your minified QSS code has been applied.\nIf you encounter any issues with the minified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
+                QApplication.instance().styleSheet = _old
+                self.qssEditor.setPlainText(_old)
         def on_btn_save_clicked(self):
             _file = None
             if self.lastSave:
-                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", self.lastSave, ".qss")
+                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", self.lastSave, "Teamspeak 3 Stylesheet File (*.qss)")
             else:
-                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", "", ".qss")
+                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", "", "Teamspeak 3 Stylesheet File (*.qss)")
             if _file == None: return
             if not _file.endswith('.qss'): _file += '.qss'
             self.lastSave = _file
             with open(_file, "w") as text_file:
-                print(self.stylesheet, file=text_file)
+                print(self.qssEditor.toPlainText()+'\n\n/* Created with DevTools QSS Editor */', file=text_file)
 
     class devTools(ts3plugin):
         name = "Developer Tools"

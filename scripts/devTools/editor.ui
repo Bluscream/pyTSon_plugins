@@ -42,6 +42,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="btn_minify">
+       <property name="text">
+        <string>Minify</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="btn_insert">
        <property name="text">
         <string>Insert</string>
