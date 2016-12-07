@@ -5,7 +5,7 @@ from PythonQt.QtCore import QTimer, Qt
 
 class tweakui(ts3plugin):
     name = "UI Tweaks"
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     apiVersion = 21
     author = "Thomas \"PLuS\" Pathmann"

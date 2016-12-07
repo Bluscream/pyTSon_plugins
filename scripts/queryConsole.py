@@ -5,7 +5,7 @@ import ts3, ts3defines, datetime, ts3query
 class queryConsole(ts3plugin):
     name = "TS3 Query Console"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Adds a query console to your Teamspeak 3 Client.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

@@ -1,9 +1,6 @@
 from ts3plugin import ts3plugin
-
 import ts3, ts3defines
-
 import re
-
 class autopoke(ts3plugin):
     name = "kickoldself"
     requestAutoload = False
@@ -16,15 +13,10 @@ class autopoke(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-
     def onConnectStatusChangeEvent(self, schid, status, errorNumber):
-        if status != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            return
-
+        if status != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
         (err, mynick) = ts3.getClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        if err != ts3defines.ERROR_ok:
-            return
-
+        if err != ts3defines.ERROR_ok: return
         sp = re.split(r"\d", mynick)
         if len(sp) > 1 and sp[0] != mynick and sp[1] == "":
             (err, clis) = ts3.getClientList(schid)

@@ -5,7 +5,7 @@ from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox
 class profile(ts3plugin):
     name = "Profile"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Share your info\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

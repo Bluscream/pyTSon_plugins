@@ -5,7 +5,7 @@ import ts3, ts3defines, datetime, sqlite3, re
 class channelWatcher(ts3plugin):
     name = "Channel Watcher"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Helps you keeping your channel moderated.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

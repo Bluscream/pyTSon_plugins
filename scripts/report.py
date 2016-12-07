@@ -7,7 +7,7 @@ import ts3, ts3defines, datetime, os
 class report(ts3plugin):
     name = "Report"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Gives you the ability to quickly Report Users to Moderators.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

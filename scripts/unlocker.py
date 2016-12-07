@@ -1,4 +1,5 @@
 from ts3plugin import ts3plugin, PluginHost
+from ts3 import logMessage, printMessageToCurrentTab
 import ts3defines
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
@@ -6,7 +7,7 @@ from PythonQt.QtCore import *
 class info(ts3plugin):
     name = "Unlocker"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Shows you more informations.\nBest to use together with a Extended Info Theme.\nClick on \"Settings\" to select what items you want to see :)\n\nHomepage: https://github.com/Bluscream/Extended-Info-Plugin\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
@@ -17,67 +18,120 @@ class info(ts3plugin):
     hotkeys = [("gui_unlock", "Unlock everything")]
 
     def __init__(self):
-        print(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
 
-    def unlock(self):
+    def unlock(self, show=False):
         i = QApplication.instance()
         for item in i.allWidgets():
-            # try: item.setHidden(False)
-            # except: continue
             try: item.setEnabled(True)
-            except: continue
+            except: pass
             try: item.setCheckable(True)
-            except: continue
+            except: pass
             try: item.setDragEnabled(True)
-            except: continue
+            except: pass
             try: item.setDragDropMode(QAbstractItemView.DragDrop)
-            except: continue
+            except: pass
             try: item.setSelectionMode(QAbstractItemView.MultiSelection)
-            except: continue
+            except: pass
             try: item.setSelectionBehavior(QAbstractItemView.SelectItems)
-            except: continue
+            except: pass
             try: item.setResizeMode(QListView.Adjust)
-            except: continue
+            except: pass
             try: item.setSortingEnabled(True)
-            except: continue
+            except: pass
             try:
                 if item.ContextMenuPolicy() == Qt.PreventContextMenu:
                     item.setContextMenuPolicy(Qt.NoContextMenu)
-            except: continue
+            except: pass
+            try:
+                if "background:red;" in item.styleSheet:
+                    item.styleSheet = item.styleSheet.replace("background:red;", "")
+            except: logMessage("error", ts3defines.LogLevel.LogLevel_INFO, "QSS", 0);pass
             try: item.setTextInteractionFlag(Qt.TextEditable)
-            except: continue
+            except: pass
             try: item.setUndoRedoEnabled(True)
-            except: continue
+            except: pass
             try: item.setReadOnly(False)
-            except: continue
+            except: pass
             try: item.clearMinimumDateTime()
-            except: continue
+            except: pass
             try: item.clearMaximumDateTime()
-            except: continue
+            except: pass
             try: item.clearMinimumTime()
-            except: continue
+            except: pass
             try: item.clearMaximumTime()
-            except: continue
+            except: pass
             try: item.clearMinimumDate()
-            except: continue
+            except: pass
             try: item.clearMaximumDate()
-            except: continue
+            except: pass
             try: item.setDateEditEnabled(True)
-            except: continue
+            except: pass
             try: item.setTextVisible(True)
-            except: continue
+            except: pass
             try: item.setHeaderHidden(False)
-            except: continue
+            except: pass
             try: item.setItemsExpandable(True)
-            except: continue
+            except: pass
+            try: item.setModality(Qt.NonModal)
+            except: pass
+            if show:
+                try: item.setHidden(False)
+                except: pass
+                try: item.show()
+                except: pass
+                try: item.raise_()
+                except: pass
+                try: item.activateWindow()
+                except: pass
+
+
+    def lock(self, show=False):
+        i = QApplication.instance()
+        for item in i.allWidgets():
+            try: item.setEnabled(False)
+            except: pass
+            try: item.setCheckable(False)
+            except: pass
+            try: item.setDragEnabled(False)
+            except: pass
+            try: item.setDragDropMode(QAbstractItemView.NoDragDrop)
+            except: pass
+            try: item.setSelectionMode(QAbstractItemView.NoSelection)
+            except: pass
+            try: item.setSelectionBehavior(QAbstractItemView.SelectItems)
+            except: pass
+            try: item.setResizeMode(QListView.Adjust)
+            except: pass
+            try: item.setResizeMode(QHeaderView.Interactive)
+            except: pass
+            try: item.setSectionResizeMode(QHeaderView.Interactive)
+            except: pass
+            try: item.setSortingEnabled(False)
+            except: pass
+            try: item.setContextMenuPolicy(Qt.PreventContextMenu)
+            except: pass
+            try: item.styleSheet = ""
+            except: pass
+            try: item.setTextInteractionFlag(Qt.NoTextInteraction)
+            except: pass
+            try: item.setUndoRedoEnabled(False)
+            except: pass
+            try: item.setReadOnly(True)
+            except: pass
+            try: item.setDateEditEnabled(True)
+            except: pass
+            try: item.setTextVisible(True)
+            except: pass
+            try: item.setHeaderHidden(False)
+            except: pass
+            try: item.setItemsExpandable(True)
+            except: pass
             try: item.setModality(Qt.ApplicationModal)
-            except: continue
-            # try: item.show()
-            # except: continue
-            # try: item.raise_()
-            # except: continue
-            # try: item.activateWindow()
-            # except: continue
+            except: pass
+            if show:
+                try: item.setHidden(True)
+                except: pass
 
     def onHotkeyEvent(self, keyword):
         if keyword == "gui_unlock":

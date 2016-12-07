@@ -1,6 +1,6 @@
 from ts3plugin import ts3plugin
 from pytsonui import setupUi
-from PythonQt.QtGui import QApplication, QCursor, QDialog, QSplitter, QTreeView, QTableView, QHBoxLayout, QVBoxLayout, QCheckBox, QWidget, QItemSelectionModel, QMenu, QMessageBox, QFileDialog
+from PythonQt.QtGui import QApplication, QCursor, QDialog, QSplitter, QTreeView, QTableView, QHBoxLayout, QVBoxLayout, QCheckBox, QWidget, QItemSelectionModel, QMenu, QMessageBox, QFileDialog, QTextDocument
 from PythonQt.QtCore import Qt, QAbstractItemModel, QModelIndex
 import ts3, ts3defines, os
 
@@ -144,6 +144,7 @@ try:
             self.checkbox.connect("toggled(bool)", self.onCheckBoxClicked)
 
             self.resize(800, 500)
+            self.setWindowTitle('Inspect Element : : Developer Tools')
 
         def onClosed(self):
             if self.checkbox.isChecked() and self.stylesheet is not None:
@@ -178,28 +179,21 @@ try:
 
             if obj.inherits("QMenu"):
                 obj.popup(QCursor.pos())
+            else:
+                obj.setEnabled(True)
 
 
         def onTreeSelectionChanged(self, cur, prev):
             obj = cur.internalPointer()
-
             self.tablemodel.setWidget(obj)
-
             if self.checkbox.isChecked():
                 if prev.isValid() and self.stylesheet is not None:
                     oldobj = prev.internalPointer()
                     if hasattr(oldobj, "setStyleSheet"):
                         oldobj.setStyleSheet(self.stylesheet)
-
                 if hasattr(obj, "setStyleSheet"):
                     self.stylesheet = obj.styleSheet
                     obj.setStyleSheet("background: red;")
-                if hasattr(obj, "setEnabled"):
-                    obj.setEnabled(True)
-                if hasattr(obj, "setEditable"):
-                    obj.setEditable(True)
-                #if hasattr(obj, "visible"):
-                    #obj.visible = True
 
         def onCheckBoxClicked(self, act):
             index = self.tree.selectionModel().currentIndex
@@ -228,8 +222,36 @@ try:
             self.resize(1000, 900)
             self.setWindowTitle('Teamspeak Stylesheet Editor : : Developer Tools')
             self.stylesheet = QApplication.instance().styleSheet
+            self.chatsheet = self.getWidgetByObjectName("ChatTab").findChild(QTextDocument).defaultStyleSheet
+            self.html = self.getWidgetByObjectName("InfoFrame").html
             self.qssEditor.setPlainText(self.stylesheet)
+            self.chatEditor.setPlainText(self.chatsheet)
+            self.tplEditor.setPlainText(self.html)
+            self.chatEditor.setReadOnly(True);self.tplEditor.setReadOnly(True)
+            index = self.tabWidget.currentIndex
+            if index == 1 or index == 2:
+                self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(False);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
+            else:
+                self.btn_apply.setEnabled(True);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(True);self.btn_reset.setEnabled(True);self.chk_live.setEnabled(True)
             self.lastSave = None
+        def getWidgetByObjectName(self, name):
+            QApp = QApplication.instance()
+            widgets = QApp.topLevelWidgets()
+            widgets = widgets + QApp.allWidgets()
+            for x in widgets:
+                if str(x.objectName) == name: return x
+        def getWidgetByClassName(self, name):
+            QApp = QApplication.instance()
+            widgets = QApp.topLevelWidgets()
+            widgets = widgets + QApp.allWidgets()
+            for x in widgets:
+                if str(x.__class__) == name: return x
+        def on_tabWidget_currentChanged(self, index):
+            #if self.tabWidget.findChild(QPlainTextEdit).isReadOnly():
+            if index == 1 or index == 2:
+                self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(False);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
+            else:
+                self.btn_apply.setEnabled(True);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(True);self.btn_reset.setEnabled(True);self.chk_live.setEnabled(True)
         def on_chk_live_stateChanged(self, state):
             if state == Qt.Checked:
                 self.qssEditor.connect('textChanged()', self.onQSSChanged)
@@ -240,7 +262,21 @@ try:
         def onQSSChanged(self):
             QApplication.instance().styleSheet = self.qssEditor.toPlainText()
         def on_btn_apply_clicked(self):
-            QApplication.instance().styleSheet = self.qssEditor.toPlainText()
+            i = self.tabWidget.currentIndex
+            if i == 0:
+                QApplication.instance().styleSheet = self.qssEditor.toPlainText()
+            elif i == 1:
+                QApp = QApplication.instance()
+                widgets = QApp.topLevelWidgets() + QApp.allWidgets()
+                for x in widgets:
+                    if x.objectName == "ChatTab":
+                        x.findChild(QTextDocument).defaultStyleSheet = self.chatEditor.toPlainText()
+            elif i == 2:
+                _i = self.getWidgetByObjectName("InfoFrame")
+                _o = _i.styleSheet
+                _i.styleSheet = "background:red;"
+                _i.html = self.html
+                _i.styleSheet = _o
         def on_btn_insert_clicked(self):
             self.qssEditor.appendPlainText("\n{\n\t:\n}")
         def on_btn_reset_clicked(self):

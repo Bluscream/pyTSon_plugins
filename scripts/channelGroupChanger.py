@@ -5,7 +5,7 @@ import ts3, ts3defines, datetime
 class channelGroupChanger(ts3plugin):
     name = "Channel Group Changer"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Change Channelgroup of clients that are not in the target channel.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
