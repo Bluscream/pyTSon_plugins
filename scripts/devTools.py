@@ -251,7 +251,8 @@ try:
             try:
                 from css_html_js_minify import css_minify
             except:
-                import traceback;QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_();return # _p = "";for item in sys.path: _p += str(item)+"\n" #"Python package \"css_html_js_minify\" could not be loaded from one of the following locations:\n\n"+_p
+                QMessageBox(QMessageBox.Warning, "Can't minify", "Python package \"css_html_js_minify\" could not be loaded.").exec_()
+                import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_();return
             _old = self.qssEditor.toPlainText()
             _minified = css_minify(_old, encode=False)
             QApplication.instance().styleSheet = _minified
