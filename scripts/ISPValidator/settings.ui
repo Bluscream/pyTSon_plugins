@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>441</width>
-    <height>348</height>
+    <width>417</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,14 +33,14 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QRadioButton" name="btn_whitelist">
+           <widget class="QRadioButton" name="chk_whitelist">
             <property name="text">
              <string>Whitelist</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="btn_blacklist">
+           <widget class="QRadioButton" name="chk_blacklist">
             <property name="text">
              <string>Blacklist</string>
             </property>
@@ -85,7 +85,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinBox">
+           <widget class="QSpinBox" name="bantime">
             <property name="value">
              <number>60</number>
             </property>
@@ -139,11 +139,27 @@
         </item>
        </layout>
       </item>
+      <item>
+       <widget class="QCheckBox" name="chk_failover">
+        <property name="text">
+         <string>Take action if everything fails</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QListWidget" name="lst_events"/>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Registered Events</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_8">
+      <item>
+       <widget class="QListWidget" name="lst_events"/>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
