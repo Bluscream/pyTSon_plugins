@@ -229,10 +229,12 @@ try:
             self.tplEditor.setPlainText(self.html)
             self.chatEditor.setReadOnly(True);self.tplEditor.setReadOnly(True)
             index = self.tabWidget.currentIndex
-            if index == 1 or index == 2:
-                self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(False);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
-            else:
+            if index == 0:
                 self.btn_apply.setEnabled(True);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(True);self.btn_reset.setEnabled(True);self.chk_live.setEnabled(True)
+            elif index == 1:
+                self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
+            else:
+                self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(False);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
             self.lastSave = None
         def getWidgetByObjectName(self, name):
             QApp = QApplication.instance()
@@ -247,11 +249,14 @@ try:
             for x in widgets:
                 if str(x.__class__) == name: return x
         def on_tabWidget_currentChanged(self, index):
+            #ts3.printMessageToCurrentTab(str(index))
             #if self.tabWidget.findChild(QPlainTextEdit).isReadOnly():
-            if index == 1 or index == 2:
-                self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(False);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
-            else:
+            if index == 0:
                 self.btn_apply.setEnabled(True);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(True);self.btn_reset.setEnabled(True);self.chk_live.setEnabled(True)
+            elif index == 1:
+                self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
+            else:
+                self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(False);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
         def on_chk_live_stateChanged(self, state):
             if state == Qt.Checked:
                 self.qssEditor.connect('textChanged()', self.onQSSChanged)
@@ -289,24 +294,37 @@ try:
             except:
                 QMessageBox(QMessageBox.Warning, "Can't minify", "Python package \"css_html_js_minify\" could not be loaded.").exec_()
                 import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_();return
-            _old = self.qssEditor.toPlainText()
+            index = self.tabWidget.currentIndex
+            _old = ""
+            if index == 0:
+                _old = self.qssEditor.toPlainText()
+            elif index == 1: _old = self.chatEditor.toPlainText()
             _minified = css_minify(_old, encode=False)
-            QApplication.instance().styleSheet = _minified
-            self.qssEditor.setPlainText(_minified)
+            if index == 0:
+                QApplication.instance().styleSheet = _minified
+                self.qssEditor.setPlainText(_minified)
+            elif index == 1: self.chatEditor.setPlainText(_minified);return
             if QMessageBox(QMessageBox.Warning, "Use minified QSS?", "Your minified QSS code has been applied.\n\nIf you encounter any issues with the minified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
                 QApplication.instance().styleSheet = _old
                 self.qssEditor.setPlainText(_old)
         def on_btn_save_clicked(self):
-            _file = None
+            _file = None;_ext = "";_text = ""
+            i = self.tabWidget.currentIndex
+            if i == 0:
+                _ext = '.qss';_text = self.qssEditor.toPlainText()+'\n\n/* Created with DevTools QSS Editor */'
+            elif i == 1:
+                _ext = '.qss';_text = self.chatEditor.toPlainText()+'\n\n/* Created with DevTools QSS Editor */'
+            elif i == 2:
+                _ext = '.tpl';_text = self.tplEditor.toPlainText()+'\n\n<!-- Created with DevTools QSS Editor -->'
             if self.lastSave:
-                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", self.lastSave, "Teamspeak 3 Stylesheet File (*.qss)")
+                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", self.lastSave, "Teamspeak 3 Stylesheet File (*"+_ext+")")
             else:
-                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", "", "Teamspeak 3 Stylesheet File (*.qss)")
+                _file = QFileDialog.getSaveFileName(self, "Save Qt Stylesheet", "", "Teamspeak 3 Stylesheet File (*"+_ext+")")
             if _file == None: return
-            if not _file.endswith('.qss'): _file += '.qss'
+            if not _file.endswith(_ext): _file += _ext
             self.lastSave = _file
             with open(_file, "w") as text_file:
-                print(self.qssEditor.toPlainText()+'\n\n/* Created with DevTools QSS Editor */', file=text_file)
+                print(_text, file=text_file)
 
     class devTools(ts3plugin):
         name = "Developer Tools"

@@ -7,6 +7,9 @@ from ts3query import *
 from pytsonui import *
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
+from PythonQt.QtNetwork import *
+from PythonQt.Qt import *
+from PythonQt.private import *
 self = QApplication.instance()
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
         message = str(message)
@@ -46,7 +49,6 @@ def urlResponse(reply):
     urlrequest.delete()
     urlrequest = None
 
-i = QApplication.instance()
 schid = ts3.getCurrentServerConnectionHandlerID()
 (error, ownid) = ts3.getClientID(schid)
 def unlock(show=False):
@@ -161,31 +163,52 @@ def lock(show=False):
             except: pass
 
 def findWidget(name):
-    name = name.lower()
-    widgets = self.topLevelWidgets()
-    widgets = widgets + self.allWidgets()
-    ret = dict()
-    c = 0
-    for x in widgets:
-        c += 1
-        if name in x.objectName.lower() or name in str(x.__class__).lower():
-            ret["class:"+str(x.__class__)+str(c)] = "obj:"+x.objectName;continue
-        if hasattr(x, "text"):
-            if name in x.text.lower():
-                ret["class:"+str(x.__class__)+str(c)] = "obj:"+x.objectName
-    return ret
-def getWidgetByClassName(name):
+    try:
+        name = name.lower()
+        widgets = self.topLevelWidgets()
+        widgets = widgets + self.allWidgets()
+        ret = dict()
+        c = 0
+        for x in widgets:
+            c += 1
+            if name in x.objectName.lower() or name in str(x.__class__).lower():
+                ret["class:"+str(x.__class__)+str(c)] = "obj:"+x.objectName;continue
+            if hasattr(x, "text"):
+                if name in x.text.lower():
+                    ret["class:"+str(x.__class__)+str(c)] = "obj:"+x.objectName
+        return ret
+    except:
+        print("error")
+def widgetbyclassname(name):
     widgets = self.topLevelWidgets()
     widgets = widgets + self.allWidgets()
     for x in widgets:
         if name in str(x.__class__).replace("<class '","").replace("'>",""):
             return x
-def getWidgetByObjectName(name):
+def widgetbyobjectname(name):
     widgets = self.topLevelWidgets()
     widgets = widgets + self.allWidgets()
     for x in widgets:
         if str(x.objectName) == name:
             return x
+def getobjects(name, cls=True):
+    import gc
+    objects = []
+    for obj in gc.get_objects():
+        if (isinstance(obj, QObject) and
+            ((cls and obj.inherits(name)) or
+             (not cls and obj.objectName() == name))):
+            objects.append(obj)
+    return objects
+
+def objects():
+    import gc;_ret = []
+    for x in gc.get_objects(): _ret.extend(str(repr(x)))
+    return _ret
+
+def file(name, content):
+    with open(os.path.expanduser("~/Desktop/"+name+".txt"), "w") as text_file:
+        print(str(content), file=text_file)
 
 #if error == 0:
     #error, ownnick = ts3.getClientDisplayName(schid, ownid)
