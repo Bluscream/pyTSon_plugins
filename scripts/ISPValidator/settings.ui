@@ -7,38 +7,44 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>394</height>
+    <width>430</width>
+    <height>466</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_4">
+  <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_7">
+    <layout class="QHBoxLayout" name="horizontalLayout_13">
      <item>
       <widget class="QGroupBox" name="groupBox">
        <property name="title">
         <string>Main</string>
        </property>
+       <widget class="QCheckBox" name="chk_debug">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>23</y>
+          <width>54</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Debug</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_6">
+       <property name="title">
+        <string>ISP List</string>
+       </property>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QCheckBox" name="chk_debug">
-          <property name="text">
-           <string>Debug</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QRadioButton" name="chk_whitelist">
-            <property name="text">
-             <string>Whitelist</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <widget class="QRadioButton" name="chk_blacklist">
             <property name="text">
@@ -46,11 +52,29 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QRadioButton" name="chk_whitelist">
+            <property name="text">
+             <string>Whitelist</string>
+            </property>
+           </widget>
+          </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolButton">
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
      </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_12">
      <item>
       <widget class="QGroupBox" name="groupBox_3">
        <property name="title">
@@ -100,6 +124,93 @@
           </item>
          </layout>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Reason:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="reason"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_5">
+       <property name="title">
+        <string>Failover Action</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QCheckBox" name="chk_failover">
+          <property name="text">
+           <string>Take action if everything fails</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QRadioButton" name="chk_kick_2">
+            <property name="text">
+             <string>Kick</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="chk_ban_2">
+            <property name="text">
+             <string>Ban</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Ban length:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="bantime_2">
+            <property name="value">
+             <number>60</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>seconds</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Reason:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="reason_2"/>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
      </item>
@@ -138,13 +249,6 @@
          <widget class="QLineEdit" name="api_fallback"/>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="chk_failover">
-        <property name="text">
-         <string>Take action if everything fails</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>
