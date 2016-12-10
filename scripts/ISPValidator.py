@@ -43,20 +43,6 @@ class ISPValidator(ts3plugin):
             self.isps = f.readlines()
         ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
 
-    def configDialogClosed(self, r, vals):
-        try:
-            if r == QDialog.Accepted:
-                for name, val in vals.items():
-                    try:
-                        if not val == self.cfg.getboolean('general', name):
-                            self.cfg.set('general', str(name), str(val))
-                    except:
-                        ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
-                with open(self.ini, 'w') as configfile:
-                    self.cfg.write(configfile)
-        except:
-            ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
-
     def configure(self, qParentWidget):
         try:
             if not self.dlg:
@@ -215,6 +201,7 @@ class SettingsDialog(QDialog):
                 _item.setToolTip(value)
                 _item.setText(event)
                 if value == "True": _item.setCheckState(Qt.Checked)
+                else: _item.setCheckState(Qt.Unchecked)
         except:
             ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
