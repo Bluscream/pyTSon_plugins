@@ -5,7 +5,7 @@ import ts3, ts3defines, datetime
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
     apiVersion = 21
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Automatically enable channel commander when switching channels.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

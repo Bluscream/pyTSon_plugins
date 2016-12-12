@@ -1,6 +1,6 @@
 from ts3plugin import ts3plugin, PluginHost
-import ts3, ts3defines, datetime, sqlite3, re
-
+from PythonQt.QtSql import QSqlDatabase
+import ts3, ts3defines, datetime, re
 
 class channelWatcher(ts3plugin):
     name = "Channel Watcher"
@@ -31,33 +31,50 @@ class channelWatcher(ts3plugin):
     sagroup = 0
     ownchannels = []
 
-
     def __init__(self):
-        self.conn = sqlite3.connect(ts3.getConfigPath() + "settings.db")
+        self.db = QSqlDatabase.addDatabase("QSQLITE","channelWatcher")
+        self.db.setDatabaseName(ts3.getConfigPath() + "settings.db")
+        if not self.db.isValid(): raise Exception("Database not valid")
+        if not self.db.open(): raise Exception("Database could not be opened")
         ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug:
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+        if self.debug: ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+
+    def stop(self):
+        self.db.close();self.db.delete()
+        QSqlDatabase.removeDatabase("channelWatcher")
+
+    def clientURL(self, schid=None, clid=1, uid=None, nickname=None, encodednick=None):
+        if schid == None:
+            try: schid = ts3.getCurrentServerConnectionHandlerID()
+            except: pass
+        if uid == None:
+            try: (error, uid) = ts3.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            except: pass
+        if nickname == None:
+            try: (error, nickname) = ts3.getClientDisplayName(schid, clid)
+            except: nickname = uid
+        if encodednick == None:
+            try: encodednick = urlencode(nickname)
+            except: pass
+        return "[url=client://%s/%s~%s]%s[/url]" % (clid, uid, encodednick, nickname)
 
     def InContacts(self, uid):
-        c = self.conn.cursor()
-        c.execute("SELECT value FROM contacts WHERE value LIKE '%IDS=" + uid + "%'")
-        line = c.fetchone()
-        if line is not None:
-            line = line[0]
-            isFriend = line.split("\n")[1]
-            isFriend = isFriend.split("Friend=")[1]
-            return int(isFriend)
-        else:
-            return -1
+        q = self.db.exec_("SELECT * FROM contacts WHERE value LIKE '%%IDS=%s%%'" % uid)
+        ret = 2
+        if q.next():
+            val = q.value("value")
+            for l in val.split('\n'):
+                if l.startswith('Friend='):
+                    ret = int(l[-1])
+        q.delete();return ret
 
     def checkUser(self, uid):
         if self.toggle:
             if len(self.ownchannels) > 0:
                 if uid != "serveradmin" and uid != "ServerQuery":
                     _in = self.InContacts(uid)
-                    if _in != -1:
+                    if _in < 2:
                         _schid = ts3.getCurrentServerConnectionHandlerID()
-                        #self.requestedUID.extend([uid])
                         self.requestedC.extend([_in])
                         _dbid = ts3.requestClientDBIDfromUID(_schid, uid)
 
@@ -72,28 +89,31 @@ class channelWatcher(ts3plugin):
                     self.checkUser(uid)
 
     def processCommand(self, schid, command):
-        if command.startswith("test"):
+        cmd = command.lower()
+        if cmd.startswith("test"):
             ts3.printMessageToCurrentTab("Status: "+str(self.toggle))
             ts3.printMessageToCurrentTab("Ban: "+str(self.sbgroup))
             ts3.printMessageToCurrentTab("Mod: "+str(self.smgroup))
             ts3.printMessageToCurrentTab("Admin: "+str(self.sagroup))
             ts3.printMessageToCurrentTab("Own Channels: "+str(self.ownchannels))
-            #ts3.printMessageToCurrentTab("requestedUIDs: "+str(self.requestedUID))
             ts3.printMessageToCurrentTab("requestedCs: "+str(self.requestedC))
             return True
-        if command.startswith("addchan"):
+        elif cmd.startswith("addchan"):
             command = int(command.split("addchan ")[1])
             self.ownchannels.extend([command])
             ts3.printMessageToCurrentTab("[color=green]Added[/color] #"+str(command)+" to list of channels: "+str(self.ownchannels))
             return True
-        if command.startswith("delchan"):
+        elif cmd.startswith("delchan"):
             command = int(command.split("delchan ")[1])
             self.ownchannels.remove([command])
             ts3.printMessageToCurrentTab("[color=red]Removed[/color] #"+str(command)+" from list of channels: "+str(self.ownchannels))
             return True
-        if command == "checkall":
+        elif cmd == "checkall":
             self.checkAllUsers()
             return True
+        elif cmd == "load":
+            self.requested = True
+            ts3.requestChannelGroupList(ts3.getCurrentServerConnectionHandlerID())
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
@@ -112,14 +132,13 @@ class channelWatcher(ts3plugin):
                 schid = ts3.getCurrentServerConnectionHandlerID()
                 (error, uid) = ts3.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
                 _i = self.checkUser(uid)
-                ts3.printMessageToCurrentTab("Client "+str(uid)+" = "+_i) # IMPORTANT
+                ts3.printMessageToCurrentTab("Client "+self.clientURL(schid, selectedItemID, uid)+" = "+_i)
 
     def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
         if self.toggle:
             if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING:
                 self.requested = True
                 ts3.requestChannelGroupList(ts3.getCurrentServerConnectionHandlerID())
-            #elif newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
                 self.ownchannels.clear()
 
@@ -182,15 +201,11 @@ class channelWatcher(ts3plugin):
 
     def onClientDBIDfromUIDEvent(self, serverConnectionHandlerID, uniqueClientIdentifier, clientDatabaseID):
         if self.toggle:
-            #if self.requestedUID != "" and self.requestedUID[0] == uniqueClientIdentifier:
                 _schid = ts3.getCurrentServerConnectionHandlerID()
-                #_uid = self.requestedUID.pop(0)
                 _cid = self.requestedC.pop(0)
-                #_clid = ts3.requestClientIDs([_schid], uniqueClientIdentifier)
-                #_cgid = ts3.getClientVariableAsInt(_schid, _clid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
-                if _cid == 0 and self.autoMod:# and _cgid != self.smgroup
+                if _cid == 0 and self.autoMod:
                     ts3.requestSetClientChannelGroup(_schid, [self.smgroup], self.ownchannels, [clientDatabaseID])
-                    ts3.printMessageToCurrentTab("[color=green]Gave Client [URL=client://0/"+uniqueClientIdentifier+"]"+uniqueClientIdentifier+"[/URL] Channel Mod in #"+str(self.ownchannels)+"[/color]")
-                elif _cid == 1 and self.autoBan:# and _cgid != self.sbgroup
+                    ts3.printMessageToCurrentTab("[color=green]Gave Client "+self.clientURL(serverConnectionHandlerID, None, uniqueClientIdentifier)+" Channel Mod in #"+str(self.ownchannels)+"[/color]")
+                elif _cid == 1 and self.autoBan:
                     ts3.requestSetClientChannelGroup(_schid, [self.sbgroup], self.ownchannels, [clientDatabaseID])
-                    ts3.printMessageToCurrentTab("[color=red]Banned Client [URL=client://0/"+uniqueClientIdentifier+"]"+uniqueClientIdentifier+"[/URL] from Channels #"+str(self.ownchannels)+"[/color]")
+                    ts3.printMessageToCurrentTab("[color=red]Banned Client "+self.clientURL(serverConnectionHandlerID, None, uniqueClientIdentifier)+" from Channels #"+str(self.ownchannels)+"[/color]")
