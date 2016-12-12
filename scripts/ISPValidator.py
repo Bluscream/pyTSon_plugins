@@ -114,7 +114,6 @@ class ISPValidator(ts3plugin):
                 if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%s's ISP: %s"%(self.clientURL(self.schid, self.requested),isp))
                 _match = False
                 for _isp in self.isps:
-                    ts3.printMessageToCurrentTab(_isp)
                     if isp == _isp: _match = True
                 if self.cfg.getboolean('general', 'whitelist') and not _match:
                     if self.cfg.getboolean('main', 'kickonly'):
@@ -154,7 +153,6 @@ class ISPValidator(ts3plugin):
                 if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%s's ISP: %s"%(self.clientURL(self.schid, self.requested),isp))
                 _match = False
                 for _isp in self.isps:
-                    ts3.printMessageToCurrentTab(_isp)
                     if isp == _isp: _match = True
                 if self.cfg.getboolean('general', 'whitelist') and not _match:
                     if self.cfg.getboolean('main', 'kickonly'):
@@ -196,9 +194,9 @@ class SettingsDialog(QDialog):
             self.chk_debug.setChecked(this.cfg.getboolean("general", "debug"))
             if this.cfg.getboolean("general", "whitelist"): self.chk_whitelist.setChecked(True)
             else: self.chk_blacklist.setChecked(True)
-            if this.cfg.getboolean("main", "kickonly"): self.chk_kick.setChecked(True);self.bantime.setEnabled(False);self.reason_2.setEnabled(False)
+            if this.cfg.getboolean("main", "kickonly"): self.chk_kick.setChecked(True)
             else: self.chk_ban.setChecked(True)
-            if this.cfg.getboolean("failover", "kickonly"): self.chk_kick_2.setChecked(True);self.bantime_2.setEnabled(False);self.reason_2.setEnabled(False)
+            if this.cfg.getboolean("failover", "kickonly"): self.chk_kick_2.setChecked(True)
             else: self.chk_ban_2.setChecked(True)
             self.bantime.setValue(int(this.cfg["main"]["bantime"]))
             self.bantime_2.setValue(int(this.cfg["failover"]["bantime"]))
@@ -215,6 +213,13 @@ class SettingsDialog(QDialog):
                 else: _item.setCheckState(Qt.Unchecked)
         except:
             ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+
+    def on_chk_kick_toggled(self, state):
+        if state: self.bantime.setEnabled(False);self.reason.setEnabled(False)
+        else: self.bantime.setEnabled(True);self.reason.setEnabled(True)
+    def on_chk_kick_2_toggled(self, state):
+        if state: self.bantime_2.setEnabled(False);self.reason_2.setEnabled(False)
+        else: self.bantime_2.setEnabled(True);self.reason_2.setEnabled(True)
 
     def on_chk_failover_stateChanged(self, state):
         if state == Qt.Checked: self.failoverBox.setEnabled(True)
