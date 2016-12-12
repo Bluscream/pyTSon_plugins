@@ -58,7 +58,7 @@ class serverBrowser(ts3plugin):
         d['morerequests'] = (ValueType.boolean, "Fast Connection", self.config['GENERAL']['morerequests'] == "True", None, None)
         d['serversperpage'] = (ValueType.integer, "Servers per page:", int(self.config['GENERAL']['serversperpage']), 0, 250)
         d['api'] = (ValueType.string, "API Base URL:", self.config['GENERAL']['api'], None, 1)
-        widgets = getValues(None, "Server Browser Settings", d, self.configDialogClosed)
+        getValues(None, "Server Browser Settings", d, self.configDialogClosed)
 
     def configDialogClosed(self, r, vals):
         if r == QDialog.Accepted:

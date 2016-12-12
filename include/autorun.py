@@ -27,6 +27,10 @@ def toggle(boolean):
     boolean = not boolean
     return boolean
 
+def getitem(useList, name): #getitem(PluginHost.modules,'devTools')
+    for _name,value in useList.items():
+        if _name == name: return value
+
 def alert(message, title="pyTSon"):
     _a = QMessageBox()
     _a.show()
@@ -179,17 +183,20 @@ def findWidget(name):
         return ret
     except:
         print("error")
-def widgetbyclassname(name):
+def widgetbyclass(name):
+    ret = []
     widgets = self.topLevelWidgets()
     widgets = widgets + self.allWidgets()
     for x in widgets:
         if name in str(x.__class__).replace("<class '","").replace("'>",""):
-            return x
-def widgetbyobjectname(name):
+            ret.extend(x)
+    return ret
+def widgetbyobject(name):
+    name = name.lower()
     widgets = self.topLevelWidgets()
     widgets = widgets + self.allWidgets()
     for x in widgets:
-        if str(x.objectName) == name:
+        if str(x.objectName).lower() == name:
             return x
 def getobjects(name, cls=True):
     import gc

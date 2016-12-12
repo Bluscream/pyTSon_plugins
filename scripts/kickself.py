@@ -3,7 +3,7 @@ import ts3, ts3defines
 import re
 class autopoke(ts3plugin):
     name = "kickoldself"
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     apiVersion = 21
     author = "Thomas \"PLuS\" Pathmann"

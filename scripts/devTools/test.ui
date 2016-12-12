@@ -374,6 +374,9 @@
      </item>
      <item>
       <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
          <string>Tab 1</string>
@@ -634,13 +637,29 @@ p, li { white-space: pre-wrap; }
      </item>
      <item>
       <widget class="Line" name="line_2">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QOpenGLWidget" name="openGLWidget"/>
+      <widget class="QOpenGLWidget" name="openGLWidget">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:red;</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QQuickWidget" name="quickWidget">
