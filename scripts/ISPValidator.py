@@ -33,10 +33,10 @@ class ISPValidator(ts3plugin):
             self.cfg.read(self.ini)
         else:
             self.cfg['general'] = { "debug": "False", "whitelist": "True", "isps": self.isps }
-            self.cfg['main'] = { "kickonly": "False", "bantime": "60", "reason": "{isp} is not a valid Internet Service Provider!" }
-            self.cfg['failover'] = { "enabled": "False", "kickonly": "False", "bantime": "60", "reason": "{isp} is not a valid Internet Service Provider!" }
+            self.cfg['main'] = { "kickonly": "False", "bantime": "60", "reason": "{isp} is not a valid home Internet Service Provider!" }
+            self.cfg['failover'] = { "enabled": "False", "kickonly": "False", "bantime": "60", "reason": "{isp} is not a valid home Internet Service Provider!" }
             self.cfg['api'] = { "main": "http://ip-api.com/line/{ip}?fields=isp", "fallback": "http://ipinfo.io/{ip}/org" }
-            self.cfg['events'] = { "onConnectStatusChangeEvent": "True", "onClientMoveEvent": "True", "onUpdateClientEvent": "True" }
+            self.cfg['events'] = { "own client connected": "True", "client connected": "True", "client ip changed": "False" }
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
         with open(self.cfg['general']['isps']) as f:
@@ -54,7 +54,7 @@ class ISPValidator(ts3plugin):
             ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
-        if not self.cfg.getboolean("events", "onConnectStatusChangeEvent"): return
+        if not self.cfg.getboolean("events", "own client connected"): return
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             (error, ids) = ts3.getClientList(serverConnectionHandlerID)
             if error == ts3defines.ERROR_ok:
@@ -67,7 +67,7 @@ class ISPValidator(ts3plugin):
                     else: ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the client type of '%s'" % self.clientURL(serverConnectionHandlerID, clientID));return
 
     def onUpdateClientEvent(self, serverConnectionHandlerID, clientID, invokerID, invokerName, invokerUniqueIdentifier):
-        if not self.cfg.getboolean("events", "onUpdateClientEvent"): return
+        if not self.cfg.getboolean("events", "client ip changed"): return
         if not invokerID == 0: return
         (error, _type) = ts3.getClientVariableAsInt(serverConnectionHandlerID, clientID, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
         if error == ts3defines.ERROR_ok and _type == 0:
@@ -77,7 +77,7 @@ class ISPValidator(ts3plugin):
         else: ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the client type of '%s'" % self.clientURL(serverConnectionHandlerID, clientID));return
 
     def onClientMoveEvent(self, serverConnectionHandlerID, clientID, oldChannelID, newChannelID, visibility, moveMessage):
-        if not self.cfg.getboolean("events", "onClientMoveEvent"): return
+        if not self.cfg.getboolean("events", "client connected"): return
         if oldChannelID == 0:
             (error, _type) = ts3.getClientVariableAsInt(serverConnectionHandlerID, clientID, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
             if error == ts3defines.ERROR_ok and _type == 0:
@@ -106,15 +106,21 @@ class ISPValidator(ts3plugin):
             try:
                 isp = reply.readAll().data().decode('utf-8')
                 if isp.startswith('AS'): isp = isp.split(" ", 1)[1]
+                if not isp or isp == "" or isp == "undefined":
+                    ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the ISP for '%s' (Reason: %s) Falling back to %s" % (self.clientURL(self.schid, self.requested),format_exc(),self.cfg['api']['fallback'].replace("{ip}",self.ip)))
+                    if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab(self.cfg['api']['fallback'].replace("{ip}",self.ip))
+                    self.nwb = QNetworkAccessManager();self.nwb.connect("finished(QNetworkReply*)", self.onFallbackReply)
+                    self.nwb.get(QNetworkRequest(QUrl(self.cfg['api']['fallback'].replace("{ip}",self.ip))));return
                 if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%s's ISP: %s"%(self.clientURL(self.schid, self.requested),isp))
                 _match = False
                 for _isp in self.isps:
+                    ts3.printMessageToCurrentTab(_isp)
                     if isp == _isp: _match = True
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("_match1: "+str(_match))
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("not whitelist: "+str(not self.cfg.getboolean('general', 'whitelist')))
-                if not self.cfg.getboolean('general', 'whitelist') and _match: _match = False
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("_match2: "+str(_match))
-                if not _match:
+                if self.cfg.getboolean('general', 'whitelist') and not _match:
+                    if self.cfg.getboolean('main', 'kickonly'):
+                        ts3.requestClientKickFromServer(self.schid, self.requested, "%s is not a valid Internet Service Provider!" % isp);self.requested = 0
+                    else: ts3.banclient(self.schid, self.requested, 60, "%s is not a valid Internet Service Provider!" % isp);self.requested = 0
+                elif not self.cfg.getboolean('general', 'whitelist') and _match:
                     if self.cfg.getboolean('main', 'kickonly'):
                         ts3.requestClientKickFromServer(self.schid, self.requested, "%s is not a valid Internet Service Provider!" % isp);self.requested = 0
                     else: ts3.banclient(self.schid, self.requested, 60, "%s is not a valid Internet Service Provider!" % isp);self.requested = 0
@@ -127,7 +133,6 @@ class ISPValidator(ts3plugin):
                 except:
                     ts3.printMessageToCurrentTab(format_exc())
         else:
-            ts3.printMessageToCurrentTab("2")
             ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the ISP for '%s' (Reason: %s) Falling back to %s" % (self.clientURL(self.schid, self.requested),reply.errorString(),self.cfg['api']['fallback'].replace("{ip}",self.ip)))
             if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab(self.cfg['api']['fallback'].replace("{ip}",self.ip))
             self.nwb = QNetworkAccessManager();self.nwb.connect("finished(QNetworkReply*)", self.onFallbackReply)
@@ -139,15 +144,23 @@ class ISPValidator(ts3plugin):
             try:
                 isp = reply.readAll().data().decode('utf-8')
                 if isp.startswith('AS'): isp = isp.split(" ", 1)[1]
+                if not isp or isp == "" or isp == "undefined":
+                    ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the ISP for '%s' (Reason: %s)" % (self.clientURL(self.schid, self.requested),format_exc()))
+                    if self.cfg.getboolean("failover", "enabled"):
+                        if self.cfg.getboolean('failover', 'kickonly'):
+                            ts3.requestClientKickFromServer(self.schid, self.requested, self.cfg['failover']['reason'].replace('{isp}', isp));
+                        else: ts3.banclient(self.schid, self.requested, int(self.cfg['failover']['bantime']), self.cfg['failover']['reason'].replace('{isp}', isp))
+                        self.requested = 0;reply.deleteLater();return
                 if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%s's ISP: %s"%(self.clientURL(self.schid, self.requested),isp))
                 _match = False
                 for _isp in self.isps:
+                    ts3.printMessageToCurrentTab(_isp)
                     if isp == _isp: _match = True
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("_match1: "+str(_match))
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("not whitelist: "+str(not self.cfg.getboolean('general', 'whitelist')))
-                if not self.cfg.getboolean('general', 'whitelist') and _match: _match = False
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("_match2: "+str(_match))
-                if not _match:
+                if self.cfg.getboolean('general', 'whitelist') and not _match:
+                    if self.cfg.getboolean('main', 'kickonly'):
+                        ts3.requestClientKickFromServer(self.schid, self.requested, "%s is not a valid Internet Service Provider!" % isp);self.requested = 0
+                    else: ts3.banclient(self.schid, self.requested, 60, "%s is not a valid Internet Service Provider!" % isp);self.requested = 0
+                elif not self.cfg.getboolean('general', 'whitelist') and _match:
                     if self.cfg.getboolean('main', 'kickonly'):
                         ts3.requestClientKickFromServer(self.schid, self.requested, "%s is not a valid Internet Service Provider!" % isp);self.requested = 0
                     else: ts3.banclient(self.schid, self.requested, 60, "%s is not a valid Internet Service Provider!" % isp);self.requested = 0
@@ -193,17 +206,19 @@ class SettingsDialog(QDialog):
             self.reason_2.setText(this.cfg["failover"]["reason"])
             self.api_main.setText(this.cfg["api"]["main"])
             self.api_fallback.setText(this.cfg["api"]["fallback"])
-            if this.cfg.getboolean("failover", "enabled"):
-                self.chk_failover.setChecked(True)
-                self.failoverBox.setEnabled(False)
+            if this.cfg.getboolean("failover", "enabled"): self.chk_failover.setChecked(True)
             for event, value in this.cfg["events"].items():
                 _item = QListWidgetItem(self.lst_events)
                 _item.setToolTip(value)
-                _item.setText(event)
+                _item.setText(event.title())
                 if value == "True": _item.setCheckState(Qt.Checked)
                 else: _item.setCheckState(Qt.Unchecked)
         except:
             ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+
+    def on_chk_failover_stateChanged(self, state):
+        if state == Qt.Checked: self.failoverBox.setEnabled(True)
+        else: self.failoverBox.setEnabled(False)
 
     def on_toolButton_clicked(self):
         file = QFileDialog.getOpenFileName(self, "Select newline seperated ISP list", self.this.cfg['general']['isps'], "ISP List (*.*)")
@@ -223,11 +238,10 @@ class SettingsDialog(QDialog):
             self.this.cfg.set('api', 'main', self.api_main.text)
             self.this.cfg.set('api', 'fallback', self.api_fallback.text)
             self.this.cfg.set('failover', 'enabled', str(self.chk_failover.isChecked()))
-            # for index in xrange(self.lst_events.count()):
-            #     item = self.lst_events.item(index)
-            #     for event in self.this.cfg["events"]
-            #         if item.text() == event
-            #             if item.isChecked():
+            for index in range(self.lst_events.count):
+                item = self.lst_events.item(index)
+                for event in self.this.cfg['events']:
+                    if item.text().lower() == event: self.this.cfg.set('events', item.text(), str(item.checkState()==Qt.Checked))
             with open(self.this.ini, 'w') as configfile:
                 self.this.cfg.write(configfile)
             self.close()

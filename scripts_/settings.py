@@ -13,7 +13,7 @@ class settings(ts3plugin):
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"
-    description = "Features:\n\n-Toggle Hostbanners\n-Toggle Hostmessages\n Toggle Hostbuttons\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
+    description = "Features:\n\n - Toggle Hostbanners\n - Toggle Hostmessages\n - Toggle Hostbuttons\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
     offersConfigure = True
     commandKeyword = ""
     infoTitle = None
@@ -30,16 +30,18 @@ class settings(ts3plugin):
             self.cfg['general'] = { "hide hostbanners": "False", "hide hostmessages": "False", "hide hostbuttons": "False" }
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        self.applySettings()
+        self.checkHostButton();self.checkHostBanner()
         logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
 
-    def applySettings(self):
+    def checkHostButton(self):
         if self.cfg.getboolean('general','hide hostbuttons'):
             try: self.grabWidget('HosterButton').styleSheet = 'margin:-9999px !important;'
             except: pass
+    def checkHostBanner(self):
         if self.cfg.getboolean('general','hide hostbanners'):
-            try: self.grabWidget('Banner',True).hide()
-            except: pass
+            try: self.grabWidget('Banner',True).delete()
+            except: from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
+    def checkHostMessage(self):
         if self.cfg.getboolean('general','hide hostmessages'):
             try:
                 hostMessage = self.grabWidget('MsgDialog')
@@ -48,9 +50,9 @@ class settings(ts3plugin):
             except: pass
 
     def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING: self.applySettings()
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING: self.checkHostMessage()
 
-    def onServerUpdatedEvent(self, serverConnectionHandlerID): self.applySettings()
+    #def onServerUpdatedEvent(self, serverConnectionHandlerID): self.applySettings()
 
     def grabWidget(self, objName, byClass=False):
         for widget in QApplication.instance().allWidgets():
