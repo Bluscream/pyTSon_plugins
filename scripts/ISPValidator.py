@@ -177,10 +177,19 @@ class ISPValidator(ts3plugin):
         self.requested = 0
         reply.deleteLater()
 
-    def clientURL(self, schid, clid, uid=None, nickname=None, encodednick=None):
-        if not nickname: (error, nickname) = ts3.getClientDisplayName(schid, clid)
-        if not uid: (error, uid) = ts3.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        if not encodednick: encodednick = urlencode(nickname)
+    def clientURL(self, schid=None, clid=1, uid=None, nickname=None, encodednick=None):
+        if schid == None:
+            try: schid = ts3.getCurrentServerConnectionHandlerID()
+            except: pass
+        if uid == None:
+            try: (error, uid) = ts3.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            except: pass
+        if nickname == None:
+            try: (error, nickname) = ts3.getClientDisplayName(schid, clid)
+            except: nickname = uid
+        if encodednick == None:
+            try: encodednick = urlencode(nickname)
+            except: pass
         return "[url=client://%s/%s~%s]%s[/url]" % (clid, uid, encodednick, nickname)
 
 class SettingsDialog(QDialog):
