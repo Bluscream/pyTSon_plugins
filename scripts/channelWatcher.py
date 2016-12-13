@@ -114,6 +114,7 @@ class channelWatcher(ts3plugin):
         elif cmd == "load":
             self.requested = True
             ts3.requestChannelGroupList(ts3.getCurrentServerConnectionHandlerID())
+            return True
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
