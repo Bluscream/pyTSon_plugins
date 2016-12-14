@@ -30,7 +30,6 @@ class settings(ts3plugin):
             self.cfg['general'] = { "hide hostbanners": "False", "hide hostmessages": "False", "hide hostbuttons": "False" }
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        self.checkHostButton();self.checkHostBanner()
         logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
 
     def checkHostButton(self):
