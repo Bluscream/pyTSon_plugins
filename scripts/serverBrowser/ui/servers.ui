@@ -59,6 +59,9 @@
          <height>0</height>
         </size>
        </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::ActionsContextMenu</enum>
+       </property>
        <property name="autoScroll">
         <bool>true</bool>
        </property>
