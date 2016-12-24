@@ -49,7 +49,7 @@ class settings(ts3plugin):
             except: pass
 
     def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING: self.checkHostMessage()
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING: self.checkHostMessage();self.checkHostBanner();self.checkHostButton()
 
     #def onServerUpdatedEvent(self, serverConnectionHandlerID): self.applySettings()
 
@@ -70,6 +70,7 @@ class settings(ts3plugin):
                     except: from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
+                self.checkHostMessage();self.checkHostBanner();self.checkHostButton()
         except: from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def configure(self, qParentWidget):

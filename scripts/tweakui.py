@@ -4,7 +4,7 @@ from PythonQt.QtGui import QApplication, QMainWindow, QSplitter, QStackedWidget,
 from PythonQt.QtCore import QTimer, Qt
 
 class tweakui(ts3plugin):
-    name = "UI Tweaks"
+    name = "tweakui"
     requestAutoload = False
     version = "1.0"
     apiVersion = 21

@@ -6,7 +6,7 @@ try:
     class channelWatcher(ts3plugin):
         name = "Channel Watcher"
         apiVersion = 21
-        requestAutoload = False
+        requestAutoload = True
         version = "1.0"
         author = "Bluscream"
         description = "Helps you keeping your channel moderated.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
@@ -34,7 +34,6 @@ try:
         check = False
 
         def __init__(self):
-            ts3.logMessage("__init__(self)", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             self.db = QSqlDatabase.addDatabase("QSQLITE","channelWatcher")
             self.db.setDatabaseName(ts3.getConfigPath() + "settings.db")
             if not self.db.isValid(): raise Exception("Database not valid")
@@ -43,12 +42,10 @@ try:
             if self.debug: ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
 
         def stop(self):
-            ts3.logMessage("stop(self)", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             self.db.close();self.db.delete()
             QSqlDatabase.removeDatabase("channelWatcher")
 
         def clientURL(self, schid=None, clid=1, uid=None, nickname=None, encodednick=None):
-            ts3.logMessage("clientURL()", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             if not self.check: return False
             if schid == None:
                 try: schid = ts3.getCurrentServerConnectionHandlerID()
@@ -65,7 +62,6 @@ try:
             return "[url=client://%s/%s~%s]%s[/url]" % (clid, uid, encodednick, nickname)
 
         def InContacts(self, uid):
-            ts3.logMessage("InContacts", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             if not self.check: return False
             q = self.db.exec_("SELECT * FROM contacts WHERE value LIKE '%%IDS=%s%%'" % uid)
             ret = 2
@@ -88,7 +84,6 @@ try:
                             _dbid = ts3.requestClientDBIDfromUID(_schid, uid)
 
         def checkAllUsers(self):
-            ts3.logMessage("checkAllUsers", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             if not self.check: return False
             if self.toggle:
                 _schid = ts3.getCurrentServerConnectionHandlerID()
@@ -100,7 +95,6 @@ try:
                         self.checkUser(uid)
 
         def processCommand(self, schid, command):
-            ts3.logMessage("processCommand", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             cmd = command.lower()
             if cmd.startswith("test"):
                 ts3.printMessageToCurrentTab("Status: "+str(self.toggle))
@@ -129,7 +123,6 @@ try:
                 return True
 
         def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-            ts3.logMessage("onMenuItemEvent", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
                 if menuItemID == 0:
                     self.toggle = not self.toggle
@@ -146,7 +139,6 @@ try:
                     (error, uid) = ts3.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER);self.checkUser(uid)
 
         def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
-            ts3.logMessage("onConnectStatusChangeEvent", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             if self.toggle:
                 if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
                     self.requested = True
@@ -158,20 +150,13 @@ try:
             if self.toggle:
                 if self.requested == True:
                     for _name in self.banned_names:
-                        if name.upper().__contains__(_name):
-                            self.sbgroup = channelGroupID
-                            break
+                        if name.upper().__contains__(_name): self.sbgroup = channelGroupID;break
                     for _name in self.mod_names:
-                        if name.upper().__contains__(_name):
-                            self.smgroup = channelGroupID
-                            break
+                        if name.upper().__contains__(_name): self.smgroup = channelGroupID;break
                     for _name in self.admin_names:
-                        if name.upper().__contains__(_name):
-                            self.sagroup = channelGroupID
-                            break
+                        if name.upper().__contains__(_name): self.sagroup = channelGroupID;break
 
         def onChannelGroupListFinishedEvent(self, serverConnectionHandlerID):
-            ts3.logMessage("onChannelGroupListFinishedEvent", ts3defines.LogLevel.LogLevel_INFO, "channelWatcher", 0)
             if self.toggle:
                 self.requested = False;self.check = True
 
@@ -179,29 +164,49 @@ try:
             if not self.check: return False
             if self.toggle:
                 (error, _clid) = ts3.getClientID(serverConnectionHandlerID)
+                (error, _cid) = ts3.getChannelOfClient(serverConnectionHandlerID, _clid)
                 if clientID == _clid:
                     if channelGroupID == self.sagroup:
                         if self.ownchannels.__contains__(channelID):
                             _t = False
                         else:
                             self.ownchannels.append(channelID)
+                    elif channelGroupID == self.smgroup:
+                        (error, neededTP) = ts3.getChannelVariableAsInt(serverConnectionHandlerID, _cid, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+                        if neededTP > 0:
+                            (error, clients) = ts3.getChannelClientList(serverConnectionHandlerID, _cid)
+                            for client in clients:
+                                if client == _clid: continue
+                                (error, _cgid) = ts3.getClientVariableAsInt(serverConnectionHandlerID, client, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
+                                if _cgid == self.sagroup: continue
+                                (error, uid) = ts3.getClientVariableAsString(serverConnectionHandlerID, client, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                                if self.InContacts(uid) == 0:
+                                    ts3.requestClientSetIsTalker(serverConnectionHandlerID, client, True)
+                elif channelID == _cid and channelGroupID == self.sbgroup:
+                    (error, uid) = ts3.getClientVariableAsString(serverConnectionHandlerID, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                    (error, _cid) = ts3.getChannelOfClient(serverConnectionHandlerID, clientID)
+                    if _cid in self.ownchannels: ts3.requestClientKickFromChannel(serverConnectionHandlerID, clientID, "You were banned by \"%s\""%invokerName)
 
         def onClientMoveEvent(self, serverConnectionHandlerID, clientID, oldChannelID, newChannelID, visibility, moveMessage):
             if not self.check: return False
             if self.toggle:
                 (error, _clid) = ts3.getClientID(serverConnectionHandlerID)
-                if clientID != _clid and oldChannelID == 0:
-                    schid = ts3.getCurrentServerConnectionHandlerID()
-                    (error, uid) = ts3.getClientVariableAsString(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-                    self.checkUser(uid)
+                (error, _cid) = ts3.getChannelOfClient(serverConnectionHandlerID, _clid)
+                (error, _cgid) = ts3.getClientVariableAsInt(serverConnectionHandlerID, _clid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
+                if not clientID == _clid:
+                    (error, uid) = ts3.getClientVariableAsString(serverConnectionHandlerID, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                    if oldChannelID == 0: self.checkUser(uid)
+                    if newChannelID == _cid and _cgid == self.smgroup:
+                        (error, neededTP) = ts3.getChannelVariableAsInt(serverConnectionHandlerID, _cid, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+                        if neededTP > 0:
+                            if self.InContacts(uid) == 0: ts3.requestClientSetIsTalker(serverConnectionHandlerID, clientID, True)
 
         def onClientMoveSubscriptionEvent(self, serverConnectionHandlerID, clientID, oldChannelID, newChannelID, visibility):
             if not self.check: return False
             if self.toggle:
                 (error, _clid) = ts3.getClientID(serverConnectionHandlerID)
                 if clientID != _clid:
-                    schid = ts3.getCurrentServerConnectionHandlerID()
-                    (error, uid) = ts3.getClientVariableAsString(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                    (error, uid) = ts3.getClientVariableAsString(serverConnectionHandlerID, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
                     self.checkUser(uid)
 
         def onNewChannelCreatedEvent(self, serverConnectionHandlerID, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
