@@ -1,6 +1,5 @@
+import ts3lib as ts3
 from ts3plugin import ts3plugin
-
-import ts3
 from ts3defines import ERROR_ok, ClientPropertiesRare, TextMessageTargetMode
 
 from PythonQt.QtGui import *
@@ -183,4 +182,3 @@ class autoreply(ts3plugin):
     def onClientChatClosedEvent(self, schid, clientID, clientUID):
         if (schid, clientUID) in self.handled:
             self.handled.remove((schid, clientUID))
-

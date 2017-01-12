@@ -1,9 +1,9 @@
-from ts3plugin import ts3plugin
-import ts3, ts3defines
+import ts3lib as ts3; from ts3plugin import ts3plugin
+import ts3lib as ts3; import   ts3defines
 import re
 class autopoke(ts3plugin):
     name = "kickoldself"
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     apiVersion = 21
     author = "Thomas \"PLuS\" Pathmann"

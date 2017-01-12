@@ -1,4 +1,4 @@
-from ts3plugin import ts3plugin
+import ts3lib as ts3; from ts3plugin import ts3plugin
 
 from PythonQt.QtGui import QApplication, QMainWindow, QSplitter, QStackedWidget, QDockWidget, QWidget
 from PythonQt.QtCore import QTimer, Qt

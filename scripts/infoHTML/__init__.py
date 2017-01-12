@@ -1,7 +1,7 @@
-from ts3plugin import ts3plugin
+import ts3lib as ts3; from ts3plugin import ts3plugin
 from PythonQt.QtGui import QApplication, QTextDocument
 from PythonQt.QtCore import Qt
-import ts3, ts3defines
+import ts3lib as ts3; import   ts3defines
 
 class infoHTML(ts3plugin):
     name = "Extended HTML Support"

@@ -1,12 +1,13 @@
 try:
+    import ts3lib as ts3
     from ts3plugin import ts3plugin, PluginHost
     from PythonQt.QtSql import QSqlDatabase
-    import ts3, ts3defines, datetime, re
+    import ts3defines, datetime, re
 
     class channelWatcher(ts3plugin):
         name = "Channel Watcher"
         apiVersion = 21
-        requestAutoload = True
+        requestAutoload = False
         version = "1.0"
         author = "Bluscream"
         description = "Helps you keeping your channel moderated.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
@@ -234,5 +235,5 @@ try:
                         ts3.requestSetClientChannelGroup(_schid, [self.sbgroup], self.ownchannels, [clientDatabaseID])
                         ts3.printMessageToCurrentTab("[color=red]Banned Client "+self.clientURL(serverConnectionHandlerID, None, uniqueClientIdentifier)+" from Channels #"+str(self.ownchannels)+"[/color]")
 except:
-    try: from traceback import format_exc;import ts3;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
+    try: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
     except: pass

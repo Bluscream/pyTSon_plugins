@@ -1,5 +1,5 @@
 from ts3plugin import ts3plugin, PluginHost
-from ts3 import logMessage, printMessageToCurrentTab
+from ts3lib import logMessage, printMessageToCurrentTab
 import ts3defines
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *

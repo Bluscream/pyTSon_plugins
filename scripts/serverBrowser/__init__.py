@@ -1,9 +1,10 @@
+import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
-from pytsonui import setupUi, getValues, ValueType
+from pytsonui import setupUi
 from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication, QInputDialog
 from PythonQt.QtCore import Qt, QTimer
 from datetime import datetime
-import ts3, ts3defines, os, requests, json, configparser, webbrowser, traceback, urllib.parse
+import ts3defines, os, requests, json, configparser, webbrowser, traceback, urllib.parse
 
 
 class serverBrowser(ts3plugin):
@@ -501,7 +502,7 @@ class ServersDialog(QDialog):
         try:
             ts3.logMessage("test", ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
             item = self.serverList.selectedItems()[0]
-            item.setData(Qt::UserRole, 22);
+            item.setData(Qt.UserRole, 22);
         except:
             print(traceback.format_exc())
 

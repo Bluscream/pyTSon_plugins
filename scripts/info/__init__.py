@@ -1,5 +1,5 @@
-from ts3plugin import ts3plugin, PluginHost
-import ts3, ts3defines, datetime, configparser, os.path
+import ts3lib as ts3; from ts3plugin import ts3plugin, PluginHost
+import ts3lib as ts3; import   ts3defines, datetime, configparser, os.path
 from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi

@@ -1,5 +1,5 @@
+import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
-from ts3 import getPluginPath, logMessage
 import ts3defines
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
@@ -19,7 +19,7 @@ class discordify(ts3plugin):
 
     def __init__(self):
         i = QApplication.instance()
-        p = QIcon(getPluginPath()+"pyTSon/scripts/discordify/icon.png")
+        p = QIcon(ts3.getPluginPath()+"pyTSon/scripts/discordify/icon.png")
         for item in i.allWidgets():
             try: item.setWindowIcon(p)
             except: pass
@@ -28,4 +28,4 @@ class discordify(ts3plugin):
                 if t and not "Discord - " in t:
                     item.setWindowTitle("Discord - " + t)
             except: pass
-        logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)

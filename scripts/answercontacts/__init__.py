@@ -1,7 +1,6 @@
 from ts3plugin import ts3plugin
-
-import ts3, ts3defines
-
+import ts3lib as ts3
+import ts3defines
 from PythonQt.QtSql import QSqlDatabase
 
 class answercontacts(ts3plugin):
@@ -63,4 +62,3 @@ class answercontacts(ts3plugin):
                     err = ts3.requestSendPrivateTextMsg(schid, "I don't like you!", fromID)
                 else:
                     err = ts3.requestSendPrivateTextMsg(schid, "Do I know you?", fromID)
-

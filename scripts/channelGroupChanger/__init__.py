@@ -1,5 +1,5 @@
-from ts3plugin import ts3plugin, PluginHost
-import ts3, ts3defines, datetime
+import ts3lib as ts3; from ts3plugin import ts3plugin, PluginHost
+import ts3lib as ts3; import   ts3defines, datetime
 
 
 class channelGroupChanger(ts3plugin):

@@ -1,8 +1,8 @@
-from ts3plugin import ts3plugin, PluginHost
+import ts3lib as ts3; from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi
 from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QListWidget
 from PythonQt.QtCore import Qt
-import ts3, ts3defines, datetime, os
+import ts3lib as ts3; import   ts3defines, datetime, os
 
 class report(ts3plugin):
     name = "Report"

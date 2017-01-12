@@ -1,9 +1,10 @@
+import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
-from pytsonui import setupUi, getValues, ValueType
+from pytsonui import setupUi
 from PythonQt.QtGui import QDialog, QInputDialog, QLineEdit
 from os import path
 from configparser import ConfigParser
-import ts3, ts3defines
+import ts3defines
 
 class cfgDialog(ts3plugin):
     name = "Config Dialog Examples"

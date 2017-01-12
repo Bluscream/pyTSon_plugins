@@ -1,16 +1,15 @@
+import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
-from ts3 import logMessage, getPluginPath, printMessageToCurrentTab
-from pytsonui import ValueType, getValues
 from os import path
 from configparser import ConfigParser
-import ts3defines
+import defines
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
 
 class settings(ts3plugin):
     name = "Extended Settings"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Features:\n\n - Toggle Hostbanners\n - Toggle Hostmessages\n - Toggle Hostbuttons\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
@@ -19,7 +18,7 @@ class settings(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    ini = path.join(getPluginPath(), "pyTSon", "scripts", "settings", "settings.ini")
+    ini = path.join(ts3.getPluginPath(), "pyTSon", "scripts", "settings", "settings.ini")
     cfg = ConfigParser()
     dlg = None
 
@@ -30,7 +29,7 @@ class settings(ts3plugin):
             self.cfg['general'] = { "hide hostbanners": "False", "hide hostmessages": "False", "hide hostbuttons": "False" }
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
 
     def checkHostButton(self):
         if self.cfg.getboolean('general','hide hostbuttons'):
@@ -39,7 +38,7 @@ class settings(ts3plugin):
     def checkHostBanner(self):
         if self.cfg.getboolean('general','hide hostbanners'):
             try: self.grabWidget('Banner',True).delete()
-            except: from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
+            except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
     def checkHostMessage(self):
         if self.cfg.getboolean('general','hide hostmessages'):
             try:
@@ -58,7 +57,7 @@ class settings(ts3plugin):
             try:
                 if byClass and widget.className() == objName: return widget
                 elif widget.objectName == objName: return widget
-            except: from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def configDialogClosed(self, r, vals):
         try:
@@ -67,11 +66,11 @@ class settings(ts3plugin):
                     try:
                         if not v == self.cfg.getboolean('general', n):
                             self.cfg.set('general', n, str(v))
-                    except: from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+                    except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
                 self.checkHostMessage();self.checkHostBanner();self.checkHostButton()
-        except: from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+        except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def configure(self, qParentWidget):
         try:
@@ -79,4 +78,4 @@ class settings(ts3plugin):
             for n, v in self.cfg['general'].items():
                 d[n] = (ValueType.boolean, n.title(), self.cfg.getboolean('general', n), None, None)
             getValues(qParentWidget, self.name, d, self.configDialogClosed)
-        except: from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+        except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)

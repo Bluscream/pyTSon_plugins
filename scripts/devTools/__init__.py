@@ -1,8 +1,8 @@
-from ts3plugin import ts3plugin
+import ts3lib as ts3; from ts3plugin import ts3plugin
 from pytsonui import setupUi
 from PythonQt.QtGui import QApplication, QCursor, QDialog, QSplitter, QTreeView, QTableView, QHBoxLayout, QVBoxLayout, QCheckBox, QWidget, QItemSelectionModel, QMenu, QMessageBox, QFileDialog, QTextDocument
 from PythonQt.QtCore import Qt, QAbstractItemModel, QModelIndex
-import ts3, ts3defines, os
+import ts3lib as ts3; import   ts3defines, os
 
 try:
 

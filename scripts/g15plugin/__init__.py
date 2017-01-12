@@ -1,9 +1,8 @@
 #if you wanna use this, you'll need the g15daemon module and ressources (font) from https://github.com/pathmann/g15mediadaemon; g15daemon has additional dependencies: freetype
+import ts3lib as ts3
 from ts3plugin import ts3plugin
-
 import os, sys
-
-import ts3, ts3defines
+import ts3defines
 import g15daemon
 
 PIXEL_ON = chr(1)
@@ -16,7 +15,7 @@ if sys.platform == 'linux':
         name = "g15"
         requestAutoload = False
         version = "1.0"
-        apiVersion = 20
+        apiVersion = 21
         author = "Thomas \"PLuS\" Pathmann"
         description = "Display information on the g15 connected to g15daemon"
         offersConfigure = False
@@ -24,7 +23,7 @@ if sys.platform == 'linux':
         infoTitle = None
         menuItems = []
         hotkeys = []
-      
+
         def __init__(self):
             self.g15 = g15daemon.g15screen(g15daemon.SCREEN_PIXEL)
             self.talkerids = []
@@ -37,12 +36,12 @@ if sys.platform == 'linux':
             else:
                 print("Error loading font: %s" % err)
                 self.ttf_id = -1
-            
+
             self.updateDisplay()
-            
+
         def stop(self):
             del(self.g15)
-        
+
         def updateDisplay(self):
             self.g15.clear()
             schid = ts3.getCurrentServerConnectionHandlerID()
@@ -71,7 +70,7 @@ if sys.platform == 'linux':
                             #self.g15.render_string(name, i +1, g15daemon.G15_TEXT_LARGE, 0, 0)
                         self.g15.display()
                         return
-            
+
             self.g15.render_string("TS3 ERROR!", 0, g15daemon.G15_TEXT_LARGE, 0, 0)
             self.g15.display()
 
@@ -80,9 +79,9 @@ if sys.platform == 'linux':
             if row >= 5:
                 x = 80
                 row -= 5
-            
+
             y = row * 12
-                
+
             if self.ttf_id != -1:
                 self.g15.ttf_print(x, y, 12, self.ttf_id, PIXEL_ON, 0, string)
             else:
@@ -91,7 +90,7 @@ if sys.platform == 'linux':
         def onClientSelfVariableUpdateEvent(self, serverConnectionHandlerID, flag, oldval, newval):
             if flag in [ts3defines.ClientProperties.CLIENT_INPUT_MUTED, ts3defines.ClientProperties.CLIENT_OUTPUT_MUTED, ts3defines.ClientPropertiesRare.CLIENT_AWAY]:
                 self.updateDisplay()
-        
+
         def onTalkStatusChangeEvent(self, serverConnectionHandlerID, status, isReceivedWhisper, clientID):
             if status == ts3defines.TalkStatus.STATUS_TALKING:
                 if (serverConnectionHandlerID, clientID) in self.talkerids:
@@ -100,19 +99,18 @@ if sys.platform == 'linux':
                 if err == ts3defines.ERROR_ok:
                     self.talkerids.append((serverConnectionHandlerID, clientID))
                     self.talkernames.append(name)
-                    
-                
+
+
             elif status == ts3defines.TalkStatus.STATUS_NOT_TALKING:
                 if (serverConnectionHandlerID, clientID) not in self.talkerids:
                     return
-                    
+
                 self.talkernames.pop(self.talkerids.index((serverConnectionHandlerID, clientID)))
                 self.talkerids.remove((serverConnectionHandlerID, clientID))
             else:
                 return
-                
+
             self.updateDisplay()
-            
+
         def onConnectStatusChangeEvent(self, schid, status, errorNumber):
             self.updateDisplay()
-          

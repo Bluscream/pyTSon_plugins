@@ -1,5 +1,6 @@
+import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
-from pytsonui import setupUi, getValues, ValueType
+from pytsonui import setupUi
 from PythonQt.QtGui import *
 from PythonQt.QtCore import QUrl, Qt
 from PythonQt.QtNetwork import *
@@ -7,7 +8,7 @@ from traceback import format_exc
 from urllib.parse import quote as urlencode
 from os import path
 from configparser import ConfigParser
-import ts3, ts3defines
+import ts3defines
 
 class ISPValidator(ts3plugin):
     name = "ISP Validator"
