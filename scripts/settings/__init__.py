@@ -2,7 +2,7 @@ import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
 from os import path
 from configparser import ConfigParser
-import defines
+import ts3defines
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
 
