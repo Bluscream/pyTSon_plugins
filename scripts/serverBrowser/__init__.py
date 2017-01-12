@@ -37,11 +37,12 @@ class serverBrowser(ts3plugin):
             }
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
-        ts3.printMessageToCurrentTab(str(QApplication.instance()))
 
         ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.config['GENERAL']['debug'] == "True":
             ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]Bluscream[/url] loaded.")
+
+    def infoData(self, schid, id, atype): pass
 
     def log(self, message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
         try:
@@ -95,45 +96,6 @@ class ServersDialog(QDialog):
     cooldown_time_page = 1000
     countries = []
     NAME_MODIFIERS = ["Contains", "Starts with", "Ends with"]
-    CONF_WIDGETS = [
-                        ("serverList", True, []),
-                        ("serverNameModifier", True, []),
-                        ("filterServerName", True, []),
-                        ("locationGroup", False, [
-                            ("countryBox", True, [])
-                        ]),
-                        ("usersGroup", False, [
-                            ("hideEmpty", True, []),
-                            ("hideFull", True, []),
-                            ("maxUsers", True, []),
-                            ("maxUsersMin", True, []),
-                            ("maxUsersMax", True, [])
-                        ]),
-                        ("slotsGroup", False, [
-                            ("maxSlots", True, []),
-                            ("maxSlotsMin", True, []),
-                            ("maxSlotsMax", True, [])
-                        ]),
-                        ("passwordGroup", False, [
-                            ("filterPasswordShowAll", True, []),
-                            ("filterPasswordShowWith", True, []),
-                            ("filterPasswordShowWithout", True, [])
-                        ]),
-                        ("channelsGroup", False, [
-                            ("filterChannelsCanCreate", True, []),
-                            ("filterChannelsCantCreate", True, []),
-                            ("filterChannelsShowAll", True, [])
-                        ]),
-                        ("status", True, []),
-                        ("info", True, []),
-                        ("pageLabel", True, []),
-                        ("apply", True, []),
-                        ("reload", True, []),
-                        ("previous", True, []),
-                        ("next", True, []),
-                        ("first", True, []),
-                        ("last", True, [])
-                    ]
     def buhl(self, s):
         if s.lower() == 'true' or s == 1:
             return True
@@ -145,7 +107,7 @@ class ServersDialog(QDialog):
     def __init__(self,serverBrowser, parent=None):
         self.serverBrowser=serverBrowser
         super(QDialog, self).__init__(parent)
-        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "serverBrowser", "ui", "servers.ui"), self.CONF_WIDGETS)
+        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "serverBrowser", "ui", "servers.ui"))
         self.setWindowTitle("PlanetTeamspeak Server Browser")
         #ts3.printMessageToCurrentTab("Countries: "+str(self.countries))
         #try:
@@ -221,15 +183,15 @@ class ServersDialog(QDialog):
         except:
             ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def contextMenuEvent(self, event):
-        try:
-            self.menu = QMenu(self.serverList)
-            connectAction = QAction('Connect', self)
-            #connectAction.triggered.connect(self.connect)
-            self.menu.addAction(connectAction)
-            self.menu.popup(QCursor.pos())
-        except:
-            ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+    # def contextMenuEvent(self, event):
+    #     try:
+    #         self.menu = QMenu(self.serverList)
+    #         connectAction = QAction('Connect', self)
+    #         #connectAction.triggered.connect(self.connect)
+    #         self.menu.addAction(connectAction)
+    #         self.menu.popup(QCursor.pos())
+    #     except:
+    #         ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def connect(self):
         index = self.serverList.selectedIndexes()[0]
@@ -370,6 +332,7 @@ class ServersDialog(QDialog):
             elif self.buhl(_filters["hideEmpty"]) and key["users"] <= 0:
                 continue
             else:
+                print("%s"%key)
                 rowPosition = _list.rowCount
                 _list.insertRow(rowPosition)
                 # if key['premium']:
@@ -383,7 +346,6 @@ class ServersDialog(QDialog):
                     palette.setColor(QPalette.Foreground,Qt.red)
                     _list.setPalette(palette)
                 _list.setItem(rowPosition, 2, QTableWidgetItem(self.getCountryNamebyID(key['country'])))
-                #ts3.printMessageToCurrentTab(str(key['createchannels']))
                 if key['createchannels']:
                     _list.setItem(rowPosition, 3, QTableWidgetItem("Yes"))
                 else:
@@ -392,6 +354,7 @@ class ServersDialog(QDialog):
                     _list.setItem(rowPosition, 4, QTableWidgetItem("Yes"))
                 else:
                     _list.setItem(rowPosition, 4, QTableWidgetItem("No"))
+                item.setData(Qt.UserRole, key['ip']);
 
     #def onReasonListItemChanged(self, item):
         #checked = item.checkState() == Qt.Checked
@@ -537,9 +500,15 @@ class ServersDialog(QDialog):
     def on_serverList_doubleClicked(self):
         try:
             ts3.logMessage("test", ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
-            index = self.serverList.selectedIndexes()[0]
-            ts3.logMessage("test2", ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
-            # id_us = int(self.serverList.model().data(index).toString())
-            # ts3.printMessageToCurrentTab("index : " + str(id_us))
+            item = self.serverList.selectedItems()[0]
+            item.setData(Qt::UserRole, 22);
         except:
-            ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            print(traceback.format_exc())
+
+    # setContextMenuPolicy(Qt::ActionsContextMenu);
+    # QAction* fooAction = new new QAction("foo");
+    # QAction* barAction = new new QAction("bar");
+    # connect(fooAction, SIGNAL(triggered()), this, SLOT(doSomethingFoo()));
+    # connect(barAction, SIGNAL(triggered()), this, SLOT(doSomethingBar()));
+    # addAction(fooAction);
+    # addAction(barAction);

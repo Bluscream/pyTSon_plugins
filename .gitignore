@@ -234,4 +234,9 @@ ressources/repository-manager.ui
 ressources/repositorymaster.json
 include/devtools.py
 include/eventlog.py
+include/*.h
 ressources/installer.ui
+lib/*
+include/pytson.py
+include/ts3client.py
+python.exe
