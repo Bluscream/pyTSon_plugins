@@ -12,7 +12,7 @@ class serverBrowser(ts3plugin):
     name = "Better Server Browser"
     apiVersion = 21
     requestAutoload = False
-    version = "1.0"
+    version = "0.5"
     author = "Bluscream"
     description = "A better serverlist provided by PlanetTeamspeak.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
     offersConfigure = True
