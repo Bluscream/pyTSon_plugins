@@ -355,7 +355,7 @@ class ServersDialog(QDialog):
                     _list.setItem(rowPosition, 4, QTableWidgetItem("Yes"))
                 else:
                     _list.setItem(rowPosition, 4, QTableWidgetItem("No"))
-                item.setData(Qt.UserRole, key['ip']);
+                #item.setData(Qt.UserRole, key['ip']);
 
     #def onReasonListItemChanged(self, item):
         #checked = item.checkState() == Qt.Checked

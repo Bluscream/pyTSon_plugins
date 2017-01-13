@@ -1,6 +1,6 @@
 import os, requests, json, configparser, webbrowser, traceback, urllib.parse, ts3defines
 from datetime import datetime
-from ts3 import *
+from ts3lib import *
 from ts3plugin import *
 from ts3help import *
 from ts3query import *
