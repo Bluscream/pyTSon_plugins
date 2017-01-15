@@ -240,3 +240,8 @@ lib/*
 include/pytson.py
 include/ts3client.py
 python.exe
+getpip.py
+scripts/easy_install-3.5.exe
+scripts/easy_install.exe
+scripts/wheel.exe
+test.py

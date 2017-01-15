@@ -43,7 +43,6 @@ class serverBrowser(ts3plugin):
         if self.config['GENERAL']['debug'] == "True":
             ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]Bluscream[/url] loaded.")
 
-    def infoData(self, schid, id, atype): pass
 
     def log(self, message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
         try:
@@ -55,12 +54,17 @@ class serverBrowser(ts3plugin):
             _a = None
 
     def configure(self, qParentWidget):
-        d = dict()
-        d['debug'] = (ValueType.boolean, "Debug", self.config['GENERAL']['debug'] == "True", None, None)
-        d['morerequests'] = (ValueType.boolean, "Fast Connection", self.config['GENERAL']['morerequests'] == "True", None, None)
-        d['serversperpage'] = (ValueType.integer, "Servers per page:", int(self.config['GENERAL']['serversperpage']), 0, 250)
-        d['api'] = (ValueType.string, "API Base URL:", self.config['GENERAL']['api'], None, 1)
-        getValues(None, "Server Browser Settings", d, self.configDialogClosed)
+        try:
+            d = dict()
+            d['debug'] = (ValueType.boolean, "Debug", self.config['GENERAL']['debug'] == "True", None, None)
+            d['morerequests'] = (ValueType.boolean, "Fast Connection", self.config['GENERAL']['morerequests'] == "True", None, None)
+            d['serversperpage'] = (ValueType.integer, "Servers per page:", int(self.config['GENERAL']['serversperpage']), 0, 250)
+            d['api'] = (ValueType.string, "API Base URL:", self.config['GENERAL']['api'], None, 1)
+            getValues(None, "Server Browser Settings", d, self.configDialogClosed)
+        except:
+            from traceback import format_exc
+            try: ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
+            except: print("Error in "+self.name+".configure: "+format_exc())
 
     def configDialogClosed(self, r, vals):
         if r == QDialog.Accepted:
