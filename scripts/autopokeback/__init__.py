@@ -1,11 +1,11 @@
-import ts3lib as ts3; from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin
 
-import ts3lib as ts3; import   ts3defines
+import ts3lib, ts3defines
 
 class autopoke(ts3plugin):
     name = "autopokeback"
     requestAutoload = False
-    version = "1.0"
+    version = "1.0.1"
     apiVersion = 21
     author = "Thomas \"PLuS\" Pathmann"
     description = "Ignore pokes and automatically poke back"
@@ -27,28 +27,28 @@ class autopoke(ts3plugin):
 
     def onClientPokeEvent(self, serverConnectionHandlerID, fromClientID, pokerName, pokerUID, message, ffIgnored):
         #is it me?
-        (err, schids) = ts3.getServerConnectionHandlerList()
+        (err, schids) = ts3lib.getServerConnectionHandlerList()
         if err == ts3defines.ERROR_ok:
             for schid in schids:
-                (err, myid) = ts3.getClientID(schid)
+                (err, myid) = ts3lib.getClientID(schid)
                 if err == ts3defines.ERROR_ok:
                     if fromClientID == myid:
                         return 0
                 else:
-                    ts3.printMessageToCurrentTab("error getting own client id")
+                    ts3lib.printMessageToCurrentTab("error getting own client id")
         else:
-            ts3.printMessageToCurrentTab("error getting schids")
+            ts3lib.printMessageToCurrentTab("error getting schids")
 
-        (err, name) = ts3.getClientVariableAsString(serverConnectionHandlerID, fromClientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        (err, name) = ts3lib.getClientVariableAsString(serverConnectionHandlerID, fromClientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
         if err != ts3defines.ERROR_ok:
-            err = ts3.requestClientPoke(serverConnectionHandlerID, fromClientID, "Ne!")
+            err = ts3lib.requestClientPoke(serverConnectionHandlerID, fromClientID, "Ne!")
         else:
-            err = ts3.requestClientPoke(serverConnectionHandlerID, fromClientID, "%s? Ne!" % name)
+            err = ts3lib.requestClientPoke(serverConnectionHandlerID, fromClientID, "%s? Ne!" % name)
 
         self.lastpoker = (serverConnectionHandlerID, fromClientID)
 
         if err != ts3defines.ERROR_ok:
-            ts3.printMessageToCurrentTab("poke error: %d" % err)
+            ts3lib.printMessageToCurrentTab("poke error: %d" % err)
             return 0
         else:
             return 1

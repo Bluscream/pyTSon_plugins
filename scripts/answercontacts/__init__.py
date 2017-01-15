@@ -1,12 +1,13 @@
 from ts3plugin import ts3plugin
-import ts3lib as ts3
-import ts3defines
+
+import ts3lib, ts3defines, ts3client
+
 from PythonQt.QtSql import QSqlDatabase
 
 class answercontacts(ts3plugin):
     name = "answercontacts"
     requestAutoload = False
-    version = "1.0"
+    version = "1.0.1"
     apiVersion = 21
     author = "Thomas \"PLuS\" Pathmann"
     description = "Autoanswer contact status (friend, neutral, blocked)"
@@ -17,14 +18,17 @@ class answercontacts(ts3plugin):
     hotkeys = []
 
     def __init__(self):
-        pass
+        self.settings = ts3client.Config()
+
+    def stop(self):
+        del self.settings
 
     def contactStatus(self, uid):
         """
         checks contact status of a given uid. Returns friend=0, blocked=1, neutral=2
         """
         db = QSqlDatabase.addDatabase("QSQLITE","pyTSon_example")
-        db.setDatabaseName(ts3.getConfigPath() + "settings.db")
+        db.setDatabaseName(ts3lib.getConfigPath() + "settings.db")
 
         if not db.isValid():
             raise Exception("Database not valid")
@@ -32,7 +36,7 @@ class answercontacts(ts3plugin):
         if not db.open():
             raise Exception("Database could not be opened")
 
-        q = db.exec_("SELECT * FROM contacts WHERE value LIKE '%%IDS=%s%%'" % uid)
+        q = self.settings.query("SELECT * FROM contacts WHERE value LIKE '%%IDS=%s%%'" % uid)
         ret = 2
 
         if q.next():
@@ -42,23 +46,19 @@ class answercontacts(ts3plugin):
                 if l.startswith('Friend='):
                     ret = int(l[-1])
 
-        q.delete()
-        db.close()
-        db.delete()
-        QSqlDatabase.removeDatabase("pyTSon_example")
-
         return ret
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
-        (err, myid) = ts3.getClientID(schid)
+        (err, myid) = ts3lib.getClientID(schid)
 
         if err == ts3defines.ERROR_ok:
             #only in private messages
             if toID == myid:
                 f = self.contactStatus(fromUniqueIdentifier)
                 if f == 0:
-                    err = ts3.requestSendPrivateTextMsg(schid, "Hello, my friend!", fromID)
+                    err = ts3lib.requestSendPrivateTextMsg(schid, "Hello, my friend!", fromID)
                 elif f == 1:
-                    err = ts3.requestSendPrivateTextMsg(schid, "I don't like you!", fromID)
+                    err = ts3lib.requestSendPrivateTextMsg(schid, "I don't like you!", fromID)
                 else:
-                    err = ts3.requestSendPrivateTextMsg(schid, "Do I know you?", fromID)
+                    err = ts3lib.requestSendPrivateTextMsg(schid, "Do I know you?", fromID)
+
