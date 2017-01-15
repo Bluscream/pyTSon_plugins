@@ -17,6 +17,7 @@ class ipcdata(object):
             self.append(obj)
 
     def append(self, obj):
+        print(str(obj))
         if type(obj) is str:
             d = bytes(obj, 'utf-8')
             self.buf += b's'
@@ -324,4 +325,3 @@ client = myclient("/path/to/your/pluginpath/pyTSon/ipcsocket")
 #get client id of schid=1
 (err, myid) = client.functions.getClientID(1)
 """
-

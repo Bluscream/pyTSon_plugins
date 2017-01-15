@@ -1,8 +1,7 @@
-import os, requests, json, configparser, webbrowser, traceback, urllib.parse, ts3defines
+import os, requests, json, configparser, webbrowser, traceback, urllib.parse, ts3defines, ts3help
 from datetime import datetime
 from ts3lib import *
 from ts3plugin import *
-from ts3help import *
 from ts3query import *
 from pytsonui import *
 from PythonQt.QtGui import *
@@ -17,8 +16,8 @@ def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
         if server > 0:
             _f += "#"+str(server)+" "
         _f += "Console> "+message
-        ts3.logMessage(message, channel, "pyTSon Console", server)
-        ts3.printMessageToCurrentTab(_f)
+        logMessage(message, channel, "pyTSon Console", server)
+        printMessageToCurrentTab(_f)
         # if PluginHost.shell:
         #     PluginHost.shell.appendLine(_f)
         print(_f)
@@ -47,14 +46,14 @@ def urlResponse(reply):
     if reply.error() == QNetworkReply.NoError:
         return reply.readAll().data().decode('utf-8')
     else:
-        err = ts3.logMessage("Error checking for update: %s" % reply.error(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon.PluginHost.updateCheckFinished", 0)
+        err = logMessage("Error checking for update: %s" % reply.error(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon.PluginHost.updateCheckFinished", 0)
         if err != ts3defines.ERROR_ok:
             print("Error checking for update: %s" % reply.error())
     urlrequest.delete()
     urlrequest = None
 
-schid = ts3.getCurrentServerConnectionHandlerID()
-(error, ownid) = ts3.getClientID(schid)
+schid = getCurrentServerConnectionHandlerID()
+(error, ownid) = getClientID(schid)
 def unlock(show=False):
     for item in self.allWidgets():
         try: item.setEnabled(True)
@@ -218,7 +217,7 @@ def file(name, content):
         print(str(content), file=text_file)
 
 #if error == 0:
-    #error, ownnick = ts3.getClientDisplayName(schid, ownid)
+    #error, ownnick = getClientDisplayName(schid, ownid)
     # if error == 0:
     #     def p(c, cmd="test", clid=0):
     #         if c == 0:
@@ -227,13 +226,13 @@ def file(name, content):
     #             print("Sent command "+cmd+" to PluginCommandTarget_SERVER")
     #         elif c == 2:
     #             print("Sent command "+cmd+" to PluginCommandTarget_CLIENT")
-    #             ts3.sendPluginCommand(schid, cmd, c, [clid])
+    #             sendPluginCommand(schid, cmd, c, [clid])
     #             return
     #         elif c == 3:
     #             print("Sent command "+cmd+" to PluginCommandTarget_CURRENT_CHANNEL_SUBSCRIBED_CLIENTS")
     #         elif c == 4:
     #             print("Sent command "+cmd+" to PluginCommandTarget_MAX")
-    #         ts3.sendPluginCommand(schid, cmd, c, [])
+    #         sendPluginCommand(schid, cmd, c, [])
 
 print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.now()))
 for item in sys.path:

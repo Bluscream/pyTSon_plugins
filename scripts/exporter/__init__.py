@@ -7,38 +7,24 @@ from datetime import datetime
 import ts3defines, os, requests, json, configparser, webbrowser, traceback, urllib.parse
 
 
-class serverBrowser(ts3plugin):
-    shortname = "PS"
-    name = "Better Server Browser"
+class exporter(ts3plugin):
+    shortname = "EX"
+    name = "Teamspeak Export/Import"
     apiVersion = 21
     requestAutoload = False
-    version = "0.5"
+    version = "1.0"
     author = "Bluscream"
-    description = "A better serverlist provided by PlanetTeamspeak.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
-    offersConfigure = True
+    description = "Like YatQA, just as plugin.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
+    offersConfigure = False
     commandKeyword = ""
-    infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Browse Servers", "scripts/serverBrowser/gfx/icon.png"),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "View on PT", "")]
+    infoTitle = ""
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Export Data", "scripts/exporter/gfx/export.png"),
+                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Import Data", "scripts/exporter/gfx/import.png")]
     hotkeys = []
     debug = False
-    ini = os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "serverBrowser", "cfg", "serverBrowser.ini")
-    config = configparser.ConfigParser()
+    action = "export"
 
     def __init__(self):
-        if os.path.isfile(self.ini):
-            self.config.read(self.ini)
-            #for key, value in self.config["FILTERS"].items():
-                #ts3.printMessageToCurrentTab(str(key).title()+": "+str(value))
-        else:
-            self.config['GENERAL'] = { "debug": "False", "api": "https://api.planetteamspeak.com/", "morerequests": "False", "serversperpage": "100" }
-            self.config['FILTERS'] = {
-                "serverNameModifier": "Contains", "filterServerName": "", "countryBox": "",
-                "hideEmpty": "False", "hideFull": "False", "maxUsers": "False", "maxUsersMin": "0", "maxUsersMax": "0",
-                "maxSlots": "False", "maxSlotsMin": "0", "maxSlotsMax": "0", "filterPassword": "all", "filterChannels": "all"
-            }
-            with open(self.ini, 'w') as configfile:
-                self.config.write(configfile)
-
         ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.config['GENERAL']['debug'] == "True":
             ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]Bluscream[/url] loaded.")
@@ -52,25 +38,6 @@ class serverBrowser(ts3plugin):
                 print('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" "+self.shortname+"> ("+str(channel)+")"+message)
         except:
             _a = None
-
-    def configure(self, qParentWidget):
-        try:
-            d = dict()
-            d['debug'] = (ValueType.boolean, "Debug", self.config['GENERAL']['debug'] == "True", None, None)
-            d['morerequests'] = (ValueType.boolean, "Fast Connection", self.config['GENERAL']['morerequests'] == "True", None, None)
-            d['serversperpage'] = (ValueType.integer, "Servers per page:", int(self.config['GENERAL']['serversperpage']), 0, 250)
-            d['api'] = (ValueType.string, "API Base URL:", self.config['GENERAL']['api'], None, 1)
-            getValues(None, "Server Browser Settings", d, self.configDialogClosed)
-        except:
-            from traceback import format_exc
-            try: ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
-            except: print("Error in "+self.name+".configure: "+format_exc())
-
-    def configDialogClosed(self, r, vals):
-        if r == QDialog.Accepted:
-            self.config['GENERAL'] = { "debug": str(vals['debug']), "api": vals['api'], "morerequests": str(vals['morerequests']), "serversperpage": str(vals['serversperpage']) }
-            with open(self.ini, 'w') as configfile:
-                self.config.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
@@ -91,29 +58,28 @@ class serverBrowser(ts3plugin):
                 ts3.printMessageToCurrentTab(str("Navigating to \""+_url+"\""))
                 webbrowser.open(_url)
 
-class ServersDialog(QDialog):
-    requests = 0
-    page = 1
-    pages = 1
-    cooldown = False
-    cooldown_page = False
-    cooldown_time = 5000
-    cooldown_time_page = 1000
-    countries = []
-    NAME_MODIFIERS = ["Contains", "Starts with", "Ends with"]
+    def configure(self, qParentWidget):
+        try:
+            self.dlg = ExportDialog(self)
+            self.dlg.show()
+        except:
+            from traceback import format_exc
+            try: ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
+            except: print("Error in "+self.name+".configure: "+format_exc())
+
+class ExportDialog(QDialog):
     def buhl(self, s):
         if s.lower() == 'true' or s == 1:
             return True
         elif s.lower() == 'false' or s == 0:
             return False
-        else:
-            raise ValueError("Cannot convert {} to a bool".format(s))
+        else: raise ValueError("Cannot convert {} to a bool".format(s))
 
-    def __init__(self,serverBrowser, parent=None):
-        self.serverBrowser=serverBrowser
+    def __init__(self,Class,parent=None):
+        self.exporter=Class
         super(QDialog, self).__init__(parent)
-        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "serverBrowser", "ui", "servers.ui"))
-        self.setWindowTitle("PlanetTeamspeak Server Browser")
+        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "exporter", "ui", "export.ui"))
+        self.setWindowTitle("Which items do you want to "+exporter.action+"?")
         #ts3.printMessageToCurrentTab("Countries: "+str(self.countries))
         #try:
             #self.serverList.doubleClicked.connect(self.table_doubleclicked)
