@@ -3,7 +3,6 @@ import ts3lib as ts3
 from ts3plugin import ts3plugin
 import os, sys
 import ts3defines
-import g15daemon
 
 PIXEL_ON = chr(1)
 MAX_X=160
@@ -25,6 +24,7 @@ if sys.platform == 'linux':
         hotkeys = []
 
         def __init__(self):
+            import g15daemon
             self.g15 = g15daemon.g15screen(g15daemon.SCREEN_PIXEL)
             self.talkerids = []
             self.talkernames = []
