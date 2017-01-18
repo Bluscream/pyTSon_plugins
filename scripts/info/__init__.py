@@ -1,5 +1,6 @@
-import ts3lib as ts3; from ts3plugin import ts3plugin, PluginHost
-import ts3lib as ts3; import   ts3defines, datetime, configparser, os.path
+from ts3plugin import ts3plugin, PluginHost
+import ts3lib as ts3
+import ts3defines, datetime, configparser, os.path
 from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi
@@ -16,7 +17,7 @@ class info(ts3plugin):
     offersConfigure = True
     commandKeyword = "info"
     infoTitle = "[b]"+name+":[/b]"
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Set Meta Data", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Set Meta Data", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Avatar Flag", "")]
     hotkeys = []
     ini = os.path.join(ts3.getConfigPath(), "extended_info.ini")
     cfg = configparser.ConfigParser()
@@ -140,7 +141,20 @@ class info(ts3plugin):
                         meta = QInputDialog.getMultiLineText(x, "Change own Meta Data", "Meta Data:", meta)
                         error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, meta)
                         if not error == ts3defines.ERROR_ok:
-                            _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own meta data!");t.show()
+                            _t = QMessageBox(QMessageBox.Critical, "Error #%s"%error, "Unable to set own meta data!");_t.show()
+            elif menuItemID == 1:
+                schid = ts3.getCurrentServerConnectionHandlerID()
+                error, ownid = ts3.getClientID(schid)
+                if error == ts3defines.ERROR_ok:
+                    error, flag = ts3.getClientVariableAsString(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR)
+                    ts3.printMessageToCurrentTab("Your current avatar flag is: %s"%flag)
+                    if error == ts3defines.ERROR_ok:
+                        x = QWidget()
+                        flag = QInputDialog.getText(x, "Change own Avatar Flag", "Avatar File MD5:")
+                        error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR, flag)
+                        error2 = ts3.flushClientSelfUpdates(schid)
+                        if not error == ts3defines.ERROR_ok and error2 == ts3defines.ERROR_ok:
+                            _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own avatar flag!");_t.show()
 
     def infoData(self, schid, id, atype):
         i = []
