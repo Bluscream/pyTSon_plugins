@@ -109,6 +109,6 @@ class channelGroupChanger(ts3plugin):
         if len(self.channels) > 0: ts3.requestSetClientChannelGroup(schid, [channelGroupID], self.channels, [dbid])
         else:
             (error, clid) = ts3.getClientID(schid)
-            (error, cid) = ts3.getCurrentChannelOfClient(schid, clid)
+            (error, cid) = ts3.getChannelOfClient(schid, clid)
             ts3.requestSetClientChannelGroup(schid, [channelGroupID], [cid], [dbid])
         ts3.printMessageToCurrentTab("Client "+str(dbid)+" has now the group \""+channelGroupName+"\" in Channel #"+str(self.channels))
