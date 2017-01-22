@@ -232,6 +232,7 @@ scripts/serverBrowser/cfg/serverBrowser.ini
 ressources/repository.ui
 ressources/repository-manager.ui
 ressources/repositorymaster.json
+ressources/octicons
 include/devtools.py
 include/eventlog.py
 include/*.h
@@ -245,3 +246,5 @@ scripts/easy_install-3.5.exe
 scripts/easy_install.exe
 scripts/wheel.exe
 test.py
+ressources/python.png
+*.exe

@@ -1,6 +1,7 @@
-import ts3lib as ts3; from ts3plugin import ts3plugin, PluginHost
-import ts3lib as ts3; import   ts3defines, datetime
-
+import ts3lib as ts3
+import ts3defines, datetime
+from ts3plugin import ts3plugin, PluginHost
+from os import path
 
 class channelGroupChanger(ts3plugin):
     name = "Channel Group Changer"
@@ -12,6 +13,7 @@ class channelGroupChanger(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
+    iconPath = path.join(ts3.getPluginPath(), "pyTSon", "scripts", "channelGroupChanger", "icons")
     #menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Set as target channel", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Change Channel Group", "")]
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Channel Group Changer", ""), # GommeHD
                     (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "=== Channel Group ===", ""),
@@ -20,10 +22,10 @@ class channelGroupChanger(ts3plugin):
                     (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Remove from target channels", ""),
                     (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "=== Channel Group ===", ""),
                     (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "=== Channel Group ===", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Channel Admin", "ressources/channelGroupChanger/icons/GommeHD/Channel Admin.png"),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Operator", "ressources/channelGroupChanger/icons/GommeHD/Channel Admin.png"),
+                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Channel Admin", iconPath+"/GommeHD/Channel Admin.png"),
+                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Operator", iconPath+"/GommeHD/Channel Admin.png"),
                     (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Guest", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Channel Bann", "ressources/channelGroupChanger/icons/GommeHD/Channel Bann.png"),
+                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Channel Bann", iconPath+"/GommeHD/Channel Bann.png"),
                     (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "Joinpower", ""),
                     (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 6, "=== Channel Group ===", "")]
     # menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Channel Group Changer", ""), #Rewinside
@@ -46,6 +48,8 @@ class channelGroupChanger(ts3plugin):
 
 
     def __init__(self):
+        # if PluginHost.globalMenuID(self, 0): ts3.setPluginMenuEnabled(globid, on)
+        # if PluginHost.globalMenuID(self, 4): ts3.setPluginMenuEnabled(globid, on)
         ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.debug:
             ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
@@ -102,5 +106,9 @@ class channelGroupChanger(ts3plugin):
     def setClientChannelGroup(self, selectedItemID, channelGroupID, channelGroupName):
         schid = ts3.getCurrentServerConnectionHandlerID()
         (error, dbid) = ts3.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        ts3.requestSetClientChannelGroup(schid, [channelGroupID], self.channels, [dbid])
+        if len(self.channels) > 0: ts3.requestSetClientChannelGroup(schid, [channelGroupID], self.channels, [dbid])
+        else:
+            (error, clid) = ts3.getClientID(schid)
+            (error, cid) = ts3.getCurrentChannelOfClient(schid, clid)
+            ts3.requestSetClientChannelGroup(schid, [channelGroupID], [cid], [dbid])
         ts3.printMessageToCurrentTab("Client "+str(dbid)+" has now the group \""+channelGroupName+"\" in Channel #"+str(self.channels))

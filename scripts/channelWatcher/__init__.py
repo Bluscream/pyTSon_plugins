@@ -13,13 +13,14 @@ try:
         description = "Helps you keeping your channel moderated.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
         offersConfigure = False
         commandKeyword = "cw"
-        infoTitle = ""
+        infoTitle = None
         menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Channel Watcher", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Add to watched channels", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Remove from watched channels", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Check this client!", "")]
         hotkeys = []
         debug = False
         toggle = True
         autoBan = True
         autoMod = True
+        checkRecording = True
         autoCheckOnChannel = False
         requested = False
         #requestedUID = []
@@ -33,6 +34,7 @@ try:
         sagroup = 0
         ownchannels = []
         check = False
+        reason = ""
 
         def __init__(self):
             self.db = QSqlDatabase.addDatabase("QSQLITE","channelWatcher")
@@ -184,9 +186,11 @@ try:
                                 if self.InContacts(uid) == 0:
                                     ts3.requestClientSetIsTalker(serverConnectionHandlerID, client, True)
                 elif channelID == _cid and channelGroupID == self.sbgroup:
-                    (error, uid) = ts3.getClientVariableAsString(serverConnectionHandlerID, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                    #(error, uid) = ts3.getClientVariableAsString(serverConnectionHandlerID, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
                     (error, _cid) = ts3.getChannelOfClient(serverConnectionHandlerID, clientID)
-                    if _cid in self.ownchannels: ts3.requestClientKickFromChannel(serverConnectionHandlerID, clientID, "You were banned by \"%s\""%invokerName)
+                    if _cid in self.ownchannels:
+                        if not self.reason == "": ts3.requestClientKickFromChannel(serverConnectionHandlerID, clientID, "Banned by \"%s\" for %s"%invokerName,self.reason);self.reason = ""
+                        else: ts3.requestClientKickFromChannel(serverConnectionHandlerID, clientID, "You were banned by \"%s\""%invokerName)
 
         def onClientMoveEvent(self, serverConnectionHandlerID, clientID, oldChannelID, newChannelID, visibility, moveMessage):
             if not self.check: return False
@@ -234,6 +238,23 @@ try:
                     elif _cid == 1 and self.autoBan:
                         ts3.requestSetClientChannelGroup(_schid, [self.sbgroup], self.ownchannels, [clientDatabaseID])
                         ts3.printMessageToCurrentTab("[color=red]Banned Client "+self.clientURL(serverConnectionHandlerID, None, uniqueClientIdentifier)+" from Channels #"+str(self.ownchannels)+"[/color]")
+
+        def onUpdateClientEvent(self, serverConnectionHandlerID, clientID, invokerID, invokerName, invokerUniqueIdentifier):
+            if self.check and self.toggle:
+                (error, _clid) = ts3.getClientID(serverConnectionHandlerID)
+                if not clientID == _clid:
+                    (error, _tcid) = ts3.getChannelOfClient(serverConnectionHandlerID, clientID)
+                    if _tcid in self.ownchannels:
+                        (error, _cgid) = ts3.getClientVariableAsInt(serverConnectionHandlerID, _clid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
+                        if _cgid in [self.smgroup, self.sagroup]:
+                            if self.checkRecording:
+                                (error, clientRecStatus) = ts3.getClientVariableAsInt(serverConnectionHandlerID, clientID, ts3defines.ClientProperties.CLIENT_IS_RECORDING)
+                                if clientRecStatus == 1:
+                                    self.reason == "Recording"
+                                    _schid = ts3.getCurrentServerConnectionHandlerID()
+                                    self.requestedC.extend([1])
+                                    _dbid = ts3.requestClientDBIDfromUID(_schid, uid)
+
 except:
     try: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
     except: pass

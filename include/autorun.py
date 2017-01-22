@@ -1,4 +1,4 @@
-import os, requests, json, configparser, webbrowser, traceback, urllib.parse, ts3defines, ts3help
+import os, requests, json, configparser, webbrowser, traceback, urllib.parse, ts3defines#, ts3help
 from datetime import datetime
 from ts3lib import *
 from ts3plugin import *
@@ -11,16 +11,16 @@ from PythonQt.Qt import *
 from PythonQt.private import *
 self = QApplication.instance()
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
-        message = str(message)
-        _f = '[{:%H:%M:%S}]'.format(datetime.now())+" ("+str(channel)+") "
-        if server > 0:
-            _f += "#"+str(server)+" "
-        _f += "Console> "+message
-        logMessage(message, channel, "pyTSon Console", server)
-        printMessageToCurrentTab(_f)
-        # if PluginHost.shell:
-        #     PluginHost.shell.appendLine(_f)
-        print(_f)
+    message = str(message)
+    _f = '[{:%H:%M:%S}]'.format(datetime.now())+" ("+str(channel)+") "
+    if server > 0:
+        _f += "#"+str(server)+" "
+    _f += "Console> "+message
+    logMessage(message, channel, "pyTSon Console", server)
+    printMessageToCurrentTab(_f)
+    # if PluginHost.shell:
+    #     PluginHost.shell.appendLine(_f)
+    print(_f)
 
 def toggle(boolean):
     boolean = not boolean
@@ -36,21 +36,39 @@ def alert(message, title="pyTSon"):
 
 urlrequest = False
 def url(url):
-    from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
-    if urlrequest: return
-    urlrequest = QNetworkAccessManager()
-    urlrequest.connect("finished(QNetworkReply*)", urlResponse)
-    urlrequest.get(QNetworkRequest(QUrl(url)))
+    try:
+        from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
+        #if urlrequest: return
+        urlrequest = QNetworkAccessManager()
+        urlrequest.connect("finished(QNetworkReply*)", urlResponse)
+        urlrequest.get(QNetworkRequest(QUrl(url)))
+    except:
+        from traceback import format_exc
+        try: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::autorun", 0)
+        except: print("Error in autorun: "+format_exc())
 def urlResponse(reply):
-    from PythonQt.QtNetwork import QNetworkReply
-    if reply.error() == QNetworkReply.NoError:
-        return reply.readAll().data().decode('utf-8')
-    else:
-        err = logMessage("Error checking for update: %s" % reply.error(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon.PluginHost.updateCheckFinished", 0)
-        if err != ts3defines.ERROR_ok:
-            print("Error checking for update: %s" % reply.error())
-    urlrequest.delete()
-    urlrequest = None
+    try:
+        from PythonQt.QtNetwork import QNetworkReply
+        if reply.error() == QNetworkReply.NoError:
+            print("Error: %s (%s)"%(reply.error(), reply.errorString()))
+            print("Content-Type: %s"%reply.header(QNetworkRequest.ContentTypeHeader))
+            print("<< reply.readAll().data().decode('utf-8') >>")
+            print("%s"%reply.readAll().data().decode('utf-8'))
+            print("<< reply.readAll().data() >>")
+            print("%s"%reply.readAll().data())
+            print("<< reply.readAll() >>")
+            print("%s"%reply.readAll())
+            return reply
+        else:
+            err = logMessage("Error checking for update: %s" % reply.error(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon.PluginHost.updateCheckFinished", 0)
+            if err != ts3defines.ERROR_ok:
+                print("Error checking for update: %s" % reply.error())
+        urlrequest.delete()
+        urlrequest = None
+    except:
+        from traceback import format_exc
+        try: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::autorun", 0)
+        except: print("Error in autorun: "+format_exc())
 
 schid = getCurrentServerConnectionHandlerID()
 (error, ownid) = getClientID(schid)
@@ -215,6 +233,13 @@ def objects():
 def file(name, content):
     with open(os.path.expanduser("~/Desktop/"+name+".txt"), "w") as text_file:
         print(str(content), file=text_file)
+
+def generateAvatarFileName():
+    (error, ownID) = getClientID(schid)
+    (error, ownUID) = getClientVariableAsString(schid, ownID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+    ownUID = ownUID.encode('ascii')
+    from base64 import b64encode
+    return "avatar_"+b64encode(ownUID).decode("ascii").split('=')[0]
 
 #if error == 0:
     #error, ownnick = getClientDisplayName(schid, ownid)
