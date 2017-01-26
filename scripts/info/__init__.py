@@ -19,7 +19,7 @@ class info(ts3plugin):
     infoTitle = "[b]"+name+":[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Set Meta Data", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Avatar Flag", "")]
     hotkeys = []
-    ini = os.path.join(ts3.getConfigPath(), "extended_info.ini")
+    ini = os.path.join(ts3.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
     cfg = configparser.ConfigParser()
     cfg.optionxform = str
     runs = 0
@@ -271,6 +271,20 @@ class info(ts3plugin):
             return i
         else:
             return ["ItemType \""+str(atype)+"\" unknown."]
+
+    def processVariable(self, function, type, var, start):
+        _tmp = eval('ts3defines.%s.%s' % (type, var))
+        if type == "VirtualServerProperties": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+        elif type == "VirtualServerPropertiesRare": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+        elif type == "ChannelProperties": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+        elif type == "ChannelPropertiesRare": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+        elif type == "ClientProperties": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+        elif type == "ClientPropertiesRare": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+        elif type == "ConnectionProperties": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+        elif type == "ConnectionPropertiesRare": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+        if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "":
+            return name.replace(start, '').replace('_', ' ').title()+": "+_var
+
 
 class SettingsDialog(QDialog):
     def __init__(self,info, parent=None):
