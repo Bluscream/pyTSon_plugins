@@ -51,27 +51,29 @@ class chatBot(ts3plugin):
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentiﬁer, message, ﬀIgnored):
         try:
             if ffIgnored: return False
-            (error, _clid) = ts3.getClientID(schid)
+            (error, _clid) = ts3lib.getClientID(schid)
             if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and toID != _clid: return False
-            #(error, _cid) = ts3.getChannelOfClient(schid, _clid)
+            #(error, _cid) = ts3lib.getChannelOfClient(schid, _clid)
             #if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL and toID != _cid: return False
-            if message.startsWith(self.cfg.get('general', prefix)) and self.cfg.getboolean('general','customprefix'): command = message.split(self.cfg.get('general', prefix),1)[1]
-            elif message.startsWith(self.clientURL(schid, _clid)) and self.cfg.getboolean('general','customprefix'): command = message.split(self.clientURL(schid, _clid),1)[1]
+            ts3lib.printMessageToCurrentTab(self.clientURL(schid, _clid))
+            ts3lib.printMessageToCurrentTab(message)
+            ts3lib.printMessageToCurrentTab("%s"%message.startswith(self.clientURL(schid, _clid)))
+            ts3lib.printMessageToCurrentTab("%s"%str(self.clientURL(schid, _clid) in message.strip()))
+            if message.startswith(self.cfg.get('general', 'prefix')) and self.cfg.getboolean('general','customprefix'): command = message.split(self.cfg.get('general', 'prefix'),1)[1]
+            elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general','customprefix'): command = message.split(self.clientURL(schid, _clid),1)[1]
             else: return False
             ts3lib.printMessageToCurrentTab(command)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
-
-
     def clientURL(self, schid=None, clid=0, uid=None, nickname=None, encodednick=None):
         if schid == None:
-            try: schid = ts3.getCurrentServerConnectionHandlerID()
+            try: schid = ts3lib.getCurrentServerConnectionHandlerID()
             except: pass
         if uid == None:
-            try: (error, uid) = ts3.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            try: (error, uid) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
             except: pass
         if nickname == None:
-            try: (error, nickname) = ts3.getClientDisplayName(schid, clid)
+            try: (error, nickname) = ts3lib.getClientDisplayName(schid, clid)
             except: nickname = uid
         if encodednick == None:
             try: encodednick = urlencode(nickname)
