@@ -1,5 +1,6 @@
 try:
     import ts3lib as ts3
+    from urllib.parse import quote as urlencode
     from ts3plugin import ts3plugin, PluginHost
     from PythonQt.QtSql import QSqlDatabase
     import ts3defines, datetime, re
