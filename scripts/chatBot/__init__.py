@@ -49,15 +49,17 @@ class chatBot(ts3plugin):
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentiﬁer, message, ﬀIgnored):
-        if ffIgnored: return False
-        (error, _clid) = ts3.getClientID(schid)
-        if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and toID != _clid: return False
-        #(error, _cid) = ts3.getChannelOfClient(schid, _clid)
-        #if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL and toID != _cid: return False
-        if message.startsWith(self.cfg.get('general', prefix)) and self.cfg.getboolean('general','customprefix'): command = message.split(self.cfg.get('general', prefix),1)[1]
-        elif message.startsWith(self.clientURL(schid, _clid)) and self.cfg.getboolean('general','customprefix'): command = message.split(self.clientURL(schid, _clid),1)[1]
-        else: return False
-        ts3lib.printMessageToCurrentTab(command)
+        try:
+            if ffIgnored: return False
+            (error, _clid) = ts3.getClientID(schid)
+            if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and toID != _clid: return False
+            #(error, _cid) = ts3.getChannelOfClient(schid, _clid)
+            #if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL and toID != _cid: return False
+            if message.startsWith(self.cfg.get('general', prefix)) and self.cfg.getboolean('general','customprefix'): command = message.split(self.cfg.get('general', prefix),1)[1]
+            elif message.startsWith(self.clientURL(schid, _clid)) and self.cfg.getboolean('general','customprefix'): command = message.split(self.clientURL(schid, _clid),1)[1]
+            else: return False
+            ts3lib.printMessageToCurrentTab(command)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
 
 
