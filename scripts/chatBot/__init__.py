@@ -5,6 +5,7 @@ from PythonQt.QtGui import *
 from PythonQt.QtCore import Qt
 from configparser import ConfigParser
 from os import path
+from sys import path as syspath
 from urllib.parse import quote as urlencode
 
 class chatBot(ts3plugin):
@@ -13,7 +14,7 @@ class chatBot(ts3plugin):
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
-    description = "A simply chatbot"
+    description = "A simply chatbot for Teamspeak 3 Clients"
     offersConfigure = True
     commandKeyword = ""
     infoTitle = None
@@ -24,7 +25,10 @@ class chatBot(ts3plugin):
     cfg = ConfigParser()
     cmdini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "commands.ini")
     cmd = ConfigParser()
+    cmdpy = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot")
     dlg = None
+    syspath.insert(0, cmdpy)
+    import commands
 
     def __init__(self):
         if path.isfile(self.ini): self.cfg.read(self.ini)
@@ -34,11 +38,13 @@ class chatBot(ts3plugin):
                 self.cfg.write(configfile)
         if path.isfile(self.cmdini): self.cmd.read(self.cmdini)
         else:
+            self.cmd['eval'] = { "enabled": "True", "function": "commandEval" }
+            self.cmd['about'] = { "enabled": "True", "function": "commandAbout" }
             self.cmd['time'] = { "enabled": "True", "function": "commandTime" }
             with open(self.cmdini, 'w') as configfile:
                 self.cmd.write(configfile)
         ts3lib.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
 
     def configure(self, qParentWidget):
         try:
@@ -53,17 +59,29 @@ class chatBot(ts3plugin):
             if ffIgnored: return False
             (error, _clid) = ts3lib.getClientID(schid)
             if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and toID != _clid: return False
-            #(error, _cid) = ts3lib.getChannelOfClient(schid, _clid)
             #if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL and toID != _cid: return False
-            ts3lib.printMessageToCurrentTab(self.clientURL(schid, _clid))
-            ts3lib.printMessageToCurrentTab(message)
-            ts3lib.printMessageToCurrentTab("%s"%message.startswith(self.clientURL(schid, _clid)))
-            ts3lib.printMessageToCurrentTab("%s"%str(self.clientURL(schid, _clid) in message.strip()))
+            #ts3lib.printMessageToCurrentTab(self.clientURL(schid, _clid))
+            #ts3lib.printMessageToCurrentTab(message)
+            #ts3lib.printMessageToCurrentTab("%s"%message.startswith(self.clientURL(schid, _clid)))
+            #ts3lib.printMessageToCurrentTab("%s"%str(self.clientURL(schid, _clid) in message.strip()))
             if message.startswith(self.cfg.get('general', 'prefix')) and self.cfg.getboolean('general','customprefix'): command = message.split(self.cfg.get('general', 'prefix'),1)[1]
             elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general','customprefix'): command = message.split(self.clientURL(schid, _clid),1)[1]
             else: return False
-            ts3lib.printMessageToCurrentTab(command)
+            cmd = command.split(' ',1)[0]
+            if not cmd in self.cmd.sections(): return False
+            params = "\"\""
+            try: params = command.split(' ',1)[1];params = bytes(params, "utf-8").decode("unicode_escape") # python3
+            except: pass
+            if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL: (error, _cid) = ts3lib.getChannelOfClient(schid, _clid);toID = _cid
+            ts3lib.printMessageToCurrentTab("self.commands.%s(%s,%s,%s,%s,%s)" % ( self.cmd.get(cmd, "function"), schid, targetMode, toID, fromID, params))
+            eval("self.commands.%s(%s,%s,%s,%s,%s,1)" % ( self.cmd.get(cmd, "function"), schid, targetMode, toID, fromID, params))
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+
+    def answerMessage(self, schid, targetMode, toID, fromID, message):
+        if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
+            ts3lib.requestSendPrivateTextMsg(schid, message, fromID);return
+        elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
+            ts3lib.requestSendChannelTextMsg(schid, "@%s: "%(self.clientURL(schid, _clid),message), toID);return
 
     def clientURL(self, schid=None, clid=0, uid=None, nickname=None, encodednick=None):
         if schid == None:
@@ -79,6 +97,11 @@ class chatBot(ts3plugin):
             try: encodednick = urlencode(nickname)
             except: pass
         return "[url=client://%s/%s~%s]%s[/url]" % (clid, uid, encodednick, nickname)
+
+    # YOUR COMMANDS HERE:
+
+
+    # COMMANDS END
 
 class SettingsDialog(QDialog):
     def __init__(self, ini, cfg, cmdini, cmd, parent=None):
