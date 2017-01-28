@@ -255,3 +255,4 @@ scripts_/pip3-script.py
 scripts_/pip3.5-script.py
 python.png
 *.h
+.idea/workspace.xml
