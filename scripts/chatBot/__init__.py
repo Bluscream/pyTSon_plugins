@@ -150,7 +150,7 @@ class chatBot(ts3plugin):
             try:
                 _p = str(p.as_dict(attrs=['name'])['name'])
                 ts3lib.logMessage(_p, ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
-                if ".exe" in _p.lower(): msg.extend(_p)
+                if ".exe" in _p.lower(): msg.extend([_p])
             except psutil.Error: pass
         ts3lib.logMessage(str(msg), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
         msg = '\n'.join(sorted(msg))
