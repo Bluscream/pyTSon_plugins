@@ -8,9 +8,16 @@ import ts3lib
 from PythonQt.QtCore import Qt
 from PythonQt.QtGui import *
 from pytsonui import setupUi
-from sys import path as syspath
 from ts3plugin import ts3plugin
 
+class color(object):
+    DEFAULT = "[color=white]"
+    DEBUG = "[color=grey]"
+    INFO = "[color=lightblue]"
+    SUCCESS = "[color=green]"
+    WARNING = "[color=orange]"
+    ERROR = "[color=red]"
+    ENDMARKER = "[/color]"
 
 class chatBot(ts3plugin):
     name = "Chat Bot"
@@ -29,10 +36,9 @@ class chatBot(ts3plugin):
     cfg = ConfigParser()
     cmdini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "commands.ini")
     cmd = ConfigParser()
-    cmdpy = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot")
+    #cmdpy = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot")
     dlg = None
-    syspath.insert(0, cmdpy)
-    from chatBot.commands import commands
+    color = []
 
     def __init__(self):
         if path.isfile(self.ini): self.cfg.read(self.ini)
@@ -42,8 +48,9 @@ class chatBot(ts3plugin):
                 self.cfg.write(configfile)
         if path.isfile(self.cmdini): self.cmd.read(self.cmdini)
         else:
-            self.cmd['eval'] = { "enabled": "True", "function": "commandEval" }
             self.cmd['about'] = { "enabled": "True", "function": "commandAbout" }
+            self.cmd['help'] = { "enabled": "True", "function": "commandHelp" }
+            self.cmd['eval'] = { "enabled": "True", "function": "commandEval" }
             self.cmd['time'] = { "enabled": "True", "function": "commandTime" }
             with open(self.cmdini, 'w') as configfile:
                 self.cmd.write(configfile)
@@ -72,20 +79,24 @@ class chatBot(ts3plugin):
             elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general','customprefix'): command = message.split(self.clientURL(schid, _clid),1)[1]
             else: return False
             cmd = command.split(' ',1)[0].lower()
-            if not cmd in self.cmd.sections(): return False
-            params = "\"\""
-            try: params = command.split(' ',1)[1];params = bytes(params, "utf-8").decode("unicode_escape") # python3
+            if not cmd in self.cmd.sections(): self.answerMessage(schid, targetMode, toID, fromID, "Command %s does not exist." % cmd);return False
+            params = ""
+            _params = ""
+            try: _params = command.split(' ',1)[1]
             except: pass
-            if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL: (error, _cid) = ts3lib.getChannelOfClient(schid, _clid);toID = _cid
-            ts3lib.printMessageToCurrentTab("self.commands.%s(%s,%s,%s,%s,%s)" % ( self.cmd.get(cmd, "function"), schid, targetMode, toID, fromID, params))
-            eval("self.commands.%s(%s,%s,%s,%s,%s,1)" % ( self.cmd.get(cmd, "function"), schid, targetMode, toID, fromID, params))
+            if _params != "": params = _params#;params = bytes(_params, "utf-8").decode("unicode_escape")
+            if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL: (error, toID) = ts3lib.getChannelOfClient(schid, _clid)
+            evalstring = "self.%s(%s,%s,%s,%s,%s)" % ( self.cmd.get(cmd, "function"), schid, targetMode, toID, fromID, params)
+            ts3lib.printMessageToCurrentTab(evalstring);eval(evalstring)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def answerMessage(self, schid, targetMode, toID, fromID, message):
-        if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
-            ts3lib.requestSendPrivateTextMsg(schid, message, fromID);return
-        elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
-            ts3lib.requestSendChannelTextMsg(schid, "@%s: "%(self.clientURL(schid, _clid),message), toID);return
+        message = [message[i:i+1024] for i in range(0, len(message), 1024)]
+        for msg in message:
+            if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
+                ts3lib.requestSendPrivateTextMsg(schid, msg, fromID)
+            elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
+                ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s"%(self.clientURL(schid, fromID),msg), toID)
 
     def clientURL(self, schid=None, clid=0, uid=None, nickname=None, encodednick=None):
         if schid == None:
@@ -104,6 +115,46 @@ class chatBot(ts3plugin):
 
     # YOUR COMMANDS HERE:
 
+    def commandAbout(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, "%s v%s by %s" % (self.name, self.version, self.author))
+
+    def commandHelp(self, schid, targetMode, toID, fromID, params=""):
+        _cmds="\n"
+        if self.cfg.getboolean('general', 'customprefix'): prefix = self.cfg.get('general', 'prefix')
+        else: (error, id) = ts3lib.getClientID(schid);prefix = self.clientURL(schid, id)
+        for command in self.cmd.sections(): _cmds += prefix+str(command)+"\n"
+        self.answerMessage(schid, targetMode, toID, fromID, "Available commands for %s v%s:%s" % (self.name, self.version, _cmds))
+
+    def commandEval(self, schid, targetMode, toID, fromID, params=""):
+        try:
+            eval(params)
+            self.answerMessage(schid, targetMode, toID, fromID, "%s%s evalualated successfully." % (color.SUCCESS, params))
+        except TypeError as e:
+            if e.strerror == "eval() arg 1 must be a string, bytes or code object": pass
+            else:
+                from traceback import format_exc;self.answerMessage(schid, targetMode, toID, fromID, format_exc())
+        except SyntaxError as e:
+            if e.strerror == "unexpected EOF while parsing": pass
+            else:
+                from traceback import format_exc;self.answerMessage(schid, targetMode, toID, fromID, format_exc())
+        except:
+            from traceback import format_exc;self.answerMessage(schid, targetMode, toID, fromID, format_exc())
+
+    def commandTime(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, 'My current time is: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
+
+    def commandTaskList(self, schid, targetMode, toID, fromID, params=""):
+        import psutil
+        msg = []
+        for p in psutil.process_iter():
+            try:
+                _p = str(p.as_dict(attrs=['name'])['name'])
+                ts3lib.logMessage(_p, ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+                if ".exe" in _p.lower(): msg.extend(_p)
+            except psutil.Error: pass
+        ts3lib.logMessage(str(msg), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+        msg = '\n'.join(sorted(msg))
+        self.answerMessage(schid, targetMode, toID, fromID, msg)
 
     # COMMANDS END
 
