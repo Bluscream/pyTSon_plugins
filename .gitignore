@@ -240,6 +240,7 @@ ressources/installer.ui
 lib/*
 include/pytson.py
 include/ts3client.py
+include/python3.5m/
 python.exe
 getpip.py
 scripts/easy_install-3.5.exe
@@ -248,3 +249,9 @@ scripts/wheel.exe
 test.py
 ressources/python.png
 *.exe
+.idea/workspace.xml
+scripts_/pip-script.py
+scripts_/pip3-script.py
+scripts_/pip3.5-script.py
+python.png
+*.h
