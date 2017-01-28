@@ -1,12 +1,16 @@
-import ts3lib, ts3defines, datetime
-from ts3plugin import ts3plugin
-from pytsonui import setupUi
-from PythonQt.QtGui import *
-from PythonQt.QtCore import Qt
 from configparser import ConfigParser
 from os import path
-from sys import path as syspath
 from urllib.parse import quote as urlencode
+
+import datetime
+import ts3defines
+import ts3lib
+from PythonQt.QtCore import Qt
+from PythonQt.QtGui import *
+from pytsonui import setupUi
+from sys import path as syspath
+from ts3plugin import ts3plugin
+
 
 class chatBot(ts3plugin):
     name = "Chat Bot"
@@ -28,7 +32,7 @@ class chatBot(ts3plugin):
     cmdpy = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot")
     dlg = None
     syspath.insert(0, cmdpy)
-    import commands
+    from chatBot.commands import commands
 
     def __init__(self):
         if path.isfile(self.ini): self.cfg.read(self.ini)
@@ -67,7 +71,7 @@ class chatBot(ts3plugin):
             if message.startswith(self.cfg.get('general', 'prefix')) and self.cfg.getboolean('general','customprefix'): command = message.split(self.cfg.get('general', 'prefix'),1)[1]
             elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general','customprefix'): command = message.split(self.clientURL(schid, _clid),1)[1]
             else: return False
-            cmd = command.split(' ',1)[0]
+            cmd = command.split(' ',1)[0].lower()
             if not cmd in self.cmd.sections(): return False
             params = "\"\""
             try: params = command.split(' ',1)[1];params = bytes(params, "utf-8").decode("unicode_escape") # python3
@@ -159,3 +163,18 @@ class SettingsDialog(QDialog):
         self.loadCommands();
     def on_btn_close_clicked(self):
         self.close()
+
+class chatCommand(object):
+    """
+    name = "__ts3plugin__"
+    version = "1.0"
+    apiVersion = 21
+    author = "Thomas \"PLuS\" Pathmann"
+    description = "This is the baseclass for all ts3 python plugins"
+    """
+
+    def __init__(self):
+        pass
+
+    def stop(self):
+        pass

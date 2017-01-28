@@ -2,11 +2,212 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/bytes2human.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/check_encoding.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/check_folder.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/check_hardware.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/env2globals.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/get_clipboard.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/get_free_port.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/get_pdb_on_exception.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/get_sanitized_string.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/get_temp_folder.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/html2ebook.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/json2xml.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_beep.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_chainable_future.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_json_flat.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_json_pretty.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_log_exception.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_multiprocess.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_multithread.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_notification.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_postexec_message.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_retry.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_template_python.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_test_terminal_color.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_typecheck.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_watch.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/make_zip_comment.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/path2import.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/seconds2human.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/set_desktop_launcher.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/set_display_off.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/set_process_name.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/set_single_instance.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/set_terminal_title.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/walk2dict.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/anglerfish/walk2list.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/autorun.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/css_html_js_minify/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/css_html_js_minify/css_minifier.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/css_html_js_minify/html_minifier.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/css_html_js_minify/js_minifier.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/css_html_js_minify/minify.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/css_html_js_minify/variables.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_encodings.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_face_flags.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_fstypes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_glyph_bbox_modes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_glyph_formats.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_kerning_modes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_lcd_filters.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_load_flags.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_load_targets.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_open_modes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_outline_flags.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_pixel_modes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_render_modes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_stroker_borders.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_stroker_linecaps.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_stroker_linejoins.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/ft_style_flags.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/tt_adobe_ids.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/tt_apple_ids.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/tt_mac_ids.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/tt_mac_langids.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/tt_ms_ids.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/tt_ms_langids.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/tt_name_ids.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_enums/tt_platforms.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_errors.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_structs.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/ft_types.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/freetype/raw.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/g15daemon/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/g15daemon/fontdata6x4.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/g15daemon/fontdata7x5.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/g15daemon/fontdata8x8.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/g15daemon/unifont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/greenlet/greenlet.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/pyminifier/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/pyminifier/__main__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/pyminifier/analyze.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/pyminifier/compression.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/pyminifier/minification.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/pyminifier/obfuscate.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/pyminifier/token_utils.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/_internal_utils.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/adapters.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/api.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/auth.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/cacert.pem" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/certs.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/compat.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/cookies.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/exceptions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/hooks.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/models.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/README.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/big5freq.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/big5prober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/chardetect.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/chardistribution.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/charsetgroupprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/charsetprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/codingstatemachine.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/compat.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/constants.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/cp949prober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/escprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/escsm.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/eucjpprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/euckrfreq.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/euckrprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/euctwfreq.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/euctwprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/gb2312freq.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/gb2312prober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/hebrewprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/jisfreq.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/jpcntx.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/langbulgarianmodel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/langcyrillicmodel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/langgreekmodel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/langhebrewmodel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/langhungarianmodel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/langthaimodel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/latin1prober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/mbcharsetprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/mbcsgroupprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/mbcssm.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/sbcharsetprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/sbcsgroupprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/sjisprober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/universaldetector.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/chardet/utf8prober.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/idna/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/idna/codec.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/idna/compat.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/idna/core.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/idna/idnadata.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/idna/intranges.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/idna/uts46data.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/_collections.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/connection.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/connectionpool.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/contrib/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/contrib/appengine.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/contrib/ntlmpool.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/contrib/pyopenssl.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/contrib/socks.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/exceptions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/fields.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/filepost.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/packages/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/packages/backports/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/packages/backports/makefile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/packages/ordered_dict.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/packages/six.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/packages/ssl_match_hostname/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/packages/ssl_match_hostname/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/poolmanager.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/request.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/response.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/util/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/util/connection.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/util/request.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/util/response.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/util/retry.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/util/ssl_.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/util/timeout.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/packages/urllib3/util/url.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/sessions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/status_codes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/structures.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/requests/utils.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/commands.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/common.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/definitions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/escape.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/examples/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/examples/def_param.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/examples/endless_poke.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/examples/hello_bot.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/examples/viewer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/examples/whirlpool.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/filetransfer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/query.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/include/ts3query/response.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/chatBot/commands.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/pip-script.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/pip3-script.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/pip3.5-script.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" afterPath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,8 +239,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1833">
-              <caret line="353" column="84" lean-forward="true" selection-start-line="353" selection-start-column="84" selection-end-line="363" selection-end-column="0" />
+            <state relative-caret-position="847">
+              <caret line="353" column="84" lean-forward="false" selection-start-line="353" selection-start-column="84" selection-end-line="363" selection-end-column="0" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -50,20 +251,38 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="14" lean-forward="true" selection-start-line="28" selection-start-column="14" selection-end-line="30" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="136">
+              <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="commands.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.py">
+      <file leaf-file-name="commandAbout.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="86" lean-forward="false" selection-start-line="18" selection-start-column="86" selection-end-line="18" selection-end-column="87" />
+            <state relative-caret-position="204">
+              <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="commandTime.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="commandEval.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -72,7 +291,7 @@
       <file leaf-file-name="ts3defines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
+            <state relative-caret-position="8619">
               <caret line="507" column="29" lean-forward="false" selection-start-line="507" selection-start-column="4" selection-end-line="507" selection-end-column="29" />
               <folding />
             </state>
@@ -120,8 +339,12 @@
         <option value="$PROJECT_DIR$/scripts/chatBot/settings.ini" />
         <option value="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
-        <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/commands.py" />
+        <option value="$PROJECT_DIR$/scripts/chatBot/commands/commands.py" />
+        <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" />
+        <option value="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" />
+        <option value="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" />
       </list>
     </option>
   </component>
@@ -132,8 +355,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="479" />
+    <option name="y" value="5" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -302,6 +525,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -346,10 +570,31 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pyTSon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pyTSon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chatBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -360,6 +605,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/include" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.__init__">
     <configuration default="false" name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -626,27 +876,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="479" y="5" width="1936" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10127932" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10341151" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.50319827" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.4968017" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33802816" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -681,13 +931,54 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/NoX/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6001">
+          <caret line="353" column="84" lean-forward="false" selection-start-line="353" selection-start-column="84" selection-end-line="363" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="30" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8619">
+          <caret line="507" column="29" lean-forward="false" selection-start-line="507" selection-start-column="4" selection-end-line="507" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#35#0" expanded="false" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/NoX/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -695,19 +986,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md" />
     <entry file="file://$PROJECT_DIR$/scripts/AutoReplyAway/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -715,13 +997,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md" />
     <entry file="file://$PROJECT_DIR$/scripts/AutoReplyAway/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -750,20 +1026,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/requests/packages/urllib3/connectionpool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="426" column="0" lean-forward="true" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/include/requests/packages/urllib3/connectionpool.py" />
     <entry file="file://$PROJECT_DIR$/scripts/NoX/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="674">
           <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="65" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#35#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -771,7 +1038,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4669">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -779,7 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="179" column="0" lean-forward="true" selection-start-line="179" selection-start-column="0" selection-end-line="193" selection-end-column="85" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -787,15 +1052,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="9" lean-forward="false" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="507" column="29" lean-forward="false" selection-start-line="507" selection-start-column="4" selection-end-line="507" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -803,9 +1059,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="47" lean-forward="false" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-          <folding>
-            <marker date="1485501815622" expanded="true" signature="3285:3337" ph="SELECT * FRO... contacts" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -813,34 +1066,89 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8619">
+          <caret line="507" column="29" lean-forward="false" selection-start-line="507" selection-start-column="4" selection-end-line="507" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commandTime">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1833">
-          <caret line="353" column="84" lean-forward="true" selection-start-line="353" selection-start-column="84" selection-end-line="363" selection-end-column="0" />
+        <state relative-caret-position="847">
+          <caret line="353" column="84" lean-forward="false" selection-start-line="353" selection-start-column="84" selection-end-line="363" selection-end-column="0" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="14" lean-forward="true" selection-start-line="28" selection-start-column="14" selection-end-line="30" selection-end-column="19" />
+        <state relative-caret-position="170">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/ts3plugin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="474" column="0" lean-forward="true" selection-start-line="474" selection-start-column="0" selection-end-line="494" selection-end-column="12" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.py">
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="86" lean-forward="false" selection-start-line="18" selection-start-column="86" selection-end-line="18" selection-end-column="87" />
+        <state relative-caret-position="136">
+          <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding />
         </state>
       </provider>
