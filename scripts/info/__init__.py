@@ -41,14 +41,14 @@ class info(ts3plugin):
             for name, value in getmembers(ts3defines.VirtualServerPropertiesRare):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER_RARE'):
                     self.cfg.set("VirtualServerPropertiesRare", name, "False")
-            self.cfg.set("ChannelProperties", "LAST_REQUESTED", "True");self.cfg.set("ChannelProperties", "TYPE", "True")
+            self.cfg.set("ChannelProperties", "LAST_REQUESTED", "True");self.cfg.set("ChannelProperties", "TYPE", "True");self.cfg.set("ChannelProperties", "ID", "True")
             for name, value in getmembers(ts3defines.ChannelProperties):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER'):
                     self.cfg.set("ChannelProperties", name, "False")
             for name, value in getmembers(ts3defines.ChannelPropertiesRare):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER_RARE'):
                     self.cfg.set("ChannelPropertiesRare", name, "False")
-            self.cfg.set("ClientProperties", "LAST_REQUESTED", "True");self.cfg.set("ClientProperties", "TYPE", "True")
+            self.cfg.set("ClientProperties", "LAST_REQUESTED", "True");self.cfg.set("ClientProperties", "TYPE", "True");self.cfg.set("ClientProperties", "ID", "True")
             for name, value in getmembers(ts3defines.ClientProperties):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER'):
                     self.cfg.set("ClientProperties", name, "False")
@@ -172,19 +172,15 @@ class info(ts3plugin):
                 else:
                     try:
                         if self.cfg.getboolean('VirtualServerProperties', name):
-                            _tmp = eval('ts3defines.VirtualServerProperties.'+name)
-                            (error, _var) = ts3.getServerVariableAsString(schid, _tmp)
-                            if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "" and not str(_var) == "0.0000":
-                                i.append(name.replace('VIRTUALSERVER_', '').replace('_', ' ').title()+": "+_var)
+                            (success, _tmp) = self.processVariable(schid, 'VirtualServerProperties', name, 'VIRTUALSERVER_', id)
+                            if success: i.append(_tmp)
                     except:
                         continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             for name in self.cfg['VirtualServerPropertiesRare']:
                 try:
                     if self.cfg.getboolean('VirtualServerPropertiesRare', name):
-                        _tmp = eval('ts3defines.VirtualServerPropertiesRare.'+name)
-                        (error, _var) = ts3.getServerVariableAsString(schid, _tmp)
-                        if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "" and not str(_var) == "0.0000":
-                            i.append(name.replace('VIRTUALSERVER_', '').replace('_', ' ').title()+": "+_var)
+                            (success, _tmp) = self.processVariable(schid, 'VirtualServerPropertiesRare', name, 'VIRTUALSERVER_', id)
+                            if success: i.append(_tmp)
                 except:
                     continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             return i
@@ -194,24 +190,22 @@ class info(ts3plugin):
                     if self.cfg.getboolean('ChannelProperties', 'LAST_REQUESTED'):
                         i.append('{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
                 elif name == 'TYPE':
-                    if self.cfg.getboolean('ChannelProperties', 'TYPE'):
-                        i.append('Type: [b]Channel[/b]')
+                    if self.cfg.getboolean('ChannelProperties', 'TYPE'): i.append('Type: [b]Channel[/b]')
+                elif name == 'ID':
+                    if self.cfg.getboolean('ChannelProperties', 'ID'):
+                        i.append("ID: %s"%id)
                 else:
                     try:
                         if self.cfg.getboolean('ChannelProperties', name):
-                            _tmp = eval('ts3defines.ChannelProperties.'+name)
-                            (error, _var) = ts3.getChannelVariableAsString(schid, id, _tmp)
-                            if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "":
-                                i.append(name.replace('CHANNEL_', '').replace('_', ' ').title()+": "+_var)
+                            (success, _tmp) = self.processVariable(schid, 'ChannelProperties', name, 'CHANNEL_', id)
+                            if success: i.append(_tmp)
                     except:
                         continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             for name in self.cfg['ChannelPropertiesRare']:
                 try:
                     if self.cfg.getboolean('ChannelPropertiesRare', name):
-                        _tmp = eval('ts3defines.ChannelPropertiesRare.'+name)
-                        (error, _var) = ts3.getChannelVariableAsString(schid, id, _tmp)
-                        if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "":
-                            i.append(name.replace('CHANNEL_', '').replace('_', ' ').title()+": "+_var)
+                        (success, _tmp) = self.processVariable(schid, 'ChannelPropertiesRare', name, 'CHANNEL_', id)
+                        if success: i.append(_tmp)
                 except:
                     continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             return i
@@ -230,61 +224,72 @@ class info(ts3plugin):
                                 i.append('Type: [b]Client[/b]')
                             elif type == ts3defines.ClientType.ClientType_SERVERQUERY:
                                 i.append('Type: [b]ServerQuery[/b]')
-                            else:
-                                i.append('Type: [b]Unknown ('+str(type)+')[/b]')
+                            else: i.append('Type: [b]Unknown ('+str(type)+')[/b]')
+                elif name == 'ID':
+                    if self.cfg.getboolean('ClientProperties', 'ID'):
+                        i.append("ID: %s"%id)
                 else:
                     try:
                         if self.cfg.getboolean('ClientProperties', name):
-                            _tmp = eval('ts3defines.ClientProperties.'+name)
-                            (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
-                            if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "":
-                                i.append(name.replace('CLIENT_', '').replace('_', ' ').title()+": "+_var)
+                            (success, _tmp) = self.processVariable(schid, 'ClientProperties', name, 'CLIENT_', id)
+                            if success: i.append(_tmp)
                     except:
-                        continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        continue;ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             for name in self.cfg['ClientPropertiesRare']:
                 try:
                     if self.cfg.getboolean('ClientPropertiesRare', name):
-                        _tmp = eval('ts3defines.ClientPropertiesRare.'+name)
-                        (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
-                        if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "":
-                            i.append(name.replace('CLIENT_', '').replace('_', ' ').title()+": "+_var)
+                            (success, _tmp) = self.processVariable(schid, 'ClientPropertiesRare', name, 'CLIENT_', id)
+                            if success: i.append(_tmp)
                 except:
-                    continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                    continue;ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             for name in self.cfg['ConnectionProperties']:
                 try:
                     if self.cfg.getboolean('ConnectionProperties', name):
-                        _tmp = eval('ts3defines.ConnectionProperties.'+name)
-                        (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-                        if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "":
-                            i.append(name.replace('CONNECTION_', '').replace('_', ' ').title()+": "+_var)
+                        (success, _tmp) = self.processVariable(schid, 'ConnectionProperties', name, 'CONNECTION_', id)
+                        if success: i.append(_tmp)
                 except:
                     continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             for name in self.cfg['ConnectionPropertiesRare']:
                 try:
                     if self.cfg.getboolean('ConnectionPropertiesRare', name):
-                        _tmp = eval('ts3defines.ConnectionPropertiesRare.'+name)
-                        (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-                        if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "":
-                            i.append(name.replace('CONNECTION_', '').replace('_', ' ').title()+": "+_var)
+                        (success, _tmp) = self.processVariable(schid, 'ConnectionPropertiesRare', name, 'CONNECTION_', id)
+                        if success: i.append(_tmp)
                 except:
                     continue#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             return i
         else:
             return ["ItemType \""+str(atype)+"\" unknown."]
 
-    def processVariable(self, function, type, var, start):
-        _tmp = eval('ts3defines.%s.%s' % (type, var))
-        if type == "VirtualServerProperties": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-        elif type == "VirtualServerPropertiesRare": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-        elif type == "ChannelProperties": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-        elif type == "ChannelPropertiesRare": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-        elif type == "ClientProperties": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-        elif type == "ClientPropertiesRare": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-        elif type == "ConnectionProperties": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-        elif type == "ConnectionPropertiesRare": (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
-        if error == ts3defines.ERROR_ok and _var and not str(_var) == "0" and not str(_var) == "":
-            return name.replace(start, '').replace('_', ' ').title()+": "+_var
-
+    def processVariable(self, schid, type, var, start, id):
+        try:
+            _tmp = eval('ts3defines.%s.%s' % (type, var))
+            if "VirtualServerProperties" in type:
+                (error, _var) = ts3.getServerVariableAsString(schid, _tmp)
+                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getServerVariableAsUInt64(schid, _tmp)
+                elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getServerVariableAsInt(schid, _tmp)
+            elif "ChannelProperties" in type:
+                (error, _var) = ts3.getChannelVariableAsString(schid, id, _tmp)
+                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getChannelVariableAsUInt64(schid, id, _tmp)
+                elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getChannelVariableAsInt(schid, id, _tmp)
+            elif "ClientProperties" in type:
+                if id == ts3.getClientID(schid):
+                    (error, _var) = ts3.getClientSelfVariableAsString(schid, _tmp)
+                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
+                    elif _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
+                    elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientSelfVariableAsInt(schid, id, _tmp)
+                    elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, _tmp)
+                else:
+                    (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
+                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
+                    elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, _tmp)
+            elif "ConnectionProperties" in type:
+                (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsUInt64(schid, id, _tmp)
+                elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsInt(schid, id, _tmp)
+            _var = str(_var)
+            if error != ts3defines.ERROR_ok or _var == "": return False, ""
+            return True, var.replace(start, '').replace('_', ' ').title() + ": " + _var
+        except: from traceback import format_exc;ts3.logMessage("Could not resolve variable ts3defines.%s.%s: %s" % (type, var, format_exc()), ts3defines.LogLevel.LogLevel_INFO, self.name, 0);return False, ""
 
 class SettingsDialog(QDialog):
     def __init__(self,info, parent=None):
