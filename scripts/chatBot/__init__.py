@@ -156,6 +156,14 @@ class chatBot(ts3plugin):
         msg = '\n'.join(sorted(msg))
         self.answerMessage(schid, targetMode, toID, fromID, msg)
 
+    def commandSetServerGroup(self, schid, targetMode, toID, fromID, params=""):
+        serverGroupID = int(params)
+        (error, dbid) = ts3lib.getClientVariableAsInt(schid, fromID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        error = ts3lib.requestServerGroupAddClient(schid, serverGroupID, dbid)
+        if not error == ts3defines.ERROR_ok:
+            self.answerMessage(schid, targetMode,toID, fromID, "Adding you to servergroup #%s failed!"%serverGroupIDs)
+        else: self.answerMessage(schid, targetMode, toID, fromID, "Successfully added you to the servergroup #%s"%serverGroupID)
+
     # COMMANDS END
 
 class SettingsDialog(QDialog):
