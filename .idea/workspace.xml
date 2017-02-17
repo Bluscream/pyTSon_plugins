@@ -2,7 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/nowPlaying/__init__.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/AutoReplyAway/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/autoChannelCreate/autoChannelCreate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/autoChannelCreate/channelCreator.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/autopokeback/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/dataChanger/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/discordify/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/discordify/icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/eventlog/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/exporter/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/faker/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/g15plugin/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/infoHTML/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/ipcplugin/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/linkinfo/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/linkinfo/linkinfo.db" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/linkinfo/linkinfo.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/linkinfo/luemmel.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/lukas/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/notify/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/nowPlaying/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/processCommandTest/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/profile/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/profile/cfg/profile.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/profile/ui/profile.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/profile/ui/profile_simple.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/queryConsole/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/report/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/report/report.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/streamChat/streamChat.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/tweakui/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/widgetinfo/__init__.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
@@ -37,28 +67,30 @@
       <file leaf-file-name="ts3defines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="899" column="4" lean-forward="false" selection-start-line="899" selection-start-column="4" selection-end-line="899" selection-end-column="4" />
+            <state relative-caret-position="833">
+              <caret line="761" column="16" lean-forward="false" selection-start-line="761" selection-start-column="16" selection-end-line="761" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="161" column="77" lean-forward="false" selection-start-line="161" selection-start-column="77" selection-end-line="161" selection-end-column="77" />
-              <folding />
+            <state relative-caret-position="6442">
+              <caret line="424" column="26" lean-forward="true" selection-start-line="424" selection-start-column="26" selection-end-line="424" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="commands.ini" pinned="false" current-in-tab="false">
+      <file leaf-file-name="commands.ini" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+            <state relative-caret-position="481">
+              <caret line="79" column="25" lean-forward="false" selection-start-line="79" selection-start-column="25" selection-end-line="79" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -84,11 +116,14 @@
       <find>ts3.</find>
       <find>urlencode</find>
       <find>message</find>
-      <find>qtimer</find>
       <find>error_ok</find>
       <find>format_e</find>
       <find>False</find>
       <find>CHANNEL_ID</find>
+      <find>textmess</find>
+      <find>clientpro</find>
+      <find>qtimer</find>
+      <find>import</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -137,7 +172,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1376" />
+    <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -305,6 +340,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -345,6 +382,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="serverBrowser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pyTSon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pyTSon" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="chatBot" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -365,8 +420,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -657,14 +710,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10942249" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19818456" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.50319827" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32733223" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.4968017" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33802816" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
@@ -721,6 +774,22 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15283">
+          <caret line="899" column="4" lean-forward="false" selection-start-line="899" selection-start-column="4" selection-end-line="899" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15283">
@@ -733,22 +802,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1485501815622" expanded="true" signature="3285:3337" ph="SELECT * FRO... contacts" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/nowPlaying/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="12" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/nowPlaying/__init__.py" />
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15283">
@@ -761,22 +818,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1485501815622" expanded="true" signature="3285:3337" ph="SELECT * FRO... contacts" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/nowPlaying/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="12" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/nowPlaying/__init__.py" />
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15283">
@@ -800,13 +845,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/dataChanger/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/dataChanger/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6001">
@@ -852,28 +891,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md" />
-    <entry file="file://$PROJECT_DIR$/scripts/AutoReplyAway/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/AutoReplyAway/__init__.py" />
     <entry file="file://$PROJECT_DIR$/README.md" />
-    <entry file="file://$PROJECT_DIR$/scripts/AutoReplyAway/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/faker/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/AutoReplyAway/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/scripts/faker/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/NoX/settings.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -941,20 +962,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/linkinfo/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="57" column="78" lean-forward="true" selection-start-line="57" selection-start-column="78" selection-end-line="60" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/notify/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="32" column="26" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/linkinfo/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/scripts/notify/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/ts3plugin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -976,13 +985,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/dataChanger/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="27" lean-forward="false" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/dataChanger/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/info/settings.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -997,46 +1000,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/nowPlaying/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="24" column="12" lean-forward="false" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/nowPlaying/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="249" column="65" lean-forward="true" selection-start-line="249" selection-start-column="65" selection-end-line="249" selection-end-column="65" />
-          <folding>
-            <marker date="1485501815622" expanded="true" signature="3285:3337" ph="SELECT * FRO... contacts" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
+    <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
-          <folding />
+        <state relative-caret-position="184">
+          <caret line="99" column="4" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="519" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="899" column="4" lean-forward="false" selection-start-line="899" selection-start-column="4" selection-end-line="899" selection-end-column="4" />
+        <state relative-caret-position="833">
+          <caret line="761" column="16" lean-forward="false" selection-start-line="761" selection-start-column="16" selection-end-line="761" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="161" column="77" lean-forward="false" selection-start-line="161" selection-start-column="77" selection-end-line="161" selection-end-column="77" />
+        <state relative-caret-position="6442">
+          <caret line="424" column="26" lean-forward="true" selection-start-line="424" selection-start-column="26" selection-end-line="424" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="79" column="25" lean-forward="false" selection-start-line="79" selection-start-column="25" selection-end-line="79" selection-end-column="25" />
           <folding />
         </state>
       </provider>
