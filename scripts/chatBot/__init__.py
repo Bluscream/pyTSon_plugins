@@ -332,8 +332,7 @@ class chatBot(ts3plugin):
         # else:
         msgBox.setText(params)
         msgBox.setIcon(QMessageBox.Warning)
-        msgBox.
-        exec ()
+        msgBox.exec()
 
         # def onServerGroupListEvent(self, schid, serverGroupID, name, atype, iconID, saveDB):
         #	 if not self.cmdevent.event == "onServerGroupListEvent": return
