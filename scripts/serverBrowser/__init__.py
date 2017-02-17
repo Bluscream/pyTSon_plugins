@@ -1,6 +1,7 @@
 import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi
+from getvalues import getValues, ValueType
 from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication, QInputDialog
 from PythonQt.QtCore import Qt, QTimer
 from datetime import datetime

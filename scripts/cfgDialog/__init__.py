@@ -1,6 +1,7 @@
 import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi
+from getvalues import getValues, ValueType
 from PythonQt.QtGui import QDialog, QInputDialog, QLineEdit
 from os import path
 from configparser import ConfigParser
