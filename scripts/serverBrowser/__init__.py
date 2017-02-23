@@ -114,6 +114,7 @@ class ServersDialog(QDialog):
     def __init__(self,serverBrowser, parent=None):
         self.serverBrowser=serverBrowser
         super(QDialog, self).__init__(parent)
+        self.setAttribute(Qt.WA_DeleteOnClose)
         setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "serverBrowser", "ui", "servers.ui"))
         self.setWindowTitle("PlanetTeamspeak Server Browser")
         #ts3.printMessageToCurrentTab("Countries: "+str(self.countries))
@@ -247,54 +248,124 @@ class ServersDialog(QDialog):
             return 'Unknown ('+cid+')'
 
     def onCountryListReply(self, reply):
-        countries = reply.readAll()
-        self.status.setText("Response from \""+self.serverBrowser.config['GENERAL']['api']+"\": "+str(countries.status_code)+": "+countries.reason)
-        palette = QPalette()
-        if countries.status_code == 200:
-            palette.setColor(QPalette.Foreground,Qt.darkGreen)
-            self.countryBox.clear()
-        else:
-            palette.setColor(QPalette.Foreground,Qt.red)
-        self.status.setPalette(palette)
-        countries = countries.data().decode('utf-8')
-        countries = json.loads(countries)["result"]["data"]
-        y= sum(x[2] for x in countries)
-        #y = 0
-        #for x in countries:
-        #   y = y + x[2]
-        #ts3.printMessageToCurrentTab(str(countries))
-        if "-" in [h[0] for h in countries]:
-            countries = countries[0:1]+sorted(countries[1:],key=lambda x: x[1])
-        else:
-            countries = sorted(countries,key=lambda x: x[1])
-        self.countries = [['ALL', 'All', y]]+countries
+        try:
+            _api = self.serverBrowser.config['GENERAL']['api']
+            _reply = reply.readAll()
+            countries = json.loads(_reply.data().decode('utf-8'))["result"]["data"]
+            ts3.printMessageToCurrentTab("%s"%countries)
+            _reason = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
+            self.status.setText("Response from \"{0}\": {1}: {2}".format(_api, _reason, reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)))
+            palette = QPalette()
+            if _reason == 200:
+                palette.setColor(QPalette.Foreground,Qt.darkGreen)
+                self.countryBox.clear()
+            else:
+                palette.setColor(QPalette.Foreground,Qt.red)
+            self.status.setPalette(palette)
+            y= sum(x[2] for x in countries)
+            #y = 0
+            #for x in countries:
+            #   y = y + x[2]
+            #ts3.printMessageToCurrentTab(str(countries))
+            if "-" in [h[0] for h in countries]:
+                countries = countries[0:1]+sorted(countries[1:],key=lambda x: x[1])
+            else:
+                countries = sorted(countries,key=lambda x: x[1])
+            self.countries = [['ALL', 'All', y]]+countries
+            #if self.serverBrowser.config['GENERAL']['morerequests'] == "True":
+                #self.countryBox.addItems([x[1]+" ("+str(x[2])+")" for x in self.countries])
+            #else:
+            self.countryBox.addItems([x[1] for x in self.countries])
 
-        #__countries = __countries.__add__([['ALL', 'All', 0]])
-        # ts3.printMessageToCurrentTab(str(countries))
+            #__countries = __countries.__add__([['ALL', 'All', 0]])
+        except:
+            ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def requestCountries(self):
-        self.nwm = QNetworkAccessManager()
-        self.nwm.connect("finished(QNetworkReply*)", self.onCountryListReply)
-        self.nwm.get(QNetworkRequest(QUrl(self.serverBrowser.config['GENERAL']['api']+"servercountries")))
+        self.nwmc = QNetworkAccessManager()
+        self.nwmc.connect("finished(QNetworkReply*)", self.onCountryListReply)
+        self.nwmc.get(QNetworkRequest(QUrl(self.serverBrowser.config['GENERAL']['api']+"servercountries")))
+        ts3.printMessageToCurrentTab("requestCountries: "+self.serverBrowser.config['GENERAL']['api']+"servercountries")
 
     def listCountries(self, force=False):
         if force or self.serverBrowser.config['GENERAL']['morerequests'] == "True":
             self.requestCountries()
-        #if self.serverBrowser.config['GENERAL']['morerequests'] == "True":
-            #self.countryBox.addItems([x[1]+" ("+str(x[2])+")" for x in self.countries])
-        #else:
-            self.countryBox.addItems([x[1] for x in self.countries])
 
     def serversReply(self, reply):
-        servers = reply.readAll()
-        self.status.setText("Response from \""+self.serverBrowser.config['GENERAL']['api']+"\": "+str(servers.status_code)+": "+servers.reason)
-        palette = QPalette()
-        if not servers.status_code == 200:
-            palette.setColor(QPalette.Foreground,Qt.red)
-        self.status.setPalette(palette)
-        _servers = servers.data().decode('utf-8')
-        __servers = json.loads(_servers)
-        return __servers
+        try:
+            _api = self.serverBrowser.config['GENERAL']['api']
+            _reason = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
+            _reply = reply.readAll()
+            servers = json.loads(_reply.data().decode('utf-8'))
+            ts3.printMessageToCurrentTab("servers: %s"%servers)
+            self.status.setText("Response from \"{0}\": {1}: {2}".format(_api, _reason, reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)))
+            palette = QPalette()
+            if not _reason == 200:
+                palette.setColor(QPalette.Foreground,Qt.red)
+            self.status.setPalette(palette)
+
+            self.status.setText("Status: %s"%reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute))
+            if servers["status"] == "success":
+                self.pages = servers["result"]["pagestotal"]
+                self.pageLabel.setText(str(servers["result"]["pageactive"])+" / "+str(servers["result"]["pagestotal"]))
+                self.pageLabel.updateGeometry()
+                self.info.setText(str(servers["result"]["itemsshown"])+" / "+str(servers["result"]["itemstotal"])+" Servers shown.")
+                self.serverList.setRowCount(0)
+            elif servers["status"] == "error":
+                self.info.setText("Requested Page: "+str(self.page))
+                self.status.setText(servers["status"].title()+": "+servers["result"]["message"]+" ("+str(servers["result"]["code"])+")")
+                palette = QPalette()
+                palette.setColor(QPalette.Foreground,Qt.red)
+                self.status.setPalette(palette)
+                return
+            else:
+                self.info.setText("Requested Page: "+str(self.page))
+                palette = QPalette()
+                palette.setColor(QPalette.Foreground,Qt.red)
+                self.status.setPalette(palette)
+                return
+            _list = self.serverList
+            _filters = self.serverBrowser.config["FILTERS"]
+            if servers["result"]["pageactive"] == 1:
+                self.previous.setEnabled(False)
+            else:
+                self.previous.setEnabled(True)
+            if servers["result"]["pageactive"] == servers["result"]["pagestotal"]:
+                self.next.setEnabled(False)
+            else:
+                self.next.setEnabled(True)
+            for key in servers["result"]["data"]:
+                if self.buhl(_filters["hideFull"]) and key["users"] >= key["slots"]:
+                    continue
+                elif self.buhl(_filters["hideEmpty"]) and key["users"] <= 0:
+                    continue
+                else:
+                    print("%s"%key)
+                    rowPosition = _list.rowCount
+                    _list.insertRow(rowPosition)
+                    # if key['premium']:
+                    #     _list.setItem(rowPosition, 0, QTableWidgetItem("Yes"))
+                    # else:
+                    #     _list.setItem(rowPosition, 0, QTableWidgetItem("No"))
+                    _list.setItem(rowPosition, 0, QTableWidgetItem(key['name']))
+                    _list.setItem(rowPosition, 1, QTableWidgetItem(str(key['users'])+' / '+str(key['slots'])))
+                    if key['users'] >= key['slots']:
+                        palette = QPalette()
+                        palette.setColor(QPalette.Foreground,Qt.red)
+                        _list.setPalette(palette)
+                    _list.setItem(rowPosition, 2, QTableWidgetItem(self.getCountryNamebyID(key['country'])))
+                    if key['createchannels']:
+                        _list.setItem(rowPosition, 3, QTableWidgetItem("Yes"))
+                    else:
+                        _list.setItem(rowPosition, 3, QTableWidgetItem("No"))
+                    if key['password']:
+                        _list.setItem(rowPosition, 4, QTableWidgetItem("Yes"))
+                    else:
+                        _list.setItem(rowPosition, 4, QTableWidgetItem("No"))
+                    #item.setData(Qt.UserRole, key['ip']);
+        except:
+            ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
 
     def requestServers(self, url):
         if self.serverBrowser.config["GENERAL"]["debug"] == "True":
@@ -312,66 +383,7 @@ class ServersDialog(QDialog):
             self.status.setPalette(palette)
             return
         url = self.setupURL()
-        servers = self.requestServers(url)
-        self.status.setText("Status: "+servers["status"].title())
-        if servers["status"] == "success":
-            self.pages = servers["result"]["pagestotal"]
-            self.pageLabel.setText(str(servers["result"]["pageactive"])+" / "+str(servers["result"]["pagestotal"]))
-            self.pageLabel.updateGeometry()
-            self.info.setText(str(servers["result"]["itemsshown"])+" / "+str(servers["result"]["itemstotal"])+" Servers shown.")
-            self.serverList.setRowCount(0)
-        elif servers["status"] == "error":
-            self.info.setText("Requested Page: "+str(self.page))
-            self.status.setText(servers["status"].title()+": "+servers["result"]["message"]+" ("+str(servers["result"]["code"])+")")
-            palette = QPalette()
-            palette.setColor(QPalette.Foreground,Qt.red)
-            self.status.setPalette(palette)
-            return
-        else:
-            self.info.setText("Requested Page: "+str(self.page))
-            palette = QPalette()
-            palette.setColor(QPalette.Foreground,Qt.red)
-            self.status.setPalette(palette)
-            return
-        _list = self.serverList
-        _filters = self.serverBrowser.config["FILTERS"]
-        if servers["result"]["pageactive"] == 1:
-            self.previous.setEnabled(False)
-        else:
-            self.previous.setEnabled(True)
-        if servers["result"]["pageactive"] == servers["result"]["pagestotal"]:
-            self.next.setEnabled(False)
-        else:
-            self.next.setEnabled(True)
-        for key in servers["result"]["data"]:
-            if self.buhl(_filters["hideFull"]) and key["users"] >= key["slots"]:
-                continue
-            elif self.buhl(_filters["hideEmpty"]) and key["users"] <= 0:
-                continue
-            else:
-                print("%s"%key)
-                rowPosition = _list.rowCount
-                _list.insertRow(rowPosition)
-                # if key['premium']:
-                #     _list.setItem(rowPosition, 0, QTableWidgetItem("Yes"))
-                # else:
-                #     _list.setItem(rowPosition, 0, QTableWidgetItem("No"))
-                _list.setItem(rowPosition, 0, QTableWidgetItem(key['name']))
-                _list.setItem(rowPosition, 1, QTableWidgetItem(str(key['users'])+' / '+str(key['slots'])))
-                if key['users'] >= key['slots']:
-                    palette = QPalette()
-                    palette.setColor(QPalette.Foreground,Qt.red)
-                    _list.setPalette(palette)
-                _list.setItem(rowPosition, 2, QTableWidgetItem(self.getCountryNamebyID(key['country'])))
-                if key['createchannels']:
-                    _list.setItem(rowPosition, 3, QTableWidgetItem("Yes"))
-                else:
-                    _list.setItem(rowPosition, 3, QTableWidgetItem("No"))
-                if key['password']:
-                    _list.setItem(rowPosition, 4, QTableWidgetItem("Yes"))
-                else:
-                    _list.setItem(rowPosition, 4, QTableWidgetItem("No"))
-                #item.setData(Qt.UserRole, key['ip']);
+        self.requestServers(url)
 
     #def onReasonListItemChanged(self, item):
         #checked = item.checkState() == Qt.Checked
