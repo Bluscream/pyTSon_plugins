@@ -116,9 +116,7 @@ class chatBot(ts3plugin):
             if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
                 ts3lib.requestSendPrivateTextMsg(schid, msg, fromID)
             elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
-                ts3lib.requestSendChannelTextMsg(schid,
-                                                 "[url=client://]@[/url]%s: %s" % (self.clientURL(schid, fromID), msg),
-                                                 toID)
+                ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % (self.clientURL(schid, fromID), msg), toID)
 
     def clientURL(self, schid=None, clid=0, uid=None, nickname=None, encodednick=None):
         if schid == None:
