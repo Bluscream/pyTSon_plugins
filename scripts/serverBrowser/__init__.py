@@ -3,9 +3,10 @@ from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi
 from getvalues import getValues, ValueType
 from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication, QInputDialog
-from PythonQt.QtCore import Qt, QTimer
+from PythonQt.QtCore import Qt, QUrl, QTimer
+from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from datetime import datetime
-import ts3defines, os, requests, json, configparser, webbrowser, traceback, urllib.parse
+import ts3defines, os, json, configparser, webbrowser, traceback, urllib.parse
 
 
 class serverBrowser(ts3plugin):
@@ -245,8 +246,8 @@ class ServersDialog(QDialog):
         except:
             return 'Unknown ('+cid+')'
 
-    def requestCountries(self):
-        countries = requests.get(self.serverBrowser.config['GENERAL']['api']+"servercountries")
+    def onCountryListReply(self, reply):
+        countries = reply.readAll()
         self.status.setText("Response from \""+self.serverBrowser.config['GENERAL']['api']+"\": "+str(countries.status_code)+": "+countries.reason)
         palette = QPalette()
         if countries.status_code == 200:
@@ -255,7 +256,7 @@ class ServersDialog(QDialog):
         else:
             palette.setColor(QPalette.Foreground,Qt.red)
         self.status.setPalette(palette)
-        countries = countries.content.decode('utf-8')
+        countries = countries.data().decode('utf-8')
         countries = json.loads(countries)["result"]["data"]
         y= sum(x[2] for x in countries)
         #y = 0
@@ -268,9 +269,14 @@ class ServersDialog(QDialog):
             countries = sorted(countries,key=lambda x: x[1])
         self.countries = [['ALL', 'All', y]]+countries
 
-
         #__countries = __countries.__add__([['ALL', 'All', 0]])
         # ts3.printMessageToCurrentTab(str(countries))
+
+    def requestCountries(self):
+        self.nwm = QNetworkAccessManager()
+        self.nwm.connect("finished(QNetworkReply*)", self.onCountryListReply)
+        self.nwm.get(QNetworkRequest(QUrl(self.serverBrowser.config['GENERAL']['api']+"servercountries")))
+
     def listCountries(self, force=False):
         if force or self.serverBrowser.config['GENERAL']['morerequests'] == "True":
             self.requestCountries()
@@ -279,19 +285,24 @@ class ServersDialog(QDialog):
         #else:
             self.countryBox.addItems([x[1] for x in self.countries])
 
-    def requestServers(self, url):
-        if self.serverBrowser.config["GENERAL"]["debug"] == "True":
-            self.requests += 1
-            ts3.printMessageToCurrentTab("Request: "+str(self.requests))
-        servers = requests.get(url)
+    def serversReply(self, reply):
+        servers = reply.readAll()
         self.status.setText("Response from \""+self.serverBrowser.config['GENERAL']['api']+"\": "+str(servers.status_code)+": "+servers.reason)
         palette = QPalette()
         if not servers.status_code == 200:
             palette.setColor(QPalette.Foreground,Qt.red)
         self.status.setPalette(palette)
-        _servers = servers.content.decode('utf-8')
+        _servers = servers.data().decode('utf-8')
         __servers = json.loads(_servers)
         return __servers
+
+    def requestServers(self, url):
+        if self.serverBrowser.config["GENERAL"]["debug"] == "True":
+            self.requests += 1
+            ts3.printMessageToCurrentTab("Request: "+str(self.requests))
+        self.nwm = QNetworkAccessManager()
+        self.nwm.connect("finished(QNetworkReply*)", self.serversReply)
+        self.nwm.get(QNetworkRequest(QUrl(url)))
 
     def listServers(self):
         if self.cooldown:

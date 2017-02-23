@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <author>Bluscream</author>
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>serverBrowser</class>
+ <widget class="QWidget" name="serverBrowser">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -44,7 +44,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_9">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_5">
+    <layout class="QVBoxLayout" name="sdfdsgkfdgnldfg">
      <item>
       <widget class="QTableWidget" name="serverList">
        <property name="sizePolicy">
@@ -165,7 +165,7 @@
       </widget>
      </item>
      <item>
-      <spacer name="verticalSpacer_2">
+      <spacer name="dfgfhfgh">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -181,7 +181,7 @@
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <layout class="QHBoxLayout" name="dfiogbfklbngfbfg">
        <item>
         <widget class="QPushButton" name="reload">
          <property name="sizePolicy">
@@ -296,14 +296,14 @@
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_8">
+    <layout class="QVBoxLayout" name="bnlbnxklgbnklxbnklcvbnfg">
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="fnkldnbkgbnfgnghn">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <layout class="QVBoxLayout" name="dffgnbhklfgh">
          <item>
           <widget class="QLabel" name="label">
            <property name="maximumSize">
@@ -342,7 +342,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="cvbmdfmjjhmfgcnghf">
          <property name="spacing">
           <number>1</number>
          </property>
@@ -350,7 +350,7 @@
           <enum>QLayout::SetMinimumSize</enum>
          </property>
          <item>
-          <spacer name="verticalSpacer_3">
+          <spacer name="bnfkbjdfkgjdgjdfkhh">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
@@ -397,7 +397,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <layout class="QHBoxLayout" name="sdjngzhdfklghdfgjkdfg">
           <item>
            <widget class="QLabel" name="countryLabel">
             <property name="text">
@@ -438,7 +438,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QHBoxLayout" name="nvdjkfnkfbdfmbn">
           <item>
            <widget class="QCheckBox" name="maxUsers">
             <property name="text">
@@ -454,7 +454,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="dfgjdfgkgnkdflgnfdgdfg">
             <property name="text">
              <string>to</string>
             </property>
@@ -468,7 +468,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="sdfnjbjkbnbnbnbnbnbnbnbnsjkbl">
             <property name="text">
              <string>users</string>
             </property>
@@ -500,7 +500,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_5">
+         <widget class="QLabel" name="sdfjsdfhsdklfsdfsd">
           <property name="text">
            <string>to</string>
           </property>
@@ -514,7 +514,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="sdklfhsdklghkvbgk">
           <property name="text">
            <string>slots</string>
           </property>
@@ -590,7 +590,7 @@
       </widget>
      </item>
      <item>
-      <spacer name="verticalSpacer">
+      <spacer name="dfhgjklfnbgklbfgfg">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -603,7 +603,7 @@
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_8">
+      <layout class="QHBoxLayout" name="jklnvhdkbhdfbhgfgbnfg">
        <item>
         <widget class="QLabel" name="info">
          <property name="text">
