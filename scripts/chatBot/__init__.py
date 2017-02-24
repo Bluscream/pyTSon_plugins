@@ -171,8 +171,7 @@ class chatBot(ts3plugin):
             self.answerMessage(schid, targetMode, toID, fromID, format_exc())
 
     def commandTime(self, schid, targetMode, toID, fromID, params=""):
-        self.answerMessage(schid, targetMode, toID, fromID,
-                           'My current time is: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
+        self.answerMessage(schid, targetMode, toID, fromID, 'My current time is: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
 
     def commandTaskList(self, schid, targetMode, toID, fromID, params=""):
         import psutil
@@ -187,8 +186,7 @@ class chatBot(ts3plugin):
 
     def commandTogglesServerGroup(self, schid, targetMode, toID, fromID, params=""):
         returnCode = ts3lib.createReturnCode()
-        self.cmdevent = {"event": "onServerGroupListEvent", "returnCode": returnCode, "schid": schid,
-                         "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
+        self.cmdevent = {"event": "onServerGroupListEvent", "returnCode": returnCode, "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
         self.tmpsgroups = []
         (error, sgroups) = ts3lib.requestServerGroupList(schid, returnCode)
 
@@ -203,8 +201,7 @@ class chatBot(ts3plugin):
 
     def commandWhoAmI(self, schid, targetMode, toID, fromID, params=""):
         (error, displayName) = ts3lib.getClientDisplayName(schid, fromID)
-        self.answerMessage(schid, targetMode, toID, fromID,
-                           "I changed your nickname to: %s%s" % (color.ERROR, displayName))
+        self.answerMessage(schid, targetMode, toID, fromID, "I changed your nickname to: %s%s" % (color.ERROR, displayName))
 
     def commandKickMe(self, schid, targetMode, toID, fromID, params=""):
         if self.cfg.getboolean('general', 'customprefix'):
