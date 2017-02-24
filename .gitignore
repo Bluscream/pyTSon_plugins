@@ -256,3 +256,4 @@ scripts_/pip3.5-script.py
 python.png
 *.h
 include/psutil*
+scripts/pyChat/__init__.py
