@@ -112,35 +112,24 @@ class chatBot(ts3plugin):
 
     def answerMessage(self, schid, targetMode, toID, fromID, message):
         message = [message[i:i + 1024] for i in range(0, len(message), 1024)]
-        for msg in message:
-            if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
-                ts3lib.requestSendPrivateTextMsg(schid, msg, fromID)
-            elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
-                ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % (self.clientURL(schid, fromID), msg), toID)
+        if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
+            for msg in message: ts3lib.requestSendPrivateTextMsg(schid, msg, fromID)
+        elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
+            for msg in message: ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % (self.clientURL(schid, fromID), msg), toID)
 
     def clientURL(self, schid=None, clid=0, uid=None, nickname=None, encodednick=None):
         if schid == None:
-            try:
-                schid = ts3lib.getCurrentServerConnectionHandlerID()
-            except:
-                pass
+            try: schid = ts3lib.getCurrentServerConnectionHandlerID()
+            except: pass
         if uid == None:
-            try:
-                (error, uid) = ts3lib.getClientVariableAsString(schid, clid,
-                                                                ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-            except:
-                pass
+            try: (error, uid) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            except: pass
         if nickname == None:
-            try:
-                (error, nickname) = ts3lib.getClientVariableAsString(schid, clid,
-                                                                     ts3defines.ClientProperties.CLIENT_NICKNAME)
-            except:
-                nickname = uid
+            try: (error, nickname) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            except: nickname = uid
         if encodednick == None:
-            try:
-                encodednick = urlencode(nickname)
-            except:
-                pass
+            try: encodednick = urlencode(nickname)
+            except: pass
         return "[url=client://%s/%s~%s]%s[/url]" % (clid, uid, encodednick, nickname)
 
     # YOUR COMMANDS HERE:
@@ -191,11 +180,8 @@ class chatBot(ts3plugin):
         for p in psutil.process_iter():
             try:
                 _p = str(p.as_dict(attrs=['name'])['name'])
-                ts3lib.logMessage(_p, ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 if ".exe" in _p.lower(): msg.extend([_p])
-            except psutil.Error:
-                pass
-        ts3lib.logMessage(str(msg), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            except psutil.Error: pass
         msg = '\n'.join(sorted(msg))
         self.answerMessage(schid, targetMode, toID, fromID, msg)
 
