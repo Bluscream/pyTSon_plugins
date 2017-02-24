@@ -32,7 +32,7 @@ class autoSubscribe(ts3plugin):
             (error, clist) = ts3lib.getChannelList(schid)
             ts3lib.requestChannelSubscribe(schid, clist)
         except:
-            try: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
+            try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
             except:
                 try: from traceback import format_exc;ts3lib.printMessageToCurrentTab(format_exc())
                 except:
@@ -48,7 +48,7 @@ class autoSubscribe(ts3plugin):
                 if not pw: clist.remove(c)
             ts3lib.requestChannelSubscribe(schid, clist)
         except:
-            try: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
+            try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
             except:
                 try: from traceback import format_exc;ts3lib.printMessageToCurrentTab(format_exc())
                 except:

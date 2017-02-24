@@ -292,8 +292,7 @@ class chatBot(ts3plugin):
     def commandBanList(self, schid, targetMode, toID, fromID, params=""):
         # try:
         returnCode = ts3lib.createReturnCode()
-        self.cmdevent = {"event": "onBanListEvent", "returnCode": returnCode, "schid": schid, "targetMode": targetMode,
-                         "toID": toID, "fromID": fromID, "params": params}
+        self.cmdevent = {"event": "onBanListEvent", "returnCode": returnCode, "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
         self.banlist = ""
         QTimer.singleShot(2500, self.sendBanList)
         ts3lib.requestBanList(schid)
@@ -315,10 +314,8 @@ class chatBot(ts3plugin):
     def sendBanList(self):
         ts3lib.printMessageToCurrentTab("self.cmdevent = %s" % self.cmdevent)
         ts3lib.requestSendPrivateTextMsg(self.cmdevent.schid, "%s" % self.banlist, self.cmdevent.fromID)
-        self.answerMessage(self.cmdevent.schid, self.cmdevent.targetMode, self.cmdevent.toID, self.cmdevent.fromID,
-                           "%s" % self.banlist)
-        self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0,
-                         "params": ""}
+        self.answerMessage(self.cmdevent.schid, self.cmdevent.targetMode, self.cmdevent.toID, self.cmdevent.fromID, "%s" % self.banlist)
+        self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
 
     def commandMessageBox(self, schid, targetMode, toID, fromID, params=""):
 
@@ -346,6 +343,36 @@ class chatBot(ts3plugin):
         #		 self.answerMessage(schid, targetMode,toID, fromID, "Adding you to servergroup #%s failed!"%serverGroupIDs)
         #	 else: self.answerMessage(schid, targetMode, toID, fromID, "Successfully added you to the servergroup #%s"%serverGroupID)
 
+    def commandGoogle(self, schid, targetMode, toID, fromID, params=""):
+        try:
+            from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
+            from urllib.parse import quote_plus
+            googleAPI = "https://www.googleapis.com/customsearch/v1"
+            googleAPIKey = "AIzaSyDj5tgIBtdiL8pdVV_tqm7aw45jjdFP1hw"
+            googleSearchID = "008729515406769090877:33fok_ycoaa"
+            params = quote_plus(params)
+            url = "{0}?key={1}&cx={2}&q={3}".format(googleAPI, googleAPIKey, googleSearchID, params)
+            self.nwmc = QNetworkAccessManager()
+            self.nwmc.connect("finished(QNetworkReply*)", self.googleReply)
+            self.cmdevent = {"event": "", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
+            self.nwmc.get(QNetworkRequest(QUrl(url)))
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+
+    def googleReply(self, reply):
+        try:
+            import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply
+            results = json.loads(reply.readAll().data().decode('utf-8'))["items"]
+            for result in results:
+                self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "[url={0}]{1}[/url]".format(result["link"],result["title"]))
+            self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+
+    def commandFlood(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, "Flooding {0} started...".format(params))
+
+
         # COMMANDS END
 
 
@@ -367,7 +394,7 @@ class SettingsDialog(QDialog):
         self.chk_debug.setChecked(cfg.getboolean("general", "debug"))
         self.grp_prefix.setChecked(cfg.getboolean("general", "customprefix"))
         self.txt_prefix.setText(cfg.get("general", "prefix"))
-        self.loadCommands();
+        self.loadCommands()
 
     def loadCommands(self):
         self.tbl_commands.clear()
