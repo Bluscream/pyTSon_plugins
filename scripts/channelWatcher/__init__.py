@@ -5,6 +5,8 @@ try:
     # noinspection PyUnresolvedReferences
     from PythonQt.QtSql import QSqlDatabase
     import ts3defines, datetime, re
+    from configparser import ConfigParser
+    from os import path
 
     class channelWatcher(ts3plugin):
         name = "Channel Watcher"
@@ -37,12 +39,22 @@ try:
         ownchannels = []
         check = False
         reason = ""
+        ini = path.join(ts3.getPluginPath(), "pyTSon", "scripts", "channelWatcher", "settings.ini")
+        cfg = ConfigParser()
 
         def __init__(self):
+            if path.isfile(self.ini): self.cfg.read(self.ini)
+            else:
+                self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "True"}
+                self.cfg['autoban'] = {"enabled": "True"}
+                self.cfg['automod'] = {"enabled": "True", "autotp": "True"}
+                self.cfg['antirecord'] = {"enabled": "True"}
+                self.cfg['autokickonban'] = {"enabled": "True"}
+                self.cfg['groups'] = {"banned": ["BAN", "NOT WELCOME"], "mod": ["MOD", "OPERATOR"], "admin": ["ADMIN"]}
+                with open(self.ini, 'w') as configfile: self.cfg.write(configfile)
             self.db = QSqlDatabase.addDatabase("QSQLITE","channelWatcher")
             self.db.setDatabaseName(ts3.getConfigPath() + "settings.db")
-            if not self.db.isValid(): raise Exception("Database not valid")
-            if not self.db.open(): raise Exception("Database could not be opened")
+            if self.db.isValid(): self.db.open()
             ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
             if self.debug: ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
 

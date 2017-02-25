@@ -80,15 +80,10 @@ class chatBot(ts3plugin):
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentiﬁer, message, ﬀIgnored):
 
         try:
-            ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
             if ffIgnored: return False
             (error, ownID) = ts3lib.getClientID(schid)
             lasttime = int(self.lastcmd["time"])
             time = int(timestamp.time())
-            ts3lib.printMessageToCurrentTab("time: {0}".format(time))
-            ts3lib.printMessageToCurrentTab("time -5: {0}".format(time - 5))
-            ts3lib.printMessageToCurrentTab("lasttime: {0}".format(lasttime))
-            if lasttime > time - 5: ts3lib.printMessageToCurrentTab("is time -5: True")
             (error, _clid) = ts3lib.getClientID(schid)
             if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and toID != _clid: return
             # if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL and toID != _cid: return False
@@ -101,6 +96,11 @@ class chatBot(ts3plugin):
             elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general', 'customprefix'):
                 command = message.split(self.clientURL(schid, _clid), 1)[1]
             else: return False
+            ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
+            ts3lib.printMessageToCurrentTab("time: {0}".format(time))
+            ts3lib.printMessageToCurrentTab("time -5: {0}".format(time - 5))
+            ts3lib.printMessageToCurrentTab("lasttime: {0}".format(lasttime))
+            if lasttime > time - 5: ts3lib.printMessageToCurrentTab("is time -5: True")
             cmd = command.split(' ', 1)[0].lower()
             if not cmd in self.cmd.sections(): self.answerMessage(schid, targetMode, toID, fromID, "Command %s does not exist." % cmd);return False
             if not self.cmd.getboolean(cmd, "enabled"): self.answerMessage(schid, targetMode, toID, fromID, "Command %s is disabled." % cmd);return False
@@ -446,9 +446,7 @@ class SettingsDialog(QDialog):
                 self.cmd.write(configfile)
             self.loadCommands();
         except:
-            from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR,
-                "pyTSon", 0)
-
+            from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_btn_close_clicked(self):
         self.close()

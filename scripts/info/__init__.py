@@ -153,7 +153,7 @@ class info(ts3plugin):
                         flag = QInputDialog.getText(x, "Change own Avatar Flag", "Avatar File MD5:")
                         error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR, flag)
                         error2 = ts3.flushClientSelfUpdates(schid)
-                        if not error == ts3defines.ERROR_ok and error2 == ts3defines.ERROR_ok:
+                        if not error == ts3defines.ERROR_ok or not error2 == ts3defines.ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own avatar flag!");_t.show()
 
     def infoData(self, schid, id, atype):
