@@ -19,6 +19,7 @@ class joinChannel(ts3plugin):
     schid = 0
     channel = 0
     password = ""
+    cname = ""
 
     def __init__(self):
         ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
@@ -35,9 +36,9 @@ class joinChannel(ts3plugin):
                 (error, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid,ownID,channel,password)
                 return True
-            self.schid = schid;self.channel = channel;self.password = password
             (error, name) = ts3lib.getChannelVariableAsString(schid, channel, ts3defines.ChannelProperties.CHANNEL_NAME)
-            ts3lib.printMessageToCurrentTab("Queued for channel \"{0}\" [color=red]{1}[/color] clients remaining.".format(name, maxclients-clients+1))
+            self.schid = schid;self.channel = channel;self.password = password;self.cname = name
+            ts3lib.printMessageToCurrentTab("Queued for channel [url=channelid://{0}]{1}[/url] [color=red]{2}[/color] clients remaining.".format(channel, name, maxclients-clients+1))
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if self.schid == schid and self.channel == oldChannelID:
@@ -47,13 +48,13 @@ class joinChannel(ts3plugin):
             if clients < maxclients and clients < maxfamilyclients:
                 (error, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid,ownID,self.channel,self.password)
-                self.schid = 0; self.channel = 0; self.password = ""
+                self.schid = 0; self.channel = 0; self.password = "";self.name = ""
                 
     def onDelChannelEvent(self, schid, channel, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if self.schid == schid and self.channel == channel:
-            self.schid = 0;self.channel = 0
             (error, name) = ts3lib.getChannelVariableAsString(schid, channel, ts3defines.ChannelProperties.CHANNEL_NAME)
             msgBox = QMessageBox()
-            msgBox.setText("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Queue!".format(name, invokerName))
+            msgBox.setText("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Queue!".format(self.name, invokerName))
             msgBox.setIcon(QMessageBox.Warning)
             msgBox.exec()
+            self.schid = 0;self.channel = 0;self.password = "";self.name = ""
