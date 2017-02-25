@@ -2,6 +2,7 @@ import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin, PluginHost
 from os import path
 
+
 class autoSubscribe(ts3plugin):
     name = "Auto Subscribe"
     apiVersion = 21
@@ -19,13 +20,15 @@ class autoSubscribe(ts3plugin):
     debug = False
 
     def __init__(self):
-        ts3lib.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+        ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
-            if menuItemID == 0: self.subscribeAll(schid)
-            elif menuItemID == 1: self.subscribeOpen(schid)
+            if menuItemID == 0:
+                self.subscribeAll(schid)
+            elif menuItemID == 1:
+                self.subscribeOpen(schid)
 
     def subscribeAll(self, schid):
         try:
@@ -56,4 +59,14 @@ class autoSubscribe(ts3plugin):
                     except: print("Unknown Error")
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        pass#if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.subscribeAll(schid)
+        pass  # if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.subscribeAll(schid)
+
+    def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentiﬁer):
+        (error, name) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
+        (error, pw) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_PASSWORD)
+        if not pw or "pw" in name.lower() or "passwort" in name.lower() or "password" in name.lower(): ts3lib.requestChannelSubscribe(schid, [channelID])
+
+    def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer) :
+        (error, name) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
+        (error, pw) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_PASSWORD)
+        if not pw or "pw" in name.lower() or "passwort" in name.lower() or "password" in name.lower(): ts3lib.requestChannelSubscribe( schid, [channelID])
