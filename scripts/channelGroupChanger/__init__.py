@@ -106,7 +106,7 @@ class channelGroupChanger(ts3plugin):
     def setClientChannelGroup(self, selectedItemID, channelGroupID, channelGroupName):
         schid = ts3.getCurrentServerConnectionHandlerID()
         (error, dbid) = ts3.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        if len(self.channels) > 0: ts3.requestSetClientChannelGroup(schid, [channelGroupID], self.channels, [dbid])
+        if len(self.channels) > 0: ts3.requestSetClientChannelGroup(schid, [channelGroupID for _, _ in enumerate(self.channels)], self.channels, [dbid])
         else:
             (error, clid) = ts3.getClientID(schid)
             (error, cid) = ts3.getChannelOfClient(schid, clid)

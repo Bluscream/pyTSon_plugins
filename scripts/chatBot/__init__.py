@@ -69,6 +69,8 @@ class chatBot(ts3plugin):
             self.dlg.show()
             self.dlg.raise_()
             self.dlg.activateWindow()
+            if path.isfile(self.ini):
+                self.cfg.read(self.ini)
         except:
             from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR,
                                                                "PyTSon", 0)
@@ -85,37 +87,36 @@ class chatBot(ts3plugin):
             # ts3lib.printMessageToCurrentTab("%s"%str(self.clientURL(schid, _clid) in message.strip()))
             if message.startswith(self.cfg.get('general', 'prefix')) and self.cfg.getboolean('general', 'customprefix'):
                 command = message.split(self.cfg.get('general', 'prefix'), 1)[1]
-            elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general',
-                                                                                              'customprefix'):
+            elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general', 'customprefix'):
                 command = message.split(self.clientURL(schid, _clid), 1)[1]
-            else:
-                return False
+            else: return False
             cmd = command.split(' ', 1)[0].lower()
-            if not cmd in self.cmd.sections(): self.answerMessage(schid, targetMode, toID, fromID,
-                                                                  "Command %s does not exist." % cmd);return False
+            if not cmd in self.cmd.sections(): self.answerMessage(schid, targetMode, toID, fromID, "Command %s does not exist." % cmd);return False
+            if not self.cmd.getboolean(cmd, "enabled"): self.answerMessage(schid, targetMode, toID, fromID, "Command %s is disabled." % cmd);return False
             params = ""
             _params = ""
-            try:
-                _params = command.split(' ', 1)[1]
-            except:
-                pass
+            try: _params = command.split(' ', 1)[1]
+            except: pass
             if _params != "": params = _params  # ;params = bytes(_params, "utf-8").decode("unicode_escape")
             if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL: (
             error, toID) = ts3lib.getChannelOfClient(schid, _clid)
             evalstring = "self.%s(%s,%s,%s,%s,'%s')" % (
             self.cmd.get(cmd, "function"), schid, targetMode, toID, fromID, params)
-            # ts3lib.printMessageToCurrentTab(evalstring)
             eval(evalstring)
         except:
             from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR,
                                                                "PyTSon", 0)
 
-    def answerMessage(self, schid, targetMode, toID, fromID, message):
+    def answerMessage(self, schid, targetMode, toID, fromID, message, prefix=False):
         message = [message[i:i + 1024] for i in range(0, len(message), 1024)]
         if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
             for msg in message: ts3lib.requestSendPrivateTextMsg(schid, msg, fromID)
         elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
-            for msg in message: ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % (self.clientURL(schid, fromID), msg), toID)
+            if prefix:
+                for msg in message: ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % (self.clientURL(schid, fromID), msg), toID)
+            else:
+                for msg in message: ts3lib.requestSendChannelTextMsg(schid, "{0}".format(msg), toID)
+
 
     def clientURL(self, schid=None, clid=0, uid=None, nickname=None, encodednick=None):
         if schid == None:
@@ -143,11 +144,22 @@ class chatBot(ts3plugin):
             prefix = self.cfg.get('general', 'prefix')
         else:
             (error, id) = ts3lib.getClientID(schid);prefix = self.clientURL(schid, id)
-        for command in self.cmd.sections(): _cmds += prefix + str(command) + "\n"
-        self.answerMessage(schid, targetMode, toID, fromID,
-                           "Available commands for %s v%s:%s" % (self.name, self.version, _cmds))
+        for command in self.cmd.sections():
+            if self.cmd.getboolean(command, "enabled"):
+                _cmds += prefix + str(command) + "\n"
+            else:
+                _cmds += prefix + str(command) + " (Disabled)\n"
+        self.answerMessage(schid, targetMode, toID, fromID, "Available commands for %s v%s:%s" % (self.name, self.version, _cmds))
+
+    def commandToggle(self, schid, targetMode, toID, fromID, params=""):
+        (error, ownID) = ts3lib.getClientID(schid)
+        if not fromID == ownID: return
+        self.cmd.set(params, "enabled", str(not self.cmd.getboolean(params, "enabled")))
+        self.answerMessage(schid, targetMode, toID, fromID, "Set command {0} to {1}".format(params, self.cmd.getboolean(params, "enabled")))
 
     def commandEval(self, schid, targetMode, toID, fromID, params=""):
+        (error, ownID) = ts3lib.getClientID(schid)
+        if not fromID == ownID: return
         try:
             ev = eval(params)
             self.answerMessage(schid, targetMode, toID, fromID,
@@ -261,8 +273,7 @@ class chatBot(ts3plugin):
         ts3lib.stopConnection(schid, "Connecting to %s" % ip)
         ts3lib.startConnection(schid, "", ip[0], int(ip[1]), nickname, [], "", "")
 
-    def commandVersion(self, schid, targetMode, toID, fromID, params=""):
-        pass
+    def commandVersion(self, schid, targetMode, toID, fromID, params=""): pass
 
     def commandToggleRecord(self, schid, targetMode, toID, fromID, params=""):
         (error, clid) = ts3lib.getClientID(schid)
@@ -282,8 +293,7 @@ class chatBot(ts3plugin):
 
     # except:
 
-    def onBanListEvent(self, schid, banid, ip, name, uid, creationTime, durationTime, invokerName, invokercldbid,
-                       invokeruid, reason, numberOfEnforcements, lastNickName):
+    def onBanListEvent(self, schid, banid, ip, name, uid, creationTime, durationTime, invokerName, invokercldbid, invokeruid, reason, numberOfEnforcements, lastNickName):
         item = ""
         item += "#%s" % banid
         if name: item += " | Name: %s" % name
@@ -292,16 +302,13 @@ class chatBot(ts3plugin):
         if reason: item += " | Reason: %s" % reason
         self.banlist += "\n%s" % item
 
-    # ts3lib.printMessageToCurrentTab("%s"%item)
 
     def sendBanList(self):
-        ts3lib.printMessageToCurrentTab("self.cmdevent = %s" % self.cmdevent)
         ts3lib.requestSendPrivateTextMsg(self.cmdevent.schid, "%s" % self.banlist, self.cmdevent.fromID)
         self.answerMessage(self.cmdevent.schid, self.cmdevent.targetMode, self.cmdevent.toID, self.cmdevent.fromID, "%s" % self.banlist)
         self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
 
     def commandMessageBox(self, schid, targetMode, toID, fromID, params=""):
-
         msgBox = QMessageBox()
         # if params.lower().startswith("[url]"):
         # params = params.split("[URL]")[1]
@@ -403,25 +410,30 @@ class SettingsDialog(QDialog):
         self.tbl_commands.removeRow(self.tbl_commands.selectedRows()[0])
 
     def on_btn_apply_clicked(self):
-        ts3lib.printMessageToCurrentTab(str(self.grp_prefix.isChecked()))
-        self.cfg.set('general', 'enabled', str(self.chk_enabled.isChecked()))
-        self.cfg.set('general', 'debug', str(self.chk_debug.isChecked()))
-        self.cfg.set('general', 'customprefix', str(self.grp_prefix.isChecked()))
-        self.cfg.set('general', 'prefix', self.txt_prefix.text)
-        with open(self.ini, 'w') as configfile:
-            self.cfg.write(configfile)
-        for i in self.tbl_commands.rowCount():
-            try:
-                if not self.tbl_commands.item(i, 0).text() in self.cmd.sections(): self.cmd.add_section(i)
-                self.cmd.set(self.tbl_commands.item(i, 0).text(), "function", self.tbl_commands.item(i, 1).text())
-                self.cmd.set(self.tbl_commands.item(i, 0).text(), "enabled",
-                             str(self.tbl_commands.item(i, 0).isChecked()))
-            except:
-                ts3lib.logMessage("Could not add row %s to commands.ini" % i, ts3defines.LogLevel.LogLevel_INFO,
-                                  "pyTSon Chat Bot", 0)
-        with open(self.cmdini, 'w') as configfile:
-            self.cmd.write(configfile)
-        self.loadCommands();
+        try:
+            self.cfg.set('general', 'enabled', str(self.chk_enabled.isChecked()))
+            self.cfg.set('general', 'debug', str(self.chk_debug.isChecked()))
+            self.cfg.set('general', 'customprefix', str(self.grp_prefix.isChecked()))
+            self.cfg.set('general', 'prefix', self.txt_prefix.text)
+            with open(self.ini, 'w') as configfile:
+                self.cfg.write(configfile)
+            i = 0
+            while i < self.tbl_commands.rowCount:
+                try:
+                    ts3lib.printMessageToCurrentTab("{0}".format(self.tbl_commands.item(i, 0)))
+                    if not self.tbl_commands.item(i, 0).text() in self.cmd.sections(): self.cmd.add_section(i)
+                    self.cmd.set(self.tbl_commands.item(i, 0).text(), "function", self.tbl_commands.item(i, 1).text())
+                    self.cmd.set(self.tbl_commands.item(i, 0).text(), "enabled", str(self.tbl_commands.item(i, 0).checkState() == Qt.Checked))
+                except:
+                    from traceback import format_exc;ts3lib.logMessage("Could not add row {0} to commands.ini\n{1}".format(i, format_exc()), ts3defines.LogLevel.LogLevel_INFO, "pyTSon Chat Bot", 0)
+                i += 1
+            with open(self.cmdini, 'w') as configfile:
+                self.cmd.write(configfile)
+            self.loadCommands();
+        except:
+            from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR,
+                "pyTSon", 0)
+
 
     def on_btn_close_clicked(self):
         self.close()
