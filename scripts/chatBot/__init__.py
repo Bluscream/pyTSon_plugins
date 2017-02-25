@@ -107,15 +107,15 @@ class chatBot(ts3plugin):
             from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR,
                                                                "PyTSon", 0)
 
-    def answerMessage(self, schid, targetMode, toID, fromID, message, prefix=False):
+    def answerMessage(self, schid, targetMode, toID, fromID, message, hideprefix=False):
         message = [message[i:i + 1024] for i in range(0, len(message), 1024)]
         if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
             for msg in message: ts3lib.requestSendPrivateTextMsg(schid, msg, fromID)
         elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
-            if prefix:
-                for msg in message: ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % (self.clientURL(schid, fromID), msg), toID)
-            else:
+            if hideprefix:
                 for msg in message: ts3lib.requestSendChannelTextMsg(schid, "{0}".format(msg), toID)
+            else:
+                for msg in message: ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % ( self.clientURL(schid, fromID), msg), toID)
 
 
     def clientURL(self, schid=None, clid=0, uid=None, nickname=None, encodednick=None):
@@ -149,7 +149,7 @@ class chatBot(ts3plugin):
                 _cmds += prefix + str(command) + "\n"
             else:
                 _cmds += prefix + str(command) + " (Disabled)\n"
-        self.answerMessage(schid, targetMode, toID, fromID, "Available commands for %s v%s:%s" % (self.name, self.version, _cmds))
+        self.answerMessage(schid, targetMode, toID, fromID, "Available commands for %s v%s:%s" % (self.name, self.version, _cmds), True)
 
     def commandToggle(self, schid, targetMode, toID, fromID, params=""):
         (error, ownID) = ts3lib.getClientID(schid)
