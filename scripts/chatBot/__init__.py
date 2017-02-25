@@ -6,6 +6,7 @@ from PythonQt.QtGui import *
 from pytsonui import setupUi
 from ts3plugin import ts3plugin
 import datetime, ts3defines, ts3lib, sys, os
+import time as timestamp
 
 
 class color(object):
@@ -40,6 +41,7 @@ class chatBot(ts3plugin):
     dlg = None
     color = []
     cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
+    lastcmd = {"cmd": "", "params": "", "time": 0, "user": 0}
 
     def __init__(self):
         if path.isfile(self.ini):
@@ -76,10 +78,19 @@ class chatBot(ts3plugin):
                                                                "PyTSon", 0)
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentiﬁer, message, ﬀIgnored):
+
         try:
+            ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
             if ffIgnored: return False
+            (error, ownID) = ts3lib.getClientID(schid)
+            lasttime = int(self.lastcmd["time"])
+            time = int(timestamp.time())
+            ts3lib.printMessageToCurrentTab("time: {0}".format(time))
+            ts3lib.printMessageToCurrentTab("time -5: {0}".format(time - 5))
+            ts3lib.printMessageToCurrentTab("lasttime: {0}".format(lasttime))
+            if lasttime > time - 5: ts3lib.printMessageToCurrentTab("is time -5: True")
             (error, _clid) = ts3lib.getClientID(schid)
-            if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and toID != _clid: return False
+            if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and toID != _clid: return
             # if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL and toID != _cid: return False
             # ts3lib.printMessageToCurrentTab(self.clientURL(schid, _clid))
             # ts3lib.printMessageToCurrentTab(message)
@@ -98,14 +109,15 @@ class chatBot(ts3plugin):
             try: _params = command.split(' ', 1)[1]
             except: pass
             if _params != "": params = _params  # ;params = bytes(_params, "utf-8").decode("unicode_escape")
+            self.lastcmd = {"cmd": cmd, "params": params, "time": int(timestamp.time()), "user": fromID}
+            ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
             if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL: (
             error, toID) = ts3lib.getChannelOfClient(schid, _clid)
             evalstring = "self.%s(%s,%s,%s,%s,'%s')" % (
             self.cmd.get(cmd, "function"), schid, targetMode, toID, fromID, params)
             eval(evalstring)
         except:
-            from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR,
-                                                               "PyTSon", 0)
+            from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def answerMessage(self, schid, targetMode, toID, fromID, message, hideprefix=False):
         message = [message[i:i + 1024] for i in range(0, len(message), 1024)]
@@ -162,8 +174,7 @@ class chatBot(ts3plugin):
         if not fromID == ownID: return
         try:
             ev = eval(params)
-            self.answerMessage(schid, targetMode, toID, fromID,
-                               "%s%s evalualated successfully: %s" % (color.SUCCESS, params, ev))
+            self.answerMessage(schid, targetMode, toID, fromID, "Evalualated {0}successfully{1}:\n{2}".format(color.SUCCESS, color.ENDMARKER, ev))
         except TypeError as e:
             if e.strerror == "eval() arg 1 must be a string, bytes or code object":
                 self.answerMessage(schid, targetMode, toID, fromID,
@@ -361,6 +372,10 @@ class chatBot(ts3plugin):
 
     def commandFlood(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, "Flooding {0} started...".format(params))
+
+    def commandFindMe(self, schid, targetMode, toID, fromID, params=""):
+        (error, ownID) = ts3lib.getClientID(schid)
+        if not fromID == ownID: self.answerMessage(schid, targetMode, toID, fromID, "Insufficient permissions to run this command");return
 
 
         # COMMANDS END
