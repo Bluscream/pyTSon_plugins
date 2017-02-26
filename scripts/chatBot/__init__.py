@@ -32,7 +32,7 @@ class chatBot(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    debug = False
+    debug = True
     ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "settings.ini")
     cfg = ConfigParser()
     cmdini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "commands.ini")
@@ -189,9 +189,7 @@ class chatBot(ts3plugin):
             else:
                 from traceback import format_exc;
                 self.answerMessage(schid, targetMode, toID, fromID, format_exc())
-        except:
-            from traceback import format_exc;
-            self.answerMessage(schid, targetMode, toID, fromID, format_exc())
+        except: from traceback import format_exc; self.answerMessage(schid, targetMode, toID, fromID, format_exc())
 
     def commandTime(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, 'My current time is: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
@@ -207,11 +205,41 @@ class chatBot(ts3plugin):
         msg = '\n'.join(sorted(msg))
         self.answerMessage(schid, targetMode, toID, fromID, msg)
 
-    def commandTogglesServerGroup(self, schid, targetMode, toID, fromID, params=""):
-        returnCode = ts3lib.createReturnCode()
-        self.cmdevent = {"event": "onServerGroupListEvent", "returnCode": returnCode, "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
+    def commandToggleServerGroup(self, schid, targetMode, toID, fromID, params=""):
+        #returnCode = ts3lib.createReturnCode()
+        self.cmdevent = {"event": "onServerGroupListEvent", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
         self.tmpsgroups = []
-        (error, sgroups) = ts3lib.requestServerGroupList(schid, returnCode)
+        ts3lib.requestServerGroupList(schid)
+
+    def onServerGroupListEvent(self, schid, serverGroupID, name, atype, iconID, saveDB):
+        try:
+            if self.debug: ts3lib.printMessageToCurrentTab("self.cmdevent.event: {0}".format(self.cmdevent["event"]))
+            if not self.cmdevent["event"] == "onServerGroupListEvent": return
+            #if not self.cmdevent.returnCode == "": return
+            self.tmpsgroups.add({"sgid": serverGroupID, "name": name})
+            if self.debug: ts3lib.printMessageToCurrentTab("sgid:{0} | name:{1}".format(serverGroupID, name))
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+
+    def onServerGroupListFinishedEvent(self, schid):
+        if self.debug: ts3lib.printMessageToCurrentTab("cmdevent: {0}".format(self.cmdevent))
+        try:
+            if self.debug: ts3lib.printMessageToCurrentTab("{0}".format(self.tmpsgroups))
+            serverGroupID = self.cmdevent["params"]
+            (error, dbid) = ts3lib.getClientVariableAsInt(schid, self.cmdevent["fromID"], ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+            (error, sgroups) = ts3lib.getClientVariableAsString(schid, self.cmdevent["fromID"], ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+            sgroups = sgroups.split(",")
+            if self.debug: ts3lib.printMessageToCurrentTab("sgroups: {0}".format(multiple))
+            if str(serverGroupID) in sgroups:
+                error = ts3lib.requestServerGroupAddClient(schid, int(self.cmdevent["params"]), dbid)
+            else:
+                error = ts3lib.requestServerGroupDelClient(schid, int(self.cmdevent["params"]), dbid)
+
+            if not error == ts3defines.ERROR_ok:
+                self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Set Servergroup #%s failed!"%serverGroupID)
+            else:
+                self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Successfully set servergroup #%s"%serverGroupID)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+        self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
 
     def commandSay(self, schid, targetMode, toID, fromID, params=""):
         if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
@@ -330,20 +358,6 @@ class chatBot(ts3plugin):
         msgBox.setIcon(QMessageBox.Warning)
         msgBox.exec()
 
-        # def onServerGroupListEvent(self, schid, serverGroupID, name, atype, iconID, saveDB):
-        #	 if not self.cmdevent.event == "onServerGroupListEvent": return
-        #	 #if not self.cmdevent.returnCode == "": return
-        #	 self.tmpsgroups.add({"sgid": serverGroupID, "name": name})
-        #
-        # def onServerGroupListFinishedEvent(self, schid):
-        #	 return
-        #	 serverGroupID = self.cmdevent.params
-        #	 (error, dbid) = ts3lib.getClientVariableAsInt(schid, self.cmdevent.fromID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        #	 error = ts3lib.requestServerGroupAddClient(schid, self.cmdevent.serverGroupID, dbid)
-        #	 if not error == ts3defines.ERROR_ok:
-        #		 self.answerMessage(schid, targetMode,toID, fromID, "Adding you to servergroup #%s failed!"%serverGroupIDs)
-        #	 else: self.answerMessage(schid, targetMode, toID, fromID, "Successfully added you to the servergroup #%s"%serverGroupID)
-
     def commandGoogle(self, schid, targetMode, toID, fromID, params=""):
         try:
             from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
@@ -378,7 +392,7 @@ class chatBot(ts3plugin):
         if not fromID == ownID: self.answerMessage(schid, targetMode, toID, fromID, "Insufficient permissions to run this command");return
 
 
-        # COMMANDS END
+    # COMMANDS END
 
 
 class SettingsDialog(QDialog):
@@ -388,6 +402,7 @@ class SettingsDialog(QDialog):
         self.cmdini = cmdini
         self.cmd = cmd
         super(QDialog, self).__init__(parent)
+        self.setAttribute(Qt.WA_DeleteOnClose)
         setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "settings.ui"))
         self.setWindowTitle("Chat Bot Settings")
         # header = self.tbl_commands.horizontalHeader()

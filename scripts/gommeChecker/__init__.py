@@ -1,7 +1,8 @@
 import ts3lib, ts3defines, datetime
-from ts3plugin import ts3plugin, PluginHost
+from ts3plugin import ts3plugin
 from os import path
-
+from PythonQt.QtGui import QDialog
+from pytsonui import setupUi
 
 class gommeChecker(ts3plugin):
     name = "Gomme Checker"
