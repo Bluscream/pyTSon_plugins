@@ -15,18 +15,28 @@ class gommeChecker(ts3plugin):
     commandKeyword = ""
     infoTitle = None
     iconPath = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "gommeChecker", "icons")
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Check all Channels", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Check all Channels", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Open Support", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Close Support", "")]
     hotkeys = []
     debug = False
+    supchans = []
 
     def __init__(self):
+        (error, clist) = ts3lib.getChannelList(schid)
+        for c in clist:
+            (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
+            if permanent:
+                (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
+                if name.startswith("Support "):
+                    pass
         ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
-            self.dlg = CheckerDialog(self)
-            self.dlg.show()
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+            if menuItemID == 0:
+                self.dlg = CheckerDialog(self)
+                self.dlg.show()
+            elif menuItemID == 1: pass
 
 class CheckerDialog(QDialog):
     def buhl(self, s):

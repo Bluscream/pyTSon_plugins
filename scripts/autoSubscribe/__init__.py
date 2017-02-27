@@ -1,5 +1,5 @@
 import ts3lib, ts3defines, datetime
-from ts3plugin import ts3plugin, PluginHost
+from ts3plugin import ts3plugin
 from os import path
 
 
@@ -21,6 +21,10 @@ class autoSubscribe(ts3plugin):
     debug = False
     passwords = ["pw", "password", "passwort"]
     blacklist = [".fm", "radio", "music", "musik"]
+    onlyOpen = False
+    subAll = [""]
+    subOpen = ["QTRtPmYiSKpMS8Oyd4hyztcvLqU="]
+    subNone = [""]
 
     def __init__(self):
         ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
@@ -75,6 +79,7 @@ class autoSubscribe(ts3plugin):
                 (error, semiperm) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
                 (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
                 if not pw and not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist): ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
+            self.onlyOpen = True
             # ts3lib.requestChannelSubscribe(schid, clist)
         except:
             try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
@@ -84,11 +89,20 @@ class autoSubscribe(ts3plugin):
                     try: from traceback import format_exc;print(format_exc())
                     except: print("Unknown Error")
 
-    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber): pass  # if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.subscribeAll(schid)
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            (error, uid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+            if uid in self.subAll: self.subscribeAll(schid)
+            elif uid in self.subNone: self.unsubscribeAll(schid)
+            elif uid in self.subOpen: self.subscribeOpen(schid)
 
-    def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentiﬁer): self.subscribe(schid, channelID)
+    def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentiﬁer):
+        if not self.subscribeOpen: return False
+        self.subscribe(schid, channelID)
 
-    def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer): self.subscribe(schid, channelID)
+    def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer):
+        if not self.subscribeOpen: return False
+        self.subscribe(schid, channelID)
 
     def subscribe(self, schid, channelID):
         (error, name) = ts3lib.getChannelVariableAsString(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
