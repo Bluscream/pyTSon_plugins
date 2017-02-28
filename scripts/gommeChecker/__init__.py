@@ -1,5 +1,6 @@
 import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin
+from configparser import ConfigParser
 from os import path
 from PythonQt.QtGui import QDialog
 from pytsonui import setupUi
@@ -17,19 +18,20 @@ class gommeChecker(ts3plugin):
     iconPath = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "gommeChecker", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Check all Channels", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Open Support", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Close Support", "")]
     hotkeys = []
-    debug = False
+    ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "gommeChecker", "settings.ini")
+    cfg = ConfigParser()
     supchans = []
+    supmain = 0
 
     def __init__(self):
-        (error, clist) = ts3lib.getChannelList(schid)
-        for c in clist:
-            (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
-            if permanent:
-                (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
-                if name.startswith("Support "):
-                    pass
+        if path.isfile(self.ini):
+            self.cfg.read(self.ini)
+        else:
+            self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "False", "uid": "QTRtPmYiSKpMS8Oyd4hyztcvLqU="}
+            with open(self.ini, 'w') as configfile:
+                self.cfg.write(configfile)
         ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
+        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
@@ -37,6 +39,22 @@ class gommeChecker(ts3plugin):
                 self.dlg = CheckerDialog(self)
                 self.dlg.show()
             elif menuItemID == 1: pass
+
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            (error, uid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+            if uid == self.cfg.get("general", "uid"):
+                (error, clist) = ts3lib.getChannelList(schid)
+                for c in clist:
+                    (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
+                    if permanent:
+                        (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
+                        if name.startswith("Support "):
+                            self.supchans.extend(c)
+                        elif name.startswith("[cspacer10]● Support"):
+                            self.supmain = c
+                self.cfg.set("general", "enabled", "True")
+            else: self.cfg.set("general", "enabled", "False")
 
 class CheckerDialog(QDialog):
     def buhl(self, s):
@@ -51,20 +69,20 @@ class CheckerDialog(QDialog):
         self.gommeChecker=gommeChecker
         super(QDialog, self).__init__(parent)
         self.setAttribute(Qt.WA_DeleteOnClose)
-        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "gommeChecker", "check.ui"))
+        setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "gommeChecker", "check.ui"))
         self.setWindowTitle("Gomme Checker")
         self.checktable.setColumnWidth(2, 350)
         self.checkChannels()
 
     def checkChannels(self):
         self.checktable.clear()
-        self.checktable.setRowCount(len(self.cmd.sections()))
+        self.checktable.setRowCount(len(self.gommeChecker.cfg.sections()))
         row = 0
         for i in self.cmd.sections():
             item = QTableWidgetItem(i)
             kitem = QTableWidgetItem(self.cmd[i]["function"])
             item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled | Qt.ItemIsEditable)
-            item.setCheckState(Qt.Checked if self.cmd.getboolean(i, "enabled") else Qt.Unchecked)
+            item.setCheckState(Qt.Checked if self.cmd.gommeChecker.cfg.getboolean(i, "enabled") else Qt.Unchecked)
             self.checktable.setItem(row, 1, kitem)
             self.checktable.setItem(row, 0, item)
             row += 1
