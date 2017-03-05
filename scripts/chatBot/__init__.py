@@ -8,7 +8,6 @@ from ts3plugin import ts3plugin
 import datetime, ts3defines, ts3lib, sys, os
 import time as timestamp
 
-
 class color(object):
     DEFAULT = "[color=white]"
     DEBUG = "[color=grey]"
@@ -18,7 +17,6 @@ class color(object):
     ERROR = "[color=red]"
     FATAL = "[color=darkred]"
     ENDMARKER = "[/color]"
-
 
 class chatBot(ts3plugin):
     name = "Chat Bot"

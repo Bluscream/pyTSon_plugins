@@ -109,16 +109,19 @@ class autoSubscribe(ts3plugin):
         (error, pw) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
         (error, subscribed) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_ARE_SUBSCRIBED)
         (error, codec) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_CODEC)
-        if self.debug: ts3lib.printMessageToCurrentTab("not pw: {0}".format(not pw))
-        if self.debug: ts3lib.printMessageToCurrentTab("any(x in name.lower() for x in self.passwords): {0}".format(any(x in name.lower() for x in self.passwords)))
-        if self.debug: ts3lib.printMessageToCurrentTab("not any(x in name.lower() for x in self.blacklist): {0}".format(not any(x in name.lower() for x in self.blacklist)))
-        if self.debug: ts3lib.printMessageToCurrentTab("not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC: {0}".format(not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC))
+        #if self.debug: ts3lib.printMessageToCurrentTab("not pw: {0}".format(not pw))
+        #if self.debug: ts3lib.printMessageToCurrentTab("any(x in name.lower() for x in self.passwords): {0}".format(any(x in name.lower() for x in self.passwords)))
+        #if self.debug: ts3lib.printMessageToCurrentTab("not any(x in name.lower() for x in self.blacklist): {0}".format(not any(x in name.lower() for x in self.blacklist)))
+        #if self.debug: ts3lib.printMessageToCurrentTab("not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC: {0}".format(not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC))
         if pw and any(x in name.lower() for x in self.passwords):
-            if not subscribed: ts3lib.requestChannelSubscribe(schid, [channelID])
-            if self.debug: ts3lib.printMessageToCurrentTab("Has PW in name: {0}".format(pw and any(x in name.lower() for x in self.passwords)))
+            if not subscribed:
+                ts3lib.requestChannelSubscribe(schid, [channelID])
+                if self.debug: ts3lib.printMessageToCurrentTab("Has PW in name: {0}".format(pw and any(x in name.lower() for x in self.passwords)))
         elif not pw and not any(x in name.lower() for x in self.blacklist) and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC:
-            if not subscribed: ts3lib.requestChannelSubscribe(schid, [channelID])
-            if self.debug: ts3lib.printMessageToCurrentTab( "no pw, no bl, no music: {0}".format(not pw and not any(x in name.lower() for x in self.blacklist) and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC))
+            if not subscribed:
+                ts3lib.requestChannelSubscribe(schid, [channelID])
+                if self.debug: ts3lib.printMessageToCurrentTab( "no pw, no bl, no music: {0}".format(not pw and not any(x in name.lower() for x in self.blacklist) and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC))
         elif (pw and not any(x in name.lower() for x in self.passwords)) or any(x in name.lower() for x in self.blacklist) or codec == ts3defines.CodecType.CODEC_OPUS_MUSIC:
-            if subscribed: ts3lib.requestChannelUnsubscribe(schid, [channelID])
-            if self.debug: ts3lib.printMessageToCurrentTab("unsubbed: {0}".format((pw and not any(x in name.lower() for x in self.passwords)) or any(x in name.lower() for x in self.blacklist) or codec == ts3defines.CodecType.CODEC_OPUS_MUSIC))
+            if subscribed:
+                ts3lib.requestChannelUnsubscribe(schid, [channelID])
+                if self.debug: ts3lib.printMessageToCurrentTab("unsubbed: {0}".format((pw and not any(x in name.lower() for x in self.passwords)) or any(x in name.lower() for x in self.blacklist) or codec == ts3defines.CodecType.CODEC_OPUS_MUSIC))

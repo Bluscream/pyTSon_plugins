@@ -3,6 +3,7 @@ from ts3plugin import ts3plugin
 from configparser import ConfigParser
 from os import path
 from PythonQt.QtGui import QDialog
+from PythonQt.QtCore import Qt
 from pytsonui import setupUi
 
 class gommeChecker(ts3plugin):

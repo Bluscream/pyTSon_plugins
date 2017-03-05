@@ -250,7 +250,7 @@ try:
                         ts3.requestSetClientChannelGroup(_schid, [self.smgroup for _, _ in enumerate(self.ownchannels)], self.ownchannels, [clientDatabaseID])
                         ts3.printMessageToCurrentTab("[color=green]Gave Client "+self.clientURL(serverConnectionHandlerID, None, uniqueClientIdentifier)+" Channel Mod in #"+str(self.ownchannels)+"[/color]")
                     elif _cid == 1 and self.autoBan:
-                        ts3.requestSetClientChannelGroup(_schid, [self.smgroup for _, _ in enumerate(self.ownchannels)], self.ownchannels, [clientDatabaseID])
+                        ts3.requestSetClientChannelGroup(_schid, [self.sbgroup for _, _ in enumerate(self.ownchannels)], self.ownchannels, [clientDatabaseID])
                         ts3.printMessageToCurrentTab("[color=red]Banned Client "+self.clientURL(serverConnectionHandlerID, None, uniqueClientIdentifier)+" from Channels #"+str(self.ownchannels)+"[/color]")
 
         def onUpdateClientEvent(self, serverConnectionHandlerID, clientID, invokerID, invokerName, invokerUniqueIdentifier):

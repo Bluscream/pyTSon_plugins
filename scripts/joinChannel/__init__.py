@@ -30,8 +30,8 @@ class joinChannel(ts3plugin):
             x = QWidget()
             password = QInputDialog.getText(x, "Enter Channel Password", "Password:")
             (error, clients) = ts3lib.getChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-            (error, maxclients) = ts3lib.getChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-            (error, maxfamilyclients) = ts3lib.getChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+            (error, maxclients) = ts3lib.getChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+            (error, maxfamilyclients) = ts3lib.getChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
             if clients < maxclients and clients < maxfamilyclients:
                 (error, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid,ownID,channel,password)
@@ -43,8 +43,8 @@ class joinChannel(ts3plugin):
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if self.schid == schid and self.channel == oldChannelID:
             (error, clients) = ts3lib.getChannelVariableAsInt(schid, self.channel, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-            (error, maxclients) = ts3lib.getChannelVariableAsInt(schid, self.channel, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-            (error, maxfamilyclients) = ts3lib.getChannelVariableAsInt(schid, self.channel, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+            (error, maxclients) = ts3lib.getChannelVariableAsInt(schid, self.channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+            (error, maxfamilyclients) = ts3lib.getChannelVariableAsInt(schid, self.channel, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
             if clients < maxclients and clients < maxfamilyclients:
                 (error, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid,ownID,self.channel,self.password)
