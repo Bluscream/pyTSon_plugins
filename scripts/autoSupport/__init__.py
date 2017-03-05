@@ -31,7 +31,9 @@ class autoSupport(ts3plugin):
     supchanmain = 368144 # » Support | Warteraum
     supchans = [355971,355972,355972]
     supbot = "Z1OUM2IvRvIpdmKIyFV3tZQXkq4=" # bergwerkLABS | Support
-    insupport = False
+    insupport = 0
+    cursupchan = 0
+    oldchan = 0
 
     def __init__(self):
         ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
@@ -62,18 +64,34 @@ class autoSupport(ts3plugin):
             if uid == self.supserver: self.toggle(True)
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentiﬁer, moveMessage):
-        if not self.insupport and moverUniqueIdentiﬁer == self.supbot and newChannelID == self.supchanmain:
+        (error, ownid) = ts3lib.getClientID(schid)
+        if self.insupport == 0 and moverUniqueIdentiﬁer == self.supbot and newChannelID == self.supchanmain:
             for c in self.supchans:
                 (error, clients) = ts3lib.getChannelClientList(schid, c)
                 if len(clients) > 0: continue
                 else:
                     ts3lib.requestClientMove(schid, clientID, c, "")
-                    (error, ownid) = ts3lib.getClientID(schid)
+                    (error, ownchan) = ts3lib.getChannelOfClient(schid, ownid)
                     ts3lib.requestClientMove(schid, ownid, c, "")
-                    self.insupport = True
+                    self.insupport = clientID;self.cursupchan = c;self.oldchan = ownchan
                     if self.debug: ts3lib.printMessageToCurrentTab("Now in support with client #{0} in channel #{1}".format(clientID, c))
                     return
             ts3lib.printMessageToCurrentTab("No free support channel found for client #{0}! Please try manually.".format(clientID))
+        elif self.insupport == clientID and oldChannelID == self.cursupchan and moverID == ownid:
+            ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
+            if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
+            self.insupport == 0;self.cursupchan == 0;self.oldchan = 0
 
-    def onClientMoveEvent(self, serverConnectionHandlerID, clientID, oldChannelID, newChannelID, visibility, moveMessage):
-        pass
+    def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
+        if clientID == self.insupport and oldChannelID == self.cursupchan and oldChannelID == self.cursupchan:
+            (error, ownid) = ts3lib.getClientID(schid)
+            ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
+            if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
+            self.insupport == 0;self.cursupchan == 0;self.oldchan = 0
+
+    def onClientKickFromChannelEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentiﬁer, kickMessage):
+        (error, ownid) = ts3lib.getClientID(schid)
+        if self.insupport == clientID and oldChannelID == self.cursupchan and kickerID == ownid:
+            ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
+            if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
+            self.insupport == 0;self.cursupchan == 0;self.oldchan = 0
