@@ -49,11 +49,28 @@ class autoSupport(ts3plugin):
         if keyword == "autosupport": self.toggle()
 
     def processCommand(self, schid, command):
-        cmd = command.lower().split(" ")[0]
+        command = command.lower().split(" ")
+        cmd = command[0]
+        params = command[1]
         if cmd == "toggle":  self.toggle();return True
         elif cmd == "on": self.toggle(True);return True
-        elif cmd == "off":self.toggle(False);return True
-        elif cmd == "stop":self.stopsup(schid);return True
+        elif cmd == "off": self.toggle(False);return True
+        elif cmd == "stop": self.stopsup(schid);return True
+        elif cmd == "start":
+            for c in self.supchans:
+                (error, clients) = ts3lib.getChannelClientList(schid, c)
+                if len(clients) > 0: continue
+                else:
+                    (error, ownid) = ts3lib.getClientID(schid)
+                    (error, ownchan) = ts3lib.getChannelOfClient(schid, ownid)
+                    ts3lib.requestClientMove(schid, params, c, "")
+                    ts3lib.requestClientMove(schid, ownid, c, "")
+                    (error, muted) = ts3lib.getClientVariableAsInt(schid, ownid, ts3defines.ClientProperties.CLIENT_OUTPUT_MUTED)
+                    self.wasmuted = muted
+                    ts3lib.setClientSelfVariableAsInt(schid, ts3defines.ClientProperties.CLIENT_OUTPUT_MUTED, 0)
+                    self.insupport = params;self.cursupchan = c;self.oldchan = ownchan
+                    if self.debug: ts3lib.printMessageToCurrentTab("Now in forced support with client #{0} in channel #{1}".format(params, c))
+                    return True
 
     def toggle(self, state=None):
         if state: self.enabled = True
