@@ -40,8 +40,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.34541336" vertical-offset="1021" max-vertical-offset="2108">
-              <caret line="78" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="118" selection-end-column="188" />
+            <state vertical-scroll-proportion="0.3272933" vertical-offset="204" max-vertical-offset="2091">
+              <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -1123,8 +1123,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34541336" vertical-offset="1021" max-vertical-offset="2108">
-          <caret line="78" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="118" selection-end-column="188" />
+        <state vertical-scroll-proportion="0.3272933" vertical-offset="204" max-vertical-offset="2091">
+          <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

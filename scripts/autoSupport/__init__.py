@@ -1,6 +1,5 @@
 import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin
-from os import path
 
 class color(object):
     DEFAULT = "[color=white]"
