@@ -257,3 +257,4 @@ python.png
 *.h
 include/psutil*
 scripts/pyChat/__init__.py
+.idea/workspace.xml
