@@ -76,7 +76,6 @@ class chatBot(ts3plugin):
                                                                "PyTSon", 0)
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentiﬁer, message, ﬀIgnored):
-
         try:
             if ffIgnored: return False
             (error, ownID) = ts3lib.getClientID(schid)
@@ -104,7 +103,7 @@ class chatBot(ts3plugin):
             if not self.cmd.getboolean(cmd, "enabled"): self.answerMessage(schid, targetMode, toID, fromID, "Command %s is disabled." % cmd);return False
             params = ""
             _params = ""
-            try: _params = command.split(' ', 1)[1]
+            try: _params = command.split(' ', 1)[1].strip()
             except: pass
             if _params != "": params = _params  # ;params = bytes(_params, "utf-8").decode("unicode_escape")
             self.lastcmd = {"cmd": cmd, "params": params, "time": int(timestamp.time()), "user": fromID}
@@ -258,10 +257,8 @@ class chatBot(ts3plugin):
         else:
             (error, id) = ts3lib.getClientID(schid);prefix = self.clientURL(schid, id)
         (error, nickname) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        if params != "":
-            ts3lib.requestClientKickFromServer(schid, fromID, params)
-        else:
-            ts3lib.requestClientKickFromServer(schid, fromID, "Command %skickme used by %s" % (prefix, nickname))
+        if params != "": ts3lib.requestClientKickFromServer(schid, fromID, params)
+        else: ts3lib.requestClientKickFromServer(schid, fromID, "Command %skickme used by %s" % (prefix, nickname))
 
     def commandBanMe(self, schid, targetMode, toID, fromID, params=""):
         if self.cfg.getboolean('general', 'customprefix'):
@@ -272,24 +269,16 @@ class chatBot(ts3plugin):
         if params != "": _params = params.split(' ', 1)
         delay = 1;
         delay = _params[0]
-        if len(_params) > 1:
-            ts3lib.banclient(schid, fromID, int(delay), _params[1])
-        else:
-            ts3lib.banclient(schid, fromID, int(delay), "Command %sbanme used by %s" % (prefix, nickname))
+        if len(_params) > 1: ts3lib.banclient(schid, fromID, int(delay), _params[1])
+        else: ts3lib.banclient(schid, fromID, int(delay), "Command %sbanme used by %s" % (prefix, nickname))
 
     def commandQuit(self, schid, targetMode, toID, fromID, params=""):
-        try:
-            import sys;sys.exit()
-        except:
-            pass
-        try:
-            QApplication.quit()
-        except:
-            pass
-        try:
-            QCoreApplication.instance().quit()
-        except:
-            pass
+        try: import sys;sys.exit()
+        except: pass
+        try: QApplication.quit()
+        except: pass
+        try: QCoreApplication.instance().quit()
+        except: pass
 
     def commandDisconnect(self, schid, targetMode, toID, fromID, params=""):
         if self.cfg.getboolean('general', 'customprefix'):
@@ -381,7 +370,6 @@ class chatBot(ts3plugin):
             self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-
     def commandFlood(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, "Flooding {0} started...".format(params))
 
@@ -390,6 +378,32 @@ class chatBot(ts3plugin):
         if not fromID == ownID: self.answerMessage(schid, targetMode, toID, fromID, "Insufficient permissions to run this command");return
 
 
+    def commandLookup(self, schid, targetMode, toID, fromID, params=""):
+        try:
+            from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
+            from urllib.parse import quote_plus
+            lookupAPI = "https://api.opencnam.com/v3/phone/"
+            lookupSID = "ACda22b69608b743328772059d32b63f26"
+            lookupAuthToken = "AUc9d9217f20194053bf2989c7cb75a368"
+            if params.startswith("00"): params = params.replace("00", "+", 1)
+            params = quote_plus(params)
+            url = "{0}{1}?format=json&casing=title&service_level=plus&geo=rate&account_sid={2}&auth_token={3}".format(lookupAPI, params, lookupSID, lookupAuthToken)
+            if self.debug: ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
+            self.nwmc = QNetworkAccessManager()
+            self.nwmc.connect("finished(QNetworkReply*)", self.lookupReply)
+            self.cmdevent = {"event": "", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
+            self.nwmc.get(QNetworkRequest(QUrl(url)))
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def lookupReply(self, reply):
+        try:
+            import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply
+            result = json.loads(reply.readAll().data().decode('utf-8'))
+            if self.debug: ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
+            try: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "{0}: {1} ({2}$/min)".format(result["number"],result["name"],result["price"]), True)
+            except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "{0}{1}{2} ({3})".format(color.ERROR, result["err"], color.ENDMARKER,self.cmdevent["params"]))
+            self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
     # COMMANDS END
 
 
