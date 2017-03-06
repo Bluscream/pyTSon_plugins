@@ -42,7 +42,7 @@ class autoSupport(ts3plugin):
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 0: self.toggle()
-            elif menuItemID == 1: self.stop(schid)
+            elif menuItemID == 1: self.stopsup(schid)
 
     def onHotkeyEvent(self, keyword):
         if keyword == "autosupport": self.toggle()
@@ -52,7 +52,7 @@ class autoSupport(ts3plugin):
         if cmd == "toggle":  self.toggle();return True
         elif cmd == "on": self.toggle(True);return True
         elif cmd == "off":self.toggle(False);return True
-        elif cmd == "stop":self.stop(schid);return True
+        elif cmd == "stop":self.stopsup(schid);return True
 
     def toggle(self, state=None):
         if state: self.enabled = True
@@ -61,7 +61,7 @@ class autoSupport(ts3plugin):
         if self.enabled: ts3lib.printMessageToCurrentTab("{0} {1}enabled{2}.".format(self.name, color.SUCCESS, color.ENDMARKER));return True
         else: ts3lib.printMessageToCurrentTab("{0} {1}disabled{2}.".format(self.name, color.ERROR, color.ENDMARKER)); return False
 
-    def stop(self, schid):
+    def stopsup(self, schid=1):
         (error, ownid) = ts3lib.getClientID(schid)
         ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
         if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
@@ -89,7 +89,7 @@ class autoSupport(ts3plugin):
             ts3lib.printMessageToCurrentTab("No free support channel found for client #{0}! Please try manually.".format(clientID))
         elif self.insupport == clientID and oldChannelID == self.cursupchan and moverID == ownid:
             ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
-            if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
+            ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
             self.insupport = 0;self.cursupchan = 0;self.oldchan = 0
         if self.debug: ts3lib.printMessageToCurrentTab("onClientMoveMovedEvent: 2 | insupport: {0} | cursupchan: {1} | oldchan: {2}".format(self.insupport,self.cursupchan, self.oldchan))
 
@@ -97,7 +97,7 @@ class autoSupport(ts3plugin):
         if clientID == self.insupport and oldChannelID == self.cursupchan:
             (error, ownid) = ts3lib.getClientID(schid)
             ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
-            if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
+            ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
             self.insupport = 0;self.cursupchan = 0;self.oldchan = 0
         if self.debug: ts3lib.printMessageToCurrentTab("onClientMoveEvent: insupport: {0} | cursupchan: {1} | oldchan: {2}".format(self.insupport,self.cursupchan, self.oldchan))
 
@@ -105,6 +105,6 @@ class autoSupport(ts3plugin):
         (error, ownid) = ts3lib.getClientID(schid)
         if self.insupport == clientID and oldChannelID == self.cursupchan and kickerID == ownid:
             ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
-            if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
+            ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
             self.insupport = 0;self.cursupchan = 0;self.oldchan = 0
         if self.debug: ts3lib.printMessageToCurrentTab("onClientKickFromChannelEvent: insupport: {0} | cursupchan: {1} | oldchan: {2}".format(self.insupport,self.cursupchan, self.oldchan))
