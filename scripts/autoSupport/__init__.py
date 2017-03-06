@@ -22,8 +22,8 @@ class autoSupport(ts3plugin):
     offersConfigure = False
     commandKeyword = "sup"
     infoTitle = None
-    iconPath = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "autoSupport", "icons")
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Support", path.join(iconPath, "toggle.png"))]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Support", ""),
+                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Force Stop Supporting", "")]
     hotkeys = [("autosupport", "Toggle Auto Support")]
     debug = True
     enabled = False
@@ -40,7 +40,9 @@ class autoSupport(ts3plugin):
         if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by " + self.author + " loaded.")
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0: self.toggle()
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+            if menuItemID == 0: self.toggle()
+            elif menuItemID == 1: self.stop(schid)
 
     def onHotkeyEvent(self, keyword):
         if keyword == "autosupport": self.toggle()
@@ -50,6 +52,7 @@ class autoSupport(ts3plugin):
         if cmd == "toggle":  self.toggle();return True
         elif cmd == "on": self.toggle(True);return True
         elif cmd == "off":self.toggle(False);return True
+        elif cmd == "stop":self.stop(schid);return True
 
     def toggle(self, state=None):
         if state: self.enabled = True
@@ -58,6 +61,12 @@ class autoSupport(ts3plugin):
         if self.enabled: ts3lib.printMessageToCurrentTab("{0} {1}enabled{2}.".format(self.name, color.SUCCESS, color.ENDMARKER));return True
         else: ts3lib.printMessageToCurrentTab("{0} {1}disabled{2}.".format(self.name, color.ERROR, color.ENDMARKER)); return False
 
+    def stop(self, schid):
+        (error, ownid) = ts3lib.getClientID(schid)
+        ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
+        if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
+        self.insupport == 0;self.cursupchan == 0;self.oldchan = 0
+
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             (error, uid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
@@ -65,6 +74,7 @@ class autoSupport(ts3plugin):
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentiﬁer, moveMessage):
         (error, ownid) = ts3lib.getClientID(schid)
+        if self.debug: ts3lib.printMessageToCurrentTab("insupport: {0} | cursupchan: {1} | oldchan: {2}".format(self.insupport,self.cursupchan, self.oldchan))
         if self.insupport == 0 and moverUniqueIdentiﬁer == self.supbot and newChannelID == self.supchanmain:
             for c in self.supchans:
                 (error, clients) = ts3lib.getChannelClientList(schid, c)
@@ -83,7 +93,7 @@ class autoSupport(ts3plugin):
             self.insupport == 0;self.cursupchan == 0;self.oldchan = 0
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
-        if clientID == self.insupport and oldChannelID == self.cursupchan and oldChannelID == self.cursupchan:
+        if clientID == self.insupport and oldChannelID == self.cursupchan:
             (error, ownid) = ts3lib.getClientID(schid)
             ts3lib.requestClientMove(schid, ownid, self.oldchan, "")
             if self.debug: ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
