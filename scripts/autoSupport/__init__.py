@@ -91,8 +91,10 @@ class autoSupport(ts3plugin):
                     if len(clients) > 0: continue
                     else:
                         # ts3lib.sendPluginCommand(schid, "S3NDuZ3r", ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER, targetIDs, returnCode)
-                        (error, clients) = ts3lib.getChannelClientList(schid, c)
-                        if len(clients) > 0: return
+                        for c in self.supchans:
+                            (error, clients) = ts3lib.getChannelClientList(schid, c)
+                            if clientID in clients: return
+
                         ts3lib.requestClientMove(schid, clientID, c, "")
                         ts3lib.requestClientMove(schid, ownid, c, "")
                         (error, muted) = ts3lib.getClientVariableAsInt(schid, ownid, ts3defines.ClientProperties.CLIENT_OUTPUT_MUTED)
