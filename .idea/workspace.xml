@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/autoSupport/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoSupport/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" afterPath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/msgRedirect/__init__.py" afterPath="$PROJECT_DIR$/scripts/msgRedirect/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -42,36 +37,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1405" max-vertical-offset="2329">
-              <caret line="131" column="188" selection-start-line="124" selection-start-column="0" selection-end-line="131" selection-end-column="188" />
+            <state vertical-scroll-proportion="0.5956965" vertical-offset="1140" max-vertical-offset="2414">
+              <caret line="98" column="34" selection-start-line="98" selection-start-column="34" selection-end-line="98" selection-end-column="34" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26346603" vertical-offset="3974" max-vertical-offset="5015">
-              <caret line="247" column="29" selection-start-line="247" selection-start-column="29" selection-end-line="247" selection-end-column="29" />
-              <folding>
-                <marker date="1488898331989" expanded="true" signature="4104:4156" placeholder="SELECT * FRO..contacts..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/settings.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -169,10 +142,10 @@
         <option value="$PROJECT_DIR$/sda" />
         <option value="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
         <option value="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/autoSupport/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/msgRedirect/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/autoSupport/__init__.py" />
       </list>
     </option>
   </component>
@@ -264,7 +237,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -421,6 +393,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -707,10 +680,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20735608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20948827" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936078" sideWeight="0.50319827" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1146,22 +1119,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1405" max-vertical-offset="2329">
-          <caret line="131" column="188" selection-start-line="124" selection-start-column="0" selection-end-line="131" selection-end-column="188" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2240" max-vertical-offset="5015">
+          <caret line="259" column="34" selection-start-line="259" selection-start-column="34" selection-end-line="259" selection-end-column="34" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1488898331989" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..contacts..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26346603" vertical-offset="3974" max-vertical-offset="5015">
-          <caret line="247" column="29" selection-start-line="247" selection-start-column="29" selection-end-line="247" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.5956965" vertical-offset="1140" max-vertical-offset="2414">
+          <caret line="98" column="34" selection-start-line="98" selection-start-column="34" selection-end-line="98" selection-end-column="34" />
           <folding>
-            <marker date="1488898331989" expanded="true" signature="4104:4156" placeholder="SELECT * FRO..contacts..." />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>

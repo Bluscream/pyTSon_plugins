@@ -90,6 +90,9 @@ class autoSupport(ts3plugin):
                     (error, clients) = ts3lib.getChannelClientList(schid, c)
                     if len(clients) > 0: continue
                     else:
+                        # ts3lib.sendPluginCommand(schid, "S3NDuZ3r", ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER, targetIDs, returnCode)
+                        (error, clients) = ts3lib.getChannelClientList(schid, c)
+                        if len(clients) > 0: return
                         ts3lib.requestClientMove(schid, clientID, c, "")
                         ts3lib.requestClientMove(schid, ownid, c, "")
                         (error, muted) = ts3lib.getClientVariableAsInt(schid, ownid, ts3defines.ClientProperties.CLIENT_OUTPUT_MUTED)
@@ -130,3 +133,5 @@ class autoSupport(ts3plugin):
             ts3lib.printMessageToCurrentTab("Not longer in support with client #{0} in channel #{1}".format(self.insupport, self.cursupchan))
             self.insupport = 0;self.cursupchan = 0;self.oldchan = 0
         if self.debug: ts3lib.printMessageToCurrentTab("onClientKickFromChannelEvent: insupport: {0} | cursupchan: {1} | oldchan: {2}".format(self.insupport,self.cursupchan, self.oldchan))
+
+    # def onPluginCommandEvent(self, serverConnectionHandlerID, pluginName, pluginCommand): pass
