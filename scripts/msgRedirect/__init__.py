@@ -15,7 +15,7 @@ class msgRedirect(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    debug = True
+    debug = False
     infoMSG1 = "\n\nHallo [color=green]",
     infoMSG2 = "[/color], du bist hier [color=red]Gast[/color] aber moechtest trozdem im Channel mitschreiben?\n\nDann schreib mir einfach zurueck und ich werde die Nachricht an den Channel weiterleiten.\n\n[color=red]INFO: SPAM ODER SONSTIGER ABUSE WIRD MIT SOFORTIGEM CHANNELBAN UND BLOCK BESTRAFT![/color]",
     redirectMSG = "Weitergeleitete Nachricht von",

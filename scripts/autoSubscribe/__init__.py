@@ -18,7 +18,7 @@ class autoSubscribe(ts3plugin):
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Sub all non-pw channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Unsub from all channels", "")]
     hotkeys = []
-    debug = True
+    debug = False
     passwords = ["pw", "password", "passwort"]
     blacklist = [".fm", "radio", "music", "musik"]
     onlyOpen = False

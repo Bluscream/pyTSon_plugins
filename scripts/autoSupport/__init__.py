@@ -24,7 +24,7 @@ class autoSupport(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Support", ""),
                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Force Stop Supporting", "")]
     hotkeys = [("autosupport", "Toggle Auto Support")]
-    debug = True
+    debug = False
     enabled = False
     supserver = "a5BUMeIEbvaQEVzU85UP8UY+6DY=" # BergwerkLabs
     afkchan = 356150

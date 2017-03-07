@@ -30,7 +30,7 @@ class chatBot(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    debug = True
+    debug = False
     ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "settings.ini")
     cfg = ConfigParser()
     cmdini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "commands.ini")
@@ -404,6 +404,29 @@ class chatBot(ts3plugin):
             except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "{0}{1}{2} ({3})".format(color.ERROR, result["err"], color.ENDMARKER,self.cmdevent["params"]))
             self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def commandRegister(self, schid, targetMode, toID, fromID, params=""):
+        (error, uid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        if uid == "QTRtPmYiSKpMS8Oyd4hyztcvLqU=":
+            if params:
+                (error, uid) = ts3lib.getClientVariableAsString(schid, int(params), ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                self.answerMessage(schid, targetMode, toID, int(params), ""+
+                "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
+                "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
+                "2. In den Minecraft chat [color=red]/ts set {0}[/color] eingeben.\n".format(uid)+
+                "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Groß/Kleinschreibung beachten)\n"+
+                "4. Wenn die Registrierung erfolgreich warst erhälst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n")
+            else:
+                (error, uid) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                self.answerMessage(schid, targetMode, toID, fromID, ""+
+                "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
+                "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
+                "2. In den Minecraft chat [color=red]/ts set {0}[/color] eingeben.\n".format(uid)+
+                "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Groß/Kleinschreibung beachten)\n"+
+                "4. Wenn die Registrierung erfolgreich warst erhälst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n")
+        elif uid == "": pass
+        else: self.answerMessage(schid, targetMode, toID, fromID, "Server not recognized or does not have a registration feature.")
+
     # COMMANDS END
 
 
