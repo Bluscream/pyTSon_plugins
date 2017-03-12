@@ -30,7 +30,7 @@ class chatBot(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    debug = False
+    debug = True
     ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "settings.ini")
     cfg = ConfigParser()
     cmdini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "commands.ini")
@@ -427,6 +427,33 @@ class chatBot(ts3plugin):
         elif uid == "": pass
         else: self.answerMessage(schid, targetMode, toID, fromID, "Server not recognized or does not have a registration feature.")
 
+    def commandDoxx(self, schid, targetMode, toID, fromID, params=""):
+        try:
+            from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
+            url = "https://randomuser.me/api/?gender={0}&nat=de&noinfo".format(params.split(" ")[1])
+            if self.debug: ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
+            self.nwmc = QNetworkAccessManager()
+            self.nwmc.connect("finished(QNetworkReply*)", self.doxxReply)
+            self.cmdevent = {"event": "", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
+            self.nwmc.get(QNetworkRequest(QUrl(url)))
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def doxxReply(self, reply):
+        try:
+            import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply
+            result = json.loads(reply.readAll().data().decode('utf-8'))["results"][0]
+            if self.debug: ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
+            params = self.cmdevent["params"].split(" ")
+            (error, name) = ts3lib.getClientVariableAsString(int(self.cmdevent["schid"]), int(params[0]), ts3defines.ClientProperties.CLIENT_NICKNAME)
+            (error, uid) = ts3lib.getClientVariableAsString(int(self.cmdevent["schid"]), int(params[0]), ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            try: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"],
+                "\nTS Name: {0} | UID: {1}\n".format(name, uid)+
+                "{0} {1}\n".format(result["name"]["first"], result["name"]["last"]).title()+
+                "{0}\n".format(result["location"]["street"],).title()+
+                "{0} {1} {2}".format(result["location"]["postcode"],result["location"]["city"],result["location"]["state"]).title(), True)
+            except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Unable to doxx {0}".format(params[0]))
+            self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
     # COMMANDS END
 
 

@@ -1,11 +1,12 @@
 from ts3plugin import ts3plugin, PluginHost
 import ts3lib as ts3
-import ts3defines, datetime, configparser, os.path
+import ts3defines, datetime, os.path
 from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi
 from collections import OrderedDict
 from inspect import getmembers
+from configparser import ConfigParser
 
 class info(ts3plugin):
     name = "Extended Info"
@@ -20,7 +21,7 @@ class info(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Set Meta Data", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Avatar Flag", "")]
     hotkeys = []
     ini = os.path.join(ts3.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
-    cfg = configparser.ConfigParser()
+    cfg = ConfigParser()
     cfg.optionxform = str
     runs = 0
 
@@ -266,33 +267,33 @@ class info(ts3plugin):
             if "VirtualServerProperties" in type:
                 (error, _var) = ts3.getServerVariableAsString(schid, _tmp)
                 if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getServerVariableAsUInt64(schid, _tmp)
-                elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getServerVariableAsInt(schid, _tmp)
+                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getServerVariableAsInt(schid, _tmp)
             elif "ChannelProperties" in type:
                 (error, _var) = ts3.getChannelVariableAsString(schid, id, _tmp)
                 if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getChannelVariableAsUInt64(schid, id, _tmp)
-                elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getChannelVariableAsInt(schid, id, _tmp)
+                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getChannelVariableAsInt(schid, id, _tmp)
             elif "ClientProperties" in type:
                 if id == ts3.getClientID(schid):
                     (error, _var) = ts3.getClientSelfVariableAsString(schid, _tmp)
                     if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
-                    elif _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
-                    elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientSelfVariableAsInt(schid, id, _tmp)
-                    elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, _tmp)
+                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientSelfVariableAsInt(schid, id, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, _tmp)
                 else:
                     (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
                     if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
-                    elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, _tmp)
             elif "ConnectionProperties" in type:
                 (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
                 if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsUInt64(schid, id, _tmp)
-                elif _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsInt(schid, id, _tmp)
+                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsInt(schid, id, _tmp)
             _var = str(_var)
             if error != ts3defines.ERROR_ok or _var == "": return False, ""
             return True, var.replace(start, '').replace('_', ' ').title() + ": " + _var
         except: from traceback import format_exc;ts3.logMessage("Could not resolve variable ts3defines.%s.%s: %s" % (type, var, format_exc()), ts3defines.LogLevel.LogLevel_INFO, self.name, 0);return False, ""
 
 class SettingsDialog(QDialog):
-    def __init__(self,info, parent=None):
+    def __init__(self, info, parent=None):
         super(QDialog, self).__init__(parent)
         setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
         self.setWindowTitle("Extended Info Settings")
@@ -357,12 +358,50 @@ class SettingsDialog(QDialog):
             if value.lower() == "true": _item.setCheckState(Qt.Checked)
             else: _item.setCheckState(Qt.Unchecked)
             _item.setText(name.replace('CONNECTION_', '').replace('_', ' ').title())
+        self.info = info
+  
+    def iterAllItems(self, parent):
+        for i in range(parent.count()):
+            yield parent.item(i)
+  
     def on_btn_apply_clicked(self):
         ts3.printMessageToCurrentTab("on_btn_apply_clicked")
-        info.cfg.set('general', 'Debug', str(self.chk_debug.isChecked()))
-        info.cfg.set('general', 'Colored', str(self.chk_colored.isChecked()))
-        info.cfg.set('general', 'Autorequest Server Variables', str(self.chk_arsv.isChecked()))
-        info.cfg.set('general', 'Autorequest Client Variables', str(self.chk_arcv.isChecked()))
-        # for
-        with open(info.ini, 'w') as configfile:
-            info.cfg.write(configfile)
+        self.info.cfg.set('general', 'Debug', str(self.chk_debug.isChecked()))
+        self.info.cfg.set('general', 'Colored', str(self.chk_colored.isChecked()))
+        self.info.cfg.set('general', 'Autorequest Server Variables', str(self.chk_arsv.isChecked()))
+        self.info.cfg.set('general', 'Autorequest Client Variables', str(self.chk_arcv.isChecked()))
+        for item in self.iterAllItems(self.lst_server):
+            if self.info.cfg.has_option('VirtualServerProperties', item.tooltip()):
+                self.info.cfg.set('VirtualServerProperties', item.toolTip(), str(item.checkState() == Qt.Checked))
+            elif self.info.cfg.has_option('VirtualServerPropertiesRare', item.tooltip()):
+                self.info.cfg.set('VirtualServerPropertiesRare', item.toolTip(), str(item.checkState() == Qt.Checked))
+        for item in self.iterAllItems(self.lst_channel):
+            if self.info.cfg.has_option('ChannelProperties', item.tooltip()):
+          	    self.info.cfg.set('ChannelProperties', item.toolTip(), str(item.checkState() == Qt.Checked))
+            elif self.info.cfg.has_option('ChannelPropertiesRare', item.tooltip()):
+          	    self.info.cfg.set('ChannelPropertiesRare', item.toolTip(), str(item.checkState() == Qt.Checked))
+        for item in self.iterAllItems(self.lst_client):
+            if self.info.cfg.has_option('ClientProperties', item.tooltip()):
+         	    self.info.cfg.set('ClientProperties', item.toolTip(), str(item.checkState() == Qt.Checked))
+            elif self.info.cfg.has_option('ClientPropertiesRare', item.tooltip()):
+         	    self.info.cfg.set('ClientPropertiesRare', item.toolTip(), str(item.checkState() == Qt.Checked))
+            elif self.info.cfg.has_option('ConnectionProperties', item.tooltip()):
+       	  	    self.info.cfg.set('ConnectionProperties', item.toolTip(), str(item.checkState() == Qt.Checked))
+            elif self.info.cfg.has_option('ConnectionPropertiesRare', item.tooltip()):
+        	    self.info.cfg.set('ConnectionPropertiesRare', item.toolTip(), str(item.checkState() == Qt.Checked))
+        with open(self.info.ini, 'w') as configfile:
+            self.info.cfg.write(configfile)
+
+###########################################################################
+#
+#  update_items() -> None
+#      |
+#      V
+#  get_items() -> namedtuple('Item', ('item', 'irgendwas', 'name', ''))
+#      |
+#      V
+#  save_to_cfg() -> None
+#
+#  --> c==3
+#
+############################################################################
