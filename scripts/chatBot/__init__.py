@@ -40,28 +40,25 @@ class chatBot(ts3plugin):
     color = []
     cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
     lastcmd = {"cmd": "", "params": "", "time": 0, "user": 0}
+    returnCode = ""
+    noperms = []
 
     def __init__(self):
         if path.isfile(self.ini):
             self.cfg.read(self.ini)
         else:
-            self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "True", "customprefix": "True",
-                                   "prefix": "!"}
+            self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "True", "customprefix": "True", "prefix": "!"}
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
         if path.isfile(self.cmdini):
             self.cmd.read(self.cmdini)
         else:
             self.cmd['about'] = {"enabled": "True", "function": "commandAbout"}
-            self.cmd['help'] = {"enabled": "True", "function": "commandHelp"}
-            self.cmd['eval'] = {"enabled": "True", "function": "commandEval"}
-            self.cmd['time'] = {"enabled": "True", "function": "commandTime"}
+            self.cmd['help'] = {"enabled": "False", "function": "commandHelp"}
             with open(self.cmdini, 'w') as configfile:
                 self.cmd.write(configfile)
-        ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".",
-                          ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(
-            datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
+        ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
 
     def configure(self, qParentWidget):
         try:
@@ -72,8 +69,7 @@ class chatBot(ts3plugin):
             if path.isfile(self.ini):
                 self.cfg.read(self.ini)
         except:
-            from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR,
-                                                               "PyTSon", 0)
+            from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon")
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentiﬁer, message, ﬀIgnored):
         try:
@@ -93,10 +89,11 @@ class chatBot(ts3plugin):
             elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general', 'customprefix'):
                 command = message.split(self.clientURL(schid, _clid), 1)[1]
             else: return False
-            ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
-            ts3lib.printMessageToCurrentTab("time: {0}".format(time))
-            ts3lib.printMessageToCurrentTab("time -5: {0}".format(time - 5))
-            ts3lib.printMessageToCurrentTab("lasttime: {0}".format(lasttime))
+            if self.debug:
+                ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
+                ts3lib.printMessageToCurrentTab("time: {0}".format(time))
+                ts3lib.printMessageToCurrentTab("time -5: {0}".format(time - 5))
+                ts3lib.printMessageToCurrentTab("lasttime: {0}".format(lasttime))
             if lasttime > time - 5: ts3lib.printMessageToCurrentTab("is time -5: True")
             cmd = command.split(' ', 1)[0].lower()
             if not cmd in self.cmd.sections(): self.answerMessage(schid, targetMode, toID, fromID, "Command %s does not exist." % cmd);return False
@@ -116,16 +113,23 @@ class chatBot(ts3plugin):
         except:
             from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
+            if schid in self.noperms: self.noperms.remove(schid)
+
+    def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+        if self.returnCode == returnCode and error == 2568 and failedPermissionID == 217: self.noperms.extend([schid])
+
     def answerMessage(self, schid, targetMode, toID, fromID, message, hideprefix=False):
+        if schid in self.noperms: ts3lib.printMessageToCurrentTab("Insufficient permissions to answer message from {0}".format(fromID)); return
         message = [message[i:i + 1024] for i in range(0, len(message), 1024)]
         if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
-            for msg in message: ts3lib.requestSendPrivateTextMsg(schid, msg, fromID)
+            for msg in message: self.returnCode = ts3lib.createReturnCode(); ts3lib.requestSendPrivateTextMsg(schid, msg, fromID, self.returnCode)
         elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
             if hideprefix:
-                for msg in message: ts3lib.requestSendChannelTextMsg(schid, "{0}".format(msg), toID)
+                for msg in message: self.returnCode = ts3lib.createReturnCode(); ts3lib.requestSendChannelTextMsg(schid, "{0}".format(msg), toID, self.returnCode)
             else:
-                for msg in message: ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % ( self.clientURL(schid, fromID), msg), toID)
-
+                for msg in message: self.returnCode = ts3lib.createReturnCode(); ts3lib.requestSendChannelTextMsg(schid, "[url=client://]@[/url]%s: %s" % ( self.clientURL(schid, fromID), msg), toID, self.returnCode)
 
     def clientURL(self, schid=None, clid=0, uid=None, nickname=None, encodednick=None):
         if schid == None:

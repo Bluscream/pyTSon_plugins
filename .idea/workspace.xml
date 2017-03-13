@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/info/__init__.py" afterPath="$PROJECT_DIR$/scripts/info/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -42,8 +40,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1390" max-vertical-offset="2448">
-              <caret line="103" column="92" selection-start-line="103" selection-start-column="92" selection-end-line="103" selection-end-column="92" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="2448">
+              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="78" selection-end-column="55" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -54,8 +52,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6477916" vertical-offset="6806" max-vertical-offset="9214">
-              <caret line="442" column="67" selection-start-line="442" selection-start-column="67" selection-end-line="442" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.8074745" vertical-offset="1463" max-vertical-offset="9282">
+              <caret line="136" column="12" selection-start-line="136" selection-start-column="12" selection-end-line="136" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -64,7 +62,7 @@
       <file leaf-file-name="commands.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1025" max-vertical-offset="1989">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1887" max-vertical-offset="1989">
               <caret line="111" column="22" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
               <folding />
             </state>
@@ -200,7 +198,6 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -281,6 +278,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -455,7 +453,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -741,11 +738,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="0" width="1936" height="1056" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21375267" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21588486" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936078" sideWeight="0.50319827" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1145,16 +1142,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1390" max-vertical-offset="2448">
-          <caret line="103" column="92" selection-start-line="103" selection-start-column="92" selection-end-line="103" selection-end-column="92" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/info/settings.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2618" max-vertical-offset="4216">
@@ -1167,9 +1154,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42695355" vertical-offset="5454" max-vertical-offset="7021">
           <caret line="343" column="40" selection-start-line="343" selection-start-column="40" selection-end-line="343" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1199,10 +1183,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="2448">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="78" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6477916" vertical-offset="6806" max-vertical-offset="9214">
-          <caret line="442" column="67" selection-start-line="442" selection-start-column="67" selection-end-line="442" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.8074745" vertical-offset="1463" max-vertical-offset="9282">
+          <caret line="136" column="12" selection-start-line="136" selection-start-column="12" selection-end-line="136" selection-end-column="12" />
           <folding />
         </state>
       </provider>
