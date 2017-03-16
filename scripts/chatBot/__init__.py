@@ -206,39 +206,61 @@ class chatBot(ts3plugin):
         msg = '\n'.join(sorted(msg))
         self.answerMessage(schid, targetMode, toID, fromID, msg)
 
+    def idByName(self,ids,name):
+        for i in ids:
+            if name.lower() in i["name"].lower(): return i["id"]
+        return False
+
     def commandToggleServerGroup(self, schid, targetMode, toID, fromID, params=""):
-        #returnCode = ts3lib.createReturnCode()
         self.cmdevent = {"event": "onServerGroupListEvent", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
         self.tmpsgroups = []
         ts3lib.requestServerGroupList(schid)
 
     def onServerGroupListEvent(self, schid, serverGroupID, name, atype, iconID, saveDB):
         try:
-            if self.debug: ts3lib.printMessageToCurrentTab("self.cmdevent.event: {0}".format(self.cmdevent["event"]))
             if not self.cmdevent["event"] == "onServerGroupListEvent": return
-            #if not self.cmdevent.returnCode == "": return
-            self.tmpsgroups.add({"sgid": serverGroupID, "name": name})
-            if self.debug: ts3lib.printMessageToCurrentTab("sgid:{0} | name:{1}".format(serverGroupID, name))
+            self.tmpsgroups.append({"id": serverGroupID, "name": name})
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def onServerGroupListFinishedEvent(self, schid):
-        if self.debug: ts3lib.printMessageToCurrentTab("cmdevent: {0}".format(self.cmdevent))
         try:
-            if self.debug: ts3lib.printMessageToCurrentTab("{0}".format(self.tmpsgroups))
-            serverGroupID = self.cmdevent["params"]
+            sgid = self.idByName(self.tmpsgroups,self.cmdevent["params"])
+            if not sgid: self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Failed to find a servergroup like \"%s\""%self.cmdevent["params"]);return
             (error, dbid) = ts3lib.getClientVariableAsInt(schid, self.cmdevent["fromID"], ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
             (error, sgroups) = ts3lib.getClientVariableAsString(schid, self.cmdevent["fromID"], ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-            sgroups = sgroups.split(",")
-            if self.debug: ts3lib.printMessageToCurrentTab("sgroups: {0}".format(multiple))
-            if str(serverGroupID) in sgroups:
-                error = ts3lib.requestServerGroupAddClient(schid, int(self.cmdevent["params"]), dbid)
-            else:
-                error = ts3lib.requestServerGroupDelClient(schid, int(self.cmdevent["params"]), dbid)
+            sgroups = [int(n) for n in sgroups.split(",")]
+            if sgid in sgroups: _p = "added";p = "Adding"; error = ts3lib.requestServerGroupDelClient(schid, sgid, dbid)
+            else: _p = "removed";p = "Removing"; error = ts3lib.requestServerGroupAddClient(schid, sgid, dbid)
+            if error == ts3defines.ERROR_ok: _t = "Successfully {0} servergroup #{1}".format(_p, sgid)
+            else: _t = "{0} Servergroup #{1} failed!".format(p, sgid)
+            self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], _t)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+        self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
 
-            if not error == ts3defines.ERROR_ok:
-                self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Set Servergroup #%s failed!"%serverGroupID)
-            else:
-                self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Successfully set servergroup #%s"%serverGroupID)
+    def commandSetChannelGroup(self, schid, targetMode, toID, fromID, params=""):
+        self.cmdevent = {"event": "onChannelGroupListEvent", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
+        self.tmpcgroups = []
+        ts3lib.requestChannelGroupList(schid)
+
+    def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
+        try:
+            if not self.cmdevent["event"] == "onChannelGroupListEvent" or not atype == 1: return
+            if self.debug: ts3lib.printMessageToCurrentTab("atype: {0}".format(atype))
+            self.tmpcgroups.append({"id": channelGroupID, "name": name})
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+
+    def onChannelGroupListFinishedEvent(self, schid):
+        try:
+            id = self.idByName(self.tmpcgroups,self.cmdevent["params"])
+            if not id: self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Failed to find a channelgroup like \"%s\""%self.cmdevent["params"]);return
+            (error, dbid) = ts3lib.getClientVariableAsInt(schid, self.cmdevent["fromID"], ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+            (error, own) = ts3lib.getClientID(schid)
+            (error, chan) = ts3lib.getChannelOfClient(schid, own)
+            if self.debug: ts3lib.printMessageToCurrentTab("dbid: {0} | own: {1} | chan: {2} | id: {3}".format(dbid,own,chan,id))
+            error = ts3lib.requestSetClientChannelGroup(schid, [id], [chan], [dbid])
+            if error == ts3defines.ERROR_ok: _t = "Successfully set your channelgroup to #{1}".format(_p, sgid)
+            else: _t = "Setting your channelgroup #{1} failed!".format(p, sgid)
+            self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], _t)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
         self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
 
@@ -254,6 +276,26 @@ class chatBot(ts3plugin):
     def commandWhoAmI(self, schid, targetMode, toID, fromID, params=""):
         (error, displayName) = ts3lib.getClientDisplayName(schid, fromID)
         self.answerMessage(schid, targetMode, toID, fromID, "I changed your nickname to: %s%s" % (color.ERROR, displayName))
+
+    def commandChannelKickMe(self, schid, targetMode, toID, fromID, params=""):
+        if self.cfg.getboolean('general', 'customprefix'):
+            prefix = self.cfg.get('general', 'prefix')
+        else:
+            (error, id) = ts3lib.getClientID(schid);prefix = self.clientURL(schid, id)
+        (error, nickname) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        if params != "": ts3lib.requestClientKickFromChannel(schid, fromID, params)
+        else: ts3lib.requestClientKickFromChannel(schid, fromID, "Command %sckickme used by %s" % (prefix, nickname))
+
+    def commandChannelBanMe(self, schid, targetMode, toID, fromID, params=""):
+        if self.cfg.getboolean('general', 'customprefix'): prefix = self.cfg.get('general', 'prefix')
+        else: (error, id) = ts3lib.getClientID(schid);prefix = self.clientURL(schid, id)
+        (error, nickname) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        (error, dbid) = ts3lib.getClientVariableAsInt(schid, fromID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        (error, own) = ts3lib.getClientID(schid)
+        (error, chan) = ts3lib.getChannelOfClient(schid, own)
+        if params != "": params = "Command %scbanme used by %s" % (prefix, nickname)
+        ts3lib.requestSetClientChannelGroup(schid, [12], [chan], [dbid])
+        ts3lib.requestClientKickFromChannel(schid, fromID, params)
 
     def commandKickMe(self, schid, targetMode, toID, fromID, params=""):
         if self.cfg.getboolean('general', 'customprefix'):
@@ -411,24 +453,15 @@ class chatBot(ts3plugin):
 
     def commandRegister(self, schid, targetMode, toID, fromID, params=""):
         (error, uid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
-        if uid == "QTRtPmYiSKpMS8Oyd4hyztcvLqU=":
-            if params:
-                (error, uid) = ts3lib.getClientVariableAsString(schid, int(params), ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-                self.answerMessage(schid, targetMode, toID, int(params), ""+
-                "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
-                "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
-                "2. In den Minecraft chat [color=red]/ts set {0}[/color] eingeben.\n".format(uid)+
-                "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Groß/Kleinschreibung beachten)\n"+
-                "4. Wenn die Registrierung erfolgreich warst erhälst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n")
-            else:
-                (error, uid) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-                self.answerMessage(schid, targetMode, toID, fromID, ""+
-                "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
-                "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
-                "2. In den Minecraft chat [color=red]/ts set {0}[/color] eingeben.\n".format(uid)+
-                "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Groß/Kleinschreibung beachten)\n"+
-                "4. Wenn die Registrierung erfolgreich warst erhälst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n")
-        elif uid == "": pass
+        if uid == "QTRtPmYiSKpMS8Oyd4hyztcvLqU=": # GommeHD
+            (error, uid) = ts3lib.getClientVariableAsString(schid, int(params), ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            self.answerMessage(schid, targetMode, toID, int(params), ""+
+            "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
+            "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
+            "2. In den Minecraft chat [color=red]/ts set {0}[/color] eingeben.\n".format(uid)+
+            "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Groß/Kleinschreibung beachten)\n"+
+            "4. Wenn die Registrierung erfolgreich warst erhälst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.")
+        elif uid == "U3UjHePU9eZ9bvnzIyLff4lvXBM=": pass
         else: self.answerMessage(schid, targetMode, toID, fromID, "Server not recognized or does not have a registration feature.")
 
     def commandDoxx(self, schid, targetMode, toID, fromID, params=""):
@@ -458,6 +491,21 @@ class chatBot(ts3plugin):
             except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Unable to doxx {0}".format(params[0]))
             self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    perms = {}
+    def commandPerms(self, schid, targetMode, toID, fromID, params=""):
+        self.cmdevent = {"event": "onPermissionListEvent", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
+        ts3lib.requestPermissionList(schid)
+
+    def onPermissionListEvent(self, schid, permissionID, permissionName, permissionDescription):
+        #ts3lib.printMessageToCurrentTab("self.name: {0}".format(self.__name__))
+        if self.cmdevent["event"] == "onPermissionListEvent" and self.cmdevent["schid"] == schid:
+            ts3lib.printMessageToCurrentTab("#{0} | {1} | {2}".format(permissionID, permissionName, permissionDescription))
+            #self.perms
+
+    def onPermissionListFinishedEvent(self, serverConnectionHandlerID):
+        ts3lib.printMessageToCurrentTab("{0}".format(self.perms))
+        self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
     # COMMANDS END
 
 

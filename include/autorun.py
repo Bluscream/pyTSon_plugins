@@ -1,4 +1,4 @@
-import os, json, configparser, webbrowser, traceback, urllib.parse, ts3defines#, ts3help
+import os, json, configparser, webbrowser, traceback, urllib.parse, ts3defines
 from datetime import datetime
 from ts3lib import *
 from ts3plugin import *
@@ -9,6 +9,9 @@ from PythonQt.QtCore import *
 from PythonQt.QtNetwork import *
 from PythonQt.Qt import *
 from PythonQt.private import *
+from PythonQt.QtSql import *
+from PythonQt.QtUiTools import *
+from PythonQt.Debug import *
 self = QApplication.instance()
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
     message = str(message)

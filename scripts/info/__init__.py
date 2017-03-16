@@ -275,18 +275,18 @@ class info(ts3plugin):
             elif "ClientProperties" in type:
                 if id == ts3.getClientID(schid):
                     (error, _var) = ts3.getClientSelfVariableAsString(schid, _tmp)
-                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
+                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientSelfVariableAsInt(schid, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
                     if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
-                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientSelfVariableAsInt(schid, id, _tmp)
-                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, id, _tmp)
                 else:
                     (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
                     if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
-                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, id, _tmp)
             elif "ConnectionProperties" in type:
                 (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
                 if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsUInt64(schid, id, _tmp)
-                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsInt(schid, id, _tmp)
+                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsDouble(schid, id, _tmp)
             _var = str(_var)
             if error != ts3defines.ERROR_ok or _var == "": return False, ""
             return True, var.replace(start, '').replace('_', ' ').title() + ": " + _var
