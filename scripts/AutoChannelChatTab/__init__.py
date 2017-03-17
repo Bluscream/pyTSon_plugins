@@ -6,9 +6,9 @@ from PythonQt.QtCore import *
 
 class autoChannelChatTab(ts3plugin):
     name = "AutoChannelChatTab"
-    apiVersion = 22
+    apiVersion = 21
     requestAutoload = True
-    version = "1.0.0"
+    version = "1.0.1"
     author = "Thomas \"PLuS\" Pathmann"
     description = "Automatically activates the channel chat (tabindex 1, so if you change order, it won't work as expected) tab when the server connection tab is changed"
     offersConfigure = False
@@ -37,18 +37,19 @@ class autoChannelChatTab(ts3plugin):
             process = True
 
         if process and not hasattr(self, "splitter"):
+            process = False
             for c in self.main.children():
                 if type(c) is QSplitter:
                     self.splitter = c
+                    process = True
                     break
 
-            if not hasattr(self, "splitter"):
-                process = False
-
         if process and (not hasattr(self, "chat")):
+            process = False
             for c in self.splitter.children():
                 if c.objectName == "MainWindowChatWidget":
                     self.chat = c
+                    process = True
 
         if process and not self.chattab:
             for c in self.chat.children():
