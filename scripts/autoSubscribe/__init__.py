@@ -5,7 +5,7 @@ from os import path
 
 class autoSubscribe(ts3plugin):
     name = "Auto Subscribe"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

@@ -247,7 +247,7 @@ class multiselectmove(ts3plugin):
     name = "multiselectmove"
     requestAutoload = False
     version = "1.0.0"
-    apiVersion = 21
+    apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "This plugin makes it possible to move multiple clients around per Multiselect. Just select two items with shift- or control-modifier pressed."
     offersConfigure = False

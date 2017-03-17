@@ -5,7 +5,7 @@ from datetime import datetime
 
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

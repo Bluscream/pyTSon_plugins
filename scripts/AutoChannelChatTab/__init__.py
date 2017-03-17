@@ -6,7 +6,7 @@ from PythonQt.QtCore import *
 
 class autoChannelChatTab(ts3plugin):
     name = "AutoChannelChatTab"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = True
     version = "1.0.0"
     author = "Thomas \"PLuS\" Pathmann"

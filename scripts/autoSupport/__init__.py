@@ -13,7 +13,7 @@ class color(object):
 
 class autoSupport(ts3plugin):
     name = "Auto Support"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream, SadPixel"

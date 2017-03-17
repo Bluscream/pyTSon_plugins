@@ -5,7 +5,7 @@ from os import path
 
 class channelGroupChanger(ts3plugin):
     name = "Channel Group Changer"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

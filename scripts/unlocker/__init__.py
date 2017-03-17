@@ -6,7 +6,7 @@ from PythonQt.QtCore import *
 
 class info(ts3plugin):
     name = "Unlocker"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

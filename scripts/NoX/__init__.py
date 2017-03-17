@@ -7,7 +7,7 @@ from os import path
 
 class NoX(ts3plugin):
     name = "BanBypasser (NoX)"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

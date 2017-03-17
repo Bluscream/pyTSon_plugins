@@ -9,7 +9,7 @@ from PythonQt.QtCore import *
 
 class settings(ts3plugin):
     name = "Extended Settings"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

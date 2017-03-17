@@ -5,7 +5,7 @@ from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox
 
 class joinChannel(ts3plugin):
     name = "Channel Queue"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

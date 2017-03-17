@@ -10,7 +10,7 @@ try:
 
     class channelWatcher(ts3plugin):
         name = "Channel Watcher"
-        apiVersion = 21
+        apiVersion = 22
         requestAutoload = False
         version = "1.0"
         author = "Bluscream"

@@ -4,7 +4,7 @@ import datetime, ts3defines, ts3lib
 
 class massAction(ts3plugin):
     name = "Mass Actions"
-    apiVersion = 21
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
