@@ -42,6 +42,7 @@ class chatBot(ts3plugin):
     lastcmd = {"cmd": "", "params": "", "time": 0, "user": 0}
     returnCode = ""
     noperms = []
+    tmpsgroups = []
 
     def __init__(self):
         if path.isfile(self.ini):
@@ -213,7 +214,6 @@ class chatBot(ts3plugin):
 
     def commandToggleServerGroup(self, schid, targetMode, toID, fromID, params=""):
         self.cmdevent = {"event": "onServerGroupListEvent", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
-        self.tmpsgroups = []
         ts3lib.requestServerGroupList(schid)
 
     def onServerGroupListEvent(self, schid, serverGroupID, name, atype, iconID, saveDB):
@@ -234,6 +234,7 @@ class chatBot(ts3plugin):
             if error == ts3defines.ERROR_ok: _t = "Successfully {0} servergroup #{1}".format(_p, sgid)
             else: _t = "{0} Servergroup #{1} failed!".format(p, sgid)
             self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], _t)
+            self.tmpsgroups = []
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
         self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
 
@@ -477,18 +478,21 @@ class chatBot(ts3plugin):
 
     def doxxReply(self, reply):
         try:
-            import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply
+            import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply;from random import randint
             result = json.loads(reply.readAll().data().decode('utf-8'))["results"][0]
             if self.debug: ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
             params = self.cmdevent["params"].split(" ")
             (error, name) = ts3lib.getClientVariableAsString(int(self.cmdevent["schid"]), int(params[0]), ts3defines.ClientProperties.CLIENT_NICKNAME)
             (error, uid) = ts3lib.getClientVariableAsString(int(self.cmdevent["schid"]), int(params[0]), ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-            try: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"],
+            #try:
+            self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"],
                 "\nTS Name: {0} | UID: {1}\n".format(name, uid)+
                 "{0} {1}\n".format(result["name"]["first"], result["name"]["last"]).title()+
-                "{0}\n".format(result["location"]["street"],).title()+
-                "{0} {1} {2}".format(result["location"]["postcode"],result["location"]["city"],result["location"]["state"]).title(), True)
-            except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Unable to doxx {0}".format(params[0]))
+                "{0} {1}\n".format(result["location"]["street"][5:],randint(0,50)).title()+
+                "{0} {1}\n".format(result["location"]["postcode"],result["location"]["city"]).title()+
+                "☎ {0} ({1})\n".format(result["phone"],result["cell"])+
+                "[url=https://adguardteam.github.io/AnonymousRedirect/redirect.html?url={0}]Bild 1[/url]\n".format(result["picture"]["large"]), True)
+            #except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Unable to doxx {0}".format(name))
             self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 

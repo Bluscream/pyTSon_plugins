@@ -19,7 +19,7 @@ try:
         infoTitle = None
         menuItems = []
         hotkeys = []
-        debug = True
+        debug = False
         enabled = False
         default = 0
         ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", __name__, "settings.ini")
@@ -49,8 +49,9 @@ try:
                         "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
                         "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
                         "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
-                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n\n"+
+                        "[color=red]Fuer deine eigene Sicherheit achte bitte darauf an wen du welche Informationen ueber dich rausgibst![/color]\n\n"+
                         #"Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
+                        "Für Info's und Rueckfragen zum [url=https://github.com/Bluscream/pyTSon_plugins/blob/master/scripts/welcomeBot/__init__.py]Bot[/url] bitte [URL=client://0/x63jNGEr/PXnu9l3bFECzMzWfXk=]TeamspeakUser[/URL] kontaktieren.\n\n"+
                         "Viel Spass dann :)",
                     "AT": "Willkommen, {nick}\n"+
                         "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
@@ -59,7 +60,8 @@ try:
                         "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
                         "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
                         "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
-                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n\n"+
+                        "[color=red]Fuer deine eigene Sicherheit achte bitte darauf an wen du welche Informationen ueber dich rausgibst![/color]\n\n"+
+                        "Für Info's und Rueckfragen zum [url=https://github.com/Bluscream/pyTSon_plugins/blob/master/scripts/welcomeBot/__init__.py]Bot[/url] bitte [URL=client://0/x63jNGEr/PXnu9l3bFECzMzWfXk=]TeamspeakUser[/URL] kontaktieren.\n\n"+
                         #"Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
                         "Viel Spass dann :)",
                     "CH": "Willkommen, {nick}\n"+
@@ -69,7 +71,8 @@ try:
                         "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
                         "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
                         "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
-                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n\n"+
+                        "[color=red]Fuer deine eigene Sicherheit achte bitte darauf an wen du welche Informationen ueber dich rausgibst![/color]\n\n"+
+                        "Für Info's und Rueckfragen zum [url=https://github.com/Bluscream/pyTSon_plugins/blob/master/scripts/welcomeBot/__init__.py]Bot[/url] bitte [URL=client://0/x63jNGEr/PXnu9l3bFECzMzWfXk=]TeamspeakUser[/URL] kontaktieren.\n\n"+
                         #"Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
                         "Viel Spass dann :)"
                 }
