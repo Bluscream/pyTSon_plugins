@@ -33,15 +33,11 @@ class autoTPRequest(ts3plugin):
         if not self.toggle: return
         (error, ownid) = ts3lib.getClientID(schid)
         if ownid == clientID:
-            (error, tp) = ts3lib.getClientVariableAsInt(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
-            if not tp: ts3lib.requestIsTalker(schid, True, self.msg)
-
-    def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
-        if not self.toggle: return
-        (error, ownid) = ts3lib.getClientID(schid)
-        if ownid == clientID:
-            (error, cgID) = ts3lib.getClientVariableAsInt(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
-            for _group in self.smgroup:
-                if cgID == _group:
-                    ts3lib.setClientSelfVariableAsInt(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER, 1)
-                    ts3lib.flushClientSelfUpdates(schid)
+            try:
+                (error, ntp) = ts3lib.getChannelVariableAsInt(schid, newChannelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+                if self.debug: ts3lib.printMessageToCurrentTab('error: {0} | ntp: {1}'.format(error,ntp))
+                if ntp < 1: return
+                (error, tp) = ts3lib.getClientVariableAsInt(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
+                if self.debug: ts3lib.printMessageToCurrentTab('error: {0} | tp: {1}'.format(error,tp))
+                if not tp: ts3lib.requestIsTalker(schid, True, self.msg)
+            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);return
