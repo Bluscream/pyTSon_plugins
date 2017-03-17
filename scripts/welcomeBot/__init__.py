@@ -25,21 +25,53 @@ try:
         ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", __name__, "settings.ini")
         cfg = ConfigParser()
         cfg.optionxform = str
-        tmp = []
+        #tmp = []
         update = 0
 
         def __init__(self):
             if path.isfile(self.ini): self.cfg.read(self.ini)
             else:
-                self.cfg['QTRtPmYiSKpMS8Oyd4hyztcvLqU='] = { "welcomeMSG": "Willkommen, {nick}\n"+
-                    "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
-                    "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
-                    "2. In den Minecraft chat [color=red]/ts set {uid}[/color] eingeben.\n"+
-                    "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Groß/Kleinschreibung beachten)\n"+
-                    "4. Wenn die Registrierung erfolgreich warst erhälst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
-                    "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest von denen du nichts weisst.\n"+
-                    "[color=red]Für deine eigene Sicherheit solltest du darauf achten an wen du welche informationen über dich rausgibst![/color]\n\n"+
-                    "Viel Spass dann :)"
+                self.cfg['QTRtPmYiSKpMS8Oyd4hyztcvLqU='] = {
+                    "US": "Welcome, {nick}\n"+
+                        "To get verified on this Teamspeak 3 Server you need to follow this steps:\n\n"+
+                        "1. Join the minecraft server [color=green]gommehd.net[/color].\n"+
+                        "2. Send [color=red]/ts set {uid}[/color] in the minecraft chat.\n"+
+                        "3. Message the user [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] in Teamspeak and send them your Minecraft Nickname (Proper casing is important)\n"+
+                        "4. If the registration succeeded the server group \"Registriert\" will be assigned to you. It can take a while for your skin head to appear behind your TS name.\n\n"+
+                        "Please consider this teamspeak mostly german, so don't expect everyone to speak proper english.\n"+
+                        "[color=red]Raids and Trolling will result in bans.[/color]\n"+
+                        "After you got registered you get access to the support channels to get help whenever you need some\n\n"+
+                        "Viel Spass dann :)",
+                    "DE": "Willkommen, {nick}\n"+
+                        "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
+                        "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
+                        "2. In den Minecraft chat [color=red]/ts set {uid}[/color] eingeben.\n"+
+                        "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
+                        "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
+                        "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
+                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n"+
+                        "Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
+                        "Viel Spass dann :)",
+                    "AT": "Willkommen, {nick}\n"+
+                        "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
+                        "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
+                        "2. In den Minecraft chat [color=red]/ts set {uid}[/color] eingeben.\n"+
+                        "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
+                        "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
+                        "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
+                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n"+
+                        "Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
+                        "Viel Spass dann :)",
+                    "CH": "Willkommen, {nick}\n"+
+                        "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
+                        "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
+                        "2. In den Minecraft chat [color=red]/ts set {uid}[/color] eingeben.\n"+
+                        "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
+                        "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
+                        "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
+                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n"+
+                        "Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
+                        "Viel Spass dann :)"
                 }
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
@@ -64,8 +96,10 @@ try:
             return "[url=client://%s/%s~%s]%s[/url]" % (clid, uid, encodednick, nickname)
 
         def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-                if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.default == self.getDefaultChannel(schid)
-                elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: self.default = 0
+            if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+                (error, suid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+                if self.cfg.has_section(suid): self.default == self.getDefaultChannel(schid)
+            elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: self.default = 0
 
         def getDefaultChannel(self, schid):
             (error, clist) = ts3lib.getChannelList(schid)
@@ -81,9 +115,9 @@ try:
             if clientID == _clid: return
             if self.debug: ts3lib.printMessageToCurrentTab("newChannelID: {0} | self.default: {1}".format(newChannelID,self.default))
             if not newChannelID == self.default: return
-            (error, uid) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-            if self.debug: ts3lib.printMessageToCurrentTab("uid: {0} | self.tmp: {1}".format(uid,self.tmp))
-            if uid in self.tmp: return
+            #(error, uid) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            #if self.debug: ts3lib.printMessageToCurrentTab("uid: {0} | self.tmp: {1}".format(uid,self.tmp))
+            #if uid in self.tmp: return
             (error, suid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
             if self.debug: ts3lib.printMessageToCurrentTab("suid: {0} | self.cfg.sections(): {1} | self.cfg.has_section(suid): {2}".format(suid,self.cfg.sections(),self.cfg.has_section(suid)))
             if not self.cfg.has_section(suid): return
@@ -91,25 +125,31 @@ try:
             ts3lib.requestClientVariables(schid, clientID)
 
         def onUpdateClientEvent(self, schid, clientID, invokerID, invokerName, invokerUniqueIdentiﬁer):
-            if not self.update == clientID: return
-            self.update = 0
-            (error, connects) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_TOTALCONNECTIONS)
-            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | connects: {1}".format(error,connects))
-            if int(connects) > 1: return
-            if self.debug: ts3lib.printMessageToCurrentTab("Is new client!")
-            (error, suid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
-            msg = self.cfg.get(suid, 'welcomeMSG')
-            (error, uid) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-            if '{nick}' in msg: msg = msg.replace('{nick}', self.clientURL(schid, clientID, uid))
-            if '{country}' in msg:
+            try:
+                if not self.update == clientID: return
+                self.update = 0
+                (error, connects) = ts3lib.getClientVariableAsUInt64(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_TOTALCONNECTIONS)
+                (error, uid) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | connects: {1} | uid: {2}".format(error,connects,uid))
+                if connects > 1 and not uid == "x63jNGEr/PXnu9l3bFECzMzWfXk=": return
+                (error, suid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
                 (error, country) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_COUNTRY)
-                msg = msg.replace('{country}', country)
-            if '{cid}' in msg: msg = msg.replace('{cid}', clientID)
-            if '{uid}' in msg: msg = msg.replace('{uid}', uid)
-            if '{connects}' in msg: msg = msg.replace('{connects}', connects)
-            msg = [msg[i:i + 1024] for i in range(0, len(msg), 1024)]
-            for message in msg: ts3lib.requestSendPrivateTextMsg(schid, "{0}".format(message), clientID)
-            self.tmp.extend([uid]);
+                if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | country: {1}".format(error,country))
+                msg = self.cfg.get(suid, country, fallback=self.cfg.get(suid, 'US'))
+                if '{nick}' in msg: msg = msg.replace('{nick}', self.clientURL(schid, clientID, uid))
+                if '{country}' in msg: msg = msg.replace('{country}', country)
+                if '{cid}' in msg: msg = msg.replace('{cid}', clientID)
+                if '{uid}' in msg: msg = msg.replace('{uid}', uid)
+                if '{connects}' in msg: msg = msg.replace('{connects}', connects)
+                msg = [msg[i:i + 1024] for i in range(0, len(msg), 1024)]
+                for message in msg: ts3lib.requestSendPrivateTextMsg(schid, "{0}".format(message), clientID)
+                (error, ownid) = ts3lib.getClientID(schid)
+                (error, _uid) = ts3lib.getClientVariableAsString(schid, ownid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                ts3lib.clientChatClosed(schid, uid, clientID)
+                ts3lib.printMessageToCurrentTab("Sent client {0} the welcome message for {1}".format(clientID,suid))
+                #self.tmp.extend([uid]);
+            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
+
 except:
     try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
     except: pass
