@@ -29,9 +29,13 @@ class joinChannel(ts3plugin):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL and menuItemID == 0:
             x = QWidget()
             password = QInputDialog.getText(x, "Enter Channel Password", "Password:")
-            (error, clients) = ts3lib.getChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-            (error, maxclients) = ts3lib.getChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
-            (error, maxfamilyclients) = ts3lib.getChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
+            (error, clients) = ts3lib.getChannelClientList(schid, channel)
+            clients = len(clients)
+            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | clients: {1}".format(error,clients))
+            (error, maxclients) = ts3lib.getChannelVariableAsUInt64(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxclients: {1}".format(error,maxclients))
+            (error, maxfamilyclients) = ts3lib.getChannelVariableAsUInt64(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
+            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxfamilyclients: {1}".format(error,maxfamilyclients))
             if clients < maxclients and clients < maxfamilyclients:
                 (error, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid,ownID,channel,password)
@@ -49,7 +53,7 @@ class joinChannel(ts3plugin):
                 (error, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid,ownID,self.channel,self.password)
                 self.schid = 0; self.channel = 0; self.password = "";self.name = ""
-                
+
     def onDelChannelEvent(self, schid, channel, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if self.schid == schid and self.channel == channel:
             (error, name) = ts3lib.getChannelVariableAsString(schid, channel, ts3defines.ChannelProperties.CHANNEL_NAME)
