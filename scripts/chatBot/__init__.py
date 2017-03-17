@@ -258,8 +258,8 @@ class chatBot(ts3plugin):
             (error, chan) = ts3lib.getChannelOfClient(schid, own)
             if self.debug: ts3lib.printMessageToCurrentTab("dbid: {0} | own: {1} | chan: {2} | id: {3}".format(dbid,own,chan,id))
             error = ts3lib.requestSetClientChannelGroup(schid, [id], [chan], [dbid])
-            if error == ts3defines.ERROR_ok: _t = "Successfully set your channelgroup to #{1}".format(_p, sgid)
-            else: _t = "Setting your channelgroup #{1} failed!".format(p, sgid)
+            if error == ts3defines.ERROR_ok: _t = "Successfully set your channelgroup to #{0}".format(id)
+            else: _t = "Setting your channelgroup #{0} failed!".format(id)
             self.answerMessage(schid, self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], _t)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
         self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
