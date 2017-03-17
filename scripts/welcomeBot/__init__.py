@@ -40,8 +40,8 @@ try:
                         "4. If the registration succeeded the server group \"Registriert\" will be assigned to you. It can take a while for your skin head to appear behind your TS name.\n\n"+
                         "Please consider this teamspeak mostly german, so don't expect everyone to speak proper english.\n"+
                         "[color=red]Raids and Trolling will result in bans.[/color]\n"+
-                        "After you got registered you get access to the support channels to get help whenever you need some\n\n"+
-                        "Viel Spass dann :)",
+                        "After you got registered you get access to the support channels to get help whenever you need some.\n\n"+
+                        "Enjoy your stay :)",
                     "DE": "Willkommen, {nick}\n"+
                         "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
                         "1. Auf den Minecraft Server [color=green]gommehd.net[/color] joinen.\n"+
@@ -49,8 +49,8 @@ try:
                         "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
                         "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
                         "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
-                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n"+
-                        "Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
+                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n\n"+
+                        #"Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
                         "Viel Spass dann :)",
                     "AT": "Willkommen, {nick}\n"+
                         "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
@@ -59,8 +59,8 @@ try:
                         "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
                         "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
                         "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
-                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n"+
-                        "Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
+                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n\n"+
+                        #"Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
                         "Viel Spass dann :)",
                     "CH": "Willkommen, {nick}\n"+
                         "Um dich auf diesem Teamspeak Server zu registrieren musst du folgendes tun:\n\n"+
@@ -69,8 +69,8 @@ try:
                         "3. Im Teamspeak Chat dem User [URL=client://0/serveradmin~Gomme-Bot]Gomme-Bot[/URL] deinen Minecraft Namen schreiben (Gross/Kleinschreibung beachten)\n"+
                         "4. Wenn die Registrierung erfolgreich warst erhaelst du die Server Gruppe \"Registriert\". Es kann eine Zeit lang dauern bis dein Minecraft Kopf hinter deinem Namen erscheint.\n\n"+
                         "Bitte bedenke das du auf diesem Teamspeak mit wildfremden Leuten redest ueber die du nichts weisst.\n"+
-                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n"+
-                        "Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
+                        "[color=red]Fuer deine eigene Sicherheit solltest du darauf achten an wen du welche informationen ueber dich rausgibst![/color]\n\n"+
+                        #"Dinge wie private Bilder werden von einigen Personen gerne weitergegeben!\n\n"+
                         "Viel Spass dann :)"
                 }
                 with open(self.ini, 'w') as configfile:
