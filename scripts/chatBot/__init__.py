@@ -43,6 +43,7 @@ class chatBot(ts3plugin):
     returnCode = ""
     noperms = []
     tmpsgroups = []
+    tmpcgroups = []
 
     def __init__(self):
         if path.isfile(self.ini):

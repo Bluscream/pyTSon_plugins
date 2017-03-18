@@ -1,4 +1,7 @@
-import ts3defines, ts3lib
+import ts3defines, ts3lib, json
+from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
+from PythonQt.QtCore import QUrl
+from urllib.parse import quote_plus as urlencode
 from ts3plugin import ts3plugin
 from datetime import datetime
 
@@ -15,8 +18,9 @@ class autoTPRequest(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Talk Power", "")]
     hotkeys = []
     debug = False
-    toggle = True
     msg = "Auto Talk Power Request"
+    toggle = True
+    schid = 0
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
@@ -31,13 +35,21 @@ class autoTPRequest(ts3plugin):
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not self.toggle: return
-        (error, ownid) = ts3lib.getClientID(schid)
-        if ownid == clientID:
-            try:
+        try:
+            (error, ownid) = ts3lib.getClientID(schid)
+            if ownid == clientID:
                 (error, ntp) = ts3lib.getChannelVariableAsInt(schid, newChannelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
                 if self.debug: ts3lib.printMessageToCurrentTab('error: {0} | ntp: {1}'.format(error,ntp))
                 if ntp < 1: return
                 (error, tp) = ts3lib.getClientVariableAsInt(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
                 if self.debug: ts3lib.printMessageToCurrentTab('error: {0} | tp: {1}'.format(error,tp))
-                if not tp: ts3lib.requestIsTalker(schid, True, self.msg)
-            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);return
+                if tp: return
+                self.nwmc = QNetworkAccessManager()
+                self.nwmc.connect("finished(QNetworkReply*)", self.jokeReply)
+                self.schid = schid
+                self.nwmc.get(QNetworkRequest(QUrl("http://tambal.azurewebsites.net/joke/random")))
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def jokeReply(self, reply):
+        try: ts3lib.requestIsTalker(self.schid, True, json.loads(reply.readAll().data().decode('utf-8'))["joke"][:50]);self.schid = 0
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
