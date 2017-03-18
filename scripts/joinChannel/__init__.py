@@ -77,9 +77,8 @@ class joinChannel(ts3plugin):
 
     def onDelChannelEvent(self, schid, channel, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if self.schid == schid and self.channel == channel:
-            (error, name) = ts3lib.getChannelVariableAsString(schid, channel, ts3defines.ChannelProperties.CHANNEL_NAME)
             msgBox = QMessageBox()
-            msgBox.setText("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Queue!".format(self.name, invokerName))
+            msgBox.setText("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Queue!".format(self.cname, invokerName))
             msgBox.setIcon(QMessageBox.Warning)
             msgBox.exec()
             self.schid = 0;self.channel = 0;self.password = "";self.name = ""
