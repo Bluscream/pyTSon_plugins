@@ -27,22 +27,24 @@ class joinChannel(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, channel):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL and menuItemID == 0:
-            x = QWidget()
-            password = QInputDialog.getText(x, "Enter Channel Password", "Password:")
-            clients = self.channelClientCount(schid, channel)
-            if self.debug: ts3lib.printMessageToCurrentTab("clients: {0}".format(clients))
-            (error, maxclients) = ts3lib.getChannelVariableAsUInt64(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
-            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxclients: {1}".format(error,maxclients))
-            (error, maxfamilyclients) = ts3lib.getChannelVariableAsUInt64(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
-            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxfamilyclients: {1}".format(error,maxfamilyclients))
-            if clients < maxclients and clients < maxfamilyclients:
-                (error, ownID) = ts3lib.getClientID(schid)
-                ts3lib.requestClientMove(schid,ownID,channel,password)
-                return True
-            (error, name) = ts3lib.getChannelVariableAsString(schid, channel, ts3defines.ChannelProperties.CHANNEL_NAME)
-            self.schid = schid;self.channel = channel;self.password = password;self.cname = name
-            if password == "": ts3lib.printMessageToCurrentTab("Queued for channel [url=channelid://{0}]{1}[/url]. [color=red]{2}[/color] client(s) remaining.".format(channel, name, maxclients-clients+1))
-            else: ts3lib.printMessageToCurrentTab("Queued for channel [url=channelid://{0}]{1}[/url] with password \"{2}\". [color=red]{3}[/color] client(s) remaining.".format(channel, name, password, maxclients-clients+1))
+            try:
+                x = QWidget()
+                password = QInputDialog.getText(x, "Enter Channel Password", "Password:")
+                clients = self.channelClientCount(schid, channel)
+                if self.debug: ts3lib.printMessageToCurrentTab("clients: {0}".format(clients))
+                (error, maxclients) = ts3lib.getChannelVariableAsUInt64(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+                if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxclients: {1}".format(error,maxclients))
+                (error, maxfamilyclients) = ts3lib.getChannelVariableAsUInt64(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
+                if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxfamilyclients: {1}".format(error,maxfamilyclients))
+                if clients < maxclients and clients < maxfamilyclients:
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    ts3lib.requestClientMove(schid,ownID,channel,password)
+                    return True
+                (error, name) = ts3lib.getChannelVariableAsString(schid, channel, ts3defines.ChannelProperties.CHANNEL_NAME)
+                self.schid = schid;self.channel = channel;self.password = password;self.cname = name
+                if password == "": ts3lib.printMessageToCurrentTab("Queued for channel [url=channelid://{0}]{1}[/url]. [color=red]{2}[/color] client(s) remaining.".format(channel, name, maxclients-clients+1))
+                else: ts3lib.printMessageToCurrentTab("Queued for channel [url=channelid://{0}]{1}[/url] with password \"{2}\". [color=red]{3}[/color] client(s) remaining.".format(channel, name, password, maxclients-clients+1))
+            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if self.schid == schid and self.channel == oldChannelID:
