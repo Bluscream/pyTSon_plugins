@@ -157,15 +157,15 @@ try:
                 if menuItemID == 0:
                     (error, uid) = ts3.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER);self.checkUser(uid)
 
-        def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
+        def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
             if self.toggle:
                 if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
                     self.requested = True
-                    ts3.requestChannelGroupList(ts3.getCurrentServerConnectionHandlerID())
+                    ts3.requestChannelGroupList(schid)
                 elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
                     self.check = False;self.ownchannels.clear()
 
-        def onChannelGroupListEvent(self, serverConnectionHandlerID, channelGroupID, name, atype, iconID, saveDB):
+        def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
             if self.toggle:
                 if self.requested == True:
                     for _name in self.banned_names:
@@ -175,7 +175,7 @@ try:
                     for _name in self.admin_names:
                         if name.upper().__contains__(_name): self.sagroup = channelGroupID;break
 
-        def onChannelGroupListFinishedEvent(self, serverConnectionHandlerID):
+        def onChannelGroupListFinishedEvent(self, schid):
             if self.toggle:
                 self.requested = False;self.check = True
 

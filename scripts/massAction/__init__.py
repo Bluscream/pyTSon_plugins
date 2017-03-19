@@ -1,6 +1,10 @@
-__author__ = 'Bluscream'
 from ts3plugin import ts3plugin
-import datetime, ts3defines, ts3lib
+from datetime import datetime
+from PythonQt.QtGui import QInputDialog, QWidget
+from PythonQt.QtCore import Qt
+from PythonQt.Qt import QApplication
+from ts3client import IconPack
+import ts3defines, ts3lib
 
 class massAction(ts3plugin):
     name = "Mass Actions"
@@ -12,47 +16,137 @@ class massAction(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Message all Clients", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Poke all Clients", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Kick all Clients", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "Ban all Clients", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Message all Clients", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Poke all Clients", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "Kick all Clients", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Ban all Clients", "")]
     hotkeys = []
     debug = False
+    banned_names = ["BAN", "NOT WELCOME"]
+    sbgroup = 0
+    menuItems = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Message all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Message all Channels", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Poke all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "Kick all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 4, "Ban all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Message all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Poke all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "ChannelKick all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "ChannelBan all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "Kick all Clients", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 5, "Ban all Clients", "")
+    ]
+
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
-        ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(
-            datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
+        self.requested = True;ts3lib.requestChannelGroupList(ts3lib.getCurrentServerConnectionHandlerID())
+        ts3lib.logMessage("{0} script for pyTSon by {1} loaded from \"{2}\".".format(self.name,self.author,__file__), ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
-            if menuItemID == 0:
-                error, ownid = ts3lib.getClientID(schid)
-                error, ownchan = ts3lib.getChannelOfClient(schid, ownid)
-                self.sendMessage(schid, ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL, ownchan)
-            elif menuItemID == 1: pass
-            elif menuItemID == 2: pass
-            elif menuItemID == 3: pass
-        elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
-            if menuItemID == 0:
-                self.sendMessage(schid, ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL, selectedItemID)
-            elif menuItemID == 1: pass
-            elif menuItemID == 2: pass
-            elif menuItemID == 3: pass
+        try:
+            if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+                if menuItemID == 0: # Message all Clients
+                    msgs = self.getText(multiline=True,title="Enter Private Message")
+                    (error, clients) = ts3lib.getClientList(schid)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        for msg in msgs: ts3lib.requestSendPrivateTextMsg(schid, msg, c)
+                elif menuItemID == 1: # Message all Channels
+                    msgs = self.getText(multiline=True,title="Enter Channel Message")
+                    (error, channels) = ts3lib.getChannelList(schid)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in channels:
+                        error = ts3lib.requestClientMove(schid, ownID, c, "123")
+                        if not error == ts3defines.ERROR_ok: continue
+                        for msg in msgs: ts3lib.requestSendChannelTextMsg(schid, msg, c)
+                elif menuItemID == 2: # Poke all Clients
+                    msgs = self.getText(title="Enter Poke Message",max=100)
+                    (error, clients) = ts3lib.getClientList(schid)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        for msg in msgs: ts3lib.requestClientPoke(schid, c, msg)
+                elif menuItemID == 3: # Kick all Clients
+                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
+                    (error, clients) = ts3lib.getClientList(schid)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        ts3lib.requestClientKickFromServer(schid, c, msg)
+                elif menuItemID == 4: # Ban all Clients
+                    msg = self.getText(title="Enter Ban Reason",multimsg=False,max=80)
+                    (error, clients) = ts3lib.getClientList(schid)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        ts3lib.banclient(schid, c, -1, msg)
+            elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
+                if menuItemID == 0: # Message all Clients
+                    msgs = self.getText(multiline=True,title="Enter Private Message")
+                    (error, clients) = ts3lib.getChannelClientList(schid, selectedItemID)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        for msg in msgs: ts3lib.requestSendPrivateTextMsg(schid, msg, c)
+                elif menuItemID == 1: # Poke all Clients
+                    msgs = self.getText(title="Enter Poke Message",max=100)
+                    (error, clients) = ts3lib.getChannelClientList(schid, selectedItemID)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        for msg in msgs: ts3lib.requestClientPoke(schid, c, msg)
+                elif menuItemID == 2: # ChannelKick all Clients
+                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
+                    (error, clients) = ts3lib.getChannelClientList(schid,selectedItemID)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        ts3lib.requestClientKickFromChannel(schid, c, msg)
+                elif menuItemID == 3: # ChannelBan all Clients
+                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
+                    (error, clients) = ts3lib.getChannelClientList(schid,selectedItemID)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        (error, dbid) = ts3lib.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+                        ts3lib.requestSetClientChannelGroup(schid, [self.sbgroup], [selectedItemID], [dbid])
+                        ts3lib.requestClientKickFromChannel(schid, c, msg)
+                elif menuItemID == 4: # Kick all Clients
+                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
+                    (error, clients) = ts3lib.getChannelClientList(schid,selectedItemID)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        ts3lib.requestClientKickFromServer(schid, c, msg)
+                elif menuItemID == 5: # Ban all Clients
+                    msg = self.getText(title="Enter Ban Reason",multimsg=False,max=80)
+                    (error, clients) = ts3lib.getChannelClientList(schid,selectedItemID)
+                    (error, ownID) = ts3lib.getClientID(schid)
+                    for c in clients:
+                        if c == ownID: continue
+                        ts3lib.banclient(schid, c, -1, msg)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
+    def getText(self,multimsg=True,multiline=False,title="Enter text here",text="",max=1024):
+        try:
+            x = QWidget()
+            x.setAttribute(Qt.WA_DeleteOnClose)
+            if multiline:
+                clipboard = QApplication.clipboard().text();
+                _message = QInputDialog.getMultiLineText(x, title, text, clipboard)
+            else: _message = QInputDialog.getText(x, title, text)
+            if multimsg: return [_message[i:i + max] for i in range(0, len(_message), max)]
+            else: return _message[:max]
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def sendMessage(self, schid, targetMode, toID):
-        x = QWidget()
-        clipboard = QApplication.clipboard().text();
-        _message = QInputDialog.getMultiLineText(x, "Enter long text here", "", clipboard)
-        message = [_message[i:i + 1024] for i in range(0, len(_message), 1024)]
-        if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
-            for msg in message:
-                error = ts3lib.requestSendChannelTextMsg(schid, msg, toID)
-        elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
-            for msg in message:
-                error = ts3lib.requestSendPrivateTextMsg(schid, msg, toID)
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            self.requested = True;ts3lib.requestChannelGroupList(schid)
+
+    def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
+        if self.requested:
+            for _name in self.banned_names:
+                if name.upper().__contains__(_name): self.sbgroup = channelGroupID;break
+
+    def onChannelGroupListFinishedEvent(self, schid):
+        if self.requested: self.requested = False
