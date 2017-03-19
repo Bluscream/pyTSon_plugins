@@ -357,6 +357,10 @@ class chatBot(ts3plugin):
         elif recording:
             ts3lib.stopVoiceRecording(schid)
 
+    def commandNick(self, schid, targetMode, toID, fromID, params=""):
+        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, params)
+        ts3lib.ﬂushClientSelfUpdates(schid)
+
     def commandBanList(self, schid, targetMode, toID, fromID, params=""):
         # try:
         returnCode = ts3lib.createReturnCode()

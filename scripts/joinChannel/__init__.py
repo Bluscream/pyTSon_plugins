@@ -2,6 +2,7 @@ import ts3lib, ts3defines
 from ts3plugin import ts3plugin
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox
+from PythonQt.QtCore import Qt
 
 class joinChannel(ts3plugin):
     name = "Channel Queue"
@@ -29,6 +30,7 @@ class joinChannel(ts3plugin):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL and menuItemID == 0:
             try:
                 x = QWidget()
+                x.setAttribute(Qt.WA_DeleteOnClose)
                 password = QInputDialog.getText(x, "Enter Channel Password", "Password:")
                 clients = self.channelClientCount(schid, channel)
                 if self.debug: ts3lib.printMessageToCurrentTab("clients: {0}".format(clients))
