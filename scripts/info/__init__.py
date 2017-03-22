@@ -133,7 +133,6 @@ class info(ts3plugin):
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 0:
-                schid = ts3.getCurrentServerConnectionHandlerID()
                 error, ownid = ts3.getClientID(schid)
                 if error == ts3defines.ERROR_ok:
                     error, meta = ts3.getClientVariableAsString(schid, ownid, ts3defines.ClientProperties.CLIENT_META_DATA)
@@ -144,7 +143,6 @@ class info(ts3plugin):
                         if not error == ts3defines.ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error #%s"%error, "Unable to set own meta data!");_t.show()
             elif menuItemID == 1:
-                schid = ts3.getCurrentServerConnectionHandlerID()
                 error, ownid = ts3.getClientID(schid)
                 if error == ts3defines.ERROR_ok:
                     error, flag = ts3.getClientVariableAsString(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR)
@@ -159,7 +157,6 @@ class info(ts3plugin):
 
     def infoData(self, schid, id, atype):
         i = []
-        schid = ts3.getCurrentServerConnectionHandlerID()
         if atype == 0:
             if self.cfg.getboolean('general', 'Autorequest Server Variables'):
                 ts3.requestServerVariables(schid)
@@ -365,7 +362,7 @@ class SettingsDialog(QDialog):
             yield parent.item(i)
 
     def on_btn_apply_clicked(self):
-        ts3.printMessageToCurrentTab("on_btn_apply_clicked")
+        if self.info.cfg.getboolean('general', 'Debug'): ts3.printMessageToCurrentTab("on_btn_apply_clicked")
         self.info.cfg.set('general', 'Debug', str(self.chk_debug.isChecked()))
         self.info.cfg.set('general', 'Colored', str(self.chk_colored.isChecked()))
         self.info.cfg.set('general', 'Autorequest Server Variables', str(self.chk_arsv.isChecked()))

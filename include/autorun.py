@@ -11,7 +11,7 @@ from PythonQt.Qt import *
 from PythonQt.private import *
 from PythonQt.QtSql import *
 from PythonQt.QtUiTools import *
-from PythonQt.Debug import *
+
 self = QApplication.instance()
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
     message = str(message)
@@ -72,9 +72,6 @@ def urlResponse(reply):
         from traceback import format_exc
         try: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::autorun", 0)
         except: print("Error in autorun: "+format_exc())
-
-schid = getCurrentServerConnectionHandlerID()
-(error, ownid) = getClientID(schid)
 def unlock(show=False):
     for item in self.allWidgets():
         try: item.setEnabled(True)
@@ -261,6 +258,9 @@ def generateAvatarFileName():
     #         elif c == 4:
     #             print("Sent command "+cmd+" to PluginCommandTarget_MAX")
     #         sendPluginCommand(schid, cmd, c, [])
+
+schid = getCurrentServerConnectionHandlerID()
+(_e, ownid) = getClientID(schid)
 
 print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.now()))
 for item in sys.path:
