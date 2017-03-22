@@ -25,6 +25,8 @@ class info(ts3plugin):
     cfg.optionxform = str
     runs = 0
 
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+
     def __init__(self):
         self.dlg = None
         if os.path.isfile(self.ini):
@@ -124,11 +126,9 @@ class info(ts3plugin):
         return False
 
     def onPluginCommandEvent(self, serverConnectionHandlerID, pluginName, pluginCommand):
-            _f = "Plugin message by \""+pluginName+"\": "+pluginCommand
-            ts3.logMessage('{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())+" "+_f, ts3defines.LogLevel.LogLevel_INFO, self.name, 0)
-            if self.cfg.getboolean('general', 'Debug'):
-                ts3.printMessageToCurrentTab(_f)
-                print(_f)
+            _f = "Plugin message by {0}: {1}".format(pluginName,pluginCommand)
+            ts3.logMessage(_f, ts3defines.LogLevel.LogLevel_INFO, self.name, 0)
+            if self.cfg.getboolean('general', 'Debug'): ts3.printMessageToCurrentTab("{0}{1}".format(self.timestamp(),_f))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
@@ -359,11 +359,11 @@ class SettingsDialog(QDialog):
             else: _item.setCheckState(Qt.Unchecked)
             _item.setText(name.replace('CONNECTION_', '').replace('_', ' ').title())
         self.info = info
-  
+
     def iterAllItems(self, parent):
         for i in range(parent.count()):
             yield parent.item(i)
-  
+
     def on_btn_apply_clicked(self):
         ts3.printMessageToCurrentTab("on_btn_apply_clicked")
         self.info.cfg.set('general', 'Debug', str(self.chk_debug.isChecked()))

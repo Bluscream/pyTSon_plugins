@@ -37,7 +37,8 @@ class massAction(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "ChannelBan all Clients", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 5, "Kick all Clients", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 6, "Ban all Clients", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 7, "== {0} ==".format(name), "")
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 7, "Give Talk Power", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 8, "== {0} ==".format(name), "")
     ]
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
