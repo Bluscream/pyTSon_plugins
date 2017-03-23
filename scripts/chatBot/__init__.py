@@ -429,7 +429,6 @@ class chatBot(ts3plugin):
         (error, ownID) = ts3lib.getClientID(schid)
         if not fromID == ownID: self.answerMessage(schid, targetMode, toID, fromID, "Insufficient permissions to run this command");return
 
-
     def commandLookup(self, schid, targetMode, toID, fromID, params=""):
         try:
             from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
@@ -515,6 +514,36 @@ class chatBot(ts3plugin):
     def onPermissionListFinishedEvent(self, serverConnectionHandlerID):
         ts3lib.printMessageToCurrentTab("{0}".format(self.perms))
         self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
+
+    def commandWhois(self, schid, targetMode, toID, fromID, params=""):
+        try:
+            from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
+            from urllib.parse import quote_plus
+            params = quote_plus(params)
+            url = "https://jsonwhois.com/api/v1/whois?domain={0}".format(params)
+            token = "fe1abe2646bdc7fac3d36a688d1685fc"
+            if self.debug: ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
+            request = QNetworkRequest()
+            request.setHeader( QNetworkRequest.ContentTypeHeader, "application/json" );
+            request.setRawHeader("Authorization", "Token token={0}".format(token));
+            request.setUrl(QUrl(url))
+            self.nwmc = QNetworkAccessManager()
+            self.nwmc.connect("finished(QNetworkReply*)", self.whoisReply)
+            self.cmdevent = {"event": "", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
+            self.nwmc.get(request)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def whoisReply(self, reply):
+        try:
+            import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply
+            result = json.loads(reply.readAll().data().decode('utf-8'))
+            if self.debug: ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
+            try: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Registrant: {0} | Admin: {1} | Tech: {2}".format(result["registrant_contacts"][0]["name"],result["admin_contacts"][0]["name"],result["technical_contacts"][0]["name"]), True)
+            except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "{0}{1}{2}".format(color.ERROR, result["status"], color.ENDMARKER))
+            self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+
     # COMMANDS END
 
 
