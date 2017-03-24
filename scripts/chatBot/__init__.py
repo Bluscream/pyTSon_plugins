@@ -239,6 +239,16 @@ class chatBot(ts3plugin):
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
         self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
 
+    def commandOP(self, schid, targetMode, toID, fromID, params=""):
+        target = int(params)
+        (error, dbid) = ts3lib.getClientVariableAsInt(schid, target, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        (error, chan) = ts3lib.getChannelOfClient(schid, target)
+        (error, name) = ts3lib.getChannelVariableAsString(schid, chan, ts3defines.ChannelProperties.CHANNEL_NAME)
+        error = ts3lib.requestSetClientChannelGroup(schid, [11], [chan], [dbid])
+        if error == ts3defines.ERROR_ok:
+            _t = "You have been made operator of the channel [url=channelid://{0}]{1}[/url].".format(chan,name)
+            self.answerMessage(schid, ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT, toID, target, _t)
+
     def commandSetChannelGroup(self, schid, targetMode, toID, fromID, params=""):
         self.cmdevent = {"event": "onChannelGroupListEvent", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
         self.tmpcgroups = []
@@ -270,7 +280,20 @@ class chatBot(ts3plugin):
         if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
             ts3lib.requestSendPrivateTextMsg(schid, params, fromID)
         elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
-            ts3lib.requestSendChannelTextMsg(schid, "%s: %s" % (self.clientURL(schid, fromID), params), toID)
+            ts3lib.requestSendChannelTextMsg(schid, "{0}: {1}".format(self.clientURL(schid, fromID), params), toID)
+
+    def commandMessage(self, schid, targetMode, toID, fromID, params=""):
+        params = params.split(" ",1);target = int(params[0]);message = params[1]
+        ts3lib.requestSendPrivateTextMsg(schid, "Message from {0}: {1}".format(self.clientURL(schid, fromID), message), target)
+
+    def commandChannelMessage(self, schid, targetMode, toID, fromID, params=""):
+        try: params = params.split(" ",1);target = int(params[0]);message = params[1]
+        except: (error, target) = ts3lib.getChannelOfClient(schid, fromID);message = params[0]
+        (error, ownID) = ts3lib.getClientID(schid)
+        (error, ownChan) = ts3lib.getChannelOfClient(schid, ownID)
+        if not ownChan == target: ts3lib.requestClientMove(schid, ownID, target, "123")
+        ts3lib.requestSendChannelTextMsg(schid, "Message from {0}: {1}".format(self.clientURL(schid, fromID), message), target)
+        if not ownChan == target: ts3lib.requestClientMove(schid, ownID, ownChan, "123")
 
     def commandPing(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, "Pong!")
@@ -289,13 +312,13 @@ class chatBot(ts3plugin):
         else: ts3lib.requestClientKickFromChannel(schid, fromID, "Command %sckickme used by %s" % (prefix, nickname))
 
     def commandChannelBanMe(self, schid, targetMode, toID, fromID, params=""):
+        (error, ownID) = ts3lib.getClientID(schid)
         if self.cfg.getboolean('general', 'customprefix'): prefix = self.cfg.get('general', 'prefix')
-        else: (error, id) = ts3lib.getClientID(schid);prefix = self.clientURL(schid, id)
+        else: prefix = self.clientURL(schid, ownID)
         (error, nickname) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientProperties.CLIENT_NICKNAME)
         (error, dbid) = ts3lib.getClientVariableAsInt(schid, fromID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        (error, own) = ts3lib.getClientID(schid)
-        (error, chan) = ts3lib.getChannelOfClient(schid, own)
-        if params != "": params = "Command %scbanme used by %s" % (prefix, nickname)
+        (error, chan) = ts3lib.getChannelOfClient(schid, ownID)
+        if params == "": params = "Command %scbanme used by %s" % (prefix, nickname)
         ts3lib.requestSetClientChannelGroup(schid, [12], [chan], [dbid])
         ts3lib.requestClientKickFromChannel(schid, fromID, params)
 
