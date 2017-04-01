@@ -258,3 +258,4 @@ python.png
 include/psutil*
 scripts/pyChat/__init__.py
 .idea/workspace.xml
+lib_new

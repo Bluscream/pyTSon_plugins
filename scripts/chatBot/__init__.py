@@ -197,6 +197,9 @@ class chatBot(ts3plugin):
     def commandTime(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, 'My current time is: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
 
+    def commandUnix(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, datetime.datetime.utcfromtimestamp(int(params)).strftime('%Y-%m-%d %H:%M:%S'))
+
     def commandTaskList(self, schid, targetMode, toID, fromID, params=""):
         import psutil
         msg = []
@@ -287,8 +290,12 @@ class chatBot(ts3plugin):
         ts3lib.requestSendPrivateTextMsg(schid, "Message from {0}: {1}".format(self.clientURL(schid, fromID), message), target)
 
     def commandChannelMessage(self, schid, targetMode, toID, fromID, params=""):
-        try: params = params.split(" ",1);target = int(params[0]);message = params[1]
-        except: (error, target) = ts3lib.getChannelOfClient(schid, fromID);message = params[0]
+        try:
+            _p = params.split(" ",1);target = int(_p[0]);message = _p[1]
+            if self.debug: ts3lib.printMessageToCurrentTab("Found Channel ID: {0}".format(target))
+        except:
+            (error, target) = ts3lib.getChannelOfClient(schid, fromID);message = params
+            if self.debug: ts3lib.printMessageToCurrentTab("Found No Channel ID.")
         (error, ownID) = ts3lib.getClientID(schid)
         (error, ownChan) = ts3lib.getChannelOfClient(schid, ownID)
         if not ownChan == target: ts3lib.requestClientMove(schid, ownID, target, "123")
@@ -513,7 +520,7 @@ class chatBot(ts3plugin):
             (error, uid) = ts3lib.getClientVariableAsString(int(self.cmdevent["schid"]), int(params[0]), ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
             #try:
             self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"],
-                "\nTS Name: {0} | UID: {1}\n".format(name, uid)+
+                "\nTS Name: [url=http://ts3index.com/?page=searchclient&nickname={0}]{0}[/url] | UID: [url=http://ts3index.com/?page=searchclient&uid={1}]{1}[/url]\n".format(name, uid)+
                 "{0} {1}\n".format(result["name"]["first"], result["name"]["last"]).title()+
                 "{0} {1}\n".format(result["location"]["street"][5:],randint(0,50)).title()+
                 "{0} {1}\n".format(result["location"]["postcode"],result["location"]["city"]).title()+
@@ -566,9 +573,25 @@ class chatBot(ts3plugin):
             self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
+    oldChannelID = 0
+    def commandJoin(self, schid, targetMode, toID, fromID, params=""):
+        (error, target) = ts3lib.getChannelOfClient(schid, fromID)
+        (error, ownID) = ts3lib.getClientID(schid)
+        (error, ownChan) = ts3lib.getChannelOfClient(schid, ownID)
+        if not ownChan == target: ts3lib.requestClientMove(schid, ownID, target, "123")
+
+    def commandBack(self, schid, targetMode, toID, fromID, params=""):
+        (error, ownID) = ts3lib.getClientID(schid)
+        ts3lib.requestClientMove(schid, ownID, self.oldChannelID, "123")
+        if self.debug: ts3lib.printMessageToCurrentTab("self.oldChannelID: {0}".format(self.oldChannelID))
+
+    def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
+        (error, _clid) = ts3lib.getClientID(schid)
+        if clientID == _clid and not oldChannelID == 0:
+            self.oldChannelID = oldChannelID
+            if self.debug: ts3lib.printMessageToCurrentTab("self.oldChannelID: {0}".format(self.oldChannelID))
 
     # COMMANDS END
-
 
 class SettingsDialog(QDialog):
     def __init__(self, ini, cfg, cmdini, cmd, parent=None):

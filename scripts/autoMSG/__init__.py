@@ -18,7 +18,7 @@ class autoMSG(ts3plugin):
     debug = False
     enabled = True
     msg = "Glory to Arstotzka, comrade!"
-    uids = ["IXv9Uy3eHpsrRupdMkUTxuTfHQE=","VhFyPHz95ZmWcMRy43rqsdo48RM="]
+    uids = ["IXv9Uy3eHpsrRupdMkUTxuTfHQE=","VhFyPHz95ZmWcMRy43rqsdo48RM=","dnKrBFaIJoMeaKfZ4R6wNDrWVRA=","0HKo9jcJKijfg3wBzgvXkGn/u6g=","09RsHejbkOvorPNJQdRnH5Lz3gY="]
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
