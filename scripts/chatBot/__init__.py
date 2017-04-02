@@ -30,7 +30,7 @@ class chatBot(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    debug = True
+    debug = False
     ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "settings.ini")
     cfg = ConfigParser()
     cmdini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot", "commands.ini")
@@ -587,9 +587,7 @@ class chatBot(ts3plugin):
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         (error, _clid) = ts3lib.getClientID(schid)
-        if clientID == _clid and not oldChannelID == 0:
-            self.oldChannelID = oldChannelID
-            if self.debug: ts3lib.printMessageToCurrentTab("self.oldChannelID: {0}".format(self.oldChannelID))
+        if clientID == _clid and not oldChannelID == 0: self.oldChannelID = oldChannelID
 
     # COMMANDS END
 

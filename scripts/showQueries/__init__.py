@@ -15,7 +15,7 @@ class showQueries(ts3plugin):
     infoTitle = "[b]Queries:[/b]"
     menuItems = []
     hotkeys = []
-    debug = True
+    debug = False
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 

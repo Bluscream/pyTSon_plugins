@@ -19,7 +19,7 @@ class autoChannelCreate(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Talk Power", "")]
     hotkeys = []
-    debug = True
+    debug = False
     ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", __name__, "settings.ini")
     cfg = ConfigParser()
 

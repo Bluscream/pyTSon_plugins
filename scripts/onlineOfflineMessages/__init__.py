@@ -1,10 +1,10 @@
-from ts3plugin import ts3plugin
 from datetime import datetime
+from os import path
 from PythonQt.QtGui import QDialog, QWidget
 from PythonQt.QtCore import Qt
+from ts3plugin import ts3plugin
 from pytsonui import setupUi
 import ts3defines, ts3lib
-from os import path
 
 class onlineOfflineMessages(ts3plugin):
     name = "Online Offline Messages"
@@ -45,7 +45,7 @@ class MessageDialog(QDialog):
             super(QDialog, self).__init__(parent)
             setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "onlineOfflineMessages", "message.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
-            self.setWindowTitle("Send Offline Message to {0}".format(name))
+            self.setWindowTitle("Offline Message to {0}".format(name))
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_send_clicked(self):
