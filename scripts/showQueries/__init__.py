@@ -39,12 +39,14 @@ class showQueries(ts3plugin):
         return "[url=client://{0}/{1}~{2}]{3}[/url]".format(clid, uid, encodednick, nickname)
 
     def infoData(self, schid, id, atype):
-        if atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
-            (error, clist) = ts3lib.getChannelClientList(schid, id)
-            i = []
-            for c in clist:
-                (error, clienttype) = ts3lib.getClientVariableAsInt(schid, c, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
-                if clienttype == ts3defines.ClientType.ClientType_SERVERQUERY:
-                    i.append(self.clientURL(schid,c))
-            if len(i) < 1: return [""]
-            else: return i
+        try:
+            if atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
+                (error, clist) = ts3lib.getChannelClientList(schid, id)
+                i = []
+                for c in clist:
+                    (error, clienttype) = ts3lib.getClientVariableAsInt(schid, c, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
+                    if clienttype == ts3defines.ClientType.ClientType_SERVERQUERY:
+                        i.append(self.clientURL(schid,c))
+                if len(i) < 1: return [""]
+                else: return i
+        except: return ["."]

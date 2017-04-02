@@ -1,7 +1,10 @@
-import ts3lib as ts3
-import ts3defines, datetime
+import ts3defines, ts3lib
 from ts3plugin import ts3plugin, PluginHost
 from os import path
+from datetime import datetime
+from PythonQt.QtGui import QDialog, QWidget, QListWidgetItem
+from PythonQt.QtCore import Qt
+from pytsonui import setupUi
 
 class channelGroupChanger(ts3plugin):
     name = "Channel Group Changer"
@@ -13,102 +16,79 @@ class channelGroupChanger(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(ts3.getPluginPath(), "pyTSon", "scripts", "channelGroupChanger", "icons")
-    #menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Set as target channel", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Change Channel Group", "")]
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Channel Group Changer", ""), # GommeHD
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "=== Channel Group ===", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Set as target channel", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "Add to target channels", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Remove from target channels", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "=== Channel Group ===", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "=== Channel Group ===", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Channel Admin", iconPath+"/GommeHD/Channel Admin.png"),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Operator", iconPath+"/GommeHD/Channel Admin.png"),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Guest", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Channel Bann", iconPath+"/GommeHD/Channel Bann.png"),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "Joinpower", ""),
-                    (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 6, "=== Channel Group ===", "")]
-    # menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Channel Group Changer", ""), #Rewinside
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "=== Channel Group ===", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Set as target channel", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "Add to target channels", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Remove from target channels", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "=== Channel Group ===", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "=== Channel Group ===", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Channel Admin", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Channel Mod", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Channel User", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Not Welcome", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "No Write", ""),
-    #             (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 6, "=== Channel Group ===", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Set as target channel", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Change Channel Group", "")]
     hotkeys = []
-    debug = False
+    debug = True
     toggle = True
-    channels = []
+    channel = 0
+    dlg = None
+    groups = {}
 
+
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
-        # if PluginHost.globalMenuID(self, 0): ts3.setPluginMenuEnabled(globid, on)
-        # if PluginHost.globalMenuID(self, 4): ts3.setPluginMenuEnabled(globid, on)
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug:
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+        self.requested = True ;ts3lib.requestChannelGroupList(ts3lib.getCurrentServerConnectionHandlerID())
+        ts3lib.logMessage("{0} script for pyTSon by {1} loaded from \"{2}\".".format(self.name,self.author,__file__), ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
-            if menuItemID == 0:
-                ts3.printMessageToCurrentTab("toggle: "+str(self.toggle)+" | debug: "+str(self.toggle)+" | channels: "+str(self.channels))
-        elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
             if menuItemID == 1:
-                self.channels = [selectedItemID]
-                ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Set target channel to [color=yellow]"+str(self.channels)+"[/color]")
-            elif menuItemID == 2:
-                if not self.channels.__contains__(selectedItemID):
-                    self.channels.extend([selectedItemID])
-                    ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Added [color=yellow]"+str(selectedItemID)+"[/color] to target channels: "+str(self.channels))
-                else:
-                    ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Channel [color=yellow]"+str(selectedItemID)+"[/color] is already in list: "+str(self.channels))
-            elif menuItemID == 3:
-                self.channels.remove(selectedItemID)
-                ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Removed [color=yellow]"+str(selectedItemID)+"[/color] from target channels: "+str(self.channels))
+                self.channel = selectedItemID
+                ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Set target channel to [color=yellow]"+str(self.channels)+"[/color]")
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
-            if menuItemID == 1:
-                self.setClientChannelGroup(selectedItemID, 10, "Channel Admin")
-                return
-            elif menuItemID == 2:
-                self.setClientChannelGroup(selectedItemID, 11, "Operator")
-                return
-            elif menuItemID == 3:
-                self.setClientChannelGroup(selectedItemID, 9, "Guest")
-                return
-            elif menuItemID == 4:
-                self.setClientChannelGroup(selectedItemID, 12, "Channel Bann")
-                return
-            elif menuItemID == 5:
-                self.setClientChannelGroup(selectedItemID, 13, "Joinpower")
-                return
-            # if menuItemID == 1:
-            #     self.setClientChannelGroup(selectedItemID, 9, "Channel Admin")
-            #     return
-            # elif menuItemID == 2:
-            #     self.setClientChannelGroup(selectedItemID, 14, "Channel Mod")
-            #     return
-            # elif menuItemID == 3:
-            #     self.setClientChannelGroup(selectedItemID, 10, "User")
-            #     return
-            # elif menuItemID == 4:
-            #     self.setClientChannelGroup(selectedItemID, 11, "Not Welcome")
-            #     return
-            # elif menuItemID == 5:
-            #     self.setClientChannelGroup(selectedItemID, 13, "No Write")
-            #     return
+            if menuItemID == 0:
+                (error, dbid) = ts3lib.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+                if not self.dlg: self.dlg = ChannelGroupDialog(schid, dbid, self.channel, self.groups)
+                self.dlg.show();self.dlg.raise_();self.dlg.activateWindow()
+                ts3lib.printMessageToCurrentTab("toggle: {0} | debug: {1} | channel: {2} | groups: {3}".format(self.toggle,self.debug,self.channel,self.groups))
 
-    def setClientChannelGroup(self, selectedItemID, channelGroupID, channelGroupName):
-        schid = ts3.getCurrentServerConnectionHandlerID()
-        (error, dbid) = ts3.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        if len(self.channels) > 0: ts3.requestSetClientChannelGroup(schid, [channelGroupID for _, _ in enumerate(self.channels)], self.channels, [dbid])
+    def setClientChannelGroup(self, schid, selectedItemID, channelGroupID, channelGroupName):
+        (error, dbid) = ts3lib.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        if len(self.channels) > 0: ts3lib.requestSetClientChannelGroup(schid, [channelGroupID for _, _ in enumerate(self.channels)], self.channels, [dbid])
         else:
-            (error, clid) = ts3.getClientID(schid)
-            (error, cid) = ts3.getChannelOfClient(schid, clid)
-            ts3.requestSetClientChannelGroup(schid, [channelGroupID], [cid], [dbid])
-        ts3.printMessageToCurrentTab("Client "+str(dbid)+" has now the group \""+channelGroupName+"\" in Channel #"+str(self.channels))
+            (error, ownID) = ts3lib.getClientID(schid)
+            (error, cid) = ts3lib.getChannelOfClient(schid, ownID)
+            ts3lib.requestSetClientChannelGroup(schid, [channelGroupID], [cid], [dbid])
+        ts3lib.printMessageToCurrentTab("Client {0} #{1} has now the group \"".format(dbid,selectedItemID)+channelGroupName+"\" in Channel #"+str(self.channel))
+
+    def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
+        if not self.requested: return
+        if self.debug: ts3lib.printMessageToCurrentTab("schid: {0} | channelGroupID: {1} | name: {2} | atype: {3} | iconID: {4} | saveDB: {5}".format(schid,channelGroupID,name,atype,iconID,saveDB))
+        if not atype == 1: return
+        if name in self.groups: return
+        self.groups[channelGroupID] = name
+
+    def onChannelGroupListFinishedEvent(self, schid):
+        if self.requested:
+            self.requested = False
+            # _t = {}
+            # for g in self.groups.items():
+            #     if not g[0] in _t:
+            #         if g[1] not in _t[g[0]]: _t[g[0]]=g[1]
+            # self.groups = _t
+
+class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/pyTSon/68c3a081e3aa27f055c902b092f1b31cc9b721d7/ressources/pytsonui.py
+    def __init__(self, schid, dbid, channel, groups, parent=None):
+        try:
+            super(QDialog, self).__init__(parent)
+            setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "channelGroupChanger", "channelGroupSelect.ui"))
+            self.setAttribute(Qt.WA_DeleteOnClose)
+            self.setWindowTitle("Channelgroup Changer")
+            # self.channelGroups.addItems(list(groups.values()))
+            self.channelGroups.clear()
+            for key,p in groups.items():
+                item = QListWidgetItem(self.channelGroups)
+                item.setText(p)
+                item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
+                item.setCheckState(Qt.Unchecked)
+                item.setData(Qt.UserRole, key)
+            self.channelGroups.sortItems()
+            self.schid = schid;self.dbid = dbid;self.channel = channel
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def onPluginsListItemChanged(self, item):
+        checked = item.checkState() == Qt.Checked
+        cgid = item.data(Qt.UserRole)
+        if checked: ts3lib.requestSetClientChannelGroup(schid, [cgid], [self.channel], [self.dbid])
