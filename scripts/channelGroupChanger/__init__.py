@@ -18,7 +18,7 @@ class channelGroupChanger(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Set as target channel", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Change Channel Group", "")]
     hotkeys = []
-    debug = True
+    debug = False
     toggle = True
     channel = 0
     dlg = None
@@ -39,22 +39,12 @@ class channelGroupChanger(ts3plugin):
                 ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Set target channel to [color=yellow]"+str(self.channels)+"[/color]")
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
             if menuItemID == 0:
-                if self.channel == 0:
-                    (e, ownID) = ts3lib.getClientID(schid)
-                    (e, self.channel) = ts3lib.getChannelOfClient(schid, ownID)
+                if self.channel == 0: (e, ownID) = ts3lib.getClientID(schid);(e, self.channel) = ts3lib.getChannelOfClient(schid, ownID)
                 (e, dbid) = ts3lib.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-                if not self.dlg: self.dlg = ChannelGroupDialog(schid, dbid, self.channel, self.groups)
+                (e, name) = ts3lib.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                if not self.dlg: self.dlg = ChannelGroupDialog(schid, dbid, name, self.channel, self.groups)
                 self.dlg.show();self.dlg.raise_();self.dlg.activateWindow()
                 ts3lib.printMessageToCurrentTab("toggle: {0} | debug: {1} | channel: {2} | groups: {3}".format(self.toggle,self.debug,self.channel,self.groups))
-
-    def setClientChannelGroup(self, schid, selectedItemID, channelGroupID, channelGroupName):
-        (error, dbid) = ts3lib.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        if len(self.channels) > 0: ts3lib.requestSetClientChannelGroup(schid, [channelGroupID for _, _ in enumerate(self.channels)], self.channels, [dbid])
-        else:
-            (error, ownID) = ts3lib.getClientID(schid)
-            (error, cid) = ts3lib.getChannelOfClient(schid, ownID)
-            ts3lib.requestSetClientChannelGroup(schid, [channelGroupID], [cid], [dbid])
-        ts3lib.printMessageToCurrentTab("Client {0} #{1} has now the group \"".format(dbid,selectedItemID)+channelGroupName+"\" in Channel #"+str(self.channel))
 
     def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
         if not self.requested: return
@@ -67,12 +57,12 @@ class channelGroupChanger(ts3plugin):
         if self.requested: self.requested = False
 
 class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/pyTSon/68c3a081e3aa27f055c902b092f1b31cc9b721d7/ressources/pytsonui.py
-    def __init__(self, schid, dbid, channel, groups, parent=None):
+    def __init__(self, schid, dbid, name, channel, groups, parent=None):
         try:
             super(QDialog, self).__init__(parent)
             setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "channelGroupChanger", "channelGroupSelect.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
-            self.setWindowTitle("Channelgroup Changer")
+            self.setWindowTitle(name)
             # self.channelGroups.addItems(list(groups.values()))
             self.channelGroups.clear()
             for key,p in groups.items():
@@ -82,14 +72,17 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
                     item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
                     item.setCheckState(Qt.Unchecked)
                     item.setData(Qt.UserRole, key)
+                    # item.setIcon(icon)
                 except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             self.channelGroups.sortItems()
-            self.channelGroups.connect("itemChanged(QListWidgetItem*)", self.onChannelChangedEvent)
+            self.channelGroups.connect("itemChanged(QListWidgetItem*)", self.onSelectedChannelGroupChangedEvent)
             self.schid = schid;self.dbid = dbid;self.channel = channel
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);pass
 
-    def onChannelChangedEvent(self, item):
-        for item self.channelGroups.items():
-            pass
+    def onSelectedChannelGroupChangedEvent(self, item):
         if item.checkState() == Qt.Checked:
+            items = self.channelGroups.count
+            for i in range(0,items):
+                litem = self.channelGroups.item(i);
+                if litem != item: litem.setCheckState(Qt.Unchecked)
             ts3lib.requestSetClientChannelGroup(self.schid, [item.data(Qt.UserRole)], [self.channel], [self.dbid])
