@@ -230,4 +230,12 @@ scripts/ts3plugin.py
 !include/autorun.py
 !include/getvalues.py
 
+#Additional docs
+!docs/api.pdf.url
+!docs/doc.qt.io.url
+!docs/pyqt.sourceforge.net.url
+!docs/pytson.4qt.de.url
+!docs/raw api.pdf.url
+
+
 !ressources/bluscream.json
