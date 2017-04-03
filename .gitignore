@@ -219,6 +219,7 @@ pip-log.txt
 docs/
 include/
 lib/
+lib_new/
 ressources/
 /python.exe
 /python.png
