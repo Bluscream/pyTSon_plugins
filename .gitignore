@@ -215,47 +215,17 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-#Custom Entries
-pathmann.git/*
-docs/*
-include/apps
-include/Lib_win64
-include/pip
-include/pytsonui.py
-include/ts3defines.py
-include/ts3help.py
-include/ts3plugin.py
-ressources/pyTSon-configdialog.ui
-scripts/ts3plugin.py
-python35.dll
-scripts/serverBrowser/cfg/serverBrowser.ini
-ressources/repository.ui
-ressources/repository-manager.ui
-ressources/repositorymaster.json
-ressources/octicons
-include/devtools.py
-include/eventlog.py
-include/*.h
-ressources/installer.ui
-lib/*
-include/pytson.py
-include/ts3client.py
-include/python3.5m/
-python.exe
-getpip.py
-scripts/easy_install-3.5.exe
-scripts/easy_install.exe
-scripts/wheel.exe
-test.py
-ressources/python.png
-*.exe
-.idea/workspace.xml
-scripts_/pip-script.py
-scripts_/pip3-script.py
-scripts_/pip3.5-script.py
-python.png
-*.h
-include/psutil*
-scripts/pyChat/__init__.py
-.idea/workspace.xml
-lib_new
+#pyTSon files
+docs/
+include/
+lib/
+ressources/
+/python.exe
+/python.png
+/python*.dll
+
+#Own includes
+!include/autorun.py
+!include/getvalues.py
+
+!ressources/bluscream.json
