@@ -47,6 +47,6 @@ class showQueries(ts3plugin):
                     (error, clienttype) = ts3lib.getClientVariableAsInt(schid, c, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
                     if clienttype == ts3defines.ClientType.ClientType_SERVERQUERY:
                         i.append(self.clientURL(schid,c))
-                if len(i) < 1: return [""]
+                if len(i) < 1: return
                 else: return i
-        except: return ["."]
+        except: return
