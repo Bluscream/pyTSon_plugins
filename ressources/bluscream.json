@@ -108,6 +108,15 @@
         "dependencies": null
     },
     {
+        "name": "Channel Group Changer",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Change users channelgroups from everywhere.",
+        "url": "https://github.com/Bluscream/pyTSon_plugins/raw/master/scripts/channelGroupChanger/__init__.py",
+        "dependencies": null
+    },
+    {
         "name": "All in One",
         "author": "Bluscream",
         "version": "0",
