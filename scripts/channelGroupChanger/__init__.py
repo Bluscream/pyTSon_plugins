@@ -34,9 +34,9 @@ class channelGroupChanger(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
-            if menuItemID == 1:
+            if menuItemID == 0:
                 self.channel = selectedItemID
-                ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Set target channel to [color=yellow]"+str(self.channels)+"[/color]")
+                ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())+" Set target channel to [color=yellow]"+str(self.channel)+"[/color]")
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
             if menuItemID == 0:
                 if self.channel == 0:
@@ -82,9 +82,12 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);pass
 
     def onSelectedChannelGroupChangedEvent(self, item):
-        if item.checkState() == Qt.Checked:
-            items = self.channelGroups.count
-            for i in range(0,items):
-                litem = self.channelGroups.item(i);
-                if litem != item: litem.setCheckState(Qt.Unchecked)
-            ts3lib.requestSetClientChannelGroup(self.schid, [item.data(Qt.UserRole)], [self.channel], [self.dbid])
+        try:
+            if item.checkState() == Qt.Checked:
+                items = self.channelGroups.count
+                for i in range(0,items):
+                    litem = self.channelGroups.item(i);
+                    if litem != item: litem.setCheckState(Qt.Unchecked)
+                #ts3lib.printMessageToCurrentTab("channel: {0} | group: {1} | dbid: {2}".format(self.channel,item.data(Qt.UserRole),self.dbid))
+                ts3lib.requestSetClientChannelGroup(self.schid, [item.data(Qt.UserRole)], [self.channel], [self.dbid])
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
