@@ -39,12 +39,14 @@ class channelGroupChanger(ts3plugin):
                 ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())+" Set target channel to [color=yellow]"+str(self.channels)+"[/color]")
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
             if menuItemID == 0:
-                if self.channel == 0: (e, ownID) = ts3lib.getClientID(schid);(e, self.channel) = ts3lib.getChannelOfClient(schid, ownID)
+                if self.channel == 0:
+                    (e, ownID) = ts3lib.getClientID(schid)
+                    (e, self.channel) = ts3lib.getChannelOfClient(schid, ownID)
                 (e, dbid) = ts3lib.getClientVariableAsUInt64(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
                 (e, name) = ts3lib.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                if self.debug: ts3lib.printMessageToCurrentTab("toggle: {0} | debug: {1} | channel: {2} | groups: {3} | dbid: {4} | name: {5}".format(self.toggle,self.debug,self.channel,self.groups,dbid,name))
                 if not self.dlg: self.dlg = ChannelGroupDialog(schid, dbid, name, self.channel, self.groups)
                 self.dlg.show();self.dlg.raise_();self.dlg.activateWindow()
-                ts3lib.printMessageToCurrentTab("toggle: {0} | debug: {1} | channel: {2} | groups: {3}".format(self.toggle,self.debug,self.channel,self.groups))
 
     def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
         if not self.requested: return
