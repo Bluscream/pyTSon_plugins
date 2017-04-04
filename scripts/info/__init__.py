@@ -79,13 +79,11 @@ class info(ts3plugin):
                         if not val == self.cfg.getboolean('general', name):
                             self.cfg.set('general', str(name), str(val))
                     except:
-                        from traceback import format_exc
-                        ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+                        if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
         except:
-            from traceback import format_exc
-            ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def configure(self, qParentWidget):
         try:
@@ -95,8 +93,7 @@ class info(ts3plugin):
             self.dlg.raise_()
             self.dlg.activateWindow()
         except:
-            from traceback import format_exc
-            ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def processCommand(self, schid, command):
         tokens = command.split(' ')
@@ -232,14 +229,14 @@ class info(ts3plugin):
                             (success, _tmp) = self.processVariable(schid, 'ClientProperties', name, 'CLIENT_', id)
                             if success: i.append(_tmp)
                     except:
-                        continue;ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        continue;#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             for name in self.cfg['ClientPropertiesRare']:
                 try:
                     if self.cfg.getboolean('ClientPropertiesRare', name):
                             (success, _tmp) = self.processVariable(schid, 'ClientPropertiesRare', name, 'CLIENT_', id)
                             if success: i.append(_tmp)
                 except:
-                    continue;ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                    continue;#ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
             for name in self.cfg['ConnectionProperties']:
                 try:
                     if self.cfg.getboolean('ConnectionProperties', name):
@@ -287,7 +284,8 @@ class info(ts3plugin):
             _var = str(_var)
             if error != ts3defines.ERROR_ok or _var == "": return False, ""
             return True, var.replace(start, '').replace('_', ' ').title() + ": " + _var
-        except: from traceback import format_exc;ts3.logMessage("Could not resolve variable ts3defines.%s.%s: %s" % (type, var, format_exc()), ts3defines.LogLevel.LogLevel_INFO, self.name, 0);return False, ""
+        except:
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage("Could not resolve variable ts3defines.%s.%s: %s" % (type, var, format_exc()), ts3defines.LogLevel.LogLevel_INFO, self.name, 0);return False, ""
 
 class SettingsDialog(QDialog):
     def __init__(self, info, parent=None):
