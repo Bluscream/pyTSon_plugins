@@ -60,6 +60,13 @@ try:
             self.db = QSqlDatabase.addDatabase("QSQLITE","channelWatcher")
             self.db.setDatabaseName(ts3lib.getConfigPath() + "settings.db")
             if self.db.isValid(): self.db.open()
+            schid = ts3lib.getCurrentServerConnectionHandlerID()
+            if schid:
+                self.requested = True
+                ts3lib.requestChannelGroupList(schid)
+                (error, ownID) = ts3lib.getClientID(schid)
+                (error, cid) = ts3lib.getChannelOfClient(schid, ownID)
+                self.ownchannels.extend([cid])
             ts3lib.logMessage("{0} script for pyTSon by {1} loaded from \"{2}\".".format(self.name,self.author,__file__), ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
             if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
