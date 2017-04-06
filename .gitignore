@@ -216,6 +216,7 @@ pip-log.txt
 .mr.developer.cfg
 
 #pyTSon files
+pathmann.git/
 docs/
 include/
 lib/
