@@ -1,13 +1,14 @@
 from ts3plugin import ts3plugin
 
-import ts3lib, ts3defines, ts3widgets
+import ts3lib, ts3defines, ts3widgets.serverview
+#from ts3widgets import serverview
 
 from PythonQt.QtGui import QApplication, QDialog, QAbstractItemView, QTreeView, QHBoxLayout, QItemSelection, QItemSelectionModel
 from PythonQt.QtCore import Qt, QEvent, QTimer, QMimeData, QModelIndex
-#from PythonQt.pytson import EventFilterObject
+from pythonqtpytson import EventFilterObject
 
 
-class DragDropServerviewModel(ts3widgets.ServerviewModel):
+class DragDropServerviewModel(ts3widgets.serverview.ServerviewModel):
     def __init__(self, schid, iconpack=None, parent=None):
         super().__init__(schid, iconpack, parent)
 
@@ -29,7 +30,7 @@ class DragDropServerviewModel(ts3widgets.ServerviewModel):
 
     def _recursiveClients(self, chan, l):
         for c in chan:
-            if type(c) is ts3widgets.Client:
+            if type(c) is ts3widgets.serverview.Client:
                 if c.clid not in l:
                     l.append(c.clid)
             else:
@@ -41,7 +42,7 @@ class DragDropServerviewModel(ts3widgets.ServerviewModel):
 
             for idx in indexes:
                 obj = self._indexObject(idx)
-                if type(obj) is ts3widgets.Client:
+                if type(obj) is ts3widgets.serverview.Client:
                     if obj.clid not in clids:
                         clids.append(obj.clid)
                 else:
@@ -61,7 +62,7 @@ class DragDropServerviewModel(ts3widgets.ServerviewModel):
             return False
 
         obj = self._indexObject(parent)
-        if type(obj) is not ts3widgets.Channel:
+        if type(obj) is not ts3widgets.serverview.Channel:
             return False
 
         return True
@@ -77,7 +78,7 @@ class DragDropServerviewModel(ts3widgets.ServerviewModel):
             return True
 
         chan = self._indexObject(parent)
-        assert type(chan) is ts3widgets.Channel
+        assert type(chan) is ts3widgets.serverview.Channel
 
         for clid in map(int, mimedata.text().split(" ")):
             err = ts3lib.requestClientMove(self.schid, clid, chan.cid, "")
@@ -153,7 +154,7 @@ class DragDropServerview(QTreeView):
         try:
             self.svmodel = DragDropServerviewModel(schid, None, self)
 
-            delegate = ts3widgets.ServerviewDelegate(self)
+            delegate = ts3widgets.serverview.ServerviewDelegate(self)
         except Exception as e:
             self.delete()
             raise e
@@ -258,10 +259,10 @@ class multiselectmove(ts3plugin):
 
     def __init__(self):
         self.svobserver = EventFilterObject([QEvent.ChildAdded])
-        self.svobserver.connect("eventFiltered(QObject*, QEvent*)", self.onNewServerview)
+        #self.svobserver.connect("eventFiltered(QObject*, QEvent*)", self.onNewServerview)
 
         self.treekeyobserver = EventFilterObject([QEvent.KeyPress, QEvent.KeyRelease, QEvent.FocusOut])
-        self.treekeyobserver.connect("eventFiltered(QObject*, QEvent*)", self.onTreeKey)
+        #self.treekeyobserver.connect("eventFiltered(QObject*, QEvent*)", self.onTreeKey)
 
         self.main = None
         self.svmanagerstack = None
@@ -350,4 +351,3 @@ class multiselectmove(ts3plugin):
     def onHotkeyEvent(self, keyword):
         if keyword == "0":
             self.showDialog(ts3lib.getCurrentServerConnectionHandlerID())
-

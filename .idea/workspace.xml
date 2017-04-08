@@ -2,10 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" afterPath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\AutoReplyAway\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\autopokeback\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\cfgDialog\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\cfgDialog\cfgDialog.ini" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\dataChanger\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\discordify\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\discordify\icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\exporter\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\faker\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\g15plugin\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\infoHTML\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\ipcplugin\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\linkinfo\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\linkinfo\linkinfo.db" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\linkinfo\linkinfo.ui" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\linkinfo\luemmel.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\lukas\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\msgRedirect\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\notify\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\nowPlaying\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\processCommandTest\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\profile\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\profile\cfg\profile.ini" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\profile\ui\profile.ui" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\profile\ui\profile_simple.ui" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\queryConsole\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\report\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\report\report.ui" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\settings_server.ui" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\streamChat\streamChat.ui" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\tweakui\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_\widgetinfo\__init__.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/multiselect/__init__.py" afterPath="$PROJECT_DIR$/scripts/multiselect/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" afterPath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/settings/settings.ini" afterPath="$PROJECT_DIR$/scripts/settings/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,11 +79,9 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="10404">
+            <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="11509">
               <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#37#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -59,11 +89,9 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2793" max-vertical-offset="5015">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3128" max-vertical-offset="5185">
               <caret line="184" column="31" selection-start-line="184" selection-start-column="31" selection-end-line="184" selection-end-column="31" />
-              <folding>
-                <marker date="1489758203271" expanded="true" signature="4104:4156" placeholder="SELECT * FRO..contacts..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -71,7 +99,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/AutoChannelChatTab/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3939732" vertical-offset="480" max-vertical-offset="1377">
+            <state vertical-scroll-proportion="0.4180602" vertical-offset="458" max-vertical-offset="1377">
               <caret line="49" column="56" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="56" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -205,7 +233,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="1932" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -285,6 +313,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -300,20 +329,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="pyTSon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pyTSon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pyTSon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts_" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -351,7 +366,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -671,11 +685,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23347548" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2361111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.50319827" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -760,6 +774,40 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3128" max-vertical-offset="5185">
+          <caret line="184" column="31" selection-start-line="184" selection-start-column="31" selection-end-line="184" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/AutoChannelChatTab/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5240" max-vertical-offset="6562">
+          <caret line="334" column="68" selection-start-line="334" selection-start-column="24" selection-end-line="334" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1003">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/NoX/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -844,13 +892,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3plugin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/pluginhost.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="7430" max-vertical-offset="8313">
@@ -922,16 +963,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sda">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/msgRedirect/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43965518" vertical-offset="0" max-vertical-offset="1751">
@@ -970,13 +1001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pyChat/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46986607" vertical-offset="837" max-vertical-offset="1734">
-          <caret line="74" column="19" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.6206117" vertical-offset="4726" max-vertical-offset="7021">
@@ -988,13 +1012,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8844847" vertical-offset="1" max-vertical-offset="884">
           <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3widgets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47554806" vertical-offset="12519" max-vertical-offset="22440">
-          <caret line="760" column="39" selection-start-line="760" selection-start-column="39" selection-end-line="760" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1090,9 +1107,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="10404">
           <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1122,9 +1137,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2793" max-vertical-offset="5015">
           <caret line="184" column="31" selection-start-line="184" selection-start-column="31" selection-end-line="184" selection-end-column="31" />
-          <folding>
-            <marker date="1489758203271" expanded="true" signature="4104:4156" placeholder="SELECT * FRO..contacts..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1138,7 +1151,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/AutoChannelChatTab/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3939732" vertical-offset="480" max-vertical-offset="1377">
+        <state vertical-scroll-proportion="0.4180602" vertical-offset="458" max-vertical-offset="1377">
           <caret line="49" column="56" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="56" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
