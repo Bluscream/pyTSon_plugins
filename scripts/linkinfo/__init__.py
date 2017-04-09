@@ -13,7 +13,7 @@ class Linkinfo(ts3plugin):
     name = "Linkinfo"
     requestAutoload = False
     version = "1.0.1"
-    apiVersion = 21
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     author = "Luemmel"
     description = "Prints a Linkinfolink to the chat."
     offersConfigure = True

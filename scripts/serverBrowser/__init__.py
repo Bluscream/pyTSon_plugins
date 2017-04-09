@@ -12,7 +12,7 @@ import ts3defines, os, json, configparser, webbrowser, traceback, urllib.parse
 class serverBrowser(ts3plugin):
     shortname = "PS"
     name = "Better Server Browser"
-    apiVersion = 22
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "0.5"
     author = "Bluscream"

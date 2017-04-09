@@ -11,7 +11,7 @@ try:
 
     class channelWatcher(ts3plugin):
         name = "Channel Watcher"
-        apiVersion = 22
+        import pytson;apiVersion = pytson.getCurrentApiVersion()
         requestAutoload = False
         version = "1.0"
         author = "Bluscream"

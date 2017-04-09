@@ -184,17 +184,17 @@ class EventlogDialog(QDialog):
     def callback(self, name, *args):
         self.model.callback(name, *args)
 
-class eventlog(ts3plugin):
+class ipcclient(ts3plugin):
     requestAutoload = False
-    name = "eventlog"
+    name = "IPC Client"
     version = "1.0.0"
     import pytson;apiVersion = pytson.getCurrentApiVersion()
-    author = "Thomas \"PLuS\" Pathmann"
-    description = "This plugin shows all available events in a log. Might be helpfull for plugin deveolopers."
+    author = "Thomas \"PLuS\" Pathmann, Bluscream"
+    description = "ipcplugin test"
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Eventlog", os.path.join("ressources", "octicons", "list-unordered.svg.png"))]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "IPC Events", os.path.join("ressources", "octicons", "list-unordered.svg.png"))]
     hotkeys = []
 
     def __init__(self):

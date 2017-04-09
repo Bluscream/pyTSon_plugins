@@ -1,12 +1,13 @@
-import ts3defines
-import ts3lib
+import ts3lib, ts3defines
 from PythonQt.QtCore import Qt, QTimer
 from ts3plugin import ts3plugin
-from pytsonui import setupUI
+from pytsonui import setupUi
+from os import path
+from configparser import ConfigParser
 
 class dataChanger(ts3plugin):
     name = "Name Changer"
-    apiVersion = 21
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

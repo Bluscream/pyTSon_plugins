@@ -1,10 +1,10 @@
-import ts3lib as ts3; from ts3plugin import ts3plugin, PluginHost
-import ts3lib as ts3; import   ts3defines, datetime, ts3query
+from ts3plugin import ts3plugin, PluginHost
+import ts3lib, ts3defines, datetime, ts3query
 
 
 class queryConsole(ts3plugin):
     name = "TS3 Query Console"
-    apiVersion = 21
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

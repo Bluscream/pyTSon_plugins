@@ -1,4 +1,4 @@
-import ts3lib, ts3defines
+import pytson, ts3lib, ts3defines
 from ts3plugin import ts3plugin
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox
@@ -6,7 +6,7 @@ from PythonQt.QtCore import Qt
 
 class joinChannel(ts3plugin):
     name = "Channel Queue"
-    apiVersion = 22
+    apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

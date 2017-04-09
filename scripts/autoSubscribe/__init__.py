@@ -5,7 +5,7 @@ from os import path
 
 class autoSubscribe(ts3plugin):
     name = "Auto Subscribe"
-    apiVersion = 22
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

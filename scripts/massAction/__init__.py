@@ -11,7 +11,7 @@ import ts3defines, ts3lib
 
 class massAction(ts3plugin):
     name = "Mass Actions"
-    apiVersion = 22
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

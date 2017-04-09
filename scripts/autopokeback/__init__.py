@@ -6,7 +6,7 @@ class autopoke(ts3plugin):
     name = "autopokeback"
     requestAutoload = False
     version = "1.0.1"
-    apiVersion = 21
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     author = "Thomas \"PLuS\" Pathmann"
     description = "Ignore pokes and automatically poke back"
     offersConfigure = False

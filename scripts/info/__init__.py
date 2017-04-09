@@ -10,7 +10,7 @@ from configparser import ConfigParser
 
 class info(ts3plugin):
     name = "Extended Info"
-    apiVersion = 22
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -101,7 +101,6 @@ class info(ts3plugin):
             ts3.sendPluginCommand(schid, tokens[1], ts3defines.PluginTargetMode.PluginCommandTarget_SERVER, []);return True
         elif tokens[0] == "meta":
             if tokens[1] == "get":
-                schid = ts3.getCurrentServerConnectionHandlerID()
                 error, ownid = ts3.getClientID(schid)
                 if error == ts3defines.ERROR_ok:
                     # requestClientVariables(schid, ownid)
@@ -113,7 +112,6 @@ class info(ts3plugin):
                 else:
                     ts3.printMessageToCurrentTab("Error: Can't get own clientID.");return True
             elif tokens[1] == "set":
-                schid = ts3.getCurrentServerConnectionHandlerID()
                 error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, tokens[2])
                 if not error == ts3defines.ERROR_ok:
                     ts3.printMessageToCurrentTab("Error: Unable to set own meta data.");return True

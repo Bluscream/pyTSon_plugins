@@ -5,7 +5,7 @@ from os import path
 
 class autoMSG(ts3plugin):
     name = "Auto Message"
-    apiVersion = 22
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

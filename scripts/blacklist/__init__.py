@@ -1,9 +1,7 @@
 from ts3plugin import ts3plugin, PluginHost
 from ts3lib import getPluginPath
 from os import path
-import ts3defines, os.path,  pickle, re
-import ts3lib as ts3
-
+import ts3defines,  pickle, re, pytson, ts3lib
 from PythonQt.QtSql import QSqlDatabase
 from PythonQt.QtGui import *
 from PythonQt.QtCore import Qt
@@ -14,7 +12,7 @@ class Blacklist(ts3plugin):
     name				= "Blacklist"
     requestAutoload		= False
     version				= "1.0"
-    apiVersion			= 21
+    apiVersion			= pytson.getCurrentApiVersion()
     author				= "Luemmel"
     description			= "Blacklist nicknames."
     offersConfigure		= True
@@ -65,13 +63,13 @@ class Blacklist(ts3plugin):
             self.db.exec_("INSERT INTO blacklist (name) VALUES ('"+nickname_low+"')")
             self.bl.append(nickname_low)
             self.bl.sort()
-            ts3.printMessageToCurrentTab("\""+nickname+"\" is [b]now[/b] blacklisted.")
-        else:ts3.printMessageToCurrentTab("\""+nickname+"\" is [b]already[/b] blacklisted.")
+            ts3lib.printMessageToCurrentTab("\""+nickname+"\" is [b]now[/b] blacklisted.")
+        else:ts3lib.printMessageToCurrentTab("\""+nickname+"\" is [b]already[/b] blacklisted.")
 
     def bl_remove(self, nickname):
         self.db.exec_("DELETE FROM blacklist WHERE name = '"+nickname+"'")
         self.bl.remove(nickname)
-        ts3.printMessageToCurrentTab("\""+nickname+"\" is [b]no longer[/b] blacklisted.")
+        ts3lib.printMessageToCurrentTab("\""+nickname+"\" is [b]no longer[/b] blacklisted.")
 
     def open_dlg(self):
         if not self.dlg:
@@ -83,7 +81,7 @@ class Blacklist(ts3plugin):
 
     def onMenuItemEvent(self, sch_id, a_type, menu_item_id, selected_item_id):
         if a_type == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
-            (error, nickname) = ts3.getClientVariableAsString(sch_id, selected_item_id, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            (error, nickname) = ts3lib.getClientVariableAsString(sch_id, selected_item_id, ts3defines.ClientProperties.CLIENT_NICKNAME)
             if menu_item_id == 0:self.bl_add(nickname)
             if menu_item_id == 1:self.bl_remove(nickname)
         elif a_type == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
@@ -91,28 +89,28 @@ class Blacklist(ts3plugin):
 
     def onClientMoveEvent(self, sch_id, user_id, old_channel_id, new_channel_id, visibility, move_message):
         if self.active:
-            (error, cl_id) = ts3.getClientID(sch_id)
-            (error, cl_ch) = ts3.getChannelOfClient(sch_id, cl_id)
+            (error, cl_id) = ts3lib.getClientID(sch_id)
+            (error, cl_ch) = ts3lib.getChannelOfClient(sch_id, cl_id)
 
             if new_channel_id == cl_ch and not user_id == cl_id:
-                (error, nickname) = ts3.getClientVariableAsString(sch_id, user_id, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                (error, nickname) = ts3lib.getClientVariableAsString(sch_id, user_id, ts3defines.ClientProperties.CLIENT_NICKNAME)
                 nickname = nickname.lower()
                 if self.ignore:
                     nickname = re.sub(r"\s+", '', nickname)
                 for nick in self.bl:
                     if nick in nickname:
-                        (error, suid) = ts3.getServerVariableAsString(sch_id, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+                        (error, suid) = ts3lib.getServerVariableAsString(sch_id, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
                         if suid == self.gomme_uid:
-                            (error, dbid) = ts3.getClientVariableAsUInt64(sch_id, user_id, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-                            ts3.requestSetClientChannelGroup(sch_id, [12], [cl_ch], [dbid])
+                            (error, dbid) = ts3lib.getClientVariableAsUInt64(sch_id, user_id, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+                            ts3lib.requestSetClientChannelGroup(sch_id, [12], [cl_ch], [dbid])
                         else:
-                            ts3.requestClientKickFromChannel(sch_id, user_id, "")
+                            ts3lib.requestClientKickFromChannel(sch_id, user_id, "")
 
 class SettingsDialog(QDialog):
     def __init__(self, blacklist, parent=None):
         self.bl = blacklist
         super(QDialog, self).__init__(parent)
-        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "blacklist", "blacklist.ui"))
+        setupUi(self, os.path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "blacklist", "blacklist.ui"))
         self.setWindowTitle("Blacklist by Luemmel")
 
         self.btn_add.clicked.connect(self.add)
@@ -142,15 +140,14 @@ class SettingsDialog(QDialog):
         self.bl.active = self.cb_active.isChecked()
         self.bl.db.exec_("UPDATE settings SET ""active = "+str(int(self.bl.active)))
         if self.bl.active:
-            ts3.printMessageToCurrentTab("Blacklist [b]enabled[/b].")
+            ts3lib.printMessageToCurrentTab("Blacklist [b]enabled[/b].")
         else:
-            ts3.printMessageToCurrentTab("Blacklist [b]disabled[/b].")
+            ts3lib.printMessageToCurrentTab("Blacklist [b]disabled[/b].")
 
     def ignore(self):
         self.bl.ignore = self.cb_ignore.isChecked()
         self.bl.db.exec_("UPDATE settings SET ""ignore = "+str(int(self.bl.ignore)))
         if self.bl.ignore:
-            ts3.printMessageToCurrentTab("Blacklist will [b]now[/b] ignore spaces.")
+            ts3lib.printMessageToCurrentTab("Blacklist will [b]now[/b] ignore spaces.")
         else:
-            ts3.printMessageToCurrentTab("Blacklist will [b]no longer[/b] ignore spaces.")
-
+            ts3lib.printMessageToCurrentTab("Blacklist will [b]no longer[/b] ignore spaces.")

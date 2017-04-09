@@ -4,7 +4,7 @@ from os import path
 
 class faker(ts3plugin):
     name = "Fake Anything"
-    apiVersion = 21
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

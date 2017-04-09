@@ -7,7 +7,7 @@ class infoHTML(ts3plugin):
     name = "Extended HTML Support"
     requestAutoload = False
     version = "1.0"
-    apiVersion = 21
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     author = "Bluscream"
     description =  "Extends the infoData Frame for extended HTML support."
     offersConfigure = False

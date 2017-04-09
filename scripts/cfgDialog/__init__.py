@@ -9,7 +9,7 @@ import ts3defines
 
 class cfgDialog(ts3plugin):
     name = "Config Dialog Examples"
-    apiVersion = 21
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

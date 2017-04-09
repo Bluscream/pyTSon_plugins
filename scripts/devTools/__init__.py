@@ -330,7 +330,7 @@ try:
         name = "Developer Tools"
         requestAutoload = False
         version = "1.3"
-        apiVersion = 22
+        import pytson;apiVersion = pytson.getCurrentApiVersion()
         author = "Thomas \"PLuS\" Pathmann, Bluscream"
         description =  "Show information of the client's ui elements.\n"
         description += "Originally called widgetInfo.\n"

@@ -1,8 +1,5 @@
-import ts3lib as ts3; from ts3plugin import ts3plugin
-
-import ts3lib as ts3; import   ts3defines
-import os
-
+import ts3lib, ts3defines, os
+from ts3plugin import ts3plugin
 from PythonQt.QtNetwork import QLocalServer
 from PythonQt.QtCore import QByteArray
 
@@ -82,7 +79,7 @@ class ipcplugin(ts3plugin):
     requestAutoload = False
     name = "ipc"
     version = "1.0"
-    apiVersion = 21
+    import pytson;apiVersion = pytson.getCurrentApiVersion()
     author = "Thomas \"PLuS\" Pathmann"
     description = "This is a plugin used for interprocess communication. It broadcasts events to clients and can receive commands to execute."
     offersConfigure = False
@@ -98,10 +95,11 @@ class ipcplugin(ts3plugin):
         self.server = QLocalServer()
         self.server.connect("newConnection()", self.onNewConnection)
 
-        path = os.path.join(ts3.getPluginPath(), "pyTSon", "ipcsocket")
+        path = os.path.join(ts3lib.getPluginPath(), "pyTSon", "ipcsocket")
         QLocalServer.removeServer(path)
         if not self.server.listen(path):
             raise Exception("Error opening local socket (%s)" % path)
+        ts3lib.logMessage("IPC Socket listening on \"{0}\"".format(path), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon.ipcplugin", 0)
 
     def stop(self):
         for cli in list(self.clients):
@@ -177,7 +175,7 @@ class ipcplugin(ts3plugin):
                 data = ipcdata(obj=tuple())
             cli.write(QByteArray((len(data.data) + ipcdata.longlen).to_bytes(ipcdata.longlen, byteorder='big') + data.data))
         else:
-            err = ts3.logMessage("Unknown method data %s" % data.data, ts3defines.LogLevel.LogLevel_ERROR, "pyTSon.ipcplugin", 0)
+            err = ts3lib.logMessage("Unknown method data %s" % data.data, ts3defines.LogLevel.LogLevel_ERROR, "pyTSon.ipcplugin", 0)
             if err != ts3defines.ERROR_ok:
                 print("Unknown method data in ipcplugin: %s" % data.data)
 
