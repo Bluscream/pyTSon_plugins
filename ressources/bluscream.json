@@ -51,7 +51,7 @@
         "apiVersion": "22",
         "description": "Show information of the client's ui elements",
         "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/scripts/devTools/__init__.py",
-        "dependencies": ["minify"]
+        "dependencies": ["css_html_js_minify"]
     },
     {
         "name": "Chat Bot",
