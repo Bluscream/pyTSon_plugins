@@ -290,10 +290,17 @@ try:
                 self.qssEditor.setPlainText(self.stylesheet)
         def on_btn_minify_clicked(self):
             try:
-                from css_html_js_minify import css_minify
+                  from css_html_js_minify import css_minify
             except:
-                QMessageBox(QMessageBox.Warning, "Can't minify", "Python package \"css_html_js_minify\" could not be loaded.").exec_()
-                import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_();return
+                  x = QWidget()
+                  x.setAttribute(Qt.WA_DeleteOnClose)
+                  _t = QMessageBox.question(x, "Can't minify", "Python package \"css_html_js_minify\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
+                  if _t == QMessageBox.Yes:
+                      from devtools import PluginInstaller
+                      PluginInstaller().installPackages(['css_html_js_minify'])
+                      self.on_btn_minify_clicked()
+                  return
+                  #import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_()
             index = self.tabWidget.currentIndex
             _old = ""
             if index == 0:
