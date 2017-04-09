@@ -25,7 +25,7 @@ class addonList(ts3plugin):
         ts3lib.logMessage("{0} script for pyTSon by {1} loaded from \"{2}\".".format(self.name,self.author,__file__), ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
-    def infoData(self, schid, id, atype):
+    def infoData(self, schid, id, atype): # https://github.com/teamspeak-plugins/now_playing/blob/master/now_playing/nowplaying_plugin.c#L667
         if atype == 2:
             i = []
             (error, meta) = ts3lib.getClientVariableAsString(schid, id, ts3defines.ClientProperties.CLIENT_META_DATA)
@@ -41,7 +41,6 @@ class addonList(ts3plugin):
                     except: continue
             except: pass
             return i
-            #
         #     for name, plugin in pluginhost.PluginHost.plugins.items():
         #         try: i.append("{name} v{version} by {author}".format(name=plugin.name,version=plugin.version,author=plugin.author))
         #         except:
@@ -60,10 +59,7 @@ class addonList(ts3plugin):
         for name, plugin in pluginhost.PluginHost.plugins.items():
             script = xml.SubElement(pytson, "script",{'version': plugin.version, 'author': plugin.author})
             script.text = plugin.name
-        newmeta = xml.tostring(newmeta).decode("utf-8")
-        #newmeta = newmeta.replace('b\'','')
-        #newmeta = newmeta.replace('\'','')
-        error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, "{old}{new}".format(old=oldmeta,new=newmeta))
+        error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, "{old}{new}".format(old=oldmeta,new=xml.tostring(newmeta).decode("utf-8")))
         if not error == ts3defines.ERROR_ok: ts3lib.printMessageToCurrentTab("Error: Unable to set own meta data to \"%s\"."%root);return False
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
