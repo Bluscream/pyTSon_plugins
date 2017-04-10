@@ -316,21 +316,21 @@ try:
             except:
                 try:
                     from traceback import format_exc
-                    QMessageBox.Critical("Can't minify", format_exc()).exec_()
+                    QMessageBox(QMessageBox.Critical, "Can't minify", format_exc()).exec_()
                 except:
                     print(format_exc())
         def on_btn_beautify_clicked(self):
             try:
                 try:
-                      from css-html-prettify import css_prettify
+                    from css_html_prettify import css_prettify
                 except:
-                      _t = QMessageBox.question(self, "Can't beautify", "Python package \"css-html-prettify\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
-                      if _t == QMessageBox.Yes:
-                          from devtools import PluginInstaller
-                          PluginInstaller().installPackages(['css-html-prettify'])
-                          self.on_btn_beautify_clicked()
-                      return
-                      #import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_()
+                    _t = QMessageBox.question(self, "Can't beautify", "Python package \"css_html_prettify\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
+                    if _t == QMessageBox.Yes:
+                      from devtools import PluginInstaller
+                      PluginInstaller().installPackages(['css_html_prettify'])
+                      self.on_btn_beautify_clicked()
+                    return
+                    #import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_()
                 index = self.tabWidget.currentIndex
                 _old = ""
                 if index == 0:
@@ -347,7 +347,7 @@ try:
             except:
                 try:
                     from traceback import format_exc
-                    QMessageBox.Critical("Can't beautify", format_exc()).exec_()
+                    QMessageBox(QMessageBox.Critical, "Can't beautify", format_exc()).exec_()
                 except:
                     print(format_exc())
 
