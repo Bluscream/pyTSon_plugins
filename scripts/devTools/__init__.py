@@ -290,30 +290,67 @@ try:
                 self.qssEditor.setPlainText(self.stylesheet)
         def on_btn_minify_clicked(self):
             try:
-                  from css_html_js_minify import css_minify
+                try:
+                      from css_html_js_minify import css_minify
+                except:
+                      _t = QMessageBox.question(self, "Can't minify", "Python package \"css_html_js_minify\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
+                      if _t == QMessageBox.Yes:
+                          from devtools import PluginInstaller
+                          PluginInstaller().installPackages(['css_html_js_minify'])
+                          self.on_btn_minify_clicked()
+                      return
+                      #import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_()
+                index = self.tabWidget.currentIndex
+                _old = ""
+                if index == 0:
+                    _old = self.qssEditor.toPlainText()
+                elif index == 1: _old = self.chatEditor.toPlainText()
+                _minified = css_minify(_old,noprefix=True) # , encode=False
+                if index == 0:
+                    QApplication.instance().styleSheet = _minified
+                    self.qssEditor.setPlainText(_minified)
+                elif index == 1: self.chatEditor.setPlainText(_minified);return
+                if QMessageBox(QMessageBox.Warning, "Use minified QSS?", "Your minified QSS code has been applied.\n\nIf you encounter any issues with the minified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
+                    QApplication.instance().styleSheet = _old
+                    self.qssEditor.setPlainText(_old)
             except:
-                  x = QWidget()
-                  x.setAttribute(Qt.WA_DeleteOnClose)
-                  _t = QMessageBox.question(x, "Can't minify", "Python package \"css_html_js_minify\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
-                  if _t == QMessageBox.Yes:
-                      from devtools import PluginInstaller
-                      PluginInstaller().installPackages(['css_html_js_minify'])
-                      self.on_btn_minify_clicked()
-                  return
-                  #import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_()
-            index = self.tabWidget.currentIndex
-            _old = ""
-            if index == 0:
-                _old = self.qssEditor.toPlainText()
-            elif index == 1: _old = self.chatEditor.toPlainText()
-            _minified = css_minify(_old, encode=False)
-            if index == 0:
-                QApplication.instance().styleSheet = _minified
-                self.qssEditor.setPlainText(_minified)
-            elif index == 1: self.chatEditor.setPlainText(_minified);return
-            if QMessageBox(QMessageBox.Warning, "Use minified QSS?", "Your minified QSS code has been applied.\n\nIf you encounter any issues with the minified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
-                QApplication.instance().styleSheet = _old
-                self.qssEditor.setPlainText(_old)
+                try:
+                    from traceback import format_exc
+                    QMessageBox.Critical("Can't minify", format_exc()).exec_()
+                except:
+                    print(format_exc())
+        def on_btn_beautify_clicked(self):
+            try:
+                try:
+                      from css-html-prettify import css_prettify
+                except:
+                      _t = QMessageBox.question(self, "Can't beautify", "Python package \"css-html-prettify\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
+                      if _t == QMessageBox.Yes:
+                          from devtools import PluginInstaller
+                          PluginInstaller().installPackages(['css-html-prettify'])
+                          self.on_btn_beautify_clicked()
+                      return
+                      #import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_()
+                index = self.tabWidget.currentIndex
+                _old = ""
+                if index == 0:
+                    _old = self.qssEditor.toPlainText()
+                elif index == 1: _old = self.chatEditor.toPlainText()
+                _beautified = css_prettify(_old)
+                if index == 0:
+                    QApplication.instance().styleSheet = _beautified
+                    self.qssEditor.setPlainText(_beautified)
+                elif index == 1: self.chatEditor.setPlainText(_beautified);return
+                if QMessageBox(QMessageBox.Warning, "Use minified QSS?", "Your minified QSS code has been applied.\n\nIf you encounter any issues with the minified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
+                    QApplication.instance().styleSheet = _old
+                    self.qssEditor.setPlainText(_old)
+            except:
+                try:
+                    from traceback import format_exc
+                    QMessageBox.Critical("Can't beautify", format_exc()).exec_()
+                except:
+                    print(format_exc())
+
         def on_btn_save_clicked(self):
             _file = None;_ext = "";_text = ""
             i = self.tabWidget.currentIndex

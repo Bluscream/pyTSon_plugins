@@ -21,11 +21,11 @@
       <bool>true</bool>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="qss">
       <attribute name="title">
-       <string>QSS</string>
+       <string>Style</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
@@ -52,7 +52,7 @@
      </widget>
      <widget class="QWidget" name="tpl">
       <attribute name="title">
-       <string>TPL</string>
+       <string>InfoData</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
@@ -79,6 +79,19 @@
       <widget class="QPushButton" name="btn_minify">
        <property name="text">
         <string>Minify</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_beautify">
+       <property name="text">
+        <string>Beautify</string>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -126,6 +139,9 @@
       <widget class="QPushButton" name="btn_apply">
        <property name="text">
         <string>Apply</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

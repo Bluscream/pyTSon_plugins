@@ -60,7 +60,7 @@ class addonList(ts3plugin):
             script = xml.SubElement(pytson, "script",{'version': plugin.version, 'author': plugin.author})
             script.text = plugin.name
         error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, "{old}{new}".format(old=oldmeta,new=xml.tostring(newmeta).decode("utf-8")))
-        if not error == ts3defines.ERROR_ok: ts3lib.printMessageToCurrentTab("Error: Unable to set own meta data to \"%s\"."%root);return False
+        if not error == ts3defines.ERROR_ok: ts3lib.printMessageToCurrentTab("Error: Unable to set own meta data to \"%s\"."%newmeta);return False
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
