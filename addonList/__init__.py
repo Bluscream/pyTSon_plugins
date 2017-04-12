@@ -3,7 +3,7 @@ import pytson, ts3client, ts3lib, ts3defines, pluginhost, re
 from pytsonui import setupUi
 from getvalues import getValues, ValueType
 from PythonQt.QtCore import Qt
-from PythonQt.QtGui import (QDialog, QTableWidgetItem, QHeaderView)
+from PythonQt.QtGui import (QDialog, QTableWidgetItem, QHeaderView, QFont)
 from ts3plugin import ts3plugin
 from datetime import datetime
 from configparser import ConfigParser
@@ -133,7 +133,6 @@ class addonList(ts3plugin):
                     except:from traceback import format_exc;ts3lib.logMessage("Error reading addon from Database:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             del db
             pytson = [element for element in newmeta.iter() if element.text == 'pyTSon'][0]
-            ts3lib.printMessageToCurrentTab("[color=red]%s"%pytson)
             if self.cfg.getboolean("general", "activeonly"): pluginhost.PluginHost.active.items()
             else: plugins = pluginhost.PluginHost.plugins.items()
             for name, plugin in plugins:
@@ -142,7 +141,7 @@ class addonList(ts3plugin):
                     script.text = name
                 except:from traceback import format_exc;ts3lib.logMessage("Error parsing script %s:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             newmeta = "{old}{new}".format(old=oldmeta,new=xml.tostring(newmeta).decode("utf-8"))
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab(newmeta)
+            # if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab(newmeta)
             error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, newmeta)
             if not error == ts3defines.ERROR_ok: ts3lib.printMessageToCurrentTab("Error: Unable to set own meta data to \"%s\"."%newmeta);return False
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid)
@@ -157,11 +156,12 @@ class AddonsDialog(QDialog):
             setupUi(self, path.join(pytson.getPluginPath(), "scripts", "addonList", "addons.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("{0}'s Addons".format(name))
+            self.txt_description.setVisible(False)
             self.tbl_addons.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
             self.tbl_addons.horizontalHeader().setSectionResizeMode(2, QHeaderView.Stretch)
-            #self.txt_description.setVisible(False)
-            #self.addonList.addItems()
-            self.setupList(addons)
+            self.setupList(addons.getchildren())
+            self.resize(1000, 600)
+            self.adddons = addons
         except:
             try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
@@ -170,21 +170,47 @@ class AddonsDialog(QDialog):
 
     def setupList(self, addons):
         try:
-            addons = addons.getchildren()
+            ts3lib.printMessageToCurrentTab("[color=green]%s"%addons)
             self.tbl_addons.clear()
             self.tbl_addons.setRowCount(len(addons))
             row = 0
             for addon in addons:
                 try:
-                    print(addon)
                     item = QTableWidgetItem(addon.text)
-                    item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
-                    #item.setData(Qt.UserRole, key)
+                    if len(list(addon)):
+                        font = QFont()
+                        font.setBold(True)
+                        item.setFont(font)
+                        # item.setData(Qt.UserRole, addon.text)
+                        if addon.text == "PyTSon": self.pytson = addon
+                        elif addon.text == "Lua": self.lua = addon
+                    item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
                     self.tbl_addons.setItem(row, 0, item)
+                    ts3lib.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
+                    item = QTableWidgetItem(addon.attrib["version"])
+                    item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
+                    self.tbl_addons.setItem(row, 1, item)
+                    item = QTableWidgetItem(addon.attrib["author"])
+                    item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
+                    self.tbl_addons.setItem(row, 2, item)
                     row += 1
-                except:from traceback import format_exc;ts3lib.logMessage("Error parsing addon %s:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), 0);continue
+                except:from traceback import format_exc;ts3lib.logMessage("Error parsing addon %s:\n%s"%(addon.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), 0);continue
             self.tbl_addons.setRowCount(row)
             self.tbl_addons.sortItems(0)
+            self.tbl_addons.setHorizontalHeaderLabels(["Name","Version","Author","API"])
+        except:
+            try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            except:
+                try: from traceback import format_exc;print("addonList: "+format_exc())
+                except: print("addonList: Unknown Error")
+
+    def on_tbl_addons_doubleClicked(self, mi):
+        try:
+            print(mi.row())
+            data = self.tbl_addons.currentItem().text()
+            print(data)
+            if data == "PyTSon": self.setupList(self.pytson.getchildren())
+            elif data == "Lua": self.setupList(self.lua.getchildren())
         except:
             try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
@@ -192,7 +218,7 @@ class AddonsDialog(QDialog):
                 except: print("addonList: Unknown Error")
 
     def on_btn_reload_clicked(self):
-        try: self.setupList()
+        try: self.setupList(self.adddons.getchildren())
         except:
             try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
@@ -200,20 +226,11 @@ class AddonsDialog(QDialog):
                 except: print("addonList: Unknown Error")
 
     def on_btn_description_clicked(self):
-        try:
-            if self.txt_description.visible:
-                self.txt_description.setVisible(False)
-            else: self.txt_description.setVisible(True)
+        try: self.txt_description.setVisible(not self.txt_description.visible)
         except:
             try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("addonList: "+format_exc())
                 except: print("addonList: Unknown Error")
 
-    def on_btn_close_clicked(self):
-        try: self.close()
-        except:
-            try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-            except:
-                try: from traceback import format_exc;print("addonList: "+format_exc())
-                except: print("addonList: Unknown Error")
+    def on_btn_close_clicked(self): self.close()
