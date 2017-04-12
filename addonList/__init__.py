@@ -127,6 +127,9 @@ class addonList(ts3plugin):
                         elif l.startswith('author='):
                             author = l.split('=', 1)[1].strip()
                             addon.set("author", author)
+                        elif l.startswith('type='):
+                            type = l.split('=', 1)[1].strip()
+                            addon.set("type", type)
                     except:from traceback import format_exc;ts3lib.logMessage("Error reading addon from Database:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             del db
             pytson = [element for element in newmeta.iter() if element.text == 'pyTSon'][0]
