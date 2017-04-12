@@ -1,8 +1,8 @@
 # t = pluginhost.PluginHost.plugins["eventlog"]
 import pytson, ts3client, ts3lib, ts3defines, pluginhost, re
 from pytsonui import setupUi
-from PythonQt.QtCore import Qt, QUrl
-from PythonQt.QtGui import (QDialog, QWidget, QMovie, QListWidgetItem, QMessageBox, QInputDialog, QLineEdit)
+from PythonQt.QtCore import Qt
+from PythonQt.QtGui import (QDialog, QListWidgetItem, QMessageBox, QHeaderView, QLineEdit)
 from ts3plugin import ts3plugin
 from datetime import datetime
 from configparser import ConfigParser
@@ -44,7 +44,7 @@ class addonList(ts3plugin):
             try:
                 (error, name) = ts3lib.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
                 addons = self.parseMeta(schid,selectedItemID)
-                if not self.dlg: self.dlg = AddonsDialog(schid, addons, name)
+                if not self.dlg: self.dlg = AddonsDialog(addons, name)
                 self.dlg.show()
                 self.dlg.raise_()
                 self.dlg.activateWindow()
@@ -68,7 +68,7 @@ class addonList(ts3plugin):
             i.append("[u]pyTSon[/u]:")
             for script in scripts:
                 try: i.append("{name} v{version} by {author}".format(name=script.text,version=script.attrib["version"],author=script.attrib["author"]))
-                except: continue
+                except:from traceback import format_exc;ts3lib.logMessage("Error parsing meta %s:\n%s"%(script.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             # for name, plugin in pluginhost.PluginHost.plugins.items():
             #     try: i.append("{name} v{version} by {author}".format(name=plugin.name,version=plugin.version,author=plugin.author))
             #     except:
@@ -93,25 +93,29 @@ class addonList(ts3plugin):
                 val = q.value("value")
                 addon = xml.SubElement(newmeta, "addon")
                 for l in val.split('\n'):
-                    if l.startswith('name='):
-                        name = l.split('=', 1)[1].strip()
-                        addon.text = name
-                    elif l.startswith('version='):
-                        version = l.split('=', 1)[1].strip()
-                        addon.set("version", version)
-                    elif l.startswith('author='):
-                        author = l.split('=', 1)[1].strip()
-                        addon.set("author", author)
+                    try:
+                        if l.startswith('name='):
+                            name = l.split('=', 1)[1].strip()
+                            addon.text = name
+                        elif l.startswith('version='):
+                            version = l.split('=', 1)[1].strip()
+                            addon.set("version", version)
+                        elif l.startswith('author='):
+                            author = l.split('=', 1)[1].strip()
+                            addon.set("author", author)
+                    except:from traceback import format_exc;ts3lib.logMessage("Error reading addon from Database:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             del db
             pytson = xml.SubElement(newmeta, "addon")
             pytson.text = "PyTSon"
 
             for name, plugin in pluginhost.PluginHost.plugins.items():
-                # for aname, aplugin in pluginhost.PluginHost.active.items():
-                #     if plugin == [name]: passed = True
-                # if not passed: continue
-                script = xml.SubElement(pytson, "script",{'version': plugin.version, 'author': plugin.author})
-                script.text = name# plugin.name
+                try:
+                    # for aname, aplugin in pluginhost.PluginHost.active.items():
+                    #     if plugin == [name]: passed = True
+                    # if not passed: continue
+                    script = xml.SubElement(pytson, "script",{'version': plugin.version, 'author': plugin.author})
+                    script.text = name# plugin.name
+                except:from traceback import format_exc;ts3lib.logMessage("Error parsing script %s:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             newmeta = "{old}{new}".format(old=oldmeta,new=xml.tostring(newmeta).decode("utf-8"))
             #if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{old}{new}".format(old=oldmeta,new=xml.tostring(newmeta).decode("utf-8")))
             error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, newmeta)
@@ -128,11 +132,31 @@ class AddonsDialog(QDialog):
             setupUi(self, path.join(pytson.getPluginPath(), "ressources", "ui", "pyTSon-configdialog.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("{0}'s Addons".format(name))
+            self.pluginsTable.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
             self.tabWidget.setTabEnabled(1, False)
             self.tabWidget.setTabEnabled(2, False)
             self.differentApiButton.setDisabled(True)
             self.reloadButton.setDisabled(True)
             self.repositoryButton.setDisabled(True)
-            self.requiredApiEdit.setDisabled(True)
+            #self.requiredApiEdit.setDisabled(True)
             #self.addonList.addItems()
+            self.setupList(addons)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def setupList(self, addons):
+        try:
+            # addons = addons.getchildren()
+            self.pluginsTable.clear()
+            self.pluginsTable.setRowCount(len(addons))
+            row = 0
+            for addon in addons:
+                try:
+                    item = QTableWidgetItem(addon)
+                    item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)
+                    #item.setData(Qt.UserRole, key)
+                    self.pluginsTable.setItem(row, 0, item)
+                    row += 1
+                except:from traceback import format_exc;ts3lib.logMessage("Error parsing addon %s:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), 0);continue
+            self.pluginsTable.setRowCount(row)
+            self.pluginsTable.sortItems(0)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
