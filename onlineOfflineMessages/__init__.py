@@ -1,6 +1,6 @@
 from datetime import datetime
 from os import path
-from PythonQt.QtGui import QDialog, QWidget
+from PythonQt.QtGui import QDialog
 from PythonQt.QtCore import Qt
 from ts3plugin import ts3plugin
 from pytsonui import setupUi
