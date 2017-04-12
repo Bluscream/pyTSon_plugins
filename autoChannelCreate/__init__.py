@@ -20,7 +20,7 @@ class autoChannelCreate(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Talk Power", "")]
     hotkeys = []
     debug = False
-    ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", __name__, "settings.ini")
+    ini = path.join(pytson.getPluginPath(), "scripts", __name__, "settings.ini")
     cfg = ConfigParser()
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())

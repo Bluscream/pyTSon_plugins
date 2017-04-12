@@ -43,7 +43,7 @@ class MessageDialog(QDialog):
         try:
             self.schid = schid;self.uid = uid;self.name = name
             super(QDialog, self).__init__(parent)
-            setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "onlineOfflineMessages", "message.ui"))
+            setupUi(self, path.join(pytson.getPluginPath(), "scripts", "onlineOfflineMessages", "message.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("Offline Message to {0}".format(name))
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)

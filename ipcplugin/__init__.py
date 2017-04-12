@@ -95,7 +95,7 @@ class ipcplugin(ts3plugin):
         self.server = QLocalServer()
         self.server.connect("newConnection()", self.onNewConnection)
 
-        path = os.path.join(ts3lib.getPluginPath(), "pyTSon", "ipcsocket")
+        path = os.path.join(pytson.getPluginPath(), "ipcsocket")
         QLocalServer.removeServer(path)
         if not self.server.listen(path):
             raise Exception("Error opening local socket (%s)" % path)

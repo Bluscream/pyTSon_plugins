@@ -15,11 +15,11 @@ class NoX(ts3plugin):
     offersConfigure = True
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "NoX", "icons")
+    iconPath = path.join(pytson.getPluginPath(), "scripts", "NoX", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Change Identity", "")]
     hotkeys = []
     debug = False
-    ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "NoX", "settings.ini")
+    ini = path.join(pytson.getPluginPath(), "scripts", "NoX", "settings.ini")
     cfg = ConfigParser()
     dlg = None
 
@@ -62,6 +62,6 @@ class SettingsDialog(QDialog):
     def __init__(self, this, parent=None):
         self.this = this
         super(QDialog, self).__init__(parent)
-        setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "NoX", "settings.ui"))
+        setupUi(self, path.join(pytson.getPluginPath(), "scripts", "NoX", "settings.ui"))
         self.setWindowTitle("%s Settings" % this.name)
         self.chk_debug.setChecked(this.cfg.getboolean("general", "debug"))

@@ -12,7 +12,7 @@ class faker(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "faker", "icons")
+    iconPath = path.join(pytson.getPluginPath(), "scripts", "faker", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Fake this channel", iconPath+"/fake.png"),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Fake this client", iconPath+"/fake.png")]
     hotkeys = []

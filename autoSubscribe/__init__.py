@@ -13,7 +13,7 @@ class autoSubscribe(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "autoSubscribe", "icons")
+    iconPath = path.join(pytson.getPluginPath(), "scripts", "autoSubscribe", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Subscribe to all channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Sub all non-pw channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Unsub from all channels", "")]

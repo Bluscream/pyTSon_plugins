@@ -26,7 +26,7 @@ class dynamicAvatar(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Refresh avatar", path.join(ts3lib.getPluginPath(),"pyTSon","scripts","dynamicAvatar","gfx","manual.png")),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Timer",'')]
     hotkeys = []
-    ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "dynamicAvatar", "settings.ini")
+    ini = path.join(pytson.getPluginPath(), "scripts", "dynamicAvatar", "settings.ini")
     config = ConfigParser()
     timer = QTimer()
     int = 0
@@ -196,7 +196,7 @@ class SettingsDialog(QDialog):
     def __init__(self,Class,parent=None):
         self.dynamicAvatar=Class
         super(QDialog, self).__init__(parent)
-        setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "dynamicAvatar", "settings.ui"))
+        setupUi(self, path.join(pytson.getPluginPath(), "scripts", "dynamicAvatar", "settings.ui"))
         s = Class.config["GENERAL"];b = self.buhl
         self.url.setChecked(s["mode"]=="url")
         self.path.setChecked(s["mode"]=="path")

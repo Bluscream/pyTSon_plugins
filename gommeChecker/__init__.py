@@ -16,10 +16,10 @@ class gommeChecker(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "gommeChecker", "icons")
+    iconPath = path.join(pytson.getPluginPath(), "scripts", "gommeChecker", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Check all Channels", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Open Support", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Close Support", "")]
     hotkeys = []
-    ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "gommeChecker", "settings.ini")
+    ini = path.join(pytson.getPluginPath(), "scripts", "gommeChecker", "settings.ini")
     cfg = ConfigParser()
     supchans = []
     supmain = 0
@@ -70,7 +70,7 @@ class CheckerDialog(QDialog):
         self.gommeChecker=gommeChecker
         super(QDialog, self).__init__(parent)
         self.setAttribute(Qt.WA_DeleteOnClose)
-        setupUi(self, path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "gommeChecker", "check.ui"))
+        setupUi(self, path.join(pytson.getPluginPath(), "scripts", "gommeChecker", "check.ui"))
         self.setWindowTitle("Gomme Checker")
         self.checktable.setColumnWidth(2, 350)
         self.checkChannels()

@@ -42,7 +42,7 @@ try:
         check = False
         checkcurrent = ""
         reason = ""
-        ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "channelWatcher", "settings.ini")
+        ini = path.join(pytson.getPluginPath(), "scripts", "channelWatcher", "settings.ini")
         cfg = ConfigParser()
 
         def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())

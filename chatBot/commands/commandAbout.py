@@ -1,5 +1,5 @@
 import ts3lib
-cmdpy = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "chatBot")
+cmdpy = path.join(pytson.getPluginPath(), "scripts", "chatBot")
 syspath.insert(0, cmdpy)
 import chatBot as self
 import chatCommand

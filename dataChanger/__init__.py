@@ -18,7 +18,7 @@ class dataChanger(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Nickname changer", "")]
     hotkeys = []
     debug = False
-    ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "dataChanger", "settings.ini")
+    ini = path.join(pytson.getPluginPath(), "scripts", "dataChanger", "settings.ini")
     cfg = ConfigParser()
     dlg = None
     int = 0

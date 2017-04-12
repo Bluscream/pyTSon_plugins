@@ -110,7 +110,7 @@ class SettingsDialog(QDialog):
     def __init__(self, blacklist, parent=None):
         self.bl = blacklist
         super(QDialog, self).__init__(parent)
-        setupUi(self, os.path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "blacklist", "blacklist.ui"))
+        setupUi(self, os.path.join(pytson.getPluginPath(), "scripts", "blacklist", "blacklist.ui"))
         self.setWindowTitle("Blacklist by Luemmel")
 
         self.btn_add.clicked.connect(self.add)
