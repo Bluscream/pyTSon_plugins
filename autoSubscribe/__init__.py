@@ -16,7 +16,8 @@ class autoSubscribe(ts3plugin):
     iconPath = path.join(pytson.getPluginPath(), "scripts", "autoSubscribe", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Subscribe to all channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Sub all non-pw channels", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Unsub from all channels", "")]
+                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Sub all visible-pw channels", ""),
+                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "Unsub from all channels", "")]
     hotkeys = []
     debug = False
     passwords = ["pw", "password", "passwort"]
@@ -34,7 +35,8 @@ class autoSubscribe(ts3plugin):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 0: self.subscribeAll(schid)
             elif menuItemID == 1: self.subscribeOpen(schid)
-            elif menuItemID == 2: self.unsubscribeAll(schid)
+            elif menuItemID == 2: self.subscribeOpenPW(schid)
+            elif menuItemID == 3: self.unsubscribeAll(schid)
 
 
     def subscribeAll(self, schid):
@@ -80,6 +82,26 @@ class autoSubscribe(ts3plugin):
                 (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
                 if not pw and not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist): ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
             self.onlyOpen = True
+            # ts3lib.requestChannelSubscribe(schid, clist)
+        except:
+            try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
+            except:
+                try: from traceback import format_exc;ts3lib.printMessageToCurrentTab(format_exc())
+                except:
+                    try: from traceback import format_exc;print(format_exc())
+                    except: print("Unknown Error")
+
+    def subscribeOpenPW(self, schid):
+        try:
+            (error, clist) = ts3lib.getChannelList(schid)
+            for c in clist:
+                (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
+                (error, pw) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+                (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
+                (error, semiperm) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
+                (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
+                if not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist) and any(x in name.lower() for x in self.passwords): ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
+            self.onlyOpen = False
             # ts3lib.requestChannelSubscribe(schid, clist)
         except:
             try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
