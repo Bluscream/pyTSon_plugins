@@ -1,10 +1,19 @@
+from os import path
 from ts3plugin import ts3plugin, PluginHost
-import ts3lib, ts3defines, datetime, ts3query
+from PythonQt.QtGui import QWidget
+from PythonQt.QtCore import Qt
+from pytsonui import setupUi
+import ts3lib, ts3defines, datetime, ts3, pytson
 
+def my_decorator(func):
+    def wrapped_func(*args,**kwargs):
+        return func("I've been decorated!",*args,**kwargs)
+    return wrapped_func
+print = my_decorator(print)
 
 class queryConsole(ts3plugin):
     name = "TS3 Query Console"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = pytson.getCurrentApiVersion()
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -16,43 +25,29 @@ class queryConsole(ts3plugin):
     hotkeys = []
     debug = False
     toggle = True
+    dlg = None
 
     def __init__(self):
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        ts3lib.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.debug:
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+            ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:
-            with ts3.query.TS3Connection("localhost") as ts3conn:
-                # Note, that the client will wait for the response and raise a
-                # **TS3QueryError** if the error id of the response is not 0.
-                try:
-                        ts3conn.login(
-                                client_login_name="serveradmin",
-                                client_login_password=""
-                        )
-                except ts3.query.TS3QueryError as err:
-                        print("Login failed:", err.resp.error["msg"])
-                        exit(1)
+            if not self.dlg: self.dlg = QueryConsole()
+            self.dlg.show();self.dlg.raise_();self.dlg.activateWindow()
 
-                ts3conn.use(sid=1)
+class QueryConsole(QWidget):
+    def __init__(self, parent=None):
+        try:
+            super(QWidget, self).__init__(parent)
+            setupUi(self, path.join(pytson.getPluginPath(), "scripts", "queryConsole", "console.ui"))
+            self.setAttribute(Qt.WA_DeleteOnClose)
+            self.setWindowTitle("Query Console")
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-                # Each query method will return a **TS3QueryResponse** instance,
-                # with the response.
-                resp = ts3conn.clientlist()
-                print("Clients on the server:", resp.parsed)
-                print("Error:", resp.error["id"], resp.error["msg"])
+    def on_btn_send_clicked(self):
+        try: ts3lib.requestMessageAdd(self.schid, uid, self.subject.text, self.message.toPlainText())
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-                # Note, the TS3Response class and therefore the TS3QueryResponse
-                # class too, can work as a rudimentary container. So, these two
-                # commands are equal:
-                for client in resp.parsed:
-                        print(client)
-                for client in resp:
-                        print(client)
-
-    def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
-        if self.toggle:
-            if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING:
-                print("hi")
+    def on_btn_connect_clicked(self): self.close()

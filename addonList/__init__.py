@@ -3,7 +3,7 @@ import pytson, ts3client, ts3lib, ts3defines, pluginhost, re
 from pytsonui import setupUi
 from getvalues import getValues, ValueType
 from PythonQt.QtCore import Qt
-from PythonQt.QtGui import (QDialog, QTableWidgetItem, QHeaderView, QFont)
+from PythonQt.QtGui import (QWidget, QTableWidgetItem, QHeaderView, QFont)
 from ts3plugin import ts3plugin
 from datetime import datetime
 from configparser import ConfigParser
@@ -149,10 +149,10 @@ class addonList(ts3plugin):
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
 
-class AddonsDialog(QDialog):
+class AddonsDialog(QWidget):
     def __init__(self, addons, name, parent=None):
         try:
-            super(QDialog, self).__init__(parent)
+            super(QWidget, self).__init__(parent)
             setupUi(self, path.join(pytson.getPluginPath(), "scripts", "addonList", "addons.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("{0}'s Addons".format(name))
@@ -176,6 +176,14 @@ class AddonsDialog(QDialog):
             row = 0
             for addon in addons:
                 try:
+                    if addon == None or addon.text == None: continue
+                    _type = "Other";
+                    try:
+                        _type = addon.attrib["type"].title()
+                    except: pass
+                    item = QTableWidgetItem(_type)
+                    item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
+                    self.tbl_addons.setItem(row, 0, item)
                     item = QTableWidgetItem(addon.text)
                     if len(list(addon)):
                         font = QFont()
@@ -185,19 +193,23 @@ class AddonsDialog(QDialog):
                         if addon.text == "PyTSon": self.pytson = addon
                         elif addon.text == "Lua": self.lua = addon
                     item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
-                    self.tbl_addons.setItem(row, 0, item)
-                    ts3lib.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
-                    item = QTableWidgetItem(addon.attrib["version"])
-                    item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
                     self.tbl_addons.setItem(row, 1, item)
-                    item = QTableWidgetItem(addon.attrib["author"])
-                    item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
-                    self.tbl_addons.setItem(row, 2, item)
+                    ts3lib.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
+                    try:
+                        item = QTableWidgetItem(addon.attrib["version"])
+                        item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
+                        self.tbl_addons.setItem(row, 2, item)
+                    except: ts3lib.logMessage("Addon %s does not have any version." % (addon.text), ts3defines.LogLevel.LogLevel_WARNING, "Addon List", 0)
+                    try:
+                        item = QTableWidgetItem(addon.attrib["author"])
+                        item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
+                        self.tbl_addons.setItem(row, 3, item)
+                    except: ts3lib.logMessage("Addon %s does not have any author." % (addon.text), ts3defines.LogLevel.LogLevel_WARNING, "Addon List", 0)
                     row += 1
-                except:from traceback import format_exc;ts3lib.logMessage("Error parsing addon %s:\n%s"%(addon.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), 0);continue
+                except: from traceback import format_exc;ts3lib.logMessage("Error parsing addon %s:\n%s"%(addon.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), 0);continue
             self.tbl_addons.setRowCount(row)
             self.tbl_addons.sortItems(0)
-            self.tbl_addons.setHorizontalHeaderLabels(["Name","Version","Author","API"])
+            self.tbl_addons.setHorizontalHeaderLabels(["Type","Name","Version","Author","API"])
         except:
             try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:

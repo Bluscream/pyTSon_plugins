@@ -1,6 +1,6 @@
 from os import path
 from datetime import datetime
-from PythonQt.QtGui import QMessageBox, QInputDialog, QDialog, QWidget, QLineEdit
+from PythonQt.QtGui import QMessageBox, QInputDialog, QDialog, QLineEdit
 from PythonQt.QtCore import Qt
 from PythonQt.Qt import QApplication
 from PythonQt import BoolResult
@@ -8,7 +8,7 @@ from ts3plugin import ts3plugin
 from pytsonui import setupUi
 
 #from ts3client import IconPack
-import ts3defines, ts3lib
+import ts3defines, ts3lib, pytson
 
 class massAction(ts3plugin):
     name = "Mass Actions"

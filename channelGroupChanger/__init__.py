@@ -3,7 +3,7 @@ from pytson import getPluginPath
 from ts3plugin import ts3plugin, PluginHost
 from os import path
 from datetime import datetime
-from PythonQt.QtGui import QDialog, QWidget, QListWidgetItem
+from PythonQt.QtGui import QDialog, QListWidgetItem
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi
 
@@ -64,7 +64,7 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
     def __init__(self, schid, cgid, dbid, name, channel, groups, parent=None):
         try:
             super(QDialog, self).__init__(parent)
-            setupUi(self, path.join(getPluginPath(), "pyTSon", "scripts", "channelGroupChanger", "channelGroupSelect.ui"))
+            setupUi(self, path.join(getPluginPath(), "scripts", "channelGroupChanger", "channelGroupSelect.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle(name)
             # self.channelGroups.addItems(list(groups.values()))
