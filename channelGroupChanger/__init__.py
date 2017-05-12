@@ -69,21 +69,23 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("%s | %i"%(name,channel))
             icons = IconPack.current()
+            icons.open()
             cache = ServerCache(schid)
             # self.channelGroups.addItems(list(groups.values()))
             self.channelGroups.clear()
             for key,p in groups.items():
                 try:
                     item = QListWidgetItem(self.channelGroups)
-                    item.setText(p[0]+" | "+str(p[1]))
+                    item.setText(p[0])
                     item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
                     item.setCheckState(Qt.Checked if key == cgid else Qt.Unchecked)
                     item.setData(Qt.UserRole, key)
-                    if p[1] == 0 or p[1] == 100 or p[1] == 200 or p[1] == 300 or p[1] == 500 or p[1] == 600:
+                    if p[1] == 0: continue;
+                    elif p[1] == 100 or p[1] == 200 or p[1] == 300 or p[1] == 500 or p[1] == 600:
                         item.setIcon(QIcon(IconPack.icon(icons,"group_%s"%p[1])))
-                    else: item.setIcon(QIcon(ServerCache.icon(cache,p[1])))
+                    else: item.setIcon(QIcon(ServerCache.icon(cache,p[1]&0xFFFFFFFF)))
                 except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-            # IconPack.close()
+            icons.close()
             # self.channelGroups.sortItems()
             self.channelGroups.connect("itemChanged(QListWidgetItem*)", self.onSelectedChannelGroupChangedEvent)
             self.schid = schid;self.dbid = dbid;self.channel = channel
