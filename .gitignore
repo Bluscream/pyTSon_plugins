@@ -225,7 +225,7 @@ pip-log.txt
 #/python.exe
 #/python.png
 #/python*.dll
-#scripts/ts3plugin.py
+ts3plugin.py
 
 #Own includes
 #!include/autorun.py
