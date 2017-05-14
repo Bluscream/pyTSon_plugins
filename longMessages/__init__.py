@@ -16,6 +16,7 @@ class longMessages(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Message to Channel", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Message to Channel", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Message to Client", "")]
     hotkeys = []
     debug = False
+    maxsize = 900
 
     def __init__(self):
         ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
@@ -38,12 +39,12 @@ class longMessages(ts3plugin):
         x = QWidget()
         clipboard = QApplication.clipboard().text();
         _message = QInputDialog.getMultiLineText(x, "Enter long text here", "", clipboard)
-        message = [_message[i:i + 1024] for i in range(0, len(_message), 1024)]
+        message = [_message[i:i + self.maxsize] for i in range(0, len(_message), self.maxsize)]
         if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
             for msg in message:
-                error = ts3lib.requestSendChannelTextMsg(schid, msg, toID)
+                error = ts3lib.requestSendChannelTextMsg(schid, "\n"+msg, toID)
                 if not error == ts3defines.ERROR_ok: _t = QMessageBox(QMessageBox.Critical, "Error #%s"%error,"Unable to send message to #%s!"%toID);_t.show();return
         elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
             for msg in message:
-                error = ts3lib.requestSendPrivateTextMsg(schid, msg, toID)
+                error = ts3lib.requestSendPrivateTextMsg(schid, "\n"+msg, toID)
                 if not error == ts3defines.ERROR_ok: _t = QMessageBox(QMessageBox.Critical, "Error #%s"%error,"Unable to send message to #%s!"%toID);_t.show();return
