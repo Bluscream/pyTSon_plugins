@@ -3,6 +3,7 @@ from os import path
 from urllib.parse import quote as urlencode
 from PythonQt.QtCore import *
 from PythonQt.QtGui import *
+from pytson import getPluginPath
 from pytsonui import setupUi
 from ts3plugin import ts3plugin
 import datetime, ts3defines, ts3lib, sys, os
@@ -48,7 +49,7 @@ class chatBot(ts3plugin):
         if path.isfile(self.ini):
             self.cfg.read(self.ini)
         else:
-            self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "True", "customprefix": "True", "prefix": "!"}
+            self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "True", "customprefix": "True", "prefix": "!", "unknowncmd": "True"}
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
         if path.isfile(self.cmdini):
@@ -97,8 +98,12 @@ class chatBot(ts3plugin):
                 ts3lib.printMessageToCurrentTab("lasttime: {0}".format(lasttime))
             if lasttime > time - 5: ts3lib.printMessageToCurrentTab("is time -5: True")
             cmd = command.split(' ', 1)[0].lower()
-            if not cmd in self.cmd.sections(): self.answerMessage(schid, targetMode, toID, fromID, "Command %s does not exist." % cmd);return False
-            if not self.cmd.getboolean(cmd, "enabled"): self.answerMessage(schid, targetMode, toID, fromID, "Command %s is disabled." % cmd);return False
+            if not cmd in self.cmd.sections():
+                if self.cfg.getboolean("general", "unknowncmd"): self.answerMessage(schid, targetMode, toID, fromID, "Command %s does not exist." % cmd)
+                return False
+            if not self.cmd.getboolean(cmd, "enabled"):
+                if self.cfg.getboolean("general", "disabledcmd"): self.answerMessage(schid, targetMode, toID, fromID, "Command %s is disabled." % cmd)
+                return False
             params = ""
             _params = ""
             try: _params = command.split(' ', 1)[1].strip()
@@ -591,76 +596,81 @@ class chatBot(ts3plugin):
     # COMMANDS END
 
 class SettingsDialog(QDialog):
-    def __init__(self, ini, cfg, cmdini, cmd, parent=None):
-        self.ini = ini
-        self.cfg = cfg
-        self.cmdini = cmdini
-        self.cmd = cmd
-        super(QDialog, self).__init__(parent)
-        self.setAttribute(Qt.WA_DeleteOnClose)
-        setupUi(self, path.join(pytson.getPluginPath(), "scripts", "chatBot", "settings.ui"))
-        self.setWindowTitle("Chat Bot Settings")
-        # header = self.tbl_commands.horizontalHeader()
-        # header.setResizeMode(0, QtGui.QHeaderView.ResizeToContents)
-        # header.setResizeMode(1, QtGui.QHeaderView.Stretch)
-        # header.setResizeMode(2, QtGui.QHeaderView.Stretch)
-        # self.tbl_commands.setColumnWidth(0, 25)
-        self.chk_enabled.setChecked(cfg.getboolean("general", "enabled"))
-        self.chk_debug.setChecked(cfg.getboolean("general", "debug"))
-        self.grp_prefix.setChecked(cfg.getboolean("general", "customprefix"))
-        self.txt_prefix.setText(cfg.get("general", "prefix"))
-        self.loadCommands()
+        def __init__(self, ini, cfg, cmdini, cmd, parent=None):
+            try:
+                self.ini = ini
+                self.cfg = cfg
+                self.cmdini = cmdini
+                self.cmd = cmd
+                super(QDialog, self).__init__(parent)
+                self.setAttribute(Qt.WA_DeleteOnClose)
+                setupUi(self, path.join(getPluginPath(), "scripts", "chatBot", "settings.ui"))
+                self.setWindowTitle("Chat Bot Settings")
+                # header = self.tbl_commands.horizontalHeader()
+                # header.setResizeMode(0, QtGui.QHeaderView.ResizeToContents)
+                # header.setResizeMode(1, QtGui.QHeaderView.Stretch)
+                # header.setResizeMode(2, QtGui.QHeaderView.Stretch)
+                # self.tbl_commands.setColumnWidth(0, 25)
+                self.chk_enabled.setChecked(cfg.getboolean("general", "enabled"))
+                self.chk_debug.setChecked(cfg.getboolean("general", "debug"))
+                self.chk_unknowncmd.setChecked(cfg.getboolean("general", "unknowncmd"))
+                self.chk_disabledcmd.setChecked(cfg.getboolean("general", "disabledcmd"))
+                self.grp_prefix.setChecked(cfg.getboolean("general", "customprefix"))
+                self.txt_prefix.setText(cfg.get("general", "prefix"))
+                self.loadCommands()
+            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def loadCommands(self):
-        self.tbl_commands.clear()
-        self.tbl_commands.setRowCount(len(self.cmd.sections()))
-        row = 0
-        for i in self.cmd.sections():
-            item = QTableWidgetItem(i)
-            kitem = QTableWidgetItem(self.cmd[i]["function"])
-            item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled | Qt.ItemIsEditable)
-            item.setCheckState(Qt.Checked if self.cmd.getboolean(i, "enabled") else Qt.Unchecked)
-            self.tbl_commands.setItem(row, 1, kitem)
-            self.tbl_commands.setItem(row, 0, item)
-            row += 1
-        self.tbl_commands.setRowCount(row)
-        self.tbl_commands.sortItems(0)
+        def loadCommands(self):
+            self.tbl_commands.clear()
+            self.tbl_commands.setRowCount(len(self.cmd.sections()))
+            row = 0
+            for i in self.cmd.sections():
+                item = QTableWidgetItem(i)
+                kitem = QTableWidgetItem(self.cmd[i]["function"])
+                item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled | Qt.ItemIsEditable)
+                item.setCheckState(Qt.Checked if self.cmd.getboolean(i, "enabled") else Qt.Unchecked)
+                self.tbl_commands.setItem(row, 1, kitem)
+                self.tbl_commands.setItem(row, 0, item)
+                row += 1
+            self.tbl_commands.setRowCount(row)
+            self.tbl_commands.sortItems(0)
 
-    def on_btn_add_clicked(self):
-        self.tbl_commands.insertRow(self.tbl_commands.rowCount() + 1)
+        def on_btn_add_clicked(self):
+            self.tbl_commands.insertRow(self.tbl_commands.rowCount() + 1)
 
-    # ok = BoolResult(); newurl = QInputDialog.getText(self, "Change url of repository %s" % name, "Url:", QLineEdit.Normal, rep["url"], ok)
-    # if ok: rep["url"] = newurl
-    def on_btn_remove_clicked(self):
-        self.tbl_commands.removeRow(self.tbl_commands.selectedRows()[0])
+        # ok = BoolResult(); newurl = QInputDialog.getText(self, "Change url of repository %s" % name, "Url:", QLineEdit.Normal, rep["url"], ok)
+        # if ok: rep["url"] = newurl
+        def on_btn_remove_clicked(self):
+            self.tbl_commands.removeRow(self.tbl_commands.selectedRows()[0])
 
-    def on_btn_apply_clicked(self):
-        try:
-            self.cfg.set('general', 'enabled', str(self.chk_enabled.isChecked()))
-            self.cfg.set('general', 'debug', str(self.chk_debug.isChecked()))
-            self.cfg.set('general', 'customprefix', str(self.grp_prefix.isChecked()))
-            self.cfg.set('general', 'prefix', self.txt_prefix.text)
-            with open(self.ini, 'w') as configfile:
-                self.cfg.write(configfile)
-            i = 0
-            while i < self.tbl_commands.rowCount:
-                try:
-                    ts3lib.printMessageToCurrentTab("{0}".format(self.tbl_commands.item(i, 0)))
-                    if not self.tbl_commands.item(i, 0).text() in self.cmd.sections(): self.cmd.add_section(i)
-                    self.cmd.set(self.tbl_commands.item(i, 0).text(), "function", self.tbl_commands.item(i, 1).text())
-                    self.cmd.set(self.tbl_commands.item(i, 0).text(), "enabled", str(self.tbl_commands.item(i, 0).checkState() == Qt.Checked))
-                except:
-                    from traceback import format_exc;ts3lib.logMessage("Could not add row {0} to commands.ini\n{1}".format(i, format_exc()), ts3defines.LogLevel.LogLevel_INFO, "pyTSon Chat Bot", 0)
-                i += 1
-            with open(self.cmdini, 'w') as configfile:
-                self.cmd.write(configfile)
-            self.loadCommands();
-        except:
-            from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+        def on_btn_apply_clicked(self):
+            try:
+                self.cfg.set('general', 'enabled', str(self.chk_enabled.isChecked()))
+                self.cfg.set('general', 'debug', str(self.chk_debug.isChecked()))
+                self.cfg.set('general', 'unknowncmd', str(self.chk_unknowncmd.isChecked()))
+                self.cfg.set('general', 'disabledcmd', str(self.chk_disabledcmd.isChecked()))
+                self.cfg.set('general', 'customprefix', str(self.grp_prefix.isChecked()))
+                self.cfg.set('general', 'prefix', self.txt_prefix.text)
+                with open(self.ini, 'w') as configfile:
+                    self.cfg.write(configfile)
+                i = 0
+                while i < self.tbl_commands.rowCount:
+                    try:
+                        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}".format(self.tbl_commands.item(i, 0)))
+                        if not self.tbl_commands.item(i, 0).text() in self.cmd.sections(): self.cmd.add_section(i)
+                        self.cmd.set(self.tbl_commands.item(i, 0).text(), "function", self.tbl_commands.item(i, 1).text())
+                        self.cmd.set(self.tbl_commands.item(i, 0).text(), "enabled", str(self.tbl_commands.item(i, 0).checkState() == Qt.Checked))
+                    except:
+                        from traceback import format_exc;ts3lib.logMessage("Could not add row {0} to commands.ini\n{1}".format(i, format_exc()), ts3defines.LogLevel.LogLevel_INFO, "pyTSon Chat Bot", 0)
+                    i += 1
+                with open(self.cmdini, 'w') as configfile:
+                    self.cmd.write(configfile)
+                self.loadCommands();
+            except:
+                from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def on_btn_close_clicked(self):
-        self.close()
-
+        def on_btn_close_clicked(self):
+            self.close()
 
 class chatCommand(object):
     """

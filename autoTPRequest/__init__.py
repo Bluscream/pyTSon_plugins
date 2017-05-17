@@ -51,7 +51,9 @@ class autoTPRequest(ts3plugin):
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def jokeReply(self, reply):
-        if self.msg == "": msg =json.loads(reply.readAll().data().decode('utf-8'))["joke"][:50]
+        joke = json.loads(reply.readAll().data().decode('utf-8'))["joke"]
+        ts3lib.logMessage("Requesting talk power with joke\n%s"%joke, ts3defines.LogLevel.LogLevel_INFO, self.name, self.schid)
+        if self.msg == "": msg =joke[:50]
         else: msg = self.msg
         if self.debug: ts3lib.printMessageToCurrentTab('[{0}] msg: {1}'.format(self.name,msg))
         try: ts3lib.requestIsTalker(self.schid, True, msg);self.schid = 0

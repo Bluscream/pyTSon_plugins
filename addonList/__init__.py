@@ -66,7 +66,7 @@ class addonList(ts3plugin):
             try:
                 (error, name) = ts3lib.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
                 addons = self.parseMeta(schid,selectedItemID)
-                if not self.dlg: self.dlg = AddonsDialog(addons, name)
+                if not self.dlg: self.dlg = AddonsDialog(addons, name, self.cfg)
                 self.dlg.show()
                 self.dlg.raise_()
                 self.dlg.activateWindow()
@@ -133,7 +133,7 @@ class addonList(ts3plugin):
                     except:from traceback import format_exc;ts3lib.logMessage("Error reading addon from Database:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             del db
             pytson = [element for element in newmeta.iter() if element.text == 'pyTSon'][0]
-            if self.cfg.getboolean("general", "activeonly"): pluginhost.PluginHost.active.items()
+            if self.cfg.getboolean("general", "activeonly"): plugins = pluginhost.PluginHost.active.items()
             else: plugins = pluginhost.PluginHost.plugins.items()
             for name, plugin in plugins:
                 try:
@@ -150,10 +150,11 @@ class addonList(ts3plugin):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
 
 class AddonsDialog(QWidget):
-    def __init__(self, addons, name, parent=None):
+    def __init__(self, addons, name, cfg, parent=None):
         try:
             super(QWidget, self).__init__(parent)
             setupUi(self, path.join(pytson.getPluginPath(), "scripts", "addonList", "addons.ui"))
+            self.cfg = cfg
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("{0}'s Addons".format(name))
             self.txt_description.setVisible(False)
@@ -170,7 +171,6 @@ class AddonsDialog(QWidget):
 
     def setupList(self, addons):
         try:
-            ts3lib.printMessageToCurrentTab("[color=green]%s"%addons)
             self.tbl_addons.clear()
             self.tbl_addons.setRowCount(len(addons))
             row = 0
@@ -190,11 +190,11 @@ class AddonsDialog(QWidget):
                         font.setBold(True)
                         item.setFont(font)
                         # item.setData(Qt.UserRole, addon.text)
-                        if addon.text == "PyTSon": self.pytson = addon
+                        if addon.text == "pyTSon": self.pytson = addon
                         elif addon.text == "Lua": self.lua = addon
                     item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
                     self.tbl_addons.setItem(row, 1, item)
-                    ts3lib.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
+                    if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
                     try:
                         item = QTableWidgetItem(addon.attrib["version"])
                         item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
@@ -218,10 +218,9 @@ class AddonsDialog(QWidget):
 
     def on_tbl_addons_doubleClicked(self, mi):
         try:
-            print(mi.row())
-            data = self.tbl_addons.currentItem().text()
-            print(data)
-            if data == "PyTSon": self.setupList(self.pytson.getchildren())
+            row = self.tbl_addons.currentRow()
+            data = self.tbl_addons.item(row,1).text()
+            if data == "pyTSon": self.setupList(self.pytson.getchildren())
             elif data == "Lua": self.setupList(self.lua.getchildren())
         except:
             try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
