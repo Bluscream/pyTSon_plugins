@@ -77,10 +77,16 @@ class addonList(ts3plugin):
             i = []
             addons = self.parseMeta(schid, clid)
             try:
+                for addon in addons:
+                    try:
+                        string = "%s"%addon.text
+                        # string += " v%s"%addon.attrib["version"]
+                        string += " by %s"%addon.attrib["author"]
+                        i.append(string)
+                    except:
+                        if self.cfg.getboolean("general", "debug"): from traceback import format_exc;ts3lib.logMessage("Error listing {0}: {1}".format(addon.text, format_exc()), ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        pass
                 pytsons = [element for element in addons.iter() if element.text == 'pyTSon']
-                print("==========")
-                print(xml.tostring(pytsons[0]).decode("utf-8"))
-                print("==========")
                 # xm = xml.fromstring('<element attribute="value">text<subelement subattribute="subvalue">subtext</subelement></element>')
                 for pytson in pytsons:
                     scripts = pytson.findall("script")
@@ -88,11 +94,7 @@ class addonList(ts3plugin):
                     for script in scripts:
                         try: i.append("{name} v{version} by {author}".format(name=script.text,version=script.attrib["version"],author=script.attrib["author"]))
                         except:from traceback import format_exc;ts3lib.logMessage("Error parsing meta %s:\n%s"%(script.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
-                # for name, plugin in pluginhost.PluginHost.plugins.items():
-                #     try: i.append("{name} v{version} by {author}".format(name=plugin.name,version=plugin.version,author=plugin.author))
-                #     except:
-                #         if self.cfg.getboolean("general", "debug"): from traceback import format_exc;ts3lib.logMessage("Error listing {0}: {1}".format(plugin, format_exc()), ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
-                #         continue
+
                 return i
             except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);pass
 
