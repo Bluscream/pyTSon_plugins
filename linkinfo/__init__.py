@@ -1,10 +1,11 @@
 from ts3plugin import ts3plugin
 import ts3lib as ts3
-import ts3defines, os.path
+import ts3defines, os.path, json
 from os import path
 from PythonQt.QtSql import QSqlDatabase
 from PythonQt.QtGui import *
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
+from PythonQt.QtCore import QUrl
 from pytsonui import *
 from traceback import format_exc
 
@@ -97,21 +98,18 @@ class Linkinfo(ts3plugin):
                         start = message.find("[url=")
                         end = message.find("]")
                         message = message[start + 5:end]
+                    self.schid = schid
+                    self.myid = myid
+                    self.target = targetMode
+                    self.fromID = fromID
                     self.getLinkInfo([message])
+                    return
                     message = "[[url=http://www.getlinkinfo.com/info?link=" + message + "]Linkinfo[/url]] "+message
-                    if self.mode:
-                        if targetMode == 1:
-                            ts3.requestSendPrivateTextMsg(schid, message, fromID)
-                        if targetMode == 2:
-                            (error, mych) = ts3.getChannelOfClient(schid, myid)
-                            ts3.requestSendChannelTextMsg(schid, message, mych)
-                    else:
-                        ts3.printMessageToCurrentTab(str(message))
 
     def getLinkInfo(self, urls): # https://www.mywot.com/wiki/API
         links = "/".join(urls)
-        print(links)
-        url = "http://api.mywot.com/0.4/public_link_json2?hosts=%s&callback=process&key=%s" % (links,self.wotapikey)
+        ts3lib.printMessageToCurrentTab("%s"%links)
+        url = "http://api.mywot.com/0.4/public_link_json2?hosts=%s&key=%s" % (links,self.wotapikey)
         ts3.logMessage('Requesting %s'%url, ts3defines.LogLevel.LogLevel_ERROR, "PyTSon Linkinfo Script", 0)
         self.nwm = QNetworkAccessManager()
         self.nwm.connect("finished(QNetworkReply*)", self.onNetworkReply)
@@ -120,8 +118,15 @@ class Linkinfo(ts3plugin):
     def onNetworkReply(self, reply):
         if reply.error() == QNetworkReply.NoError:
             try:
-                response = reply.readAll().data().decode('utf-8')
-                ts3.printMessageToCurrentTab(response)
+                message = str(json.loads(reply.readAll().data().decode('utf-8')))
+                if self.mode:
+                    if self.target == 1:
+                        ts3.requestSendPrivateTextMsg(self.schid, message, self.fromID)
+                    if self.target == 2:
+                        (error, mych) = ts3.getChannelOfClient(self.schid, self.myid)
+                        ts3.requestSendChannelTextMsg(self.schid, message, mych)
+                else:
+                    ts3.printMessageToCurrentTab(str(message))
             except:
                 ts3.printMessageToCurrentTab(format_exc())
 
