@@ -8,7 +8,7 @@ class processcmdtest(ts3plugin):
     name = "processCommandTest"
     requestAutoload = False
     version = "1.0.1"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "This plugin shows how to use commands, run \"/py pt greet\" or \"/py pt time\""
     offersConfigure = False

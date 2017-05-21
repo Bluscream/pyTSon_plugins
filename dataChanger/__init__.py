@@ -7,7 +7,7 @@ from configparser import ConfigParser
 
 class dataChanger(ts3plugin):
     name = "Name Changer"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

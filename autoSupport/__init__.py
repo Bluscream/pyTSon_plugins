@@ -13,7 +13,7 @@ class color(object):
 
 class autoSupport(ts3plugin):
     name = "Auto Support"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream, SadPixel"

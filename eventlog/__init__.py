@@ -188,7 +188,7 @@ class eventlog(ts3plugin):
     requestAutoload = False
     name = "eventlog"
     version = "1.0.0"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "This plugin shows all available events in a log. Might be helpfull for plugin deveolopers."
     offersConfigure = False

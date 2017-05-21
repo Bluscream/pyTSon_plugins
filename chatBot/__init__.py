@@ -21,7 +21,7 @@ class color(object):
 
 class chatBot(ts3plugin):
     name = "Chat Bot"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -676,7 +676,7 @@ class chatCommand(object):
     """
     name = "__ts3plugin__"
     version = "1.0"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "This is the baseclass for all ts3 python plugins"
     """

@@ -4,7 +4,7 @@ from datetime import datetime
 
 class recreateChannel(ts3plugin):
     name = "Recreate Channel"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

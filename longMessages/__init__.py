@@ -5,7 +5,7 @@ import datetime, ts3defines, ts3lib
 
 class longMessages(ts3plugin):
     name = "Long Messages"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

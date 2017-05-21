@@ -14,7 +14,7 @@ if sys.platform == 'linux':
         name = "g15"
         requestAutoload = False
         version = "1.0"
-        import pytson;apiVersion = pytson.getCurrentApiVersion()
+        apiVersion = 22
         author = "Thomas \"PLuS\" Pathmann"
         description = "Display information on the g15 connected to g15daemon"
         offersConfigure = False

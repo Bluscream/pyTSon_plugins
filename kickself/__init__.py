@@ -5,7 +5,7 @@ class autopoke(ts3plugin):
     name = "kickoldself"
     requestAutoload = False
     version = "1.0"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "Kick my zombie eg after a crash"
     offersConfigure = False

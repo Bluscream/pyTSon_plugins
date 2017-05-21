@@ -6,7 +6,7 @@ from PythonQt.QtCore import *
 
 class discordify(ts3plugin):
     name = "Discordify"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

@@ -4,7 +4,7 @@ from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox
 
 class profile(ts3plugin):
     name = "Profile"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

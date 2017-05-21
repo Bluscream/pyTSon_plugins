@@ -5,7 +5,7 @@ import ts3defines, ts3lib
 
 class showQueries(ts3plugin):
     name = "Query Viewer"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

@@ -9,7 +9,7 @@ from inspect import getmembers
 
 class nowPlaying(ts3plugin):
     name = "Now Playing"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

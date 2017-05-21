@@ -8,7 +8,7 @@ from pytsonui import setupUi
 
 class gommeChecker(ts3plugin):
     name = "Gomme Checker"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

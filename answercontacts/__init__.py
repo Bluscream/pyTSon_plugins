@@ -8,7 +8,7 @@ class answercontacts(ts3plugin):
     name = "answercontacts"
     requestAutoload = False
     version = "1.0.1"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "Autoanswer contact status (friend, neutral, blocked)"
     offersConfigure = False

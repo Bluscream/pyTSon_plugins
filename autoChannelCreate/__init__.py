@@ -9,7 +9,7 @@ from configparser import ConfigParser
 
 class autoChannelCreate(ts3plugin):
     name = "Auto Channel Creator"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

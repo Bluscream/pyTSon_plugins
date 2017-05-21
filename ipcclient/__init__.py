@@ -188,7 +188,7 @@ class ipcclient(ts3plugin):
     requestAutoload = False
     name = "IPC Client"
     version = "1.0.0"
-    import pytson;apiVersion = pytson.getCurrentApiVersion()
+    apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann, Bluscream"
     description = "ipcplugin test"
     offersConfigure = False
