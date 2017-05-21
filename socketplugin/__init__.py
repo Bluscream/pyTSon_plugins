@@ -1,6 +1,6 @@
 from ts3plugin import ts3plugin
 from websocket import create_connection
-import ts3lib, ts3defines, tshelp, json
+import ts3lib, ts3defines, tshelp, json, tssocketserver, SimpleWebSocketServer
 
 class socketplugin(ts3plugin):
 	"""docstring for overlayplugin"""
@@ -17,7 +17,7 @@ class socketplugin(ts3plugin):
 	hotkeys = []
 	global currentActiveServer
 	global ws
-	
+
 
 	def __init__(self):
 		#Open Socket
@@ -45,16 +45,16 @@ class socketplugin(ts3plugin):
 			#	ts3lib.printMessageToCurrentTab("%s started talking" % name)
 			#elif status == ts3defines.TalkStatus.STATUS_NOT_TALKING:
 			#	ts3lib.printMessageToCurrentTab("%s stopped talking" % name)
-			
+
 
 	def onClientSelfVariableUpdateEvent(self, serverConnectionHandlerID, flag, oldValue, newValue):
 		if flag == ts3defines.ClientProperties.CLIENT_INPUT_HARDWARE:
 			self.currentActiveServer = serverConnectionHandlerID
 #			{'event': 'onClientSelfVariableUpdateEvent', 'flag': flag, 'data': [oldValue, newValue]}
 			self.ws.send(json.dumps({'event': 'ActiveServerSwap', 'serverConnectionHandlerID': serverConnectionHandlerID,'channelName': tshelp.getChannelName(serverConnectionHandlerID,tshelp.getChannelID(serverConnectionHandlerID)), 'serverName': tshelp.getServerName(serverConnectionHandlerID), 'clients': tshelp.getNearbyClients(self.currentActiveServer)}))
-			
+
 			#ts3lib.printMessageToCurrentTab("Switched Server Mic to %s" % tshelp.getServerName(serverConnectionHandlerID))
-			
+
 
 	def onClientMoveEvent(self, serverConnectionHandlerID, clientID, oldChannelID, newChannelID, visibility, moveMessage):
 		#Log Channel Change
@@ -73,9 +73,9 @@ class socketplugin(ts3plugin):
 
 	def onClientMoveTimeoutEvent(self, serverConnectionHandlerID, clientID, oldChannelID, newChannelID, visibility, timeoutMessage):
 		if self.currentActiveServer == serverConnectionHandlerID and oldChannelID == tshelp.getChannelID(serverConnectionHandlerID):
-			self.ws.send(json.dumps({'event': 'nearbyClientMoveEvent', 'client': tshelp.getClientInfo(serverConnectionHandlerID, clientID), 'status': 1}))	
+			self.ws.send(json.dumps({'event': 'nearbyClientMoveEvent', 'client': tshelp.getClientInfo(serverConnectionHandlerID, clientID), 'status': 1}))
 
-	
+
 	def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
 		#if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
 		if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTED:
@@ -92,4 +92,4 @@ class socketplugin(ts3plugin):
 
 	def onClientMoveMovedEvent(self, serverConnectionHandlerID, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
 		if self.currentActiveServer == serverConnectionHandlerID and oldChannelID == tshelp.getChannelID(serverConnectionHandlerID):
-			self.ws.send(json.dumps({'event': 'nearbyClientMoveEvent', 'client': tshelp.getClientInfo(serverConnectionHandlerID, clientID), 'status': 1}))	
+			self.ws.send(json.dumps({'event': 'nearbyClientMoveEvent', 'client': tshelp.getClientInfo(serverConnectionHandlerID, clientID), 'status': 1}))

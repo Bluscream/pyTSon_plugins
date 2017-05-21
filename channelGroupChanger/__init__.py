@@ -81,7 +81,7 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
                     item.setCheckState(Qt.Checked if key == cgid else Qt.Unchecked)
                     item.setData(Qt.UserRole, key)
                     if p[1] == 0: continue;
-                    elif p[1] in [100, 200, 300, 500, 600]:
+                    elif p[1] in range(100, 700, 100):
                         item.setIcon(QIcon(IconPack.icon(icons,"group_%s"%p[1])))
                     else: item.setIcon(QIcon(ServerCache.icon(cache,p[1]&0xFFFFFFFF)))
                 except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
