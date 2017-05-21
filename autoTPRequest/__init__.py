@@ -7,7 +7,8 @@ from datetime import datetime
 
 class autoTPRequest(ts3plugin):
     name = "Auto Talk Power Request"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

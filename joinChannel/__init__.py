@@ -6,7 +6,8 @@ from PythonQt.QtCore import Qt
 
 class joinChannel(ts3plugin):
     name = "Channel Queue"
-    apiVersion = pytson.getCurrentApiVersion()
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

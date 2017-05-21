@@ -215,7 +215,8 @@ class widgetinfo(ts3plugin):
     name = "widgetinfo"
     requestAutoload = False
     version = "1.0.1"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "Show information of the client's ui elements"
     offersConfigure = False

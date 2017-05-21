@@ -10,7 +10,8 @@ import ts3defines, os, json, configparser, webbrowser, traceback, urllib.parse
 class exporter(ts3plugin):
     shortname = "EX"
     name = "Teamspeak Export/Import"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

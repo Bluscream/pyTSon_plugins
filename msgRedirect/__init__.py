@@ -5,7 +5,8 @@ from os import path
 
 class msgRedirect(ts3plugin):
     name = "MSG Redirect"
-    apiVersion = pytson.getCurrentApiVersion()
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

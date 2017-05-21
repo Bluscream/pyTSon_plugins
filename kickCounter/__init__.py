@@ -4,7 +4,8 @@ from datetime import datetime
 
 class kickCounter(ts3plugin):
     name = "Kick Counter"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

@@ -12,7 +12,8 @@ class Blacklist(ts3plugin):
     name				= "Blacklist"
     requestAutoload		= False
     version				= "1.0"
-    apiVersion			= pytson.getCurrentApiVersion()
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 22
     author				= "Luemmel"
     description			= "Blacklist nicknames."
     offersConfigure		= True

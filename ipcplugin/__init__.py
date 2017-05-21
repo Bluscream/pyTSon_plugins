@@ -79,7 +79,8 @@ class ipcplugin(ts3plugin):
     requestAutoload = False
     name = "ipc"
     version = "1.0"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "This is a plugin used for interprocess communication. It broadcasts events to clients and can receive commands to execute."
     offersConfigure = False

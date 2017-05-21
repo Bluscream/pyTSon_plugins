@@ -7,7 +7,8 @@ class socketplugin(ts3plugin):
 	name = "socket"
 	requestAutoload = False
 	version = "0.1"
-	apiVersion = 21
+	try: apiVersion = pytson.getCurrentApiVersion()
+	except: apiVersion = 22
 	author = "Scratch"
 	description = "Overlay helper"
 	offersConfigure = False

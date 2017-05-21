@@ -9,7 +9,8 @@ from configparser import ConfigParser
 
 class info(ts3plugin):
     name = "Extended Info"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

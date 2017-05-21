@@ -4,7 +4,8 @@ from datetime import datetime
 
 class recreateChannel(ts3plugin):
     name = "Recreate Channel"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -53,11 +54,13 @@ class recreateChannel(ts3plugin):
         # CHANNEL_NEEDED_TALK_POWER
         err, CHANNEL_NEEDED_TALK_POWER = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
         ts3lib.setChannelVariableAsInt(schid,0,ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER,CHANNEL_NEEDED_TALK_POWER)
-        self.returncode = ts3lib.createReturnCode()
-        ts3lib.ﬂushChannelCreation(schid, 0, self.returncode)
+        # self.returncode = ts3lib.createReturnCode()
+        ts3lib.ﬂushChannelCreation(schid, 0)#, self.returncode)
+
 
     def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentiﬁer):
         err, clientID = ts3lib.getClientID(schid)
         if invokerID != clientID: return
         ts3lib.setChannelVariableAsString(schid,channelID,ts3defines.ChannelProperties.CHANNEL_NAME,self.CHANNEL_NAME)
+        del self.CHANNEL_NAME
         ts3lib.ﬂushChannelUpdates(schid, channelID)

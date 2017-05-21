@@ -18,7 +18,8 @@ class dynamicAvatar(ts3plugin):
     name = "Dynamic Avatar Changer"
     requestAutoload = False
     version = "1.0"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     author = "Bluscream"
     description = "Changes your avatar for you."
     offersConfigure = True

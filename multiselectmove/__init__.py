@@ -252,7 +252,8 @@ class multiselectmove(ts3plugin):
     name = "multiselectmove"
     requestAutoload = False
     version = "1.0.1"
-    apiVersion = 21
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "This plugin makes it possible to move multiple clients around per Multiselect. Just select two items with shift- or control-modifier pressed."
     offersConfigure = False
@@ -355,4 +356,3 @@ class multiselectmove(ts3plugin):
     def onHotkeyEvent(self, keyword):
         if keyword == "0":
             self.showDialog(ts3lib.getCurrentServerConnectionHandlerID())
-

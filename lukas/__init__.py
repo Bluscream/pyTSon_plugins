@@ -8,7 +8,8 @@ class luemmelspluginpack(ts3plugin):
 	name = "Luemmels Pluginpack"
 	requestAutoload = False
 	version = "1.0"
-	apiVersion = 22
+	try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
 	author = "Luemmel"
 	description = "Autokicker, Linkinfo, Autochannelgroup"
 	offersConfigure = False

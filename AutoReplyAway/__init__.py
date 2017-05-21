@@ -98,7 +98,8 @@ class autoreply(ts3plugin):
     name = "AutoReplyAway"
     requestAutoload = False
     version = "1.0.1"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "This plugin autoreplies if you are away. It also shows one way to create ui-configurable scripts."
     offersConfigure = True

@@ -12,7 +12,8 @@ import ts3defines
 
 class ISPValidator(ts3plugin):
     name = "ISP Validator"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+  except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

@@ -5,7 +5,8 @@ from datetime import datetime
 
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
