@@ -62,9 +62,9 @@ class massAction(ts3plugin):
         try:
             if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
                 if menuItemID == 1: # Message all Clients
-                    msgs = self.getText(multiline=True,title="Enter Private Message")
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getClientList(schid)
+                    msgs = self.getText(multiline=True,title="Message all %s clients on this server"%len(clients),text="Enter Private Message")
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
@@ -80,33 +80,33 @@ class massAction(ts3plugin):
                     if not self.dlg: self.dlg = MessageDialog(schid, uids)
                     self.dlg.show();self.dlg.raise_();self.dlg.activateWindow()
                 elif menuItemID == 3: # Message all Channels
-                    msgs = self.getText(multiline=True,title="Enter Channel Message")
                     (error, channels) = ts3lib.getChannelList(schid)
+                    msgs = self.getText(multiline=True,title="Message all %s channels on this server"%len(channels),text="Enter Channel Message")
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in channels:
                         error = ts3lib.requestClientMove(schid, ownID, c, "123")
                         if not error == ts3defines.ERROR_ok: continue
                         for msg in msgs: ts3lib.requestSendChannelTextMsg(schid, msg, c)
                 elif menuItemID == 4: # Poke all Clients
-                    msgs = self.getText(title="Enter Poke Message",max=100)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getClientList(schid)
+                    msgs = self.getText(title="Poke all %s clients on this server"%len(clients),text="Enter Poke Message",max=100)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
                         for msg in msgs: ts3lib.requestClientPoke(schid, c, msg)
                 elif menuItemID == 5: # ChannelKick all Clients
-                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getClientList(schid)
+                    msg = self.getText(title="Kick all %s clients on this server from their channel"%len(clients),text="Enter Kick Reason",multimsg=False,max=80)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
                         ts3lib.requestClientKickFromChannel(schid, c, msg)
                 elif menuItemID == 6: # ChannelBan all Clients
-                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getClientList(schid)
+                    msg = self.getText(title="ChannelBan all %s clients on this server"%len(clients),text="Enter Kick Reason",multimsg=False,max=80)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
@@ -115,17 +115,17 @@ class massAction(ts3plugin):
                         ts3lib.requestSetClientChannelGroup(schid, [self.sbgroup], [chan], [dbid])
                         ts3lib.requestClientKickFromChannel(schid, c, msg)
                 elif menuItemID == 7: # Kick all Clients
-                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getClientList(schid)
+                    msg = self.getText(title="Kick all %s clients from this server"%len(clients),text="Enter Kick Reason",multimsg=False,max=80)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
                         ts3lib.requestClientKickFromServer(schid, c, msg)
                 elif menuItemID == 8: # Ban all Clients
-                    msg = self.getText(title="Enter Ban Reason",multimsg=False,max=80)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getClientList(schid)
+                    msg = self.getText(title="Ban all %s clients from this server"%len(clients),text="Enter Ban Reason",multimsg=False,max=80)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
@@ -137,9 +137,10 @@ class massAction(ts3plugin):
                     for c in channels: ts3lib.requestChannelDelete(schid, c, True)
             elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
                 if menuItemID == 1: # Message all Clients
-                    msgs = self.getText(multiline=True,title="Enter Private Message")
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getChannelClientList(schid, selectedItemID)
+                    (err, name) = ts3lib.getChannelVariableAsString(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msgs = self.getText(multiline=True,title="Message to all %s clients in channel \"%s\""%(len(clients),name),text="Enter Private Message")
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
@@ -155,25 +156,28 @@ class massAction(ts3plugin):
                     if not self.dlg: self.dlg = MessageDialog(schid, uids)
                     self.dlg.show();self.dlg.raise_();self.dlg.activateWindow()
                 elif menuItemID == 3: # Poke all Clients
-                    msgs = self.getText(title="Enter Poke Message",max=100)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getChannelClientList(schid, selectedItemID)
+                    (err, name) = ts3lib.getChannelVariableAsString(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msgs = self.getText(title="Poke all %s clients in channel \"%s\""%(len(clients),name),text="Enter Poke Message",max=100)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
                         for msg in msgs: ts3lib.requestClientPoke(schid, c, msg)
                 elif menuItemID == 4: # ChannelKick all Clients
-                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getChannelClientList(schid,selectedItemID)
+                    (err, name) = ts3lib.getChannelVariableAsString(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msg = self.getText(title="Kick all %s clients from channel \"%s\""%(len(clients),name),text="Enter Kick Reason",multimsg=False,max=80)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
                         ts3lib.requestClientKickFromChannel(schid, c, msg)
                 elif menuItemID == 5: # ChannelBan all Clients
-                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getChannelClientList(schid,selectedItemID)
+                    (err, name) = ts3lib.getChannelVariableAsString(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msg = self.getText(title="ChannelBan all %s clients from channel \"%s\""%(len(clients),name),text="Enter Kick Reason",multimsg=False,max=80)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
@@ -181,17 +185,19 @@ class massAction(ts3plugin):
                         ts3lib.requestSetClientChannelGroup(schid, [self.sbgroup], [selectedItemID], [dbid])
                         ts3lib.requestClientKickFromChannel(schid, c, msg)
                 elif menuItemID == 6: # Kick all Clients
-                    msg = self.getText(title="Enter Kick Reason",multimsg=False,max=80)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getChannelClientList(schid,selectedItemID)
+                    (err, name) = ts3lib.getChannelVariableAsString(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msg = self.getText(title="Kick all %s clients in channel \"%s\" from this server"%(len(clients),name),text="Enter Kick Reason",multimsg=False,max=80)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
                         ts3lib.requestClientKickFromServer(schid, c, msg)
                 elif menuItemID == 7: # Ban all Clients
-                    msg = self.getText(title="Enter Ban Reason",multimsg=False,max=80)
-                    if bool(self.ok) != True:return
                     (error, clients) = ts3lib.getChannelClientList(schid,selectedItemID)
+                    (err, name) = ts3lib.getChannelVariableAsString(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msg = self.getText(title="Ban all %s clients in channel \"%s\""%(len(clients),name),text="Enter Ban Reason",multimsg=False,max=80)
+                    if bool(self.ok) != True:return
                     (error, ownID) = ts3lib.getClientID(schid)
                     for c in clients:
                         if c == ownID: continue
@@ -200,7 +206,7 @@ class massAction(ts3plugin):
 
     def getText(self,multimsg=True,multiline=False,title="Enter text here",text="",max=1024):
         try:
-            x = QWidget()
+            x = QDialog()
             x.setAttribute(Qt.WA_DeleteOnClose)
             if multiline:
                 clipboard = QApplication.clipboard().text()
@@ -211,7 +217,7 @@ class massAction(ts3plugin):
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def confirm(self, title, message):
-        x = QWidget()
+        x = QDialog()
         x.setAttribute(Qt.WA_DeleteOnClose)
         _t = QMessageBox.question(x, title, message, QMessageBox.Yes, QMessageBox.No)
         if _t == QMessageBox.Yes: return True
