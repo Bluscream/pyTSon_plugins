@@ -7,7 +7,7 @@ import ts3lib as ts3; import   ts3defines, datetime, os
 class report(ts3plugin):
     name = "Report"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

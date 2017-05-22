@@ -5,6 +5,7 @@ try:
     # noinspection PyUnresolvedReferences
     from PythonQt.QtSql import QSqlDatabase
     import ts3defines, re
+    from pytson import getPluginPath
     from configparser import ConfigParser
     from os import path
     from datetime import datetime
@@ -12,7 +13,7 @@ try:
     class channelWatcher(ts3plugin):
         name = "Channel Watcher"
         try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+        except: apiVersion = 22
         requestAutoload = False
         version = "1.0"
         author = "Bluscream"
@@ -43,7 +44,7 @@ try:
         check = False
         checkcurrent = ""
         reason = ""
-        ini = path.join(pytson.getPluginPath(), "scripts", "channelWatcher", "settings.ini")
+        ini = path.join(getPluginPath(), "scripts", "channelWatcher", "settings.ini")
         cfg = ConfigParser()
 
         def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())

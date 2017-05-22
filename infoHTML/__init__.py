@@ -8,7 +8,7 @@ class infoHTML(ts3plugin):
     requestAutoload = False
     version = "1.0"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     author = "Bluscream"
     description =  "Extends the infoData Frame for extended HTML support."
     offersConfigure = False

@@ -10,7 +10,7 @@ from inspect import getmembers
 class nowPlaying(ts3plugin):
     name = "Now Playing"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

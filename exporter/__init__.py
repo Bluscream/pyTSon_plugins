@@ -11,7 +11,7 @@ class exporter(ts3plugin):
     shortname = "EX"
     name = "Teamspeak Export/Import"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

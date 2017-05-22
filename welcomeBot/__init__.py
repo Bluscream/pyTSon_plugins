@@ -1,6 +1,7 @@
 import ts3lib
 try:
     import ts3defines
+    from pytson import getPluginPath
     from datetime import datetime
     from ts3plugin import ts3plugin
     from urllib.parse import quote as urlencode
@@ -10,7 +11,7 @@ try:
     class welcomeBot(ts3plugin):
         name = "Welcome Bot"
         try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+        except: apiVersion = 22
         requestAutoload = False
         version = "1.0"
         author = "Bluscream"
@@ -23,7 +24,7 @@ try:
         debug = False
         enabled = False
         default = 0
-        ini = path.join(pytson.getPluginPath(), "scripts", __name__, "settings.ini")
+        ini = path.join(getPluginPath(), "scripts", __name__, "settings.ini")
         cfg = ConfigParser()
         cfg.optionxform = str
         #tmp = []

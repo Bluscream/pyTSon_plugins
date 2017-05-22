@@ -22,7 +22,7 @@ class color(object):
 class chatBot(ts3plugin):
     name = "Chat Bot"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -32,9 +32,9 @@ class chatBot(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    ini = path.join(pytson.getPluginPath(), "scripts", "chatBot", "settings.ini")
+    ini = path.join(getPluginPath(), "scripts", "chatBot", "settings.ini")
     cfg = ConfigParser()
-    cmdini = path.join(pytson.getPluginPath(), "scripts", "chatBot", "commands.ini")
+    cmdini = path.join(getPluginPath(), "scripts", "chatBot", "commands.ini")
     cmd = ConfigParser()
     # cmdpy = path.join(pytson.getPluginPath(), "scripts", "chatBot")
     dlg = None

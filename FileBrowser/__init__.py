@@ -6,7 +6,7 @@ import ts3lib, ts3defines
 class FileBrowser(ts3plugin):
     name = "File Browser"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

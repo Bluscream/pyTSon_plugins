@@ -375,7 +375,7 @@ try:
         requestAutoload = False
         version = "1.3"
         try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+        except: apiVersion = 22
         author = "Thomas \"PLuS\" Pathmann, Bluscream"
         description =  "Show information of the client's ui elements.\n"
         description += "Originally called widgetInfo.\n"

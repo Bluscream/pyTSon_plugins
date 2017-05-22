@@ -13,7 +13,7 @@ class serverBrowser(ts3plugin):
     shortname = "PS"
     name = "Better Server Browser"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "0.5"
     author = "Bluscream"

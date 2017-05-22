@@ -31,8 +31,8 @@ class recreateChannel(ts3plugin):
         err, self.CHANNEL_NAME = ts3lib.getChannelVariableAsString(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
         ts3lib.setChannelVariableAsString(schid,0,ts3defines.ChannelProperties.CHANNEL_NAME,self.CHANNEL_NAME+"_")
         # CHANNEL_NAME_PHONETIC
-        err, CHANNEL_NAME_PHONETIC = ts3lib.getChannelVariableAsString(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC)
-        ts3lib.setChannelVariableAsString(schid,0,ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC,CHANNEL_NAME_PHONETIC)
+        # err, CHANNEL_NAME_PHONETIC = ts3lib.getChannelVariableAsString(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC)
+
         # CHANNEL_TOPIC
         # err, CHANNEL_TOPIC = ts3lib.getChannelVariableAsString(schid, channelID, ts3defines.ChannelProperties.CHANNEL_TOPIC)
         # ts3lib.setChannelVariableAsString(schid,0,ts3defines.ChannelProperties.CHANNEL_TOPIC,CHANNEL_TOPIC)

@@ -5,11 +5,12 @@ from os import path
 from PythonQt.QtGui import QDialog
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi
+from pytson import getPluginPath
 
 class gommeChecker(ts3plugin):
     name = "Gomme Checker"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -17,10 +18,10 @@ class gommeChecker(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(pytson.getPluginPath(), "scripts", "gommeChecker", "icons")
+    iconPath = path.join(getPluginPath(), "scripts", "gommeChecker", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Check all Channels", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Open Support", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Close Support", "")]
     hotkeys = []
-    ini = path.join(pytson.getPluginPath(), "scripts", "gommeChecker", "settings.ini")
+    ini = path.join(getPluginPath(), "scripts", "gommeChecker", "settings.ini")
     cfg = ConfigParser()
     supchans = []
     supmain = 0

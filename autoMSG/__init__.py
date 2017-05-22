@@ -6,7 +6,7 @@ from os import path
 class autoMSG(ts3plugin):
     name = "Auto Message"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

@@ -2,13 +2,14 @@ import ts3lib, ts3defines
 from PythonQt.QtCore import Qt, QTimer
 from ts3plugin import ts3plugin
 from pytsonui import setupUi
+from pytson import getPluginPath
 from os import path
 from configparser import ConfigParser
 
 class dataChanger(ts3plugin):
     name = "Name Changer"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -19,7 +20,7 @@ class dataChanger(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Nickname changer", "")]
     hotkeys = []
     debug = False
-    ini = path.join(pytson.getPluginPath(), "scripts", "dataChanger", "settings.ini")
+    ini = path.join(getPluginPath(), "scripts", "dataChanger", "settings.ini")
     cfg = ConfigParser()
     dlg = None
     int = 0

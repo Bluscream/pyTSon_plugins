@@ -15,7 +15,7 @@ if sys.platform == 'linux':
         requestAutoload = False
         version = "1.0"
         try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+        except: apiVersion = 22
         author = "Thomas \"PLuS\" Pathmann"
         description = "Display information on the g15 connected to g15daemon"
         offersConfigure = False

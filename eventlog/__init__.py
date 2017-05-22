@@ -189,7 +189,7 @@ class eventlog(ts3plugin):
     name = "eventlog"
     version = "1.0.0"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann"
     description = "This plugin shows all available events in a log. Might be helpfull for plugin deveolopers."
     offersConfigure = False

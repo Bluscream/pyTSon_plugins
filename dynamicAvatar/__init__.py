@@ -4,6 +4,7 @@ from configparser import ConfigParser
 from os import path, remove, listdir
 from shutil import copy2
 from datetime import datetime
+from pytson import getPluginPath
 from pytsonui import setupUi
 from base64 import b64encode
 from hashlib import md5
@@ -19,7 +20,7 @@ class dynamicAvatar(ts3plugin):
     requestAutoload = False
     version = "1.0"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     author = "Bluscream"
     description = "Changes your avatar for you."
     offersConfigure = True
@@ -27,7 +28,7 @@ class dynamicAvatar(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Refresh avatar", path.join(ts3lib.getPluginPath(),"pyTSon","scripts","dynamicAvatar","gfx","manual.png")),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Timer",'')]
     hotkeys = []
-    ini = path.join(pytson.getPluginPath(), "scripts", "dynamicAvatar", "settings.ini")
+    ini = path.join(getPluginPath(), "scripts", "dynamicAvatar", "settings.ini")
     config = ConfigParser()
     timer = QTimer()
     int = 0

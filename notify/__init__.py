@@ -5,7 +5,7 @@ import ts3lib as ts3; import   ts3defines, datetime
 class notify(ts3plugin):
     name = "Notifier"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

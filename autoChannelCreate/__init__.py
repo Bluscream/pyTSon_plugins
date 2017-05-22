@@ -1,4 +1,4 @@
-import ts3defines, ts3lib, json, string, random
+import ts3defines, ts3lib, json, string, random, pytson
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from PythonQt.QtCore import QUrl
 from urllib.parse import quote_plus as urlencode
@@ -10,7 +10,7 @@ from configparser import ConfigParser
 class autoChannelCreate(ts3plugin):
     name = "Auto Channel Creator"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"

@@ -1,6 +1,7 @@
 import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin
 from pytsonui import setupUi
+from pytson import getPluginPath
 from PythonQt.QtGui import *
 from configparser import ConfigParser
 from os import path
@@ -8,7 +9,7 @@ from os import path
 class NoX(ts3plugin):
     name = "BanBypasser (NoX)"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -16,11 +17,11 @@ class NoX(ts3plugin):
     offersConfigure = True
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(pytson.getPluginPath(), "scripts", "NoX", "icons")
+    iconPath = path.join(getPluginPath(), "scripts", "NoX", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Change Identity", "")]
     hotkeys = []
     debug = False
-    ini = path.join(pytson.getPluginPath(), "scripts", "NoX", "settings.ini")
+    ini = path.join(getPluginPath(), "scripts", "NoX", "settings.ini")
     cfg = ConfigParser()
     dlg = None
 

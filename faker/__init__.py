@@ -1,11 +1,12 @@
 import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin, PluginHost
+from pytson import getPluginPath
 from os import path
 
 class faker(ts3plugin):
     name = "Fake Anything"
     try: apiVersion = pytson.getCurrentApiVersion()
-  except: apiVersion = 22
+    except: apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -13,7 +14,7 @@ class faker(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(pytson.getPluginPath(), "scripts", "faker", "icons")
+    iconPath = path.join(getPluginPath(), "scripts", "faker", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Fake this channel", iconPath+"/fake.png"),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Fake this client", iconPath+"/fake.png")]
     hotkeys = []
@@ -34,7 +35,7 @@ class faker(ts3plugin):
 
         (error, phonetic) = ts3lib.getChannelVariableAsString(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME_PHONETIC)
         ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelProperties.CHANNEL_NAME,phonetic)
-        
+
         (error, pw) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_PASSWORD)
         if pw: ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelProperties.CHANNEL_PASSWORD,".")
 

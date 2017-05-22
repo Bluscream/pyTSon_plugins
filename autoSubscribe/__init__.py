@@ -1,5 +1,6 @@
 import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin
+from pytson import getPluginPath
 from os import path
 
 
@@ -14,14 +15,14 @@ class autoSubscribe(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    iconPath = path.join(pytson.getPluginPath(), "scripts", "autoSubscribe", "icons")
+    iconPath = path.join(getPluginPath(), "scripts", "autoSubscribe", "icons")
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Subscribe to all channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Sub all non-pw channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Sub all visible-pw channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "Unsub from all channels", "")]
     hotkeys = []
     debug = False
-    passwords = ["pw", "password", "passwort"]
+    passwords = ["pw", "pass"]
     blacklist = [".fm", "radio", "music", "musik"]
     onlyOpen = False
     subAll = [""]
