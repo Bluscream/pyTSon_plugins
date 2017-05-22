@@ -3,10 +3,8 @@ from os import path
 from urllib.parse import quote as urlencode
 from PythonQt.QtCore import *
 from PythonQt.QtGui import *
-from pytson import getPluginPath
-from pytsonui import setupUi
 from ts3plugin import ts3plugin
-import datetime, ts3defines, ts3lib, sys, os
+import datetime, ts3defines, ts3lib, sys, os, pytson, pytsonui
 import time as timestamp
 
 class color(object):
@@ -32,9 +30,9 @@ class chatBot(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    ini = path.join(getPluginPath(), "scripts", "chatBot", "settings.ini")
+    ini = path.join(pytson.getPluginPath(), "scripts", "chatBot", "settings.ini")
     cfg = ConfigParser()
-    cmdini = path.join(getPluginPath(), "scripts", "chatBot", "commands.ini")
+    cmdini = path.join(pytson.getPluginPath(), "scripts", "chatBot", "commands.ini")
     cmd = ConfigParser()
     # cmdpy = path.join(pytson.getPluginPath(), "scripts", "chatBot")
     dlg = None
