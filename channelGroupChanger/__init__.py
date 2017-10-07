@@ -4,7 +4,7 @@ from ts3plugin import ts3plugin, PluginHost
 from ts3client import ServerCache, IconPack
 from os import path
 from datetime import datetime
-from PythonQt.QtGui import QDialog, QListWidgetItem, QIcon
+from PythonQt.QtGui import QInputDialog, QDialog, QListWidgetItem, QIcon, QLineEdit
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi
 
@@ -19,9 +19,12 @@ class channelGroupChanger(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Set as target channel", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Change Channel Group", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Set as target channel", ""),
+				(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Change Channel Group", ""),
+				(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Change Channel Group", "")
+				]
     hotkeys = []
-    debug = False
+    debug = True
     toggle = True
     channel = 0
     dlg = None
@@ -40,6 +43,20 @@ class channelGroupChanger(ts3plugin):
             if menuItemID == 0:
                 self.channel = selectedItemID
                 ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())+" Set target channel to [color=yellow]"+str(self.channel)+"[/color]")
+            elif menuItemID == 1:
+                (e, cgid) = ts3lib.getServerVariableAsUInt64(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)
+                x = QDialog()
+                x.setAttribute(Qt.WA_DeleteOnClose)
+                dbid = QInputDialog.getInt(x, "Manually change channel group", "Enter DBID", QLineEdit.Normal)
+                if self.channel == 0:
+                    (e, ownID) = ts3lib.getClientID(schid)
+                    (e, self.channel) = ts3lib.getChannelOfClient(schid, ownID)
+                name = "DBID: %s"%dbid
+                if self.debug:
+                    ts3lib.printMessageToCurrentTab("toggle: {0} | debug: {1} | channel: {2} | groups: {3} | dbid: {4} | name: {5}".format(self.toggle,self.debug,self.channel,self.groups,dbid,name))
+                    ts3lib.printMessageToCurrentTab("schid: {0} | cgid: {1} | dbid: {2}".format(schid,cgid,dbid))
+                if not self.dlg: self.dlg = ChannelGroupDialog(schid, cgid, dbid, name, self.channel, self.groups)
+                self.dlg.show();self.dlg.raise_();self.dlg.activateWindow()
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
             if menuItemID == 0:
                 if self.channel == 0:
@@ -69,9 +86,11 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
             setupUi(self, path.join(getPluginPath(), "scripts", "channelGroupChanger", "channelGroupSelect.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("%s | %i"%(name,channel))
-            icons = IconPack.current()
-            icons.open()
-            cache = ServerCache(schid)
+            try:
+                icons = IconPack.current()
+                icons.open()
+                cache = ServerCache(schid)
+            except: from traceback import format_exc;ts3lib.logMessage("Could not load icons: {}".format(format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             # self.channelGroups.addItems(list(groups.values()))
             self.channelGroups.clear()
             for key,p in groups.items():
@@ -81,11 +100,13 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
                     item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
                     item.setCheckState(Qt.Checked if key == cgid else Qt.Unchecked)
                     item.setData(Qt.UserRole, key)
-                    if p[1] == 0: continue;
-                    elif p[1] in range(100, 700, 100):
-                        item.setIcon(QIcon(IconPack.icon(icons,"group_%s"%p[1])))
-                    else: item.setIcon(QIcon(ServerCache.icon(cache,p[1]&0xFFFFFFFF)))
-                except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+                    try:
+                        if p[1] == 0: continue;
+                        elif p[1] in range(100, 700, 100):
+                            item.setIcon(QIcon(IconPack.icon(icons,"group_%s"%p[1])))
+                        else: item.setIcon(QIcon(ServerCache.icon(cache,p[1]&0xFFFFFFFF)))
+                    except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+                except: from traceback import format_exc;ts3lib.logMessage("Could set icon: {}".format(format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             icons.close()
             # self.channelGroups.sortItems()
             self.channelGroups.connect("itemChanged(QListWidgetItem*)", self.onSelectedChannelGroupChangedEvent)
