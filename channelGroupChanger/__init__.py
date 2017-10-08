@@ -86,6 +86,7 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
             setupUi(self, path.join(getPluginPath(), "scripts", "channelGroupChanger", "channelGroupSelect.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("%s | %i"%(name,channel))
+            cache = False
             try:
                 icons = IconPack.current()
                 icons.open()
@@ -100,12 +101,13 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
                     item.setFlags(Qt.ItemIsSelectable | Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
                     item.setCheckState(Qt.Checked if key == cgid else Qt.Unchecked)
                     item.setData(Qt.UserRole, key)
-                    try:
-                        if p[1] == 0: continue;
-                        elif p[1] in range(100, 700, 100):
-                            item.setIcon(QIcon(IconPack.icon(icons,"group_%s"%p[1])))
-                        else: item.setIcon(QIcon(ServerCache.icon(cache,p[1]&0xFFFFFFFF)))
-                    except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+                    if (cache):
+                        try:
+                            if p[1] == 0: continue;
+                            elif p[1] in range(100, 700, 100):
+                                item.setIcon(QIcon(IconPack.icon(icons,"group_{}".format(p[1]))))
+                            else: item.setIcon(QIcon(ServerCache.icon(cache,p[1]&0xFFFFFFFF)))
+                        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
                 except: from traceback import format_exc;ts3lib.logMessage("Could set icon: {}".format(format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             icons.close()
             # self.channelGroups.sortItems()
