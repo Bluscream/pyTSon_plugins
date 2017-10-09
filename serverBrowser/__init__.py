@@ -541,3 +541,7 @@ class ServersDialog(QDialog):
     # connect(barAction, SIGNAL(triggered()), this, SLOT(doSomethingBar()));
     # addAction(fooAction);
     # addAction(barAction);
+
+    # Planetteamspeak: https://api.planetteamspeak.com/servernodes/84.200.62.248:9987/
+    # TSViewer: https://www.tsviewer.com/ts3viewer.php?ID=904314
+    # TS3Index: https://ts3index.com/viewer/?id=138009

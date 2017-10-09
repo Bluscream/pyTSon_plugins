@@ -24,7 +24,7 @@ class channelGroupChanger(ts3plugin):
 				(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Change Channel Group", "")
 				]
     hotkeys = []
-    debug = True
+    debug = False
     toggle = True
     channel = 0
     dlg = None

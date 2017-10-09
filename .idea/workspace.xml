@@ -2,7 +2,111 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/welcomeBot/settings.ini" afterPath="$PROJECT_DIR$/welcomeBot/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/pyTSon_plugins.iml" afterPath="$PROJECT_DIR$/.idea/pyTSon_plugins.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AutoChannelChatTab/__init__.py" afterPath="$PROJECT_DIR$/AutoChannelChatTab/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AutoReplyAway/__init__.py" afterPath="$PROJECT_DIR$/AutoReplyAway/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileBrowser/__init__.py" afterPath="$PROJECT_DIR$/FileBrowser/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ISPValidator/__init__.py" afterPath="$PROJECT_DIR$/ISPValidator/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ISPValidator/isps.txt" afterPath="$PROJECT_DIR$/ISPValidator/isps.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ISPValidator/settings.ini" afterPath="$PROJECT_DIR$/ISPValidator/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ISPValidator/settings.ui" afterPath="$PROJECT_DIR$/ISPValidator/settings.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NoX/__init__.py" afterPath="$PROJECT_DIR$/NoX/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NoX/settings.ini" afterPath="$PROJECT_DIR$/NoX/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NoX/settings.ui" afterPath="$PROJECT_DIR$/NoX/settings.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/__init__.py" afterPath="$PROJECT_DIR$/addonList/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/addons.ui" afterPath="$PROJECT_DIR$/addonList/addons.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/addons.xml" afterPath="$PROJECT_DIR$/addonList/addons.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/settings.ini" afterPath="$PROJECT_DIR$/addonList/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/answercontacts/__init__.py" afterPath="$PROJECT_DIR$/answercontacts/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoChannelCreate/__init__.py" afterPath="$PROJECT_DIR$/autoChannelCreate/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoChannelCreate/autoChannelCreate.ui" afterPath="$PROJECT_DIR$/autoChannelCreate/autoChannelCreate.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoChannelCreate/channelCreator.ui" afterPath="$PROJECT_DIR$/autoChannelCreate/channelCreator.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoCommander/__init__.py" afterPath="$PROJECT_DIR$/autoCommander/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoMSG/__init__.py" afterPath="$PROJECT_DIR$/autoMSG/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoSubscribe/__init__.py" afterPath="$PROJECT_DIR$/autoSubscribe/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoSupport/__init__.py" afterPath="$PROJECT_DIR$/autoSupport/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoTPRequest/__init__.py" afterPath="$PROJECT_DIR$/autoTPRequest/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autopokeback/__init__.py" afterPath="$PROJECT_DIR$/autopokeback/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blacklist/__init__.py" afterPath="$PROJECT_DIR$/blacklist/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blacklist/blacklist.ui" afterPath="$PROJECT_DIR$/blacklist/blacklist.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cfgDialog/__init__.py" afterPath="$PROJECT_DIR$/cfgDialog/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cfgDialog/cfgDialog.ini" afterPath="$PROJECT_DIR$/cfgDialog/cfgDialog.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelGroupChanger/__init__.py" afterPath="$PROJECT_DIR$/channelGroupChanger/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelGroupChanger/channelGroupSelect.ui" afterPath="$PROJECT_DIR$/channelGroupChanger/channelGroupSelect.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelWatcher/__init__.py" afterPath="$PROJECT_DIR$/channelWatcher/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelWatcher/channelWatcher.ui" afterPath="$PROJECT_DIR$/channelWatcher/channelWatcher.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelWatcher/settings.ini" afterPath="$PROJECT_DIR$/channelWatcher/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/__init__.py" afterPath="$PROJECT_DIR$/chatBot/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands.MD" afterPath="$PROJECT_DIR$/chatBot/commands.MD" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands.ini" afterPath="$PROJECT_DIR$/chatBot/commands.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands/commandAbout.py" afterPath="$PROJECT_DIR$/chatBot/commands/commandAbout.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands/commandEval.py" afterPath="$PROJECT_DIR$/chatBot/commands/commandEval.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands/commandTime.py" afterPath="$PROJECT_DIR$/chatBot/commands/commandTime.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/settings.ini" afterPath="$PROJECT_DIR$/chatBot/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/settings.ui" afterPath="$PROJECT_DIR$/chatBot/settings.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dataChanger/__init__.py" afterPath="$PROJECT_DIR$/dataChanger/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devTools/__init__.py" afterPath="$PROJECT_DIR$/devTools/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devTools/editor.ui" afterPath="$PROJECT_DIR$/devTools/editor.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devTools/test.ui" afterPath="$PROJECT_DIR$/devTools/test.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/discordify/__init__.py" afterPath="$PROJECT_DIR$/discordify/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamicAvatar/__init__.py" afterPath="$PROJECT_DIR$/dynamicAvatar/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamicAvatar/settings.ini" afterPath="$PROJECT_DIR$/dynamicAvatar/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamicAvatar/settings.ui" afterPath="$PROJECT_DIR$/dynamicAvatar/settings.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eventlog/__init__.py" afterPath="$PROJECT_DIR$/eventlog/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exporter/__init__.py" afterPath="$PROJECT_DIR$/exporter/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/faker/__init__.py" afterPath="$PROJECT_DIR$/faker/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/g15plugin/__init__.py" afterPath="$PROJECT_DIR$/g15plugin/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gommeChecker/__init__.py" afterPath="$PROJECT_DIR$/gommeChecker/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gommeChecker/check.ui" afterPath="$PROJECT_DIR$/gommeChecker/check.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gommeChecker/settings.ini" afterPath="$PROJECT_DIR$/gommeChecker/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info/__init__.py" afterPath="$PROJECT_DIR$/info/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info/settings.ini" afterPath="$PROJECT_DIR$/info/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info/settings.ui" afterPath="$PROJECT_DIR$/info/settings.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/infoHTML/__init__.py" afterPath="$PROJECT_DIR$/infoHTML/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipcclient/__init__.py" afterPath="$PROJECT_DIR$/ipcclient/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipcplugin/__init__.py" afterPath="$PROJECT_DIR$/ipcplugin/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/joinChannel/__init__.py" afterPath="$PROJECT_DIR$/joinChannel/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kickCounter/__init__.py" afterPath="$PROJECT_DIR$/kickCounter/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kickself/__init__.py" afterPath="$PROJECT_DIR$/kickself/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/linkinfo/__init__.py" afterPath="$PROJECT_DIR$/linkinfo/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/linkinfo/linkinfo.ui" afterPath="$PROJECT_DIR$/linkinfo/linkinfo.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/longMessages/__init__.py" afterPath="$PROJECT_DIR$/longMessages/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lukas/__init__.py" afterPath="$PROJECT_DIR$/lukas/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/massAction/__init__.py" afterPath="$PROJECT_DIR$/massAction/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/massAction/message.ui" afterPath="$PROJECT_DIR$/massAction/message.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/msgRedirect/__init__.py" afterPath="$PROJECT_DIR$/msgRedirect/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/multiselectmove/__init__.py" afterPath="$PROJECT_DIR$/multiselectmove/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notify/__init__.py" afterPath="$PROJECT_DIR$/notify/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nowPlaying/__init__.py" afterPath="$PROJECT_DIR$/nowPlaying/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/onlineOfflineMessages/__init__.py" afterPath="$PROJECT_DIR$/onlineOfflineMessages/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/onlineOfflineMessages/message.ui" afterPath="$PROJECT_DIR$/onlineOfflineMessages/message.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/processCommandTest/__init__.py" afterPath="$PROJECT_DIR$/processCommandTest/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile/__init__.py" afterPath="$PROJECT_DIR$/profile/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile/cfg/profile.ini" afterPath="$PROJECT_DIR$/profile/cfg/profile.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile/ui/profile.ui" afterPath="$PROJECT_DIR$/profile/ui/profile.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile/ui/profile_simple.ui" afterPath="$PROJECT_DIR$/profile/ui/profile_simple.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/queryConsole/__init__.py" afterPath="$PROJECT_DIR$/queryConsole/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/queryConsole/console.ui" afterPath="$PROJECT_DIR$/queryConsole/console.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recreateChannel/__init__.py" afterPath="$PROJECT_DIR$/recreateChannel/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/__init__.py" afterPath="$PROJECT_DIR$/report/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/report.ui" afterPath="$PROJECT_DIR$/report/report.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/__init__.py" afterPath="$PROJECT_DIR$/serverBrowser/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/cfg/serverBrowser.ini" afterPath="$PROJECT_DIR$/serverBrowser/cfg/serverBrowser.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/ui/servers.ui" afterPath="$PROJECT_DIR$/serverBrowser/ui/servers.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/ui/servers_temp.ui" afterPath="$PROJECT_DIR$/serverBrowser/ui/servers_temp.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverSwitcher/__init__.py" afterPath="$PROJECT_DIR$/serverSwitcher/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/__init__.py" afterPath="$PROJECT_DIR$/settings/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/settings.ini" afterPath="$PROJECT_DIR$/settings/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/showQueries/__init__.py" afterPath="$PROJECT_DIR$/showQueries/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/socketplugin/__init__.py" afterPath="$PROJECT_DIR$/socketplugin/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/streamChat/streamChat.ui" afterPath="$PROJECT_DIR$/streamChat/streamChat.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tweakui/__init__.py" afterPath="$PROJECT_DIR$/tweakui/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unlocker/__init__.py" afterPath="$PROJECT_DIR$/unlocker/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/welcomeBot/__init__.py" afterPath="$PROJECT_DIR$/welcomeBot/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/widgetinfo/__init__.py" afterPath="$PROJECT_DIR$/widgetinfo/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,12 +131,24 @@
       </PATH_ELEMENT>
     </PATH>
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="pyTSon" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-85">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -140,11 +256,11 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="211" />
+    <option name="y" value="-22" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Default">
@@ -215,23 +331,25 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="scripts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scripts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="serverSwitcher" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -240,7 +358,7 @@
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editor.preferences.smartKeys" />
@@ -267,7 +385,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="false" name="Unittests in scripts" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in scripts" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -283,9 +401,8 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
     </configuration>
-    <configuration default="false" name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -302,7 +419,20 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pyTSon_plugins" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="" />
@@ -503,21 +633,6 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;.&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method />
-    </configuration>
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in scripts" />
       <item index="1" class="java.lang.String" itemvalue="Python.__init__" />
@@ -569,40 +684,41 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.5042644" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30965006" sideWeight="0.5042644" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32467532" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Floobits" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33766234" sideWeight="0.49791667" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25479743" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.4968017" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33766234" sideWeight="0.49791667" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.4968017" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Floobits" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,7 +769,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/AutoChannelChatTab/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/NoX/__init__.py" />
@@ -703,11 +818,14 @@
     <entry file="file://$PROJECT_DIR$/include/pluginhost.py" />
     <entry file="file://$PROJECT_DIR$/scripts/addonList/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/testplugin/__init__.py">
+    <entry file="file://$PROJECT_DIR$/testplugin/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="-85">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
