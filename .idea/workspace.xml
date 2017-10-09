@@ -1,112 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/welcomeBot/settings.ini" afterPath="$PROJECT_DIR$/welcomeBot/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/pyTSon_plugins.iml" afterPath="$PROJECT_DIR$/.idea/pyTSon_plugins.iml" />
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="update">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AutoChannelChatTab/__init__.py" afterPath="$PROJECT_DIR$/AutoChannelChatTab/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AutoReplyAway/__init__.py" afterPath="$PROJECT_DIR$/AutoReplyAway/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileBrowser/__init__.py" afterPath="$PROJECT_DIR$/FileBrowser/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ISPValidator/__init__.py" afterPath="$PROJECT_DIR$/ISPValidator/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ISPValidator/isps.txt" afterPath="$PROJECT_DIR$/ISPValidator/isps.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ISPValidator/settings.ini" afterPath="$PROJECT_DIR$/ISPValidator/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ISPValidator/settings.ui" afterPath="$PROJECT_DIR$/ISPValidator/settings.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NoX/__init__.py" afterPath="$PROJECT_DIR$/NoX/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NoX/settings.ini" afterPath="$PROJECT_DIR$/NoX/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NoX/settings.ui" afterPath="$PROJECT_DIR$/NoX/settings.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/__init__.py" afterPath="$PROJECT_DIR$/addonList/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/addons.ui" afterPath="$PROJECT_DIR$/addonList/addons.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/addons.xml" afterPath="$PROJECT_DIR$/addonList/addons.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/settings.ini" afterPath="$PROJECT_DIR$/addonList/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/answercontacts/__init__.py" afterPath="$PROJECT_DIR$/answercontacts/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoChannelCreate/__init__.py" afterPath="$PROJECT_DIR$/autoChannelCreate/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoChannelCreate/autoChannelCreate.ui" afterPath="$PROJECT_DIR$/autoChannelCreate/autoChannelCreate.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoChannelCreate/channelCreator.ui" afterPath="$PROJECT_DIR$/autoChannelCreate/channelCreator.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoCommander/__init__.py" afterPath="$PROJECT_DIR$/autoCommander/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoMSG/__init__.py" afterPath="$PROJECT_DIR$/autoMSG/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoSubscribe/__init__.py" afterPath="$PROJECT_DIR$/autoSubscribe/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoSupport/__init__.py" afterPath="$PROJECT_DIR$/autoSupport/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoTPRequest/__init__.py" afterPath="$PROJECT_DIR$/autoTPRequest/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autopokeback/__init__.py" afterPath="$PROJECT_DIR$/autopokeback/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blacklist/__init__.py" afterPath="$PROJECT_DIR$/blacklist/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blacklist/blacklist.ui" afterPath="$PROJECT_DIR$/blacklist/blacklist.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cfgDialog/__init__.py" afterPath="$PROJECT_DIR$/cfgDialog/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cfgDialog/cfgDialog.ini" afterPath="$PROJECT_DIR$/cfgDialog/cfgDialog.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelGroupChanger/__init__.py" afterPath="$PROJECT_DIR$/channelGroupChanger/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelGroupChanger/channelGroupSelect.ui" afterPath="$PROJECT_DIR$/channelGroupChanger/channelGroupSelect.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelWatcher/__init__.py" afterPath="$PROJECT_DIR$/channelWatcher/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelWatcher/channelWatcher.ui" afterPath="$PROJECT_DIR$/channelWatcher/channelWatcher.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/channelWatcher/settings.ini" afterPath="$PROJECT_DIR$/channelWatcher/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/__init__.py" afterPath="$PROJECT_DIR$/chatBot/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands.MD" afterPath="$PROJECT_DIR$/chatBot/commands.MD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands.ini" afterPath="$PROJECT_DIR$/chatBot/commands.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands/commandAbout.py" afterPath="$PROJECT_DIR$/chatBot/commands/commandAbout.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands/commandEval.py" afterPath="$PROJECT_DIR$/chatBot/commands/commandEval.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/commands/commandTime.py" afterPath="$PROJECT_DIR$/chatBot/commands/commandTime.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/settings.ini" afterPath="$PROJECT_DIR$/chatBot/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chatBot/settings.ui" afterPath="$PROJECT_DIR$/chatBot/settings.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dataChanger/__init__.py" afterPath="$PROJECT_DIR$/dataChanger/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devTools/__init__.py" afterPath="$PROJECT_DIR$/devTools/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devTools/editor.ui" afterPath="$PROJECT_DIR$/devTools/editor.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devTools/test.ui" afterPath="$PROJECT_DIR$/devTools/test.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/discordify/__init__.py" afterPath="$PROJECT_DIR$/discordify/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamicAvatar/__init__.py" afterPath="$PROJECT_DIR$/dynamicAvatar/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamicAvatar/settings.ini" afterPath="$PROJECT_DIR$/dynamicAvatar/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dynamicAvatar/settings.ui" afterPath="$PROJECT_DIR$/dynamicAvatar/settings.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eventlog/__init__.py" afterPath="$PROJECT_DIR$/eventlog/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exporter/__init__.py" afterPath="$PROJECT_DIR$/exporter/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/faker/__init__.py" afterPath="$PROJECT_DIR$/faker/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/g15plugin/__init__.py" afterPath="$PROJECT_DIR$/g15plugin/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gommeChecker/__init__.py" afterPath="$PROJECT_DIR$/gommeChecker/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gommeChecker/check.ui" afterPath="$PROJECT_DIR$/gommeChecker/check.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gommeChecker/settings.ini" afterPath="$PROJECT_DIR$/gommeChecker/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info/__init__.py" afterPath="$PROJECT_DIR$/info/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info/settings.ini" afterPath="$PROJECT_DIR$/info/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info/settings.ui" afterPath="$PROJECT_DIR$/info/settings.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/infoHTML/__init__.py" afterPath="$PROJECT_DIR$/infoHTML/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipcclient/__init__.py" afterPath="$PROJECT_DIR$/ipcclient/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ipcplugin/__init__.py" afterPath="$PROJECT_DIR$/ipcplugin/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/joinChannel/__init__.py" afterPath="$PROJECT_DIR$/joinChannel/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kickCounter/__init__.py" afterPath="$PROJECT_DIR$/kickCounter/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kickself/__init__.py" afterPath="$PROJECT_DIR$/kickself/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/linkinfo/__init__.py" afterPath="$PROJECT_DIR$/linkinfo/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/linkinfo/linkinfo.ui" afterPath="$PROJECT_DIR$/linkinfo/linkinfo.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/longMessages/__init__.py" afterPath="$PROJECT_DIR$/longMessages/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lukas/__init__.py" afterPath="$PROJECT_DIR$/lukas/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/massAction/__init__.py" afterPath="$PROJECT_DIR$/massAction/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/massAction/message.ui" afterPath="$PROJECT_DIR$/massAction/message.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/msgRedirect/__init__.py" afterPath="$PROJECT_DIR$/msgRedirect/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/multiselectmove/__init__.py" afterPath="$PROJECT_DIR$/multiselectmove/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notify/__init__.py" afterPath="$PROJECT_DIR$/notify/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nowPlaying/__init__.py" afterPath="$PROJECT_DIR$/nowPlaying/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/onlineOfflineMessages/__init__.py" afterPath="$PROJECT_DIR$/onlineOfflineMessages/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/onlineOfflineMessages/message.ui" afterPath="$PROJECT_DIR$/onlineOfflineMessages/message.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/processCommandTest/__init__.py" afterPath="$PROJECT_DIR$/processCommandTest/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile/__init__.py" afterPath="$PROJECT_DIR$/profile/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile/cfg/profile.ini" afterPath="$PROJECT_DIR$/profile/cfg/profile.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile/ui/profile.ui" afterPath="$PROJECT_DIR$/profile/ui/profile.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile/ui/profile_simple.ui" afterPath="$PROJECT_DIR$/profile/ui/profile_simple.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/queryConsole/__init__.py" afterPath="$PROJECT_DIR$/queryConsole/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/queryConsole/console.ui" afterPath="$PROJECT_DIR$/queryConsole/console.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/recreateChannel/__init__.py" afterPath="$PROJECT_DIR$/recreateChannel/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/__init__.py" afterPath="$PROJECT_DIR$/report/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/report/report.ui" afterPath="$PROJECT_DIR$/report/report.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/__init__.py" afterPath="$PROJECT_DIR$/serverBrowser/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/cfg/serverBrowser.ini" afterPath="$PROJECT_DIR$/serverBrowser/cfg/serverBrowser.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/ui/servers.ui" afterPath="$PROJECT_DIR$/serverBrowser/ui/servers.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/ui/servers_temp.ui" afterPath="$PROJECT_DIR$/serverBrowser/ui/servers_temp.ui" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverSwitcher/__init__.py" afterPath="$PROJECT_DIR$/serverSwitcher/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/__init__.py" afterPath="$PROJECT_DIR$/settings/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings/settings.ini" afterPath="$PROJECT_DIR$/settings/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/showQueries/__init__.py" afterPath="$PROJECT_DIR$/showQueries/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/socketplugin/__init__.py" afterPath="$PROJECT_DIR$/socketplugin/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/streamChat/streamChat.ui" afterPath="$PROJECT_DIR$/streamChat/streamChat.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tweakui/__init__.py" afterPath="$PROJECT_DIR$/tweakui/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/unlocker/__init__.py" afterPath="$PROJECT_DIR$/unlocker/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/welcomeBot/__init__.py" afterPath="$PROJECT_DIR$/welcomeBot/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/widgetinfo/__init__.py" afterPath="$PROJECT_DIR$/widgetinfo/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -139,8 +36,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="25">
+              <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -194,6 +91,7 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -248,6 +146,7 @@
         <option value="$PROJECT_DIR$/include/pluginhost.py" />
         <option value="$PROJECT_DIR$/scripts/addonList/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/devTools/__init__.py" />
+        <option value="$PROJECT_DIR$/serverSwitcher/__init__.py" />
       </list>
     </option>
   </component>
@@ -659,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485571351662</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update">
+      <created>1507579331608</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1507579331608</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -756,7 +662,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="true" />
     <MESSAGE value="splitted commands into files" />
-    <option name="LAST_COMMIT_MESSAGE" value="splitted commands into files" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -821,8 +728,8 @@
     <entry file="file://$PROJECT_DIR$/testplugin/__init__.py" />
     <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="25">
+          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>

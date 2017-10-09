@@ -5,10 +5,8 @@ from datetime import datetime
 
 class serverSwitcher(ts3plugin):
     name = 'Server Switcher'
-    try:
-        apiVersion = pytson.getCurrentApiVersion()
-    except NameError:
-        apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except NameError: apiVersion = 22
     requestAutoload = False
     version = '1.0'
     author = 'Bluscream'
@@ -22,15 +20,11 @@ class serverSwitcher(ts3plugin):
     awaymsg = "Anderer TS"
 
     @staticmethod
-    def timestamp():
-        return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
-        ts3lib.logMessage('{0} script for pyTSon by {1} loaded from "{2}".'.format(self.name, self.author, __file__),
-                          ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab(
-            '{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.'.format(
-                self.timestamp(), self.name, self.author))
+        ts3lib.logMessage('{0} script for pyTSon by {1} loaded from "{2}".'.format(self.name, self.author, __file__), ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        if self.debug: ts3lib.printMessageToCurrentTab( '{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.'.format(self.timestamp(), self.name, self.author))
 
     """
     def onIncomingClientQueryEvent(self, schid, commandText):
@@ -66,24 +60,18 @@ class serverSwitcher(ts3plugin):
                 err, meta_data = ts3lib.getClientSelfVariable(tab, ts3defines.ClientProperties.CLIENT_META_DATA)
                 meta_data = regex.sub("", meta_data)
                 if tab == schid:
-                    ts3lib.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY,
-                                                      ts3defines.AwayStatus.AWAY_NONE)
+                    ts3lib.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_NONE)
                 else:
                     err, away = ts3lib.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY)
-                    err, away_message = ts3lib.getClientSelfVariable(tab,
-                                                                     ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE)
+                    err, away_message = ts3lib.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE)
                     if away == ts3defines.AwayStatus.AWAY_ZZZ and away_message == self.awaymsg: continue
-                    ts3lib.setClientSelfVariableAsString(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE,
-                                                         self.awaymsg)
-                    ts3lib.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY,
-                                                      ts3defines.AwayStatus.AWAY_ZZZ)
-                    err, ip = ts3lib.getConnectionVariableAsString(schid, ownid,
-                                                                   ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
-                    err, port = ts3lib.getConnectionVariableAsString(schid, ownid,
-                                                                     ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
+                    ts3lib.setClientSelfVariableAsString(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE, self.awaymsg)
+                    ts3lib.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_ZZZ)
+                    err, ip = ts3lib.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+                    err, port = ts3lib.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
                     # err, ip = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_IP)
                     # err, port = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
-                    meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
+                    if ip: meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
                 ts3lib.setClientSelfVariableAsString(tab, ts3defines.ClientProperties.CLIENT_META_DATA, meta_data)
                 ts3lib.flushClientSelfUpdates(tab)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
