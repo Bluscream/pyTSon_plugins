@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/addons.xml" afterPath="$PROJECT_DIR$/addonList/addons.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/__init__.py" afterPath="$PROJECT_DIR$/serverBrowser/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/settings.ini" afterPath="$PROJECT_DIR$/addonList/settings.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverSwitcher/__init__.py" afterPath="$PROJECT_DIR$/serverSwitcher/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -51,44 +49,11 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="92" column="43" lean-forward="true" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+            <state relative-caret-position="272">
+              <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="11" selection-end-line="91" selection-end-column="16" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scratch.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="29" lean-forward="true" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addons.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/addonList/addons.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="776">
-              <caret line="109" column="12" lean-forward="false" selection-start-line="109" selection-start-column="12" selection-end-line="109" selection-end-column="12" />
-              <folding>
-                <element signature="e#8699#8705#0" expanded="true" />
-                <element signature="e#8718#8724#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ts3defines.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../include/ts3defines.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="931" column="36" lean-forward="false" selection-start-line="931" selection-start-column="19" selection-end-line="931" selection-end-column="36" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -130,9 +95,9 @@
       <find>connects</find>
       <find>verbose</find>
       <find>datetime</find>
-      <find>inst</find>
       <find>ts3lib.</find>
       <find>parseMeta</find>
+      <find>inst</find>
       <find>hasattr</find>
     </findStrings>
     <replaceStrings>
@@ -242,8 +207,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="116" />
-    <option name="y" value="-14" />
+    <option name="x" value="-27" />
+    <option name="y" value="-8" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -697,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507646343069</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="stuff">
+      <created>1507651644060</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1507651644060</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1229,14 +1201,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="931" column="36" lean-forward="false" selection-start-line="931" selection-start-column="19" selection-end-line="931" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/serverSwitcher/settings.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1245,10 +1209,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+    <entry file="file://$PROJECT_DIR$/serverBrowser/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="29" lean-forward="true" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
+        <state relative-caret-position="17">
+          <caret line="93" column="21" lean-forward="true" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="576" column="24" lean-forward="true" selection-start-line="576" selection-start-column="24" selection-end-line="576" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1264,10 +1236,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/serverBrowser/__init__.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="93" column="21" lean-forward="true" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="21" />
+        <state relative-caret-position="0">
+          <caret line="0" column="29" lean-forward="true" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1284,8 +1256,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="92" column="43" lean-forward="true" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+        <state relative-caret-position="272">
+          <caret line="91" column="16" lean-forward="false" selection-start-line="91" selection-start-column="11" selection-end-line="91" selection-end-column="16" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>

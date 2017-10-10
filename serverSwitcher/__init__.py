@@ -89,27 +89,16 @@ class serverSwitcher(ts3plugin):
                 self.cfg.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        try:
-            if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT and menuItemID == 0:
-                server = self.parseMeta(schid, selectedItemID)
-                if server is None: return
-                print(server)
-                err, tab = ts3.spawnNewServerConnectionHandler(0)
-                #rr = ts3.startConnection(tab, identity, ip, port, nickname, defaultChannelArray, defaultChannelPassword, serverPassword)
-                err = ts3.startConnection(tab, "", server.attrib["host"], server.attrib["port"] if hasattr(server, "port") else 0, "", [], "", server.attrib["pw"] if hasattr(server, "pw") else "")
-                # err, tab = ts3.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, server.text or "Server",
-                               # '{}:{}'.format(server.attrib["host"], server.attrib["port"]) if hasattr(server, 'port') else server.attrib["host"],
-                               # server.attrib["pw"] if hasattr(server, "pw") else "",
-                               # "TeamspeakUser","","","","","","","","")
-                print(err)
-                print(tab)
-        except:
-            from traceback import format_exc
-            try: ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
-            except: print("Error in "+self.name+".configure: "+format_exc())
-
-    def onUpdateClientEvent(self, schid, clientID, invokerID, invokerName, invokerUniqueIdentifier):
-        pass
+        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT or menuItemID != 0: return
+        server = self.parseMeta(schid, selectedItemID)
+        if server is None: return
+        print(server)
+        # err, tab = ts3.spawnNewServerConnectionHandler(0)
+        # err = ts3.startConnection(tab, "", server.attrib["host"], server.attrib["port"] if hasattr(server, "port") else 0, "", [], "", server.attrib["pw"] if hasattr(server, "pw") else "")
+        err, tab = ts3.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, server.text or "Server",
+                       '{}:{}'.format(server.attrib["host"], server.attrib["port"]) if hasattr(server, 'port') else server.attrib["host"],
+                       server.attrib["pw"] if hasattr(server, "pw") else "",
+                       "TeamspeakUser","","","","","","","","", "")
 
     """
     def onIncomingClientQueryEvent(self, schid, commandText):
