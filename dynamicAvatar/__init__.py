@@ -19,8 +19,8 @@ class dynamicAvatar(ts3plugin):
     name = "Dynamic Avatar Changer"
     requestAutoload = False
     version = "1.0"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     author = "Bluscream"
     description = "Changes your avatar for you."
     offersConfigure = True
@@ -33,14 +33,16 @@ class dynamicAvatar(ts3plugin):
     timer = QTimer()
     int = 0
 
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+
     def __init__(self):
         if path.isfile(self.ini): self.config.read(self.ini)
         else:
             self.config['GENERAL'] = { "debug": "False", "imgurl": "", "imgpath": "", "mode": "url", "refresh": "60" }
             with open(self.ini, 'w') as configfile: self.config.write(configfile)
         self.timer.timeout.connect(self.tick)
-        ts3lib.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.config.getboolean('GENERAL','debug'): ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]Bluscream[/url] loaded.")
+        if self.config.getboolean('GENERAL','debug'): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+
     def tick(self,schid=0):
         schid = ts3lib.getCurrentServerConnectionHandlerID()
         self.int += 1;ts3lib.printMessageToCurrentTab('Tick %s'%self.int)

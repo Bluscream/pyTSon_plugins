@@ -8,8 +8,8 @@ from os import path
 
 class NoX(ts3plugin):
     name = "BanBypasser (NoX)"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -25,6 +25,9 @@ class NoX(ts3plugin):
     cfg = ConfigParser()
     dlg = None
 
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+
     def __init__(self):
         if path.isfile(self.ini):
             self.cfg.read(self.ini)
@@ -39,8 +42,8 @@ class NoX(ts3plugin):
             self.cfg['data'] = { "ip": "127.0.0.1", "port": "9987", "channelid": "0", "channelname": "Default Channel", "nickname": "TeamspeakUser", "phoneticnick": "", "metaData": "" }
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        ts3lib.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+
+        if self.cfg.getboolean('general', 'debug'): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def configure(self, qParentWidget):
         try:

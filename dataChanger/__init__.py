@@ -1,4 +1,5 @@
 import ts3lib, ts3defines
+from datetime import datetime
 from PythonQt.QtCore import Qt, QTimer
 from ts3plugin import ts3plugin
 from pytsonui import setupUi
@@ -8,8 +9,8 @@ from configparser import ConfigParser
 
 class dataChanger(ts3plugin):
     name = "Name Changer"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -24,14 +25,16 @@ class dataChanger(ts3plugin):
     cfg = ConfigParser()
     dlg = None
     int = 0
+
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+
     def __init__(self):
         if path.isfile(self.ini): self.cfg.read(self.ini)
         else:
             self.cfg['general'] = { "cfgversion": "1", "debug": "False", "enabled": "True" }
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        ts3lib.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onMenuItemEvent(self, serverConnectionHandlerID, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:

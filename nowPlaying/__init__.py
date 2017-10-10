@@ -1,16 +1,15 @@
 from ts3plugin import ts3plugin, PluginHost
-import ts3lib as ts3
-import ts3defines, datetime, configparser, os.path
+import ts3lib, ts3defines, configparser, os.path
 from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi
 from collections import OrderedDict
 from inspect import getmembers
+from datetime import datetime
 
 class nowPlaying(ts3plugin):
     name = "Now Playing"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -20,10 +19,13 @@ class nowPlaying(ts3plugin):
     infoTitle = "[b]"+name+":[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Set Meta Data", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Avatar Flag", "")]
     hotkeys = []
-    ini = os.path.join(ts3.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
+    ini = os.path.join(ts3lib.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
     cfg = configparser.ConfigParser()
     cfg.optionxform = str
     runs = 0
+
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
         self.dlg = None
@@ -64,13 +66,13 @@ class nowPlaying(ts3plugin):
                     self.cfg.set('ConnectionPropertiesRare', name, 'False')
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+
         if self.cfg.getboolean('general', 'Debug'):
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+            ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def configDialogClosed(self, r, vals):
         try:
-            ts3.printMessageToCurrentTab("vals: "+str(vals))
+            ts3lib.printMessageToCurrentTab("vals: "+str(vals))
             if r == QDialog.Accepted:
                 for name, val in vals.items():
                     try:
@@ -78,12 +80,12 @@ class nowPlaying(ts3plugin):
                             self.cfg.set('general', str(name), str(val))
                     except:
                         from traceback import format_exc
-                        ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+                        ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
         except:
             from traceback import format_exc
-            ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def configure(self, qParentWidget):
         try:
@@ -94,4 +96,4 @@ class nowPlaying(ts3plugin):
             self.dlg.activateWindow()
         except:
             from traceback import format_exc
-            ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)

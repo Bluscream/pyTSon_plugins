@@ -7,8 +7,8 @@ class infoHTML(ts3plugin):
     name = "Extended HTML Support"
     requestAutoload = False
     version = "1.0"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     author = "Bluscream"
     description =  "Extends the infoData Frame for extended HTML support."
     offersConfigure = False
@@ -23,7 +23,7 @@ class infoHTML(ts3plugin):
         try:
             self.InfoFrame = self.getWidgetByObjectName("InfoFrame").findChild(QTextDocument)
         except: pass
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+
     def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
         if not newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
         if not self.enabled:

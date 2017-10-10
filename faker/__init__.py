@@ -5,8 +5,8 @@ from os import path
 
 class faker(ts3plugin):
     name = "Fake Anything"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -19,11 +19,10 @@ class faker(ts3plugin):
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Fake this client", iconPath+"/fake.png")]
     hotkeys = []
 
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
-        ts3lib.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug:
-            ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL and menuItemID == 0: self.fakeChannel(schid, selectedItemID)

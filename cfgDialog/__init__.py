@@ -9,8 +9,8 @@ import ts3defines
 
 class cfgDialog(ts3plugin):
     name = "Config Dialog Examples"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -30,7 +30,7 @@ class cfgDialog(ts3plugin):
             self.cfg['general'] = { "Example string": "Hello World :)" }
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+
 
     def configDialogClosed(self, r, vals):
         # Start getValues method +
@@ -41,7 +41,7 @@ class cfgDialog(ts3plugin):
                         if not val == self.cfg.getboolean('general', name):
                             self.cfg.set('general', str(name), str(val))
                     except:
-                        from traceback import format_exc;logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+                        from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
         except:

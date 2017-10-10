@@ -19,8 +19,8 @@ class color(object):
 
 class chatBot(ts3plugin):
     name = "Chat Bot"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -44,6 +44,8 @@ class chatBot(ts3plugin):
     tmpsgroups = []
     tmpcgroups = []
 
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+
     def __init__(self):
         if path.isfile(self.ini):
             self.cfg.read(self.ini)
@@ -58,8 +60,7 @@ class chatBot(ts3plugin):
             self.cmd['help'] = {"enabled": "False", "function": "commandHelp"}
             with open(self.cmdini, 'w') as configfile:
                 self.cmd.write(configfile)
-        ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
+        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def configure(self, qParentWidget):
         try:

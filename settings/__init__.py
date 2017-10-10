@@ -9,8 +9,8 @@ from PythonQt.QtCore import *
 
 class settings(ts3plugin):
     name = "Extended Settings"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -23,6 +23,10 @@ class settings(ts3plugin):
     ini = path.join(ts3.getPluginPath(), "pyTSon", "scripts", "settings", "settings.ini")
     cfg = ConfigParser()
     dlg = None
+    debug = False
+
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
         if path.isfile(self.ini):
@@ -31,7 +35,8 @@ class settings(ts3plugin):
             self.cfg['general'] = { "hide hostbanners": "False", "hide hostmessages": "False", "hide hostbuttons": "False" }
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        if self.debug: ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+
 
     def checkHostButton(self):
         if self.cfg.getboolean('general','hide hostbuttons'):

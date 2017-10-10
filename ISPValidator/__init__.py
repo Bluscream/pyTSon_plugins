@@ -12,8 +12,8 @@ import ts3defines
 
 class ISPValidator(ts3plugin):
     name = "ISP Validator"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -43,7 +43,7 @@ class ISPValidator(ts3plugin):
                 self.cfg.write(configfile)
         with open(self.cfg['general']['isps']) as f:
             self.isps = f.readlines()
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+
 
     def configure(self, qParentWidget):
         try:

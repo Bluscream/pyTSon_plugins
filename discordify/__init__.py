@@ -1,13 +1,14 @@
 import ts3lib as ts3
-from ts3plugin import ts3plugin, PluginHost
-import ts3defines
+from ts3plugin import ts3plugin
+# noinspection PyUnresolvedReferences
 from PythonQt.QtGui import *
+# noinspection PyUnresolvedReferences
 from PythonQt.QtCore import *
 
 class discordify(ts3plugin):
     name = "Discordify"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -19,7 +20,9 @@ class discordify(ts3plugin):
     hotkeys = []
 
     def __init__(self):
+        # noinspection PyUnresolvedReferences
         i = QApplication.instance()
+        # noinspection PyUnresolvedReferences
         p = QIcon(ts3.getPluginPath()+"pyTSon/scripts/discordify/icon.png")
         for item in i.allWidgets():
             try: item.setWindowIcon(p)
@@ -29,4 +32,4 @@ class discordify(ts3plugin):
                 if t and not "Discord - " in t:
                     item.setWindowTitle("Discord - " + t)
             except: pass
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+

@@ -2,12 +2,14 @@ import ts3lib as ts3; from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi
 from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QListWidget
 from PythonQt.QtCore import Qt
-import ts3lib as ts3; import   ts3defines, datetime, os
+import ts3lib as ts3;
+import ts3defines, os
+from datetime import datetime
 
 class report(ts3plugin):
     name = "Report"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -19,9 +21,12 @@ class report(ts3plugin):
     hotkeys = []
     debug = False
 
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+
 
     def __init__(self):
-        ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/Bluscream]Bluscream[/url] loaded.")
+        ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:

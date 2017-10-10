@@ -5,12 +5,11 @@ from os import path
 
 class msgRedirect(ts3plugin):
     name = "MSG Redirect"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
-    description = "Manage your channel subscriptions the way YOU want."
+    description = "Redirect guests messages to the channel."
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
@@ -18,14 +17,16 @@ class msgRedirect(ts3plugin):
     hotkeys = []
     debug = False
     infoMSG1 = "\n\nHallo [color=green]",
-    infoMSG2 = "[/color], du bist hier [color=red]Gast[/color] aber moechtest trozdem im Channel mitschreiben?\n\nDann schreib mir einfach zurueck und ich werde die Nachricht an den Channel weiterleiten.\n\n[color=red]INFO: SPAM ODER SONSTIGER ABUSE WIRD MIT SOFORTIGEM CHANNELBAN UND BLOCK BESTRAFT![/color]",
+    infoMSG2 = "[/color], du bist hier [color=red]Gast[/color] aber moechtest trotzdem im Channel mitschreiben?\n\nDann schreib mir einfach zurueck und ich werde die Nachricht an den Channel weiterleiten.\n\n[color=red]INFO: SPAM ODER SONSTIGER ABUSE WIRD MIT SOFORTIGEM CHANNELBAN UND BLOCK BESTRAFT![/color]",
     redirectMSG = "Weitergeleitete Nachricht von",
-    BadWordArray = { 'hurensohn', 'ddos', 'wichser', 'egal', 'lizard', 'asshole', 'arschloch', 'fick', 'anus', 'scheide', 'vagina', 'fotze', 'schlampe', 'hitler', 'adolf', 'sieg', 'heil' }
-    LinkArray = { '%://', 'www%.', '%.net', '%.de', '%.com', '%.me', '%.tk' }
+    BadWordArray = [ 'hurensohn', 'ddos', 'wichser', 'egal', 'lizard', 'asshole', 'arschloch', 'fick', 'anus', 'scheide', 'vagina', 'fotze', 'schlampe', 'hitler', 'adolf', 'sieg', 'heil' ]
+    LinkArray = [ '%://', 'www%.', '%.net', '%.de', '%.com', '%.me', '%.tk' ]
+
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
-        ts3lib.logMessage(self.name + " script for pyTSon by " + self.author + " loaded from \"" + __file__ + "\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.datetime.now()) + " [color=orange]" + self.name + "[/color] Plugin for pyTSon by [url=https://github.com/" + self.author + "]" + self.author + "[/url] loaded.")
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def msgredirect(serverConnectionHandlerID, mode): pass
         # if isempty(mode) then

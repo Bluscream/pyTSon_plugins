@@ -12,8 +12,8 @@ import ts3defines, os, json, configparser, webbrowser, traceback, urllib.parse
 class serverBrowser(ts3plugin):
     shortname = "PS"
     name = "Better Server Browser"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "0.5"
     author = "Bluscream"
@@ -26,6 +26,9 @@ class serverBrowser(ts3plugin):
     debug = False
     ini = os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "serverBrowser", "cfg", "serverBrowser.ini")
     config = configparser.ConfigParser()
+
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
         if os.path.isfile(self.ini):
@@ -41,9 +44,9 @@ class serverBrowser(ts3plugin):
             }
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+
         if self.config['GENERAL']['debug'] == "True":
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]Bluscream[/url] loaded.")
+            ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
 
     def log(self, message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):

@@ -1,13 +1,14 @@
 from ts3plugin import ts3plugin, PluginHost
 from ts3lib import logMessage, printMessageToCurrentTab
+from datetime import datetime
 import ts3defines
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
 
 class info(ts3plugin):
     name = "Unlocker"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -17,9 +18,13 @@ class info(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Unlock everything", "")]
     hotkeys = [("gui_unlock", "Unlock everything")]
+    debug = False
+
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
-        logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+        if self.debug: printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def unlock(self, show=False):
         i = QApplication.instance()

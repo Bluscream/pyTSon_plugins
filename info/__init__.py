@@ -9,8 +9,8 @@ from configparser import ConfigParser
 
 class info(ts3plugin):
     name = "Extended Info"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -25,7 +25,8 @@ class info(ts3plugin):
     cfg.optionxform = str
     runs = 0
 
-    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
         self.dlg = None
@@ -66,9 +67,8 @@ class info(ts3plugin):
                     self.cfg.set('ConnectionPropertiesRare', name, 'False')
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        ts3lib.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.cfg.getboolean('general', 'Debug'):
-            ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+            ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def configDialogClosed(self, r, vals):
         try:

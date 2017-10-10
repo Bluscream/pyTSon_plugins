@@ -4,8 +4,8 @@ from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox
 
 class profile(ts3plugin):
     name = "Profile"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -22,6 +22,9 @@ class profile(ts3plugin):
     META_COLON = '§$#'
     META_STOP = '</profile>'
 
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+
     def __init__(self):
         if os.path.isfile(self.ini):
             self.config.read(self.ini)
@@ -30,9 +33,9 @@ class profile(ts3plugin):
             self.config['PROFILE'] = { "Test": "[url=https://google.com]Google[/url]"}
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
+
         if self.config['GENERAL']['Debug'] == "True":
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]"+self.author+"[/url] loaded.")
+            ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def configure(self, qParentWidget):
         if not self.dlg:

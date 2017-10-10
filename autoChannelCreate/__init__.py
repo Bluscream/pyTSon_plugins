@@ -9,8 +9,7 @@ from configparser import ConfigParser
 
 class autoChannelCreate(ts3plugin):
     name = "Auto Channel Creator"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -33,7 +32,6 @@ class autoChannelCreate(ts3plugin):
         else:
             self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "True"}
             with open(self.ini, 'w') as configfile: self.cfg.write(configfile)
-        ts3lib.logMessage("{0} script for pyTSon by {1} loaded from \"{2}\".".format(self.name,self.author,__file__), ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def configure(self, qParentWidget): pass

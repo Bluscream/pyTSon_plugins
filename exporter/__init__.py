@@ -1,17 +1,16 @@
-import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi
 from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication, QInputDialog
 from PythonQt.QtCore import Qt, QTimer
 from datetime import datetime
-import ts3defines, os, json, configparser, webbrowser, traceback, urllib.parse
+import ts3lib, ts3defines, os, json, configparser, webbrowser, traceback, urllib.parse
 
 
 class exporter(ts3plugin):
     shortname = "EX"
     name = "Teamspeak Export/Import"
-    try: apiVersion = pytson.getCurrentApiVersion()
-    except: apiVersion = 22
+
+    apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -25,17 +24,17 @@ class exporter(ts3plugin):
     debug = False
     action = "export"
 
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+
     def __init__(self):
-        ts3.logMessage(self.name+" script for pyTSon by "+self.author+" loaded from \""+__file__+"\".", ts3defines.LogLevel.LogLevel_INFO, "Python Script", 0)
-        if self.config['GENERAL']['debug'] == "True":
-            ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" [color=orange]"+self.name+"[/color] Plugin for pyTSon by [url=https://github.com/"+self.author+"]Bluscream[/url] loaded.")
+        if self.config['GENERAL']['debug'] == "True": ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
 
     def log(self, message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
         try:
-            ts3.logMessage(message, channel, self.name, server)
+            ts3lib.logMessage(message, channel, self.name, server)
             if self.config['GENERAL']['debug'] == "True":
-                ts3.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" "+self.shortname+"> "+message)
+                ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" "+self.shortname+"> "+message)
                 print('[{:%Y-%m-%d %H:%M:%S}]'.format(datetime.now())+" "+self.shortname+"> ("+str(channel)+")"+message)
         except:
             _a = None
@@ -45,18 +44,18 @@ class exporter(ts3plugin):
             if menuItemID == 0:
                 self.dlg = ServersDialog(self)
                 self.dlg.show()
-                #ts3.printMessageToCurrentTab(str(self.filters))
+                #ts3lib.printMessageToCurrentTab(str(self.filters))
             elif menuItemID == 1:
-                _schid = ts3.getCurrentServerConnectionHandlerID()
-                (error, _clid) = ts3.getClientID(_schid)
-                (error, _ip) = ts3.getConnectionVariableAsString(_schid,_clid,ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
-                (error, _port) = ts3.getConnectionVariableAsString(_schid,_clid,ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
+                _schid = ts3lib.getCurrentServerConnectionHandlerID()
+                (error, _clid) = ts3lib.getClientID(_schid)
+                (error, _ip) = ts3lib.getConnectionVariableAsString(_schid,_clid,ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+                (error, _port) = ts3lib.getConnectionVariableAsString(_schid,_clid,ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
                 url = ""
                 if _port != "":
                     _url = self.config['GENERAL']['api']+"serverlist/result/server/ip/"+_ip+":"+_port+"/"
                 else:
                     _url = self.config['GENERAL']['api']+"serverlist/result/server/ip/"+_ip+"/"
-                ts3.printMessageToCurrentTab(str("Navigating to \""+_url+"\""))
+                ts3lib.printMessageToCurrentTab(str("Navigating to \""+_url+"\""))
                 webbrowser.open(_url)
 
     def configure(self, qParentWidget):
@@ -65,7 +64,7 @@ class exporter(ts3plugin):
             self.dlg.show()
         except:
             from traceback import format_exc
-            try: ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
+            try: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
             except: print("Error in "+self.name+".configure: "+format_exc())
 
 class ExportDialog(QDialog):
@@ -79,5 +78,5 @@ class ExportDialog(QDialog):
     def __init__(self,Class,parent=None):
         self.exporter=Class
         super(QDialog, self).__init__(parent)
-        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "exporter", "ui", "export.ui"))
+        setupUi(self, os.path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "exporter", "ui", "export.ui"))
         self.setWindowTitle("Which items do you want to "+exporter.action+"?")
