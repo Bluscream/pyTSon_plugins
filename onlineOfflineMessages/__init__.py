@@ -4,7 +4,7 @@ from PythonQt.QtGui import QDialog
 from PythonQt.QtCore import Qt
 from ts3plugin import ts3plugin
 from pytsonui import setupUi
-import ts3defines, ts3lib
+import ts3defines, ts3lib, pytson
 
 class onlineOfflineMessages(ts3plugin):
     name = "Online Offline Messages"
