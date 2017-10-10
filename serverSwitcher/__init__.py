@@ -15,7 +15,7 @@ class serverSwitcher(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    debug = True
+    debug = False
     awaymsg = 'Anderer TS'
 
     @staticmethod

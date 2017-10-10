@@ -1,5 +1,7 @@
 from ts3plugin import ts3plugin, PluginHost
-import ts3lib, ts3defines, datetime, os.path
+import ts3defines,  os.path
+import ts3lib as ts3
+from datetime import datetime
 from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi
@@ -20,7 +22,7 @@ class info(ts3plugin):
     infoTitle = "Extendend Info"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Set Meta Data", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Avatar Flag", "")]
     hotkeys = []
-    ini = os.path.join(ts3lib.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
+    ini = os.path.join(ts3.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
     cfg = ConfigParser()
     cfg.optionxform = str
     runs = 0
@@ -68,22 +70,22 @@ class info(ts3plugin):
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
         if self.cfg.getboolean('general', 'Debug'):
-            ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+            ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def configDialogClosed(self, r, vals):
         try:
-            # ts3lib.printMessageToCurrentTab("vals: "+str(vals))
+            # ts3.printMessageToCurrentTab("vals: "+str(vals))
             if r == QDialog.Accepted:
                 for name, val in vals.items():
                     try:
                         if not val == self.cfg.getboolean('general', name):
                             self.cfg.set('general', str(name), str(val))
                     except:
-                        if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+                        if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
         except:
-            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def configure(self, qParentWidget):
         try:
@@ -93,60 +95,60 @@ class info(ts3plugin):
             self.dlg.raise_()
             self.dlg.activateWindow()
         except:
-            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def processCommand(self, schid, command):
         tokens = command.split(' ')
         if tokens[0] == "pcmd":
-            ts3lib.sendPluginCommand(schid, tokens[1], ts3defines.PluginTargetMode.PluginCommandTarget_SERVER, []);return True
+            ts3.sendPluginCommand(schid, tokens[1], ts3defines.PluginTargetMode.PluginCommandTarget_SERVER, []);return True
         elif tokens[0] == "meta":
             if tokens[1] == "get":
-                error, ownid = ts3lib.getClientID(schid)
+                error, ownid = ts3.getClientID(schid)
                 if error == ts3defines.ERROR_ok:
                     # requestClientVariables(schid, ownid)
-                    error, meta = ts3lib.getClientVariableAsString(schid, ownid, ts3defines.ClientProperties.CLIENT_META_DATA)
+                    error, meta = ts3.getClientVariableAsString(schid, ownid, ts3defines.ClientProperties.CLIENT_META_DATA)
                     if error == ts3defines.ERROR_ok:
-                        ts3lib.printMessageToCurrentTab(meta);return True
+                        ts3.printMessageToCurrentTab(meta);return True
                     else:
-                        ts3lib.printMessageToCurrentTab("Error: Can't get own meta data.");return True
+                        ts3.printMessageToCurrentTab("Error: Can't get own meta data.");return True
                 else:
-                    ts3lib.printMessageToCurrentTab("Error: Can't get own clientID.");return True
+                    ts3.printMessageToCurrentTab("Error: Can't get own clientID.");return True
             elif tokens[1] == "set":
-                error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, tokens[2])
+                error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, tokens[2])
                 if not error == ts3defines.ERROR_ok:
-                    ts3lib.printMessageToCurrentTab("Error: Unable to set own meta data.");return True
+                    ts3.printMessageToCurrentTab("Error: Unable to set own meta data.");return True
                 else: return True
         else:
-            ts3lib.printMessageToCurrentTab("ERROR: Command \""+tokens[0]+"\" not found!");return True
+            ts3.printMessageToCurrentTab("ERROR: Command \""+tokens[0]+"\" not found!");return True
         return False
 
     def onPluginCommandEvent(self, serverConnectionHandlerID, pluginName, pluginCommand):
             _f = "Plugin message by {0}: {1}".format(pluginName,pluginCommand)
-            ts3lib.logMessage(_f, ts3defines.LogLevel.LogLevel_INFO, self.name, 0)
-            if self.cfg.getboolean('general', 'Debug'): ts3lib.printMessageToCurrentTab("{0}{1}".format(self.timestamp(),_f))
+            ts3.logMessage(_f, ts3defines.LogLevel.LogLevel_INFO, self.name, 0)
+            if self.cfg.getboolean('general', 'Debug'): ts3.printMessageToCurrentTab("{0}{1}".format(self.timestamp(),_f))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 0:
-                error, ownid = ts3lib.getClientID(schid)
+                error, ownid = ts3.getClientID(schid)
                 if error == ts3defines.ERROR_ok:
-                    error, meta = ts3lib.getClientVariableAsString(schid, ownid, ts3defines.ClientProperties.CLIENT_META_DATA)
+                    error, meta = ts3.getClientVariableAsString(schid, ownid, ts3defines.ClientProperties.CLIENT_META_DATA)
                     if error == ts3defines.ERROR_ok:
                         x = QWidget()
                         meta = QInputDialog.getMultiLineText(x, "Change own Meta Data", "Meta Data:", meta)
-                        error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, meta)
+                        error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, meta)
                         if not error == ts3defines.ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error #%s"%error, "Unable to set own meta data!");_t.show()
             elif menuItemID == 1:
-                error, ownid = ts3lib.getClientID(schid)
+                error, ownid = ts3.getClientID(schid)
                 if error == ts3defines.ERROR_ok:
-                    error, flag = ts3lib.getClientVariableAsString(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR)
-                    ts3lib.printMessageToCurrentTab("Your current avatar flag is: %s"%flag)
+                    error, flag = ts3.getClientVariableAsString(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR)
+                    ts3.printMessageToCurrentTab("Your current avatar flag is: %s"%flag)
                     if error == ts3defines.ERROR_ok:
                         x = QWidget()
                         flag = QInputDialog.getText(x, "Change own Avatar Flag", "Avatar File MD5:")
-                        error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR, flag)
-                        error2 = ts3lib.flushClientSelfUpdates(schid)
+                        error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR, flag)
+                        error2 = ts3.flushClientSelfUpdates(schid)
                         if not error == ts3defines.ERROR_ok or not error2 == ts3defines.ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own avatar flag!");_t.show()
 
@@ -154,11 +156,11 @@ class info(ts3plugin):
         i = []
         if atype == 0:
             if self.cfg.getboolean('general', 'Autorequest Server Variables'):
-                ts3lib.requestServerVariables(schid)
+                ts3.requestServerVariables(schid)
             for name in self.cfg['VirtualServerProperties']:
                 if name == 'LAST_REQUESTED':
                     if self.cfg.getboolean('VirtualServerProperties', 'LAST_REQUESTED'):
-                        i.append('{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
+                        i.append(self.timestamp())
                 elif name == 'TYPE':
                     if self.cfg.getboolean('VirtualServerProperties', 'TYPE'):
                         i.append('Type: [b]Server[/b]')
@@ -169,7 +171,7 @@ class info(ts3plugin):
                             if success: i.append(_tmp)
                     except:
                         if self.cfg.getboolean("general","Debug"):
-                            ts3lib.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                            ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                         continue
             for name in self.cfg['VirtualServerPropertiesRare']:
                 try:
@@ -178,14 +180,14 @@ class info(ts3plugin):
                             if success: i.append(_tmp)
                 except:
                     if self.cfg.getboolean("general","Debug"):
-                        ts3lib.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                     continue
             return i
         elif atype == 1:
             for name in self.cfg['ChannelProperties']:
                 if name == 'LAST_REQUESTED':
                     if self.cfg.getboolean('ChannelProperties', 'LAST_REQUESTED'):
-                        i.append('{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
+                        i.append(self.timestamp())
                 elif name == 'TYPE':
                     if self.cfg.getboolean('ChannelProperties', 'TYPE'): i.append('Type: [b]Channel[/b]')
                 elif name == 'ID':
@@ -198,7 +200,7 @@ class info(ts3plugin):
                             if success: i.append(_tmp)
                     except:
                         if self.cfg.getboolean("general","Debug"):
-                            ts3lib.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                            ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                         continue
             for name in self.cfg['ChannelPropertiesRare']:
                 try:
@@ -207,19 +209,19 @@ class info(ts3plugin):
                         if success: i.append(_tmp)
                 except:
                     if self.cfg.getboolean("general","Debug"):
-                        ts3lib.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                     continue
             return i
         elif atype == 2:
             if self.cfg.getboolean('general', 'Autorequest Client Variables'):
-                ts3lib.requestClientVariables(schid, id)
+                ts3.requestClientVariables(schid, id)
             for name in self.cfg['ClientProperties']:
                 if name == 'LAST_REQUESTED':
                     if self.cfg.getboolean('ClientProperties', 'LAST_REQUESTED'):
-                        i.append('{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
+                        i.append(self.timestamp())
                 elif name == 'TYPE':
                     if self.cfg.getboolean('ClientProperties', 'TYPE'):
-                        (error, type) = ts3lib.getClientVariableAsInt(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
+                        (error, type) = ts3.getClientVariableAsInt(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
                         if error == ts3defines.ERROR_ok:
                             if type == ts3defines.ClientType.ClientType_NORMAL:
                                 i.append('Type: [b]Client[/b]')
@@ -236,7 +238,7 @@ class info(ts3plugin):
                             if success: i.append(_tmp)
                     except:
                         if self.cfg.getboolean("general","Debug"):
-                            ts3lib.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                            ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                         continue
             for name in self.cfg['ClientPropertiesRare']:
                 try:
@@ -245,7 +247,7 @@ class info(ts3plugin):
                             if success: i.append(_tmp)
                 except:
                     if self.cfg.getboolean("general","Debug"):
-                        ts3lib.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                     continue
             for name in self.cfg['ConnectionProperties']:
                 try:
@@ -254,7 +256,7 @@ class info(ts3plugin):
                         if success: i.append(_tmp)
                 except:
                     if self.cfg.getboolean("general","Debug"):
-                        ts3lib.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                     continue
             for name in self.cfg['ConnectionPropertiesRare']:
                 try:
@@ -263,7 +265,7 @@ class info(ts3plugin):
                         if success: i.append(_tmp)
                 except:
                     if self.cfg.getboolean("general","Debug"):
-                        ts3lib.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                     continue
             return i
         else:
@@ -273,40 +275,42 @@ class info(ts3plugin):
         try:
             _tmp = eval('ts3defines.%s.%s' % (type, var))
             if "VirtualServerProperties" in type:
-                (error, _var) = ts3lib.getServerVariableAsString(schid, _tmp)
-                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getServerVariableAsUInt64(schid, _tmp)
-                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getServerVariableAsInt(schid, _tmp)
+                (error, _var) = ts3.getServerVariableAsString(schid, _tmp)
+                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getServerVariableAsUInt64(schid, _tmp)
+                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getServerVariableAsInt(schid, _tmp)
             elif "ChannelProperties" in type:
-                (error, _var) = ts3lib.getChannelVariableAsString(schid, id, _tmp)
-                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getChannelVariableAsUInt64(schid, id, _tmp)
-                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getChannelVariableAsInt(schid, id, _tmp)
+                (error, _var) = ts3.getChannelVariableAsString(schid, id, _tmp)
+                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getChannelVariableAsUInt64(schid, id, _tmp)
+                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getChannelVariableAsInt(schid, id, _tmp)
             elif "ClientProperties" in type:
-                if id == ts3lib.getClientID(schid):
-                    (error, _var) = ts3lib.getClientSelfVariableAsString(schid, _tmp)
-                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getClientSelfVariableAsInt(schid, _tmp)
-                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getClientVariableAsString(schid, id, _tmp)
-                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getClientVariableAsUInt64(schid, id, _tmp)
-                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getClientVariableAsInt(schid, id, _tmp)
+                if id == ts3.getClientID(schid):
+                    (error, _var) = ts3.getClientSelfVariableAsString(schid, _tmp)
+                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientSelfVariableAsInt(schid, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
+                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, id, _tmp)
+                    ts3.printMessageToCurrentTab("{}: {}".format(_tmp, _var))
+                    if _tmp == "CLIENT_META_DATA": _var = (_var[:75] + '..') if len(_var) > 75 else _var
                 else:
-                    (error, _var) = ts3lib.getClientVariableAsString(schid, id, _tmp)
-                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getClientVariableAsUInt64(schid, id, _tmp)
-                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getClientVariableAsInt(schid, id, _tmp)
+                    (error, _var) = ts3.getClientVariableAsString(schid, id, _tmp)
+                    if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsUInt64(schid, id, _tmp)
+                    if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getClientVariableAsInt(schid, id, _tmp)
             elif "ConnectionProperties" in type:
-                (error, _var) = ts3lib.getConnectionVariableAsString(schid, id, _tmp)
-                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getConnectionVariableAsUInt64(schid, id, _tmp)
-                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3lib.getConnectionVariableAsDouble(schid, id, _tmp)
+                (error, _var) = ts3.getConnectionVariableAsString(schid, id, _tmp)
+                if _var == "" or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsUInt64(schid, id, _tmp)
+                if _var is None or _var == 0 or error != ts3defines.ERROR_ok: (error, _var) = ts3.getConnectionVariableAsDouble(schid, id, _tmp)
             _var = str(_var)
-            if error != ts3defines.ERROR_ok or _var == "": return False, ""
+            if error != ts3defines.ERROR_ok or _var == "" or _var == "0": return False, ""
             return True, var.replace(start, '').replace('_', ' ').title() + ": " + _var
         except:
-            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3lib.logMessage("Could not resolve variable ts3defines.%s.%s: %s" % (type, var, format_exc()), ts3defines.LogLevel.LogLevel_INFO, self.name, 0);return False, ""
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage("Could not resolve variable ts3defines.%s.%s: %s" % (type, var, format_exc()), ts3defines.LogLevel.LogLevel_INFO, self.name, 0);return False, ""
 
 class SettingsDialog(QDialog):
     def __init__(self, info, parent=None):
         super(QDialog, self).__init__(parent)
-        setupUi(self, os.path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
+        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
         self.setWindowTitle("Extended Info Settings")
-        ts3lib.printMessageToCurrentTab(str(info.cfg.getboolean('general', 'Debug')))
+        ts3.printMessageToCurrentTab(str(info.cfg.getboolean('general', 'Debug')))
         self.chk_debug.setChecked(info.cfg.getboolean('general', 'Debug'))
         self.chk_colored.setChecked(info.cfg.getboolean('general', 'Colored'))
         self.chk_arsv.setChecked(info.cfg.getboolean('general', 'Autorequest Server Variables'))
@@ -374,7 +378,7 @@ class SettingsDialog(QDialog):
             yield parent.item(i)
 
     def on_btn_apply_clicked(self):
-        if self.info.cfg.getboolean('general', 'Debug'): ts3lib.printMessageToCurrentTab("on_btn_apply_clicked")
+        if self.info.cfg.getboolean('general', 'Debug'): ts3.printMessageToCurrentTab("on_btn_apply_clicked")
         self.info.cfg.set('general', 'Debug', str(self.chk_debug.isChecked()))
         self.info.cfg.set('general', 'Colored', str(self.chk_colored.isChecked()))
         self.info.cfg.set('general', 'Autorequest Server Variables', str(self.chk_arsv.isChecked()))
