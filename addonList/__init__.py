@@ -1,9 +1,9 @@
-# t = pluginhost.PluginHost.plugins["eventlog"]
-import pytson, ts3client, ts3lib, ts3defines, pluginhost, re
+import pytson, ts3client, ts3defines, pluginhost, re
+import ts3lib as ts3
 from pytsonui import setupUi
 from getvalues import getValues, ValueType
 from PythonQt.QtCore import Qt
-from PythonQt.QtGui import (QWidget, QTableWidgetItem, QHeaderView, QFont)
+from PythonQt.QtGui import (QDialog, QWidget, QTableWidgetItem, QHeaderView, QFont)
 from ts3plugin import ts3plugin
 from datetime import datetime
 from configparser import ConfigParser
@@ -11,6 +11,7 @@ from os import path
 import xml.etree.ElementTree as xml
 
 class addonList(ts3plugin):
+    tag = "addons"
     name = "Addon Scanner"
     apiVersion = 22
     requestAutoload = False
@@ -35,10 +36,10 @@ class addonList(ts3plugin):
             self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "True", "infodata": "False", "activeonly": "False"}
             with open(self.ini, 'w') as cfg:
                 self.cfg.write(cfg)
-        schid = ts3lib.getCurrentServerConnectionHandlerID()
-        err, ownid = ts3lib.getClientID(schid)
-        if not err: self.setMeta(ts3lib.getCurrentServerConnectionHandlerID())
-        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        schid = ts3.getCurrentServerConnectionHandlerID()
+        err, status = ts3.getConnectionStatus(schid)
+        if not err and status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(ts3.getCurrentServerConnectionHandlerID())
+        if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def configure(self, qParentWidget):
         try:
@@ -63,14 +64,12 @@ class addonList(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT and menuItemID == 0:
-            try:
-                (error, name) = ts3lib.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
-                addons = self.parseMeta(schid,selectedItemID)
-                if not self.dlg: self.dlg = AddonsDialog(addons, name, self.cfg)
-                self.dlg.show()
-                self.dlg.raise_()
-                self.dlg.activateWindow()
-            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            (error, name) = ts3.getClientVariableAsString(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            addons = self.parseMeta(schid,selectedItemID)
+            if not self.dlg: self.dlg = AddonsDialog(addons, name, self.cfg)
+            self.dlg.show()
+            self.dlg.raise_()
+            self.dlg.activateWindow()
 
     def infoData(self, schid, clid, atype): # https://github.com/teamspeak-plugins/now_playing/blob/master/now_playing/nowplaying_plugin.c#L667
         if atype == 2 and self.cfg.getboolean("general", "infodata"):
@@ -84,7 +83,7 @@ class addonList(ts3plugin):
                         string += " by %s"%addon.attrib["author"]
                         i.append(string)
                     except:
-                        if self.cfg.getboolean("general", "debug"): from traceback import format_exc;ts3lib.logMessage("Error listing {0}: {1}".format(addon.text, format_exc()), ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        if self.cfg.getboolean("general", "debug"): from traceback import format_exc;ts3.logMessage("Error listing {0}: {1}".format(addon.text, format_exc()), ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                         pass
                 pytsons = [element for element in addons.iter() if element.text == 'pyTSon']
                 # xm = xml.fromstring('<element attribute="value">text<subelement subattribute="subvalue">subtext</subelement></element>')
@@ -93,31 +92,31 @@ class addonList(ts3plugin):
                     i.append("[u]pyTSon[/u]:")
                     for script in scripts:
                         try: i.append("{name} v{version} by {author}".format(name=script.text,version=script.attrib["version"],author=script.attrib["author"]))
-                        except:from traceback import format_exc;ts3lib.logMessage("Error parsing meta %s:\n%s"%(script.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
+                        except:from traceback import format_exc;ts3.logMessage("Error parsing meta %s:\n%s"%(script.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
 
                 return i
-            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);pass
+            except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);pass
 
     def parseMeta(self, schid, clid):
-        (error, meta) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_META_DATA)
-        try: meta = re.search('<addons>(.+?)</addons>', meta).group(0)
+        (error, meta) = ts3.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_META_DATA)
+        try: meta = re.search('<{0}>(.+?)</{0}>'.format(self.tag), meta).group(0)
         except AttributeError: return False
         return xml.fromstring(meta)
 
 
     def setMeta(self, schid, ownID=None):
         try:
-            if ownID == None: (error, ownID) = ts3lib.getClientID(schid)
-            (error, oldmeta) = ts3lib.getClientVariableAsString(schid, ownID, ts3defines.ClientProperties.CLIENT_META_DATA)
+            if ownID == None: (error, ownID) = ts3.getClientID(schid)
+            (error, oldmeta) = ts3.getClientVariableAsString(schid, ownID, ts3defines.ClientProperties.CLIENT_META_DATA)
             # e = xml.etree.ElementTree.parse('<addons><pytson></pytson></addons>').getroot()
-            if oldmeta and '<addons>' in oldmeta:
-                oldmeta = re.sub(r"<addons>.*</addons>", "", oldmeta)
+            if oldmeta and '<{}>'.format(self.tag) in oldmeta:
+                oldmeta = re.sub(r"<{0}>.*</{0}>".format(self.tag), "", oldmeta)
             newmeta = xml.Element('addons')
             db = ts3client.Config()
             q = db.query("SELECT value FROM addons")
             while(q.next()):
                 val = q.value("value")
-                addon = xml.SubElement(newmeta, "addon")
+                addon = xml.SubElement(newmeta, "a")
                 for l in val.split('\n'):
                     try:
                         if l.startswith('name='):
@@ -125,28 +124,28 @@ class addonList(ts3plugin):
                             addon.text = name
                         elif l.startswith('version='):
                             version = l.split('=', 1)[1].strip()
-                            addon.set("version", version)
+                            addon.set("v", version)
                         elif l.startswith('author='):
                             author = l.split('=', 1)[1].strip()
-                            addon.set("author", author)
+                            addon.set("a", author)
                         elif l.startswith('type='):
                             type = l.split('=', 1)[1].strip()
-                            addon.set("type", type)
-                    except:from traceback import format_exc;ts3lib.logMessage("Error reading addon from Database:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
+                            addon.set("t", type)
+                    except:from traceback import format_exc;ts3.logMessage("Error reading addon from Database:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             del db
             pytson = [element for element in newmeta.iter() if element.text == 'pyTSon'][0]
             if self.cfg.getboolean("general", "activeonly"): plugins = pluginhost.PluginHost.active.items()
             else: plugins = pluginhost.PluginHost.plugins.items()
             for name, plugin in plugins:
                 try:
-                    script = xml.SubElement(pytson, "script",{'version': plugin.version, 'author': plugin.author})
+                    script = xml.SubElement(pytson, "s",{'v': plugin.version, 'a': plugin.author})
                     script.text = name
-                except:from traceback import format_exc;ts3lib.logMessage("Error parsing script %s:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
+                except:from traceback import format_exc;ts3.logMessage("Error parsing script %s:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             newmeta = "{old}{new}".format(old=oldmeta,new=xml.tostring(newmeta).decode("utf-8"))
-            # if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab(newmeta)
-            error = ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, newmeta)
-            if not error == ts3defines.ERROR_ok: ts3lib.printMessageToCurrentTab("Error: Unable to set own meta data to \"%s\"."%newmeta);return False
-        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid)
+            # if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab(newmeta)
+            error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, newmeta)
+            if not error == ts3defines.ERROR_ok: ts3.printMessageToCurrentTab("Error: Unable to set own meta data to \"%s\"."%newmeta);return False
+        except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
@@ -166,7 +165,7 @@ class AddonsDialog(QWidget):
             self.resize(1000, 600)
             self.adddons = addons
         except:
-            try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("addonList: "+format_exc())
                 except: print("addonList: Unknown Error")
@@ -181,7 +180,7 @@ class AddonsDialog(QWidget):
                     if addon == None or addon.text == None: continue
                     _type = "Other";
                     try:
-                        _type = addon.attrib["type"].title()
+                        _type = addon.attrib["t"].title()
                     except: pass
                     item = QTableWidgetItem(_type)
                     item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
@@ -196,24 +195,24 @@ class AddonsDialog(QWidget):
                         elif addon.text == "Lua": self.lua = addon
                     item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
                     self.tbl_addons.setItem(row, 1, item)
-                    if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
+                    if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
                     try:
-                        item = QTableWidgetItem(addon.attrib["version"])
+                        item = QTableWidgetItem(addon.attrib["v"])
                         item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
                         self.tbl_addons.setItem(row, 2, item)
-                    except: ts3lib.logMessage("Addon %s does not have any version." % (addon.text), ts3defines.LogLevel.LogLevel_WARNING, "Addon List", 0)
+                    except: ts3.logMessage("Addon %s does not have any version." % (addon.text), ts3defines.LogLevel.LogLevel_WARNING, "Addon List", 0)
                     try:
-                        item = QTableWidgetItem(addon.attrib["author"])
+                        item = QTableWidgetItem(addon.attrib["a"])
                         item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
                         self.tbl_addons.setItem(row, 3, item)
-                    except: ts3lib.logMessage("Addon %s does not have any author." % (addon.text), ts3defines.LogLevel.LogLevel_WARNING, "Addon List", 0)
+                    except: ts3.logMessage("Addon %s does not have any author." % (addon.text), ts3defines.LogLevel.LogLevel_WARNING, "Addon List", 0)
                     row += 1
-                except: from traceback import format_exc;ts3lib.logMessage("Error parsing addon %s:\n%s"%(addon.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), 0);continue
+                except: from traceback import format_exc;ts3.logMessage("Error parsing addon %s:\n%s"%(addon.text,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), 0);continue
             self.tbl_addons.setRowCount(row)
             self.tbl_addons.sortItems(0)
             self.tbl_addons.setHorizontalHeaderLabels(["Type","Name","Version","Author","API"])
         except:
-            try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("addonList: "+format_exc())
                 except: print("addonList: Unknown Error")
@@ -225,7 +224,7 @@ class AddonsDialog(QWidget):
             if data == "pyTSon": self.setupList(self.pytson.getchildren())
             elif data == "Lua": self.setupList(self.lua.getchildren())
         except:
-            try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("addonList: "+format_exc())
                 except: print("addonList: Unknown Error")
@@ -233,7 +232,7 @@ class AddonsDialog(QWidget):
     def on_btn_reload_clicked(self):
         try: self.setupList(self.adddons.getchildren())
         except:
-            try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("addonList: "+format_exc())
                 except: print("addonList: Unknown Error")
@@ -241,7 +240,7 @@ class AddonsDialog(QWidget):
     def on_btn_description_clicked(self):
         try: self.txt_description.setVisible(not self.txt_description.visible)
         except:
-            try: from traceback import format_exc;ts3lib.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3.logMessage("addonList: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("addonList: "+format_exc())
                 except: print("addonList: Unknown Error")

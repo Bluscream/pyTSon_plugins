@@ -19,10 +19,13 @@ class notify(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle "+name, "")]
     hotkeys = []
-    debug = False
+    debug = True
     toggle = False
     requested = False
+    checkOutdatedVersion = True
+    checkUnreadMessages = True
     blacklist = ["QTRtPmYiSKpMS8Oyd4hyztcvLqU="]
+
     versions = {
         "clientver": "3.1.6",
         "clientrev": 1502873983,
