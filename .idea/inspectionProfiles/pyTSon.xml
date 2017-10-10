@@ -8,6 +8,7 @@
         <list>
           <option value="chatBot.*" />
           <option value="cfgDialog.*" />
+          <option value="ts3lib.*" />
         </list>
       </option>
     </inspection_tool>

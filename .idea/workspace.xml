@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dataDump/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dataDump/dump.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dataDump/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/__init__.py" afterPath="$PROJECT_DIR$/addonList/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info/settings.ini" afterPath="$PROJECT_DIR$/info/settings.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notify/__init__.py" afterPath="$PROJECT_DIR$/notify/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addonList/addons.xml" afterPath="$PROJECT_DIR$/addonList/addons.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverBrowser/__init__.py" afterPath="$PROJECT_DIR$/serverBrowser/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/serverSwitcher/__init__.py" afterPath="$PROJECT_DIR$/serverSwitcher/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -42,8 +39,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/addonList/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="74" column="40" lean-forward="true" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            <state relative-caret-position="611">
+              <caret line="163" column="47" lean-forward="false" selection-start-line="163" selection-start-column="33" selection-end-line="163" selection-end-column="47" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -51,23 +48,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/serverBrowser/__init__.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="77" selection-end-column="45" />
+            <state relative-caret-position="544">
+              <caret line="92" column="43" lean-forward="true" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scratch.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="29" lean-forward="true" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
+      <file leaf-file-name="addons.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/addonList/addons.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="56" column="1" lean-forward="true" selection-start-line="56" selection-start-column="1" selection-end-line="80" selection-end-column="126" />
+            <state relative-caret-position="776">
+              <caret line="109" column="12" lean-forward="false" selection-start-line="109" selection-start-column="12" selection-end-line="109" selection-end-column="12" />
               <folding>
-                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#8699#8705#0" expanded="true" />
+                <element signature="e#8718#8724#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,8 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>error_ok</find>
-      <find>format_e</find>
       <find>False</find>
       <find>CHANNEL_ID</find>
       <find>textmess</find>
@@ -124,6 +132,8 @@
       <find>datetime</find>
       <find>inst</find>
       <find>ts3lib.</find>
+      <find>parseMeta</find>
+      <find>hasattr</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -146,6 +156,24 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
+  <component name="GotoClassSymbolConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="DTD" />
+      <filtered-out-file-type name="HTML" />
+      <filtered-out-file-type name="JQL" />
+      <filtered-out-file-type name="JSON" />
+      <filtered-out-file-type name="Python" />
+      <filtered-out-file-type name="PythonRegExp" />
+      <filtered-out-file-type name="RELAX-NG" />
+      <filtered-out-file-type name="ReST" />
+      <filtered-out-file-type name="RegExp" />
+      <filtered-out-file-type name="TEXT" />
+      <filtered-out-file-type name="XHTML" />
+      <filtered-out-file-type name="XML" />
+      <filtered-out-file-type name="YouTrack" />
+      <filtered-out-file-type name="yaml" />
+    </file-type-list>
+  </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
@@ -154,8 +182,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/AutoChannelChatTab/__init__.py" />
-        <option value="$PROJECT_DIR$/include/pytsonui/repository.py" />
         <option value="$PROJECT_DIR$/include/pluginhost.py" />
         <option value="$PROJECT_DIR$/scripts/addonList/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/devTools/__init__.py" />
@@ -191,7 +217,6 @@
         <option value="$PROJECT_DIR$/profile/__init__.py" />
         <option value="$PROJECT_DIR$/recreateChannel/__init__.py" />
         <option value="$PROJECT_DIR$/report/__init__.py" />
-        <option value="$PROJECT_DIR$/serverBrowser/__init__.py" />
         <option value="$PROJECT_DIR$/settings/__init__.py" />
         <option value="$PROJECT_DIR$/showQueries/__init__.py" />
         <option value="$PROJECT_DIR$/unlocker/__init__.py" />
@@ -203,8 +228,11 @@
         <option value="$PROJECT_DIR$/info/settings.ini" />
         <option value="$PROJECT_DIR$/dataDump/__init__.py" />
         <option value="$PROJECT_DIR$/notify/__init__.py" />
-        <option value="$PROJECT_DIR$/serverSwitcher/__init__.py" />
+        <option value="$PROJECT_DIR$/serverBrowser/__init__.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+        <option value="$PROJECT_DIR$/addonList/addons.xml" />
         <option value="$PROJECT_DIR$/addonList/__init__.py" />
+        <option value="$PROJECT_DIR$/serverSwitcher/__init__.py" />
       </list>
     </option>
   </component>
@@ -336,6 +364,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="last.edited.regexp" value="Sample Text" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -661,7 +690,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507632262510</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="stuff">
+      <created>1507646343069</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1507646343069</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -697,30 +733,30 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33766234" sideWeight="0.49791667" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Floobits" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,7 +797,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="cleanup" />
     <MESSAGE value="a lot of changes o.O" />
-    <option name="LAST_COMMIT_MESSAGE" value="a lot of changes o.O" />
+    <MESSAGE value="stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -774,16 +811,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/autoTPRequest/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="28" column="202" lean-forward="false" selection-start-line="28" selection-start-column="202" selection-end-line="28" selection-end-column="202" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cfgDialog/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1161,7 +1188,7 @@
         <state relative-caret-position="272">
           <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="26" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1187,16 +1214,8 @@
         <state relative-caret-position="187">
           <caret line="80" column="66" lean-forward="false" selection-start-line="80" selection-start-column="66" selection-end-line="80" selection-end-column="66" />
           <folding>
-            <element signature="e#0#52#0" expanded="true" />
+            <element signature="e#0#52#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addonList/addons.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1205,7 +1224,7 @@
         <state relative-caret-position="606">
           <caret line="117" column="59" lean-forward="true" selection-start-line="117" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
           <folding>
-            <element signature="e#15#44#0" expanded="true" />
+            <element signature="e#15#44#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1226,28 +1245,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addonList/__init__.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="74" column="40" lean-forward="true" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        <state relative-caret-position="0">
+          <caret line="0" column="29" lean-forward="true" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addonList/addons.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="776">
+          <caret line="109" column="12" lean-forward="false" selection-start-line="109" selection-start-column="12" selection-end-line="109" selection-end-column="12" />
           <folding>
-            <element signature="e#0#52#0" expanded="true" />
+            <element signature="e#8699#8705#0" expanded="true" />
+            <element signature="e#8718#8724#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/serverBrowser/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="77" selection-end-column="45" />
+        <state relative-caret-position="17">
+          <caret line="93" column="21" lean-forward="true" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addonList/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="611">
+          <caret line="163" column="47" lean-forward="false" selection-start-line="163" selection-start-column="33" selection-end-line="163" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="56" column="1" lean-forward="true" selection-start-line="56" selection-start-column="1" selection-end-line="80" selection-end-column="126" />
+        <state relative-caret-position="544">
+          <caret line="92" column="43" lean-forward="true" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>

@@ -73,9 +73,9 @@ class serverBrowser(ts3plugin):
 
     def configDialogClosed(self, r, vals):
         if r == QDialog.Accepted:
-            self.config['GENERAL'] = { "debug": str(vals['debug']), "api": vals['api'], "morerequests": str(vals['morerequests']), "serversperpage": str(vals['serversperpage']) }
+            self.cfg['general'] = { "debug": str(vals['debug']), "api": vals['api'], "morerequests": str(vals['morerequests']), "serversperpage": str(vals['serversperpage']) }
             with open(self.ini, 'w') as configfile:
-                self.config.write(configfile)
+                self.cfg.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:

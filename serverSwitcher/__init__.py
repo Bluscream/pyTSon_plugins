@@ -9,9 +9,10 @@ from os import path
 from PythonQt.QtCore import Qt
 from PythonQt.QtGui import (QDialog, QWidget, QTableWidgetItem, QHeaderView, QFont)
 from pytsonui import setupUi
+from xml.sax.saxutils import quoteattr, escape, unescape
 
 class serverSwitcher(ts3plugin):
-    tag = "server"
+    tag = "tabs"
     name = 'Server Switcher'
     apiVersion = 22
     requestAutoload = False
@@ -24,7 +25,6 @@ class serverSwitcher(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Join", "")]
     hotkeys = []
     debug = False
-    awaymsg = 'Anderer TS'
     ini = path.join(pytson.getPluginPath(), "scripts", "serverSwitcher", "settings.ini")
     cfg = ConfigParser()
 
@@ -33,9 +33,14 @@ class serverSwitcher(ts3plugin):
 
     def parseMeta(self, schid, clid):
         (error, meta) = ts3.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_META_DATA)
-        try: meta = re.search('<{0}>(.+?)</{0}>'.format(self.tag), meta).group(0)
+        # print(re.search('(<{0}.*>.*</{0}>)'.format(self.tag), meta))
+        try: meta = re.search('<{0}>(.*)</{0}>'.format(self.tag), meta).group(0)
         except AttributeError: return False
-        return xml.fromstring(meta)
+        print('meta_strip: %s'%meta.strip())
+        print('xml: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")))
+        print('xml_sub: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")).getchildren())
+        print('xml_sub[0]: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")).getchildren()[0])
+        return xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")).getchildren()[0]
 
     def __init__(self):
         if path.isfile(self.ini):
@@ -44,11 +49,11 @@ class serverSwitcher(ts3plugin):
             self.cfg['general'] = {
                 "cfgversion": "1",
                 "debug": "False",
-                "broadcast own changes": "True",
-                "broadcast server pw": "False",
-                "broadcast new channel": "False",
-                "broadcast channel pw": "False",
-                "afk status": "switched servers"
+                "enabled": "True",
+                "pw": "False",
+                "channel": "False",
+                "channelpw": "False",
+                "status": "switched servers"
             }
             with open(self.ini, 'w') as cfg:
                 self.cfg.write(cfg)
@@ -57,38 +62,51 @@ class serverSwitcher(ts3plugin):
     def configure(self, qParentWidget):
         try:
             d = dict()
-            for n, v in self.cfg['general'].items():
-                if n == "cfgversion": continue
-                _type = ValueType.boolean
-                if n in ["afk status"]:
-                    _type = ValueType.string
-                    _var = self.cfg.get('general', n)
-                else: _var = self.cfg.getboolean('general', n)
-                d[n] = (_type, n.title(), _var, None, None)
-            getValues(qParentWidget, self.name, d, self.configDialogClosed)
-        except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            d['debug'] = (ValueType.boolean, "Debug", self.cfg['general']['debug'] == "True", None, None)
+            d['enabled'] = (ValueType.boolean, "Broadcast own changes", self.cfg['general']['enabled'] == "True", None, None)
+            d['pw'] = (ValueType.boolean, "Broadcast server passwords", self.cfg['general']['pw'] == "True", None, None)
+            d['channel'] = (ValueType.boolean, "Broadcast new channel", self.cfg['general']['channel'] == "True", None, None)
+            d['channelpw'] = (ValueType.boolean, "Broadcast channel pw", self.cfg['general']['channelpw'] == "True", None, None)
+            d['status'] = (ValueType.string, "AFK status text:", self.cfg['general']['status'], None, 1)
+            getValues(None, "{} Settings".format(self.name), d, self.configDialogClosed)
+        except:
+            from traceback import format_exc
+            try: ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
+            except: print("Error in "+self.name+".configure: "+format_exc())
 
     def configDialogClosed(self, r, vals):
-        try:
-            if r == QDialog.Accepted:
-                for n, v in vals.items():
-                    try:
-                        if not v == self.cfg.getboolean('general', n):
-                            self.cfg.set('general', n, str(v))
-                    except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
-                with open(self.ini, 'w') as configfile:
-                    self.cfg.write(configfile)
-        except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+        if r == QDialog.Accepted:
+            self.cfg['general'] = {
+                "cfgversion": self.cfg.get('general', 'cfgversion'),
+                "debug": str(vals['debug']),
+                "enabled": str(vals['enabled']),
+                "pw": str(vals['pw']),
+                "channel": str(vals['channel']),
+                "channelpw": str(vals['channelpw']),
+                "status": vals['status']
+            }
+            with open(self.ini, 'w') as configfile:
+                self.cfg.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT and menuItemID == 0:
-            server = self.parseMeta(schid, selectedItemID)
-            if not server: return
-            port = server.attrib["port"]
-            pw = server.attrib["pw"]
-            err, tab = ts3.spawnNewServerConnectionHandler(0)
-            ts3.startConnection(tab, "", server.attrib["ip"], port if port else 9987, "", [], [], pw if pw else "")
-            # ts3.guiConnect(connectTab, serverLabel, serverAddress, serverPassword, nickname, channel, channelPassword, captureProfile, playbackProfile, hotkeyProfile, userIdentity, oneTimeKey, phoneticName)
+        try:
+            if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT and menuItemID == 0:
+                server = self.parseMeta(schid, selectedItemID)
+                if server is None: return
+                print(server)
+                err, tab = ts3.spawnNewServerConnectionHandler(0)
+                #rr = ts3.startConnection(tab, identity, ip, port, nickname, defaultChannelArray, defaultChannelPassword, serverPassword)
+                err = ts3.startConnection(tab, "", server.attrib["host"], server.attrib["port"] if hasattr(server, "port") else 0, "", [], "", server.attrib["pw"] if hasattr(server, "pw") else "")
+                # err, tab = ts3.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, server.text or "Server",
+                               # '{}:{}'.format(server.attrib["host"], server.attrib["port"]) if hasattr(server, 'port') else server.attrib["host"],
+                               # server.attrib["pw"] if hasattr(server, "pw") else "",
+                               # "TeamspeakUser","","","","","","","","")
+                print(err)
+                print(tab)
+        except:
+            from traceback import format_exc
+            try: ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
+            except: print("Error in "+self.name+".configure: "+format_exc())
 
     def onUpdateClientEvent(self, schid, clientID, invokerID, invokerName, invokerUniqueIdentifier):
         pass
@@ -132,8 +150,8 @@ class serverSwitcher(ts3plugin):
                     err, away_message = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE)
                     err, away = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY)
                     if away != ts3defines.AwayStatus.AWAY_ZZZ: ts3.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_ZZZ)
-                    if away_message != self.awaymsg: ts3.setClientSelfVariableAsString(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE, self.awaymsg)
-                    if self.cfg.getboolean('general', 'broadcast own changes'):
+                    host = "";port = 0; name = ""
+                    if self.cfg.getboolean('general', 'enabled'):
                         err, host, port, pw = ts3.getServerConnectInfo(schid)
                         # err, ip = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
                         # err, port = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
@@ -141,13 +159,17 @@ class serverSwitcher(ts3plugin):
                         # err, port = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
                         if host:
                             newmeta = xml.Element(self.tag)
+                            c = xml.SubElement(newmeta, "tab")
+                            c.set("id", str(schid))
                             err, name = ts3.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-                            if name: newmeta.text = name.strip()
-                            newmeta.set("host", host)
-                            if port and port != 9987: newmeta.set("port", "{}".format(port))
-                            if pw and self.cfg.getboolean('general', 'broadcast server pw'): newmeta.set("pw", pw)
+                            if name: c.text = escape(name.strip())
+                            c.set("host", escape(host))
+                            if port and port != 9987: c.set("port", "{}".format(port))
+                            if pw and self.cfg.getboolean('general', 'broadcast server pw'): c.set("pw", pw)
                             meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
                             # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
+                    _away_message = self.cfg.get('general', 'status').replace('{host}', host).replace('{port}', str(port)).replace('{name}', name)
+                    if away_message != _away_message: ts3.setClientSelfVariableAsString(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE, _away_message)
                 ts3.setClientSelfVariableAsString(tab, ts3defines.ClientProperties.CLIENT_META_DATA, meta_data)
                 ts3.flushClientSelfUpdates(tab)
         except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
