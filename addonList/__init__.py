@@ -27,7 +27,8 @@ class addonList(ts3plugin):
     cfg = ConfigParser()
     dlg = None
 
-    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+    @staticmethod
+    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
         if path.isfile(self.ini):
@@ -106,7 +107,8 @@ class addonList(ts3plugin):
 
     def setMeta(self, schid, ownID=None):
         try:
-            if ownID == None: (error, ownID) = ts3.getClientID(schid)
+            if not self.cfg.getboolean('general', 'enabled'): return
+            if ownID is None: (error, ownID) = ts3.getClientID(schid)
             (error, oldmeta) = ts3.getClientVariableAsString(schid, ownID, ts3defines.ClientProperties.CLIENT_META_DATA)
             # e = xml.etree.ElementTree.parse('<addons><pytson></pytson></addons>').getroot()
             if oldmeta and '<{}>'.format(self.tag) in oldmeta:
