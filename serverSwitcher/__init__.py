@@ -36,10 +36,10 @@ class serverSwitcher(ts3plugin):
         # print(re.search('(<{0}.*>.*</{0}>)'.format(self.tag), meta))
         try: meta = re.search('<{0}>(.*)</{0}>'.format(self.tag), meta).group(0)
         except AttributeError: return False
-        print('meta_strip: %s'%meta.strip())
-        print('xml: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")))
-        print('xml_sub: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")).getchildren())
-        print('xml_sub[0]: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")).getchildren()[0])
+        # print('meta_strip: %s'%meta.strip())
+        # print('xml: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")))
+        # print('xml_sub: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")).getchildren())
+        # print('xml_sub[0]: %s'%xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")).getchildren()[0])
         return xml.fromstring(meta.strip(), parser = xml.XMLParser(encoding="utf-8")).getchildren()[0]
 
     def __init__(self):
@@ -92,7 +92,6 @@ class serverSwitcher(ts3plugin):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT or menuItemID != 0: return
         server = self.parseMeta(schid, selectedItemID)
         if server is None: return
-        print(server)
         # err, tab = ts3.spawnNewServerConnectionHandler(0)
         # err = ts3.startConnection(tab, "", server.attrib["host"], server.attrib["port"] if hasattr(server, "port") else 0, "", [], "", server.attrib["pw"] if hasattr(server, "pw") else "")
         err, tab = ts3.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, server.text or "Server",
@@ -122,7 +121,8 @@ class serverSwitcher(ts3plugin):
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         try:
             if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-                self.setStatus(schid)
+                err, mic = ts3.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_INPUT_HARDWARE)
+                if not err and not mic: self.setStatus(schid)
         except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
 
     def setStatus(self, schid):
