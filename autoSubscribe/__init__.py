@@ -28,6 +28,7 @@ class autoSubscribe(ts3plugin):
     subAll = [""]
     subOpen = ["QTRtPmYiSKpMS8Oyd4hyztcvLqU="]
     subNone = [""]
+    isFlooding = False
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
@@ -47,72 +48,40 @@ class autoSubscribe(ts3plugin):
             error = ts3lib.requestChannelSubscribeAll(schid)
             if not error == ts3defines.ERROR_ok: raise Exception("Error in requestChannelSubscribeAll")
         except:
-            try:
-                (error, clist) = ts3lib.getChannelList(schid)
-                ts3lib.requestChannelSubscribe(schid, clist)
-            except:
-                try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
-                except:
-                    try: from traceback import format_exc;ts3lib.printMessageToCurrentTab(format_exc())
-                    except:
-                        try: from traceback import format_exc;print(format_exc())
-                        except: print("Unknown Error")
+            (error, clist) = ts3lib.getChannelList(schid)
+            ts3lib.requestChannelSubscribe(schid, clist)
 
     def unsubscribeAll(self, schid):
         try:
             error = ts3lib.requestChannelUnsubscribeAll(schid)
             if not error == ts3defines.ERROR_ok: raise Exception("Error in requestChannelUnsubscribeAll")
         except:
-            try:
-                (error, clist) = ts3lib.getChannelList(schid)
-                ts3lib.requestChannelUnsubscribe(schid, clist)
-            except:
-                try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
-                except:
-                    try: from traceback import format_exc;ts3lib.printMessageToCurrentTab(format_exc())
-                    except:
-                        try: from traceback import format_exc;print(format_exc())
-                        except: print("Unknown Error")
+            (error, clist) = ts3lib.getChannelList(schid)
+            ts3lib.requestChannelUnsubscribe(schid, clist)
 
     def subscribeOpen(self, schid):
-        try:
-            (error, clist) = ts3lib.getChannelList(schid)
-            for c in clist:
-                (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
-                (error, pw) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-                (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
-                (error, semiperm) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
-                (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
-                if not pw and not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist): ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
-            self.onlyOpen = True
-            # ts3lib.requestChannelSubscribe(schid, clist)
-        except:
-            try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
-            except:
-                try: from traceback import format_exc;ts3lib.printMessageToCurrentTab(format_exc())
-                except:
-                    try: from traceback import format_exc;print(format_exc())
-                    except: print("Unknown Error")
+        (error, clist) = ts3lib.getChannelList(schid)
+        for c in clist:
+            (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
+            (error, pw) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+            (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
+            (error, semiperm) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
+            (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
+            if not pw and not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist):
+                err = ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
+                ts3lib.printMessageToCurrentTab("c: {} err: {}".format(c, err))
+        self.onlyOpen = True
 
     def subscribeOpenPW(self, schid):
-        try:
-            (error, clist) = ts3lib.getChannelList(schid)
-            for c in clist:
-                (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
-                (error, pw) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-                (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
-                (error, semiperm) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
-                (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
-                if not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist) and any(x in name.lower() for x in self.passwords): ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
-            self.onlyOpen = False
-            # ts3lib.requestChannelSubscribe(schid, clist)
-        except:
-            try: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
-            except:
-                try: from traceback import format_exc;ts3lib.printMessageToCurrentTab(format_exc())
-                except:
-                    try: from traceback import format_exc;print(format_exc())
-                    except: print("Unknown Error")
+        (error, clist) = ts3lib.getChannelList(schid)
+        for c in clist:
+            (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
+            (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
+            (error, semiperm) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
+            (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
+            if not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist) and any(x in name.lower() for x in self.passwords):
+                ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
+        self.onlyOpen = False
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
@@ -134,10 +103,13 @@ class autoSubscribe(ts3plugin):
         (error, pw) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
         (error, subscribed) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_ARE_SUBSCRIBED)
         (error, codec) = ts3lib.getChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_CODEC)
-        #if self.debug: ts3lib.printMessageToCurrentTab("not pw: {0}".format(not pw))
-        #if self.debug: ts3lib.printMessageToCurrentTab("any(x in name.lower() for x in self.passwords): {0}".format(any(x in name.lower() for x in self.passwords)))
-        #if self.debug: ts3lib.printMessageToCurrentTab("not any(x in name.lower() for x in self.blacklist): {0}".format(not any(x in name.lower() for x in self.blacklist)))
-        #if self.debug: ts3lib.printMessageToCurrentTab("not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC: {0}".format(not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC))
+        if self.debug:
+            ts3lib.printMessageToCurrentTab("==== #{0} ====".format(channelID))
+            ts3lib.printMessageToCurrentTab("not pw: {0}".format(not pw))
+            ts3lib.printMessageToCurrentTab("any(x in name.lower() for x in self.passwords): {0}".format(any(x in name.lower() for x in self.passwords)))
+            ts3lib.printMessageToCurrentTab("not any(x in name.lower() for x in self.blacklist): {0}".format(not any(x in name.lower() for x in self.blacklist)))
+            ts3lib.printMessageToCurrentTab("not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC: {0}".format(not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC))
+            ts3lib.printMessageToCurrentTab("==== #{0} ====".format(channelID))
         if pw and any(x in name.lower() for x in self.passwords):
             if not subscribed:
                 ts3lib.requestChannelSubscribe(schid, [channelID])
