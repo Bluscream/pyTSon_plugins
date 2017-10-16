@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addons>
+    <addon type="ICONPACK">TeamSpeak Mono</addon>
+    <addon type="ICONPACK">TeamSpeak Origin</addon>
+    <addon type="ICONPACK">TeamSpeak Colored</addon>
+    <addon type="SOUNDPACK">Default Sound Pack (Male)</addon>
+    <addon type="SOUNDPACK">Sounds deactivated</addon>
+    <addon type="SOUNDPACK">Default Sound Pack (Female)</addon>
+    <addon type="SOUNDPACK">Default Text To Speech</addon>
+    <addon type="STYLE">classic</addon>
+    <addon type="STYLE">modern</addon>
+    <addon type="TRANSLATION">Japanese</addon>
+    <addon type="TRANSLATION">Russian</addon>
+    <addon type="TRANSLATION">Spanish</addon>
+    <addon type="TRANSLATION">German</addon>
+    <addon type="TRANSLATION">French</addon>
+    <addon type="TRANSLATION">Polish</addon>
+    <addon type="TRANSLATION">Portuguese</addon>
+    <addon author="dante696" type="STYLE" version="3.1 (2016.09.28)">Extended Client Info</addon>
+    <addon author="@Brady_The" type="ICONPACK" version="1.6.1 (22.03.2017)">DarkenTS Icon Pack</addon>
+    <addon type="ICONPACK">DarkenTS</addon>
+    <addon author="@Brady_The" type="ICONPACK" version="1.6.1 (22.03.2017)">DarkenTS Icon Pack</addon>
+    <addon author="TeamSpeak Systems GmbH" type="PLUGIN" version="1.1">Control</addon>
+    <addon author="TeamSpeak Systems GmbH" type="PLUGIN" version="1.0">Lua</addon>
+    <addon author="TeamSpeak Systems GmbH" type="PLUGIN" version="1.1">ClientQuery</addon>
+    <addon author="SilentStorm - Cloudbreaker Development" type="PLUGIN" version="1.0.0">Chatlog Viewer</addon>
+    <addon author="SilentStorm - Cloudbreaker Development" type="PLUGIN" version="1.3.0">Connection History</addon>
+    <addon author="Sven 'ScP' Paulsen" type="PLUGIN" version="1.0.2">Notifications</addon>
+    <addon author="POQDavid" type="PLUGIN" version="1.0">AutoAway</addon>
+    <addon author="@Brady_The" type="STYLE" version="1.5.1 (22.03.2017)">DarkenTS</addon>
+    <addon author="Janne Hakonen (jhakonen @ WOT EU server)" type="PLUGIN" version="0.7.0">TessuMod Plugin</addon>
+    <addon author="Broesel" type="PLUGIN" version="1.9.0.1">Volume Control by Broesel</addon>
+    <addon author="Sven 'ScP' Paulsen" type="PLUGIN" version="1.0.1">Dock Widgets</addon>
+    <addon author="SilentStorm - Cloudbreaker Development" type="PLUGIN" version="0.2.0">VLC Muter</addon>
+    <addon author="Thorsten Weinz" type="PLUGIN" version="1.7.0">CrossTalk Plugin</addon>
+    <addon author="Thorsten Weinz" type="PLUGIN" version="1.0.2">RadioFx Plugin</addon>
+    <addon author="TeamSpeak Systems GmbH" type="PLUGIN" version="1.2">AppScanner</addon>
+    <addon author="thorwe" type="PLUGIN" version="1.0">Ducker Plugin</addon>
+    <addon author="Stefan Martens, Mr. S" type="PLUGIN" version="0.61.21">TS3MassMover</addon>
+    <addon author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" type="PLUGIN" version="1.1.0pre">
+        pyTSon
+        <script author="Bluscream" version="1.0">Online Offline Messages</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.1">widgetinfo</script>
+        <script author="Bluscream" version="1.0">Query Viewer</script>
+        <script author="Bluscream" version="1.0">Auto Subscribe</script>
+        <script author="Bluscream" version="1.0">Chat Bot</script>
+        <script author="Bluscream" version="1.0">Discordify</script>
+        <script author="Bluscream" version="1.0">ISP Validator</script>
+        <script author="Luemmel" version="1.0.1">Linkinfo</script>
+        <script author="Bluscream" version="1.0">Dynamic Avatar Changer</script>
+        <script author="Bluscream" version="1.0">Mass Actions</script>
+        <script author="Bluscream" version="1.0">Gomme Checker</script>
+        <script author="Bluscream" version="1.0">Extended HTML Support</script>
+        <script author="Bluscream" version="1.0">BanBypasser (NoX)</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.1">AutoChannelChatTab</script>
+        <script author="Bluscream" version="1.0">Auto Channel Creator</script>
+        <script author="Bluscream, SadPixel" version="1.0">Auto Support</script>
+        <script author="Bluscream" version="1.0">Extended Settings</script>
+        <script author="Bluscream" version="1.0">Notifier</script>
+        <script author="Bluscream" version="1.0">Name Changer</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0">ipc</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.1">processCommandTest</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.1">AutoReplyAway</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.1">answercontacts</script>
+        <script author="Bluscream" version="1.0">Auto Message</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.0">multiselectmove</script>
+        <script author="Bluscream" version="1.0">Unlocker</script>
+        <script author="Bluscream" version="0.5">Better Server Browser</script>
+        <script author="Bluscream" version="1.0">Config Dialog Examples</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann, Bluscream" version="1.0.0">IPC Client</script>
+        <script author="Bluscream" version="1.0">Auto Channel Commander</script>
+        <script author="Bluscream" version="1.0">Addon Scanner</script>
+        <script author="Bluscream" version="1.0">Profile</script>
+        <script author="Bluscream" version="1.0">Channel Watcher</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.1">tweakui</script>
+        <script author="Bluscream" version="1.0">Channel Queue</script>
+        <script author="Bluscream" version="1.0">Welcome Bot</script>
+        <script author="Bluscream" version="1.0">Fake Anything</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.0">eventlog</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann, Bluscream" version="1.3">Developer Tools</script>
+        <script author="Luemmel" version="1.0">Blacklist</script>
+        <script author="Bluscream" version="1.0">Now Playing</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0.1">autopokeback</script>
+        <script author="Bluscream" version="1.0">Long Messages</script>
+        <script author="Bluscream" version="1.0">Extended Info</script>
+        <script author="Bluscream" version="1.0">Teamspeak Export/Import</script>
+        <script author="Bluscream" version="1.0">Channel Group Changer</script>
+        <script author="Bluscream" version="1.0">Auto Talk Power Request</script>
+        <script author="Thomas &amp;quot;PLuS&amp;quot; Pathmann" version="1.0">kickoldself</script>
+        <script author="Luemmel" version="1.0">Luemmels Pluginpack</script>
+        <script author="Bluscream" version="1.0">MSG Redirect</script>
+        <script author="Bluscream" version="1.0">Report</script>
+    </addon>
+    <addon author="Andreas Gebert" type="PLUGIN" version="1.6.0d">TSNotifier Helper Plugin</addon>
+    <addon author="Manuel Freiholz &amp;lt;info@mfreiholz.de&amp;gt;" type="PLUGIN" version="0.11">TS3VIDEO</addon>
+    <addon author="TeamSpeak Systems GmbH" type="PLUGIN" version="1.0">Gamepad and Joystick Hotkey Support</addon>
+    <addon type="SOUNDPACK">Bluscream</addon>
+    <addon type="SOUNDPACK">Better Female Voice Sound Pack (Female)</addon>
+    <addon type="SOUNDPACK">TS2 Sound for TS3 by Buff</addon>
+    <addon type="STYLE">classic (&amp;#164;p&amp;#195;&amp;#250;&amp;#165;t&amp;#187;s)</addon>
+    <addon author="Ren&amp;#233; de Hesselle" type="PLUGIN" version="v0.7">DayZ Server IP</addon>
+    <addon author="Marius Gr&amp;#228;fe" type="PLUGIN" version="1.3.3.1622 Release Win 64-bit">RP Soundboard</addon>
+    <addon author="shitty720" type="PLUGIN" version="3.1.1.1.1.1">User Manager</addon>
+    <addon author="Kleberstoff" type="PLUGIN" version="0.0">YAEIP</addon>
+    <addon author="Copyright (C) 2016 SilentStorm - Cloudbreaker Development" type="PLUGIN" version="1.0.6">Auto Reply</addon>
+    <addon author="sk0r / Czybik" type="PLUGIN" version="0.2">PermChanSwitcher</addon>
+    <addon author="Copyright (C) 2012-2017 SilentStorm - Cloudbreaker Development" type="PLUGIN" version="1.0.4">Session Lock Actions</addon>
+    <addon author="Christian Goltz, Stefan Seering" type="PLUGIN" version="1.2">Teamspeak Love Plugin</addon>
+    <addon author="Mr. &amp;#1609;&amp;#1010;r&amp;#1077;&amp;#8205;&amp;#8205;&amp;#1077;&amp;#1010;h" type="PLUGIN" version="0.15.4031">Now Playing</addon>
+    <tabs><2 host="&quot;85.25.152.205&quot;" port="2211">"VIP CLAN"</2></tabs>
+</addons>

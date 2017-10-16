@@ -1,0 +1,137 @@
+[
+    {
+        "name": "Better Server Browser (broken)",
+        "author": "Bluscream",
+        "version": "0.5",
+        "apiVersion": "22",
+        "description": "A better serverlist provided by PlanetTeamspeak.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/serverBrowser/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Extended Info",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Shows you more informations.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/info/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "ISP Validator",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Autokick everyone not using a whitelisted ISP.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/ISPValidator/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Dynamic Avatar Changer",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Changes your avatar for you.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/dynamicAvatar/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Extended Settings",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Features:\n\n - Toggle Hostbanners\n - Toggle Hostmessages\n - Toggle Hostbuttons",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/settings/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Developer Tools",
+        "author": "Bluscream",
+        "version": "1.4",
+        "apiVersion": "22",
+        "description": "Show information of the client's ui elements",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/devTools/__init__.py",
+        "dependencies": ["css_html_js_minify"]
+    },
+    {
+        "name": "Chat Bot",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "A simple chatbot for Teamspeak 3 Clients.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/chatBot/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Channel Queue",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Let's you join a channel instantly after enough slots have been free'd.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/joinChannel/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Auto Channel Commander",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Automatically enable channel commander when switching channels.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/autoCommander/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Auto Talk Power Request",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Automatically request talk power when switching channels.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/autoTPRequest/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Auto Subscribe",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Manage your channel subscriptions the way YOU want.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/autoSubscribe/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Channel Queue",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Let's you join a channel instantly after enough slots have been free'd.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/joinChannel/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Long Messages",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Lets you send long messages to a client.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/longMessages/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "Channel Group Changer",
+        "author": "Bluscream",
+        "version": "1.0",
+        "apiVersion": "22",
+        "description": "Change users channelgroups from everywhere.",
+        "url": "https://raw.githubusercontent.com/Bluscream/pyTSon_plugins/master/channelGroupChanger/__init__.py",
+        "dependencies": null
+    },
+    {
+        "name": "All in One",
+        "author": "Bluscream",
+        "version": "0",
+        "apiVersion": "22",
+        "description": "All my scripts in one package.",
+        "url": "https://github.com/Bluscream/pyTSon_plugins/archive/master.zip",
+        "dependencies": null
+    }
+]
