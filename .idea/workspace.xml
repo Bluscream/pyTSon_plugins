@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/include/autorun.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/include/getvalues.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/include/ts3ext.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -33,11 +36,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="238" column="16" lean-forward="true" selection-start-line="238" selection-start-column="16" selection-end-line="238" selection-end-column="16" />
+            <state relative-caret-position="731">
+              <caret line="226" column="14" lean-forward="true" selection-start-line="226" selection-start-column="14" selection-end-line="226" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ts3defines.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -258,6 +271,11 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -780,7 +798,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508171086387</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="o.O">
+      <created>1508171391049</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1508171391049</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -896,7 +921,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/faker/__init__.py" />
     <entry file="file://$PROJECT_DIR$/FileBrowser/__init__.py" />
     <entry file="file://$PROJECT_DIR$/infoHTML/__init__.py" />
     <entry file="file://$PROJECT_DIR$/ipcclient/__init__.py" />
@@ -954,8 +978,16 @@
     <entry file="file://$PROJECT_DIR$/antiServerKick/__init__.py" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="238" column="16" lean-forward="true" selection-start-line="238" selection-start-column="16" selection-end-line="238" selection-end-column="16" />
+        <state relative-caret-position="731">
+          <caret line="226" column="14" lean-forward="true" selection-start-line="226" selection-start-column="14" selection-end-line="226" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
