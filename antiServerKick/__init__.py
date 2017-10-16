@@ -19,8 +19,7 @@ class antiServerKick(ts3plugin):
     hotkeys = []
     enabled = True
     debug = True
-    whitelistUIDs = [""]
-    whitelistSGIDs = [2]
+    whitelistUIDs = ["serveradmin"]
     delay = 0
     tabs = {}
     schid = 0
@@ -34,6 +33,9 @@ class antiServerKick(ts3plugin):
             ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=self.timestamp(), name=self.name, message=message), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
     def __init__(self):
+        schid = ts3lib.getCurrentServerConnectionHandlerID()
+        (err, ownID) = ts3lib.getClientID(schid)
+        if err == ts3defines.ERROR_ok: self.saveTab(schid)
         self.log(LogLevel.LogLevel_DEBUG, "Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
@@ -43,14 +45,18 @@ class antiServerKick(ts3plugin):
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            self.tabs[schid] = {}
-            (err, self.tabs[schid]["name"]) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-            (err, self.tabs[schid]["host"], self.tabs[schid]["port"], self.tabs[schid]["pw"]) = ts3lib.getServerConnectInfo(schid)
-            (err, self.tabs[schid]["clid"]) = ts3lib.getClientID(schid)
-            (err, self.tabs[schid]["nick"]) = ts3lib.getClientDisplayName(schid, self.tabs[schid]["clid"])
-            (err, cid) = ts3lib.getChannelOfClient(schid, self.tabs[schid]["clid"])
-            (err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"]) = ts3lib.getChannelConnectInfo(schid, cid)
-            self.log(LogLevel.LogLevel_DEBUG, "New Tab: {}".format(self.tabs[schid]), schid)
+            self.saveTab(schid)
+
+    def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
+        if clientID != self.tabs[schid]["clid"]: return
+        # (err, pw) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+        (err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"]) = ts3lib.getChannelConnectInfo(schid, newChannelID)
+        self.log(LogLevel.LogLevel_DEBUG, "Tab updated: {}".format(self.tabs[schid]), schid)
+
+    def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
+        if flag != ts3defines.ClientProperties.CLIENT_NICKNAME: return
+        (err, self.tabs[schid]["nick"]) = newValue
+        self.log(LogLevel.LogLevel_DEBUG, "Tab updated: {}".format(self.tabs[schid]), schid)
 
     def onClientKickFromServerEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
         if kickerID == clientID:
@@ -58,10 +64,6 @@ class antiServerKick(ts3plugin):
             return
         if clientID != self.tabs[schid]["clid"]:
             self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting target is not self")
-            return
-        (err, sgids) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        if set(sgids).isdisjoint(self.whitelistSGIDs):
-            self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because kicker \"{}\" was in servergroup {}".format(kickerName, sgids))
             return
         if kickerUniqueIdentifier in self.whitelistUIDs:
             self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because kicker \"{}\" has whitelisted UID {}".format(kickerName, uid))
@@ -73,6 +75,15 @@ class antiServerKick(ts3plugin):
         if self.delay >= 0: QTimer.singleShot(self.delay, self.reconnect)
         else: self.reconnect(schid)
 
+    def saveTab(self, schid):
+        self.tabs[schid] = {}
+        (err, self.tabs[schid]["name"]) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+        (err, self.tabs[schid]["host"], self.tabs[schid]["port"], self.tabs[schid]["pw"]) = ts3lib.getServerConnectInfo(schid)
+        (err, self.tabs[schid]["clid"]) = ts3lib.getClientID(schid)
+        (err, self.tabs[schid]["nick"]) = ts3lib.getClientDisplayName(schid, self.tabs[schid]["clid"])
+        (err, cid) = ts3lib.getChannelOfClient(schid, self.tabs[schid]["clid"])
+        (err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"]) = ts3lib.getChannelConnectInfo(schid, cid)
+        self.log(LogLevel.LogLevel_DEBUG, "New Tab: {}".format(self.tabs[schid]), schid)
 
     def reconnect(self, schid=None):
         schid = schid or self.schid
