@@ -21,8 +21,7 @@ class antiMove(ts3plugin):
     whitelistUIDs = [""]
     whitelistSGIDs = [2]
     delay = 0
-    defaultPassword = "123"
-    schid=0;clid=0;cid=0;
+    schid=0;clid=0;cid=0;cpw="123"
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -43,10 +42,10 @@ class antiMove(ts3plugin):
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if uid in self.whitelistUIDs: return
         self.schid=schid;self.clid=ownID;self.cid=oldChannelID
+        (err, cpath, self.cpw) = ts3lib.getChannelConnectInfo(schid, oldChannelID)
         if self.delay >= 0: QTimer.singleShot(self.delay, self.moveBack)
         else: self.moveBack()
 
 
     def moveBack(self):
-        ts3lib.requestClientMove(self.schid, self.clid, self.cid, self.defaultPassword)
-        self.schid = 0;self.clid = 0;self.cid = 0
+        ts3lib.requestClientMove(self.schid, self.clid, self.cid, self.cpw)

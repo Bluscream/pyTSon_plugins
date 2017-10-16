@@ -21,7 +21,7 @@ class antiChannelKick(ts3plugin):
     whitelistUIDs = [""]
     whitelistSGIDs = [2]
     delay = 0
-    schid=0;clid=0;cid=0;cname="";cpw=""
+    schid=0;clid=0;cid=0;cname="";cpw="123"
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
