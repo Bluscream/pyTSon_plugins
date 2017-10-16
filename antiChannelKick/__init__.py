@@ -1,4 +1,5 @@
-import ts3lib, ts3defines, datetime
+import ts3lib, ts3defines
+from datetime import datetime
 from ts3plugin import ts3plugin
 from PythonQt.QtCore import QTimer
 

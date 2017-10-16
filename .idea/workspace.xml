@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/antiChannelKick/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/antiServerKick/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/countNick/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pingNick/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serverBrowser/ui/servers - Copy.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/serverSwitcher/settings.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/antiChannelKick/__init__.py" afterPath="$PROJECT_DIR$/antiChannelKick/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/antiMove/__init__.py" afterPath="$PROJECT_DIR$/antiMove/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/antiServerKick/__init__.py" afterPath="$PROJECT_DIR$/antiServerKick/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,14 +35,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antiChannelKick/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="776">
-              <caret line="49" column="32" lean-forward="false" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="25" lean-forward="true" selection-start-line="0" selection-start-column="25" selection-end-line="1" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,23 +48,19 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antiServerKick/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="11" column="59" lean-forward="false" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/antiMove/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="25" column="11" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -219,12 +210,12 @@
         <option value="$PROJECT_DIR$/settings/__init__.py" />
         <option value="$PROJECT_DIR$/autoSubscribe/__init__.py" />
         <option value="$PROJECT_DIR$/kickself/__init__.py" />
-        <option value="$PROJECT_DIR$/antiMove/__init__.py" />
         <option value="$PROJECT_DIR$/autoFollow/__init__.py" />
         <option value="$PROJECT_DIR$/gommeChecker/__init__.py" />
         <option value="$PROJECT_DIR$/antiKick/__init__.py" />
         <option value="$PROJECT_DIR$/antiChannelKick/__init__.py" />
         <option value="$PROJECT_DIR$/antiServerKick/__init__.py" />
+        <option value="$PROJECT_DIR$/antiMove/__init__.py" />
       </list>
     </option>
   </component>
@@ -743,7 +734,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508153810054</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="even more stuff?">
+      <created>1508154140013</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1508154140013</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -845,7 +843,8 @@
     <MESSAGE value="a lot of changes o.O" />
     <MESSAGE value="stuff" />
     <MESSAGE value="added anti-stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="added anti-stuff" />
+    <MESSAGE value="even more stuff?" />
+    <option name="LAST_COMMIT_MESSAGE" value="even more stuff?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1159,33 +1158,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/antiMove/__init__.py">
+    <entry file="file://$PROJECT_DIR$/antiChannelKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" column="11" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="true" selection-start-line="0" selection-start-column="25" selection-end-line="1" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/antiServerKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="59" lean-forward="false" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/antiChannelKick/__init__.py">
+    <entry file="file://$PROJECT_DIR$/antiMove/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="776">
-          <caret line="49" column="32" lean-forward="false" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
