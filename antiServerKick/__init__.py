@@ -34,8 +34,8 @@ class antiServerKick(ts3plugin):
 
     def __init__(self):
         schid = ts3lib.getCurrentServerConnectionHandlerID()
-        (err, ownID) = ts3lib.getClientID(schid)
-        if err == ts3defines.ERROR_ok: self.saveTab(schid)
+        (err, status) = ts3lib.getConnectionStatus(schid)
+        if err == ts3defines.ERROR_ok and status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.saveTab(schid)
         self.log(LogLevel.LogLevel_DEBUG, "Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
@@ -76,18 +76,19 @@ class antiServerKick(ts3plugin):
         else: self.reconnect(schid)
 
     def saveTab(self, schid):
-        self.tabs[schid] = {}
+        if not hasattr(self.tabs, '%s'%schid):
+            self.tabs[schid] = {}
         (err, self.tabs[schid]["name"]) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
         (err, self.tabs[schid]["host"], self.tabs[schid]["port"], self.tabs[schid]["pw"]) = ts3lib.getServerConnectInfo(schid)
         (err, self.tabs[schid]["clid"]) = ts3lib.getClientID(schid)
         (err, self.tabs[schid]["nick"]) = ts3lib.getClientDisplayName(schid, self.tabs[schid]["clid"])
         (err, cid) = ts3lib.getChannelOfClient(schid, self.tabs[schid]["clid"])
         (err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"]) = ts3lib.getChannelConnectInfo(schid, cid)
-        self.log(LogLevel.LogLevel_DEBUG, "New Tab: {}".format(self.tabs[schid]), schid)
+        self.log(LogLevel.LogLevel_DEBUG, "Saved Tab: {}".format(self.tabs[schid]), schid)
 
     def reconnect(self, schid=None):
         schid = schid or self.schid
-        self.log(LogLevel.LogLevel_DEBUG, "Reconnecting to tab: {self.tab[schid]}")
+        self.log(LogLevel.LogLevel_DEBUG, "Reconnecting to tab: {0}".format(self.tab[schid]))
         ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT, self.tabs[schid]["name"],
                        '{}:{}'.format(self.tabs[schid]["host"], self.tabs[schid]["port"]) if hasattr(self.tabs[schid], 'port') else self.tabs[schid]["host"],
                         self.tabs[schid]["pw"],

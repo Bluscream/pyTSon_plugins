@@ -2,53 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/AutoChannelChatTab/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/FileBrowser/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/NoX/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/NoX/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/NoX/settings.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoChannelCreate/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoChannelCreate/autoChannelCreate.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoChannelCreate/channelCreator.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoMSG/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoSupport/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoSupport/icons/toggle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cfgDialog/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cfgDialog/cfgDialog.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channelWatcher/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channelWatcher/channelWatcher.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channelWatcher/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/countNick/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dataChanger/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dataDump/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dataDump/dump.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dataDump/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/discordify/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/discordify/icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dynamicAvatar/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dynamicAvatar/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dynamicAvatar/settings.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/exporter/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/faker/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gommeChecker/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gommeChecker/check.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gommeChecker/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/kickCounter/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/linkinfo/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/linkinfo/linkinfo.db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/linkinfo/linkinfo.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/linkinfo/luemmel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/msgRedirect/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/nowPlaying/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/profile/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/profile/cfg/profile.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/profile/ui/profile.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/profile/ui/profile_simple.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/report/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/report/report.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/streamChat/streamChat.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/welcomeBot/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/welcomeBot/settings.ini" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/antiServerKick/__init__.py" afterPath="$PROJECT_DIR$/antiServerKick/__init__.py" />
     </list>
@@ -83,7 +36,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antiChannelKick/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="657">
+            <state relative-caret-position="680">
               <caret line="43" column="8" lean-forward="false" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="82" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -95,8 +48,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/antiServerKick/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="64" selection-end-column="18" />
+            <state relative-caret-position="578">
+              <caret line="37" column="106" lean-forward="false" selection-start-line="37" selection-start-column="106" selection-end-line="37" selection-end-column="106" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -107,8 +60,8 @@
       <file leaf-file-name="ts3defines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="576" column="24" lean-forward="true" selection-start-line="576" selection-start-column="24" selection-end-line="576" selection-end-column="24" />
+            <state relative-caret-position="9792">
+              <caret line="576" column="24" lean-forward="false" selection-start-line="576" selection-start-column="24" selection-end-line="576" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -136,16 +89,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2397">
-              <caret line="152" column="28" lean-forward="false" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="123" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -157,7 +100,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clientpro</find>
       <find>qtimer</find>
       <find>import</find>
       <find>getvalues</find>
@@ -187,6 +129,7 @@
       <find>True</find>
       <find>timer</find>
       <find>cooldown_time_page</find>
+      <find>ownID</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -355,7 +298,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -401,6 +343,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
@@ -828,7 +771,21 @@
       <option name="project" value="LOCAL" />
       <updated>1508155748918</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="o.O">
+      <created>1508166988253</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1508166988253</updated>
+    </task>
+    <task id="LOCAL-00019" summary="o.O">
+      <created>1508168103857</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1508168103857</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1116,11 +1073,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/antiKick/__init__.py" />
     <entry file="file://$PROJECT_DIR$/gommeChecker/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/settings/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="65" column="26" lean-forward="false" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antiChannelKick/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="43" column="8" lean-forward="false" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="82" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9792">
+          <caret line="576" column="24" lean-forward="false" selection-start-line="576" selection-start-column="24" selection-end-line="576" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2397">
-          <caret line="152" column="28" lean-forward="false" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="123" />
-          <folding />
+        <state relative-caret-position="266">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="111" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -1134,36 +1116,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="65" column="26" lean-forward="false" selection-start-line="65" selection-start-column="19" selection-end-line="65" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antiChannelKick/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="43" column="8" lean-forward="false" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="82" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="576" column="24" lean-forward="true" selection-start-line="576" selection-start-column="24" selection-end-line="576" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/antiServerKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="64" selection-end-column="18" />
+        <state relative-caret-position="578">
+          <caret line="37" column="106" lean-forward="false" selection-start-line="37" selection-start-column="106" selection-end-line="37" selection-end-column="106" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
