@@ -49,6 +49,7 @@ class gommeChecker(ts3plugin):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             (error, uid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
             if uid == self.cfg.get("general", "uid"):
+                # ts3lib.getChannelIDFromChannelNames(serverConnectionHandlerID, channelNameArray)
                 (error, clist) = ts3lib.getChannelList(schid)
                 for c in clist:
                     (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
