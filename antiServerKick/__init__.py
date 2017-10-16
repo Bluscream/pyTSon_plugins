@@ -55,10 +55,12 @@ class antiServerKick(ts3plugin):
 
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
         if flag != ts3defines.ClientProperties.CLIENT_NICKNAME: return
-        (err, self.tabs[schid]["nick"]) = newValue
+        if not hasattr(self.tabs, '%s' % schid): return
+        self.tabs[schid]["nick"] = newValue
         self.log(LogLevel.LogLevel_DEBUG, "Tab updated: {}".format(self.tabs[schid]), schid)
 
     def onClientKickFromServerEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
+        self.log(LogLevel.LogLevel_DEBUG, "kicked")
         if kickerID == clientID:
             self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because kicker is target")
             return
@@ -66,14 +68,21 @@ class antiServerKick(ts3plugin):
             self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting target is not self")
             return
         if kickerUniqueIdentifier in self.whitelistUIDs:
-            self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because kicker \"{}\" has whitelisted UID {}".format(kickerName, uid))
+            self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because kicker \"{}\" has whitelisted UID {}".format(kickerName, kickerUniqueIdentifier))
             return
         if schid not in self.tabs:
             self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because tab was not found!")
             return
-        self.schid = schid
-        if self.delay >= 0: QTimer.singleShot(self.delay, self.reconnect)
-        else: self.reconnect(schid)
+        if self.delay > 0:
+            self.log(LogLevel.LogLevel_DEBUG, "kickedpre")
+            self.schid = schid
+            QTimer.singleShot(self.delay, self.reconnect)
+            self.log(LogLevel.LogLevel_DEBUG, "kickedpost")
+        else:
+            self.log(LogLevel.LogLevel_DEBUG, "kickedpre")
+            self.reconnect(schid)
+            self.log(LogLevel.LogLevel_DEBUG, "kickedpost")
+        self.log(LogLevel.LogLevel_DEBUG, "kickedlast")
 
     def saveTab(self, schid):
         if not hasattr(self.tabs, '%s'%schid):
@@ -87,8 +96,8 @@ class antiServerKick(ts3plugin):
         self.log(LogLevel.LogLevel_DEBUG, "Saved Tab: {}".format(self.tabs[schid]), schid)
 
     def reconnect(self, schid=None):
-        schid = schid or self.schid
-        self.log(LogLevel.LogLevel_DEBUG, "Reconnecting to tab: {0}".format(self.tab[schid]))
+        schid = schid if schid else self.schid
+        self.log(LogLevel.LogLevel_DEBUG, "Reconnecting to tab: {0}".format(self.tabs[schid]))
         ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT, self.tabs[schid]["name"],
                        '{}:{}'.format(self.tabs[schid]["host"], self.tabs[schid]["port"]) if hasattr(self.tabs[schid], 'port') else self.tabs[schid]["host"],
                         self.tabs[schid]["pw"],
