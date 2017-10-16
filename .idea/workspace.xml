@@ -2,116 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/autoSupport/icons/toggle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/discordify/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/linkinfo/linkinfo.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/linkinfo/luemmel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/AutoChannelChatTab/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/FileBrowser/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/ISPValidator/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/ISPValidator/isps.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/ISPValidator/settings.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/ISPValidator/settings.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/NoX/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/NoX/settings.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/NoX/settings.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/autoChannelCreate/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/autoChannelCreate/autoChannelCreate.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/autoChannelCreate/channelCreator.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/autoCommander/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/autoFollow/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/autoMSG/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/autoSupport/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/cfgDialog/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/cfgDialog/cfgDialog.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/channelWatcher/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/channelWatcher/channelWatcher.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/channelWatcher/settings.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/countNick/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/dataChanger/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/dataDump/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/dataDump/dump.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/dataDump/settings.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/discordify/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/dynamicAvatar/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/dynamicAvatar/settings.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/dynamicAvatar/settings.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/exporter/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/faker/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/gommeChecker/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/gommeChecker/check.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/gommeChecker/settings.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/infoHTML/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/kickCounter/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/linkinfo/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/linkinfo/linkinfo.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/msgRedirect/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/nowPlaying/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/profile/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/profile/cfg/profile.ini" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/profile/ui/profile.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/profile/ui/profile_simple.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/queryConsole/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/queryConsole/console.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/report/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/report/report.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/socketplugin/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/streamChat/streamChat.ui" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/welcomeBot/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts_/welcomeBot/settings.ini" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/addonList/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/addonList/addons.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/addonList/addons.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/addonList/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/antiChannelKick/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/antiMove/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/antiServerKick/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoSubscribe/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/autoTPRequest/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channelGroupChanger/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channelGroupChanger/channelGroupSelect.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channelGroupChanger/icons/GommeHD/Channel Admin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channelGroupChanger/icons/GommeHD/Channel Bann.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channelGroupChanger/icons/GommeHD/Operator.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chatBot/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chatBot/commands.MD" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chatBot/commands.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chatBot/commands/commandAbout.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chatBot/commands/commandEval.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chatBot/commands/commandTime.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chatBot/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chatBot/settings.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/devTools/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/devTools/editor.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/devTools/test.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eventlog/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/info/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/info/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/info/settings.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/joinChannel/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/kickself/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/longMessages/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/massAction/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/massAction/message.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/multiselectmove/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/notify/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/onlineOfflineMessages/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/onlineOfflineMessages/message.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pingNick/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/recreateChannel/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/repository.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/serverBrowser/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/serverBrowser/cfg/serverBrowser.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/serverBrowser/gfx/icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/serverBrowser/ui/servers - Copy.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/serverBrowser/ui/servers.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/serverBrowser/ui/servers_temp.ui" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/serverSwitcher/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/serverSwitcher/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/settings.ini" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/showQueries/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/unlocker/__init__.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/scripts/repository.json" afterPath="$PROJECT_DIR$/ressources/repository.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -141,7 +33,18 @@
     <favorites_list name="pyTSon" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="226" column="12" lean-forward="true" selection-start-line="226" selection-start-column="12" selection-end-line="226" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -231,7 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/AutoReplyAway/__init__.py" />
         <option value="$PROJECT_DIR$/../../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/longMessages/__init__.py" />
         <option value="$PROJECT_DIR$/autoChannelCreate/__init__.py" />
@@ -282,6 +184,7 @@
         <option value="$PROJECT_DIR$/antiMove/__init__.py" />
         <option value="$PROJECT_DIR$/settings/__init__.py" />
         <option value="$PROJECT_DIR$/antiServerKick/__init__.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -338,14 +241,14 @@
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
-      <showMembers />
+      <showMembers ProjectPane="true" />
       <showModules />
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <autoscrollToSource />
+      <autoscrollToSource ProjectPane="true" />
       <autoscrollFromSource />
-      <sortByType />
+      <sortByType ProjectPane="true" />
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
@@ -360,14 +263,34 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts_" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
+      <pane id="Scratches">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -387,12 +310,13 @@
     <property name="last.edited.regexp" value="Sample Text" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\ressources" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -836,7 +760,21 @@
       <option name="project" value="LOCAL" />
       <updated>1508170010160</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="o.O">
+      <created>1508170215312</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1508170215312</updated>
+    </task>
+    <task id="LOCAL-00025" summary="o.O">
+      <created>1508170281432</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1508170281432</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -861,8 +799,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767764" sideWeight="0.24895833" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32467532" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -952,7 +891,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/exporter/__init__.py" />
     <entry file="file://$PROJECT_DIR$/faker/__init__.py" />
     <entry file="file://$PROJECT_DIR$/FileBrowser/__init__.py" />
     <entry file="file://$PROJECT_DIR$/infoHTML/__init__.py" />
@@ -1009,5 +947,13 @@
     <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py" />
     <entry file="file://$PROJECT_DIR$/antiMove/__init__.py" />
     <entry file="file://$PROJECT_DIR$/antiServerKick/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="226" column="12" lean-forward="true" selection-start-line="226" selection-start-column="12" selection-end-line="226" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

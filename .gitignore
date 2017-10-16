@@ -216,28 +216,31 @@ pip-log.txt
 .mr.developer.cfg
 
 #pyTSon files
-#pathmann.git/
-#docs/
-#include/
-#lib/
-#lib_new/
-#ressources/
-#/python.exe
-#/python.png
-#/python*.dll
+pathmann.git/
+docs/
+include/
+lib/
+lib_new/
+ressources/
+/python.exe
+/python.png
+/python*.dll
 ts3plugin.py
 pluginhost.py
+Changelog.html
+VERSION
 
 #Own includes
-#!include/autorun.py
-#!include/getvalues.py
+!include/autorun.py
+!include/getvalues.py
+!include/ts3ext.py
 
 #Additional docs
-#!docs/api.pdf.url
-#!docs/doc.qt.io.url
-#!docs/pyqt.sourceforge.net.url
-#!docs/pytson.4qt.de.url
-#!docs/raw api.pdf.url
+!docs/pyQt 5.url
+!docs/pyTSon PDF.url
+!docs/pyTSon.url
+!docs/Qt.url
+!docs/TS3 Plugin SDK.url
 
-
-!ressources/bluscream.json
+#Repo stuff
+!ressources/repository.json
