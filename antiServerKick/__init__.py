@@ -8,17 +8,16 @@ from ts3defines import LogLevel
 class antiServerKick(ts3plugin):
     name = "Anti Server Kick"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Auto rejoin servers after you got kicked."
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Anti Server Kick", "")]
+    menuItems = []
     hotkeys = []
-    enabled = True
-    debug = True
+    debug = False
     whitelistUIDs = ["serveradmin"]
     delay = 0
     tabs = {}
@@ -38,14 +37,8 @@ class antiServerKick(ts3plugin):
         if err == ts3defines.ERROR_ok and status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.saveTab(schid)
         self.log(LogLevel.LogLevel_DEBUG, "Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
-    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
-            self.enabled = not self.enabled
-            ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.enabled))
-
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            self.saveTab(schid)
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.saveTab(schid)
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if clientID != self.tabs[schid]["clid"]: return
@@ -61,28 +54,14 @@ class antiServerKick(ts3plugin):
 
     def onClientKickFromServerEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
         self.log(LogLevel.LogLevel_DEBUG, "kicked")
-        if kickerID == clientID:
-            self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because kicker is target")
-            return
-        if clientID != self.tabs[schid]["clid"]:
-            self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting target is not self")
-            return
-        if kickerUniqueIdentifier in self.whitelistUIDs:
-            self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because kicker \"{}\" has whitelisted UID {}".format(kickerName, kickerUniqueIdentifier))
-            return
-        if schid not in self.tabs:
-            self.log(LogLevel.LogLevel_DEBUG, "Not reconnecting because tab was not found!")
-            return
+        if kickerID == clientID: return
+        if clientID != self.tabs[schid]["clid"]: return
+        if kickerUniqueIdentifier in self.whitelistUIDs: return
+        if schid not in self.tabs: return
         if self.delay > 0:
-            self.log(LogLevel.LogLevel_DEBUG, "kickedpre")
             self.schid = schid
             QTimer.singleShot(self.delay, self.reconnect)
-            self.log(LogLevel.LogLevel_DEBUG, "kickedpost")
-        else:
-            self.log(LogLevel.LogLevel_DEBUG, "kickedpre")
-            self.reconnect(schid)
-            self.log(LogLevel.LogLevel_DEBUG, "kickedpost")
-        self.log(LogLevel.LogLevel_DEBUG, "kickedlast")
+        else: self.reconnect(schid)
 
     def saveTab(self, schid):
         if not hasattr(self.tabs, '%s'%schid):
