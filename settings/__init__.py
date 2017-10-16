@@ -41,12 +41,12 @@ class settings(ts3plugin):
 
     def checkHostButton(self):
         if self.cfg.getboolean('general','hide hostbuttons'):
-            try: self.grabWidget('HosterButton').styleSheet = 'margin:-9999px !important;'
-            except: pass
+            hostButton = self.grabWidget('HosterButton')
+            if hasattr(hostButton, 'styleSheet'): hostButton.styleSheet = 'margin:-9999px !important;'
     def checkHostBanner(self):
         if self.cfg.getboolean('general','hide hostbanners'):
-            try: self.grabWidget('Banner',True).delete()
-            except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0);pass
+            banner = self.grabWidget('Banner',True)
+            if hasattr(banner, 'delete'): banner.delete()
     def checkHostMessage(self):
         if self.cfg.getboolean('general','hide hostmessages'):
             try:

@@ -17,11 +17,11 @@ class antiServerKick(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Anti Server Kick", "")]
     hotkeys = []
     enabled = True
-    debug = False
+    debug = True
     whitelistUIDs = [""]
     whitelistSGIDs = [2]
     delay = 0
-    tabs = []
+    tabs = {}
     schid = 0
 
     @staticmethod
@@ -37,6 +37,7 @@ class antiServerKick(ts3plugin):
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            self.tabs[schid] = {}
             (err, self.tabs[schid]["name"]) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
             (err, self.tabs[schid]["host"], self.tabs[schid]["port"], self.tabs[schid]["pw"]) = ts3lib.getServerConnectInfo(schid)
             (err, clid) = ts3lib.getClientID(schid)
@@ -45,13 +46,20 @@ class antiServerKick(ts3plugin):
             (err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"]) = ts3lib.getChannelConnectInfo(schid, cid)
 
     def onClientKickFromServerEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
+        if kickerID == clientID: return
         (err, ownID) = ts3lib.getClientID(schid)
-        if clientID != ownID or kickerID == ownID: return
+        if clientID != ownID: return
         (err, sgids) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        if set(sgids).isdisjoint(self.whitelistSGIDs): return
+        if set(sgids).isdisjoint(self.whitelistSGIDs):
+            if self.debug: ts3lib.printMessageToCurrentTab("Not reconnecting because kicker \"{}\" was in servergroup {}".format(kickerName, sgids))
+            return
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        if uid in self.whitelistUIDs: return
-        if schid not in self.tabs: return
+        if uid in self.whitelistUIDs:
+            if self.debug: ts3lib.printMessageToCurrentTab("Not reconnecting because kicker \"{}\" has whitelisted UID {}".format(kickerName, uid))
+            return
+        if schid not in self.tabs:
+            if self.debug: ts3lib.printMessageToCurrentTab("Not reconnecting because tab was not found!")
+            return
         self.schid = schid
         if self.delay >= 0: QTimer.singleShot(self.delay, self.reconnect)
         else: self.reconnect(schid)
