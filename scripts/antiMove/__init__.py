@@ -40,16 +40,12 @@ class antiMove(ts3plugin):
             ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.enabled))
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
-        self.log(ts3defines.LogLevel.LogLevel_DEBUG, "moverID == 0: {}".format(moverID == 0), schid)
         if moverID == 0: return
         (err, ownID) = ts3lib.getClientID(schid)
-        self.log(ts3defines.LogLevel.LogLevel_DEBUG, "clientID != ownID: {} OR moverID == ownID: {}".format(clientID != ownID, moverID == ownID), schid)
         if clientID != ownID or moverID == ownID: return
         (err, sgids) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        self.log(ts3defines.LogLevel.LogLevel_DEBUG, "set(sgids).isdisjoint(self.whitelistSGIDs): {}".format(set(sgids).isdisjoint(self.whitelistSGIDs)), schid)
         if not set(sgids).isdisjoint(self.whitelistSGIDs): return
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        self.log(ts3defines.LogLevel.LogLevel_DEBUG, "uid in self.whitelistUIDs: {}".format(uid in self.whitelistUIDs), schid)
         if uid in self.whitelistUIDs: return
         self.schid=schid;self.clid=ownID;self.cid=oldChannelID
         (err, cpath, self.cpw) = ts3lib.getChannelConnectInfo(schid, oldChannelID)
