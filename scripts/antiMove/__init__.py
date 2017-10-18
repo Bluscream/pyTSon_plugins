@@ -17,7 +17,7 @@ class antiMove(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Antimove", "")]
     hotkeys = []
     enabled = False
-    debug = True
+    debug = False
     whitelistUIDs = [""]
     whitelistSGIDs = [2]
     delay = 0
