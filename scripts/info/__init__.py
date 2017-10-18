@@ -216,6 +216,7 @@ class info(ts3plugin):
             if self.cfg.getboolean('general', 'Autorequest Client Variables'):
                 ts3.requestClientVariables(schid, id)
             for name in self.cfg['ClientProperties']:
+                (err, ownid) = ts3.getClientID(schid)
                 if name == 'LAST_REQUESTED':
                     if self.cfg.getboolean('ClientProperties', 'LAST_REQUESTED'):
                         i.append(self.timestamp())
@@ -231,6 +232,7 @@ class info(ts3plugin):
                 elif name == 'ID':
                     if self.cfg.getboolean('ClientProperties', 'ID'):
                         i.append("ID: %s"%id)
+                elif name == 'CLIENT_META_DATA' and id == ownid: continue
                 else:
                     try:
                         if self.cfg.getboolean('ClientProperties', name):

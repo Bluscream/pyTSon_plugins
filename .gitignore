@@ -241,3 +241,7 @@ VERSION
 
 #Repo stuff
 !ressources/repository.json
+!/docs/Client Versions.url
+!/docs/Error Codes.url
+!/docs/Permissions.url
+!/docs/Variables.url
