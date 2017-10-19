@@ -52,6 +52,5 @@ class antiMove(ts3plugin):
         if self.delay >= 0: QTimer.singleShot(self.delay, self.moveBack)
         else: self.moveBack()
 
-
     def moveBack(self):
         ts3lib.requestClientMove(self.schid, self.clid, self.cid, self.cpw)

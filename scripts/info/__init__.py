@@ -146,8 +146,9 @@ class info(ts3plugin):
                     ts3.printMessageToCurrentTab("Your current avatar flag is: %s"%flag)
                     if error == ts3defines.ERROR_ok:
                         x = QWidget()
-                        flag = QInputDialog.getText(x, "Change own Avatar Flag", "Avatar File MD5:")
-                        error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR, flag)
+                        _flag = QInputDialog.getText(x, "Change own Avatar Flag", "Avatar File MD5:")
+                        if _flag == "x" or _flag.strip() == flag.strip(): return
+                        error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientPropertiesRare.CLIENT_FLAG_AVATAR, _flag)
                         error2 = ts3.flushClientSelfUpdates(schid)
                         if not error == ts3defines.ERROR_ok or not error2 == ts3defines.ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own avatar flag!");_t.show()

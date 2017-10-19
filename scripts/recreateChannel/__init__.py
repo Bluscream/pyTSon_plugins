@@ -4,7 +4,6 @@ from datetime import datetime
 
 class recreateChannel(ts3plugin):
     name = "Recreate Channel"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

@@ -26,7 +26,7 @@ class countNick(ts3plugin):
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
-    def __init__(self):
+    def __init__(self):3
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
@@ -50,4 +50,4 @@ class countNick(ts3plugin):
         if self.debug: ts3lib.printMessageToCurrentTab('Tick %s: '%self.count + _newnick)
         ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _newnick)
         ts3lib.flushClientSelfUpdates(schid)
-        self.count += 3
+        self.count +=

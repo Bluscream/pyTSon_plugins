@@ -98,27 +98,27 @@ To update click on "Help" => "Check for Update
         if self.checkUnreadMessages:
             (error, platform) = ts3.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_PLATFORM)
             if self.debug: ts3.printMessageToCurrentTab("clid: {} error: {} platform: {}".format(clientID, error, platform))
-            if not platform in ["Android", "iOS"]:
-                (error, messages) = ts3.getClientVariableAsInt(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_UNREAD_MESSAGES)
-                if self.debug: ts3.printMessageToCurrentTab("clid: {} error: {} messages: {}".format(clientID, error, messages))
-                if messages > 0:
-                    if country in ["DE", "CH", "AT"]:
-                        msg = """[color=orange]Hinweis[/color]:
+            if platform in ["Android", "iOS"]: return
+            (error, messages) = ts3.getClientVariableAsInt(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_UNREAD_MESSAGES)
+            if self.debug: ts3.printMessageToCurrentTab("clid: {} error: {} messages: {}".format(clientID, error, messages))
+            if messages > 0:
+                if country in ["DE", "CH", "AT"]:
+                    msg = """[color=orange]Hinweis[/color]:
 Du hast [color=blue]%s[/color] ungelesene Offline Nachrichte(n).
 Du kannst sie nachlesen indem du auf \"Extras\" => \"Offline Nachrichten\" klickst oder einfach [STRG]+[O] auf deiner Tastatur drückst.
-                        """
-                    else:
-                        msg = """[color=orange]Reminder[/color]:
+                    """
+                else:
+                    msg = """[color=orange]Reminder[/color]:
 You have [color=blue]%s[/color] unread offline message(s).
 You can read them by clicking on \"Tools\" => \"Offline Messages\" or pressing [CTRL]+[O] on your keyboard.
-                        """
-                    ts3.requestSendPrivateTextMsg(schid, msg % messages, clientID)
-                    _done = True
-                if _done:
-                    self._sent.extend([_uid])
-                    (err, _ownuid) = ts3.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-                    close = ts3.clientChatClosed(schid, _ownuid, clientID)
-                    if self.debug: ts3.printMessageToCurrentTab("\nSCHID: {}\nownUID: {}\nclientID: {}\nclientUID: {}\nclosed: {}\nerrorid: {}".format(schid, _ownuid, clientID, _uid, close == ts3defines.ERROR_ok, close))
+                    """
+                ts3.requestSendPrivateTextMsg(schid, msg % messages, clientID)
+                _done = True
+            if _done:
+                self._sent.extend([_uid])
+                (err, _ownuid) = ts3.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                close = ts3.clientChatClosed(schid, _ownuid, clientID)
+                if self.debug: ts3.printMessageToCurrentTab("\nSCHID: {}\nownUID: {}\nclientID: {}\nclientUID: {}\nclosed: {}\nerrorid: {}".format(schid, _ownuid, clientID, _uid, close == ts3defines.ERROR_ok, close))
 
     @staticmethod
     def parseVersion(ver):

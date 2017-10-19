@@ -8,7 +8,6 @@ from datetime import datetime
 
 class report(ts3plugin):
     name = "Report"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
