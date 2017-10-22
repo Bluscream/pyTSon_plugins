@@ -57,6 +57,6 @@ class gommeHD(ts3plugin):
         # if not clid: ts3lib.printMessage(schid, 'Gomme-Bot not found.', ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         # (err, uid) = ts3lib.getClientVariable(schid, self.gommeBotID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         # if uid != "serveradmin": return
-        if self.debug: ts3lib.printMessageToCurrentTab('self.gommeBotID == 0: {}'.format(self.gommeBotID == 0))
+        # if self.debug: ts3lib.printMessageToCurrentTab('self.gommeBotID == 0: {}'.format(self.gommeBotID == 0))
         if self.gommeBotID == 0: return
         ts3lib.requestSendPrivateTextMsg(schid, "registriert", self.gommeBotID)
