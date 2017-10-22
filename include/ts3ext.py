@@ -3,6 +3,8 @@
 Copyright (c) 2017, Marc-Andre Ferland.
 License: GNU General Public License v3.0, see LICENSE for more details.
 """
+import string
+
 from ts3plugin import ts3plugin
 import ts3lib, ts3defines, ts3client, pytson
 from weakref import WeakValueDictionary
@@ -551,7 +553,7 @@ class ts3Channel(object):
     
     @property
     def neededTalkPower(self):
-        (error, tp) = ts3.getChannelVariableAsInt(self.schid, self.channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+        (err, tp) = ts3lib.getChannelVariableAsInt(self.schid, self.channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
         if err != ts3defines.ERROR_ok: raise ts3Error("Error getting client channel needed talk power: (%s, %s)" % (err, ts3lib.getErrorMessage(err)[1]))
         return tp
     

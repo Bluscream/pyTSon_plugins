@@ -14,7 +14,6 @@ class Linkinfo(ts3plugin):
     name = "Linkinfo"
     requestAutoload = False
     version = "1.0.1"
-
     apiVersion = 22
     author = "Luemmel"
     description = "Prints a Linkinfolink to the chat."
