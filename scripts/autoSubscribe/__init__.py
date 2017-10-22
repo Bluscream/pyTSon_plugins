@@ -25,9 +25,9 @@ class autoSubscribe(ts3plugin):
     passwords = ["pw", "pass"]
     blacklist = [".fm", "radio", "music", "musik"]
     onlyOpen = False
-    subAll = [""]
-    subOpen = ["QTRtPmYiSKpMS8Oyd4hyztcvLqU="]
-    subNone = [""]
+    subAll = []
+    subOpen = []
+    subNone = []
     isFlooding = False
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -41,6 +41,14 @@ class autoSubscribe(ts3plugin):
             elif menuItemID == 1: self.subscribeOpen(schid)
             elif menuItemID == 2: self.subscribeOpenPW(schid)
             elif menuItemID == 3: self.unsubscribeAll(schid)
+
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            (error, uid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+            if uid in self.subAll: self.subscribeAll(schid)
+            elif uid in self.subNone: self.unsubscribeAll(schid)
+            elif uid in self.subOpen: self.subscribeOpen(schid)
+            if uid == "QTRtPmYiSKpMS8Oyd4hyztcvLqU=": ts3lib.requestChannelSubscribe(schid, [136205, 136209, 545989, 46, 48])
 
 
     def subscribeAll(self, schid):
@@ -61,6 +69,7 @@ class autoSubscribe(ts3plugin):
 
     def subscribeOpen(self, schid):
         (error, clist) = ts3lib.getChannelList(schid)
+        tosub = []
         for c in clist:
             (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
             (error, pw) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
@@ -68,27 +77,24 @@ class autoSubscribe(ts3plugin):
             (error, semiperm) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
             (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
             if not pw and not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist):
-                err = ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
-                ts3lib.printMessageToCurrentTab("c: {} err: {}".format(c, err))
+                tosub.append(c) #clist.remove(c)
+        err = ts3lib.requestChannelSubscribe(schid, tosub)
+        ts3lib.printMessageToCurrentTab("c: {} err: {}".format(tosub, err))
         self.onlyOpen = True
 
     def subscribeOpenPW(self, schid):
         (error, clist) = ts3lib.getChannelList(schid)
+        tosub = []
         for c in clist:
             (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
             (error, permanent) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
             (error, semiperm) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
             (error, codec) = ts3lib.getChannelVariableAsInt(schid, c, ts3defines.ChannelProperties.CHANNEL_CODEC)
             if not permanent and not semiperm and not codec == ts3defines.CodecType.CODEC_OPUS_MUSIC and not any(x in name.lower() for x in self.blacklist) and any(x in name.lower() for x in self.passwords):
-                ts3lib.requestChannelSubscribe(schid, [c]) #clist.remove(c)
+                tosub.append(c) #clist.remove(c)
+        err = ts3lib.requestChannelSubscribe(schid, tosub)
+        ts3lib.printMessageToCurrentTab("c: {} err: {}".format(tosub, err))
         self.onlyOpen = False
-
-    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            (error, uid) = ts3lib.getServerVariableAsString(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
-            if uid in self.subAll: self.subscribeAll(schid)
-            elif uid in self.subNone: self.unsubscribeAll(schid)
-            elif uid in self.subOpen: self.subscribeOpen(schid)
 
     def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if not self.subscribeOpen: return False
