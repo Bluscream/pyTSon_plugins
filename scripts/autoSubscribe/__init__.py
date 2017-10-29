@@ -108,23 +108,23 @@ class autoSubscribe(ts3plugin):
     def subscribeOpen(self, schid=None):
         if not schid: schid = self.schid
         (error, clist) = ts3lib.getChannelList(schid)
-        tosub = []
         for c in clist:
             if not isPassworded(schid, c) and not isPermanent(schid, c) and not isSemiPermanent(schid, c) and not isMusicChannel(schid, c) and isBlacklisted(schid, c):
-                tosub.append(c) #clist.remove(c)
-        err = ts3lib.requestChannelSubscribe(schid, tosub)
-        ts3lib.printMessageToCurrentTab("c: {} err: {}".format(tosub, err))
+                self.toSub.append(c) #clist.remove(c)
+        self.subChannels()
+        # err = ts3lib.requestChannelSubscribe(schid, tosub)
+        # ts3lib.printMessageToCurrentTab("c: {} err: {}".format(tosub, err))
         self.onlyOpen = True
 
     def subscribeOpenPW(self, schid=None):
         if not schid: schid = self.schid
         (error, clist) = ts3lib.getChannelList(schid)
-        tosub = []
         for c in clist:
             if not isPermanent(schid, c) and not isSemiPermanent(schid, c) and not isMusicChannel(schid, c) and not isBlacklisted(schid, c) and isPWInName(schid, c):
-                tosub.append(c) #clist.remove(c)
-        err = ts3lib.requestChannelSubscribe(schid, tosub)
-        ts3lib.printMessageToCurrentTab("c: {} err: {}".format(tosub, err))
+                self.toSub.append(c) #clist.remove(c)
+        self.subChannels()
+        # err = ts3lib.requestChannelSubscribe(schid, tosub)
+        # ts3lib.printMessageToCurrentTab("c: {} err: {}".format(tosub, err))
         self.onlyOpen = False
 
     def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentiﬁer):

@@ -46,8 +46,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="150" column="82" lean-forward="false" selection-start-line="150" selection-start-column="82" selection-end-line="150" selection-end-column="82" />
+            <state relative-caret-position="1904">
+              <caret line="112" column="33" lean-forward="false" selection-start-line="112" selection-start-column="27" selection-end-line="112" selection-end-column="33" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -282,13 +282,6 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="autoSubscribe" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoSubscribe" type="462c0819:PsiDirectoryNode" />
-              <item name="__init__.py" type="8704e2dd:PyFileNode" />
             </path>
           </expand>
           <select />
@@ -899,7 +892,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509240036254</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="o.O">
+      <created>1509241401844</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1509241401844</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1362,8 +1362,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="150" column="82" lean-forward="false" selection-start-line="150" selection-start-column="82" selection-end-line="150" selection-end-column="82" />
+        <state relative-caret-position="1904">
+          <caret line="112" column="33" lean-forward="false" selection-start-line="112" selection-start-column="27" selection-end-line="112" selection-end-column="33" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
