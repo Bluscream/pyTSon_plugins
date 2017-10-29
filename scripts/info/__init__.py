@@ -313,7 +313,6 @@ class SettingsDialog(QDialog):
         super(QDialog, self).__init__(parent)
         setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
         self.setWindowTitle("Extended Info Settings")
-        ts3.printMessageToCurrentTab(str(info.cfg.getboolean('general', 'Debug')))
         self.chk_debug.setChecked(info.cfg.getboolean('general', 'Debug'))
         self.chk_colored.setChecked(info.cfg.getboolean('general', 'Colored'))
         self.chk_arsv.setChecked(info.cfg.getboolean('general', 'Autorequest Server Variables'))
