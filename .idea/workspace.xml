@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="o.O">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" afterPath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/antiMove/__init__.py" afterPath="$PROJECT_DIR$/scripts/antiMove/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" afterPath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/settings/settings.ini" afterPath="$PROJECT_DIR$/scripts/settings/settings.ini" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,24 +40,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pyTSon.conf" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pyTSon.conf" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="15" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+            <state relative-caret-position="153">
+              <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -58,41 +53,11 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="112" column="43" lean-forward="false" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/antiServerKick/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="34" lean-forward="false" selection-start-line="30" selection-start-column="34" selection-end-line="31" selection-end-column="84" />
+            <state relative-caret-position="2023">
+              <caret line="149" column="98" lean-forward="false" selection-start-line="149" selection-start-column="84" selection-end-line="149" selection-end-column="98" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#35#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ts3lib.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="18" column="16" lean-forward="true" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/info/settings.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="30" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -108,9 +73,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>qtimer</find>
-      <find>import</find>
-      <find>getvalues</find>
       <find>requests</find>
       <find>QNetworkAccessManager</find>
       <find>requests.</find>
@@ -138,6 +100,9 @@
       <find>timer</find>
       <find>cooldown_time_page</find>
       <find>ownID</find>
+      <find>requestAutoload = True</find>
+      <find>requestAutoload</find>
+      <find>channelID</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -147,6 +112,7 @@
       <replace>ts3lib.</replace>
       <replace>ts3.</replace>
       <replace>False</replace>
+      <replace>requestAutoload = False</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts</dir>
@@ -187,7 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/FileBrowser/__init__.py" />
         <option value="$PROJECT_DIR$/countNick/__init__.py" />
         <option value="$PROJECT_DIR$/kickCounter/__init__.py" />
         <option value="$PROJECT_DIR$/msgRedirect/__init__.py" />
@@ -222,7 +187,6 @@
         <option value="$PROJECT_DIR$/antiMove/__init__.py" />
         <option value="$PROJECT_DIR$/settings/__init__.py" />
         <option value="$PROJECT_DIR$/antiServerKick/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/antiMove/__init__.py" />
         <option value="$PROJECT_DIR$/scripts_/channelWatcher/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/info/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -234,8 +198,10 @@
         <option value="$PROJECT_DIR$/scripts_/linkinfo/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3ext.py" />
         <option value="$PROJECT_DIR$/scripts/info/settings.ini" />
-        <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/include/ts3lib.py" />
+        <option value="$PROJECT_DIR$/scripts/antiMove/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" />
+        <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" />
       </list>
@@ -306,17 +272,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches">
-        <subPane>
-          <expand>
-            <path>
-              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -342,25 +297,6 @@
               <item name="autoSubscribe" type="462c0819:PsiDirectoryNode" />
               <item name="__init__.py" type="8704e2dd:PyFileNode" />
             </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="gommeHD" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="gommeHD" type="462c0819:PsiDirectoryNode" />
-              <item name="__init__.py" type="8704e2dd:PyFileNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="info" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -371,6 +307,17 @@
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
             </path>
           </expand>
           <select />
@@ -938,7 +885,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508672097253</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="o.O">
+      <created>1508673880180</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1508673880180</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -996,7 +950,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Floobits" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767764" sideWeight="0.75104165" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32767764" sideWeight="0.75104165" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1058,10 +1012,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/settings/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/antiChannelKick/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/../include/ts3defines.py" />
-    <entry file="file://$PROJECT_DIR$/serverSwitcher/__init__.py" />
     <entry file="file://$PROJECT_DIR$/antiMove/__init__.py" />
     <entry file="file://$PROJECT_DIR$/antiServerKick/__init__.py" />
     <entry file="file://$PROJECT_DIR$/docs/Client Versions.url">
@@ -1075,13 +1025,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-561">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="43" column="33" lean-forward="true" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -1297,7 +1240,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="727" column="6" lean-forward="false" selection-start-line="727" selection-start-column="6" selection-end-line="727" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1340,25 +1282,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="15" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiServerKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
+        <state relative-caret-position="442">
           <caret line="30" column="34" lean-forward="false" selection-start-line="30" selection-start-column="34" selection-end-line="31" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1366,25 +1296,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="18" column="16" lean-forward="true" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/ts3plugin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="45" column="27" lean-forward="false" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiChannelKick/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/devtools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="29" column="4" lean-forward="false" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/pyTSon.url">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="21" column="8" lean-forward="true" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="26" />
+        <state relative-caret-position="351">
+          <caret line="40" column="86" lean-forward="false" selection-start-line="40" selection-start-column="86" selection-end-line="40" selection-end-column="86" />
           <folding>
-            <element signature="e#0#33#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="112" column="43" lean-forward="false" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="43" />
-          <folding />
+        <state relative-caret-position="2023">
+          <caret line="149" column="98" lean-forward="false" selection-start-line="149" selection-start-column="84" selection-end-line="149" selection-end-column="98" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -7,7 +7,7 @@ from PythonQt.QtCore import QTimer
 class antiMove(ts3plugin):
     name = "Anti Move"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Deny others to move you around."

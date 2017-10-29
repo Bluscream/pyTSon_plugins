@@ -7,7 +7,7 @@ from PythonQt.QtCore import QTimer
 class antiChannelKick(ts3plugin):
     name = "Anti Channel Kick"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Auto rejoin channels you got kicked from."

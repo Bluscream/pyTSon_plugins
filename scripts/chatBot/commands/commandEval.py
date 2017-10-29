@@ -6,7 +6,7 @@ import chatBot as self
 class commandAbout(chatCommand):
     name = "about"
     version = 1
-    requestAutoload = True
+    requestAutoload = False
 
     def __init__(schid, targetMode, toID, fromID, params=""):
         try:

@@ -1,6 +1,7 @@
 import pytson, ts3lib, ts3defines
 from ts3plugin import ts3plugin
 from datetime import datetime
+from PythonQt.QtCore import QTimer
 
 class gommeHD(ts3plugin):
     name = "GommeHD nifty tricks"
@@ -19,7 +20,7 @@ class gommeHD(ts3plugin):
     channelAdminGroupID = 10
     gommeBotNick = "Gomme-Bot"
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
-    gommeBotID = 0
+    delay = 500
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -30,9 +31,12 @@ class gommeHD(ts3plugin):
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
         if fromUniqueIdentifier != "serveradmin": return
         if fromName != self.gommeBotNick: return
-        if self.gommeBotID == 0: self.gommeBotID = fromID
-        # if not message.endswith(self.msg): return
-        # ts3lib.requestSendPrivateTextMsg(schid, "registriert", fromID)
+        if not message.endswith(self.msg): return
+        self.schid = schid; self.gommeBotID = fromID
+        QTimer.singleShot(self.delay, self.sendMessage)
+
+    def sendMessage(self):
+        ts3lib.requestSendPrivateTextMsg(self.schid, "registriert", self.gommeBotID)
 
     def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
@@ -53,6 +57,7 @@ class gommeHD(ts3plugin):
             (err, cnp) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC)
             if not cnp or cnp == "": ts3lib.setChannelVariableAsString(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC, "Team | Lounge 1")
             ts3lib.flushChannelUpdates(schid, channelID)
+        return
         # clid = ts3lib.getClientIDbyNickname(schid, self.gommeBotNick)
         # if not clid: ts3lib.printMessage(schid, 'Gomme-Bot not found.', ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         # (err, uid) = ts3lib.getClientVariable(schid, self.gommeBotID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
