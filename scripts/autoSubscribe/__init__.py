@@ -148,5 +148,5 @@ class autoSubscribe(ts3plugin):
             if (isPassworded(schid, cid) and isPWInName(schid, cid)) or (not isPassworded(schid, cid) and not isBlacklisted(schid, cid) and not isMusicChannel(schid, cid)):
                 ts3lib.requestChannelSubscribe(schid, [cid])
         elif subscribed:
-            if (isPassworded(schid, cid) and not isPassworded(schid, cid)) or isBlacklisted(schid, cid) or isMusicChannel(schid, cid):
+            if (isPassworded(schid, cid) and not isPWInName(schid, cid)) or isBlacklisted(schid, cid) or isMusicChannel(schid, cid):
                 ts3lib.requestChannelUnsubscribe(schid, [cid])
