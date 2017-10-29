@@ -57,6 +57,7 @@ class autoSubscribe(ts3plugin):
     subNone = []
     isFlooding = False
     schid = 0
+    toSub = []
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
@@ -77,15 +78,14 @@ class autoSubscribe(ts3plugin):
             if uid in self.subAll: QTimer.singleShot(2500, self.subscribeAll)
             elif uid in self.subNone: QTimer.singleShot(2500, self.unsubscribeAll)
             elif uid in self.subOpen: QTimer.singleShot(2500, self.subscribeOpen)
-            if uid == "QTRtPmYiSKpMS8Oyd4hyztcvLqU=":  QTimer.singleShot(2500, self.subGomme)
+            if uid == "QTRtPmYiSKpMS8Oyd4hyztcvLqU=":
+                self.toSub = [46,48,136205,136209,545989]
+                QTimer.singleShot(2500, self.subChannels)
 
-    def subGomme(self):
-        ts3lib.requestChannelSubscribe(self.schid, [46])
-        ts3lib.requestChannelSubscribe(self.schid, [48])
-        ts3lib.requestChannelSubscribe(self.schid, [136205])
-        ts3lib.requestChannelSubscribe(self.schid, [136209])
-        ts3lib.requestChannelSubscribe(self.schid, [545989])
-        # ts3lib.requestChannelSubscribe(schid, [46,48,136205,136209,545989])
+    def subChannels(self):
+        for cid in self.toSub:
+            ts3lib.requestChannelSubscribe(self.schid, [cid])
+        del self.toSub
 
     def subscribeAll(self, schid=None):
         if not schid: schid = self.schid
