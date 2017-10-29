@@ -33,7 +33,7 @@ class autoEncode(ts3plugin):
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
         if flag in [ts3defines.ClientProperties.CLIENT_NICKNAME, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE]:
             if newValue.endswith("="): return
-            encoded = b64encode(newValue).decode('utf-8')
+            encoded = b64encode(newValue.encode('utf-8')).decode('utf-8')
             if not encoded.endswith("="): encoded + "="
             ts3lib.setClientSelfVariableAsString(schid, flag, encoded)
             ts3lib.flushClientSelfUpdates(schid)

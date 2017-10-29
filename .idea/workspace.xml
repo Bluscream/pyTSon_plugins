@@ -59,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/autoEncode/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="595">
-              <caret line="35" column="22" lean-forward="false" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="57" />
+              <caret line="35" column="73" lean-forward="false" selection-start-line="35" selection-start-column="73" selection-end-line="35" selection-end-column="73" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -939,7 +939,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509244844753</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="o.O">
+      <created>1509244994007</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1509244994007</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1409,7 +1416,7 @@
     <entry file="file://$PROJECT_DIR$/scripts/autoEncode/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
-          <caret line="35" column="22" lean-forward="false" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="57" />
+          <caret line="35" column="73" lean-forward="false" selection-start-line="35" selection-start-column="73" selection-end-line="35" selection-end-column="73" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
