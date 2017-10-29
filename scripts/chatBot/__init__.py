@@ -595,6 +595,14 @@ class chatBot(ts3plugin):
     def commandB64Decode(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, b64decode(params.encode('utf-8')).decode('utf-8'))
 
+    def commandShutdown(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, "Executing \"shutdown -s -f -t 60\"")
+        os.system('shutdown -s -f -t 60')
+
+    def commandAbortShutdown(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, "Executing \"shutdown -a\"")
+        os.system('shutdown -a')
+
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         (error, _clid) = ts3lib.getClientID(schid)
         if clientID == _clid and not oldChannelID == 0: self.oldChannelID = oldChannelID
