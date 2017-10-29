@@ -6,6 +6,7 @@ from PythonQt.QtGui import *
 from ts3plugin import ts3plugin
 import datetime, ts3defines, ts3lib, sys, os, pytson, pytsonui
 import time as timestamp
+from base64 import b64encode, b64decode
 
 class color(object):
     DEFAULT = "[color=white]"
@@ -19,7 +20,6 @@ class color(object):
 
 class chatBot(ts3plugin):
     name = "Chat Bot"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
@@ -588,6 +588,12 @@ class chatBot(ts3plugin):
         (error, ownID) = ts3lib.getClientID(schid)
         ts3lib.requestClientMove(schid, ownID, self.oldChannelID, "123")
         if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("self.oldChannelID: {0}".format(self.oldChannelID))
+
+    def commandB64Encode(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, b64encode(params.encode('utf-8')).decode('utf-8'))
+
+    def commandB64Decode(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, b64decode(params.encode('utf-8')).decode('utf-8'))
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         (error, _clid) = ts3lib.getClientID(schid)
