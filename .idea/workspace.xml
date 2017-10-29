@@ -58,8 +58,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoEncode/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+            <state relative-caret-position="595">
+              <caret line="35" column="22" lean-forward="false" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="57" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -932,7 +932,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509244502612</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="o.O">
+      <created>1509244844753</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1509244844753</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1401,8 +1408,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoEncode/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+        <state relative-caret-position="595">
+          <caret line="35" column="22" lean-forward="false" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="57" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
