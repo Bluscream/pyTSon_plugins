@@ -90,6 +90,8 @@ class gommeHD(ts3plugin):
         if _needed:
             ts3lib.flushChannelUpdates(schid, channelID)
             self.violations[invokerUniqueIdentifier] += 1
+            if self.debug: ts3lib.printMessageToCurrentTab("violations of {}: {}".format(invokerUniqueIdentifier, self.violations[invokerUniqueIdentifier]))
             if self.violations[invokerUniqueIdentifier] > 3:
                 (err, dbid) = ts3lib.getClientVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
                 ts3lib.requestSetClientChannelGroup(schid, [9], [channelID], [dbid])
+                del self.violations[invokerUniqueIdentifier]
