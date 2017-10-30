@@ -2,6 +2,7 @@ import pytson, ts3lib, ts3defines
 from ts3plugin import ts3plugin
 from datetime import datetime
 from PythonQt.QtCore import QTimer
+from collections import defaultdict
 
 class gommeHD(ts3plugin):
     name = "GommeHD nifty tricks"
@@ -22,7 +23,7 @@ class gommeHD(ts3plugin):
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     delay = 750
     settings = { "maxclients": 10, "tp": 23 }
-    violations = {}
+    violations = defaultdict(int)
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -96,10 +97,7 @@ class gommeHD(ts3plugin):
             ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.settings["maxclients"])
         if _needed:
             ts3lib.flushChannelUpdates(schid, channelID)
-            if not invokerUniqueIdentifier in self.violations:
-                self.violations[invokerUniqueIdentifier] = 1
-            else:
-                self.violations[invokerUniqueIdentifier] += 1
+            self.violations[invokerUniqueIdentifier] += 1
             if self.debug: ts3lib.printMessageToCurrentTab("violations of {}: {}".format(invokerUniqueIdentifier, self.violations[invokerUniqueIdentifier]))
             if self.violations[invokerUniqueIdentifier] > 2:
                 (err, dbid) = ts3lib.getClientVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
