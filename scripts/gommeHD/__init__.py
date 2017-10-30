@@ -20,7 +20,9 @@ class gommeHD(ts3plugin):
     channelAdminGroupID = 10
     gommeBotNick = "Gomme-Bot"
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
-    delay = 500
+    delay = 750
+    settings = { "maxclients": 10, "tp": 23 }
+    violations = {}
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -50,10 +52,10 @@ class gommeHD(ts3plugin):
         # if self.debug: ts3lib.printMessageToCurrentTab('invokerClientID != 0: {}'.format(invokerClientID != 0))
         if invokerClientID == 0:
             (err, ntp) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
-            if not ntp or ntp == 0: ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, 23)
+            if not ntp or ntp == 0: ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, self.settings["tp"])
             # (err, cmc) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
             ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
-            ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, 10)
+            ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.settings["maxclients"])
             (err, cnp) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC)
             if not cnp or cnp == "": ts3lib.setChannelVariableAsString(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC, "Team | Lounge 1")
             ts3lib.flushChannelUpdates(schid, channelID)
@@ -65,3 +67,29 @@ class gommeHD(ts3plugin):
         # if self.debug: ts3lib.printMessageToCurrentTab('self.gommeBotID == 0: {}'.format(self.gommeBotID == 0))
         if self.gommeBotID == 0: return
         ts3lib.requestSendPrivateTextMsg(schid, "registriert", self.gommeBotID)
+
+    def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentifier):
+        (err, ownID) = ts3lib.getClientID(schid)
+        if invokerID == ownID:
+            (err, self.settings["maxclients"]) = ts3lib.getChannelVariable(schid, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+            (err, self.settings["tp"]) = ts3lib.getChannelVariable(schid, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+        (err, ownChannel) = ts3lib.getChannelOfClient(schid, ownID)
+        if channelID != ownChannel: return
+        (err, invokerChannel) = ts3lib.getChannelOfClient(schid, invokerID)
+        if invokerChannel == channelID: return
+        _needed = False
+        (err, ntp) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+        if ntp != self.settings["tp"]:
+            _needed = True
+            ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, self.settings["tp"])
+        (err, cmc) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+        ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
+        if cmc != self.settings["maxclients"]:
+            _needed = True
+            ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.settings["maxclients"])
+        if _needed:
+            ts3lib.flushChannelUpdates(schid, channelID)
+            self.violations[invokerUniqueIdentifier] += 1
+            if self.violations[invokerUniqueIdentifier] > 3:
+                (err, dbid) = ts3lib.getClientVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+                ts3lib.requestSetClientChannelGroup(schid, [9], [channelID], [dbid])
