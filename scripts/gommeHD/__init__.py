@@ -72,28 +72,36 @@ class gommeHD(ts3plugin):
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         if suid != self.suid: return
         (err, ownID) = ts3lib.getClientID(schid)
+        if self.debug: ts3lib.printMessageToCurrentTab('invokerID == ownID: {}'.format(invokerID == ownID))
         if invokerID == ownID:
             (err, self.settings["maxclients"]) = ts3lib.getChannelVariable(schid, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
             (err, self.settings["tp"]) = ts3lib.getChannelVariable(schid, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
         (err, ownChannel) = ts3lib.getChannelOfClient(schid, ownID)
+        if self.debug: ts3lib.printMessageToCurrentTab('channelID != ownChannel: {}'.format(channelID != ownChannel))
         if channelID != ownChannel: return
         (err, invokerChannel) = ts3lib.getChannelOfClient(schid, invokerID)
+        if self.debug: ts3lib.printMessageToCurrentTab('invokerChannel == channelID: {}'.format(invokerChannel == channelID))
         if invokerChannel == channelID: return
         _needed = False
         (err, ntp) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+        if self.debug: ts3lib.printMessageToCurrentTab('ntp != self.settings["tp"]: {}'.format(ntp != self.settings["tp"]))
         if ntp != self.settings["tp"]:
             _needed = True
             ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, self.settings["tp"])
         (err, cmc) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
         ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
+        if self.debug: ts3lib.printMessageToCurrentTab('cmc != self.settings["maxclients"]: {}'.format(cmc != self.settings["maxclients"]))
         if cmc != self.settings["maxclients"]:
             _needed = True
             ts3lib.setChannelVariableAsInt(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.settings["maxclients"])
         if _needed:
             ts3lib.flushChannelUpdates(schid, channelID)
-            self.violations[invokerUniqueIdentifier] += 1
+            if not invokerUniqueIdentifier in self.violations:
+                self.violations[invokerUniqueIdentifier] = 1
+            else:
+                self.violations[invokerUniqueIdentifier] += 1
             if self.debug: ts3lib.printMessageToCurrentTab("violations of {}: {}".format(invokerUniqueIdentifier, self.violations[invokerUniqueIdentifier]))
-            if self.violations[invokerUniqueIdentifier] > 3:
+            if self.violations[invokerUniqueIdentifier] > 2:
                 (err, dbid) = ts3lib.getClientVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
                 ts3lib.requestSetClientChannelGroup(schid, [9], [channelID], [dbid])
                 del self.violations[invokerUniqueIdentifier]

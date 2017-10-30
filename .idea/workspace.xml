@@ -58,8 +58,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="94" column="58" lean-forward="false" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="58" />
+            <state relative-caret-position="861">
+              <caret line="103" column="56" lean-forward="false" selection-start-line="103" selection-start-column="56" selection-end-line="103" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -651,13 +651,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00004" summary="a lot of changes o.O">
-      <created>1507625444164</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1507625444164</updated>
-    </task>
     <task id="LOCAL-00005" summary="a lot of changes o.O">
       <created>1507632262510</created>
       <option name="number" value="00005" />
@@ -994,7 +987,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509328128144</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="added base64 stuff to the chatbot">
+      <created>1509328303075</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1509328303075</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1471,8 +1471,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="94" column="58" lean-forward="false" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="58" />
+        <state relative-caret-position="861">
+          <caret line="103" column="56" lean-forward="false" selection-start-line="103" selection-start-column="56" selection-end-line="103" selection-end-column="56" />
           <folding />
         </state>
       </provider>
