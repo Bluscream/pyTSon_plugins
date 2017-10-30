@@ -69,6 +69,8 @@ class gommeHD(ts3plugin):
         ts3lib.requestSendPrivateTextMsg(schid, "registriert", self.gommeBotID)
 
     def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentifier):
+        (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        if suid != self.suid: return
         (err, ownID) = ts3lib.getClientID(schid)
         if invokerID == ownID:
             (err, self.settings["maxclients"]) = ts3lib.getChannelVariable(schid, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
