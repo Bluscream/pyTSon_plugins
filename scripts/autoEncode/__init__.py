@@ -19,7 +19,7 @@ class autoEncode(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle "+name, "")]
     hotkeys = []
     debug = False
-    enabled = True
+    enabled = False
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
