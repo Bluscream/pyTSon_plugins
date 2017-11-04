@@ -31,6 +31,7 @@ class autoEncode(ts3plugin):
             if menuItemID == 0: self.enabled = not self.enabled
 
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
+        if not self.enabled: return
         if flag in [ts3defines.ClientProperties.CLIENT_NICKNAME, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE]:
             if newValue.endswith("="): return
             encoded = b64encode(newValue.encode('utf-8')).decode('utf-8')
