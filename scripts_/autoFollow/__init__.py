@@ -3,17 +3,17 @@ from ts3plugin import ts3plugin
 from PythonQt.QtCore import QTimer
 
 
-class antiMove(ts3plugin):
-    name = "Anti Move"
+class autoFollow(ts3plugin):
+    name = "Anti Follow (former Love Plugin)"
     apiVersion = 22
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"
-    description = "Deny others to move you around."
+    description = "Auto Follow specified users around."
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Antimove", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
     hotkeys = []
     enabled = False
     debug = False

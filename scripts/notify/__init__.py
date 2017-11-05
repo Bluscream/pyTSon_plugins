@@ -93,7 +93,7 @@ Your version is very likely vulnerable to several exploits.
 Please update your Client to Version [color=blue]{latest}[/color]
 To update click on "Help" => "Check for Update
                         """
-                    ts3.requestSendPrivateTextMsg(schid, msg.format(current=current["ver"], latest=self.versions["rev"]), clientID)
+                    ts3.requestSendPrivateTextMsg(schid, msg.format(current=current["ver"], latest=self.versions["clientver"]), clientID)
                     _done = True
         if self.checkUnreadMessages:
             (error, platform) = ts3.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_PLATFORM)
