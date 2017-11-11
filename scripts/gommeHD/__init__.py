@@ -16,11 +16,12 @@ class gommeHD(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    debug = True
+    debug = False
     suid = "QTRtPmYiSKpMS8Oyd4hyztcvLqU="
     channelAdminGroupID = 10
     gommeBotNick = "Gomme-Bot"
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
+    welcomeMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"']
     delay = 750
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
@@ -32,11 +33,12 @@ class gommeHD(ts3plugin):
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
-        if fromUniqueIdentifier != "serveradmin": return
-        if fromName != self.gommeBotNick: return
-        if not message.endswith(self.msg): return
-        self.schid = schid; self.gommeBotID = fromID
-        QTimer.singleShot(self.delay, self.sendMessage)
+        if fromUniqueIdentifier != "serveradmin": return False
+        if fromName != self.gommeBotNick: return False
+        if message.endswith(self.msg):
+            self.schid = schid; self.gommeBotID = fromID
+            QTimer.singleShot(self.delay, self.sendMessage)
+        elif message in self.welcomeMSG: return True
 
     def sendMessage(self):
         ts3lib.requestSendPrivateTextMsg(self.schid, "registriert", self.gommeBotID)

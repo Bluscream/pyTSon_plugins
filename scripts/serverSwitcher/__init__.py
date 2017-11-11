@@ -57,6 +57,10 @@ class serverSwitcher(ts3plugin):
             }
             with open(self.ini, 'w') as cfg:
                 self.cfg.write(cfg)
+            schid = ts3.getCurrentServerConnectionHandlerID()
+            err, status = ts3.getConnectionStatus(schid)
+            if status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+                self.setStatus(schid)
         if self.debug: ts3.printMessageToCurrentTab( '{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.'.format(self.timestamp(), self.name, self.author))
 
     def configure(self, qParentWidget):
@@ -157,7 +161,7 @@ class serverSwitcher(ts3plugin):
                             if pw and self.cfg.getboolean('general', 'broadcast server pw'): c.set("pw", pw)
                             meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
                             # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
-                    _away_message = self.cfg.get('general', 'status').replace('{host}', host).replace('{port}', str(port)).replace('{name}', name)
+                    _away_message = self.cfg.get('general', 'status').replace('{host}', host).replace('{name}', name) # .replace('{port}', str(port))
                     if away_message != _away_message: ts3.setClientSelfVariableAsString(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE, _away_message)
                 ts3.setClientSelfVariableAsString(tab, ts3defines.ClientProperties.CLIENT_META_DATA, meta_data)
                 ts3.flushClientSelfUpdates(tab)

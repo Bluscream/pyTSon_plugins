@@ -135,8 +135,9 @@ class info(ts3plugin):
                     error, meta = ts3.getClientVariableAsString(schid, ownid, ts3defines.ClientProperties.CLIENT_META_DATA)
                     if error == ts3defines.ERROR_ok:
                         x = QWidget()
-                        meta = QInputDialog.getMultiLineText(x, "Change own Meta Data", "Meta Data:", meta)
-                        error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, meta)
+                        _meta = QInputDialog.getMultiLineText(x, "Change own Meta Data", "Meta Data:", meta)
+                        if _meta == meta: return
+                        error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, _meta)
                         if not error == ts3defines.ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error #%s"%error, "Unable to set own meta data!");_t.show()
             elif menuItemID == 1:
