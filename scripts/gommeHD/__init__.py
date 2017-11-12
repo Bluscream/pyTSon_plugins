@@ -22,7 +22,7 @@ class gommeHD(ts3plugin):
     gommeBotNick = "Gomme-Bot"
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     welcomeMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"']
-    delay = 750
+    delay = 1500
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
 
