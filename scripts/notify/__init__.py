@@ -81,13 +81,13 @@ class notify(ts3plugin):
                 current = self.parseVersion(targetVer)
                 if current["rev"] < self.versions["clientrev"]:
                     if country in ["DE", "CH", "AT"]:
-                        msg = """[color=red]Hinweis[/color]:
+                        msg = """[b][color=red]Hinweis[/color][/b]
 Du nutzt eine veraltete Version von Teamspeak ([color=red]{current}[/color]).
 Bitte aktualisiere deinen Client auf Version [color=blue]{latest}[/color] um mögliche Sicherheitsrisiken auszuschliessen.
 Um zu updaten gehe einfach auf "Hilfe" => "Nach Aktualisierung suchen"
                         """
                     else:
-                        msg = """[color=red]Attention[/color]:
+                        msg = """[b][color=red]Attention[/color][/b]
 You are using a outdated version of Teamspeak ([color=red]{current}[/color]).
 Your version is very likely vulnerable to several exploits.
 Please update your Client to Version [color=blue]{latest}[/color]
@@ -103,12 +103,12 @@ To update click on "Help" => "Check for Update
             if self.debug: ts3.printMessageToCurrentTab("clid: {} error: {} messages: {}".format(clientID, error, messages))
             if messages > 0:
                 if country in ["DE", "CH", "AT"]:
-                    msg = """[color=orange]Hinweis[/color]:
+                    msg = """[b][color=orange]Hinweis[/color][/b]
 Du hast [color=blue]%s[/color] ungelesene Offline Nachrichte(n).
 Du kannst sie nachlesen indem du auf \"Extras\" => \"Offline Nachrichten\" klickst oder einfach [STRG]+[O] auf deiner Tastatur drückst.
                     """
                 else:
-                    msg = """[color=orange]Reminder[/color]:
+                    msg = """[b][color=orange]Reminder[/color][/b]
 You have [color=blue]%s[/color] unread offline message(s).
 You can read them by clicking on \"Tools\" => \"Offline Messages\" or pressing [CTRL]+[O] on your keyboard.
                     """
