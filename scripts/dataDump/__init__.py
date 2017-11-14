@@ -39,6 +39,10 @@ class dataDump(ts3plugin):
         if not err: self.setMeta(ts3.getCurrentServerConnectionHandlerID())
         if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
+
+    """
     def configure(self, qParentWidget):
         try:
             d = dict()
@@ -47,7 +51,6 @@ class dataDump(ts3plugin):
                 d[n] = (ValueType.boolean, n.title(), self.cfg.getboolean('general', n), None, None)
             getValues(qParentWidget, self.name, d, self.configDialogClosed)
         except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
-
     def configDialogClosed(self, r, vals):
         try:
             if r == QDialog.Accepted:
@@ -59,17 +62,14 @@ class dataDump(ts3plugin):
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
         except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
-
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
             if not self.dlg: self.dlg = DumpView()
             self.dlg.show()
             self.dlg.raise_()
             self.dlg.activateWindow()
-
-    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
-
+    """
+"""
 class DumpView(QWidget):
     def __init__(self, parent=None):
         super(QWidget, self).__init__(parent)
@@ -157,4 +157,4 @@ class DumpView(QWidget):
                 try: from traceback import format_exc;print("addonList: "+format_exc())
                 except: print("addonList: Unknown Error")
 
-    def on_btn_close_clicked(self): self.close()
+    def on_btn_close_clicked(self): self.close()"""
