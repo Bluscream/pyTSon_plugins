@@ -18,7 +18,6 @@ class antiAFK(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
     hotkeys = []
     debug = False
-    delay = randint(10000,15000)
     timer = None
     schid = 0
     clid = 0
@@ -42,7 +41,7 @@ class antiAFK(ts3plugin):
             else:
                 self.schid = schid
                 err, self.clid = ts3lib.getClientID(schid)
-                self.timer.start(self.delay)
+                self.timer.start(randint(30*1000,120*1000))
                 ts3lib.printMessageToCurrentTab('Timer started!')
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):

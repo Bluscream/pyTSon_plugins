@@ -590,10 +590,14 @@ class chatBot(ts3plugin):
         if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("self.oldChannelID: {0}".format(self.oldChannelID))
 
     def commandB64Encode(self, schid, targetMode, toID, fromID, params=""):
-        self.answerMessage(schid, targetMode, toID, fromID, b64encode(params.encode('utf-8')).decode('utf-8'))
+        try: msg = b64encode(params.encode('utf-8')).decode('utf-8')
+        except Exception as ex: msg = "Error while encoding: {}".format(ex.__class__.__name__)
+        self.answerMessage(schid, targetMode, toID, fromID, msg)
 
     def commandB64Decode(self, schid, targetMode, toID, fromID, params=""):
-        self.answerMessage(schid, targetMode, toID, fromID, b64decode(params.encode('utf-8')).decode('utf-8'))
+        try: msg = b64decode(params.encode('utf-8')).decode('utf-8')
+        except Exception as ex: msg = "Error while decoding: {}".format(ex.__class__.__name__)
+        self.answerMessage(schid, targetMode, toID, fromID, msg)
 
     def commandShutdown(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, "Executing \"shutdown -s -f -t 60\"")

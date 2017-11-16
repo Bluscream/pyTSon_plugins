@@ -180,11 +180,11 @@ try:
             if self.toggle:
                 if self.requested == True:
                     for _name in self.banned_names:
-                        if name.upper().__contains__(_name): self.sbgroup = channelGroupID;break
+                        if name.upper().__contains__(_name): self.sbgroup = channelGroupID;return
                     for _name in self.mod_names:
-                        if name.upper().__contains__(_name): self.smgroup = channelGroupID;break
+                        if name.upper().__contains__(_name): self.smgroup = channelGroupID;return
                     for _name in self.admin_names:
-                        if name.upper().__contains__(_name): self.sagroup = channelGroupID;break
+                        if name.upper().__contains__(_name): self.sagroup = channelGroupID;return
 
         def onChannelGroupListFinishedEvent(self, schid):
             if self.toggle:
