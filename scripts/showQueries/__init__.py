@@ -1,18 +1,17 @@
 from ts3plugin import ts3plugin
 from datetime import datetime
 from urllib.parse import quote as urlencode
-import ts3defines, ts3lib
+import ts3defines, ts3lib, _ts3lib
 
 class showQueries(ts3plugin):
     name = "Query Viewer"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Shows you queries in channels.\n\nHomepage: https://github.com/Bluscream/Extended-Info-Plugin\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
     offersConfigure = False
-    commandKeyword = ""
+    commandKeyword = "cmd"
     infoTitle = "[b]Queries:[/b]"
     menuItems = []
     hotkeys = []
@@ -51,3 +50,11 @@ class showQueries(ts3plugin):
                 if len(i) < 1: return
                 else: return i
         except: return
+
+    def processCommand(self, schid, command):
+        ts3lib.sendPluginCommand(schid, command, ts3defines.PluginTargetMode.PluginCommandTarget_CURRENT_CHANNEL, []) #_ts3lib
+        return True
+
+    def onPluginCommandEvent(self, schid, clid, pluginCommand):
+        ts3lib.printMessageToCurrentTab("onPluginCommandEvent")
+        ts3lib.printMessage(schid, "{} PluginMessage from {}: {}".format(self.timestamp(), self.clientURL(clid), pluginCommand), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)

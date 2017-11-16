@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" afterPath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" afterPath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/info/__init__.py" afterPath="$PROJECT_DIR$/scripts/info/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/info/settings.ini" afterPath="$PROJECT_DIR$/scripts/info/settings.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/showQueries/__init__.py" afterPath="$PROJECT_DIR$/scripts/showQueries/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -40,10 +41,64 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/showQueries/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="598" column="74" lean-forward="false" selection-start-line="598" selection-start-column="74" selection-end-line="598" selection-end-column="74" />
+            <state relative-caret-position="793">
+              <caret line="59" column="100" lean-forward="false" selection-start-line="59" selection-start-column="100" selection-end-line="59" selection-end-column="100" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="99" column="32" lean-forward="false" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="268">
+              <caret line="260" column="59" lean-forward="false" selection-start-line="260" selection-start-column="31" selection-end-line="260" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.ini" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/info/settings.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-5">
+              <caret line="128" column="24" lean-forward="true" selection-start-line="128" selection-start-column="24" selection-end-line="128" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5083">
+              <caret line="308" column="26" lean-forward="false" selection-start-line="308" selection-start-column="26" selection-end-line="308" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pluginhost.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/pluginhost.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7956">
+              <caret line="490" column="8" lean-forward="false" selection-start-line="490" selection-start-column="8" selection-end-line="490" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -60,9 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ts3lib.logMessage('{0} script for pyTSon by {1} loaded from &quot;{2}&quot;.'.format(self.name, self.author, __file__), ts3defines.LogLevel.LogLevel_INFO, &quot;Python Script&quot;, 0)</find>
-      <find>ts3lib.logMessage(self.name+&quot; script for pyTSon by &quot;+self.author+&quot; loaded from \&quot;&quot;+__file__+&quot;\&quot;.&quot;, ts3defines.LogLevel.LogLevel_INFO, &quot;Python Script&quot;, 0)</find>
-      <find>ts3.logMessage(self.name+&quot; script for pyTSon by &quot;+self.author+&quot; loaded from \&quot;&quot;+__file__+&quot;\&quot;.&quot;, ts3defines.LogLevel.LogLevel_INFO, &quot;Python Script&quot;, 0)</find>
       <find>except: apiVersion = 22</find>
       <find>try: apiVersion = pytson.getCurrentApiVersion()</find>
       <find>ts3lib.logMessage(&quot;{0} script for pyTSon by {1} loaded from \&quot;{2}\&quot;.&quot;.format(self.name,self.author,__file__), ts3defines.LogLevel.LogLevel_INFO, &quot;Python Script&quot;, 0)</find>
@@ -90,6 +142,9 @@
       <find>QTimer()</find>
       <find>except</find>
       <find>qmessa</find>
+      <find>onPluginCommandEvent</find>
+      <find>serverConnectionHandlerID</find>
+      <find>requestSetClientChannelGroup</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -100,6 +155,7 @@
       <replace>ts3.</replace>
       <replace>False</replace>
       <replace>requestAutoload = False</replace>
+      <replace>schid</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts</dir>
@@ -140,7 +196,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/joinChannel/__init__.py" />
         <option value="$PROJECT_DIR$/massAction/__init__.py" />
         <option value="$PROJECT_DIR$/pluginhost.py" />
         <option value="$PROJECT_DIR$/info/__init__.py" />
@@ -181,16 +236,17 @@
         <option value="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoFlee/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoFlee/cfg/settings.ini" />
-        <option value="$PROJECT_DIR$/scripts/info/settings.ini" />
-        <option value="$PROJECT_DIR$/scripts/info/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/notify/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/scripts/dataDump/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/info/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/info/settings.ini" />
+        <option value="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/showQueries/__init__.py" />
       </list>
     </option>
   </component>
@@ -200,8 +256,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="183" />
-    <option name="y" value="-8" />
+    <option name="x" value="406" />
+    <option name="y" value="-16" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -297,7 +353,13 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="chatBot" type="462c0819:PsiDirectoryNode" />
+              <item name="channelWatcher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="info" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -612,13 +674,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00017" summary="o.O">
-      <created>1508155748918</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1508155748918</updated>
     </task>
     <task id="LOCAL-00018" summary="o.O">
       <created>1508166988253</created>
@@ -956,7 +1011,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510639151616</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary=":thinking:">
+      <created>1510796042774</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1510796042775</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -986,6 +1048,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767764" sideWeight="0.24895833" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767764" sideWeight="0.75104165" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32467532" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.4968017" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1014,7 +1077,6 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Floobits" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32767764" sideWeight="0.75104165" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1085,34 +1147,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts_/report/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="119" lean-forward="false" selection-start-line="33" selection-start-column="114" selection-end-line="33" selection-end-column="119" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts_/profile/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="32" column="67" lean-forward="false" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts_/profile/cfg/profile.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="3" lean-forward="false" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts_/infoHTML/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="40" column="86" lean-forward="false" selection-start-line="40" selection-start-column="86" selection-end-line="40" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts_/exporter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1342,20 +1376,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2312">
-          <caret line="145" column="61" lean-forward="false" selection-start-line="145" selection-start-column="61" selection-end-line="145" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/info/settings.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="214" column="25" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoEncode/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -1420,29 +1440,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="216" column="48" lean-forward="false" selection-start-line="216" selection-start-column="48" selection-end-line="216" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/pluginhost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7956">
+          <caret line="490" column="8" lean-forward="false" selection-start-line="490" selection-start-column="8" selection-end-line="490" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="435" column="8" lean-forward="false" selection-start-line="435" selection-start-column="8" selection-end-line="435" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/onlineOfflineMessages/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5083">
+          <caret line="308" column="26" lean-forward="false" selection-start-line="308" selection-start-column="26" selection-end-line="308" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/info/settings.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5">
+          <caret line="128" column="24" lean-forward="true" selection-start-line="128" selection-start-column="24" selection-end-line="128" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="260" column="59" lean-forward="false" selection-start-line="260" selection-start-column="31" selection-end-line="260" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="99" column="32" lean-forward="false" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="32" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/showQueries/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="598" column="74" lean-forward="false" selection-start-line="598" selection-start-column="74" selection-end-line="598" selection-end-column="74" />
-          <folding />
+        <state relative-caret-position="793">
+          <caret line="59" column="100" lean-forward="false" selection-start-line="59" selection-start-column="100" selection-end-line="59" selection-end-column="100" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
