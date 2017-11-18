@@ -57,4 +57,4 @@ class showQueries(ts3plugin):
 
     def onPluginCommandEvent(self, schid, clid, pluginCommand):
         ts3lib.printMessageToCurrentTab("onPluginCommandEvent")
-        ts3lib.printMessage(schid, "{} PluginMessage from {}: {}".format(self.timestamp(), self.clientURL(clid), pluginCommand), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        ts3lib.printMessage(schid, "{0} PluginMessage from {1}: {2}".format(self.timestamp(), self.clientURL(clid), pluginCommand), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
