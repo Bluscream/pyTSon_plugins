@@ -21,8 +21,10 @@ class autoCasino(ts3plugin):
     sUID = "qdIe8FnQrSTpYhfAlaqaVp8OEGQ="
     botNick = "PhynixGaming.NET Casino"
     botUID = "EkfzBP4YlKCsWwVKhI8fIM2VNck="
-    msg = "Das Spiel wurde gestartet jeder der mitspielen möchte schreibt !play"
-    bet = 11
+    msg = "Das Spiel wurde gestartet"
+    bet = 10
+    minRand = 10
+    maxRand = 90
     delay = 500
     schid = 0
     botCLID = 0
@@ -36,14 +38,14 @@ class autoCasino(ts3plugin):
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
         if targetMode != ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL: return
         if fromUniqueIdentifier != self.botUID: return
-        if fromName != self.botNick: return
+        # if fromName != self.botNick: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         if suid != self.sUID: return
-        if message != self.msg: return
+        if not self.msg in message: return
         ts3lib.requestSendChannelTextMsg(schid, "!play", toID)
         self.schid = schid; self.botCLID = fromID;
-        QTimer.singleShot(self.delay, self.bet)
+        QTimer.singleShot(self.delay, self.doBet)
 
-    def bet(self):
-        ts3lib.requestSendPrivateTextMsg(self.schid, "!pay 11", self.botCLID)
-        ts3lib.requestSendPrivateTextMsg(self.schid, "!set {0}".format(randint(1, 100)), self.botCLID)
+    def doBet(self):
+        ts3lib.requestSendPrivateTextMsg(self.schid, "!pay {}".format(self.bet), self.botCLID)
+        ts3lib.requestSendPrivateTextMsg(self.schid, "!set {0}".format(randint(self.minRand, self.maxRand)), self.botCLID)

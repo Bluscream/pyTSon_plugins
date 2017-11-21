@@ -85,13 +85,17 @@ class notify(ts3plugin):
 Du nutzt eine veraltete Version von Teamspeak ([color=red]{current}[/color]).
 Bitte aktualisiere deinen Client auf Version [color=blue]{latest}[/color] um mögliche Sicherheitsrisiken auszuschliessen.
 Um zu updaten gehe einfach auf "Hilfe" => "Nach Aktualisierung suchen"
+Falls du nicht aktualisierst setzt du dich unter Umständen einigen Gefahren aus.
+Hier mal ein paar Beispiele: https://r4p3.net/resources/exploit-overview.84/
                         """
                     else:
                         msg = """[b][color=red]Attention[/color][/b]
 You are using a outdated version of Teamspeak ([color=red]{current}[/color]).
 Your version is very likely vulnerable to several exploits.
 Please update your Client to Version [color=blue]{latest}[/color]
-To update click on "Help" => "Check for Update
+To update click on "Help" => "Check for Update"
+If you don't update you might risk your computer being hacked.
+Some examples: https://r4p3.net/resources/exploit-overview.84/
                         """
                     ts3.requestSendPrivateTextMsg(schid, msg.format(current=current["ver"], latest=self.versions["clientver"]), clientID)
                     _done = True
