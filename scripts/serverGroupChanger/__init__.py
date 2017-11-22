@@ -18,8 +18,8 @@ class serverGroupChanger(ts3plugin):
 				(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Toggle Group 2", "")]
     hotkeys = []
     debug = False
-    sgid1 = "1"
-    sgid2 = "2"
+    sgid1 = 1
+    sgid2 = 2
 
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -31,7 +31,6 @@ class serverGroupChanger(ts3plugin):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
             (err, dbid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
             (err, sgroups) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-            sgroups = sgroups.split(',')
             if menuItemID == 0:
                 if self.sgid1 in sgroups: ts3lib.requestServerGroupDelClient(schid, self.sgid1, dbid)
                 else: ts3lib.requestServerGroupAddClient(schid, self.sgid1, dbid)
