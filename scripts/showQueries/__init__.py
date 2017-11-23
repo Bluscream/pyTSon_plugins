@@ -2,41 +2,87 @@ from ts3plugin import ts3plugin
 from datetime import datetime
 from urllib.parse import quote as urlencode
 import ts3defines, ts3lib, _ts3lib
+from PythonQt.QtCore import QTimer
+
+
+def date(): return '{:%Y-%m-%d}'.format(datetime.now())
+def time(): return '{:%H:%M:%S}'.format(datetime.now())
+
+def channelURL(schid=None, cid=0, name=None):
+    if schid == None:
+        try: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        except: pass
+    if name == None:
+        try: (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        except: name = cid
+    return '[url=channelid://{0}]"{1}"[/url]'.format(cid, name)
+def clientURL(schid=None, clid=0, uid=None, nickname=None, encodednick=None):
+    if schid == None:
+        try: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        except: pass
+    if uid == None:
+        try: (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        except: pass
+    if nickname == None:
+        try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        except: nickname = uid
+    if encodednick == None:
+        try: encodednick = urlencode(nickname)
+        except: pass
+    return '[url=client://{0}/{1}~{2}]{3}[/url]'.format(clid, uid, encodednick, nickname)
+
 
 class showQueries(ts3plugin):
     name = "Query Viewer"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Shows you queries in channels.\n\nHomepage: https://github.com/Bluscream/Extended-Info-Plugin\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
     offersConfigure = False
-    commandKeyword = "cmd"
+    commandKeyword = ""
     infoTitle = "[b]Queries:[/b]"
     menuItems = []
     hotkeys = []
     debug = False
-
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+    timer = QTimer()
+    cleartimer = QTimer()
+    schid = 0
+    queries = []
 
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        self.cleartimer.timeout.connect(self.clearQueries)
+        self.cleartimer.start(1000*18000)
+        if self.debug: ts3lib.printMessageToCurrentTab("[{0} {1}] [color=orange]{2}[/color] Plugin for pyTSon by [url=https://github.com/{3}]{4}[/url] loaded.".format(date(), time(), self.name, self.author))
 
-    def clientURL(self, schid=None, clid=1, uid=None, nickname=None, encodednick=None):
-        if schid == None:
-            try: schid = ts3lib.getCurrentServerConnectionHandlerID()
-            except: pass
-        if uid == None:
-            try: (error, uid) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-            except: pass
-        if nickname == None:
-            try: (error, nickname) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-            except: nickname = uid
-        if encodednick == None:
-            try: encodednick = urlencode(nickname)
-            except: pass
-        return "[url=client://{0}/{1}~{2}]{3}[/url]".format(clid, uid, encodednick, nickname)
+    def onConnectStatusChangeEvent(self, schid, status, errorNumber):
+        if status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            self.schid = schid
+            self.timer.timeout.connect(self.checkQueries)
+            self.timer.start(1000)
+            ts3lib.printMessageToCurrentTab('Timer started!')
+        elif status == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
+            if self.timer.isActive():
+                self.timer.stop()
+                self.schid = 0
+                ts3lib.printMessageToCurrentTab('Timer stopped!')
+
+    def checkQueries(self):
+        (err, clist) = ts3lib.getClientList(self.schid)
+        for c in clist:
+            if c in self.queries:
+                continue
+            else:
+                (err, ctype) = ts3lib.getClientVariable(self.schid, c, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
+                if ctype != ts3defines.ClientType.ClientType_SERVERQUERY: return
+                self.queries.append(c)
+                (err, cid) = ts3lib.getChannelOfClient(self.schid, c)
+                # (err, channelname) = ts3lib.getChannelVariable(self.schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+                ts3lib.printMessage(self.schid, "<{0}> Found Query {1} in channel {2}".format(time(), clientURL(self.schid, c), channelURL(self.schid, cid)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+
+    def clearQueries(self):
+        self.queries = []
+        ts3lib.printMessage(self.schid, "<{0}> Cleared Query List".format(time()), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
     def infoData(self, schid, id, atype):
         try:
@@ -44,17 +90,17 @@ class showQueries(ts3plugin):
                 (error, clist) = ts3lib.getChannelClientList(schid, id)
                 i = []
                 for c in clist:
-                    (error, clienttype) = ts3lib.getClientVariableAsInt(schid, c, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
+                    (error, clienttype) = ts3lib.getClientVariable(schid, c, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
                     if clienttype == ts3defines.ClientType.ClientType_SERVERQUERY:
-                        i.append(self.clientURL(schid,c))
+                        i.append(clientURL(schid, c))
                 if len(i) < 1: return
                 else: return i
         except: return
 
-    def processCommand(self, schid, command):
-        ts3lib.sendPluginCommand(schid, command, ts3defines.PluginTargetMode.PluginCommandTarget_CURRENT_CHANNEL, []) #_ts3lib
-        return True
-
-    def onPluginCommandEvent(self, schid, clid, pluginCommand):
-        ts3lib.printMessageToCurrentTab("onPluginCommandEvent")
-        ts3lib.printMessage(schid, "{0} PluginMessage from {1}: {2}".format(self.timestamp(), self.clientURL(clid), pluginCommand), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+    def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
+        # if oldChannelID != 0: return
+        (err, clienttype) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
+        if clienttype != ts3defines.ClientType.ClientType_SERVERQUERY: return
+        # (err, channelname) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelProperties.CHANNEL_NAME)
+        ts3lib.printMessage(schid, "<{0}> {1} switched from channel {2} to {3}".format(time(), clientURL(schid, clientID), channelURL(schid, oldChannelID), channelURL(schid, newChannelID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        # <16:11:43> "charlie sheen" switched from channel "Intros Gratis <3" to "Serverteam-Gesucht Builder"

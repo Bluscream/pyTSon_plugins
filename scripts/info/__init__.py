@@ -18,7 +18,7 @@ class info(ts3plugin):
     description = "Shows you more informations.\nBest to use together with a Extended Info Theme.\nClick on \"Settings\" to select what items you want to see :)\n\nHomepage: https://github.com/Bluscream/Extended-Info-Plugin\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
     offersConfigure = True
     commandKeyword = "info"
-    infoTitle = "Extendend Info"
+    infoTitle = "[b]Extendend Info[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Set Meta Data", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Avatar Flag", "")]
     hotkeys = []
     ini = os.path.join(ts3.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
@@ -164,7 +164,7 @@ class info(ts3plugin):
                         i.append(self.timestamp())
                 elif name == 'TYPE':
                     if self.cfg.getboolean('VirtualServerProperties', 'TYPE'):
-                        i.append('Type: [b]Server[/b]')
+                        i.append('Type: Server')
                 else:
                     try:
                         if self.cfg.getboolean('VirtualServerProperties', name):
@@ -190,7 +190,7 @@ class info(ts3plugin):
                     if self.cfg.getboolean('ChannelProperties', 'LAST_REQUESTED'):
                         i.append(self.timestamp())
                 elif name == 'TYPE':
-                    if self.cfg.getboolean('ChannelProperties', 'TYPE'): i.append('Type: [b]Channel[/b]')
+                    if self.cfg.getboolean('ChannelProperties', 'TYPE'): i.append('Type: Channel')
                 elif name == 'ID':
                     if self.cfg.getboolean('ChannelProperties', 'ID'):
                         i.append("ID: %s"%id)
@@ -226,10 +226,10 @@ class info(ts3plugin):
                         (error, type) = ts3.getClientVariableAsInt(schid, id, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
                         if error == ts3defines.ERROR_ok:
                             if type == ts3defines.ClientType.ClientType_NORMAL:
-                                i.append('Type: [b]Client[/b]')
+                                i.append('Type: Client')
                             elif type == ts3defines.ClientType.ClientType_SERVERQUERY:
-                                i.append('Type: [b]ServerQuery[/b]')
-                            else: i.append('Type: [b]Unknown ('+str(type)+')[/b]')
+                                i.append('Type: ServerQuery')
+                            else: i.append('Type: Unknown ({0})'.format(type))
                 elif name == 'ID':
                     if self.cfg.getboolean('ClientProperties', 'ID'):
                         i.append("ID: %s"%id)

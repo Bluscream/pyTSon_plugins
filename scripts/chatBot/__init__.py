@@ -7,6 +7,8 @@ from ts3plugin import ts3plugin
 import datetime, ts3defines, ts3lib, sys, os, pytson, pytsonui
 import time as timestamp
 from base64 import b64encode, b64decode
+from pytsonui import setupUi
+from pytson import *
 
 class color(object):
     DEFAULT = "[color=white]"
@@ -24,7 +26,7 @@ class chatBot(ts3plugin):
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
-    description = "A simply chatbot for Teamspeak 3 Clients"
+    description = "A simple chatbot for Teamspeak 3 Clients"
     offersConfigure = True
     commandKeyword = ""
     infoTitle = None
