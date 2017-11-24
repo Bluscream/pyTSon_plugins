@@ -15,7 +15,7 @@ def channelURL(schid=None, cid=0, name=None):
     if name == None:
         try: (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
         except: name = cid
-    return '[url=channelid://{0}]"{1}"[/url]'.format(cid, name)
+    return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
 def clientURL(schid=None, clid=0, uid=None, nickname=None, encodednick=None):
     if schid == None:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
@@ -40,7 +40,7 @@ class showQueries(ts3plugin):
     author = "Bluscream"
     description = "Shows you queries in channels.\n\nHomepage: https://github.com/Bluscream/Extended-Info-Plugin\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
     offersConfigure = False
-    commandKeyword = ""
+    commandKeyword = "query"
     infoTitle = "[b]Queries:[/b]"
     menuItems = []
     hotkeys = []
@@ -74,7 +74,7 @@ class showQueries(ts3plugin):
                 continue
             else:
                 (err, ctype) = ts3lib.getClientVariable(self.schid, c, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
-                if ctype != ts3defines.ClientType.ClientType_SERVERQUERY: return
+                if ctype != ts3defines.ClientType.ClientType_SERVERQUERY: continue
                 self.queries.append(c)
                 (err, cid) = ts3lib.getChannelOfClient(self.schid, c)
                 # (err, channelname) = ts3lib.getChannelVariable(self.schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
@@ -104,3 +104,26 @@ class showQueries(ts3plugin):
         # (err, channelname) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelProperties.CHANNEL_NAME)
         ts3lib.printMessage(schid, "<{0}> {1} switched from channel {2} to {3}".format(time(), clientURL(schid, clientID), channelURL(schid, oldChannelID), channelURL(schid, newChannelID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         # <16:11:43> "charlie sheen" switched from channel "Intros Gratis <3" to "Serverteam-Gesucht Builder"
+
+    def printQueries(self):
+        (err, schids) = ts3lib.getServerConnectionHandlerList()
+        for schid in schids:
+            (err, cids) = ts3lib.getChannelList(schid)
+            for cid in cids:
+                (err, clids) = ts3lib.getChannelClientList(schid, cid)
+                msg = []
+                for clid in clids:
+                    (err, ctype) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
+                    if ctype != ts3defines.ClientType.ClientType_SERVERQUERY: continue
+                    msg.append(clientURL(schid, clid))
+                if len(msg) < 1: continue
+                ts3lib.printMessage(schid, "<{0}> {1} has [b]{2}[/b] Query Clients: {3}".format(time(), channelURL(schid, cid), len(msg), ", ".join(msg)),
+                                    ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+
+
+    def processCommand(self, schid, cmd):
+        cmd = cmd.split(' ', 1)
+        command = cmd[0].lower()
+        if command == "list":
+            self.printQueries()
+        return 1
