@@ -50,4 +50,4 @@ class countNick(ts3plugin):
         if self.debug: ts3lib.printMessageToCurrentTab('Tick %s: '%self.count + _newnick)
         ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _newnick)
         ts3lib.flushClientSelfUpdates(schid)
-        self.count +=
+        self.count += 1

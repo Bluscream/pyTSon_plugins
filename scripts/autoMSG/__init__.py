@@ -5,7 +5,6 @@ from os import path
 
 class autoMSG(ts3plugin):
     name = "Auto Message"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

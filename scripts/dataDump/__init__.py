@@ -36,11 +36,11 @@ class dataDump(ts3plugin):
                 self.cfg.write(cfg)
         schid = ts3.getCurrentServerConnectionHandlerID()
         err, ownid = ts3.getClientID(schid)
-        if not err: self.setMeta(ts3.getCurrentServerConnectionHandlerID())
+        # if not err: self.setMeta(ts3.getCurrentServerConnectionHandlerID())
         if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
+        pass # if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
 
     """
     def configure(self, qParentWidget):

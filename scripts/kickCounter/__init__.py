@@ -4,7 +4,6 @@ from datetime import datetime
 
 class kickCounter(ts3plugin):
     name = "Kick Counter"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
