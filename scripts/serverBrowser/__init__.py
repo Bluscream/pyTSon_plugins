@@ -342,7 +342,6 @@ class ServersDialog(QDialog):
                 elif self.buhl(_filters["hideEmpty"]) and key["users"] <= 0:
                     continue
                 else:
-                    print("%s"%key)
                     rowPosition = _list.rowCount
                     _list.insertRow(rowPosition)
                     # if key['premium']:
@@ -365,6 +364,9 @@ class ServersDialog(QDialog):
                     else:
                         _list.setItem(rowPosition, 4, QTableWidgetItem("No"))
                     #item.setData(Qt.UserRole, key['ip']);
+            _list.setAlternatingRowColors(True)
+            _list.styleSheet = "alternate-background-color: grey;"
+            _list.setStyleSheet("alternate-background-color: grey;")
         except:
             ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 

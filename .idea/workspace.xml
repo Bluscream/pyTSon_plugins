@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/showQueries/__init__.py" afterPath="$PROJECT_DIR$/scripts/showQueries/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" afterPath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -37,7 +37,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/showQueries/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="932">
@@ -45,6 +45,16 @@
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="367" column="28" lean-forward="false" selection-start-line="367" selection-start-column="18" selection-end-line="367" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -70,7 +80,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ts3lib.logMessage(self.name + &quot; script for pyTSon by &quot; + self.author + &quot; loaded from \&quot;&quot; + __file__ + &quot;\&quot;.&quot;, ts3defines.LogLevel.LogLevel_INFO, &quot;Python Script&quot;, 0)</find>
       <find>if self.debug: ts3lib.printMessageToCurrentTab('[{:%Y-%m-%d %H:%M:%S}]'.format( datetime.datetime.now()) + &quot; [color=orange]&quot; + self.name + &quot;[/color] Plugin for pyTSon by [url=https://github.com/&quot; + self.author + &quot;]&quot; + self.author + &quot;[/url] loaded.&quot;)</find>
       <find>ts3lib.logMessage</find>
       <find>ts3.</find>
@@ -100,6 +109,7 @@
       <find>handleplu</find>
       <find>password</find>
       <find>qtimer</find>
+      <find>setAlternatingRowColors</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -176,7 +186,6 @@
         <option value="$PROJECT_DIR$/scripts/autoEncode/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/nowPlaying/__init__.py" />
         <option value="$PROJECT_DIR$/scripts_/autoFollow/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoFlee/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoFlee/cfg/settings.ini" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
@@ -202,6 +211,7 @@
         <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/dataDump/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/showQueries/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
       </list>
     </option>
   </component>
@@ -314,6 +324,12 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="pluginCMD" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="serverBrowser" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -640,13 +656,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00025" summary="o.O">
-      <created>1508170281432</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1508170281432</updated>
     </task>
     <task id="LOCAL-00026" summary="o.O">
       <created>1508171086387</created>
@@ -984,7 +993,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511489955162</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="added command to list all queries on demand ^^">
+      <created>1511493195441</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1511493195442</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1014,6 +1030,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767764" sideWeight="0.24895833" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767764" sideWeight="0.75104165" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32467532" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.4968017" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1042,7 +1059,6 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Floobits" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767764" sideWeight="0.75104165" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1094,7 +1110,8 @@
     <MESSAGE value="added base64 stuff to the chatbot" />
     <MESSAGE value=":thinking:" />
     <MESSAGE value="fixed all obvious errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed all obvious errors" />
+    <MESSAGE value="added command to list all queries on demand ^^" />
+    <option name="LAST_COMMIT_MESSAGE" value="added command to list all queries on demand ^^" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1214,13 +1231,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts_/autoFollow/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="13" column="34" lean-forward="false" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoFlee/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="779">
@@ -1476,6 +1486,14 @@
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="367" column="28" lean-forward="false" selection-start-line="367" selection-start-column="18" selection-end-line="367" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
