@@ -158,7 +158,7 @@ class serverSwitcher(ts3plugin):
                             if name: c.text = escape(name.strip())
                             c.set("host", escape(host))
                             if port and port != 9987: c.set("port", "{}".format(port))
-                            if pw and self.cfg.getboolean('general', 'broadcast server pw'): c.set("pw", pw)
+                            if pw and self.cfg.getboolean('general', 'pw'): c.set("pw", pw)
                             meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
                             # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
                     _away_message = self.cfg.get('general', 'status').replace('{host}', host if host else "").replace('{name}', name if name else "").replace('{port}', str(port) if port else "")

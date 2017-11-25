@@ -9,6 +9,11 @@ from collections import OrderedDict
 from inspect import getmembers
 from configparser import ConfigParser
 
+
+def getItems(object):
+    return [getattr(object, a) for a in dir(object) if not a.startswith('__') and not callable(getattr(object, a))]
+
+
 class info(ts3plugin):
     name = "Extended Info"
     apiVersion = 22
@@ -25,7 +30,7 @@ class info(ts3plugin):
     cfg = ConfigParser()
     cfg.optionxform = str
     runs = 0
-    requested = {}
+    requested = []
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -131,20 +136,20 @@ class info(ts3plugin):
 
     def onServerUpdatedEvent(self, schid):
         if schid in self.requested: return
+        self.requested.append(schid)
         ts3.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_SERVER, schid)
-
 
     def getServerInfo(self, schid):
         i = []
         (err, host, port, password) = ts3.getServerConnectInfo(schid)
-        for var in ts3defines.VirtualServerProperties:
+        for var in getItems(ts3defines.VirtualServerProperties):
             (err, var) = ts3.getServerVariable(schid, var)
             if err == ts3defines.ERROR_ok and var != "" and var != 0:
-                i.append('{0}: {1}'.format(ts3defines.VirtualServerProperties(var).name, var))
-        for var in ts3defines.VirtualServerPropertiesRare:
+                i.append('{0}: {1}'.format(var.__name__, var))
+        for var in getItems(ts3defines.VirtualServerPropertiesRare):
             (err, var) = ts3.getServerVariable(schid, var)
             if err == ts3defines.ERROR_ok and var != "" and var != 0:
-                i.append('{0}: {1}'.format(ts3defines.VirtualServerPropertiesRare(var).name, var))
+                i.append('{0}: {1}'.format(var.__name__, var))
         return i if len(i) > 0 else None
 
     def infoData(self, schid, id, atype):
