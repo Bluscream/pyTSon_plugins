@@ -1,4 +1,4 @@
-import os, json, configparser, webbrowser, traceback, urllib.parse, ts3defines
+import os, json, configparser, webbrowser, traceback, urllib.parse, ts3defines, itertools
 from datetime import datetime
 from ts3lib import *
 from ts3plugin import *
@@ -240,6 +240,33 @@ def generateAvatarFileName():
     ownUID = ownUID.encode('ascii')
     from base64 import b64encode
     return "avatar_"+b64encode(ownUID).decode("ascii").split('=')[0]
+
+def getItems(object):
+    return [(a, getattr(object, a)) for a in dir(object)
+            if not a.startswith('__') and not callable(getattr(object, a)) and not "ENDMARKER" in a and not "DUMMY" in a]
+
+def getvar(clid):
+    for name, var in getItems(ConnectionProperties) + getItems(ConnectionPropertiesRare):
+        ret = "=== Results for {0} ===\n".format(name)
+        try:
+            (err, var1) = getConnectionVariableAsDouble(schid, clid, var)
+            (er, ec) = getErrorMessage(err)
+            ret += "getConnectionVariableAsDouble: err={0} var={1}\n".format(ec, var1)
+        except Exception as e:
+            ret += "getConnectionVariableAsDouble err={0}\n".format(e)
+        try:
+            (err, var2) = getConnectionVariableAsUInt64(schid, clid, var)
+            (er, ec) = getErrorMessage(err)
+            ret += "getConnectionVariableAsUInt64: err={0} var={1}\n".format(ec, var2)
+        except Exception as e:
+            ret += "getConnectionVariableAsUInt64 err={0}\n".format(e)
+        try:
+            (err, var3) = getConnectionVariableAsString(schid, clid, var)
+            (er, ec) = getErrorMessage(err)
+            ret += "getConnectionVariableAsString: err={0} var={1}\n".format(ec, var3)
+        except Exception as e:
+            ret += "getConnectionVariableAsString err={0}\n".format(e)
+        print("{0}================".format(ret))
 
 #if error == 0:
     #error, ownnick = getClientDisplayName(schid, ownid)
