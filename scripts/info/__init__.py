@@ -25,6 +25,7 @@ class info(ts3plugin):
     cfg = ConfigParser()
     cfg.optionxform = str
     runs = 0
+    requested = {}
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -96,36 +97,6 @@ class info(ts3plugin):
         except:
             if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
-    def processCommand(self, schid, command):
-        tokens = command.split(' ')
-        if tokens[0] == "pcmd":
-            ts3.sendPluginCommand(schid, tokens[1], ts3defines.PluginTargetMode.PluginCommandTarget_SERVER, []);return True
-        elif tokens[0] == "meta":
-            if tokens[1] == "get":
-                error, ownid = ts3.getClientID(schid)
-                if error == ts3defines.ERROR_ok:
-                    # requestClientVariables(schid, ownid)
-                    error, meta = ts3.getClientVariableAsString(schid, ownid, ts3defines.ClientProperties.CLIENT_META_DATA)
-                    if error == ts3defines.ERROR_ok:
-                        ts3.printMessageToCurrentTab(meta);return True
-                    else:
-                        ts3.printMessageToCurrentTab("Error: Can't get own meta data.");return True
-                else:
-                    ts3.printMessageToCurrentTab("Error: Can't get own clientID.");return True
-            elif tokens[1] == "set":
-                error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, tokens[2])
-                if not error == ts3defines.ERROR_ok:
-                    ts3.printMessageToCurrentTab("Error: Unable to set own meta data.");return True
-                else: return True
-        else:
-            ts3.printMessageToCurrentTab("ERROR: Command \""+tokens[0]+"\" not found!");return True
-        return False
-
-    def onPluginCommandEvent(self, serverConnectionHandlerID, pluginName, pluginCommand):
-            _f = "Plugin message by {0}: {1}".format(pluginName,pluginCommand)
-            ts3.logMessage(_f, ts3defines.LogLevel.LogLevel_INFO, self.name, 0)
-            if self.cfg.getboolean('general', 'Debug'): ts3.printMessageToCurrentTab("{0}{1}".format(self.timestamp(),_f))
-
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 0:
@@ -153,9 +124,37 @@ class info(ts3plugin):
                         if not error == ts3defines.ERROR_ok or not error2 == ts3defines.ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own avatar flag!");_t.show()
 
+    # (err, path, password) = ts3.getChannelConnectInfo(serverConnectionHandlerID, channelID, maxLen)
+    # (err, host, port, password) = ts3.getServerConnectInfo(serverConnectionHandlerID, maxLen=256)
+    # ts3.requestConnectionInfo(serverConnectionHandlerID, clientID, returnCode)
+    # ts3.requestInfoUpdate(serverConnectionHandlerID, itemType, itemID)
+
+    def onServerUpdatedEvent(self, schid):
+        if schid in self.requested: return
+        ts3.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_SERVER, schid)
+
+
+    def getServerInfo(self, schid):
+        i = []
+        (err, host, port, password) = ts3.getServerConnectInfo(schid)
+        for var in ts3defines.VirtualServerProperties:
+            (err, var) = ts3.getServerVariable(schid, var)
+            if err == ts3defines.ERROR_ok and var != "" and var != 0:
+                i.append('{0}: {1}'.format(ts3defines.VirtualServerProperties(var).name, var))
+        for var in ts3defines.VirtualServerPropertiesRare:
+            (err, var) = ts3.getServerVariable(schid, var)
+            if err == ts3defines.ERROR_ok and var != "" and var != 0:
+                i.append('{0}: {1}'.format(ts3defines.VirtualServerPropertiesRare(var).name, var))
+        return i if len(i) > 0 else None
+
     def infoData(self, schid, id, atype):
         i = []
-        if atype == 0:
+        if atype == ts3defines.PluginItemType.PLUGIN_SERVER:
+            if not schid in self.requested:
+                ts3.requestServerVariables(schid)
+            return self.getServerInfo(schid)
+        return None
+        if atype == ts3defines.PluginItemType.PLUGIN_SERVER:
             if self.cfg.getboolean('general', 'Autorequest Server Variables'):
                 ts3.requestServerVariables(schid)
             for name in self.cfg['VirtualServerProperties']:
@@ -184,7 +183,7 @@ class info(ts3plugin):
                         ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                     continue
             return i
-        elif atype == 1:
+        elif atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
             for name in self.cfg['ChannelProperties']:
                 if name == 'LAST_REQUESTED':
                     if self.cfg.getboolean('ChannelProperties', 'LAST_REQUESTED'):
@@ -213,7 +212,7 @@ class info(ts3plugin):
                         ts3.logMessage('Could not look up '+name, ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                     continue
             return i
-        elif atype == 2:
+        elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
             if self.cfg.getboolean('general', 'Autorequest Client Variables'):
                 ts3.requestClientVariables(schid, id)
             for name in self.cfg['ClientProperties']:

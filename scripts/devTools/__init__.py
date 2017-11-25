@@ -255,7 +255,7 @@ try:
                 self.btn_apply.setEnabled(True);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(True);self.btn_reset.setEnabled(True);self.chk_live.setEnabled(True)
             elif index == 1:
                 self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
-            else:
+            elif index == 2:
                 self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(False);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
         def on_chk_live_stateChanged(self, state):
             if state == Qt.Checked:
