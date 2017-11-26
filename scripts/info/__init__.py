@@ -9,11 +9,37 @@ from pytsonui import setupUi
 from collections import OrderedDict
 from inspect import getmembers
 from configparser import ConfigParser
+from urllib.parse import quote as urlencode
+
+def date(): return '{:%Y-%m-%d}'.format(datetime.datetime.now())
+def time(): return '{:%H:%M:%S}'.format(datetime.datetime.now())
 
 def getItems(object):
     return [(a, getattr(object, a)) for a in dir(object)
             if not a.startswith('__') and not callable(getattr(object, a)) and not "ENDMARKER" in a and not "DUMMY" in a]
 
+def channelURL(schid=None, cid=0, name=None):
+    if schid == None:
+        try: schid = ts3.getCurrentServerConnectionHandlerID()
+        except: pass
+    if name == None:
+        try: (error, name) = ts3.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
+        except: name = cid
+    return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
+def clientURL(schid=None, clid=0, uid=None, nickname=None, encodednick=None):
+    if schid == None:
+        try: schid = ts3.getCurrentServerConnectionHandlerID()
+        except: pass
+    if uid == None:
+        try: (error, uid) = ts3.getClientVariable(schid, clid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        except: pass
+    if nickname == None:
+        try: (error, nickname) = ts3.getClientVariable(schid, clid, ClientProperties.CLIENT_NICKNAME)
+        except: nickname = uid
+    if encodednick == None:
+        try: encodednick = urlencode(nickname)
+        except: pass
+    return '[url=client://{0}/{1}~{2}]{3}[/url]'.format(clid, uid, encodednick, nickname)
 
 class info(ts3plugin):
     name = "Extended Info"
@@ -102,6 +128,16 @@ class info(ts3plugin):
             self.dlg.activateWindow()
         except:
             if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+
+    def processCommand(self, schid, cmd):
+        cmd = cmd.split(' ', 1)
+        command = cmd[0].lower()
+        if command == "client":
+            clid = int(cmd[1])
+            (err, cid) = ts3.getChannelOfClient(schid, clid)
+            ts3.printMessage(schid, "<{0}> Client {1} in channel {2}".format(time(), clientURL(schid, clid), channelURL(schid, cid)),
+                                PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        return 1
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
