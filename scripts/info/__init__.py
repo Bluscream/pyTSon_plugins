@@ -228,6 +228,11 @@ class info(ts3plugin):
         self.requested.append(schid)
         ts3.requestInfoUpdate(schid, PluginItemType.PLUGIN_SERVER, schid)
 
+    def onConnectionInfoEvent(self, schid, clid):
+        if clid in self.requestedCLIDS: return
+        self.requestedCLIDS.append(clid)
+        ts3.requestInfoUpdate(schid, PluginItemType.PLUGIN_CLIENT, schid)
+
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
         if clid in self.requestedCLIDS: return
         self.requestedCLIDS.append(clid)
