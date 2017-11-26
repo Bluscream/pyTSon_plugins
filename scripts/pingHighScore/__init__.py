@@ -1,7 +1,6 @@
 import pytson, ts3lib, ts3defines, itertools, re, textwrap
 from ts3plugin import ts3plugin
 from datetime import datetime
-from urllib.parse import quote as urlencode
 from collections import defaultdict
 
 def take(n, iterable):
@@ -19,7 +18,7 @@ def channelURL(schid=None, cid=0, name=None):
         try: (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
         except: name = cid
     return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
-def clientURL(schid=None, clid=0, uid=None, nickname=None, encodednick=None):
+def clientURL(schid=None, clid=0, uid=None, nickname=None):
     if schid == None:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
@@ -29,10 +28,7 @@ def clientURL(schid=None, clid=0, uid=None, nickname=None, encodednick=None):
     if nickname == None:
         try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         except: nickname = uid
-    if encodednick == None:
-        try: encodednick = urlencode(nickname)
-        except: pass
-    return '[url=client://{0}/{1}~{2}]{3}[/url]'.format(clid, uid, encodednick, nickname)
+    return '[url=client://{0}/{1}]{2}[/url]'.format(clid, uid, nickname)
 
 class pingHighScore(ts3plugin):
     name = "Ping High Score"
@@ -59,15 +55,19 @@ class pingHighScore(ts3plugin):
         cmd = cmd.split(' ', 1)
         command = cmd[0].lower()
         if command == "ping":
+            count = int(cmd[1]) if cmd[1] else 5
             c = {}
             (err, clids) = ts3lib.getClientList(schid)
             for clid in clids:
-                if len(self.c) > 10: break
+                # if len(self.c) > 10: break
+                if not clid in self.c:
+                    ts3lib.requestConnectionInfo(schid, clid)
+                    self.c.append(clid)
                 (err, ping) = ts3lib.getConnectionVariableAsUInt64(schid, clid, ts3defines.ConnectionProperties.CONNECTION_PING)
                 if err == ts3defines.ERROR_ok: c[clid] = ping
             print(c)
             s = sorted(c.items(), key=lambda x: int(x[1]))
-            t = take(10, s)
+            t = take(count, s)
             string = ""
             place = 1
             for k,v in t:
