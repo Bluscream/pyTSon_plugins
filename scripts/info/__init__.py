@@ -222,16 +222,17 @@ class info(ts3plugin):
         i = []
         (err, host, port, password) = ts3.getServerConnectInfo(schid)
         i.append('Host: {0}'.format(host))
-        i.append('Port: {0}'.format(port))
-        i.append('Password: {0}'.format(password))
+        if port: i.append('Port: {0}'.format(port))
+        if password != "": i.append('Password: {0}'.format(password))
         i.extend(self.getInfo(schid, None, [VirtualServerProperties, VirtualServerPropertiesRare]))
         return i if len(i) > 0 else None
 
     def getChannelInfo(self, schid, cid):
         i = []
         (err, path, password) = ts3.getChannelConnectInfo(schid, cid)
-        i.append('Path: {0}'.format(path))
-        i.append('Password: {0}'.format(password))
+        (err, name) = ts3.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
+        if path != name: i.append('Path: {0}'.format(path))
+        if password != "": i.append('Password: {0}'.format(password))
         i.extend(self.getInfo(schid, cid, [ChannelProperties, ChannelPropertiesRare]))
         return i if len(i) > 0 else None
 
