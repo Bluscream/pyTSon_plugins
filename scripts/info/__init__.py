@@ -1,9 +1,10 @@
-import os.path, inspect, re, traceback, datetime
+import os.path, inspect, re, traceback, datetime, json, requests
 import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
 from ts3defines import *
 from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
-from PythonQt.QtCore import Qt
+from PythonQt.QtCore import Qt#, QUrl
+# from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
 from pytsonui import setupUi
 from collections import OrderedDict
 from inspect import getmembers
@@ -12,61 +13,6 @@ from configparser import ConfigParser
 def getItems(object):
     return [(a, getattr(object, a)) for a in dir(object)
             if not a.startswith('__') and not callable(getattr(object, a)) and not "ENDMARKER" in a and not "DUMMY" in a]
-
-def getInfo(schid, selectedItemID, lists):
-    i = []
-    for lst in lists:
-        for name, var in getItems(lst):
-            (name, var) = preProcessVar(schid, selectedItemID, name, var, lst)
-            if var is None: continue
-            if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
-                (err, var) = ts3.getServerVariable(schid, var)
-            elif lst in [ChannelProperties, ChannelPropertiesRare]:
-                (err, var) = ts3.getChannelVariable(schid, selectedItemID, var)
-            elif lst in [ConnectionProperties, ConnectionPropertiesRare]:
-                (err, var) = ts3.getConnectionVariable(schid, selectedItemID, var)
-            else:
-                (err, var) = ts3.getClientVariable(schid, selectedItemID, var)
-            if err == ERROR_ok and var != "" and var != 0:
-                if isinstance(var, list): var = ", ".join(var)
-                (name, var) = postProcessVar(schid, selectedItemID, name, var, lst)
-                i.append('{0}: {1}'.format(name, var))
-    return i
-
-def preProcessVar(schid, id, name, var, lst):
-    if name == "CLIENT_META_DATA":
-        (err, ownID) = ts3.getClientID(schid)
-        if id == ownID: return name, None
-    return name, var
-
-def postProcessVar(schid, id, name, val, lst):
-    if name in [
-        "VIRTUALSERVER_CREATED",
-        "CLIENT_LAST_VAR_REQUEST",
-        "CLIENT_CREATED",
-        "CLIENT_LASTCONNECTED"
-    ]:
-        val = datetime.datetime.fromtimestamp(val).strftime('%Y-%m-%d %H:%M:%S')
-    elif name in [
-        "VIRTUALSERVER_UPTIME",
-        "VIRTUALSERVER_COMPLAIN_AUTOBAN_TIME",
-        "VIRTUALSERVER_COMPLAIN_REMOVE_TIME",
-        "CHANNEL_DELETE_DELAY",
-        "CLIENT_IDLE_TIME",
-        "CONNECTION_CONNECTED_TIME",
-        "CONNECTION_IDLE_TIME"
-    ]:
-        val = datetime.timedelta(milliseconds=val)
-    if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
-        name = name.replace("VIRTUALSERVER_", "")
-    elif lst in [ChannelProperties, ChannelPropertiesRare]:
-        name = name.replace("CHANNEL_", "")
-    elif lst in [ConnectionProperties, ConnectionPropertiesRare]:
-        name = name.replace("CONNECTION_", "")
-    elif list in [ClientProperties, ClientPropertiesRare]:
-        name = name.replace("CLIENT_", "")
-    name = name.replace("_", " ").title()
-    return name, val
 
 
 class info(ts3plugin):
@@ -184,6 +130,63 @@ class info(ts3plugin):
                         if not error == ERROR_ok or not error2 == ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own avatar flag!");_t.show()
 
+    def getInfo(self, schid, selectedItemID, lists):
+        i = []
+        for lst in lists:
+            for name, var in getItems(lst):
+                (name, var) = self.preProcessVar(schid, selectedItemID, name, var, lst)
+                if var is None: continue
+                if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
+                    (err, var) = ts3.getServerVariable(schid, var)
+                elif lst in [ChannelProperties, ChannelPropertiesRare]:
+                    (err, var) = ts3.getChannelVariable(schid, selectedItemID, var)
+                elif lst in [ConnectionProperties, ConnectionPropertiesRare]:
+                    (err, var) = ts3.getConnectionVariable(schid, selectedItemID, var)
+                else:
+                    (err, var) = ts3.getClientVariable(schid, selectedItemID, var)
+                if err != ERROR_ok or var == "" or var == 0: continue
+                if isinstance(var, list): var = ", ".join(var)
+                if name in ["VIRTUALSERVER_IP","CONNECTION_CLIENT_IP"]: i.extend(self.ipInfo(var))
+                (name, var) = self.postProcessVar(schid, selectedItemID, name, var, lst)
+                i.append('{0}: {1}'.format(name, var))
+        return i
+
+    def preProcessVar(self, schid, id, name, var, lst):
+        if name == "CLIENT_META_DATA":
+            (err, ownID) = ts3.getClientID(schid)
+            if id == ownID: return name, None
+        if name == "CHANNEL_PASSWORD": return name, None
+        return name, var
+
+    def postProcessVar(self, schid, id, name, val, lst):
+        if name in [
+            "VIRTUALSERVER_CREATED",
+            "CLIENT_LAST_VAR_REQUEST",
+            "CLIENT_CREATED",
+            "CLIENT_LASTCONNECTED"
+        ]:
+            val = datetime.datetime.fromtimestamp(val).strftime('%Y-%m-%d %H:%M:%S ({0})'.format(val))
+        elif name in [
+            "VIRTUALSERVER_UPTIME",
+            "VIRTUALSERVER_COMPLAIN_AUTOBAN_TIME",
+            "VIRTUALSERVER_COMPLAIN_REMOVE_TIME",
+            "CHANNEL_DELETE_DELAY",
+            "CLIENT_IDLE_TIME",
+            "CONNECTION_CONNECTED_TIME",
+            "CONNECTION_IDLE_TIME"
+        ]:
+            val = '{0} ({1})'.format(datetime.timedelta(milliseconds=val), val)
+        if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
+            name = name.replace("VIRTUALSERVER_", "")
+        elif lst in [ChannelProperties, ChannelPropertiesRare]:
+            name = name.replace("CHANNEL_", "")
+        elif lst in [ConnectionProperties, ConnectionPropertiesRare]:
+            name = name.replace("CONNECTION_", "")
+        elif list in [ClientProperties, ClientPropertiesRare]:
+            name = name.replace("CLIENT_", "")
+        name = name.replace("_", " ").title()
+        return name, val
+
     def onServerUpdatedEvent(self, schid):
         if schid in self.requested: return
         self.requested.append(schid)
@@ -194,13 +197,34 @@ class info(ts3plugin):
         self.requestedCLIDS.append(clid)
         ts3.requestInfoUpdate(schid, PluginItemType.PLUGIN_CLIENT, schid)
 
+    def ipInfo(self, ip):
+        url = 'http://ip-api.com/json/{0}'.format(ip)
+        print('Requesting {0}'.format(url))
+        i = []
+        r = requests.get(url)
+        if r.status_code != requests.codes.ok: return i
+        for k,v in r.json().items():
+            if v is None or v == "" or k in ["status", "query", "message"]: continue
+            i.append('{0}: {1}'.format(k.title(), v))
+        return i
+        # self.nwmc = QNetworkAccessManager()
+        # self.nwmc.connect("finished(QNetworkReply*)", self.ipReply)
+        # self.nwmc.get(QNetworkRequest(QUrl(url)))
+
+    def ipReply(self, reply):
+        i = []
+        r = json.loads(reply.readAll().data().decode('utf-8'))
+        for n, v in r:
+            i.append('{0}: {1}'.format(n.title(), v))
+        return i if len(i) > 0 else None
+
     def getServerInfo(self, schid):
         i = []
         (err, host, port, password) = ts3.getServerConnectInfo(schid)
         i.append('Host: {0}'.format(host))
         i.append('Port: {0}'.format(port))
         i.append('Password: {0}'.format(password))
-        i.extend(getInfo(schid, None, [VirtualServerProperties, VirtualServerPropertiesRare]))
+        i.extend(self.getInfo(schid, None, [VirtualServerProperties, VirtualServerPropertiesRare]))
         return i if len(i) > 0 else None
 
     def getChannelInfo(self, schid, cid):
@@ -208,12 +232,12 @@ class info(ts3plugin):
         (err, path, password) = ts3.getChannelConnectInfo(schid, cid)
         i.append('Path: {0}'.format(path))
         i.append('Password: {0}'.format(password))
-        i.extend(getInfo(schid, cid, [ChannelProperties, ChannelPropertiesRare]))
+        i.extend(self.getInfo(schid, cid, [ChannelProperties, ChannelPropertiesRare]))
         return i if len(i) > 0 else None
 
     def getClientInfo(self, schid, clid):
         i = []
-        i.extend(getInfo(schid, clid, [ClientProperties, ClientPropertiesRare, ConnectionProperties, ConnectionPropertiesRare]))
+        i.extend(self.getInfo(schid, clid, [ClientProperties, ClientPropertiesRare, ConnectionProperties, ConnectionPropertiesRare]))
         return i if len(i) > 0 else None
 
     def infoData(self, schid, id, atype):
