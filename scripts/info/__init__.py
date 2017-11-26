@@ -145,7 +145,7 @@ class info(ts3plugin):
                 else:
                     (err, var) = ts3.getClientVariable(schid, selectedItemID, var)
                 if err != ERROR_ok or var == "" or var == 0: continue
-                if isinstance(var, list): var = ", ".join(var)
+                if isinstance(var, map): var = ", ".join(map(str, var))
                 if name in ["VIRTUALSERVER_IP","CONNECTION_CLIENT_IP"]: i.extend(self.ipInfo(var))
                 (name, var) = self.postProcessVar(schid, selectedItemID, name, var, lst)
                 i.append('{0}: {1}'.format(name, var))

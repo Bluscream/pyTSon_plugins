@@ -40,8 +40,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="225" column="19" lean-forward="false" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="19" />
+            <state relative-caret-position="459">
+              <caret line="147" column="16" lean-forward="false" selection-start-line="147" selection-start-column="16" selection-end-line="147" selection-end-column="71" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -333,6 +333,17 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -350,17 +361,6 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="chatBot" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -676,13 +676,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00031" summary="o.O">
-      <created>1508335120869</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1508335120869</updated>
     </task>
     <task id="LOCAL-00032" summary="o.O">
       <created>1508335166483</created>
@@ -1020,7 +1013,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511669462306</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary=":thinking:">
+      <created>1511671252350</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1511671252351</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1131,10 +1131,10 @@
     <MESSAGE value="fixed all obvious errors" />
     <MESSAGE value="added command to list all queries on demand ^^" />
     <MESSAGE value="fixed serverlist only showing ~10 servers + added alternate row colors." />
-    <MESSAGE value=":thinking:" />
     <MESSAGE value=":thinking: it twerks! yay" />
     <MESSAGE value=":thinking: now with much ipinfo" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking: now with much ipinfo" />
+    <MESSAGE value=":thinking:" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking:" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1528,8 +1528,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="225" column="19" lean-forward="false" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="19" />
+        <state relative-caret-position="459">
+          <caret line="147" column="16" lean-forward="false" selection-start-line="147" selection-start-column="16" selection-end-line="147" selection-end-column="71" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
