@@ -167,7 +167,7 @@ class passwordCracker(ts3plugin):
         if confirm("Password removed", "Password was removed from channel \"{0}\" by \"{1}\"\n\nDo you want to join now?".format(name, invokerName)):
             (err, ownID) = ts3lib.getClientID(self.schid)
             ts3lib.requestClientMove(schid, ownID, channelID, "")
-        self.schid = 0;self.cid = 0;self.pwc = 0;
+        self.schid = 0;self.cid = 0;self.pwc = 0
 
     def onDelChannelEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if not self.cid == channelID: return
@@ -175,7 +175,7 @@ class passwordCracker(ts3plugin):
         self.timer.stop()
         (err, name) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
         msgBox("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Cracker!".format(name, invokerName), QMessageBox.Warning)
-        self.schid = 0;self.cid = 0;self.pwc = 0;
+        self.schid = 0;self.cid = 0;self.pwc = 0
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if not newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: return
@@ -183,4 +183,4 @@ class passwordCracker(ts3plugin):
         self.timer.stop()
         (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
         msgBox("Server left\n\nStopping Cracker!", QMessageBox.Warning)
-        self.schid = 0;self.cid = 0;self.pwc = 0;
+        self.schid = 0;self.cid = 0;self.pwc = 0
