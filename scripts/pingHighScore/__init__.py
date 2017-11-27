@@ -81,4 +81,6 @@ class pingHighScore(ts3plugin):
             # message = (line.strip() for line in re.findall(r'.{1,80}(?:\s+|$)', string))
             # message = textwrap.wrap(string, 1024, break_long_words=False)
             for msg in message: ts3lib.requestSendChannelTextMsg(schid, '\n{0}'.format(msg), ownchan)
+        elif command == "clear":
+            self.c = []
         return 1
