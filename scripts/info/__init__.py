@@ -135,8 +135,7 @@ class info(ts3plugin):
         if command == "client":
             clid = int(cmd[1])
             (err, cid) = ts3.getChannelOfClient(schid, clid)
-            ts3.printMessage(schid, "<{0}> Client {1} in channel {2}".format(time(), clientURL(schid, clid), channelURL(schid, cid)),
-                                PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+            ts3.printMessageToCurrentTab("<{0}> Client {1} in channel {2}".format(time(), clientURL(schid, clid), channelURL(schid, cid)))
         return 1
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):

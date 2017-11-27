@@ -1,23 +1,49 @@
-import pytson, ts3lib, ts3defines
+import pytson, ts3lib, ts3defines, os
 from ts3plugin import ts3plugin
 from datetime import datetime
-from os import path
-from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox
+from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox, QDialog
 from PythonQt.QtCore import Qt, QTimer
 
 
-@staticmethod
-def clientURL(schid=1, clid=0, uid=None, nickname=None):
+def channelURL(schid=None, cid=0, name=None):
+    if schid == None:
+        try: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        except: pass
+    if name == None:
+        try: (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        except: name = cid
+    return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
+def clientURL(schid=None, clid=0, uid=None, nickname=None):
     if schid == None:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
     if uid == None:
-        try: (error, uid) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        try: (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         except: pass
     if nickname == None:
-        try: (error, nickname) = ts3lib.getClientDisplayName(schid, clid)
+        try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         except: nickname = uid
-    return "[url=client://%s/%s]%s[/url]" % (clid, uid, nickname)
+    return '[url=client://{0}/{1}]{2}[/url]'.format(clid, uid, nickname)
+
+
+def inputBox(title, text):
+    x = QWidget()
+    x.setAttribute(Qt.WA_DeleteOnClose)
+    return QInputDialog.getText(x, title, text)
+
+
+def msgBox(text, icon=QMessageBox.Information):
+    x = QMessageBox()
+    x.setText(text)
+    x.setIcon(icon)
+    x.exec()
+
+
+def confirm(title, message):
+    x = QDialog()
+    x.setAttribute(Qt.WA_DeleteOnClose)
+    _x = QMessageBox.question(x, title, message, QMessageBox.Yes, QMessageBox.No)
+    if _x == QMessageBox.Yes: return True if _x == QMessageBox.Yes else False
 
 
 class passwordCracker(ts3plugin):
@@ -32,11 +58,11 @@ class passwordCracker(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Crack PW", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Add PW to cracker", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Stop Cracker"),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Add PW to cracker", "")]
+                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Stop Cracker", ""),
+                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Add PW to cracker", "")]
     hotkeys = []
     debug = False
-    pwpath = path.join(pytson.getPluginPath(), "scripts", name, "pws.txt")
+    pwpath = os.path.join(pytson.getPluginPath(), "scripts", __name__, "pws.txt")
     schid = 0
     cid = 0
     pws = []
@@ -49,6 +75,7 @@ class passwordCracker(ts3plugin):
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
+        content = []
         with open(self.pwpath) as f:
             content = f.readlines()
         self.pws = [x.strip() for x in content]
@@ -62,87 +89,73 @@ class passwordCracker(ts3plugin):
         if err != ts3defines.ERROR_ok:
             (er, msg) = ts3lib.getErrorMessage(err)
             print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(msg, err, pw, self.cid, self.schid))
+        else: print('[{0}] Trying password \"{1}\" for channel #{2} on server #{3}'.format(self.pwc, pw, self.cid, self.schid))
         self.pwc += 1
+
+    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if not returnCode == self.retcode: return
+        if not error == ts3defines.ERROR_ok: return 1
+        self.timer.stop()
+        (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        if confirm("Password found! ({0} / {1})".format(self.pwc, len(self.pws)), "Password \"{0}\" was found for channel \"{1}\"\n\nDo you want to join now?".format(self.pws[self.pwc-1],name)):
+            (err, ownID) = ts3lib.getClientID(self.schid)
+            ts3lib.requestClientMove(schid, ownID, self.cid, self.pws[self.pwc-1])
+        self.schid = 0;self.cid = 0;self.pwc = 0;return 1
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
             if menuItemID == 0:
+                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+                if not haspw:
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
                 self.schid = schid
                 self.cid = selectedItemID
                 self.timer.start(self.interval)
                 ts3lib.printMessageToCurrentTab('Timer started!')
             elif menuItemID == 1:
-                pass
+                (err, path, pw) = ts3lib.getChannelConnectInfo(schid, selectedItemID)
+                if pw == None or pw == False or pw == "":
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msgBox('No password saved for channel {0}'.format(name));return
+                self.pws.append(pw)
+                with open(self.pwpath, "a") as myfile:
+                    myfile.write('\n{0}'.format(pw))
+                msgBox("Added \"{0}\" to password db".format(pw))
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 0:
                 self.timer.stop()
                 ts3lib.printMessageToCurrentTab('Timer stopped!')
             elif menuItemID == 1:
-                x = QWidget()
-                x.setAttribute(Qt.WA_DeleteOnClose)
-                pw = QInputDialog.getText(x, "Enter Channel Password to add", "Password:")
+                pw = inputBox("Enter Channel Password to add", "Password:")
                 if pw == None or pw == False or pw == "":
-                    msgBox = QMessageBox()
-                    msgBox.setText("Not adding \"{0}\" to password db".format(self.cname, invokerName))
-                    msgBox.setIcon(QMessageBox.Warning)
-                    msgBox.
-                    exec ()
-            try:
-
-                clients = self.channelClientCount(schid, channel)
-                if self.debug: ts3lib.printMessageToCurrentTab("clients: {0}".format(clients))
-                (error, maxclients) = ts3lib.getChannelVariableAsUInt64(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
-                if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxclients: {1}".format(error,maxclients))
-                (error, maxfamilyclients) = ts3lib.getChannelVariableAsUInt64(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
-                if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxfamilyclients: {1}".format(error,maxfamilyclients))
-                if clients < maxclients and clients < maxfamilyclients:
-                    (error, ownID) = ts3lib.getClientID(schid)
-                    ts3lib.requestClientMove(schid,ownID,channel,password)
-                    return True
-                (error, name) = ts3lib.getChannelVariableAsString(schid, channel, ts3defines.ChannelProperties.CHANNEL_NAME)
-                self.schid = schid;self.channel = channel;self.password = password;self.cname = name
-                if password == "": ts3lib.printMessageToCurrentTab("Queued for channel [url=channelid://{0}]{1}[/url]. [color=red]{2}[/color] client(s) remaining.".format(channel, name, maxclients-clients+1))
-                else: ts3lib.printMessageToCurrentTab("Queued for channel [url=channelid://{0}]{1}[/url] with password \"{2}\". [color=red]{3}[/color] client(s) remaining.".format(channel, name, password, maxclients-clients+1))
-            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+                    msgBox("Not adding \"{0}\" to password db".format(pw), QMessageBox.Warning);return
+                elif pw in self.pws:
+                    msgBox("Not adding \"{0}\" to password db\n\nIt already exists!".format(pw), QMessageBox.Warning);return
+                self.pws.append(pw)
+                with open(self.pwpath, "a") as myfile:
+                    myfile.write('\n{0}'.format(pw))
+                msgBox("Added \"{0}\" to password db".format(pw))
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
-        if self.schid == schid and self.channel == oldChannelID:
-            clients = self.channelClientCount(schid, oldChannelID)
-            if self.debug: ts3lib.printMessageToCurrentTab("clients: {0}".format(clients))
-            (error, maxclients) = ts3lib.getChannelVariableAsUInt64(schid, oldChannelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
-            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxclients: {1}".format(error,maxclients))
-            (error, maxfamilyclients) = ts3lib.getChannelVariableAsUInt64(schid, oldChannelID, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
-            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxfamilyclients: {1}".format(error,maxfamilyclients))
-            if clients < maxclients and clients < maxfamilyclients:
-                (error, ownID) = ts3lib.getClientID(schid)
-                ts3lib.requestClientMove(schid,ownID,oldChannelID,self.password)
-                self.schid = 0; self.channel = 0; self.password = "";self.name = ""
-            else: ts3lib.printMessageToCurrentTab("{0} left channel [url=channelid://{1}]{2}[/url]. [color=red]{3}[/color] client(s) remaining.".format(clientURL(schid, clientID), channel, name, maxclients - clients + 1))
+        pass
 
     def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer):
-        if self.debug: ts3lib.printMessageToCurrentTab("self.schid: {0} | schid: {1}".format(self.schid,schid))
-        if self.debug: ts3lib.printMessageToCurrentTab("self.channel: {0} | channelID: {1}".format(self.channel,channelID))
-        if self.schid == schid and self.channel == channelID:
-            clients = self.channelClientCount(schid, channelID)
-            if self.debug: ts3lib.printMessageToCurrentTab("clients: {0}".format(clients))
-            (error, maxclients) = ts3lib.getChannelVariableAsUInt64(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
-            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxclients: {1}".format(error,maxclients))
-            (error, maxfamilyclients) = ts3lib.getChannelVariableAsUInt64(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
-            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxfamilyclients: {1}".format(error,maxfamilyclients))
-            if clients < maxclients and clients < maxfamilyclients:
-                (error, ownID) = ts3lib.getClientID(schid)
-                ts3lib.requestClientMove(schid,ownID,channelID,self.password)
-                self.schid = 0; self.channel = 0; self.password = "";self.name = ""
+        if not self.cid == channelID: return
+        if not self.schid == schid: return
+        (err, haspw) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+        if haspw: return
+        self.timer.stop()
+        (err, name) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
+        if confirm("Password removed", "Password was removed from channel \"{0}\" by \"{1}\"\n\nDo you want to join now?".format(name, invokerName)):
+            (err, ownID) = ts3lib.getClientID(self.schid)
+            ts3lib.requestClientMove(schid, ownID, channelID, "")
+        self.schid = 0;self.cid = 0;self.pwc = 0;
 
-    def onDelChannelEvent(self, schid, channel, invokerID, invokerName, invokerUniqueIdentiﬁer):
-        if self.schid == schid and self.channel == channel:
-            msgBox = QMessageBox()
-            msgBox.setText("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Queue!".format(self.cname, invokerName))
-            msgBox.setIcon(QMessageBox.Warning)
-            msgBox.exec()
-            self.schid = 0;self.channel = 0;self.password = "";self.name = ""
-
-    def channelClientCount(self, schid, channelID):
-            (error, clients) = ts3lib.getChannelClientList(schid, channelID)
-            if error == ts3defines.ERROR_ok: return len(clients)
-            else: return error
+    def onDelChannelEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer):
+        if not self.cid == channelID: return
+        if not self.schid == schid: return
+        self.timer.stop()
+        (err, name) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
+        msgBox("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Cracker!".format(name, invokerName), QMessageBox.Warning)
+        self.schid = 0;self.cid = 0;self.pwc = 0;
