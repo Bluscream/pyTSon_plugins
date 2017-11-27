@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" afterPath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" afterPath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/passwordCracker/pws.txt" afterPath="$PROJECT_DIR$/scripts/passwordCracker/pws.txt" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -42,7 +40,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
+            <state relative-caret-position="476">
               <caret line="32" column="47" lean-forward="false" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="68" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -54,8 +52,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="175" column="19" lean-forward="false" selection-start-line="175" selection-start-column="19" selection-end-line="175" selection-end-column="19" />
+            <state relative-caret-position="623">
+              <caret line="201" column="63" lean-forward="false" selection-start-line="201" selection-start-column="55" selection-end-line="201" selection-end-column="63" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -647,13 +645,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00044" summary="o.O">
-      <created>1509244994007</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1509244994007</updated>
-    </task>
     <task id="LOCAL-00045" summary="o.O">
       <created>1509245170331</created>
       <option name="number" value="00045" />
@@ -990,7 +981,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511760286640</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary=":thinking:">
+      <created>1511770131870</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1511770131870</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1478,7 +1476,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
+        <state relative-caret-position="476">
           <caret line="32" column="47" lean-forward="false" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="68" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
@@ -1488,8 +1486,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="175" column="19" lean-forward="false" selection-start-line="175" selection-start-column="19" selection-end-line="175" selection-end-column="19" />
+        <state relative-caret-position="623">
+          <caret line="201" column="63" lean-forward="false" selection-start-line="201" selection-start-column="55" selection-end-line="201" selection-end-column="63" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>

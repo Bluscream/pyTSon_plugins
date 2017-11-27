@@ -199,8 +199,7 @@ class passwordCracker(ts3plugin):
         if not self.cid == channelID: return
         if not self.schid == schid: return
         self.timer.stop()
-        (err, name) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
-        msgBox("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Cracker!".format(name, invokerName), QMessageBox.Warning)
+        msgBox("Channel #{0} got deleted by \"{1}\"\n\nStopping Cracker!".format(self.cid, invokerName), QMessageBox.Warning)
         self.schid = 0;self.cid = 0;self.pwc = 0
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
