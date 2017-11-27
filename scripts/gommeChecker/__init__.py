@@ -56,7 +56,7 @@ class gommeChecker(ts3plugin):
                     if permanent:
                         (error, name) = ts3lib.getChannelVariableAsString(schid, c, ts3defines.ChannelProperties.CHANNEL_NAME)
                         if name.startswith("Support "):
-                            self.supchans.extend(c)
+                            self.supchans.append(c)
                         elif name.startswith("[cspacer10]● Support"):
                             self.supmain = c
                 self.cfg.set("general", "enabled", "True")

