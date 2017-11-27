@@ -107,15 +107,16 @@ class passwordCracker(ts3plugin):
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if not returnCode == self.retcode: return
-        ts3lib.requestInfoUpdate(self.schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
+        ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
         if not error == ts3defines.ERROR_ok: return 1
         self.timer.stop()
         (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        ts3lib.printMessageToCurrentTab('Channel: {0} Password: \"{1}\"'.format(channelURL(schid, self.cid, name), self.pws[self.pwc-1]))
         if confirm("Password found! ({0} / {1})".format(self.pwc, len(self.pws)), "Password \"{0}\" was found for channel \"{1}\"\n\nDo you want to join now?".format(self.pws[self.pwc-1],name)):
-            (err, ownID) = ts3lib.getClientID(self.schid)
+            (err, ownID) = ts3lib.getClientID(schid)
             ts3lib.requestClientMove(schid, ownID, self.cid, self.pws[self.pwc-1])
         self.schid = 0;self.cid = 0;self.pwc = 0
-        ts3lib.requestInfoUpdate(self.schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
+        ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
         return 1
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
