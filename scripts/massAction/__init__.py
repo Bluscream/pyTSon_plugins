@@ -6,6 +6,7 @@ from PythonQt.Qt import QApplication
 from PythonQt import BoolResult
 from ts3plugin import ts3plugin
 from pytsonui import setupUi
+from pluginhost import PluginHost
 import ts3defines, ts3lib, pytson
 
 class massAction(ts3plugin):
@@ -35,7 +36,7 @@ class massAction(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 8, "Ban all Clients", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 9, "Delete all Channels", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 10, "== {0} ==".format(name), ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "== {0} ==".format(name), ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 11, "== {0} ==".format(name), ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Message all Clients", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "OfflineMessage all Clients", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Poke all Clients", ""),
@@ -44,7 +45,7 @@ class massAction(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 6, "Kick all Clients", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 7, "Ban all Clients", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 8, "Give Talk Power", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 9, "== {0} ==".format(name), "")
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 12, "== {0} ==".format(name), "")
     ]
     dlg = None
     ok = BoolResult()
@@ -55,6 +56,10 @@ class massAction(ts3plugin):
     def __init__(self):
         self.requested = True;ts3lib.requestChannelGroupList(ts3lib.getCurrentServerConnectionHandlerID())
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+
+    def menuCreated(self):
+        for id in [0,10,11,12]:
+            ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         try:

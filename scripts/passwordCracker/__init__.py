@@ -63,13 +63,13 @@ class passwordCracker(ts3plugin):
         (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "== {0} ==".format(name), ""),
         (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Stop Cracker", ""),
         (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Add PW to cracker", ""),
-        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "== {0} ==".format(name), ""),
-        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "== {0} ==".format(name), ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 10, "== {0} ==".format(name), ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 11, "== {0} ==".format(name), ""),
         (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Crack PW (Dictionary)", ""),
         (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "Crack PW (Bruteforce)", ""),
         (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Add PW to cracker", ""),
         (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "Try Password", ""),
-        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 5, "== {0} ==".format(name), "")
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 12, "== {0} ==".format(name), "")
     ]
     hotkeys = []
     debug = False
@@ -106,9 +106,8 @@ class passwordCracker(ts3plugin):
         self.timer = QTimer()
 
     def menuCreated(self):
-        pass
-        # ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, ), False)
-        # ts3lib.setPluginMenuEnabled(0, False)
+        for id in [0,10,11,12]:
+            ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
 
     def startTimer(self, schid=0, cid=0):
         if schid != 0: self.schid = schid
