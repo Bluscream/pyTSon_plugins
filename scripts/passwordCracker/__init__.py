@@ -1,6 +1,7 @@
-import pytson, ts3lib, ts3defines, os
+import pytson, ts3lib, os
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
+from ts3defines import *
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox, QDialog
 from PythonQt.QtCore import Qt, QTimer
@@ -12,7 +13,7 @@ def channelURL(schid=None, cid=0, name=None):
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
     if name == None:
-        try: (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        try: (error, name) = ts3lib.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
         except: name = cid
     return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
 def clientURL(schid=None, clid=0, uid=None, nickname=None):
@@ -20,10 +21,10 @@ def clientURL(schid=None, clid=0, uid=None, nickname=None):
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
     if uid == None:
-        try: (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        try: (error, uid) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         except: pass
     if nickname == None:
-        try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_NICKNAME)
         except: nickname = uid
     return '[url=client://{0}/{1}]{2}[/url]'.format(clid, uid, nickname)
 
@@ -59,15 +60,15 @@ class passwordCracker(ts3plugin):
     commandKeyword = ""
     infoTitle = "[b]Cracking Password...[/b]"
     menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "== {0} ==".format(name), ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Stop Cracker", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Add PW to cracker", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "== {0} ==".format(name), ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "== {0} ==".format(name), ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Crack PW (Dictionary)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "Crack PW (Bruteforce)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Add PW to cracker", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "== {0} ==".format(name), "")
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "== {0} ==".format(name), ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Stop Cracker", ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Add PW to cracker", ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "== {0} ==".format(name), ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "== {0} ==".format(name), ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Crack PW (Dictionary)", ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "Crack PW (Bruteforce)", ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Add PW to cracker", ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "== {0} ==".format(name), "")
     ]
     hotkeys = []
     debug = False
@@ -114,25 +115,25 @@ class passwordCracker(ts3plugin):
         self.timer.start(self.interval)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
+        if atype == PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
             if menuItemID == 0:
                 if not self.dlg: self.dlg = StatusDialog(self)
                 self.dlg.show();
                 self.dlg.raise_();
                 self.dlg.activateWindow()
             elif menuItemID == 1:
-                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_FLAG_PASSWORD)
                 if not haspw:
-                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_NAME)
                     msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
                 self.mode = 0
                 self.step = 1
                 self.pwc = 0
                 self.startTimer(schid, selectedItemID)
             elif menuItemID == 2:
-                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_FLAG_PASSWORD)
                 if not haspw:
-                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_NAME)
                     msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
                 self.mode = 1
                 step = inputBox(self.name, 'How much to increase per try?')
@@ -143,7 +144,7 @@ class passwordCracker(ts3plugin):
             elif menuItemID == 3:
                 (err, path, pw) = ts3lib.getChannelConnectInfo(schid, selectedItemID)
                 if pw == None or pw == False or pw == "":
-                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_NAME)
                     msgBox('No password saved for channel {0}'.format(name));return
                 elif pw in self.pws:
                     msgBox("Not adding \"{0}\" to password db\n\nIt already exists!".format(pw), QMessageBox.Warning);return
@@ -151,7 +152,7 @@ class passwordCracker(ts3plugin):
                 with open(self.pwpath, "a") as myfile:
                     myfile.write('\n{0}'.format(pw))
                 msgBox("Added \"{0}\" to password db".format(pw))
-        elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+        elif atype == PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 1:
                 self.timer.stop()
                 ts3lib.printMessageToCurrentTab('Timer stopped!')
@@ -167,7 +168,7 @@ class passwordCracker(ts3plugin):
                 msgBox("Added \"{0}\" to password db".format(pw))
 
     def infoData(self, schid, id, atype):
-        if not atype == ts3defines.PluginItemType.PLUGIN_CHANNEL: return None
+        if not atype == PluginItemType.PLUGIN_CHANNEL: return None
         if not self.cid == id: return None
         if not self.schid == schid: return None
         if self.mode == 0: msg = "Trying: {0} / {1}\nCurrent: {2}\nStatus: {3}".format(self.pwc, len(self.pws), self.pws[self.pwc-1], self.status)
@@ -180,49 +181,52 @@ class passwordCracker(ts3plugin):
             if self.mode == 0:
                 if self.pwc >= len(self.pws):
                     self.timer.stop()
-                    (err, name) = ts3lib.getChannelVariable(self.schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    (err, name) = ts3lib.getChannelVariable(self.schid, self.cid, ChannelProperties.CHANNEL_NAME)
                     msgBox("Password for channel \"{0}\" was not found :(\n\nTried {1} passwords.".format(name, self.pwc+1))
                     self.schid = 0;self.cid = 0;self.pwc = 0;return
                 pw = self.pws[self.pwc]
             elif self.mode == 1: pw = str(self.pwc)
             err = ts3lib.verifyChannelPassword(self.schid, self.cid, pw, self.retcode)
-            if err != ts3defines.ERROR_ok:
+            if err != ERROR_ok:
                 (er, status) = ts3lib.getErrorMessage(err)
                 print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(status, err, pw, self.cid, self.schid))
             # else: print('[{0}] Trying password \"{1}\" for channel #{2} on server #{3}'.format(self.pwc, pw, self.cid, self.schid))
             if not self.flooding: self.pwc += self.step
-        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if not returnCode == self.retcode: return
         errorMessage = errorMessage.title()
-        if error == ts3defines.ERROR_channel_invalid_password:
+        if error == ERROR_channel_invalid_password:
             if self.flooding: self.flooding = False
             self.status = '[color=orange]{0}[/color]'.format(errorMessage)
-        elif error == ts3defines.ERROR_client_is_flooding:
+            ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CHANNEL, self.cid)
+        elif error == ERROR_client_is_flooding:
             self.flooding = True
             self.timer.stop()
             QTimer.singleShot(self.antiflood_delay, self.startTimer)
             self.status = '[color=red]{0}[/color]'.format(errorMessage)
-        elif error == ts3defines.ERROR_channel_invalid_id:
+            ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CHANNEL, self.cid)
+        elif error == ERROR_channel_invalid_id:
             self.timer.stop()
-            msgBox("Channel #{0} is invalid!\n\nStopping Cracker!".format(self.cid), QMessageBox.Warning)
-            ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
-            self.schid = 0;self.cid = 0;self.pwc = 0
             self.status = '[color=red]{0}[/color]'.format(errorMessage)
-        elif error == ts3defines.ERROR_ok:
+            ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CHANNEL, self.cid)
+            msgBox("Channel #{0} is invalid!\n\nStopping Cracker!".format(self.cid), QMessageBox.Warning)
+        elif error == ERROR_ok:
+            if self.flooding: self.flooding = False
             self.timer.stop()
-            (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+            (err, name) = ts3lib.getChannelVariable(schid, self.cid, ChannelProperties.CHANNEL_NAME)
             ts3lib.printMessageToCurrentTab('Channel: {0} Password: \"{1}\"'.format(channelURL(schid, self.cid, name), self.pws[self.pwc-1] if self.mode == 0 else self.pwc-1))
+            self.status = '[color=green]{0}[/color]'.format(errorMessage)
+            ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CHANNEL, self.cid)
             if confirm("Password found! ({0} / {1})".format(self.pwc, len(self.pws)) if self.mode == 0 else "Password found!",
                        "Password \"{0}\" was found for channel \"{1}\"\n\nDo you want to join now?".format(self.pws[self.pwc-1] if self.mode == 0 else self.pwc-1,name)):
                 (err, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid, ownID, self.cid, self.pws[self.pwc-1] if self.mode == 0 else str(self.pwc-1))
-            self.schid = 0;self.cid = 0;self.pwc = 0
-            self.status = '[color=green]{0}[/color]'.format(errorMessage)
         else:
             self.status = errorMessage
-        ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
+            ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CHANNEL, self.cid)
+        if error in [ERROR_channel_invalid_id, ERROR_ok]: self.schid = 0;self.cid = 0;self.pwc = 0
         return 1
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
@@ -231,10 +235,10 @@ class passwordCracker(ts3plugin):
     def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if not self.cid == channelID: return
         if not self.schid == schid: return
-        (err, haspw) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+        (err, haspw) = ts3lib.getChannelVariable(schid, channelID, ChannelProperties.CHANNEL_FLAG_PASSWORD)
         if haspw: return
         self.timer.stop()
-        (err, name) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
+        (err, name) = ts3lib.getChannelVariable(schid, channelID, ChannelProperties.CHANNEL_NAME)
         if confirm("Password removed", "Password was removed from channel \"{0}\" by \"{1}\"\n\nDo you want to join now?".format(name, invokerName)):
             (err, ownID) = ts3lib.getClientID(self.schid)
             ts3lib.requestClientMove(schid, ownID, channelID, "")
@@ -248,10 +252,10 @@ class passwordCracker(ts3plugin):
         self.schid = 0;self.cid = 0;self.pwc = 0
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if not newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: return
+        if not newStatus == ConnectStatus.STATUS_DISCONNECTED: return
         if not self.schid == schid: return
         self.timer.stop()
-        (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        (err, name) = ts3lib.getChannelVariable(schid, self.cid, ChannelProperties.CHANNEL_NAME)
         msgBox("Server left\n\nStopping Cracker!", QMessageBox.Warning)
         self.schid = 0;self.cid = 0;self.pwc = 0
 
@@ -263,11 +267,11 @@ class StatusDialog(QDialog):
             setupUi(self, os.path.join(pytson.getPluginPath(), "scripts", "passwordCracker", "status.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle('{0} - Idle'.format(plugin.name))
-        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_send_clicked(self):
         for uid in self.uids:
             try: ts3lib.requestMessageAdd(self.schid, uid, self.subject.text, self.message.toPlainText())
-            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_pushButton_3_clicked(self): self.close()
