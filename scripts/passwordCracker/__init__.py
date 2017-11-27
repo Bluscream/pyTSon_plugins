@@ -170,7 +170,7 @@ class passwordCracker(ts3plugin):
         if not atype == ts3defines.PluginItemType.PLUGIN_CHANNEL: return None
         if not self.cid == id: return None
         if not self.schid == schid: return None
-        if self.mode == 0: msg = "Trying: {0} / {1}\nCurrent: {2}\nStatus: {3}".format(self.pwc, len(self.pws), self.pws[self.pwc], self.status)
+        if self.mode == 0: msg = "Trying: {0} / {1}\nCurrent: {2}\nStatus: {3}".format(self.pwc, len(self.pws), self.pws[self.pwc-1], self.status)
         elif self.mode == 1: msg = "Trying: {0}".format(self.pwc)
         return [msg]
 
@@ -186,27 +186,30 @@ class passwordCracker(ts3plugin):
                 pw = self.pws[self.pwc]
             elif self.mode == 1: pw = str(self.pwc)
             err = ts3lib.verifyChannelPassword(self.schid, self.cid, pw, self.retcode)
-            (er, self.status) = ts3lib.getErrorMessage(err)
             if err != ts3defines.ERROR_ok:
-                print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(self.status, err, pw, self.cid, self.schid))
+                (er, status) = ts3lib.getErrorMessage(err)
+                print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(status, err, pw, self.cid, self.schid))
             # else: print('[{0}] Trying password \"{1}\" for channel #{2} on server #{3}'.format(self.pwc, pw, self.cid, self.schid))
             if not self.flooding: self.pwc += self.step
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if not returnCode == self.retcode: return
-        ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
+        errorMessage = errorMessage.title()
         if error == ts3defines.ERROR_channel_invalid_password:
             if self.flooding: self.flooding = False
+            self.status = '[color=orange]{0}[/color]'.format(errorMessage)
         elif error == ts3defines.ERROR_client_is_flooding:
             self.flooding = True
             self.timer.stop()
             QTimer.singleShot(self.antiflood_delay, self.startTimer)
+            self.status = '[color=red]{0}[/color]'.format(errorMessage)
         elif error == ts3defines.ERROR_channel_invalid_id:
             self.timer.stop()
             msgBox("Channel #{0} is invalid!\n\nStopping Cracker!".format(self.cid), QMessageBox.Warning)
             ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
             self.schid = 0;self.cid = 0;self.pwc = 0
+            self.status = '[color=red]{0}[/color]'.format(errorMessage)
         elif error == ts3defines.ERROR_ok:
             self.timer.stop()
             (err, name) = ts3lib.getChannelVariable(schid, self.cid, ts3defines.ChannelProperties.CHANNEL_NAME)
@@ -215,8 +218,11 @@ class passwordCracker(ts3plugin):
                        "Password \"{0}\" was found for channel \"{1}\"\n\nDo you want to join now?".format(self.pws[self.pwc-1] if self.mode == 0 else self.pwc-1,name)):
                 (err, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid, ownID, self.cid, self.pws[self.pwc-1] if self.mode == 0 else str(self.pwc-1))
-            ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
             self.schid = 0;self.cid = 0;self.pwc = 0
+            self.status = '[color=green]{0}[/color]'.format(errorMessage)
+        else:
+            self.status = errorMessage
+        ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
         return 1
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
