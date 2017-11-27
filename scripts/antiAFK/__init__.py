@@ -29,6 +29,10 @@ class antiAFK(ts3plugin):
     def __init__(self):
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
+    def stop(self):
+        if hasattr(self.timer, "isActive") and self.timer.isActive():
+            self.toggleTimer(self.schid)
+
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
             self.toggleTimer(schid)
