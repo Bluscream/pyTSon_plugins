@@ -77,8 +77,8 @@ class gommeHD(ts3plugin):
         (err, ownID) = ts3lib.getClientID(schid)
         if self.debug: ts3lib.printMessageToCurrentTab('invokerID == ownID: {}'.format(invokerID == ownID))
         if invokerID == ownID:
-            (err, self.settings["maxclients"]) = ts3lib.getChannelVariable(schid, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
-            (err, self.settings["tp"]) = ts3lib.getChannelVariable(schid, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+            (err, self.settings["maxclients"]) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+            (err, self.settings["tp"]) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
         (err, ownChannel) = ts3lib.getChannelOfClient(schid, ownID)
         if self.debug: ts3lib.printMessageToCurrentTab('channelID != ownChannel: {}'.format(channelID != ownChannel))
         if channelID != ownChannel: return

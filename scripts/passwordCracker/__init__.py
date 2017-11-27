@@ -47,7 +47,7 @@ def confirm(title, message):
 
 
 class passwordCracker(ts3plugin):
-    name = "Password cracker"
+    name = "PW Cracker"
     apiVersion = 22
     requestAutoload = True
     version = "1.0"
@@ -56,10 +56,17 @@ class passwordCracker(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = "[b]PW Cracker[/b]"
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Crack PW", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Add PW to cracker", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Stop Cracker", ""),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Add PW to cracker", "")]
+    menuItems = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "== {0} ==".format(name), ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Stop Cracker", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Add PW to cracker", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "== {0} ==".format(name), ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "== {0} ==".format(name), ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Crack PW (Dictionary)", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "Crack PW (Bruteforce)", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Add PW to cracker", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "== {0} ==".format(name), "")
+    ]
     hotkeys = []
     debug = False
     pwpath = os.path.join(pytson.getPluginPath(), "scripts", __name__, "pws.txt")
@@ -68,7 +75,7 @@ class passwordCracker(ts3plugin):
     pws = []
     pwc = 0
     timer = QTimer()
-    interval = 1*1000
+    interval = 250
     retcode = ""
 
     @staticmethod
@@ -81,6 +88,41 @@ class passwordCracker(ts3plugin):
         self.pws = [x.strip() for x in content]
         self.timer.timeout.connect(self.tick)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+
+    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
+            if menuItemID == 1:
+                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+                if not haspw:
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
+                self.schid = schid
+                self.cid = selectedItemID
+                self.timer.start(self.interval)
+                ts3lib.printMessageToCurrentTab('Timer started!')
+            elif menuItemID == 3:
+                (err, path, pw) = ts3lib.getChannelConnectInfo(schid, selectedItemID)
+                if pw == None or pw == False or pw == "":
+                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
+                    msgBox('No password saved for channel {0}'.format(name));return
+                self.pws.append(pw)
+                with open(self.pwpath, "a") as myfile:
+                    myfile.write('\n{0}'.format(pw))
+                msgBox("Added \"{0}\" to password db".format(pw))
+        elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+            if menuItemID == 1:
+                self.timer.stop()
+                ts3lib.printMessageToCurrentTab('Timer stopped!')
+            elif menuItemID == 2:
+                pw = inputBox("Enter Channel Password to add", "Password:")
+                if pw == None or pw == False or pw == "":
+                    msgBox("Not adding \"{0}\" to password db".format(pw), QMessageBox.Warning);return
+                elif pw in self.pws:
+                    msgBox("Not adding \"{0}\" to password db\n\nIt already exists!".format(pw), QMessageBox.Warning);return
+                self.pws.append(pw)
+                with open(self.pwpath, "a") as myfile:
+                    myfile.write('\n{0}'.format(pw))
+                msgBox("Added \"{0}\" to password db".format(pw))
 
     def infoData(self, schid, id, atype):
         if not atype == ts3defines.PluginItemType.PLUGIN_CHANNEL: return None
@@ -118,41 +160,6 @@ class passwordCracker(ts3plugin):
         self.schid = 0;self.cid = 0;self.pwc = 0
         ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
         return 1
-
-    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
-            if menuItemID == 0:
-                (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-                if not haspw:
-                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
-                    msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
-                self.schid = schid
-                self.cid = selectedItemID
-                self.timer.start(self.interval)
-                ts3lib.printMessageToCurrentTab('Timer started!')
-            elif menuItemID == 1:
-                (err, path, pw) = ts3lib.getChannelConnectInfo(schid, selectedItemID)
-                if pw == None or pw == False or pw == "":
-                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ts3defines.ChannelProperties.CHANNEL_NAME)
-                    msgBox('No password saved for channel {0}'.format(name));return
-                self.pws.append(pw)
-                with open(self.pwpath, "a") as myfile:
-                    myfile.write('\n{0}'.format(pw))
-                msgBox("Added \"{0}\" to password db".format(pw))
-        elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
-            if menuItemID == 0:
-                self.timer.stop()
-                ts3lib.printMessageToCurrentTab('Timer stopped!')
-            elif menuItemID == 1:
-                pw = inputBox("Enter Channel Password to add", "Password:")
-                if pw == None or pw == False or pw == "":
-                    msgBox("Not adding \"{0}\" to password db".format(pw), QMessageBox.Warning);return
-                elif pw in self.pws:
-                    msgBox("Not adding \"{0}\" to password db\n\nIt already exists!".format(pw), QMessageBox.Warning);return
-                self.pws.append(pw)
-                with open(self.pwpath, "a") as myfile:
-                    myfile.write('\n{0}'.format(pw))
-                msgBox("Added \"{0}\" to password db".format(pw))
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         pass
