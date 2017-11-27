@@ -68,7 +68,8 @@ class passwordCracker(ts3plugin):
         (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Crack PW (Dictionary)", ""),
         (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 2, "Crack PW (Bruteforce)", ""),
         (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 3, "Add PW to cracker", ""),
-        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "== {0} ==".format(name), "")
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 4, "Try Password", ""),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 5, "== {0} ==".format(name), "")
     ]
     hotkeys = []
     debug = False
@@ -152,13 +153,18 @@ class passwordCracker(ts3plugin):
                 with open(self.pwpath, "a") as myfile:
                     myfile.write('\n{0}'.format(pw))
                 msgBox("Added \"{0}\" to password db".format(pw))
+            elif menuItemID == 4:
+                (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_NAME)
+                pw = inputBox("{0} - {1}".format(self.name,name), "Password:")
+                self.schid = schid;self.cid = selectedItemID;self.pw = pw
+                ts3lib.verifyChannelPassword(schid, selectedItemID, pw, "passwordCracker:manual")
         elif atype == PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 1:
                 self.timer.stop()
                 ts3lib.printMessageToCurrentTab('Timer stopped!')
             elif menuItemID == 2:
                 pw = inputBox("Enter Channel Password to add", "Password:")
-                if pw == None or pw == False or pw == "":
+                if pw is None or pw == False or pw == "":
                     msgBox("Not adding \"{0}\" to password db".format(pw), QMessageBox.Warning);return
                 elif pw in self.pws:
                     msgBox("Not adding \"{0}\" to password db\n\nIt already exists!".format(pw), QMessageBox.Warning);return
@@ -195,6 +201,10 @@ class passwordCracker(ts3plugin):
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if returnCode == "passwordCracker:manual":
+            (err, name) = ts3lib.getChannelVariable(schid, self.cid, ChannelProperties.CHANNEL_NAME)
+            errorMessage = errorMessage.title()
+            msgBox("Channel: {0}\n\nPW: {1}\n\nResult: {2}".format(name, self.pw,errorMessage))
         if not returnCode == self.retcode: return
         errorMessage = errorMessage.title()
         if error == ERROR_channel_invalid_password:
@@ -226,7 +236,7 @@ class passwordCracker(ts3plugin):
         else:
             self.status = errorMessage
             ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CHANNEL, self.cid)
-        if error in [ERROR_channel_invalid_id, ERROR_ok]: self.schid = 0;self.cid = 0;self.pwc = 0
+        if error in [ERROR_channel_invalid_id, ERROR_ok] or returnCode in ["passwordCracker:manual"]: self.schid = 0;self.cid = 0;self.pwc = 0
         return 1
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
