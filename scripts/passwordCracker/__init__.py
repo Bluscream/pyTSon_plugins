@@ -77,6 +77,7 @@ class passwordCracker(ts3plugin):
     pwc = 0
     timer = QTimer()
     interval = 250
+    step = 1
     retcode = ""
     mode = 0
 
@@ -113,6 +114,10 @@ class passwordCracker(ts3plugin):
                 self.startTimer(schid, selectedItemID)
             elif menuItemID == 2:
                 self.mode = 1
+                step = inputBox(self.name, 'How much to increase per try?')
+                if step: self.step = int(step)
+                start = inputBox(self.name, 'Where to start?')
+                if start: self.pwc = int(start)
                 self.startTimer(schid, selectedItemID)
             elif menuItemID == 3:
                 (err, path, pw) = ts3lib.getChannelConnectInfo(schid, selectedItemID)
@@ -161,8 +166,8 @@ class passwordCracker(ts3plugin):
             if err != ts3defines.ERROR_ok:
                 (er, msg) = ts3lib.getErrorMessage(err)
                 print('ERROR {0} ({1}) while trying password \"{2}\" for channel #{3} on server #{4}'.format(msg, err, pw, self.cid, self.schid))
-            else: print('[{0}] Trying password \"{1}\" for channel #{2} on server #{3}'.format(self.pwc, pw, self.cid, self.schid))
-            self.pwc += 1
+            # else: print('[{0}] Trying password \"{1}\" for channel #{2} on server #{3}'.format(self.pwc, pw, self.cid, self.schid))
+            self.pwc += self.step
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
