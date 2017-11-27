@@ -75,9 +75,10 @@ class passwordCracker(ts3plugin):
     cid = 0
     pws = []
     pwc = 0
+    pwcf = 0
     timer = QTimer()
     interval = 250
-    antiflood_delay = 1000
+    antiflood_delay = 2500
     step = 1
     retcode = ""
     mode = 0
@@ -93,6 +94,10 @@ class passwordCracker(ts3plugin):
         self.timer.timeout.connect(self.tick)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
+    def stop(self):
+        self.timer.stop()
+        self.timer = QTimer()
+
     def menuCreated(self):
         pass
         # ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, ), False)
@@ -102,7 +107,6 @@ class passwordCracker(ts3plugin):
         if schid != 0: self.schid = schid
         if cid != 0: self.cid = cid
         self.timer.start(self.interval)
-        ts3lib.printMessageToCurrentTab('Timer started!')
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
@@ -180,7 +184,12 @@ class passwordCracker(ts3plugin):
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if not returnCode == self.retcode: return
         ts3lib.requestInfoUpdate(schid, ts3defines.PluginItemType.PLUGIN_CHANNEL, self.cid)
-        if error == ts3defines.ERROR_client_is_flooding:
+        if error == ts3defines.ERROR_channel_invalid_password:
+            if self.pwcf != 0:
+                self.pwcf = 0
+                self.pwc = self.pwcf
+        elif error == ts3defines.ERROR_client_is_flooding:
+            self.pwcf = self.pwc
             self.timer.stop()
             QTimer.singleShot(self.antiflood_delay, self.startTimer)
         elif error == ts3defines.ERROR_channel_invalid_id:
