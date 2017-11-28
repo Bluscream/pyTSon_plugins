@@ -181,7 +181,7 @@ class passwordCracker(ts3plugin):
         if not self.cid == id: return None
         if not self.schid == schid: return None
         if self.mode == 0: msg = "Trying: {0} / {1}\nCurrent: {2}\nStatus: {3}".format(self.pwc, len(self.pws), self.pws[self.pwc-1], self.status)
-        elif self.mode == 1: msg = "Trying: {0}".format(self.pwc)
+        elif self.mode == 1: msg = "Trying: {0}\nStatus: {3}".format(self.pwc, self.status)
         return [msg]
 
     def tick(self):
@@ -265,9 +265,9 @@ class passwordCracker(ts3plugin):
         self.schid = 0;self.cid = 0;self.pwc = 0
 
     def getInterval(self, schid):
-        (err, afreduce) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
         (err, cmdblock) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
         (err, ipblock) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
+        (err, afreduce) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
         ts3lib.logMessage("schid = {0} | err = {1} | afreduce = {2} | cmdblock = {3} | ipblock = {4} | verify_antiflood_points = {5}".format(schid, err, afreduce, cmdblock, ipblock, self.verify_antiflood_points), LogLevel.LogLevel_INFO, "pyTSon", 0)
         self.interval = round(1000/((afreduce/self.verify_antiflood_points)))
         ts3lib.logMessage("Set interval to {0}".format(self.interval), LogLevel.LogLevel_INFO, "pyTSon", 0)
