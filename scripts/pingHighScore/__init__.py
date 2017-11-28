@@ -69,7 +69,7 @@ class pingHighScore(ts3plugin):
 
     def processVar(self, var, mode):
         if mode == 0:
-            return '[b]{0}[/b]ms'.format(round(var, 2))
+            return '[b]{0}[/b]ms'.format(round(var, 3))
         elif mode == 1:
             return '{0}'.format(datetime.timedelta(milliseconds=var)).split('.')[0]
 
@@ -98,7 +98,6 @@ class pingHighScore(ts3plugin):
                 self.c.append(clid)
             (err, ping) = ts3lib.getConnectionVariable(schid, clid, flag)
             if err == ts3defines.ERROR_ok: c[clid] = ping
-        print(c)
         if mode == 0:
             s = sorted(c.items(), key=lambda x: int(x[1]))
         elif mode == 1:
