@@ -53,8 +53,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="183" column="90" lean-forward="false" selection-start-line="183" selection-start-column="90" selection-end-line="183" selection-end-column="90" />
+            <state relative-caret-position="538">
+              <caret line="277" column="37" lean-forward="true" selection-start-line="277" selection-start-column="37" selection-end-line="277" selection-end-column="37" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -285,17 +285,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -329,6 +318,17 @@
             <path>
               <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
               <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -644,13 +644,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00056" summary=":thinking:">
-      <created>1509816433716</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1509816433716</updated>
     </task>
     <task id="LOCAL-00057" summary=":thinking:">
       <created>1509819213890</created>
@@ -988,7 +981,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511828348973</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary=":thinking:">
+      <created>1511831386474</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1511831386520</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1013,6 +1013,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1488,8 +1489,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="183" column="90" lean-forward="false" selection-start-line="183" selection-start-column="90" selection-end-line="183" selection-end-column="90" />
+        <state relative-caret-position="538">
+          <caret line="277" column="37" lean-forward="true" selection-start-line="277" selection-start-column="37" selection-end-line="277" selection-end-column="37" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

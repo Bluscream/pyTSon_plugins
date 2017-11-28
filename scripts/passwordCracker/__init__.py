@@ -100,7 +100,8 @@ class passwordCracker(ts3plugin):
             content = f.readlines()
         self.pws = [x.strip() for x in content]
         self.timer.timeout.connect(self.tick)
-        self.getInterval(ts3lib.getCurrentServerConnectionHandlerID())
+        # self.getInterval(ts3lib.getCurrentServerConnectionHandlerID())
+        ts3lib.requestServerVariables(ts3lib.getCurrentServerConnectionHandlerID())
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def stop(self):
@@ -181,7 +182,7 @@ class passwordCracker(ts3plugin):
         if not self.cid == id: return None
         if not self.schid == schid: return None
         if self.mode == 0: msg = "Trying: {0} / {1}\nCurrent: {2}\nStatus: {3}".format(self.pwc, len(self.pws), self.pws[self.pwc-1], self.status)
-        elif self.mode == 1: msg = "Trying: {0}\nStatus: {3}".format(self.pwc, self.status)
+        elif self.mode == 1: msg = "Trying: {0}\nStatus: {1}".format(self.pwc, self.status)
         return [msg]
 
     def tick(self):
@@ -264,7 +265,7 @@ class passwordCracker(ts3plugin):
         msgBox("Channel #{0} got deleted by \"{1}\"\n\nStopping Cracker!".format(self.cid, invokerName), QMessageBox.Warning)
         self.schid = 0;self.cid = 0;self.pwc = 0
 
-    def getInterval(self, schid):
+    def onServerUpdatedEvent(self, schid):
         (err, cmdblock) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
         (err, ipblock) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
         (err, afreduce) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
@@ -273,8 +274,10 @@ class passwordCracker(ts3plugin):
         ts3lib.logMessage("Set interval to {0}".format(self.interval), LogLevel.LogLevel_INFO, "pyTSon", 0)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.getInterval(schid)
-        elif newStatus == ConnectStatus.STATUS_DISCONNECTED:
+        if newStatus == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            # self.getInterval(schid)
+            ts3lib.requestServerVariables(schid)
+        if newStatus == ConnectStatus.STATUS_DISCONNECTED:
             if not self.schid == schid: return
             self.timer.stop()
             (err, name) = ts3lib.getChannelVariable(schid, self.cid, ChannelProperties.CHANNEL_NAME)
