@@ -11,7 +11,6 @@ import ts3defines, ts3lib, pytson
 
 class massAction(ts3plugin):
     name = "Mass Actions"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
@@ -59,7 +58,7 @@ class massAction(ts3plugin):
 
     def menuCreated(self):
         for id in [0,10,11,12]:
-            ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
+            ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(PluginHost.active[self.name], id), False)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         try:
