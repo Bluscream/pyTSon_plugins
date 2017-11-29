@@ -49,6 +49,8 @@ class showQueries(ts3plugin):
     cleartimer = QTimer()
     schid = 0
     queries = []
+    hqueries = []
+    hqueries_cache = []
     query_uids = ["serveradmin", "ServerQuery"]
     waitingFor = ""
     retcode = ""
@@ -57,6 +59,12 @@ class showQueries(ts3plugin):
         self.cleartimer.timeout.connect(self.clearQueries)
         self.cleartimer.start(1000*18000)
         if self.debug: ts3lib.printMessageToCurrentTab("[{0} {1}] [color=orange]{2}[/color] Plugin for pyTSon by [url=https://github.com/{3}]{4}[/url] loaded.".format(date(), time(), self.name, self.author))
+
+    def stop(self):
+        self.timer.stop()
+        self.timer = None
+        del self.timer
+        self.timer = QTimer()
 
     def onConnectStatusChangeEvent(self, schid, status, errorNumber):
         if status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
@@ -82,6 +90,9 @@ class showQueries(ts3plugin):
                 (err, cid) = ts3lib.getChannelOfClient(self.schid, c)
                 # (err, channelname) = ts3lib.getChannelVariable(self.schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
                 ts3lib.printMessage(self.schid, "<{0}> Found Query {1} in channel {2}".format(time(), clientURL(self.schid, c), channelURL(self.schid, cid)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        # self.waitingFor = self.query_uids[0]
+        # self.retcode = ts3lib.createReturnCode()
+        # ts3lib.requestClientIDs(self.schid, self.query_uids[0], self.retcode)
 
     def clearQueries(self):
         self.queries = []
@@ -112,15 +123,17 @@ class showQueries(ts3plugin):
     def onClientIDsEvent(self, schid, uid, clid, nickname):
         # print('{0} == {1}: {2}'.format(uid, self.waitingFor, uid == self.waitingFor))
         if not uid == self.waitingFor: return
-        self.queries.append((clid, uid, nickname))
+        (err, chan) = ts3lib.getChannelOfClient(schid, clid)
+        if err != ts3defines.ERROR_ok: self.hqueries.append((clid, uid, nickname))
 
     def onClientIDsFinishedEvent(self, schid):
         if not self.waitingFor in self.query_uids: return
-        if len(self.queries) > 0:
+        if len(self.hqueries) > 0:
             # qstring = ", ".join("[url=client://{0}/{1}]{2}[/url]".format(tup) for tup in self.queries)
-            qstring = ", ".join("[url=client://%s/%s]%s[/url]" % tup for tup in self.queries)
-            ts3lib.printMessage(schid, "<{0}> Found {1} hidden Queries with UID \"{2}\": {3}".format(time(), len(self.queries), self.waitingFor, qstring), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-            self.queries = []
+            qlist = ["[url=client://{}/{}]{}[/url]".format(*tup) for tup in self.hqueries]
+            qstring = ", ".join(qlist)
+            ts3lib.printMessage(schid, "<{0}> Found {1} hidden Queries with UID \"{2}\": {3}".format(time(), len(self.hqueries), self.waitingFor, qstring), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+            self.hqueries = []
         if self.waitingFor == self.query_uids[0]:
             self.waitingFor = self.query_uids[-1]
             ts3lib.requestClientIDs(schid, self.query_uids[-1], self.retcode)
