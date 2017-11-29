@@ -57,8 +57,9 @@ class massAction(ts3plugin):
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def menuCreated(self):
+        if not self.name in PluginHost.active: return
         for id in [0,10,11,12]:
-            ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(PluginHost.active[self.name], id), False)
+            ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         try:

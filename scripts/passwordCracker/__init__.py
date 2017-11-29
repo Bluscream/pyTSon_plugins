@@ -111,6 +111,7 @@ class passwordCracker(ts3plugin):
         self.timer = QTimer()
 
     def menuCreated(self):
+        if not self.name in PluginHost.active: return
         for id in [0,10,11,12]:
             ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
 

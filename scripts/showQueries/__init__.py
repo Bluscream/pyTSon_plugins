@@ -49,6 +49,9 @@ class showQueries(ts3plugin):
     cleartimer = QTimer()
     schid = 0
     queries = []
+    query_uids = ["serveradmin", "ServerQuery"]
+    waitingFor = ""
+    retcode = ""
 
     def __init__(self):
         self.cleartimer.timeout.connect(self.clearQueries)
@@ -98,12 +101,32 @@ class showQueries(ts3plugin):
         except: return
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
+        pass
         # if oldChannelID != 0: return
         (err, clienttype) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
         if clienttype != ts3defines.ClientType.ClientType_SERVERQUERY: return
         # (err, channelname) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelProperties.CHANNEL_NAME)
         ts3lib.printMessage(schid, "<{0}> {1} switched from channel {2} to {3}".format(time(), clientURL(schid, clientID), channelURL(schid, oldChannelID), channelURL(schid, newChannelID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         # <16:11:43> "charlie sheen" switched from channel "Intros Gratis <3" to "Serverteam-Gesucht Builder"
+
+    def onClientIDsEvent(self, schid, uid, clid, nickname):
+        # print('{0} == {1}: {2}'.format(uid, self.waitingFor, uid == self.waitingFor))
+        if not uid == self.waitingFor: return
+        self.queries.append((clid, uid, nickname))
+
+    def onClientIDsFinishedEvent(self, schid):
+        if not self.waitingFor in self.query_uids: return
+        qstring = ", ".join("[url=client://%s/%s]%s[/url]" % tup for tup in self.queries)
+        ts3lib.printMessage(schid, "<{0}> Found {1} hidden Queries with UID \"{2}\": {3}".format(time(), len(self.queries), self.waitingFor, qstring), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        self.queries = []
+        if self.waitingFor == self.query_uids[0]:
+            self.waitingFor = self.query_uids[-1]
+            ts3lib.requestClientIDs(schid, self.query_uids[-1], self.retcode)
+        if self.waitingFor == self.query_uids[-1]:
+            self.waitingFor = False
+
+    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if returnCode == self.retcode: return True
 
     def printQueries(self):
         (err, schids) = ts3lib.getServerConnectionHandlerList()
@@ -117,9 +140,10 @@ class showQueries(ts3plugin):
                     if ctype != ts3defines.ClientType.ClientType_SERVERQUERY: continue
                     msg.append(clientURL(schid, clid))
                 if len(msg) < 1: continue
-                ts3lib.printMessage(schid, "<{0}> {1} has [b]{2}[/b] Query Clients: {3}".format(time(), channelURL(schid, cid), len(msg), ", ".join(msg)),
-                                    ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-
+                ts3lib.printMessage(schid, "<{0}> {1} has [b]{2}[/b] Query Clients: {3}".format(time(), channelURL(schid, cid), len(msg), ", ".join(msg)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+            self.waitingFor = self.query_uids[0]
+            self.retcode = ts3lib.createReturnCode()
+            ts3lib.requestClientIDs(schid, self.query_uids[0], self.retcode)
 
     def processCommand(self, schid, cmd):
         cmd = cmd.split(' ', 1)

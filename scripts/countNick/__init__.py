@@ -6,7 +6,6 @@ from PythonQt.QtCore import QTimer
 
 class countNick(ts3plugin):
     name = "Count Nickname"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
@@ -39,7 +38,7 @@ class countNick(ts3plugin):
                 self.timer = None
                 ts3lib.printMessageToCurrentTab('Timer stopped!')
             else:
-                self.timer.start(3000)
+                self.timer.start(500)
                 ts3lib.printMessageToCurrentTab('Timer started!')
             ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.toggle))
 
