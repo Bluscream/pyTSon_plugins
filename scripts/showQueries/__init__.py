@@ -116,9 +116,10 @@ class showQueries(ts3plugin):
 
     def onClientIDsFinishedEvent(self, schid):
         if not self.waitingFor in self.query_uids: return
-        qstring = ", ".join("[url=client://%s/%s]%s[/url]" % tup for tup in self.queries)
-        ts3lib.printMessage(schid, "<{0}> Found {1} hidden Queries with UID \"{2}\": {3}".format(time(), len(self.queries), self.waitingFor, qstring), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-        self.queries = []
+        if len(self.queries) < 1:
+            qstring = ", ".join("[url=client://{0}/{1}]{2}[/url]".format(tup) for tup in self.queries)
+            ts3lib.printMessage(schid, "<{0}> Found {1} hidden Queries with UID \"{2}\": {3}".format(time(), len(self.queries), self.waitingFor, qstring), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+            self.queries = []
         if self.waitingFor == self.query_uids[0]:
             self.waitingFor = self.query_uids[-1]
             ts3lib.requestClientIDs(schid, self.query_uids[-1], self.retcode)
