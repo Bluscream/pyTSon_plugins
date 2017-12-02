@@ -23,7 +23,7 @@ class serverBrowser(ts3plugin):
     commandKeyword = ""
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Browse Servers", "scripts/serverBrowser/gfx/icon.png"),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "View on PT", "")]
-    hotkeys = []
+    hotkeys = [("browse_servers", "Better Server Browser")]
     debug = False
     ini = os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "serverBrowser", "cfg", "serverBrowser.ini")
     config = configparser.ConfigParser()
@@ -85,11 +85,14 @@ class serverBrowser(ts3plugin):
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
 
+    def onHotkeyEvent(self, keyword):
+        if keyword == "browse_servers":
+            self.openServerBrowser()
+
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 0:
-                self.dlg = ServersDialog(self)
-                self.dlg.show()
+                self.openServerBrowser()
                 #if self.serverBrowser.config["GENERAL"]["debug"] == "True":
                 #   ts3.printMessageToCurrentTab(str(self.filters))
             elif menuItemID == 1:
@@ -105,6 +108,10 @@ class serverBrowser(ts3plugin):
                 if self.serverBrowser.config["GENERAL"]["debug"] == "True":
                     ts3.printMessageToCurrentTab(str("Navigating to \""+_url+"\""))
                 webbrowser.open(_url)
+
+    def openServerBrowser(self):
+        self.dlg = ServersDialog(self)
+        self.dlg.show()
 
 class ServersDialog(QDialog):
     requests = 0
