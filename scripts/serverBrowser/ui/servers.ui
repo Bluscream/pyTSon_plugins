@@ -87,7 +87,7 @@
         <bool>false</bool>
        </property>
        <property name="columnCount">
-        <number>5</number>
+        <number>6</number>
        </property>
        <attribute name="horizontalHeaderVisible">
         <bool>true</bool>
@@ -157,6 +157,22 @@
         </property>
         <property name="toolTip">
          <string>This server is password protected</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Address</string>
+        </property>
+        <property name="font">
+         <font>
+          <strikeout>false</strikeout>
+         </font>
         </property>
         <property name="textAlignment">
          <set>AlignCenter</set>
@@ -350,6 +366,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="serverNameModifier">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>

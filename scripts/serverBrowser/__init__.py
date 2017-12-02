@@ -2,11 +2,13 @@ import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi
 from getvalues import getValues, ValueType
-from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication, QInputDialog
-from PythonQt.QtCore import Qt, QUrl, QTimer
-from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from datetime import datetime
 import ts3defines, os, json, configparser, webbrowser, traceback, urllib.parse
+import sip
+sip.setapi('QVariant', 2)
+from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication, QInputDialog, QInputDialog, QMessageBox
+from PythonQt.QtCore import Qt, QUrl, QTimer
+from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 
 
 class serverBrowser(ts3plugin):
@@ -35,7 +37,7 @@ class serverBrowser(ts3plugin):
             #for key, value in self.config["FILTERS"].items():
                 #ts3.printMessageToCurrentTab(str(key).title()+": "+str(value))
         else:
-            self.config['GENERAL'] = { "debug": "False", "api": "https://api.planetteamspeak.com/", "morerequests": "False", "serversperpage": "100" }
+            self.config['GENERAL'] = { "debug": "False", "api": "https://api.planetteamspeak.com/", "morerequests": "False", "serversperpage": "100", "alternatebackgroundcolor": "" }
             self.config['FILTERS'] = {
                 "serverNameModifier": "Contains", "filterServerName": "", "countryBox": "",
                 "hideEmpty": "False", "hideFull": "False", "maxUsers": "False", "maxUsersMin": "0", "maxUsersMax": "0",
@@ -64,6 +66,7 @@ class serverBrowser(ts3plugin):
             d['morerequests'] = (ValueType.boolean, "Fast Connection", self.config['GENERAL']['morerequests'] == "True", None, None)
             d['serversperpage'] = (ValueType.integer, "Servers per page:", int(self.config['GENERAL']['serversperpage']), 0, 250)
             d['api'] = (ValueType.string, "API Base URL:", self.config['GENERAL']['api'], None, 1)
+            d['alternatebackgroundcolor'] = (ValueType.string, "Alternate row bg color:", self.config['GENERAL']['alternatebackgroundcolor'], None, 1)
             getValues(None, "Server Browser Settings", d, self.configDialogClosed)
         except:
             from traceback import format_exc
@@ -71,17 +74,24 @@ class serverBrowser(ts3plugin):
             except: print("Error in "+self.name+".configure: "+format_exc())
 
     def configDialogClosed(self, r, vals):
-        if r == QDialog.Accepted:
-            self.cfg['general'] = { "debug": str(vals['debug']), "api": vals['api'], "morerequests": str(vals['morerequests']), "serversperpage": str(vals['serversperpage']) }
+        if r != QDialog.Rejected:
+            self.config["GENERAL"] = {
+                "debug": str(vals["debug"]),
+                "api": str(vals["api"]),
+                "morerequests": str(vals["morerequests"]),
+                "serversperpage": str(vals["serversperpage"]),
+                "alternatebackgroundcolor": str(vals["alternatebackgroundcolor"])
+            }
             with open(self.ini, 'w') as configfile:
-                self.cfg.write(configfile)
+                self.config.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if menuItemID == 0:
                 self.dlg = ServersDialog(self)
                 self.dlg.show()
-                #ts3.printMessageToCurrentTab(str(self.filters))
+                #if self.serverBrowser.config["GENERAL"]["debug"] == "True":
+                #   ts3.printMessageToCurrentTab(str(self.filters))
             elif menuItemID == 1:
                 _schid = ts3.getCurrentServerConnectionHandlerID()
                 (error, _clid) = ts3.getClientID(_schid)
@@ -92,7 +102,8 @@ class serverBrowser(ts3plugin):
                     _url = self.config['GENERAL']['api']+"serverlist/result/server/ip/"+_ip+":"+_port+"/"
                 else:
                     _url = self.config['GENERAL']['api']+"serverlist/result/server/ip/"+_ip+"/"
-                ts3.printMessageToCurrentTab(str("Navigating to \""+_url+"\""))
+                if self.serverBrowser.config["GENERAL"]["debug"] == "True":
+                    ts3.printMessageToCurrentTab(str("Navigating to \""+_url+"\""))
                 webbrowser.open(_url)
 
 class ServersDialog(QDialog):
@@ -129,8 +140,11 @@ class ServersDialog(QDialog):
             #ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
         #self.ReasonList.connect("currentItemChanged(QListWidgetItem*, QListWidgetItem*)", self.onReasonListCurrentItemChanged)
         #self.ReasonList.connect("itemChanged(QListWidgetItem*)", self.onReasonListItemChanged)
+        # self.serverList.setVisible(False)
         self.serverList.horizontalHeader().setStretchLastSection(True)
         self.serverList.setColumnWidth(0, 350)
+        # self.serverList.setColumnWidth(5, 0)
+        self.serverList.setColumnHidden(5, True)
         self.serverNameModifier.addItems(self.NAME_MODIFIERS)
         self.serverNameModifier.setEnabled(False)
         #self.pageLabel.mousePressEvent = self.on_pageLabel_clicked
@@ -138,7 +152,8 @@ class ServersDialog(QDialog):
         self.listCountries(True)
         #ReportDialog.ReasonList.clear()
         self.setupFilters()
-        # self.serverList.doubleClicked.connect(self.doubleClicked_table)
+        # self.serverList.doubleClicked.connect(self.on_serverList_doubleClicked)
+        # self.serverList.cellClicked.connect(self.cell_was_clicked)
         #ts3.printMessageToCurrentTab(str(serverBrowser.filters))
         #if serverBrowser.filters.filterServerName != "":
             #self.filterServerName.setText(serverBrowser.filters.filterServerName)
@@ -190,6 +205,7 @@ class ServersDialog(QDialog):
             if self.countryBox.findText(_filters["countryBox"]) < 0:
                 self.countryBox.addItem(_filters["countryBox"])
             self.countryBox.setCurrentIndex(self.countryBox.findText(_filters["countryBox"]))
+            self.listServers()
         except:
             ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -229,7 +245,9 @@ class ServersDialog(QDialog):
         if _filters["filterServerName"] and _filters["filterServerName"] != "":
             url += "&search="+urllib.parse.quote_plus(_filters["filterServerName"])
         cid = self.getCountryIDbyName(_filters["countryBox"])
-        if _filters["countryBox"] != "All" and cid != '--':
+        print("cb: \"{0}\"".format(_filters["countryBox"]))
+        print("cid: \"{0}\"".format(cid))
+        if _filters["countryBox"] != "All" and (cid != '--' or cid != '-'):
             url+= "&country="+cid
         if self.serverBrowser.config["GENERAL"]["debug"] == "True":
             ts3.printMessageToCurrentTab("Requesting: "+url)
@@ -254,7 +272,8 @@ class ServersDialog(QDialog):
             _api = self.serverBrowser.config['GENERAL']['api']
             _reply = reply.readAll()
             countries = json.loads(_reply.data().decode('utf-8'))["result"]["data"]
-            ts3.printMessageToCurrentTab("%s"%countries)
+            if self.serverBrowser.config["GENERAL"]["debug"] == "True":
+                ts3.printMessageToCurrentTab("%s"%countries)
             _reason = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
             self.status.setText("Response from \"{0}\": {1}: {2}".format(_api, _reason, reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)))
             palette = QPalette()
@@ -268,7 +287,8 @@ class ServersDialog(QDialog):
             #y = 0
             #for x in countries:
             #   y = y + x[2]
-            #ts3.printMessageToCurrentTab(str(countries))
+            #if self.serverBrowser.config["GENERAL"]["debug"] == "True":
+            #   ts3.printMessageToCurrentTab(str(countries))
             if "-" in [h[0] for h in countries]:
                 countries = countries[0:1]+sorted(countries[1:],key=lambda x: x[1])
             else:
@@ -287,7 +307,8 @@ class ServersDialog(QDialog):
         self.nwmc = QNetworkAccessManager()
         self.nwmc.connect("finished(QNetworkReply*)", self.onCountryListReply)
         self.nwmc.get(QNetworkRequest(QUrl(self.serverBrowser.config['GENERAL']['api']+"servercountries")))
-        ts3.printMessageToCurrentTab("requestCountries: "+self.serverBrowser.config['GENERAL']['api']+"servercountries")
+        if self.serverBrowser.config["GENERAL"]["debug"] == "True":
+            ts3.printMessageToCurrentTab("requestCountries: "+self.serverBrowser.config['GENERAL']['api']+"servercountries")
 
     def listCountries(self, force=False):
         if force or self.serverBrowser.config['GENERAL']['morerequests'] == "True":
@@ -299,7 +320,8 @@ class ServersDialog(QDialog):
             _reason = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
             _reply = reply.readAll()
             servers = json.loads(_reply.data().decode('utf-8'))
-            ts3.printMessageToCurrentTab("servers: %s"%servers)
+            if self.serverBrowser.config["GENERAL"]["debug"] == "True":
+                ts3.printMessageToCurrentTab("servers: %s"%servers)
             self.status.setText("Response from \"{0}\": {1}: {2}".format(_api, _reason, reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)))
             palette = QPalette()
             if not _reason == 200:
@@ -363,10 +385,14 @@ class ServersDialog(QDialog):
                         _list.setItem(rowPosition, 4, QTableWidgetItem("Yes"))
                     else:
                         _list.setItem(rowPosition, 4, QTableWidgetItem("No"))
-                    #item.setData(Qt.UserRole, key['ip']);
-            _list.setAlternatingRowColors(True)
-            _list.styleSheet = "alternate-background-color: grey;"
-            _list.setStyleSheet("alternate-background-color: grey;")
+                    _list.setItem(rowPosition, 5, QTableWidgetItem(key["address"]))
+                    # first_cell = _list.item(rowPosition, 0)
+                    # first_cell.setData(Qt.UserRole, key['address'])
+            _color = self.serverBrowser.config["GENERAL"]["alternatebackgroundcolor"]
+            if _color != "":
+                _list.styleSheet = "alternate-background-color: {0};".format(_color)
+            else:
+                _list.setAlternatingRowColors(False)
         except:
             ts3.logMessage(traceback.format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -532,9 +558,30 @@ class ServersDialog(QDialog):
 
     def on_serverList_doubleClicked(self):
         try:
-            ts3.logMessage("test", ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
-            item = self.serverList.selectedItems()[0]
-            item.setData(Qt.UserRole, 22);
+            row = self.serverList.selectedItems()[0].row()
+            name = self.serverList.item(row, 0).text()
+            ip = self.serverList.item(row, 5).text()
+            haspw = True if self.serverList.item(row, 4).text() == "Yes" else False
+            if haspw:
+                x = QWidget()
+                x.setAttribute(Qt.WA_DeleteOnClose)
+                password = QInputDialog.getText(x, "Enter Server Password", "Password:")
+            err, tab = ts3.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, name, ip,
+                                      password if haspw else "",
+                                      "TeamspeakUser", "", "", "", "", "", "", "", "", "")
+            # print('item: {0} | row: {1} | item2: {2} |item2_column: {3} | text: {4}'.format(item, row, item2, item2.column(), item2.text()))
+            # item.
+            # item.setData(Qt.UserRole, 22);
+        except:
+            print(traceback.format_exc())
+
+    def cell_was_clicked(self, row, column):
+        pass
+        try:
+            print("Row %d and Column %d was clicked" % (row, column))
+            item = self.serverList.itemAt(row, column)
+            self.ID = item.text()
+            print(self.ID)
         except:
             print(traceback.format_exc())
 
