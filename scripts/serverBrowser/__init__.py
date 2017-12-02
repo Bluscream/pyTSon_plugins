@@ -209,7 +209,7 @@ class ServersDialog(QDialog):
                 self.filterChannelsShowAll.setChecked(True)
             self.serverNameModifier.setCurrentText(_filters["serverNameModifier"])
             self.filterServerName.setText(_filters["filterServerName"])
-            if self.countryBox.findText(_filters["countryBox"]) < 0:
+            if self.countryBox.findText(_filters["countryBox"].split(' (')[0]) < 0:
                 self.countryBox.addItem(_filters["countryBox"])
             self.countryBox.setCurrentIndex(self.countryBox.findText(_filters["countryBox"]))
             self.listServers()
@@ -301,10 +301,10 @@ class ServersDialog(QDialog):
             else:
                 countries = sorted(countries,key=lambda x: x[1])
             self.countries = [['ALL', 'All', y]]+countries
-            #if self.serverBrowser.config['GENERAL']['morerequests'] == "True":
-                #self.countryBox.addItems([x[1]+" ("+str(x[2])+")" for x in self.countries])
-            #else:
-            self.countryBox.addItems([x[1] for x in self.countries])
+            if self.serverBrowser.config['GENERAL']['morerequests'] == "True":
+                self.countryBox.addItems([x[1]+" ("+str(x[2])+")" for x in self.countries])
+            else:
+                self.countryBox.addItems([x[1] for x in self.countries])
 
             #__countries = __countries.__add__([['ALL', 'All', 0]])
         except:

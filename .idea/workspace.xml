@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py" line="391" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py" line="398" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/pws.txt" afterPath="$PROJECT_DIR$/scripts/passwordCracker/pws.txt" />
       <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" afterPath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
       <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" afterPath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/ui/servers.ui" afterPath="$PROJECT_DIR$/scripts/serverBrowser/ui/servers.ui" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -46,42 +44,20 @@
       <file leaf-file-name="ts3lib.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4250">
+            <state relative-caret-position="0">
               <caret line="257" column="52" lean-forward="false" selection-start-line="257" selection-start-column="23" selection-end-line="257" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="76" column="14" lean-forward="false" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
+            <state relative-caret-position="-597">
+              <caret line="213" column="43" lean-forward="false" selection-start-line="213" selection-start-column="28" selection-end-line="213" selection-end-column="43" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="103" column="67" lean-forward="true" selection-start-line="100" selection-start-column="8" selection-end-line="103" selection-end-column="67" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="36" selection-end-column="89" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="serverBrowser.ini" pinned="false" current-in-tab="true">
+      <file leaf-file-name="serverBrowser.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            <state relative-caret-position="170">
+              <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -128,9 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>loglevel</find>
-      <find>(Enum)</find>
-      <find>virtualserverp</find>
       <find>clientpro</find>
       <find>getChannelConnectInfo</find>
       <find>connectio</find>
@@ -158,6 +131,9 @@
       <find>address</find>
       <find>Address</find>
       <find>alter</find>
+      <find>gui_unlock</find>
+      <find>hotkeys =</find>
+      <find>countryBox</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -211,7 +187,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/include/ts3tools.py" />
         <option value="$PROJECT_DIR$/scripts/recreateChannel/__init__.py" />
         <option value="$PROJECT_DIR$/scripts_/report/__init__.py" />
         <option value="$PROJECT_DIR$/scripts_/countNick/__init__.py" />
@@ -261,6 +236,7 @@
         <option value="$PROJECT_DIR$/scripts/serverBrowser/ui/servers.ui" />
         <option value="$PROJECT_DIR$/scripts/joinChannel/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" />
+        <option value="$PROJECT_DIR$/scripts/unlocker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
       </list>
     </option>
@@ -336,6 +312,11 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -712,20 +693,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00065" summary=":thinking:">
-      <created>1510639151616</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1510639151616</updated>
-    </task>
-    <task id="LOCAL-00066" summary=":thinking:">
-      <created>1510796042774</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1510796042775</updated>
-    </task>
     <task id="LOCAL-00067" summary=":thinking:">
       <created>1510872438232</created>
       <option name="number" value="00067" />
@@ -1055,7 +1022,21 @@
       <option name="project" value="LOCAL" />
       <updated>1511940599337</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="doubleclick works OMFG">
+      <created>1512201750887</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1512201750889</updated>
+    </task>
+    <task id="LOCAL-00115" summary="added hotkey for serverbrowser">
+      <created>1512201955214</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1512201955215</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1172,7 +1153,10 @@
     <MESSAGE value=":thinking:" />
     <MESSAGE value="query viewer now also lists the invisible queries" />
     <MESSAGE value="oops" />
-    <option name="LAST_COMMIT_MESSAGE" value="oops" />
+    <MESSAGE value="doubleclick works OMFG" />
+    <MESSAGE value="added hotkey for serverbrowser" />
+    <MESSAGE value=":thonk:" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thonk:" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1203,7 +1187,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts_/autoFollow/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/autoFlee/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="779">
@@ -1493,7 +1476,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4250">
+        <state relative-caret-position="0">
           <caret line="257" column="52" lean-forward="false" selection-start-line="257" selection-start-column="23" selection-end-line="257" selection-end-column="52" />
           <folding />
         </state>
@@ -1531,6 +1514,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="103" column="67" lean-forward="true" selection-start-line="100" selection-start-column="8" selection-end-line="103" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/unlocker/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="19" column="51" lean-forward="true" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-136">
@@ -1541,29 +1540,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="103" column="67" lean-forward="true" selection-start-line="100" selection-start-column="8" selection-end-line="103" selection-end-column="67" />
+        <state relative-caret-position="170">
+          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="76" column="14" lean-forward="false" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
+        <state relative-caret-position="-597">
+          <caret line="213" column="43" lean-forward="false" selection-start-line="213" selection-start-column="28" selection-end-line="213" selection-end-column="43" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
