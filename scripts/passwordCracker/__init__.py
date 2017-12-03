@@ -119,6 +119,8 @@ class passwordCracker(ts3plugin):
         if schid != 0: self.schid = schid
         if cid != 0: self.cid = cid
         self.timer.start(self.interval)
+        self.tick()
+        ts3lib.requestInfoUpdate(self.schid, PluginItemType.PLUGIN_CHANNEL, self.cid)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
@@ -182,7 +184,7 @@ class passwordCracker(ts3plugin):
         if not atype == PluginItemType.PLUGIN_CHANNEL: return None
         if not self.cid == id: return None
         if not self.schid == schid: return None
-        if self.mode == 0: msg = "Trying: {0} / {1}\nCurrent: {2}\nStatus: {3}".format(self.pwc, len(self.pws), self.pws[self.pwc-1], self.status)
+        if self.mode == 0: msg = "Trying: {0} / {1}\nCurrent: {2}\nStatus: {3}".format(self.pwc+1, len(self.pws)+1, self.pws[self.pwc], self.status)
         elif self.mode == 1: msg = "Trying: {0}\nStatus: {1}".format(self.pwc, self.status)
         return [msg]
 

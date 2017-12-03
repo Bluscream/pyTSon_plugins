@@ -573,6 +573,7 @@ class ServersDialog(QDialog):
                 x = QWidget()
                 x.setAttribute(Qt.WA_DeleteOnClose)
                 password = QInputDialog.getText(x, "Enter Server Password", "Password:")
+                if password == "": return
             err, tab = ts3.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, name, ip,
                                       password if haspw else "",
                                       "TeamspeakUser", "", "", "", "", "", "", "", "", "")
