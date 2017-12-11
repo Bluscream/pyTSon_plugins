@@ -325,28 +325,32 @@ try:
         def on_btn_beautify_clicked(self):
             try:
                 try:
-                    from css_html_prettify import css_prettify
+                    from bs4 import BeautifulSoup
                 except Exception:
                     from traceback import format_exc
                     print("Error: {0}".format(format_exc()))
-                    _t = QMessageBox.question(self, "Can't beautify", "Python package \"css_html_prettify\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
+                    _t = QMessageBox.question(self, "Can't beautify", "Python package \"beautifulsoup4\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
                     if _t == QMessageBox.Yes:
                       from devtools import PluginInstaller
-                      PluginInstaller().installPackages(['css_html_prettify'])
+                      PluginInstaller().installPackages(['beautifulsoup4'])
                       self.on_btn_beautify_clicked()
                     return
                     #import traceback; QMessageBox.Critical("Can't minify", traceback.format_exc()).exec_()
                 index = self.tabWidget.currentIndex
                 _old = ""
-                if index == 0:
-                    _old = self.qssEditor.toPlainText()
+                if index == 0: _old = self.qssEditor.toPlainText()
                 elif index == 1: _old = self.chatEditor.toPlainText()
-                _beautified = css_prettify(_old)
+                elif index == 2: _old = self.tplEditor.toPlainText()
+                elif index == 3: _old = self.chatEditor_html.toPlainText()
+                _beautified = BeautifulSoup(_old)
+                _beautified = _beautified.prettify()
                 if index == 0:
                     QApplication.instance().styleSheet = _beautified
                     self.qssEditor.setPlainText(_beautified)
                 elif index == 1: self.chatEditor.setPlainText(_beautified);return
-                if QMessageBox(QMessageBox.Warning, "Use minified QSS?", "Your minified QSS code has been applied.\n\nIf you encounter any issues with the minified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
+                elif index == 2: self.tplEditor.setPlainText(_beautified);return
+                elif index == 3: self.chatEditor_html.setPlainText(_beautified);return
+                if QMessageBox(QMessageBox.Warning, "Use beautified code?", "Your beautified code has been applied.\n\nIf you encounter any issues with the beautified code you should click on cancel.", QMessageBox.Ok | QMessageBox.Cancel).exec_() == QMessageBox.Cancel:
                     QApplication.instance().styleSheet = _old
                     self.qssEditor.setPlainText(_old)
             except:

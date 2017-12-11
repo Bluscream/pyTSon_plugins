@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/scripts_/AutoReplyAway/__init__.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/scripts_/autopokeback/__init__.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/scripts_/ipc/__init__.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/scripts_/tweakui/__init__.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/countNick/__init__.py" afterPath="$PROJECT_DIR$/scripts/countNick/__init__.py" />
       <change beforePath="$PROJECT_DIR$/scripts/devTools/__init__.py" afterPath="$PROJECT_DIR$/scripts/devTools/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" afterPath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" />
+      <change beforePath="$PROJECT_DIR$/scripts/devTools/editor.ui" afterPath="$PROJECT_DIR$/scripts/devTools/editor.ui" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -52,8 +55,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="327" column="42" lean-forward="false" selection-start-line="327" selection-start-column="25" selection-end-line="327" selection-end-column="42" />
+            <state relative-caret-position="305">
+              <caret line="343" column="31" lean-forward="false" selection-start-line="343" selection-start-column="31" selection-end-line="343" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -214,8 +217,8 @@
         <option value="$PROJECT_DIR$/scripts/whosStalkingMe/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/devTools/__init__.py" />
         <option value="$PROJECT_DIR$/include/css_html_prettify.py" />
+        <option value="$PROJECT_DIR$/scripts/devTools/__init__.py" />
       </list>
     </option>
   </component>
@@ -290,11 +293,6 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -662,13 +660,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00069" summary=":thinking:">
-      <created>1511284648433</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1511284648434</updated>
-    </task>
     <task id="LOCAL-00070" summary=":thinking:">
       <created>1511398122276</created>
       <option name="number" value="00070" />
@@ -1005,7 +996,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512280851482</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary=":thonk:">
+      <created>1513010965502</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1513010965503</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1487,6 +1485,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="861">
           <caret line="80" column="37" lean-forward="false" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1518,8 +1517,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="327" column="42" lean-forward="false" selection-start-line="327" selection-start-column="25" selection-end-line="327" selection-end-column="42" />
+        <state relative-caret-position="305">
+          <caret line="343" column="31" lean-forward="false" selection-start-line="343" selection-start-column="31" selection-end-line="343" selection-end-column="31" />
           <folding />
         </state>
       </provider>
