@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py" line="398" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/scripts/whosStalkingMe/__init__.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" afterPath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" afterPath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/countNick/__init__.py" afterPath="$PROJECT_DIR$/scripts/countNick/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/devTools/__init__.py" afterPath="$PROJECT_DIR$/scripts/devTools/__init__.py" />
       <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" afterPath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -43,22 +39,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
+      <file leaf-file-name="autorun.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/autorun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+            <state relative-caret-position="334">
+              <caret line="210" column="18" lean-forward="false" selection-start-line="210" selection-start-column="4" selection-end-line="210" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pws.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/pws.txt">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+            <state relative-caret-position="339">
+              <caret line="327" column="42" lean-forward="false" selection-start-line="327" selection-start-column="25" selection-end-line="327" selection-end-column="42" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="css_html_prettify.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/css_html_prettify.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="43" column="3" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="3" />
+              <folding>
+                <element signature="e#145#158#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,9 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clientpro</find>
-      <find>getChannelConnectInfo</find>
-      <find>connectio</find>
       <find>channelpro</find>
       <find>QNET</find>
       <find>googlerepl</find>
@@ -104,6 +109,9 @@
       <find>hotkeys =</find>
       <find>Address</find>
       <find>countryBox</find>
+      <find>trace</find>
+      <find>except</find>
+      <find>log.</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -157,7 +165,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts_/report/__init__.py" />
         <option value="$PROJECT_DIR$/scripts_/countNick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts_/linkinfo/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3ext.py" />
@@ -183,9 +190,7 @@
         <option value="$PROJECT_DIR$/scripts/banUID/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/kickCounter/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoMSG/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/dataDump/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/devTools/__init__.py" />
         <option value="$PROJECT_DIR$/include/pluginhost.py" />
         <option value="$PROJECT_DIR$/include/ts3defines.py" />
         <option value="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" />
@@ -208,6 +213,9 @@
         <option value="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/whosStalkingMe/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/devTools/__init__.py" />
+        <option value="$PROJECT_DIR$/include/css_html_prettify.py" />
       </list>
     </option>
   </component>
@@ -217,8 +225,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="125" />
-    <option name="y" value="-8" />
+    <option name="x" value="227" />
+    <option name="y" value="-22" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -286,7 +294,7 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -297,19 +305,24 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="joinChannel" type="462c0819:PsiDirectoryNode" />
+              <item name="countNick" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="passwordCracker" type="462c0819:PsiDirectoryNode" />
+              <item name="devTools" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="whosStalkingMe" type="462c0819:PsiDirectoryNode" />
+              <item name="multiselectmove" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts_" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -357,15 +370,15 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/include/_plugincmd.py&#10;C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3lib.py&#10;true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\ressources" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -648,13 +661,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00068" summary=":thinking:">
-      <created>1511020197649</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1511020197649</updated>
     </task>
     <task id="LOCAL-00069" summary=":thinking:">
       <created>1511284648433</created>
@@ -992,7 +998,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512202821160</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary=":thonk:">
+      <created>1512280851480</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1512280851482</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1017,12 +1030,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06822917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13013698" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767764" sideWeight="0.25208333" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.5052687" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32467532" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.4968017" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.4947313" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33766234" sideWeight="0.49791667" order="11" side_tool="false" content_ui="tabs" />
@@ -1132,8 +1146,13 @@
           <url>file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py</url>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/include/css_html_prettify.py</url>
+          <line>10</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1142,27 +1161,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/autoFlee/cfg/settings.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoEncode/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiServerKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="986">
@@ -1278,13 +1276,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/countNick/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="52" column="18" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/pluginCMD/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -1292,24 +1283,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="288" column="37" lean-forward="false" selection-start-line="288" selection-start-column="29" selection-end-line="288" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/settings.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="2" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/autorun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4165">
-          <caret line="257" column="55" lean-forward="false" selection-start-line="257" selection-start-column="26" selection-end-line="257" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -1384,13 +1361,6 @@
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/massAction/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="88" column="38" lean-forward="true" selection-start-line="88" selection-start-column="38" selection-end-line="88" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -1482,25 +1452,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/whosStalkingMe/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="30" column="51" lean-forward="false" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/whosStalkingMe/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/pws.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-          <folding />
+        <state relative-caret-position="136">
+          <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+        <state relative-caret-position="2210">
+          <caret line="137" column="29" lean-forward="false" selection-start-line="137" selection-start-column="29" selection-end-line="137" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/massAction/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="89" column="56" lean-forward="false" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/multiselectmove/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5542">
+          <caret line="337" column="60" lean-forward="false" selection-start-line="337" selection-start-column="60" selection-end-line="337" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts_/tweakui/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="861">
+          <caret line="80" column="37" lean-forward="false" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/countNick/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/autorun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="210" column="18" lean-forward="false" selection-start-line="210" selection-start-column="4" selection-end-line="210" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/css_html_prettify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="43" column="3" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="3" />
+          <folding>
+            <element signature="e#145#158#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="327" column="42" lean-forward="false" selection-start-line="327" selection-start-column="25" selection-end-line="327" selection-end-column="42" />
           <folding />
         </state>
       </provider>

@@ -222,11 +222,14 @@ try:
             self.resize(1000, 900)
             self.setWindowTitle('Teamspeak Stylesheet Editor : : Developer Tools')
             self.stylesheet = QApplication.instance().styleSheet
-            self.chatsheet = self.getWidgetByObjectName("ChatTab").findChild(QTextDocument).defaultStyleSheet
+            chatWidget = self.getWidgetByObjectName("ChatTab")
+            self.chatsheet = chatWidget.findChild(QTextDocument).defaultStyleSheet
             self.html = self.getWidgetByObjectName("InfoFrame").html
+            self.chat_html = chatWidget.findChild("QWidgetTextControl").html
             self.qssEditor.setPlainText(self.stylesheet)
             self.chatEditor.setPlainText(self.chatsheet)
             self.tplEditor.setPlainText(self.html)
+            self.chatEditor_html.setPlainText(self.chat_html)
             self.chatEditor.setReadOnly(True);self.tplEditor.setReadOnly(True)
             index = self.tabWidget.currentIndex
             if index == 0:
@@ -239,13 +242,13 @@ try:
         def getWidgetByObjectName(self, name):
             QApp = QApplication.instance()
             widgets = QApp.topLevelWidgets()
-            widgets = widgets + QApp.allWidgets()
+            widgets += QApp.allWidgets()
             for x in widgets:
                 if str(x.objectName) == name: return x
         def getWidgetByClassName(self, name):
             QApp = QApplication.instance()
             widgets = QApp.topLevelWidgets()
-            widgets = widgets + QApp.allWidgets()
+            widgets += QApp.allWidgets()
             for x in widgets:
                 if str(x.__class__) == name: return x
         def on_tabWidget_currentChanged(self, index):
@@ -255,7 +258,7 @@ try:
                 self.btn_apply.setEnabled(True);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(True);self.btn_reset.setEnabled(True);self.chk_live.setEnabled(True)
             elif index == 1:
                 self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(True);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
-            elif index == 2:
+            else:
                 self.btn_apply.setEnabled(False);self.btn_minify.setEnabled(False);self.btn_insert.setEnabled(False);self.btn_reset.setEnabled(False);self.chk_live.setEnabled(False)
         def on_chk_live_stateChanged(self, state):
             if state == Qt.Checked:
@@ -323,7 +326,9 @@ try:
             try:
                 try:
                     from css_html_prettify import css_prettify
-                except:
+                except Exception:
+                    from traceback import format_exc
+                    print("Error: {0}".format(format_exc()))
                     _t = QMessageBox.question(self, "Can't beautify", "Python package \"css_html_prettify\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
                     if _t == QMessageBox.Yes:
                       from devtools import PluginInstaller
