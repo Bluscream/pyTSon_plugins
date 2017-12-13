@@ -7,8 +7,8 @@
       <change beforePath="" afterPath="$PROJECT_DIR$/scripts_/ipc/__init__.py" />
       <change beforePath="" afterPath="$PROJECT_DIR$/scripts_/tweakui/__init__.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/devTools/__init__.py" afterPath="$PROJECT_DIR$/scripts/devTools/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/devTools/editor.ui" afterPath="$PROJECT_DIR$/scripts/devTools/editor.ui" />
+      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" afterPath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/pws.txt" afterPath="$PROJECT_DIR$/scripts/passwordCracker/pws.txt" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -42,34 +42,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="autorun.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/autorun.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="210" column="18" lean-forward="false" selection-start-line="210" selection-start-column="4" selection-end-line="210" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="343" column="31" lean-forward="false" selection-start-line="343" selection-start-column="31" selection-end-line="343" selection-end-column="31" />
+            <state relative-caret-position="812">
+              <caret line="143" column="29" lean-forward="true" selection-start-line="143" selection-start-column="29" selection-end-line="143" selection-end-column="29" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="css_html_prettify.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/css_html_prettify.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="43" column="3" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="3" />
-              <folding>
-                <element signature="e#145#158#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -85,8 +63,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>channelpro</find>
-      <find>QNET</find>
       <find>googlerepl</find>
       <find>_IP</find>
       <find>split</find>
@@ -115,6 +91,8 @@
       <find>trace</find>
       <find>except</find>
       <find>log.</find>
+      <find>cid</find>
+      <find>self.schid</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -215,10 +193,10 @@
         <option value="$PROJECT_DIR$/scripts/unlocker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/whosStalkingMe/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
         <option value="$PROJECT_DIR$/include/css_html_prettify.py" />
         <option value="$PROJECT_DIR$/scripts/devTools/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
       </list>
     </option>
   </component>
@@ -287,6 +265,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -303,19 +292,7 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="countNick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="devTools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="multiselectmove" type="462c0819:PsiDirectoryNode" />
+              <item name="passwordCracker" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -332,17 +309,6 @@
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scratches">
-        <subPane>
-          <expand>
-            <path>
-              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
             </path>
           </expand>
           <select />
@@ -659,13 +625,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00070" summary=":thinking:">
-      <created>1511398122276</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1511398122277</updated>
     </task>
     <task id="LOCAL-00071" summary=":thinking:">
       <created>1511398602736</created>
@@ -1003,7 +962,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513010965503</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary=":thonk:">
+      <created>1513012828294</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1513012828294</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1030,11 +996,11 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13013698" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12961012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.5052687" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5094837" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32467532" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.4947313" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.49051633" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33766234" sideWeight="0.49791667" order="11" side_tool="false" content_ui="tabs" />
@@ -1458,19 +1424,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2210">
-          <caret line="137" column="29" lean-forward="false" selection-start-line="137" selection-start-column="29" selection-end-line="137" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/massAction/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
           <caret line="89" column="56" lean-forward="false" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1485,7 +1442,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="861">
           <caret line="80" column="37" lean-forward="false" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1493,13 +1449,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="335" column="45" lean-forward="false" selection-start-line="335" selection-start-column="45" selection-end-line="335" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/autorun.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
+        <state relative-caret-position="838">
           <caret line="210" column="18" lean-forward="false" selection-start-line="210" selection-start-column="4" selection-end-line="210" selection-end-column="18" />
           <folding />
         </state>
@@ -1507,7 +1470,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/css_html_prettify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="544">
           <caret line="43" column="3" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="3" />
           <folding>
             <element signature="e#145#158#0" expanded="true" />
@@ -1515,10 +1478,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="343" column="31" lean-forward="false" selection-start-line="343" selection-start-column="31" selection-end-line="343" selection-end-column="31" />
+        <state relative-caret-position="812">
+          <caret line="143" column="29" lean-forward="true" selection-start-line="143" selection-start-column="29" selection-end-line="143" selection-end-column="29" />
           <folding />
         </state>
       </provider>
