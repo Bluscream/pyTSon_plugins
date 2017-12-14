@@ -90,8 +90,6 @@ class passwordCracker(ts3plugin):
     status = ""
     verify_antiflood_points = 5
 
-
-
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
