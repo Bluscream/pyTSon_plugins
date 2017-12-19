@@ -2,7 +2,7 @@ import ts3defines, ts3lib, traceback
 from ts3plugin import ts3plugin
 from datetime import datetime
 from PythonQt.QtCore import QTimer, Qt
-from PythonQt.QtGui import QMessageBox, QInputDialog, QWidget
+from PythonQt.QtGui import QMessageBox, QInputDialog, QWidget,QDialog
 from pytsonui import setupUi
 
 def errorMsgBox(title, text):
@@ -80,7 +80,7 @@ class countNick(ts3plugin):
                self.b = 0
             self.i -= 1
             self.b += 1
-            ts3lib.printMessageToCurrentTab("self.i == %s | self.b == %s"%(self.i,self.b))
+            #ts3lib.printMessageToCurrentTab("self.i == %s | self.b == %s"%(self.i,self.b))
             count = 0
             newnick = ["!"]
 
@@ -90,9 +90,9 @@ class countNick(ts3plugin):
 
             if self.i > 1 :
                 for k in range(0,self.b):
-                    if  k < len(self._nick):#k anpassen das nicht über _nick len
-                        newnick.append(self._nick[k])#((k+1)-self.max) * -1])
-                        ts3lib.printMessageToCurrentTab("1: {} | 2: {} | 3: {}".format(0, self.b, self._nick[k]))
+                    if  k < len(self._nick) and k < max:
+                        newnick.append(self._nick[k])
+                        #ts3lib.printMessageToCurrentTab("1: {} | 2: {} | 3: {}".format(0, self.b, self._nick[k]))
                         count += 1
                     else:
                         pass
@@ -100,9 +100,7 @@ class countNick(ts3plugin):
                     newnick.append(self.seperator)
             else:
                  for k in range(self.i * -1 ,len(self._nick)):
-                      if k == -1:
-                         pass
-                      else:
+                      if k != -1 and count < max:
                           newnick.append(self._nick[k])
                           count +=1
                  for k in range(count, max):
