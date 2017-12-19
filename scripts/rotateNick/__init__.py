@@ -26,13 +26,13 @@ class countNick(ts3plugin):
     hotkeys = []
     timer = None
     debug = False
-    max = ts3defines.TS3_MAX_SIZE_CLIENT_NICKNAME_NONSDK-2
+    max = ts3defines.TS3_MAX_SIZE_CLIENT_NICKNAME_NONSDK
     nick = "TeamspeakUser"
+    seperator = " "
     _nick = []
     schid = 0
-    i = max
+    i = max-2
     b = 0
-
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
@@ -47,45 +47,65 @@ class countNick(ts3plugin):
             if self.timer.isActive():
                 self.timer.stop()
                 self.timer = None
-                self.schid = 0;self.i = 30;self.b = 0;
                 ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self.nick)
                 ts3lib.flushClientSelfUpdates(schid)
                 ts3lib.printMessageToCurrentTab('Timer stopped!')
             else:
                 (err, nick) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-                if len(nick) > self.max: errorMsgBox("Error", "Nickname must be %s chars or below!"%self.max); return
+                if len(nick) > self.max-2: errorMsgBox("Error", "Nickname must be %s chars or below!"%self.max); return
                 self.nick = nick
                 self._nick = list(nick)
+                self.i = self.max - 2
+                self.b = 0
                 self.schid = schid
                 step = inputBox(self.name, 'Interval in Milliseconds:')
                 if step: interval = int(step)
-                else: interval = 1000
+                else: interval = 300
                 self.timer.start(interval)
                 ts3lib.printMessageToCurrentTab('Timer started!')
 
     def tick(self):
         if self.schid == 0: return
         _newnick = self.fillnick()
-        ts3lib.printMessageToCurrentTab("newnick: {}".format(_newnick))
+        if _newnick is None: return
+        ts3lib.printMessageToCurrentTab("length: {} | newnick: \"{}\"".format(len(_newnick), _newnick))
         ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _newnick)
         ts3lib.flushClientSelfUpdates(self.schid)
 
     def fillnick(self):
-        try:
+            max = self.max - 2
+            if self.i == (len(self._nick) * -1):
+               self.i = max
+               self.b = 0
             self.i -= 1
             self.b += 1
             ts3lib.printMessageToCurrentTab("self.i == %s | self.b == %s"%(self.i,self.b))
+            count = 0
             newnick = ["!"]
 
             for k in range(0, self.i):
-                newnick.append(" ")
-                # ts3lib.printMessageToCurrentTab("test")
+                newnick.append(self.seperator)
+                count += 1
 
-            if self.i >= 0 :
+            if self.i > 1 :
                 for k in range(0,self.b):
-                    if len(self._nick) < self.b:
-                        pass # k anpassen das nicht über _nick len
-                    newnick.append(self._nick[k])#((k+1)-self.max) * -1])
-                    ts3lib.printMessageToCurrentTab("1: {} | 2: {} | 3: {}".format(0, self.b, self._nick[k]))
+                    if  k < len(self._nick):#k anpassen das nicht über _nick len
+                        newnick.append(self._nick[k])#((k+1)-self.max) * -1])
+                        ts3lib.printMessageToCurrentTab("1: {} | 2: {} | 3: {}".format(0, self.b, self._nick[k]))
+                        count += 1
+                    else:
+                        pass
+                for k in range(count, max):
+                    newnick.append(self.seperator)
+            else:
+                 for k in range(self.i * -1 ,len(self._nick)):
+                      if k == -1:
+                         pass
+                      else:
+                          newnick.append(self._nick[k])
+                          count +=1
+                 for k in range(count, max):
+                      newnick.append(self.seperator)
+            newnick.append("!")
             return ''.join(newnick)
-        except: ts3lib.printMessageToCurrentTab("[color=red]%s"%traceback.format_exc())
+      
