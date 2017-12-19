@@ -3,6 +3,7 @@ from ts3plugin import ts3plugin
 from datetime import datetime
 from PythonQt.QtCore import QTimer, Qt
 from PythonQt.QtGui import QMessageBox, QInputDialog, QWidget
+from pytsonui import setupUi
 
 def errorMsgBox(title, text):
     QMessageBox.critical(None, title, text)
@@ -108,4 +109,20 @@ class countNick(ts3plugin):
                       newnick.append(self.seperator)
             newnick.append("!")
             return ''.join(newnick)
-      
+
+class MessageDialog(QDialog):
+    def __init__(self, countNick, parent=None):
+        try:
+            self.countNick = countNick
+            super(QDialog, self).__init__(parent)
+            setupUi(self, path.join(pytson.getPluginPath(), "scripts", countNick.__name__, "dialog.ui"))
+            self.setAttribute(Qt.WA_DeleteOnClose)
+            self.setWindowTitle(countNick.Name)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_btn_apply_clicked(self):
+        for uid in self.uids:
+            try: ts3lib.requestMessageAdd(self.schid, uid, self.subject.text, self.message.toPlainText())
+            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_cancel_clicked(self): self.close()
