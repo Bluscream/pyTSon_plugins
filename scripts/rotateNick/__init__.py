@@ -1,9 +1,10 @@
-import ts3defines, ts3lib, traceback
+import ts3defines, ts3lib, traceback, pytson
 from ts3plugin import ts3plugin
 from datetime import datetime
 from PythonQt.QtCore import QTimer, Qt
-from PythonQt.QtGui import QMessageBox, QInputDialog, QWidget,QDialog
+from PythonQt.QtGui import QMessageBox, QInputDialog, QWidget, QDialog
 from pytsonui import setupUi
+from os import path
 
 def errorMsgBox(title, text):
     QMessageBox.critical(None, title, text)
@@ -13,7 +14,7 @@ def inputBox(title, text):
     x.setAttribute(Qt.WA_DeleteOnClose)
     return QInputDialog.getText(x, title, text)
 
-class countNick(ts3plugin):
+class rotateNick(ts3plugin):
     name = "Rotate Nickname"
     apiVersion = 22
     requestAutoload = False
@@ -34,36 +35,49 @@ class countNick(ts3plugin):
     schid = 0
     i = max-2
     b = 0
+    dlg = None
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
+        if self.timer is None:
+            self.timer = QTimer()
+            self.timer.timeout.connect(self.tick)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+
+    def stop(self):
+        if hasattr(self.timer, "isActive") and self.timer.isActive():
+            self.toggleTimer(self.schid)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:
-            if self.timer is None:
-                self.timer = QTimer()
-                self.timer.timeout.connect(self.tick)
-            if self.timer.isActive():
-                self.timer.stop()
-                self.timer = None
-                ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self.nick)
-                ts3lib.flushClientSelfUpdates(schid)
-                ts3lib.printMessageToCurrentTab('Timer stopped!')
-            else:
-                (err, nick) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-                if len(nick) > self.max-2: errorMsgBox("Error", "Nickname must be %s chars or below!"%self.max); return
-                self.nick = nick
-                self._nick = list(nick)
-                self.i = self.max - 2
-                self.b = 0
-                self.schid = schid
-                step = inputBox(self.name, 'Interval in Milliseconds:')
-                if step: interval = int(step)
-                else: interval = 300
-                self.timer.start(interval)
-                ts3lib.printMessageToCurrentTab('Timer started!')
+            if not self.dlg: self.dlg = dialog(self)
+            self.dlg.show()
+            self.dlg.raise_()
+            self.dlg.activateWindow()
+
+    def startTimer(self, interval, nick):
+            if not self.nick: (err, nick) = ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            # if len(nick) > self.max-2: errorMsgBox("Error", "Nickname must be %s chars or below!"%self.max); return
+            self._nick = list(nick)
+            self.i = self.max - 2
+            self.b = 0
+            # step = inputBox(self.name, 'Interval in Milliseconds:')
+            # if step: interval = int(step)
+            # else: interval = 300
+            self.timer.start(interval)
+            ts3lib.printMessageToCurrentTab('Timer started!')
+
+    def stopTimer(self):
+        self.timer.stop()
+        self.timer = None
+        ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self.nick)
+        ts3lib.flushClientSelfUpdates(self.schid)
+        ts3lib.printMessageToCurrentTab('Timer stopped!')
+
+    def toggleTimer(self, interval):
+        if self.timer.isActive(): self.startTimer()
+        else: self.stopTimer()
 
     def tick(self):
         if self.schid == 0: return
@@ -108,19 +122,21 @@ class countNick(ts3plugin):
             newnick.append("!")
             return ''.join(newnick)
 
-class MessageDialog(QDialog):
-    def __init__(self, countNick, parent=None):
+class dialog(QDialog):
+    def __init__(self, rotateNick, parent=None):
         try:
-            self.countNick = countNick
+            self.rotateNick = rotateNick
             super(QDialog, self).__init__(parent)
-            setupUi(self, path.join(pytson.getPluginPath(), "scripts", countNick.__name__, "dialog.ui"))
+            setupUi(self, path.join(pytson.getPluginPath(), "scripts", rotateNick.__name__, "dialog.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
-            self.setWindowTitle(countNick.Name)
+            self.setWindowTitle(rotateNick.name)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def on_btn_apply_clicked(self):
-        for uid in self.uids:
-            try: ts3lib.requestMessageAdd(self.schid, uid, self.subject.text, self.message.toPlainText())
-            except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+    def on_btn_start_clicked(self):
+        try:
+            if self.customNick.checked: nick = self.nick.text
+            else: (err, nick) = self.rotateNick.nick
+            self.rotateNick.toggleTimer(self.interval.value)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def on_cancel_clicked(self): self.close()
+    def on_btn_cancel_clicked(self): self.close()
