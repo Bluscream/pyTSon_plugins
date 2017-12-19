@@ -32,6 +32,7 @@ class countNick(ts3plugin):
     schid = 0
     i = max
     b = 0
+
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
@@ -83,7 +84,7 @@ class countNick(ts3plugin):
             if self.i >= 0 :
                 for k in range(0,self.b):
                     if len(self._nick) < self.b:
-                        #k anpassen das nicht über _nick len
+                        pass # k anpassen das nicht über _nick len
                     newnick.append(self._nick[k])#((k+1)-self.max) * -1])
                     ts3lib.printMessageToCurrentTab("1: {} | 2: {} | 3: {}".format(0, self.b, self._nick[k]))
             return ''.join(newnick)

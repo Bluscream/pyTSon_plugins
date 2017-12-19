@@ -1,135 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="89" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="90" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/AutoChannelChatTab/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/FileBrowser/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/ISPValidator/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/ISPValidator/isps.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/ISPValidator/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/ISPValidator/settings.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/addonList/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/addonList/addons.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/addonList/addons.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/addonList/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiMove/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoCasino/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoEncode/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFlee/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFlee/cfg/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoMSG/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupChanger/channelGroupSelect.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupChanger/icons/GommeHD/Channel Admin.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupChanger/icons/GommeHD/Channel Bann.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupChanger/icons/GommeHD/Operator.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelWatcher/channelWatcher.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelWatcher/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands.MD" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/settings.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/countNick/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/dataDump/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/dataDump/dump.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/dataDump/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/devTools/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/devTools/editor.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/devTools/test.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/eventlog/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/gommeChecker/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/gommeChecker/check.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/gommeChecker/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/info/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/info/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/info/settings.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/kickCounter/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/kickself/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/longMessages/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/massAction/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/massAction/message.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/multiselectmove/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/notify/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/onlineOfflineMessages/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/onlineOfflineMessages/message.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/pws.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/pws2.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/status.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/pingHighScore/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/pingNick/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/pluginCMD/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/rawPluginCMD/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/recreateChannel/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/gfx/icon.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/ui/servers - Copy.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/ui/servers.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/ui/servers_temp.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverSwitcher/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/settings/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/settings/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/showQueries/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts/unlocker/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/NoX/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/NoX/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/NoX/settings.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/autoChannelCreate/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/autoChannelCreate/autoChannelCreate.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/autoChannelCreate/channelCreator.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/autoSupport/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/autoSupport/icons/toggle.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/banUID/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/cfgDialog/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/cfgDialog/cfgDialog.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/dataChanger/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/discordify/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/discordify/icon.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/dynamicAvatar/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/dynamicAvatar/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/dynamicAvatar/settings.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/exporter/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/faker/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/infoHTML/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/linkinfo/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/linkinfo/linkinfo.db" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/linkinfo/linkinfo.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/linkinfo/luemmel.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/msgRedirect/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/nowPlaying/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/nowPlaying/settings.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/profile/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/profile/cfg/profile.ini" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/profile/ui/profile.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/profile/ui/profile_simple.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/queryConsole/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/queryConsole/console.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/report/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/report/report.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/serverGroupChanger/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/socketplugin/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/streamChat/streamChat.ui" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/welcomeBot/__init__.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/scripts_/welcomeBot/settings.ini" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" afterPath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -176,7 +53,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="170">
               <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -188,8 +65,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="54" column="117" lean-forward="true" selection-start-line="54" selection-start-column="117" selection-end-line="54" selection-end-column="117" />
+            <state relative-caret-position="379">
+              <caret line="67" column="34" lean-forward="true" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -197,21 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ts3defines.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="47" column="40" lean-forward="false" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts_/autoCommander/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="49" column="37" lean-forward="false" selection-start-line="47" selection-start-column="16" selection-end-line="49" selection-end-column="37" />
+            <state relative-caret-position="1326">
+              <caret line="78" column="56" lean-forward="false" selection-start-line="78" selection-start-column="56" selection-end-line="78" selection-end-column="56" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -234,11 +101,9 @@
       <file leaf-file-name="pluginhost.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/pluginhost.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="150" column="66" lean-forward="false" selection-start-line="150" selection-start-column="44" selection-end-line="150" selection-end-column="66" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -462,51 +327,6 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="antiAFK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="rotateNick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts_" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts_" type="462c0819:PsiDirectoryNode" />
-              <item name="autoCommander" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts_" type="462c0819:PsiDirectoryNode" />
-              <item name="countNick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts_" type="462c0819:PsiDirectoryNode" />
-              <item name="massAction" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -851,13 +671,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00073" summary="fixed all obvious errors">
-      <created>1511489955161</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1511489955162</updated>
-    </task>
     <task id="LOCAL-00074" summary="added command to list all queries on demand ^^">
       <created>1511493195441</created>
       <option name="number" value="00074" />
@@ -1194,7 +1007,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513255426927</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary=":thonk:">
+      <created>1513622527486</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1513622527488</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1224,7 +1044,6 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12961012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5094837" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32717392" sideWeight="0.74791664" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32391304" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.49051633" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1253,6 +1072,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Floobits" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32717392" sideWeight="0.74791664" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1458,44 +1278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts_/massAction/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3655">
-          <caret line="224" column="24" lean-forward="false" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="47" column="40" lean-forward="false" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pluginhost.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="150" column="66" lean-forward="false" selection-start-line="150" selection-start-column="44" selection-end-line="150" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts_/autoCommander/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="49" column="37" lean-forward="false" selection-start-line="47" selection-start-column="16" selection-end-line="49" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
@@ -1506,7 +1288,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="170">
           <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
@@ -1514,10 +1296,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="47" column="40" lean-forward="false" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts_/massAction/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3655">
+          <caret line="224" column="24" lean-forward="false" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts_/autoCommander/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="78" column="56" lean-forward="false" selection-start-line="78" selection-start-column="56" selection-end-line="78" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/pluginhost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="54" column="117" lean-forward="true" selection-start-line="54" selection-start-column="117" selection-end-line="54" selection-end-column="117" />
+        <state relative-caret-position="379">
+          <caret line="67" column="34" lean-forward="true" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
