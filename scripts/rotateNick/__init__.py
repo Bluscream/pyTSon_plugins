@@ -50,14 +50,12 @@ class rotateNick(ts3plugin):
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
 
-        if self.timer is None:
-            self.timer = QTimer()
-            self.timer.timeout.connect(self.tick)
+        # if self.timer is None:
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.tick)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
-    def stop(self):
-        if hasattr(self.timer, "isActive") and self.timer.isActive():
-            self.toggleTimer()
+    def stop(self): self.stopTimer()
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:
@@ -83,11 +81,12 @@ class rotateNick(ts3plugin):
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def stopTimer(self):
-        self.timer.stop()
-        self.timer = None
-        ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self._nick)
-        ts3lib.flushClientSelfUpdates(self.schid)
-        ts3lib.printMessageToCurrentTab('Timer stopped!')
+        if hasattr(self.timer, "isActive") and self.timer.isActive():
+            self.timer.stop()
+            # self.timer = None
+            ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self._nick)
+            ts3lib.flushClientSelfUpdates(self.schid)
+            ts3lib.printMessageToCurrentTab('Timer stopped!')
 
     def tick(self):
         try:
