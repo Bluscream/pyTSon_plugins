@@ -91,9 +91,9 @@ class rotateNick(ts3plugin):
     def tick(self):
         try:
             if self.schid == 0: return
-            max = self.max - 2
+            max = self.max - 1
             _nick = list(self.nick)
-            if self.i == (len(_nick) * -1):
+            if self.i == (len(_nick) * -1) + 2:
                 self.i = max
                 self.b = 0
             self.i -= 1
@@ -114,15 +114,15 @@ class rotateNick(ts3plugin):
                         count += 1
                     else:
                         pass
-                for k in range(count, max):
-                    newnick.append(self.seperator)
+                #for k in range(count, max):
+                    #newnick.append(self.seperator)
             else:
                 for k in range(self.i * -1, len(_nick)):
                     if k != -1 and count < max:
                         newnick.append(_nick[k])
                         count += 1
-                for k in range(count, max):
-                    newnick.append(self.seperator)
+                #for k in range(count, max):
+                    #newnick.append(self.seperator)
             # newnick.append("!")
             _newnick = ''.join(newnick)
             if _newnick is None: return
