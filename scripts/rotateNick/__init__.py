@@ -30,7 +30,7 @@ class rotateNick(ts3plugin):
     debug = False
     max = ts3defines.TS3_MAX_SIZE_CLIENT_NICKNAME_NONSDK
     nick = "TeamspeakUser"
-    seperator = " "
+    seperator = "꧂"
     schid = 0
     i = max-2
     b = 0
@@ -38,6 +38,9 @@ class rotateNick(ts3plugin):
     ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "rotateNick", "config.ini")
     config = configparser.ConfigParser()
 
+    def separator(self, sep=None):
+        if sep: self.config.set('general', 'separator', sep.replace(" ", "\s"))
+        else: return self.config.get('general', 'separator').replace("\s", " ")
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -46,7 +49,7 @@ class rotateNick(ts3plugin):
         if path.isfile(self.ini):
             self.config.read(self.ini)
         else:
-            self.config['GENERAL'] = { "cfgver": "1", "debug": "False", "nick": "TeamspeakUser", "customNick": "False", "interval": "1000" }
+            self.config["general"] = { "cfgver": "1", "debug": "False", "nick": "TeamspeakUser", "customNick": "False", "interval": "1000", "separator": " " }
             with open(self.ini, 'w') as configfile:
                 self.config.write(configfile)
 
@@ -103,7 +106,7 @@ class rotateNick(ts3plugin):
             newnick = ["!"]
 
             for k in range(0, self.i):
-                newnick.append(self.seperator)
+                newnick.append(self.separator())
                 count += 1
 
             if self.i > 1:
@@ -115,18 +118,18 @@ class rotateNick(ts3plugin):
                     else:
                         pass
                 #for k in range(count, max):
-                    #newnick.append(self.seperator)
+                    #newnick.append(separator())
             else:
                 for k in range(self.i * -1, len(_nick)):
                     if k != -1 and count < max:
                         newnick.append(_nick[k])
                         count += 1
                 #for k in range(count, max):
-                    #newnick.append(self.seperator)
+                    #newnick.append(self.separator())
             # newnick.append("!")
             _newnick = ''.join(newnick)
             if _newnick is None: return
-            ts3lib.printMessageToCurrentTab("length: {} | newnick: \"{}\"".format(len(_newnick), _newnick))
+            # ts3lib.printMessageToCurrentTab("length: {} | newnick: \"{}\"".format(len(_newnick), _newnick))
             ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _newnick)
             ts3lib.flushClientSelfUpdates(self.schid)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
@@ -139,6 +142,11 @@ class dialog(QDialog):
             setupUi(self, path.join(pytson.getPluginPath(), "scripts", rotateNick.__class__.__name__, "dialog.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle(rotateNick.name)
+            self.nick.setText(self.rotateNick.config.get('general', 'nick'))
+            self.separator.setText(self.rotateNick.separator())
+            customNick = self.rotateNick.config.get('general', 'customNick')
+            self.customNick.setChecked(True if customNick == "True" else False)
+            self.interval.value = int(self.rotateNick.config.get('general', 'interval'))
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_btn_start_clicked(self):
@@ -150,6 +158,8 @@ class dialog(QDialog):
                 else:
                     nick = _nick
                 self.rotateNick._nick = _nick
+                self.rotateNick.separator(self.separator.text)
+                # self.rotateNick.config.set('general', 'separator', self.separator.text)
                 self.rotateNick.startTimer(self.interval.value, nick)
                 self.btn_start.setText("Stop")
             else:
@@ -158,4 +168,14 @@ class dialog(QDialog):
             # elf.close()
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def on_btn_cancel_clicked(self): self.close()
+    def on_btn_cancel_clicked(self):
+        try:
+            self.rotateNick.separator(self.separator.text)
+            # self.rotateNick.config.set('general', 'separator', self.separator.text)
+            self.rotateNick.config.set('general', 'nick', self.nick.text)
+            self.rotateNick.config.set('general', 'customNick', str(self.customNick.checked))
+            self.rotateNick.config.set('general', 'interval', str(self.interval.value))
+            with open(self.rotateNick.ini, 'w') as configfile:
+                self.rotateNick.config.write(configfile)
+            self.close()
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
