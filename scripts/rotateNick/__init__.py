@@ -1,4 +1,4 @@
-import ts3defines, ts3lib, traceback, pytson
+import ts3defines, ts3lib, traceback, pytson, configparser
 from ts3plugin import ts3plugin
 from datetime import datetime
 from PythonQt.QtCore import QTimer, Qt
@@ -31,15 +31,25 @@ class rotateNick(ts3plugin):
     max = ts3defines.TS3_MAX_SIZE_CLIENT_NICKNAME_NONSDK
     nick = "TeamspeakUser"
     seperator = " "
-    _nick = []
     schid = 0
     i = max-2
     b = 0
     dlg = None
+    ini = path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "rotateNick", "config.ini")
+    config = configparser.ConfigParser()
+
+
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
+        if path.isfile(self.ini):
+            self.config.read(self.ini)
+        else:
+            self.config['GENERAL'] = { "cfgver": "1", "debug": "False", "nick": "TeamspeakUser", "customNick": "False", "interval": "1000" }
+            with open(self.ini, 'w') as configfile:
+                self.config.write(configfile)
+
         if self.timer is None:
             self.timer = QTimer()
             self.timer.timeout.connect(self.tick)
@@ -47,19 +57,22 @@ class rotateNick(ts3plugin):
 
     def stop(self):
         if hasattr(self.timer, "isActive") and self.timer.isActive():
-            self.toggleTimer(self.schid)
+            self.toggleTimer()
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:
-            if not self.dlg: self.dlg = dialog(self)
-            self.dlg.show()
-            self.dlg.raise_()
-            self.dlg.activateWindow()
+            if hasattr(self.timer, "isActive") and self.timer.isActive(): self.stopTimer()
+            else:
+                self.schid = schid
+                if not self.dlg: self.dlg = dialog(self)
+                self.dlg.show()
+                self.dlg.raise_()
+                self.dlg.activateWindow()
 
-    def startTimer(self, interval, nick):
-            if not self.nick: (err, nick) = ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+    def startTimer(self, interval=1000, nick=None):
+        try:
+            self.nick = nick
             # if len(nick) > self.max-2: errorMsgBox("Error", "Nickname must be %s chars or below!"%self.max); return
-            self._nick = list(nick)
             self.i = self.max - 2
             self.b = 0
             # step = inputBox(self.name, 'Interval in Milliseconds:')
@@ -67,6 +80,7 @@ class rotateNick(ts3plugin):
             # else: interval = 300
             self.timer.start(interval)
             ts3lib.printMessageToCurrentTab('Timer started!')
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def stopTimer(self):
         self.timer.stop()
@@ -75,26 +89,17 @@ class rotateNick(ts3plugin):
         ts3lib.flushClientSelfUpdates(self.schid)
         ts3lib.printMessageToCurrentTab('Timer stopped!')
 
-    def toggleTimer(self, interval):
-        if self.timer.isActive(): self.startTimer()
-        else: self.stopTimer()
-
     def tick(self):
-        if self.schid == 0: return
-        _newnick = self.fillnick()
-        if _newnick is None: return
-        ts3lib.printMessageToCurrentTab("length: {} | newnick: \"{}\"".format(len(_newnick), _newnick))
-        ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _newnick)
-        ts3lib.flushClientSelfUpdates(self.schid)
-
-    def fillnick(self):
+        try:
+            if self.schid == 0: return
             max = self.max - 2
-            if self.i == (len(self._nick) * -1):
-               self.i = max
-               self.b = 0
+            _nick = list(self.nick)
+            if self.i == (len(_nick) * -1):
+                self.i = max
+                self.b = 0
             self.i -= 1
             self.b += 1
-            #ts3lib.printMessageToCurrentTab("self.i == %s | self.b == %s"%(self.i,self.b))
+            # ts3lib.printMessageToCurrentTab("self.i == %s | self.b == %s"%(self.i,self.b))
             count = 0
             newnick = ["!"]
 
@@ -102,41 +107,50 @@ class rotateNick(ts3plugin):
                 newnick.append(self.seperator)
                 count += 1
 
-            if self.i > 1 :
-                for k in range(0,self.b):
-                    if  k < len(self._nick) and k < max:
-                        newnick.append(self._nick[k])
-                        #ts3lib.printMessageToCurrentTab("1: {} | 2: {} | 3: {}".format(0, self.b, self._nick[k]))
+            if self.i > 1:
+                for k in range(0, self.b):
+                    if k < len(_nick) and k < max:
+                        newnick.append(_nick[k])
+                        # ts3lib.printMessageToCurrentTab("1: {} | 2: {} | 3: {}".format(0, self.b, self._nick[k]))
                         count += 1
                     else:
                         pass
                 for k in range(count, max):
                     newnick.append(self.seperator)
             else:
-                 for k in range(self.i * -1 ,len(self._nick)):
-                      if k != -1 and count < max:
-                          newnick.append(self._nick[k])
-                          count +=1
-                 for k in range(count, max):
-                      newnick.append(self.seperator)
+                for k in range(self.i * -1, len(_nick)):
+                    if k != -1 and count < max:
+                        newnick.append(_nick[k])
+                        count += 1
+                for k in range(count, max):
+                    newnick.append(self.seperator)
             newnick.append("!")
-            return ''.join(newnick)
+            _newnick = ''.join(newnick)
+            if _newnick is None: return
+            ts3lib.printMessageToCurrentTab("length: {} | newnick: \"{}\"".format(len(_newnick), _newnick))
+            ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _newnick)
+            ts3lib.flushClientSelfUpdates(self.schid)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
 class dialog(QDialog):
     def __init__(self, rotateNick, parent=None):
         try:
             self.rotateNick = rotateNick
             super(QDialog, self).__init__(parent)
-            setupUi(self, path.join(pytson.getPluginPath(), "scripts", rotateNick.__name__, "dialog.ui"))
+            setupUi(self, path.join(pytson.getPluginPath(), "scripts", rotateNick.__class__.__name__, "dialog.ui"))
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle(rotateNick.name)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_btn_start_clicked(self):
         try:
-            if self.customNick.checked: nick = self.nick.text
-            else: (err, nick) = self.rotateNick.nick
-            self.rotateNick.toggleTimer(self.interval.value)
+            (err, _nick) = ts3lib.getClientSelfVariable(self.rotateNick.schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            if self.customNick.checked:
+                nick = self.nick.text
+            else:
+                nick = _nick
+            self.rotateNick.startTimer(self.interval.value, nick)
+            self.close()
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_btn_cancel_clicked(self): self.close()

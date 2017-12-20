@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="123" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="133" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/scripts/pingNick/__init__.py" afterPath="$PROJECT_DIR$/scripts/pingNick/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" afterPath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -42,7 +44,7 @@
       <file leaf-file-name="pyTSon.conf" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
+            <state relative-caret-position="538">
               <caret line="50" column="22" lean-forward="false" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
               <folding />
             </state>
@@ -50,12 +52,12 @@
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="29" column="202" lean-forward="false" selection-start-line="29" selection-start-column="202" selection-end-line="33" selection-end-column="40" />
+            <state relative-caret-position="422">
+              <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,10 +66,22 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="122" column="35" lean-forward="true" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+            <state relative-caret-position="1479">
+              <caret line="87" column="49" lean-forward="false" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="49" />
               <folding>
-                <element signature="e#0#44#0" expanded="true" />
+                <element signature="e#0#58#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/pingNick/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="498">
+              <caret line="48" column="32" lean-forward="false" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,12 +132,12 @@
       <find>except</find>
       <find>log.</find>
       <find>cid</find>
-      <find>self.schid</find>
       <find>requestserver</find>
       <find>QMessageBox</find>
       <find>messageb</find>
       <find>traceback</find>
       <find>toggle</find>
+      <find>self.schid</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -177,8 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
         <option value="$PROJECT_DIR$/scripts/autoEncode/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/nowPlaying/__init__.py" />
@@ -227,6 +239,8 @@
         <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
         <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/scripts/pluginhost.py" />
+        <option value="$PROJECT_DIR$/../../pyTSon/eventlog.conf" />
+        <option value="$PROJECT_DIR$/scripts/pingNick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/rotateNick/__init__.py" />
       </list>
     </option>
@@ -296,17 +310,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scratches">
         <subPane>
           <expand>
@@ -334,18 +337,30 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="pingNick" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="rotateNick" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts_" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="serverBrowser" type="462c0819:PsiDirectoryNode" />
             </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
             <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts_" type="462c0819:PsiDirectoryNode" />
-              <item name="onlineOfflineMessages" type="462c0819:PsiDirectoryNode" />
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -359,7 +374,7 @@
     <property name="nodejs_interpreter_path" value="D:/Bars-and-Tools/NodeJS/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pyTSon/eventlog - Copy.conf" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
     <property name="recentsLimit" value="5" />
@@ -662,13 +677,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00076" summary="fixed serverlist only showing ~10 servers + added alternate row colors.">
-      <created>1511624402692</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1511624402693</updated>
     </task>
     <task id="LOCAL-00077" summary=":thinking:">
       <created>1511627577823</created>
@@ -1006,7 +1014,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513704235022</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary=":thonk:">
+      <created>1513709516459</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1513709516460</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1163,9 +1178,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/rawPluginCMD/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/scripts_/serverGroupChanger/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts_/banUID/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/recreateChannel/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/kickself/__init__.py" />
@@ -1209,7 +1221,6 @@
     <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" />
     <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/ui/servers.ui" />
-    <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -1245,21 +1256,7 @@
     <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/scripts_/countNick/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="47" column="16" lean-forward="false" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="50" column="22" lean-forward="false" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts_/countNick/__init__.py" />
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1275,46 +1272,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts_/massAction/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts_/massAction/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/scripts_/autoCommander/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/scripts_/onlineOfflineMessages/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/eventlog - Copy.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3927">
-          <caret line="240" column="0" lean-forward="false" selection-start-line="240" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/eventlog.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="29" column="202" lean-forward="false" selection-start-line="29" selection-start-column="202" selection-end-line="33" selection-end-column="40" />
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/pingNick/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="48" column="32" lean-forward="false" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts_/autoCommander/__init__.py">
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="78" column="56" lean-forward="false" selection-start-line="78" selection-start-column="56" selection-end-line="78" selection-end-column="56" />
+        <state relative-caret-position="538">
+          <caret line="50" column="22" lean-forward="false" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts_/onlineOfflineMessages/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="34" column="132" lean-forward="false" selection-start-line="34" selection-start-column="132" selection-end-line="38" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="442">
+          <caret line="26" column="38" lean-forward="true" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="122" column="35" lean-forward="true" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+        <state relative-caret-position="1479">
+          <caret line="87" column="49" lean-forward="false" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="49" />
           <folding>
-            <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#0#58#0" expanded="true" />
           </folding>
         </state>
       </provider>

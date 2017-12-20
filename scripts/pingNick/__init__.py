@@ -6,7 +6,6 @@ from PythonQt.QtCore import QTimer
 
 class pingNick(ts3plugin):
     name = "Ping Nickname"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
@@ -23,6 +22,9 @@ class pingNick(ts3plugin):
     suffix = "ms :O"
     int = 0
     lastPing = 0
+    nick = "TeamspeakUser"
+    schid = 0
+    clid = 0
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -32,25 +34,32 @@ class pingNick(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:
-            if self.timer == None:
+            if self.timer is None:
                 self.timer = QTimer()
                 self.timer.timeout.connect(self.tick)
             if self.timer.isActive():
                 self.timer.stop()
                 self.timer = None
+                ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self.nick)
+                ts3lib.flushClientSelfUpdates(schid)
                 ts3lib.printMessageToCurrentTab('Timer stopped!')
             else:
+                (err, self.nick) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                self.schid = schid
+                (err, self.clid) = ts3lib.getClientID(schid)
                 self.timer.start(1000)
                 ts3lib.printMessageToCurrentTab('Timer started!')
-            ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.toggle))
+            # ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.toggle))
 
-    def tick(self,schid=0, clid=0):
-        if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
-        if clid == 0: (err, clid) = ts3lib.getClientID(schid)
-        if schid == 0 or clid == 0: return
-        if self.debug: self.int += 1;ts3lib.printMessageToCurrentTab('Tick %s'%self.int)
-        (err, ping) = ts3lib.getConnectionVariableAsUInt64(schid, clid, ts3defines.ConnectionProperties.CONNECTION_PING)
-        if ping == self.lastPing: return
-        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, "{0}{1}{2}".format(self.prefix, ping, self.suffix))
-        ts3lib.flushClientSelfUpdates(schid)
-        self.lastPing = ping
+    def tick(self):
+        try:
+            # if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
+            # (err, clid) = ts3lib.getClientID(self.schid)
+            if self.schid == 0 or self.clid == 0: return
+            if self.debug: self.int += 1;ts3lib.printMessageToCurrentTab('Tick %s'%self.int)
+            (err, ping) = ts3lib.getConnectionVariableAsUInt64(self.schid, self.clid, ts3defines.ConnectionProperties.CONNECTION_PING)
+            if ping == self.lastPing: return
+            ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, "{0}{1}{2}".format(self.prefix, ping, self.suffix))
+            ts3lib.flushClientSelfUpdates(self.schid)
+            self.lastPing = ping
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
