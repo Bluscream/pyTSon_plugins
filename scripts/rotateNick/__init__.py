@@ -143,14 +143,19 @@ class dialog(QDialog):
 
     def on_btn_start_clicked(self):
         try:
-            (err, _nick) = ts3lib.getClientSelfVariable(self.rotateNick.schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-            if self.customNick.checked:
-                nick = self.nick.text
+            if not self.rotateNick.timer.isActive():
+                (err, _nick) = ts3lib.getClientSelfVariable(self.rotateNick.schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                if self.customNick.checked:
+                    nick = self.nick.text
+                else:
+                    nick = _nick
+                self.rotateNick._nick = _nick
+                self.rotateNick.startTimer(self.interval.value, nick)
+                self.btn_start.setText("Stop")
             else:
-                nick = _nick
-            self.rotateNick._nick = _nick
-            self.rotateNick.startTimer(self.interval.value, nick)
-            self.close()
+                self.rotateNick.stopTimer()
+                self.btn_start.setText("Start")
+            # elf.close()
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_btn_cancel_clicked(self): self.close()
