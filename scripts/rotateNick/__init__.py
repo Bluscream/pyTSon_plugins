@@ -85,7 +85,7 @@ class rotateNick(ts3plugin):
     def stopTimer(self):
         self.timer.stop()
         self.timer = None
-        ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self.nick)
+        ts3lib.setClientSelfVariableAsString(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self._nick)
         ts3lib.flushClientSelfUpdates(self.schid)
         ts3lib.printMessageToCurrentTab('Timer stopped!')
 
@@ -149,6 +149,7 @@ class dialog(QDialog):
                 nick = self.nick.text
             else:
                 nick = _nick
+            self.rotateNick._nick = _nick
             self.rotateNick.startTimer(self.interval.value, nick)
             self.close()
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)

@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/pingNick/__init__.py" afterPath="$PROJECT_DIR$/scripts/pingNick/__init__.py" />
       <change beforePath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" afterPath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -66,8 +65,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1479">
-              <caret line="87" column="49" lean-forward="false" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="49" />
+            <state relative-caret-position="188">
+              <caret line="87" column="108" lean-forward="false" selection-start-line="87" selection-start-column="108" selection-end-line="87" selection-end-column="108" />
               <folding>
                 <element signature="e#0#58#0" expanded="true" />
               </folding>
@@ -344,12 +343,6 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="rotateNick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="serverBrowser" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -677,13 +670,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00077" summary=":thinking:">
-      <created>1511627577823</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1511627577825</updated>
     </task>
     <task id="LOCAL-00078" summary=":thinking: it twerks! yay">
       <created>1511644858601</created>
@@ -1021,7 +1007,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513709516460</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary=":thonk:">
+      <created>1513763490936</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1513763490937</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1035,12 +1028,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12961012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12961012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5094837" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32391304" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32391304" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.49051633" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1331,8 +1323,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="87" column="49" lean-forward="false" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="49" />
+        <state relative-caret-position="188">
+          <caret line="87" column="108" lean-forward="false" selection-start-line="87" selection-start-column="108" selection-end-line="87" selection-end-column="108" />
           <folding>
             <element signature="e#0#58#0" expanded="true" />
           </folding>
