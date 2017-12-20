@@ -123,7 +123,7 @@ class rotateNick(ts3plugin):
                         count += 1
                 for k in range(count, max):
                     newnick.append(self.seperator)
-            newnick.append("!")
+            # newnick.append("!")
             _newnick = ''.join(newnick)
             if _newnick is None: return
             ts3lib.printMessageToCurrentTab("length: {} | newnick: \"{}\"".format(len(_newnick), _newnick))
