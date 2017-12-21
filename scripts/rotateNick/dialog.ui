@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>360</width>
     <height>286</height>
    </rect>
   </property>
@@ -81,7 +81,7 @@
       <bool>true</bool>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_scroll">
       <attribute name="title">
@@ -104,12 +104,20 @@
               <property name="text">
                <string>Forward</string>
               </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/bookmark_add.svg</normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/bookmark_add.svg</iconset>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QRadioButton" name="radioButton_4">
               <property name="text">
                <string>Backward</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/bookmark_remove.svg</normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/bookmark_remove.svg</iconset>
               </property>
              </widget>
             </item>
@@ -125,23 +133,27 @@
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
-           <widget class="QRadioButton" name="radioButton_5">
+           <widget class="QRadioButton" name="currentNick">
             <property name="text">
              <string>Current</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/change_nickname.svg</normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/change_nickname.svg</iconset>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_18">
             <item>
-             <widget class="QRadioButton" name="radioButton_6">
+             <widget class="QRadioButton" name="customNick">
               <property name="text">
                <string>Custom</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="nick_4"/>
+             <widget class="QLineEdit" name="nick"/>
             </item>
            </layout>
           </item>
@@ -153,10 +165,88 @@
             <property name="text">
              <string>News</string>
             </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/server_log.svg</normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/server_log.svg</iconset>
+            </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="QRadioButton" name="radioButton_8">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Lorem Ipsum</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/addon.svg</normaloff>../../../../../../../../../Visual Studio/source/repos/teamspeak-dark/iconpack/gfx/dark/addon.svg</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_bounce">
+      <attribute name="title">
+       <string>Bounce</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="title">
+          <string>Nickname</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton_15">
+            <property name="text">
+             <string>Current</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_21">
+            <item>
+             <widget class="QRadioButton" name="radioButton_16">
+              <property name="text">
+               <string>Custom</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="nick_6"/>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="radioButton_17">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>News</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QRadioButton" name="radioButton_18">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -170,78 +260,87 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_bounce">
+     <widget class="QWidget" name="tab_write">
       <attribute name="title">
-       <string>Bounce</string>
+       <string>Write</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_9">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="customNick_2">
+        <widget class="QGroupBox" name="groupBox_4">
          <property name="enabled">
           <bool>false</bool>
          </property>
          <property name="title">
-          <string>Use custom Nickname</string>
+          <string>Direction</string>
          </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <layout class="QVBoxLayout" name="verticalLayout_10">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <layout class="QHBoxLayout" name="horizontalLayout_19">
             <item>
-             <widget class="QLabel" name="label_5">
+             <widget class="QRadioButton" name="radioButton_9">
               <property name="text">
-               <string>Nickname:</string>
+               <string>Forward</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="nick_2"/>
+             <widget class="QRadioButton" name="radioButton_10">
+              <property name="text">
+               <string>Backward</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
          </layout>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab_write">
-      <attribute name="title">
-       <string>Write</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_10">
        <item>
-        <widget class="QGroupBox" name="customNick_3">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
+        <widget class="QGroupBox" name="groupBox_5">
          <property name="title">
-          <string>Use custom Nickname</string>
+          <string>Nickname</string>
          </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton_11">
+            <property name="text">
+             <string>Current</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_20">
             <item>
-             <widget class="QLabel" name="label_6">
+             <widget class="QRadioButton" name="radioButton_12">
               <property name="text">
-               <string>Nickname:</string>
+               <string>Custom</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="nick_3"/>
+             <widget class="QLineEdit" name="nick_5"/>
             </item>
            </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="radioButton_13">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>News</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QRadioButton" name="radioButton_14">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Lorem Ipsum</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

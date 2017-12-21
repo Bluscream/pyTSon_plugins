@@ -1,13 +1,18 @@
 import ts3defines, ts3lib, json
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from PythonQt.QtCore import QUrl
+from PythonQt.QtCore import QUrl, Qt, QTimer
+from PythonQt.QtGui import QInputDialog, QWidget
 from urllib.parse import quote_plus as urlencode
 from ts3plugin import ts3plugin
 from datetime import datetime
 
+def inputBox(title, text):
+    x = QWidget()
+    x.setAttribute(Qt.WA_DeleteOnClose)
+    return QInputDialog.getText(x, title, text)
+
 class autoTPRequest(ts3plugin):
     name = "Auto Talk Power Request"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
@@ -16,11 +21,12 @@ class autoTPRequest(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Talk Power", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Talk Power", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Talk Power Spam", "")]
     hotkeys = []
     debug = False
     msg = ""
     toggle = True
+    timer = None
     schid = 0
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -28,10 +34,32 @@ class autoTPRequest(ts3plugin):
     def __init__(self):
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
+    def toggleTimer(self, schid):
+            if self.timer is None:
+                self.timer = QTimer()
+                self.timer.timeout.connect(self.tick)
+            if self.timer.isActive():
+                self.timer.stop()
+                self.timer = None
+                ts3lib.printMessageToCurrentTab('Timer stopped!')
+            else:
+                step = inputBox(self.name, 'Interval in Milliseconds:')
+                if step: interval = int(step)
+                else: interval = 1000
+                self.schid = schid
+                self.timer.start(interval)
+                ts3lib.printMessageToCurrentTab('Timer started!')
+
+    def tick(self):
+        self.current = not self.current
+        try: ts3lib.requestIsTalker(self.schid, self.current, "");self.schid = 0
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:
             self.toggle = not self.toggle
             ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.toggle))
+        elif menuItemID == 1: self.toggleTimer(schid)
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not self.toggle: return
@@ -56,5 +84,5 @@ class autoTPRequest(ts3plugin):
         if self.msg == "": msg =joke[:50]
         else: msg = self.msg
         if self.debug: ts3lib.printMessageToCurrentTab('[{0}] msg: {1}'.format(self.name,msg))
-        try: ts3lib.requestIsTalker(self.schid, True, msg);self.schid = 0
+        try: ts3lib.requestIsTalker(self.schid, True, msg)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)

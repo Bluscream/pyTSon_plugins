@@ -14,6 +14,11 @@ def inputBox(title, text):
     x.setAttribute(Qt.WA_DeleteOnClose)
     return QInputDialog.getText(x, title, text)
 
+def boolean(arschloch):
+    if arschloch and arschloch.lower() == "true": return True
+    elif arschloch and arschloch.lower() == "false": return False
+    else: return None
+
 class rotateNick(ts3plugin):
     name = "Rotate Nickname"
     apiVersion = 22
@@ -144,8 +149,10 @@ class dialog(QDialog):
             self.setWindowTitle(rotateNick.name)
             self.nick.setText(self.rotateNick.config.get('general', 'nick'))
             self.separator.setText(self.rotateNick.separator())
-            customNick = self.rotateNick.config.get('general', 'customNick')
-            self.customNick.setChecked(True if customNick == "True" else False)
+            customNick = boolean(self.rotateNick.config.get('general', 'customNick'))
+            self.currentNick.setChecked(not customNick)
+            self.customNick.setChecked(customNick)
+            self.nick.setEnabled(customNick)
             self.interval.value = int(self.rotateNick.config.get('general', 'interval'))
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
