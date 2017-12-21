@@ -2,12 +2,14 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="140" />
-    <bookmark url="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" line="102" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" line="88" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/queryConsole/__init__.py" afterPath="$PROJECT_DIR$/scripts/queryConsole/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/socketplugin/__init__.py" afterPath="$PROJECT_DIR$/scripts/socketplugin/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -68,8 +70,32 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="51" column="24" lean-forward="true" selection-start-line="49" selection-start-column="57" selection-end-line="51" selection-end-column="24" />
+            <state relative-caret-position="1054">
+              <caret line="62" column="18" lean-forward="false" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/queryConsole/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/socketplugin/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -108,7 +134,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>MessageDialog</find>
       <find>ts3defines.</find>
       <find>verify</find>
       <find>logmessa</find>
@@ -138,6 +163,7 @@
       <find>self.schid</find>
       <find>seperator</find>
       <find>separator</find>
+      <find>active</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -191,8 +217,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/nowPlaying/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts_/autoFollow/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoFlee/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoFlee/cfg/settings.ini" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -241,6 +265,8 @@
         <option value="$PROJECT_DIR$/scripts/rotateNick/__init__.py" />
         <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/queryConsole/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/socketplugin/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" />
       </list>
     </option>
@@ -355,6 +381,18 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="info" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="queryConsole" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="socketplugin" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -682,13 +720,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00087" summary=":thinking:">
-      <created>1511741497864</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1511741497864</updated>
     </task>
     <task id="LOCAL-00088" summary=":thinking:">
       <created>1511745920552</created>
@@ -1026,7 +1057,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513869497858</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary=":thonk:">
+      <created>1513870361729</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1513870361729</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1183,8 +1221,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/FileBrowser/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/scripts/kickCounter/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/autoMSG/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/pluginCMD/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/settings.ini" />
@@ -1366,10 +1402,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/socketplugin/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/queryConsole/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="51" column="24" lean-forward="true" selection-start-line="49" selection-start-column="57" selection-end-line="51" selection-end-column="24" />
+        <state relative-caret-position="1054">
+          <caret line="62" column="18" lean-forward="false" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>

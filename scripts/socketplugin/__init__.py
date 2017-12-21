@@ -1,6 +1,6 @@
 from ts3plugin import ts3plugin
-from websocket import create_connection
-import ts3lib, ts3defines, tshelp, json, tssocketserver, SimpleWebSocketServer
+# from websocket import create_connection
+import ts3lib, ts3defines, json, pytson #, tssocketserver, SimpleWebSocketServer
 
 class socketplugin(ts3plugin):
 	"""docstring for overlayplugin"""

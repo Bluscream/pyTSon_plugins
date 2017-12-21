@@ -3,13 +3,13 @@ from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtGui import QWidget
 from PythonQt.QtCore import Qt
 from pytsonui import setupUi
-import ts3lib, ts3defines, datetime, ts3, pytson
+import ts3lib, ts3defines, datetime, pytson
 
 def my_decorator(func):
     def wrapped_func(*args,**kwargs):
         return func("I've been decorated!",*args,**kwargs)
     return wrapped_func
-print = my_decorator(print)
+# print = my_decorator(print)
 
 class queryConsole(ts3plugin):
     name = "TS3 Query Console"
