@@ -2,12 +2,11 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="140" />
-    <bookmark url="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" line="99" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" line="102" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
       <change beforePath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -70,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="413">
-              <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+              <caret line="51" column="24" lean-forward="true" selection-start-line="49" selection-start-column="57" selection-end-line="51" selection-end-column="24" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -684,13 +683,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00086" summary=":thinking:">
-      <created>1511692393608</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1511692393611</updated>
-    </task>
     <task id="LOCAL-00087" summary=":thinking:">
       <created>1511741497864</created>
       <option name="number" value="00087" />
@@ -1027,7 +1019,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513866528143</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary=":thonk:">
+      <created>1513869497858</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1513869497858</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1370,7 +1369,7 @@
     <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
-          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+          <caret line="51" column="24" lean-forward="true" selection-start-line="49" selection-start-column="57" selection-end-line="51" selection-end-column="24" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>

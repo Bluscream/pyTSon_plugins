@@ -26,63 +26,67 @@ class autoTPRequest(ts3plugin):
     debug = True
     msg = ""
     toggle = 0
-    timer = None
+    timer = QTimer()
     schid = 0
     count = 0
-    interval = 1500
+    interval = 5000
+    active = False
 
     def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
-        if self.timer is None:
-            self.timer = QTimer()
+        try:
             self.timer.timeout.connect(self.tick)
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+            self.schid = ts3lib.getCurrentServerConnectionHandlerID()
+            self.timer.start(self.interval)
+            if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def stop(self):
-        self.stopTimer()
-
-    def stopTimer(self):
         self.timer.stop()
-        self.timer = None
         self.schid = 0
         self.count = 0
+        self.toggle = 0
         ts3lib.printMessageToCurrentTab('Timer stopped!')
 
-    def startTimer(self, schid, interval=None):
-        if not interval:
-            step = inputBox(self.name, 'Interval in Milliseconds:')
-            if step:
-                interval = int(step)
-        if not interval:
-            interval = self.interval
-        self.schid = schid
-        self.timer.start(interval)
-        ts3lib.printMessageToCurrentTab('Timer started!')
+    def stopTimer(self):
+        try:
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def startTimer(self):
+        try:
+
+            ts3lib.printMessageToCurrentTab('Timer started!')
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def toggleTimer(self, schid=None):
-        if hasattr(self.timer, "isActive") and self.timer.isActive(): self.stopTimer()
-        else: self.startTimer(schid)
+        try:
+            if hasattr(self.timer, "isActive") and self.timer.isActive(): self.stopTimer()
+            else: self.startTimer(schid)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def tick(self):
-        self.count += 1
-        ts3lib.requestIsTalker(self.schid, False, "")
-        ts3lib.requestIsTalker(self.schid, True, "Request #{}".format(self.count))
+        try:
+            if not self.active: return
+            self.count += 1
+            ts3lib.requestIsTalker(self.schid, False, "")
+            ts3lib.requestIsTalker(self.schid, True, "Request #{}".format(self.count))
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if menuItemID == 0:
-            self.toggle = 1
-            ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.toggle))
-        elif menuItemID == 1:
-            self.toggle == 2
-            (error, cID) = ts3lib.getClientID(schid)
-            if error == ts3defines.ERROR_ok: return
-            (err, talker) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
-            if not talker: self.toggleTimer(schid)
+        try:
+            if menuItemID == 0:
+                self.toggle = 1
+                ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.toggle))
+            elif menuItemID == 1:
+                self.toggle == 2
+                (err, talker) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
+                if not talker: self.startTimer(schid)
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
-        if not self.toggle: return
         try:
+            if self.toggle == 0: return
             (error, ownid) = ts3lib.getClientID(schid)
             if ownid != clientID: return
             (error, ntp) = ts3lib.getChannelVariableAsInt(schid, newChannelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
@@ -96,20 +100,21 @@ class autoTPRequest(ts3plugin):
                 self.nwmc.connect("finished(QNetworkReply*)", self.jokeReply)
                 self.schid = schid
                 self.nwmc.get(QNetworkRequest(QUrl("http://tambal.azurewebsites.net/joke/random")))
-            elif self.toggle == 2:
-                self.startTimer(self.interval)
+            elif self.toggle == 2: self.active = True
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
 
     def onUpdateClientEvent(self, serverConnectionHandlerID, clientID, invokerID, invokerName, invokerUniqueIdentifier):
-        if not self.toggle: return
-        (error, cID) = ts3lib.getClientID(self.schid)
-        if error == ts3defines.ERROR_ok: return
-        if not cID == clientID: return
-        (err, talker) = ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
-        if talker: self.stopTimer()
+        try:
+            if self.toggle == 0: return
+            (error, cID) = ts3lib.getClientID(self.schid)
+            if not cID == clientID: return
+            (err, talker) = ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
+            if talker: self.active = False
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def jokeReply(self, reply):
+        if not self.toggle == 1: return
         joke = json.loads(reply.readAll().data().decode('utf-8'))["joke"]
         ts3lib.logMessage("Requesting talk power with joke\n%s"%joke, ts3defines.LogLevel.LogLevel_INFO, self.name, self.schid)
         if self.msg == "": msg =joke[:50]
