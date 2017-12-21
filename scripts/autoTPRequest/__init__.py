@@ -24,7 +24,7 @@ class autoTPRequest(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Talk Power", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Talk Power Spam", "")]
     hotkeys = []
     debug = True
-    msg = ""
+    msg = "Hey du <3"
     toggle = 0
     timer = QTimer()
     schid = 0
@@ -48,7 +48,7 @@ class autoTPRequest(ts3plugin):
 
     def tick(self):
         if self.debug: ts3lib.printMessageToCurrentTab('toggle: {0} | schid: {1} | count: {2} | interval: {3} | active: {4}'.format(self.toggle, self.schid, self.count, self.interval, self.active))
-        if not self.active: return
+        if not self.active or self.toggle != 2: return
         self.count += 1
         ts3lib.requestIsTalker(self.schid, False, "")
         ts3lib.requestIsTalker(self.schid, True, "Request #{}".format(self.count))
@@ -77,18 +77,18 @@ class autoTPRequest(ts3plugin):
         if not self.toggle or schid != self.schid: return
         (error, ownid) = ts3lib.getClientID(schid)
         if ownid != clientID: return
-        (error, ntp) = ts3lib.getChannelVariableAsInt(schid, newChannelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
-        (error, talker) = ts3lib.getClientVariableAsInt(schid, ownid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
-        if self.debug: ts3lib.printMessageToCurrentTab('onClientMoveEvent talker: {0} | ntp: {1}'.format(talker,ntp))
-        if ntp < 1: return
-        if self.toggle == 1 and not talker:
-            self.nwmc = QNetworkAccessManager()
-            self.nwmc.connect("finished(QNetworkReply*)", self.jokeReply)
-            # self.schid = schid
-            self.nwmc.get(QNetworkRequest(QUrl("http://tambal.azurewebsites.net/joke/random")))
-        elif self.toggle == 2:
-            if self.talker(): self.active = False
-            else: self.active = True
+        if not self.talker():
+            if self.toggle == 1:
+                if self.msg != "":
+                    self.nwmc = QNetworkAccessManager()
+                    self.nwmc.connect("finished(QNetworkReply*)", self.jokeReply)
+                    self.nwmc.get(QNetworkRequest(QUrl("http://tambal.azurewebsites.net/joke/random")))
+                else: ts3lib.requestIsTalker(schid, True, self.msg)
+            elif self.toggle == 2:
+                self.active = True
+        else:
+            if self.toggle == 2:
+                self.active = False
 
 
     def onUpdateClientEvent(self, schid, clientID, invokerID, invokerName, invokerUniqueIdentifier):
@@ -105,7 +105,6 @@ class autoTPRequest(ts3plugin):
         if not self.toggle == 1: return
         joke = json.loads(reply.readAll().data().decode('utf-8'))["joke"]
         ts3lib.logMessage("Requesting talk power with joke\n%s"%joke, ts3defines.LogLevel.LogLevel_INFO, self.name, self.schid)
-        if self.msg == "": msg =joke[:50]
-        else: msg = self.msg
+        msg = joke[:50]
         if self.debug: ts3lib.printMessageToCurrentTab('[{0}] msg: {1}'.format(self.name,msg))
         ts3lib.requestIsTalker(self.schid, True, msg)
