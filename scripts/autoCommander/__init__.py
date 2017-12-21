@@ -22,7 +22,7 @@ class autoCommander(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Channel Commander", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Channel Commander Spam", "")]
     hotkeys = []
     debug = False
-    toggle = True
+    toggle = False
     timer = None
     schid = 0
     current = False

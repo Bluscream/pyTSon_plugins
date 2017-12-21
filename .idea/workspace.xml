@@ -2,13 +2,13 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="140" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" line="99" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
       <change beforePath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" afterPath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/rotateNick/dialog.ui" afterPath="$PROJECT_DIR$/scripts/rotateNick/dialog.ui" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -57,8 +57,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/autoCommander/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="63" column="8" lean-forward="false" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="53" />
+            <state relative-caret-position="515">
+              <caret line="63" column="53" lean-forward="false" selection-start-line="63" selection-start-column="53" selection-end-line="63" selection-end-column="53" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -70,10 +70,20 @@
         <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="413">
-              <caret line="55" column="40" lean-forward="true" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+              <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pyTSon.conf" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -225,13 +235,13 @@
         <option value="$PROJECT_DIR$/scripts/devTools/__init__.py" />
         <option value="$PROJECT_DIR$/scripts_/autoCommander/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
-        <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/scripts/pluginhost.py" />
         <option value="$PROJECT_DIR$/../../pyTSon/eventlog.conf" />
         <option value="$PROJECT_DIR$/scripts/pingNick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/rotateNick/config.ini" />
         <option value="$PROJECT_DIR$/scripts/rotateNick/__init__.py" />
+        <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
+        <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" />
       </list>
     </option>
@@ -242,8 +252,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="227" />
-    <option name="y" value="-22" />
+    <option name="x" value="273" />
+    <option name="y" value="-10" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -322,6 +332,11 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -365,7 +380,7 @@
     <property name="nodejs_interpreter_path" value="D:/Bars-and-Tools/NodeJS/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pyTSon/eventlog - Copy.conf" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
     <property name="recentsLimit" value="5" />
@@ -668,13 +683,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00085" summary=":thinking:">
-      <created>1511689742715</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1511689742716</updated>
     </task>
     <task id="LOCAL-00086" summary=":thinking:">
       <created>1511692393608</created>
@@ -1012,7 +1020,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513863569478</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL-00134" summary=":thonk:">
+      <created>1513866528139</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1513866528143</updated>
+    </task>
+    <option name="localTasksCounter" value="135" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1267,13 +1282,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../pyTSon/eventlog.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -1298,13 +1306,6 @@
           <folding>
             <element signature="e#0#20#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="50" column="22" lean-forward="false" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1340,10 +1341,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/eventlog.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoCommander/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="63" column="8" lean-forward="false" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="53" />
+        <state relative-caret-position="515">
+          <caret line="63" column="53" lean-forward="false" selection-start-line="63" selection-start-column="53" selection-end-line="63" selection-end-column="53" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -1353,7 +1370,7 @@
     <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
-          <caret line="55" column="40" lean-forward="true" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
