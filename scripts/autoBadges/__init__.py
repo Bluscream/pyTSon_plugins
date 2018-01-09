@@ -1,8 +1,14 @@
 from ts3plugin import ts3plugin
 from datetime import datetime
 from random import choice, getrandbits
-from PythonQt.QtCore import QTimer
+from PythonQt.QtCore import QTimer, Qt
+from PythonQt.QtGui import QInputDialog, QWidget
 import ts3defines, ts3lib
+
+def inputBox(title, text):
+    x = QWidget()
+    x.setAttribute(Qt.WA_DeleteOnClose)
+    return QInputDialog.getText(x, title, text)
 
 class autoBadges(ts3plugin):
     name = "Hack the Badge"
@@ -49,7 +55,10 @@ class autoBadges(ts3plugin):
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
             if self.timer.isActive(): self.timer.stop()
-            else: self.timer.start(self.interval)
+            else:
+                interval = inputBox(self.name, 'Interval')
+                if interval: self.interval = int(interval)
+                self.timer.start(self.interval)
 
     def tick(self):
         self.setRandomBadges()
@@ -75,7 +84,7 @@ class autoBadges(ts3plugin):
         return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, badges)
 
     def sendCommand(self, cmd):
-        ts3lib.printMessageToCurrentTab("[color=white]Sending command: {}".format(cmd))
+        ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=self.timestamp(), name=self.name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         cmd = cmd.replace(" ", "~s")
         schid = ts3lib.getCurrentServerConnectionHandlerID()
         ts3lib.requestSendServerTextMsg(schid, "~cmd{}".format(cmd))
