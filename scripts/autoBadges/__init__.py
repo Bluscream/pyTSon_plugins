@@ -56,7 +56,7 @@ class autoBadges(ts3plugin):
 
     def setRandomBadges(self):
         rand = self.randomBadges()
-        overwolf = bool(getrandbits(1))
+        overwolf = True # bool(getrandbits(1))
         badges = self.buildBadges(rand, overwolf)
         self.sendCommand(badges)
 
@@ -71,7 +71,7 @@ class autoBadges(ts3plugin):
             if i != count-1: badges += ","
         return badges
 
-    def buildBadges(self, badges, overwolf=True):
+    def buildBadges(self, badges, overwolf=False):
         return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, badges)
 
     def sendCommand(self, cmd):
