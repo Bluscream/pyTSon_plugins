@@ -226,7 +226,7 @@ class passwordCracker(ts3plugin):
     def onServerUpdatedEvent(self, schid):
         if not self.requested: return
         self.requested = False
-        self.interval = calculateInterval(schid, AntiFloodPoints.VERIFYCHANNELPASSWORD)
+        self.interval = calculateInterval(schid, AntiFloodPoints.VERIFYCHANNELPASSWORD, self.name)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:

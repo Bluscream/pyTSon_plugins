@@ -55,7 +55,7 @@ class autoBadges(ts3plugin):
         self.requested = False
         self.timers[schid] = QTimer()
         self.timers[schid].timeout.connect(self.tick)
-        interval = calculateInterval(schid, ts3defines.AntiFloodPoints.CLIENTUPDATE)
+        interval = calculateInterval(schid, ts3defines.AntiFloodPoints.CLIENTUPDATE, self.name)
         self.timers[schid].start(interval)
 
     def startTimer(self, schid):
@@ -77,7 +77,7 @@ class autoBadges(ts3plugin):
         rand = self.randomBadges()
         # overwolf = bool(getrandbits(1))
         badges = self.buildBadges(rand, True) # overwolf
-        sendCommand(self.name, badges)
+        sendCommand(self.name, badges, schid)
 
     def randomBadges(self, count=3):
         badges = ""
