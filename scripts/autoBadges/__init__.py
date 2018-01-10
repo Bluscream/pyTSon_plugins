@@ -78,7 +78,7 @@ class autoBadges(ts3plugin):
         rand = self.randomBadges()
         # overwolf = bool(getrandbits(1))
         badges = self.buildBadges(rand, True) # overwolf
-        sendCommand(self.name, badges, schid)
+        sendCommand(self.name, badges)#, schid)
 
     def randomBadges(self, count=3):
         badges = ""
