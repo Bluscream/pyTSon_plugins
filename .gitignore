@@ -231,6 +231,7 @@ VERSION
 !include/autorun.py
 !include/getvalues.py
 !include/ts3ext.py
+!include/bluscream.py
 
 #Additional docs
 !docs/pyQt 5.url

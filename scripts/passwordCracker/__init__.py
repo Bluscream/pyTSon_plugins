@@ -2,52 +2,10 @@ import pytson, ts3lib, os
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
 from ts3defines import *
-from datetime import datetime
+from bluscream import timestamp, channelURL, clientURL, inputBox, confirm, msgBox, calculateInterval
 from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox, QDialog
 from PythonQt.QtCore import Qt, QTimer
 from pytsonui import setupUi
-
-
-def channelURL(schid=None, cid=0, name=None):
-    if schid == None:
-        try: schid = ts3lib.getCurrentServerConnectionHandlerID()
-        except: pass
-    if name == None:
-        try: (error, name) = ts3lib.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
-        except: name = cid
-    return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
-def clientURL(schid=None, clid=0, uid=None, nickname=None):
-    if schid == None:
-        try: schid = ts3lib.getCurrentServerConnectionHandlerID()
-        except: pass
-    if uid == None:
-        try: (error, uid) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        except: pass
-    if nickname == None:
-        try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_NICKNAME)
-        except: nickname = uid
-    return '[url=client://{0}/{1}]{2}[/url]'.format(clid, uid, nickname)
-
-
-def inputBox(title, text):
-    x = QWidget()
-    x.setAttribute(Qt.WA_DeleteOnClose)
-    return QInputDialog.getText(x, title, text)
-
-
-def msgBox(text, icon=QMessageBox.Information):
-    x = QMessageBox()
-    x.setText(text)
-    x.setIcon(icon)
-    x.exec()
-
-
-def confirm(title, message):
-    x = QDialog()
-    x.setAttribute(Qt.WA_DeleteOnClose)
-    _x = QMessageBox.question(x, title, message, QMessageBox.Yes, QMessageBox.No)
-    if _x == QMessageBox.Yes: return True if _x == QMessageBox.Yes else False
-
 
 class passwordCracker(ts3plugin):
     name = "PW Cracker"
@@ -88,10 +46,7 @@ class passwordCracker(ts3plugin):
     mode = 0
     dlg = None
     status = ""
-    verify_antiflood_points = 5
-
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+    requested = False
 
     def __init__(self):
         content = []
@@ -99,9 +54,8 @@ class passwordCracker(ts3plugin):
             content = f.readlines()
         self.pws = [x.strip() for x in content]
         self.timer.timeout.connect(self.tick)
-        # self.getInterval(ts3lib.getCurrentServerConnectionHandlerID())
         ts3lib.requestServerVariables(ts3lib.getCurrentServerConnectionHandlerID())
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def stop(self):
         self.timer.stop()
@@ -270,24 +224,22 @@ class passwordCracker(ts3plugin):
         self.cracking = False
 
     def onServerUpdatedEvent(self, schid):
-        (err, cmdblock) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
-        (err, ipblock) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
-        (err, afreduce) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
-        ts3lib.logMessage("schid = {0} | err = {1} | afreduce = {2} | cmdblock = {3} | ipblock = {4} | verify_antiflood_points = {5}".format(schid, err, afreduce, cmdblock, ipblock, self.verify_antiflood_points), LogLevel.LogLevel_INFO, "pyTSon", 0)
-        self.interval = round(1000/((afreduce/self.verify_antiflood_points)))
-        ts3lib.logMessage("Set interval to {0}".format(self.interval), LogLevel.LogLevel_INFO, "pyTSon", 0)
+        if not self.requested: return
+        self.requested = False
+        self.interval = calculateInterval(schid, AntiFloodPoints.VERIFYCHANNELPASSWORD)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            # self.getInterval(schid)
+            self.requested = True
             ts3lib.requestServerVariables(schid)
         if newStatus == ConnectStatus.STATUS_DISCONNECTED:
             if not self.cracking: return
             if not self.schid == schid: return
             self.timer.stop()
-            (err, name) = ts3lib.getChannelVariable(schid, self.cid, ChannelProperties.CHANNEL_NAME)
+            # (err, name) = ts3lib.getChannelVariable(schid, self.cid, ChannelProperties.CHANNEL_NAME)
             msgBox("Server left\n\nStopping Cracker!", QMessageBox.Warning)
             self.cracking = False
+
 
 class StatusDialog(QDialog):
     def __init__(self, plugin, parent=None):

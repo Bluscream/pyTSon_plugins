@@ -1,14 +1,9 @@
 from ts3plugin import ts3plugin
-from datetime import datetime
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt
 from PythonQt.QtGui import QInputDialog, QWidget
+from bluscream import timestamp, sendCommand, calculateInterval
 import ts3defines, ts3lib
-
-def inputBox(title, text):
-    x = QWidget()
-    x.setAttribute(Qt.WA_DeleteOnClose)
-    return QInputDialog.getText(x, title, text)
 
 class autoBadges(ts3plugin):
     name = "Hack the Badge"
@@ -18,13 +13,13 @@ class autoBadges(ts3plugin):
     author = "Bluscream"
     description = "Automatically sets some badges for you :)"
     offersConfigure = False
-    commandKeyword = "cmd"
+    commandKeyword = ""
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
     hotkeys = []
     debug = True
-    timer = QTimer()
-    interval = 1000
+    timers = {}
+    requested = False
     badges = [
         ("TeamSpeak Addon Author", "1cb07348-34a4-4741-b50f-c41e584370f7"),
         ("Gamescom 2016", "50bbdbc8-0f2a-46eb-9808-602225b49627"),
@@ -41,37 +36,48 @@ class autoBadges(ts3plugin):
         ("Rocket Beans TV", "f22c22f1-8e2d-4d99-8de9-f352dc26ac5b")
     ]
 
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
-
     def __init__(self):
-        self.timer.timeout.connect(self.tick)
-        self.timer.start(self.interval)
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
-        if self.timer.isActive(): self.timer.stop()
+        for schid in self.timers: self.stopTimer(schid)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
-            if self.timer.isActive(): self.timer.stop()
-            else:
-                interval = inputBox(self.name, 'Interval')
-                if interval: self.interval = int(interval)
-                self.timer.start(self.interval)
+        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
+        if schid in self.timers: self.stopTimer(schid)
+        else: self.startTimer(schid)
 
     def tick(self):
         self.setRandomBadges()
 
-    def setRandomBadges(self):
-        rand = self.randomBadges()
-        overwolf = True # bool(getrandbits(1))
-        badges = self.buildBadges(rand, overwolf)
-        self.sendCommand(badges)
+    def onServerUpdatedEvent(self, schid):
+        if not self.requested: return
+        self.requested = False
+        self.timers[schid] = QTimer()
+        self.timers[schid].timeout.connect(self.tick)
+        interval = calculateInterval(schid, ts3defines.AntiFloodPoints.CLIENTUPDATE)
+        self.timers[schid].start(interval)
+
+    def startTimer(self, schid):
+        self.requested = True
+        ts3lib.requestServerVariables(schid)
+
+    def stopTimer(self, schid):
+        if schid in self.timers:
+            self.timers[schid].stop()
+            del self.timers[schid]
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            self.setRandomBadges()
+            self.startTimer(schid)
+        elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
+             self.stopTimer(schid)
+
+    def setRandomBadges(self):
+        rand = self.randomBadges()
+        # overwolf = bool(getrandbits(1))
+        badges = self.buildBadges(rand, True) # overwolf
+        sendCommand(self.name, badges)
 
     def randomBadges(self, count=3):
         badges = ""
@@ -82,15 +88,3 @@ class autoBadges(ts3plugin):
 
     def buildBadges(self, badges, overwolf=False):
         return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, badges)
-
-    def sendCommand(self, cmd):
-        ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=self.timestamp(), name=self.name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-        cmd = cmd.replace(" ", "~s")
-        schid = ts3lib.getCurrentServerConnectionHandlerID()
-        ts3lib.requestSendServerTextMsg(schid, "~cmd{}".format(cmd))
-
-    def processCommand(self, schid, cmd):
-        cmd = cmd.split(' ', 1)
-        command = cmd[0].lower()
-        if command == "randombadges": self.sendCommand(self.randomBadges())
-        return 1
