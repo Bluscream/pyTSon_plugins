@@ -1,7 +1,6 @@
 from ts3plugin import ts3plugin
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt
-from PythonQt.QtGui import QInputDialog, QWidget
 from bluscream import timestamp, sendCommand, calculateInterval
 import ts3defines, ts3lib
 
@@ -78,7 +77,7 @@ class autoBadges(ts3plugin):
         rand = self.randomBadges()
         # overwolf = bool(getrandbits(1))
         badges = self.buildBadges(rand, True) # overwolf
-        sendCommand(self.name, badges)#, schid)
+        sendCommand(self.name, badges)#, schid) # TODO: ADD SCHID
 
     def randomBadges(self, count=3):
         badges = ""
