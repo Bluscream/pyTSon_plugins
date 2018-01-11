@@ -1,6 +1,7 @@
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
 from PythonQt.QtCore import Qt
+from ts3plugin import PluginHost
 import ts3lib, ts3defines
 
 # GENERAL FUNCTIONS #
@@ -75,7 +76,8 @@ def calculateInterval(schid, command, name="pyTSon"):
 # TS3Hook #
 
 def sendCommand(name, cmd, schid=0):
-    ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+    if PluginHost.cfg.getboolean("general", "verbose"):
+        ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
     cmd = cmd.replace(" ", "~s")
     if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
     ts3lib.requestSendServerTextMsg(schid, "~cmd{}".format(cmd))
