@@ -32,12 +32,10 @@ class crasher_3_1_7(ts3plugin):
         else: self.startTimer(schid)
 
     def startTimer(self, schid):
-        ts3lib.printMessageToCurrentTab("starting timer")
         self.timers[schid] = QTimer()
         self.timers[schid].timeout.connect(self.tick)
         # interval = calculateInterval(schid, ts3defines.AntiFloodPoints.SETCONNECTIONINFO, self.name)
         self.timers[schid].start(1000)
-        ts3lib.printMessageToCurrentTab("started timer")
 
     def stopTimer(self, schid):
         if schid in self.timers:
@@ -51,10 +49,7 @@ class crasher_3_1_7(ts3plugin):
              self.stopTimer(schid)
 
     def tick(self):
-        try:
-            ts3lib.printMessageToCurrentTab("[color=green]tick")
-            sendCommand(self.name, self.buildConnectionInfo()) # TODO: ADD SCHID
-            ts3lib.printMessageToCurrentTab("[color=red]tick")
+        try: sendCommand(self.name, self.buildConnectionInfo()) # TODO: ADD SCHID
         except: print(format_exc())
 
     def buildConnectionInfo(self):
