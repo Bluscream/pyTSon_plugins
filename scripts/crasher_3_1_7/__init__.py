@@ -66,7 +66,6 @@ class crasher_3_1_7(ts3plugin):
     def startTimer(self, schid):
         self.timers[schid] = QTimer()
         self.timers[schid].timeout.connect(self.tick)
-        # interval = calculateInterval(schid, ts3defines.AntiFloodPoints.SETCONNECTIONINFO, self.name)
         self.timers[schid].start(1000)
 
     def stopTimer(self, schid):

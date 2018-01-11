@@ -1,7 +1,7 @@
 from ts3plugin import ts3plugin
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt
-from bluscream import timestamp, sendCommand, calculateInterval
+from bluscream import timestamp, sendCommand, calculateInterval, AntiFloodPoints
 import ts3defines, ts3lib
 
 class autoBadges(ts3plugin):
@@ -55,7 +55,7 @@ class autoBadges(ts3plugin):
         self.requested = False
         self.timers[schid] = QTimer()
         self.timers[schid].timeout.connect(self.tick)
-        interval = calculateInterval(schid, ts3defines.AntiFloodPoints.CLIENTUPDATE, self.name)
+        interval = calculateInterval(schid, AntiFloodPoints.CLIENTUPDATE, self.name)
         self.timers[schid].start(interval)
 
     def startTimer(self, schid):
