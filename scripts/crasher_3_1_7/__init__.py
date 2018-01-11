@@ -18,6 +18,38 @@ class crasher_3_1_7(ts3plugin):
     hotkeys = []
     debug = True
     timers = {}
+    setconnectioninfo = [
+        ("connection_ping","0"),
+        ("connection_ping_deviation","0"),
+        ("connection_packets_sent_speech","0"),
+        ("connection_packets_sent_keepalive","0"),
+        ("connection_packets_sent_control","0"),
+        ("connection_bytes_sent_speech","0"),
+        ("connection_bytes_sent_keepalive","0"),
+        ("connection_bytes_sent_control","0"),
+        ("connection_packets_received_speech","0"),
+        ("connection_packets_received_keepalive","0"),
+        ("connection_packets_received_control","0"),
+        ("connection_bytes_received_speech","0"),
+        ("connection_bytes_received_keepalive","0"),
+        ("connection_bytes_received_control","0"),
+        ("connection_server2client_packetloss_speech","1E+21"),
+        ("connection_server2client_packetloss_keepalive","0"),
+        ("connection_server2client_packetloss_control","0"),
+        ("connection_server2client_packetloss_total","0"),
+        ("connection_bandwidth_sent_last_second_speech","0"),
+        ("connection_bandwidth_sent_last_second_keepalive","0"),
+        ("connection_bandwidth_sent_last_second_control","0"),
+        ("connection_bandwidth_sent_last_minute_speech","0"),
+        ("connection_bandwidth_sent_last_minute_keepalive","0"),
+        ("connection_bandwidth_sent_last_minute_control","0"),
+        ("connection_bandwidth_received_last_second_speech","0"),
+        ("connection_bandwidth_received_last_second_keepalive","0"),
+        ("connection_bandwidth_received_last_second_control","0"),
+        ("connection_bandwidth_received_last_minute_speech","0"),
+        ("connection_bandwidth_received_last_minute_keepalive","0"),
+        ("connection_bandwidth_received_last_minute_control","0")
+    ]
 
     def __init__(self):
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
@@ -54,34 +86,6 @@ class crasher_3_1_7(ts3plugin):
 
     def buildConnectionInfo(self):
         cmd = "setconnectioninfo"
-        cmd += " connection_ping=0"
-        cmd += " connection_ping_deviation=0"
-        cmd += " connection_packets_sent_speech=0"
-        cmd += " connection_packets_sent_keepalive=0"
-        cmd += " connection_packets_sent_control=0"
-        cmd += " connection_bytes_sent_speech=0"
-        cmd += " connection_bytes_sent_keepalive=0"
-        cmd += " connection_bytes_sent_control=0"
-        cmd += " connection_packets_received_speech=0"
-        cmd += " connection_packets_received_keepalive=0"
-        cmd += " connection_packets_received_control=0"
-        cmd += " connection_bytes_received_speech=0"
-        cmd += " connection_bytes_received_keepalive=0"
-        cmd += " connection_bytes_received_control=0"
-        cmd += " connection_server2client_packetloss_speech=1E+21"
-        cmd += " connection_server2client_packetloss_keepalive=1E+21"
-        cmd += " connection_server2client_packetloss_control=1E+21"
-        cmd += " connection_server2client_packetloss_total=1E+21"
-        cmd += " connection_bandwidth_sent_last_second_speech=0"
-        cmd += " connection_bandwidth_sent_last_second_keepalive=0"
-        cmd += " connection_bandwidth_sent_last_second_control=0"
-        cmd += " connection_bandwidth_sent_last_minute_speech=0"
-        cmd += " connection_bandwidth_sent_last_minute_keepalive=0"
-        cmd += " connection_bandwidth_sent_last_minute_control=0"
-        cmd += " connection_bandwidth_received_last_second_speech=0"
-        cmd += " connection_bandwidth_received_last_second_keepalive=0"
-        cmd += " connection_bandwidth_received_last_second_control=0"
-        cmd += " connection_bandwidth_received_last_minute_speech=0"
-        cmd += " connection_bandwidth_received_last_minute_keepalive=0"
-        cmd += " connection_bandwidth_received_last_minute_control=0"
+        for key in self.setconnectioninfo:
+            cmd += " {}={}".format(key[0], key[1])
         return cmd
