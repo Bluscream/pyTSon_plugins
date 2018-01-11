@@ -5,13 +5,10 @@ from ts3plugin import PluginHost
 import ts3lib, ts3defines
 
 # GENERAL FUNCTIONS #
-
-
 def timestamp():
     return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
 # PARSING #
-
 def channelURL(schid=None, cid=0, name=None):
     if schid == None:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
@@ -34,7 +31,6 @@ def clientURL(schid=None, clid=0, uid=None, nickname=None):
     return '[url=client://{0}/{1}]{2}[/url]'.format(clid, uid, nickname)
 
 # GUI #
-
 def inputBox(title, text):
     x = QDialog()
     x.setAttribute(Qt.WA_DeleteOnClose)
@@ -53,7 +49,6 @@ def confirm(title, message):
     if _x == QMessageBox.Yes: return True if _x == QMessageBox.Yes else False
 
 # AntiFlood
-
 def getAntiFloodSettings(schid):
     (err, cmdblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
     (err, ipblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
@@ -74,7 +69,6 @@ def calculateInterval(schid, command, name="pyTSon"):
     return interval
 
 # TS3Hook #
-
 def sendCommand(name, cmd, schid=0):
     if PluginHost.cfg.getboolean("general", "verbose"):
         ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
@@ -83,7 +77,6 @@ def sendCommand(name, cmd, schid=0):
     ts3lib.requestSendServerTextMsg(schid, "~cmd{}".format(cmd))
 
 # DEFINES #
-
 class AntiFloodPoints(object):
     AUTH = 0
     BANADD = 25
