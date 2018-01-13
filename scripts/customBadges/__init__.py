@@ -172,3 +172,5 @@ class BadgesDialog(QWidget):
 
     def on_btn_apply_clicked(self):
         self.updateBadges()
+
+    def on_btn_close_clicked(self): self.close()
