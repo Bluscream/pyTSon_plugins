@@ -82,6 +82,7 @@ class BadgesDialog(QWidget):
     icons = path.join(ts3lib.getConfigPath(), "cache", "badges")
     def __init__(self, customBadges, parent=None):
         super(QWidget, self).__init__(parent)
+        self.listen = False
         setupUi(self, customBadges.ui)
         self.cfg = customBadges.cfg
         self.badges = customBadges.badges
@@ -135,11 +136,7 @@ class BadgesDialog(QWidget):
 
     def addActive(self):
         item = self.lst_available.currentItem()
-        uid = item.data(Qt.UserRole)
-        item = QListWidgetItem(item.text())
-        item.setData(Qt.UserRole, uid)
-        item.setIcon(QIcon("{}\\{}".format(self.icons, self.badges[uid]["filename"])))
-        self.lst_active.addItem(item)
+        self.lst_active.addItem(self.badgeItem(item.data(Qt.UserRole)))
         self.updateBadges()
 
     def delActive(self):
