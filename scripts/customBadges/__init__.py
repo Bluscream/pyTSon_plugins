@@ -2,8 +2,7 @@ from ts3plugin import ts3plugin
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt
 from PythonQt.QtGui import QWidget, QListWidgetItem
-from bluscream import timestamp, sendCommand, calculateInterval, AntiFloodPoints, ClientBadges
-from configparser import ConfigParser
+from bluscream import timestamp, sendCommand, calculateInterval, AntiFloodPoints, ClientBadges, loadCfg, saveCfg
 from os import path, remove, listdir
 from pytson import getPluginPath
 from pytsonui import setupUi
@@ -23,22 +22,19 @@ class customBadges(ts3plugin):
     hotkeys = []
     ini = path.join(getPluginPath(), "scripts", "customBadges", "settings.ini")
     ui = path.join(getPluginPath(), "scripts", "customBadges", "badges.ui")
-    cfg = ConfigParser()
+    cfg = None
     dlg = None
     cfg_default = {
-        "cfgversion": "1",
-        "debug": "False",
-        "enabled": "True",
-        "badges": ""
+        "general": {
+            "cfgversion": "1",
+            "debug": "False",
+            "enabled": "True",
+            "badges": ""
+        }
     }
 
     def __init__(self):
-        if path.isfile(self.ini):
-            self.cfg.read(self.ini)
-        else:
-            self.cfg['general'] = self.cfg_default
-            with open(self.ini, 'w') as cfg:
-                self.cfg.write(cfg)
+        self.cfg = loadCfg(self.ini, self.cfg_default)
         if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def configure(self, qParentWidget):

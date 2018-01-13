@@ -2,7 +2,8 @@ from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
 from PythonQt.QtCore import Qt
 from ts3plugin import PluginHost
-import ts3lib, ts3defines
+from configparser import ConfigParser
+import ts3lib, ts3defines, os.path
 
 # GENERAL FUNCTIONS #
 def timestamp():
@@ -33,6 +34,17 @@ def clientURL(schid=None, clid=0, uid=None, nickname=None):
         try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         except: nickname = uid
     return '[url=client://{0}/{1}]{2}[/url]'.format(clid, uid, nickname)
+
+# I/O #
+def loadCfg(path, default):
+    cfg = ConfigParser()
+    if not os.path.isfile(path):
+        saveCfg(path, default)
+    return cfg.read(path)
+
+def saveCfg(path, cfg):
+    with open(path, 'w') as cfg:
+        cfg.write(cfg)
 
 # GUI #
 def inputBox(title, text):
