@@ -169,3 +169,6 @@ class BadgesDialog(QWidget):
 
     def on_lst_active_itemChanged(self, mi):
         self.updateBadges()
+
+    def on_btn_apply_clicked(self):
+        self.updateBadges()
