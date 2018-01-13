@@ -2,7 +2,7 @@ from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
 from PythonQt.QtCore import Qt
 from ts3plugin import PluginHost
-from configparser import ConfigParser
+# from configparser import ConfigParser
 import ts3lib, ts3defines, os.path
 
 # GENERAL FUNCTIONS #
@@ -36,20 +36,14 @@ def clientURL(schid=None, clid=0, uid=None, nickname=None):
     return '[url=client://{0}/{1}]{2}[/url]'.format(clid, uid, nickname)
 
 # I/O #
-def loadCfg(path, default):
-    try:
-        cfg = ConfigParser()
-        if not os.path.isfile(path):
-            saveCfg(path, default)
-        return cfg.read(path)
-    except: print("err1")
+def loadCfg(path, cfg):
+    if not os.path.isfile(path) or os.path.getsize(path) < 1:
+        saveCfg(path, cfg)
+    cfg = cfg.read(path)
 
-def saveCfg(path, config):
-    try:
-        with open(path, 'w') as cfg:
-            cfg.write(config)
-    except: print("err2")
-
+def saveCfg(path, cfg):
+    with open(path, 'w') as cfgfile:
+        cfg.write(cfgfile)
 # GUI #
 def inputBox(title, text):
     x = QDialog()
@@ -89,16 +83,20 @@ def calculateInterval(schid, command, name="pyTSon"):
     return interval
 
 # TS3Hook #
-def parseCommand(self, cmd):
+def parseCommand(cmd):
     pass
 
-def buildCommand(self, cmd, parameters):
+def buildCommand(cmd, parameters):
     for key, value in parameters:
         if key.startswith('-') or not value:
             cmd += " {}".format(key)
         else:
             cmd += " {}={}".format(key[0], key[1])
     return cmd
+
+
+def buildBadges(badges=[], overwolf=False):
+    return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ','.join(badges))
 
 def sendCommand(name, cmd, schid=0):
     if PluginHost.cfg.getboolean("general", "verbose"):
