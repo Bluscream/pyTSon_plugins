@@ -37,14 +37,18 @@ def clientURL(schid=None, clid=0, uid=None, nickname=None):
 
 # I/O #
 def loadCfg(path, default):
-    cfg = ConfigParser()
-    if not os.path.isfile(path):
-        saveCfg(path, default)
-    return cfg.read(path)
+    try:
+        cfg = ConfigParser()
+        if not os.path.isfile(path):
+            saveCfg(path, default)
+        return cfg.read(path)
+    except: print("err1")
 
-def saveCfg(path, cfg):
-    with open(path, 'w') as cfg:
-        cfg.write(cfg)
+def saveCfg(path, config):
+    try:
+        with open(path, 'w') as cfg:
+            cfg.write(config)
+    except: print("err2")
 
 # GUI #
 def inputBox(title, text):
