@@ -1,12 +1,13 @@
 from ts3plugin import ts3plugin
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt
-from PythonQt.QtGui import QWidget, QListWidgetItem
-from bluscream import timestamp, sendCommand, calculateInterval, AntiFloodPoints, ClientBadges, loadCfg, saveCfg, buildBadges
+from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon
+from bluscream import *
 from os import path
 from configparser import ConfigParser
 from pytson import getPluginPath
 from pytsonui import setupUi
+from json import load
 import ts3defines, ts3lib
 
 class customBadges(ts3plugin):
@@ -23,6 +24,7 @@ class customBadges(ts3plugin):
     hotkeys = []
     ini = path.join(getPluginPath(), "scripts", "customBadges", "settings.ini")
     ui = path.join(getPluginPath(), "scripts", "customBadges", "badges.ui")
+    badgesinfo = path.join(getPluginPath(), "include", "badges.json")
     cfg = ConfigParser()
     dlg = None
     cfg["general"] = {
@@ -32,20 +34,26 @@ class customBadges(ts3plugin):
         "badges": "",
         "overwolf": "False",
     }
+    badges = {}
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
+        with open(self.badgesinfo, encoding='utf-8-sig') as json_file:
+            self.badges = load(json_file)
         if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
         saveCfg(self.ini, self.cfg)
 
     def configure(self, qParentWidget):
+        """
         print("<configure>")
         print(self.cfg)
         if hasattr(self.cfg, "sections"):
             print(self.cfg.sections())
+            print(self.cfg.get('general', 'badges'))
         print("</configure>")
+        """
         self.openDialog()
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
@@ -68,15 +76,19 @@ class customBadges(ts3plugin):
         self.dlg.activateWindow()
 
 class BadgesDialog(QWidget):
+    listen = False
+    icons = path.join(ts3lib.getConfigPath(), "cache", "badges")
     def __init__(self, customBadges, parent=None):
         try:
             super(QWidget, self).__init__(parent)
             setupUi(self, customBadges.ui)
             self.cfg = customBadges.cfg
+            self.badges = customBadges.badges
             self.setCustomBadges = customBadges.setCustomBadges
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("Customize Badges")
             self.setupList()
+            self.listen = True
             # self.resize(1000, 600)
         except:
             try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
@@ -90,8 +102,15 @@ class BadgesDialog(QWidget):
             for k, v in ClientBadges.items():
                 item = QListWidgetItem(k)
                 item.setData(Qt.UserRole, v)
-                # item.setIcon()
+                item.setIcon(QIcon("{}\\{}".format(self.icons, self.badges[v]["filename"])))
                 self.lst_available.addItem(item)
+            badges = self.cfg.get('general', 'badges').split(",")
+            print("badges; {}".format(badges))
+            for badge in badges:
+                item = QListWidgetItem(badgeNameByUID(badge))
+                item.setData(Qt.UserRole, badge)
+                item.setIcon(QIcon("{}\\{}_details".format(self.icons, self.badges[badge]["filename"])))
+                self.lst_active.addItem(item)
         except:
             try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
@@ -100,9 +119,16 @@ class BadgesDialog(QWidget):
 
     def updateBadges(self):
         items = []
-        for index in xrange(self.lst_active.count()):
-             items.append(self.lst_active.item(index).data(Qt.UserRole))
-        print(items)
+        for index in range(self.lst_active.count):
+             uid = self.lst_active.item(index).data(Qt.UserRole)
+             items.append(uid)
+             if index == 0:
+                 self.badge1.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
+             elif index == 1:
+                 self.badge2.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
+             elif index == 2:
+                 self.badge3.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
+        print("overwriting badges")
         self.cfg.set('general', 'badges', ','.join(items))
         self.setCustomBadges()
 
@@ -113,6 +139,7 @@ class BadgesDialog(QWidget):
             uid = item.data(Qt.UserRole)
             item = QListWidgetItem(item.text())
             item.setData(Qt.UserRole, uid)
+            item.setIcon(QIcon("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
             self.lst_active.addItem(item)
             self.updateBadges()
         except:
@@ -125,6 +152,7 @@ class BadgesDialog(QWidget):
         try:
             row = self.lst_active.currentRow
             self.lst_active.takeItem(row)
+            self.updateBadges()
         except:
             try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
@@ -132,16 +160,28 @@ class BadgesDialog(QWidget):
                 except: print("Custom Badges: Unknown Error")
 
     def on_lst_available_doubleClicked(self, mi):
+        if not self.listen: return
         self.addActive()
 
     def on_btn_addactive_clicked(self):
+        if not self.listen: return
         self.addActive()
 
     def on_lst_active_doubleClicked(self, mi):
+        if not self.listen: return
         self.delActive()
 
     def on_btn_removeactive_clicked(self):
+        if not self.listen: return
         self.delActive()
 
     def on_chk_overwolf_stateChanged(self, mi):
+        if not self.listen: return
         self.cfg.set('general', 'overwolf', "True" if mi == Qt.Checked else "False")
+        self.updateBadges()
+
+    def on_lst_active_indexesMoved(self, mi):
+        self.updateBadges()
+
+    def on_lst_active_itemChanged(self, mi):
+        self.updateBadges()
