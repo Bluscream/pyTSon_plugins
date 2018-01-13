@@ -1,20 +1,21 @@
 from ts3plugin import ts3plugin
 from random import choice, getrandbits
-from PythonQt.QtCore import QTimer, Qt
-from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon
+from PythonQt.QtCore import QTimer, Qt, QUrl
+from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap
+from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from bluscream import *
 from os import path
 from configparser import ConfigParser
 from pytson import getPluginPath
 from pytsonui import setupUi
-from json import load
+from json import load, loads
 import ts3defines, ts3lib
 
 class customBadges(ts3plugin):
     name = "Custom Badges"
     apiVersion = 21
     requestAutoload = True
-    version = "1"
+    version = "0.9"
     author = "Bluscream"
     description = "Automatically sets some badges for you :)"
     offersConfigure = True
@@ -38,22 +39,23 @@ class customBadges(ts3plugin):
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
-        with open(self.badgesinfo, encoding='utf-8-sig') as json_file:
-            self.badges = load(json_file)
+        try:
+            with open(self.badgesinfo, encoding='utf-8-sig') as json_file:
+                self.badges = load(json_file)
+        except:
+            self.nwmc = QNetworkAccessManager()
+            self.nwmc.connect("finished(QNetworkReply*)", self.loadBadges)
+            self.nwmc.get(QNetworkRequest(QUrl("https://gist.githubusercontent.com/Bluscream/29b838f11adc409feac9874267b43b1e/raw")))
         if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
+
+    def loadBadges(self, reply):
+        data = reply.readAll().data().decode('utf-8')
+        self.badges = loads(data)
 
     def stop(self):
         saveCfg(self.ini, self.cfg)
 
     def configure(self, qParentWidget):
-        """
-        print("<configure>")
-        print(self.cfg)
-        if hasattr(self.cfg, "sections"):
-            print(self.cfg.sections())
-            print(self.cfg.get('general', 'badges'))
-        print("</configure>")
-        """
         self.openDialog()
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
@@ -79,46 +81,44 @@ class BadgesDialog(QWidget):
     listen = False
     icons = path.join(ts3lib.getConfigPath(), "cache", "badges")
     def __init__(self, customBadges, parent=None):
-        try:
-            super(QWidget, self).__init__(parent)
-            setupUi(self, customBadges.ui)
-            self.cfg = customBadges.cfg
-            self.badges = customBadges.badges
-            self.setCustomBadges = customBadges.setCustomBadges
-            self.setAttribute(Qt.WA_DeleteOnClose)
-            self.setWindowTitle("Customize Badges")
-            self.setupList()
-            self.listen = True
-            # self.resize(1000, 600)
-        except:
-            try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-            except:
-                try: from traceback import format_exc;print("Custom Badges: "+format_exc())
-                except: print("Custom Badges: Unknown Error")
+        super(QWidget, self).__init__(parent)
+        setupUi(self, customBadges.ui)
+        self.cfg = customBadges.cfg
+        self.badges = customBadges.badges
+        self.setCustomBadges = customBadges.setCustomBadges
+        self.setAttribute(Qt.WA_DeleteOnClose)
+        self.setWindowTitle("Customize Badges")
+        self.setupList()
+        self.listen = True
 
     def setupList(self):
-        try:
-            self.chk_overwolf.setChecked(True if self.cfg.getboolean('general', 'overwolf') else False)
-            for k, v in ClientBadges.items():
-                item = QListWidgetItem(k)
-                item.setData(Qt.UserRole, v)
-                item.setIcon(QIcon("{}\\{}".format(self.icons, self.badges[v]["filename"])))
-                self.lst_available.addItem(item)
-            badges = self.cfg.get('general', 'badges').split(",")
-            print("badges; {}".format(badges))
-            for badge in badges:
-                item = QListWidgetItem(badgeNameByUID(badge))
-                item.setData(Qt.UserRole, badge)
-                item.setIcon(QIcon("{}\\{}_details".format(self.icons, self.badges[badge]["filename"])))
-                self.lst_active.addItem(item)
-        except:
-            try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-            except:
-                try: from traceback import format_exc;print("Custom Badges: "+format_exc())
-                except: print("Custom Badges: Unknown Error")
+        self.chk_overwolf.setChecked(True if self.cfg.getboolean('general', 'overwolf') else False)
+        for k, v in ClientBadges.items():
+            item = QListWidgetItem(k)
+            item.setData(Qt.UserRole, v)
+            item.setIcon(QIcon("{}\\{}".format(self.icons, self.badges[v]["filename"])))
+            self.lst_available.addItem(item)
+        badges = self.cfg.get('general', 'badges').split(",")
+        if len(badges) < 1: return
+        i = 0
+        for badge in badges:
+            if not badge: return
+            i += 1
+            # print("Adding badge #{}: {}".format(i, badge))
+            if i == 1:
+                self.badge1.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[badge]["filename"])))
+            elif i == 2:
+                self.badge2.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[badge]["filename"])))
+            elif i == 3:
+                self.badge3.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[badge]["filename"])))
+            item = QListWidgetItem(badgeNameByUID(badge))
+            item.setData(Qt.UserRole, badge)
+            item.setIcon(QIcon("{}\\{}".format(self.icons, self.badges[badge]["filename"])))
+            self.lst_active.addItem(item)
 
     def updateBadges(self):
         items = []
+        self.badge1.clear();self.badge2.clear();self.badge3.clear();
         for index in range(self.lst_active.count):
              uid = self.lst_active.item(index).data(Qt.UserRole)
              items.append(uid)
@@ -128,36 +128,23 @@ class BadgesDialog(QWidget):
                  self.badge2.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
              elif index == 2:
                  self.badge3.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
-        print("overwriting badges")
         self.cfg.set('general', 'badges', ','.join(items))
         self.setCustomBadges()
 
 
     def addActive(self):
-        try:
-            item = self.lst_available.currentItem()
-            uid = item.data(Qt.UserRole)
-            item = QListWidgetItem(item.text())
-            item.setData(Qt.UserRole, uid)
-            item.setIcon(QIcon("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
-            self.lst_active.addItem(item)
-            self.updateBadges()
-        except:
-            try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-            except:
-                try: from traceback import format_exc;print("Custom Badges: "+format_exc())
-                except: print("Custom Badges: Unknown Error")
+        item = self.lst_available.currentItem()
+        uid = item.data(Qt.UserRole)
+        item = QListWidgetItem(item.text())
+        item.setData(Qt.UserRole, uid)
+        item.setIcon(QIcon("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
+        self.lst_active.addItem(item)
+        self.updateBadges()
 
     def delActive(self):
-        try:
-            row = self.lst_active.currentRow
-            self.lst_active.takeItem(row)
-            self.updateBadges()
-        except:
-            try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-            except:
-                try: from traceback import format_exc;print("Custom Badges: "+format_exc())
-                except: print("Custom Badges: Unknown Error")
+        row = self.lst_active.currentRow
+        self.lst_active.takeItem(row)
+        self.updateBadges()
 
     def on_lst_available_doubleClicked(self, mi):
         if not self.listen: return

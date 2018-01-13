@@ -20,8 +20,8 @@
       <string>Miscellanious</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="2">
-       <widget class="QLabel" name="badge1">
+      <item row="0" column="4">
+       <widget class="QLabel" name="badge3">
         <property name="text">
          <string/>
         </property>
@@ -29,6 +29,16 @@
       </item>
       <item row="0" column="3">
        <widget class="QLabel" name="badge2">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="badge1">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -51,13 +61,6 @@
        <widget class="QCheckBox" name="chk_overwolf">
         <property name="text">
          <string>Overwolf</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QLabel" name="badge3">
-        <property name="text">
-         <string/>
         </property>
        </widget>
       </item>
