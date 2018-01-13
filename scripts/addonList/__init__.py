@@ -40,7 +40,7 @@ class addonList(ts3plugin):
         schid = ts3.getCurrentServerConnectionHandlerID()
         err, status = ts3.getConnectionStatus(schid)
         if not err and status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(ts3.getCurrentServerConnectionHandlerID())
-        if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def configure(self, qParentWidget):
         try:
@@ -84,7 +84,7 @@ class addonList(ts3plugin):
                         string += " by %s"%addon.attrib["author"]
                         i.append(string)
                     except:
-                        if self.cfg.getboolean("general", "debug"): from traceback import format_exc;ts3.logMessage("Error listing {0}: {1}".format(addon.text, format_exc()), ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
+                        if PluginHost.cfg.getboolean("general", "verbose"): from traceback import format_exc;ts3.logMessage("Error listing {0}: {1}".format(addon.text, format_exc()), ts3defines.LogLevel.LogLevel_ERROR, self.name, schid)
                         pass
                 pytsons = [element for element in addons.iter() if element.text == 'pyTSon']
                 # xm = xml.fromstring('<element attribute="value">text<subelement subattribute="subvalue">subtext</subelement></element>')
@@ -144,7 +144,7 @@ class addonList(ts3plugin):
                     script.text = name
                 except:from traceback import format_exc;ts3.logMessage("Error parsing script %s:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             newmeta = "{old}{new}".format(old=oldmeta,new=xml.tostring(newmeta).decode("utf-8"))
-            # if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab(newmeta)
+            # if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab(newmeta)
             error = ts3.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_META_DATA, newmeta)
             if not error == ts3defines.ERROR_ok: ts3.printMessageToCurrentTab("Error: Unable to set own meta data to \"%s\"."%newmeta);return False
         except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid)
@@ -197,7 +197,7 @@ class AddonsDialog(QWidget):
                         elif addon.text == "Lua": self.lua = addon
                     item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
                     self.tbl_addons.setItem(row, 1, item)
-                    if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
+                    if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
                     try:
                         item = QTableWidgetItem(addon.attrib["v"])
                         item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)

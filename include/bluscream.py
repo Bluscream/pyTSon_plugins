@@ -94,6 +94,23 @@ def buildCommand(cmd, parameters):
             cmd += " {}={}".format(key[0], key[1])
     return cmd
 
+def parseBadges(client_badges):
+    overwolf = None
+    badges = []
+    if "verwolf=" in client_badges and "badges=" in client_badges:
+        print('"verwolf=" and "badges="')
+        client_badges = client_badges.split(":")
+        overwolf = bool(client_badges[0].split("=")[1])
+        badges = client_badges[1].split("=")[1].split(",")
+    elif "verwolf=" in client_badges:
+        print('"verwolf="')
+        overwolf = bool(client_badges.split("=")[1])
+    elif "badges=" in client_badges:
+        print('"badges="')
+        badges = client_badges.split("=")[1].split(",")
+    else:
+        print('"nothing"')
+    return (overwolf, badges)
 
 def buildBadges(badges=[], overwolf=False):
     return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ','.join(badges))

@@ -36,7 +36,7 @@ class gommeChecker(ts3plugin):
             self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "False", "uid": "QTRtPmYiSKpMS8Oyd4hyztcvLqU="}
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
-        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:

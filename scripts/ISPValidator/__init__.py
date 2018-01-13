@@ -96,7 +96,7 @@ class ISPValidator(ts3plugin):
                 self.nwm = QNetworkAccessManager()
                 self.nwm.connect("finished(QNetworkReply*)", self.onMainReply)
                 self.nwm.get(QNetworkRequest(QUrl(self.cfg['api']['main'].replace("{ip}",ip))))
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab(self.cfg['api']['main'].replace("{ip}",ip))
+                if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab(self.cfg['api']['main'].replace("{ip}",ip))
             else:
                 (e, msg) = ts3.getErrorMessage(error)
                 ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the IP for '%s' (Reason: %s)" % (self.clientURL(serverConnectionHandlerID, clientID),msg))
@@ -109,10 +109,10 @@ class ISPValidator(ts3plugin):
                 if isp.startswith('AS'): isp = isp.split(" ", 1)[1]
                 if not isp or isp == "" or isp == "undefined":
                     ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the ISP for '%s' (Reason: %s) Falling back to %s" % (self.clientURL(self.schid, self.requested),format_exc(),self.cfg['api']['fallback'].replace("{ip}",self.ip)))
-                    if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab(self.cfg['api']['fallback'].replace("{ip}",self.ip))
+                    if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab(self.cfg['api']['fallback'].replace("{ip}",self.ip))
                     self.nwb = QNetworkAccessManager();self.nwb.connect("finished(QNetworkReply*)", self.onFallbackReply)
                     self.nwb.get(QNetworkRequest(QUrl(self.cfg['api']['fallback'].replace("{ip}",self.ip))));return
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%s's ISP: %s"%(self.clientURL(self.schid, self.requested),isp))
+                if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab("%s's ISP: %s"%(self.clientURL(self.schid, self.requested),isp))
                 _match = False
                 for _isp in self.isps:
                     if isp == _isp: _match = True
@@ -127,14 +127,14 @@ class ISPValidator(ts3plugin):
             except:
                 try:
                     ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the ISP for '%s' (Reason: %s) Falling back to %s" % (self.clientURL(self.schid, self.requested),format_exc(),self.cfg['api']['fallback'].replace("{ip}",self.ip)))
-                    if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab(self.cfg['api']['fallback'].replace("{ip}",self.ip))
+                    if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab(self.cfg['api']['fallback'].replace("{ip}",self.ip))
                     self.nwb = QNetworkAccessManager();self.nwb.connect("finished(QNetworkReply*)", self.onFallbackReply)
                     self.nwb.get(QNetworkRequest(QUrl(self.cfg['api']['fallback'].replace("{ip}",self.ip))))
                 except:
                     ts3.printMessageToCurrentTab(format_exc())
         else:
             ts3.printMessageToCurrentTab("[[color=orange]WARNING[/color]] [color=red]ISPValidator could not resolve the ISP for '%s' (Reason: %s) Falling back to %s" % (self.clientURL(self.schid, self.requested),reply.errorString(),self.cfg['api']['fallback'].replace("{ip}",self.ip)))
-            if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab(self.cfg['api']['fallback'].replace("{ip}",self.ip))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab(self.cfg['api']['fallback'].replace("{ip}",self.ip))
             self.nwb = QNetworkAccessManager();self.nwb.connect("finished(QNetworkReply*)", self.onFallbackReply)
             self.nwb.get(QNetworkRequest(QUrl(self.cfg['api']['fallback'].replace("{ip}",self.ip))))
         reply.deleteLater()
@@ -151,7 +151,7 @@ class ISPValidator(ts3plugin):
                             ts3.requestClientKickFromServer(self.schid, self.requested, self.cfg['failover']['reason'].replace('{isp}', isp));
                         else: ts3.banclient(self.schid, self.requested, int(self.cfg['failover']['bantime']), self.cfg['failover']['reason'].replace('{isp}', isp))
                         self.requested = 0;reply.deleteLater();return
-                if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%s's ISP: %s"%(self.clientURL(self.schid, self.requested),isp))
+                if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab("%s's ISP: %s"%(self.clientURL(self.schid, self.requested),isp))
                 _match = False
                 for _isp in self.isps:
                     if isp == _isp: _match = True

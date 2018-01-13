@@ -62,7 +62,7 @@ class chatBot(ts3plugin):
             self.cmd['help'] = {"enabled": "False", "function": "commandHelp"}
             with open(self.cmdini, 'w') as configfile:
                 self.cmd.write(configfile)
-        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
 
     def configure(self, qParentWidget):
         try:
@@ -93,7 +93,7 @@ class chatBot(ts3plugin):
             elif message.startswith(self.clientURL(schid, _clid)) and not self.cfg.getboolean('general', 'customprefix'):
                 command = message.split(self.clientURL(schid, _clid), 1)[1]
             else: return False
-            if self.cfg.getboolean("general", "debug"):
+            if PluginHost.cfg.getboolean("general", "verbose"):
                 ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
                 ts3lib.printMessageToCurrentTab("time: {0}".format(time))
                 ts3lib.printMessageToCurrentTab("time -5: {0}".format(time - 5))
@@ -266,7 +266,7 @@ class chatBot(ts3plugin):
     def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
         try:
             if not self.cmdevent["event"] == "onChannelGroupListEvent" or not atype == 1: return
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("atype: {0}".format(atype))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("atype: {0}".format(atype))
             self.tmpcgroups.append({"id": channelGroupID, "name": name})
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
@@ -277,7 +277,7 @@ class chatBot(ts3plugin):
             (error, dbid) = ts3lib.getClientVariableAsInt(schid, self.cmdevent["fromID"], ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
             (error, own) = ts3lib.getClientID(schid)
             (error, chan) = ts3lib.getChannelOfClient(schid, own)
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("dbid: {0} | own: {1} | chan: {2} | id: {3}".format(dbid,own,chan,id))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("dbid: {0} | own: {1} | chan: {2} | id: {3}".format(dbid,own,chan,id))
             error = ts3lib.requestSetClientChannelGroup(schid, [id], [chan], [dbid])
             if error == ts3defines.ERROR_ok: _t = "Successfully set your channelgroup to #{0}".format(id)
             else: _t = "Setting your channelgroup #{0} failed!".format(id)
@@ -298,10 +298,10 @@ class chatBot(ts3plugin):
     def commandChannelMessage(self, schid, targetMode, toID, fromID, params=""):
         try:
             _p = params.split(" ",1);target = int(_p[0]);message = _p[1]
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("Found Channel ID: {0}".format(target))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Found Channel ID: {0}".format(target))
         except:
             (error, target) = ts3lib.getChannelOfClient(schid, fromID);message = params
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("Found No Channel ID.")
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Found No Channel ID.")
         (error, ownID) = ts3lib.getClientID(schid)
         (error, ownChan) = ts3lib.getChannelOfClient(schid, ownID)
         if not ownChan == target: ts3lib.requestClientMove(schid, ownID, target, "123")
@@ -475,7 +475,7 @@ class chatBot(ts3plugin):
             if params.startswith("00"): params = params.replace("00", "+", 1)
             params = quote_plus(params)
             url = "{0}{1}?format=json&casing=title&service_level=plus&geo=rate&account_sid={2}&auth_token={3}".format(lookupAPI, params, lookupSID, lookupAuthToken)
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
             self.nwmc = QNetworkAccessManager()
             self.nwmc.connect("finished(QNetworkReply*)", self.lookupReply)
             self.cmdevent = {"event": "", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
@@ -486,7 +486,7 @@ class chatBot(ts3plugin):
         try:
             import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply
             result = json.loads(reply.readAll().data().decode('utf-8'))
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
             try: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "{0}: {1} ({2}$/min)".format(result["number"],result["name"],result["price"]), True)
             except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "{0}{1}{2} ({3})".format(color.ERROR, result["err"], color.ENDMARKER,self.cmdevent["params"]))
             self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
@@ -509,7 +509,7 @@ class chatBot(ts3plugin):
         try:
             from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
             url = "https://randomuser.me/api/?gender={0}&nat=de&noinfo".format(params.split(" ")[1])
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
             self.nwmc = QNetworkAccessManager()
             self.nwmc.connect("finished(QNetworkReply*)", self.doxxReply)
             self.cmdevent = {"event": "", "returnCode": "", "schid": schid, "targetMode": targetMode, "toID": toID, "fromID": fromID, "params": params}
@@ -520,7 +520,7 @@ class chatBot(ts3plugin):
         try:
             import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply;from random import randint
             result = json.loads(reply.readAll().data().decode('utf-8'))["results"][0]
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
             params = self.cmdevent["params"].split(" ")
             (error, name) = ts3lib.getClientVariableAsString(int(self.cmdevent["schid"]), int(params[0]), ts3defines.ClientProperties.CLIENT_NICKNAME)
             (error, uid) = ts3lib.getClientVariableAsString(int(self.cmdevent["schid"]), int(params[0]), ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
@@ -558,7 +558,7 @@ class chatBot(ts3plugin):
             params = quote_plus(params)
             url = "https://jsonwhois.com/api/v1/whois?domain={0}".format(params)
             token = "fe1abe2646bdc7fac3d36a688d1685fc"
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Requesting: {0}".format(url))
             request = QNetworkRequest()
             request.setHeader( QNetworkRequest.ContentTypeHeader, "application/json" );
             request.setRawHeader("Authorization", "Token token={0}".format(token));
@@ -573,7 +573,7 @@ class chatBot(ts3plugin):
         try:
             import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply
             result = json.loads(reply.readAll().data().decode('utf-8'))
-            if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Result: {0}".format(result))
             try: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "Registrant: {0} | Admin: {1} | Tech: {2}".format(result["registrant_contacts"][0]["name"],result["admin_contacts"][0]["name"],result["technical_contacts"][0]["name"]), True)
             except: self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "{0}{1}{2}".format(color.ERROR, result["status"], color.ENDMARKER))
             self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
@@ -589,7 +589,7 @@ class chatBot(ts3plugin):
     def commandBack(self, schid, targetMode, toID, fromID, params=""):
         (error, ownID) = ts3lib.getClientID(schid)
         ts3lib.requestClientMove(schid, ownID, self.oldChannelID, "123")
-        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("self.oldChannelID: {0}".format(self.oldChannelID))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("self.oldChannelID: {0}".format(self.oldChannelID))
 
     def commandB64Encode(self, schid, targetMode, toID, fromID, params=""):
         try: msg = b64encode(params.encode('utf-8')).decode('utf-8')
@@ -676,7 +676,7 @@ class SettingsDialog(QDialog):
                 i = 0
                 while i < self.tbl_commands.rowCount:
                     try:
-                        if self.cfg.getboolean("general", "debug"): ts3lib.printMessageToCurrentTab("{0}".format(self.tbl_commands.item(i, 0)))
+                        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}".format(self.tbl_commands.item(i, 0)))
                         if not self.tbl_commands.item(i, 0).text() in self.cmd.sections(): self.cmd.add_section(i)
                         self.cmd.set(self.tbl_commands.item(i, 0).text(), "function", self.tbl_commands.item(i, 1).text())
                         self.cmd.set(self.tbl_commands.item(i, 0).text(), "enabled", str(self.tbl_commands.item(i, 0).checkState() == Qt.Checked))

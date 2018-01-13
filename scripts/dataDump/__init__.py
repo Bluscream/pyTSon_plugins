@@ -37,7 +37,7 @@ class dataDump(ts3plugin):
         schid = ts3.getCurrentServerConnectionHandlerID()
         err, ownid = ts3.getClientID(schid)
         # if not err: self.setMeta(ts3.getCurrentServerConnectionHandlerID())
-        if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         pass # if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(schid)
@@ -107,7 +107,7 @@ class DumpView(QWidget):
                         elif addon.text == "Lua": self.lua = addon
                     item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
                     self.tbl_addons.setItem(row, 1, item)
-                    if self.cfg.getboolean("general", "debug"): ts3.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
+                    if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab("%i [color=red]%s"%(row, xml.tostring(addon).decode("utf-8")))
                     try:
                         item = QTableWidgetItem(addon.attrib["version"])
                         item.setFlags(Qt.ItemIsEnabled | ~Qt.ItemIsEditable)
