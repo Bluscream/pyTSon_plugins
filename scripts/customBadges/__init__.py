@@ -165,12 +165,16 @@ class BadgesDialog(QWidget):
         self.updateBadges()
 
     def on_lst_active_indexesMoved(self, mi):
+        if not self.listen: return
         self.updateBadges()
 
     def on_lst_active_itemChanged(self, mi):
+        if not self.listen: return
         self.updateBadges()
 
     def on_btn_apply_clicked(self):
+        if not self.listen: return
         self.updateBadges()
 
-    def on_btn_close_clicked(self): self.close()
+    def on_btn_close_clicked(self):
+        self.close()
