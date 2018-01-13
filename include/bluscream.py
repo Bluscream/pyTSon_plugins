@@ -8,6 +8,10 @@ import ts3lib, ts3defines
 def timestamp():
     return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
+def varname(obj, callingLocals=locals()):
+    for k, v in list(callingLocals.items()):
+         if v is obj: return k
+
 # PARSING #
 def channelURL(schid=None, cid=0, name=None):
     if schid == None:
@@ -65,10 +69,21 @@ def calculateInterval(schid, command, name="pyTSon"):
         # ts3lib.requestServerVariables(schid)
         # (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
     interval = round(1000/((afreduce/command)))
-    ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_action = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
+    ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command), command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
     return interval
 
 # TS3Hook #
+def parseCommand(self, cmd):
+    pass
+
+def buildCommand(self, cmd, parameters):
+    for key, value in parameters:
+        if key.startswith('-') or not value:
+            cmd += " {}".format(key)
+        else:
+            cmd += " {}={}".format(key[0], key[1])
+    return cmd
+
 def sendCommand(name, cmd, schid=0):
     if PluginHost.cfg.getboolean("general", "verbose"):
         ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
@@ -246,3 +261,19 @@ class AntiFloodPoints(object):
     VERIFYSERVERPASSWORD = 5
     VERSION = 0
     WHOAMI = 0
+
+ClientBadges = {
+    "TeamSpeak Addon Author": "1cb07348-34a4-4741-b50f-c41e584370f7",
+    "Gamescom 2016": "50bbdbc8-0f2a-46eb-9808-602225b49627",
+    "Paris Games Week 2016": "d95f9901-c42d-4bac-8849-7164fd9e2310",
+    "Gamescom 2014": "62444179-0d99-42ba-a45c-c6b1557d079a",
+    "Paris Games Week 2014": "d95f9901-c42d-4bac-8849-7164fd9e2310",
+    "TeamSpeak Addon Developer (Bronze)": "450f81c1-ab41-4211-a338-222fa94ed157",
+    "TeamSpeak Addon Developer (Silver)": "c9e97536-5a2d-4c8e-a135-af404587a472",
+    "TeamSpeak Addon Developer (Gold)": "94ec66de-5940-4e38-b002-970df0cf6c94",
+    "Gamescom 2017": "534c9582-ab02-4267-aec6-2d94361daa2a",
+    "Gamescom Hero 2017": "34dbfa8f-bd27-494c-aa08-a312fc0bb240",
+    "MIFCOM": "7d9fa2b1-b6fa-47ad-9838-c239a4ddd116",
+    "4Netplayers customer": "f81ad44d-e931-47d1-a3ef-5fd160217cf8",
+    "Rocket Beans TV": "f22c22f1-8e2d-4d99-8de9-f352dc26ac5b"
+}

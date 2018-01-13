@@ -4,10 +4,10 @@ from PythonQt.QtCore import QTimer, Qt
 from bluscream import timestamp, sendCommand, calculateInterval, AntiFloodPoints
 import ts3defines, ts3lib
 
-class autoBadges(ts3plugin):
+class toggleBadges(ts3plugin):
     name = "Hack the Badge"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1"
     author = "Bluscream"
     description = "Automatically sets some badges for you :)"

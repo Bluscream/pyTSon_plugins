@@ -2,7 +2,7 @@ import pytson, ts3lib, os
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
 from ts3defines import *
-from bluscream import timestamp, channelURL, clientURL, inputBox, confirm, msgBox, calculateInterval
+from bluscream import timestamp, channelURL, clientURL, inputBox, confirm, msgBox, calculateInterval, AntiFloodPoints
 from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox, QDialog
 from PythonQt.QtCore import Qt, QTimer
 from pytsonui import setupUi

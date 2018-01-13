@@ -7,7 +7,7 @@ import ts3defines, ts3lib
 class crasher_3_1_7(ts3plugin):
     name = "3.1.7 Crasher"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1"
     author = "Bluscream"
     description = "( .) ( .)"
