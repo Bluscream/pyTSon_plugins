@@ -91,13 +91,17 @@ class BadgesDialog(QWidget):
         self.setupList()
         self.listen = True
 
+    def badgeItem(self, badge, alt=False):
+        item = QListWidgetItem(self.badges[badge]["name"])
+        item.setData(Qt.UserRole, badge)
+        item.setToolTip(self.badges[badge]["description"])
+        item.setIcon(QIcon("{}\\{}{}".format(self.icons, self.badges[badge]["filename"],"_details" if alt else "")))
+        return item
+
     def setupList(self):
         self.chk_overwolf.setChecked(True if self.cfg.getboolean('general', 'overwolf') else False)
-        for k, v in ClientBadges.items():
-            item = QListWidgetItem(k)
-            item.setData(Qt.UserRole, v)
-            item.setIcon(QIcon("{}\\{}".format(self.icons, self.badges[v]["filename"])))
-            self.lst_available.addItem(item)
+        for badge in self.badges:
+            self.lst_available.addItem(self.badgeItem(badge))
         badges = self.cfg.get('general', 'badges').split(",")
         if len(badges) < 1: return
         i = 0
@@ -111,10 +115,7 @@ class BadgesDialog(QWidget):
                 self.badge2.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[badge]["filename"])))
             elif i == 3:
                 self.badge3.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[badge]["filename"])))
-            item = QListWidgetItem(badgeNameByUID(badge))
-            item.setData(Qt.UserRole, badge)
-            item.setIcon(QIcon("{}\\{}".format(self.icons, self.badges[badge]["filename"])))
-            self.lst_active.addItem(item)
+            self.lst_active.addItem(self.badgeItem(badge))
 
     def updateBadges(self):
         items = []
