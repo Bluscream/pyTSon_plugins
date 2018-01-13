@@ -137,7 +137,7 @@ class BadgesDialog(QWidget):
         uid = item.data(Qt.UserRole)
         item = QListWidgetItem(item.text())
         item.setData(Qt.UserRole, uid)
-        item.setIcon(QIcon("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
+        item.setIcon(QIcon("{}\\{}".format(self.icons, self.badges[uid]["filename"])))
         self.lst_active.addItem(item)
         self.updateBadges()
 
