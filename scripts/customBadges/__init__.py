@@ -109,7 +109,6 @@ class BadgesDialog(QWidget):
         for badge in badges:
             if not badge: return
             i += 1
-            # print("Adding badge #{}: {}".format(i, badge))
             if i == 1:
                 self.badge1.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[badge]["filename"])))
             elif i == 2:
@@ -121,14 +120,14 @@ class BadgesDialog(QWidget):
     def updateBadges(self):
         items = []
         self.badge1.clear();self.badge2.clear();self.badge3.clear();
-        for index in range(self.lst_active.count):
+        for i in range(self.lst_active.count):
              uid = self.lst_active.item(index).data(Qt.UserRole)
              items.append(uid)
-             if index == 0:
+             if i == 0:
                  self.badge1.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
-             elif index == 1:
+             elif i == 1:
                  self.badge2.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
-             elif index == 2:
+             elif i == 2:
                  self.badge3.setPixmap(QPixmap("{}\\{}_details".format(self.icons, self.badges[uid]["filename"])))
         self.cfg.set('general', 'badges', ','.join(items))
         self.setCustomBadges()
