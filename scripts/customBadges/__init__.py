@@ -52,7 +52,7 @@ class customBadges(ts3plugin):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             self.setCustomBadges()
 
-    def setCustomBadges():
+    def setCustomBadges(self):
         pass
 
     def buildBadges(self, badges, overwolf=False):
@@ -75,20 +75,20 @@ class BadgesDialog(QWidget):
             self.setupList()
             # self.resize(1000, 600)
         except:
-            try: from traceback import format_exc;ts3.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("Custom Badges: "+format_exc())
                 except: print("Custom Badges: Unknown Error")
 
     def setupList(self):
         try:
-            for k, v in ClientBadges:
+            for k, v in ClientBadges.items():
                 item = QListWidgetItem(k)
                 item.setData(Qt.UserRole, v)
                 # item.setIcon()
                 self.lst_available.addItem(item)
         except:
-            try: from traceback import format_exc;ts3.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("Custom Badges: "+format_exc())
                 except: print("Custom Badges: Unknown Error")
@@ -96,19 +96,22 @@ class BadgesDialog(QWidget):
     def addActive(self):
         try:
             item = self.lst_available.currentItem()
+            uid = item.data(Qt.UserRole)
+            item = QListWidgetItem(item.text())
+            item.setData(Qt.UserRole, uid)
             self.lst_active.addItem(item)
         except:
-            try: from traceback import format_exc;ts3.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("Custom Badges: "+format_exc())
                 except: print("Custom Badges: Unknown Error")
 
     def delActive(self):
         try:
-            item = self.lst_active.currentItem()
-            self.lst_active.takeItem(item)
+            row = self.lst_active.currentRow
+            self.lst_active.takeItem(row)
         except:
-            try: from traceback import format_exc;ts3.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            try: from traceback import format_exc;ts3lib.logMessage("Custom Badges: "+format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             except:
                 try: from traceback import format_exc;print("Custom Badges: "+format_exc())
                 except: print("Custom Badges: Unknown Error")
