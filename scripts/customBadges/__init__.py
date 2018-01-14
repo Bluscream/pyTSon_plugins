@@ -60,7 +60,6 @@ class customBadges(ts3plugin):
         badges = self.cfg.get('general', 'badges').split(',')
         for badge in badges:
             _return.append("{} {}".format(
-                # "[img]https://teaspeak.de/img/animated.png[/img]",
                 "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, self.badges[badge]["filename"]),
                 self.badgeNameByUID(badge)
             ))
