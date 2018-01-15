@@ -101,7 +101,7 @@ class customBadges(ts3plugin):
         try:
             overwolf = self.cfg.getboolean('general', 'overwolf')
             badges = self.cfg.get('general', 'badges').split(",")
-            if len(badges) > 0: badges += ['0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript']
+            # if len(badges) > 0: badges += ['0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript']
             sendCommand(self.name, buildBadges(badges, overwolf))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
