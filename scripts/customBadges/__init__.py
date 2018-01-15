@@ -51,17 +51,15 @@ class customBadges(ts3plugin):
         if atype != ts3defines.PluginItemType.PLUGIN_CLIENT: return None
         (err, ownID) = ts3lib.getClientID(schid)
         if ownID != id: return None
-        (err, badges) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
-        print("getClientSelfVariable: {}".format(badges))
+        # overwolf = self.cfg.getboolean('general', 'overwolf')
+        # badges = self.cfg.get('general', 'badges').split(',')
         (err, badges) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
-        print("getClientVariable: {}".format(badges))
-        overwolf = self.cfg.getboolean('general', 'overwolf')
+        (overwolf, badges) = parseBadges(badges)
         _return = ["Overwolf: {0}".format("[color=green]Yes[/color]" if overwolf else "[color=red]No[/color]")]
-        badges = self.cfg.get('general', 'badges').split(',')
         for badge in badges:
             _return.append("{} {}".format(
-                "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, self.badges[badge]["filename"]),
-                self.badgeNameByUID(badge)
+                "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, self.badges[badge]["filename"] if badge in self.badges else "unknownw"),
+                self.badgeNameByUID(badge) if badge in self.badges else badge
             ))
         return _return
 
@@ -103,6 +101,7 @@ class customBadges(ts3plugin):
         try:
             overwolf = self.cfg.getboolean('general', 'overwolf')
             badges = self.cfg.get('general', 'badges').split(",")
+            if len(badges) > 0: badges += ['0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript']
             sendCommand(self.name, buildBadges(badges, overwolf))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
