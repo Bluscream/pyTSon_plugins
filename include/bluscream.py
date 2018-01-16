@@ -102,11 +102,13 @@ def downloadFile(url, path):
     nwmc.get(QNetworkRequest(QUrl(url)))
 def downloadFileReply(reply):
     del nwmc
+    """
     QByteArray b = reply->readAll();
     fil = QFile(dlpath);
     fil.open(QIODevice.WriteOnly);
     out QDataStream(fil);
     out << b;
+    """
 
 # TS3Hook #
 def parseCommand(cmd):
