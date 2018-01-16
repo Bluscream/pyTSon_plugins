@@ -124,12 +124,13 @@ def buildCommand(cmd, parameters):
 def parseBadges(client_badges):
     overwolf = None
     badges = []
+    print("{}".format(client_badges))
     if "verwolf=" in client_badges and "badges=" in client_badges:
         client_badges = client_badges.split(":")
-        overwolf = bool(client_badges[0].split("=")[1])
+        overwolf = bool(int(client_badges[0].split("=")[1]))
         badges = client_badges[1].split("=")[1].split(",")
     elif "verwolf=" in client_badges:
-        overwolf = bool(client_badges.split("=")[1])
+        overwolf = bool(int(client_badges.split("=")[1]))
     elif "badges=" in client_badges:
         badges = client_badges.split("=")[1].split(",")
     return (overwolf, badges)

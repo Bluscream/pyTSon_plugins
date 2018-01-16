@@ -56,11 +56,11 @@ class customBadges(ts3plugin):
 
     def infoData(self, schid, id, atype):
         if atype != ts3defines.PluginItemType.PLUGIN_CLIENT: return None
-        (err, ownID) = ts3lib.getClientID(schid)
-        if ownID != id: return None
+        # (err, ownID) = ts3lib.getClientID(schid)
+        # if ownID != id: return None
         # overwolf = self.cfg.getboolean('general', 'overwolf')
         # badges = self.cfg.get('general', 'badges').split(',')
-        (err, badges) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
+        (err, badges) = ts3lib.getClientVariable(schid, id, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
         (overwolf, badges) = parseBadges(badges)
         _return = ["Overwolf: {0}".format("[color=green]Yes[/color]" if overwolf else "[color=red]No[/color]")]
         for badge in badges:
