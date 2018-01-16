@@ -1,6 +1,7 @@
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
-from PythonQt.QtCore import Qt
+from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream
+from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
 # from configparser import ConfigParser
 import ts3lib, ts3defines, os.path, string, random
@@ -85,6 +86,28 @@ def calculateInterval(schid, command, name="pyTSon"):
     ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command), command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
     return interval
 
+# Network #
+def getFile(url):
+    nwmc = QNetworkAccessManager()
+    nwmc.connect("finished(QNetworkReply*)", getFile)
+    nwmc.get(QNetworkRequest(QUrl(url)))
+def getFileReply(reply):
+    del nwmc
+
+
+def downloadFile(url, path):
+    nwmc = QNetworkAccessManager()
+    nwmc.connect("finished(QNetworkReply*)", downloadFileReply)
+    dlpath = path
+    nwmc.get(QNetworkRequest(QUrl(url)))
+def downloadFileReply(reply):
+    del nwmc
+    QByteArray b = reply->readAll();
+    fil = QFile(dlpath);
+    fil.open(QIODevice.WriteOnly);
+    out QDataStream(fil);
+    out << b;
+
 # TS3Hook #
 def parseCommand(cmd):
     pass
@@ -120,6 +143,9 @@ def sendCommand(name, cmd, schid=0):
     ts3lib.requestSendServerTextMsg(schid, "~cmd{}".format(cmd))
 
 # DEFINES #
+
+dlpath = ""
+
 class AntiFloodPoints(object):
     AUTH = 0
     BANADD = 25

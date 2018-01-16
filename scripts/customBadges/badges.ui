@@ -72,7 +72,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QGroupBox" name="groupBox_4">
+        <widget class="QGroupBox" name="grp_available">
          <property name="title">
           <string>Available (Internal)</string>
          </property>
@@ -88,7 +88,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_5">
+        <widget class="QGroupBox" name="grp_available_ext">
          <property name="title">
           <string>Available (External)</string>
          </property>
@@ -183,7 +183,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_2">
+      <widget class="QGroupBox" name="grp_active">
        <property name="title">
         <string>Active</string>
        </property>
@@ -209,6 +209,16 @@
       <widget class="QPushButton" name="btn_close">
        <property name="text">
         <string>Close</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_reload">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Reload</string>
        </property>
       </widget>
      </item>

@@ -33,6 +33,7 @@ class customBadges(ts3plugin):
     badges_local = path.join(getPluginPath(), "include", "badges.json")
     badges_ext = path.join(getPluginPath(), "include", "badges_ext.json")
     badges_remote = "https://gist.githubusercontent.com/Bluscream/29b838f11adc409feac9874267b43b1e/raw"
+    badges_ext_remote = "https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/badges.json"
     cfg = ConfigParser()
     dlg = None
     cfg["general"] = {
@@ -49,6 +50,7 @@ class customBadges(ts3plugin):
         try:
             loadCfg(self.ini, self.cfg)
             self.requestBadges()
+            self.requestBadgesExt()
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -62,19 +64,19 @@ class customBadges(ts3plugin):
         (overwolf, badges) = parseBadges(badges)
         _return = ["Overwolf: {0}".format("[color=green]Yes[/color]" if overwolf else "[color=red]No[/color]")]
         for badge in badges:
+            lst = self.badges
+            if badge in self.extbadges: lst = self.extbadges
             _return.append("{} {}".format(
-                "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, self.badges[badge]["filename"] if badge in self.badges else "unknownw"),
-                self.badgeNameByUID(badge) if badge in self.badges else badge
+                "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, lst[badge]["filename"] if badge in lst else "unknown"),
+                self.badgeNameByUID(badge, lst) if badge in lst else badge
             ))
         return _return
 
-    def badgeNameByUID(self, uid):
-        for badge in self.badges:
-            if badge == uid: return self.badges[badge]["name"]
+    def badgeNameByUID(self, uid, lst=badges):
+        for badge in lst:
+            if badge == uid: return lst[badge]["name"]
 
     def requestBadges(self):
-        with open(self.badges_ext, encoding='utf-8-sig') as json_file:
-            self.extbadges = load(json_file)
         try:
             with open(self.badges_local, encoding='utf-8-sig') as json_file:
                 self.badges = load(json_file)
@@ -83,10 +85,33 @@ class customBadges(ts3plugin):
             self.nwmc.connect("finished(QNetworkReply*)", self.loadBadges)
             self.nwmc.get(QNetworkRequest(QUrl(self.badges_remote)))
 
-    def loadBadges(self, reply):
+    def requestBadgesExt(self):
+        try:
+            with open(self.badges_ext, encoding='utf-8-sig') as json_file:
+                self.extbadges = load(json_file)
+        except:
+            self.nwmc_ext = QNetworkAccessManager()
+            self.nwmc_ext.connect("finished(QNetworkReply*)", self.loadBadgesExt)
+            self.nwmc_ext.get(QNetworkRequest(QUrl(self.badges_ext_remote)))
+
+    def loadBadgesExt(self, reply):
         try:
             data = reply.readAll().data().decode('utf-8')
+            self.extbadges = loads(data)
+            print("extbadges: {}".format(self.extbadges))
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{}".format(self.badges))
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+
+    def loadBadges(self, reply):
+        try:
+            # print(reply)
+            _reason = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
+            _reasonmsg = reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)
+            print('reason={}|reasonmsg={}'.format(_reason,_reasonmsg))
+            data = reply.readAll().data().decode('utf-8')
             self.badges = loads(data)
+            print("badges: {}".format(self.badges))
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{}".format(self.badges))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -138,6 +163,8 @@ class BadgesDialog(QWidget):
             self.badges = customBadges.badges
             self.extbadges = customBadges.extbadges
             self.setCustomBadges = customBadges.setCustomBadges
+            self.requestBadges = customBadges.requestBadges
+            self.requestBadgesExt = customBadges.requestBadgesExt
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("Customize Badges")
             self.setupList()
@@ -174,12 +201,17 @@ class BadgesDialog(QWidget):
     def setupList(self):
         try:
             self.chk_overwolf.setChecked(True if self.cfg.getboolean('general', 'overwolf') else False)
+            self.lst_available.clear()
             for badge in self.badges:
                 self.lst_available.addItem(self.badgeItem(badge))
+            self.grp_available.setTitle("{} Available (Internal)".format(len(self.badges)))
+            self.lst_available_ext.clear()
             for badge in self.extbadges:
                 self.lst_available_ext.addItem(self.badgeItem(badge, False, True))
+            self.grp_available_ext.setTitle("{} Available (External)".format(len(self.extbadges)))
             badges = self.cfg.get('general', 'badges').split(",")
             if len(badges) < 1: return
+            self.lst_active.clear()
             i = 0
             for badge in badges:
                 if not badge: return
@@ -189,6 +221,7 @@ class BadgesDialog(QWidget):
                     self.lst_active.addItem(self.badgeItem(badge))
                 elif badge in self.extbadges:
                     self.lst_active.addItem(self.badgeItem(badge, False, True))
+            self.grp_active.setTitle("{} Active".format(self.lst_active.count))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def updateBadges(self):
@@ -199,6 +232,7 @@ class BadgesDialog(QWidget):
                  uid = self.lst_active.item(i).data(Qt.UserRole)
                  items.append(uid)
                  if i < 3: self.updatePreview(uid, i)
+            self.grp_active.setTitle("{} Active".format(self.lst_active.count))
             self.cfg.set('general', 'badges', ','.join(items))
             self.setCustomBadges()
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
@@ -264,6 +298,12 @@ class BadgesDialog(QWidget):
     def on_btn_save_clicked(self):
         if not self.listen: return
         saveCfg(self.ini, self.cfg)
+
+    def on_btn_reload_clicked(self):
+        if not self.listen: return
+        self.requestBadges()
+        self.requestBadgesExt()
+        self.setupList()
 
     def on_btn_close_clicked(self):
         self.close()
