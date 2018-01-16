@@ -33,10 +33,6 @@ class antiAFK(ts3plugin):
         if hasattr(self.timer, "isActive") and self.timer.isActive():
             self.toggleTimer(self.schid)
 
-    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
-            self.toggleTimer(schid)
-
     def toggleTimer(self, schid):
             if self.timer is None:
                 self.timer = QTimer()
@@ -51,6 +47,12 @@ class antiAFK(ts3plugin):
                 self.timer.start(randint(30*1000,120*1000))
                 ts3lib.printMessageToCurrentTab('Timer started!')
 
+    def tick(self): ts3lib.requestSendPrivateTextMsg(self.schid, self.text, self.clid, "antiAFK:auto")
+
+    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
+            self.toggleTimer(schid)
+
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             if hasattr(self.timer, "isActive") and self.timer.isActive():
@@ -59,4 +61,5 @@ class antiAFK(ts3plugin):
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
         if fromID == self.clid and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
 
-    def tick(self): ts3lib.requestSendPrivateTextMsg(self.schid, self.text, self.clid)
+    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if returnCode == "antiAFK:auto": return True

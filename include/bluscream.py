@@ -3,7 +3,7 @@ from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
 from PythonQt.QtCore import Qt
 from ts3plugin import PluginHost
 # from configparser import ConfigParser
-import ts3lib, ts3defines, os.path
+import ts3lib, ts3defines, os.path, string, random
 
 # GENERAL FUNCTIONS #
 def timestamp():
@@ -12,6 +12,9 @@ def timestamp():
 def varname(obj, callingLocals=locals()):
     for k, v in list(callingLocals.items()):
          if v is obj: return k
+
+def random_string(size=1, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+    return ''.join(random.SystemRandom().choice(chars) for _ in range(size))
 
 # PARSING #
 def channelURL(schid=None, cid=0, name=None):

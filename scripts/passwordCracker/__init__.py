@@ -197,7 +197,7 @@ class passwordCracker(ts3plugin):
             self.status = errorMessage
             ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CHANNEL, self.cid)
         if error in [ERROR_channel_invalid_id, ERROR_ok] or returnCode in ["passwordCracker:manual"]: self.cracking = False
-        return 1
+        return True
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         pass
