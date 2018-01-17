@@ -126,17 +126,18 @@ def parseBadges(client_badges):
     badges = []
     print("{}".format(client_badges))
     if "verwolf=" in client_badges and "badges=" in client_badges:
-        client_badges = client_badges.split(":")
-        overwolf = bool(int(client_badges[0].split("=")[1]))
-        badges = client_badges[1].split("=")[1].split(",")
+        client_badges = client_badges.split(":",1)
+        overwolf = bool(int(client_badges[0].split("=",1)[1]))
+        badges = client_badges[1].split("=",1)[1].replace(":badges=", ",").split(",")
     elif "verwolf=" in client_badges:
         overwolf = bool(int(client_badges.split("=")[1]))
     elif "badges=" in client_badges:
-        badges = client_badges.split("=")[1].split(",")
+        badges = client_badges.split("=",1)[1].replace(":badges=", ",").split(",")
     return (overwolf, badges)
 
 def buildBadges(badges=[], overwolf=False):
-    return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ','.join(badges))
+    blocks = [",".join(badges[i:i+3]) for i in range(0, len(badges), 3)]
+    return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ":badges=".join(blocks))
 
 def sendCommand(name, cmd, schid=0):
     if PluginHost.cfg.getboolean("general", "verbose"):
