@@ -56,8 +56,8 @@ class customBadges(ts3plugin):
 
     def infoData(self, schid, id, atype):
         if atype != ts3defines.PluginItemType.PLUGIN_CLIENT: return None
-        # (err, ownID) = ts3lib.getClientID(schid)
-        # if ownID != id: return None
+        (err, ownID) = ts3lib.getClientID(schid)
+        if ownID != id: return None
         # overwolf = self.cfg.getboolean('general', 'overwolf')
         # badges = self.cfg.get('general', 'badges').split(',')
         (err, badges) = ts3lib.getClientVariable(schid, id, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
@@ -242,14 +242,16 @@ class BadgesDialog(QWidget):
         try:
             item = self.lst_available_ext.currentItem() if ext else self.lst_available.currentItem()
             self.lst_active.addItem(self.badgeItem(item.data(Qt.UserRole), False, True if ext else False))
-            self.updateBadges()
+            if self.chk_autoApply.checkState() == Qt.Checked:
+                self.updateBadges()
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def delActive(self):
         try:
             row = self.lst_active.currentRow
             self.lst_active.takeItem(row)
-            self.updateBadges()
+            if self.chk_autoApply.checkState() == Qt.Checked:
+                self.updateBadges()
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_lst_available_doubleClicked(self, mi):
@@ -272,9 +274,16 @@ class BadgesDialog(QWidget):
         if not self.listen: return
         self.delActive()
 
-    def on_btn_removeactive_clicked(self):
+    def on_btn_removeActive_clicked(self):
         if not self.listen: return
         self.delActive()
+
+    def on_btn_removeAll_clicked(self):
+        if not self.listen: return
+        if not confirm("Custom Badge", "Remove all active badges?"): return
+        self.lst_active.clear()
+        if self.chk_autoApply.checkState() == Qt.Checked:
+            self.updateBadges()
 
     def on_chk_overwolf_stateChanged(self, mi):
         if not self.listen: return
