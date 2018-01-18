@@ -63,6 +63,9 @@ class customBadges(ts3plugin):
         (err, badges) = ts3lib.getClientVariable(schid, id, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
         (overwolf, badges) = parseBadges(badges)
         _return = ["Overwolf: {0}".format("[color=green]Yes[/color]" if overwolf else "[color=red]No[/color]")]
+        i = []
+        for badge in badges:
+            if badge
         for badge in badges:
             lst = self.badges
             if badge in self.extbadges: lst = self.extbadges
@@ -142,7 +145,9 @@ class customBadges(ts3plugin):
             overwolf = self.cfg.getboolean('general', 'overwolf')
             badges = self.cfg.get('general', 'badges').split(",")
             # if len(badges) > 0: badges += ['0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript']
-            sendCommand(self.name, buildBadges(badges, overwolf))
+            (err, schids) = ts3lib.getServerConnectionHandlerList()
+            for schid in schids:
+                sendCommand(self.name, buildBadges(badges, overwolf), schid)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def openDialog(self):
