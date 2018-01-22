@@ -63,9 +63,9 @@ class customBadges(ts3plugin):
         (err, badges) = ts3lib.getClientVariable(schid, id, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
         (overwolf, badges) = parseBadges(badges)
         _return = ["Overwolf: {0}".format("[color=green]Yes[/color]" if overwolf else "[color=red]No[/color]")]
-        i = []
-        for badge in badges:
-            if badge
+        # i = []
+        # for badge in badges:
+            # if badge
         for badge in badges:
             lst = self.badges
             if badge in self.extbadges: lst = self.extbadges
