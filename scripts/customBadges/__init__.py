@@ -146,7 +146,7 @@ class customBadges(ts3plugin):
         elif menuItemID == 1:
             (timestamp, badges) = self.parseLocalBadges()
             print("Timestamp: {}".format(timestamp))
-            for byte in badges;
+            for byte in badges:
                 print("Byte: {}".format(badges))
             return
             for i in range(0,3):
