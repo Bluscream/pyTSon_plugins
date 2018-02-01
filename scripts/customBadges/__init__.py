@@ -10,7 +10,7 @@ from pytson import getPluginPath
 from pytsonui import setupUi
 from json import load, loads
 from traceback import format_exc
-import ts3defines, ts3lib
+import ts3defines, ts3lib, ts3client
 
 class customBadges(ts3plugin):
     name = "Custom Badges"
@@ -124,10 +124,31 @@ class customBadges(ts3plugin):
     def configure(self, qParentWidget):
         self.openDialog()
 
+    def parseLocalBadges(self):
+        db = ts3client.Config()
+        q = db.query("SELECT * FROM Badges") #  WHERE key = BadgesListData
+        timestamp = 0
+        ret = b""
+        if q.next():
+            key = q.value("key")
+            print("DB: Key: {}".format(key))
+            if key == "BadgesListTimestamp":
+                timestamp = q.value("value")
+            elif key == "BadgesListData":
+                ret = q.value("value")
+                print("Type: {}".format(type(ret)))
+        del db
+        return timestamp, ret
+
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
         if menuItemID == 0: self.openDialog()
         elif menuItemID == 1:
+            (timestamp, badges) = self.parseLocalBadges()
+            print("Timestamp: {}".format(timestamp))
+            for byte in badges;
+                print("Byte: {}".format(badges))
+            return
             for i in range(0,3):
                 # 0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript
                 uid = [random_string(size=8, chars=string.ascii_lowercase + string.digits)]

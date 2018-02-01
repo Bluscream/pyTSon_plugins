@@ -75,7 +75,7 @@ class crasher_3_1_7(ts3plugin):
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            self.startTimer(schid)
+            pass # self.startTimer(schid)
         elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
              self.stopTimer(schid)
 

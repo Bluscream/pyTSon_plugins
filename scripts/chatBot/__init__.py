@@ -5,6 +5,7 @@ from PythonQt.QtCore import *
 from PythonQt.QtGui import *
 from ts3plugin import ts3plugin
 import datetime, ts3defines, ts3lib, sys, os, pytson, pytsonui
+from pluginhost import PluginHost
 import time as timestamp
 from base64 import b64encode, b64decode
 from pytsonui import setupUi

@@ -4,7 +4,7 @@ from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
 # from configparser import ConfigParser
-import ts3lib, ts3defines, os.path, string, random
+import ts3lib, ts3defines, os.path, string, random, ts3client
 
 # GENERAL FUNCTIONS #
 def timestamp():
