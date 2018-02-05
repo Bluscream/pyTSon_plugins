@@ -2,8 +2,8 @@ import os.path, inspect, re, traceback, datetime, json, requests
 import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
 from ts3defines import *
-from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
-from PythonQt.QtCore import Qt#, QUrl
+from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem, QTableWidgetItem
+from PythonQt.QtCore import Qt #, QUrl
 # from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
 from pytsonui import setupUi
 from collections import OrderedDict
@@ -17,6 +17,15 @@ def time(): return '{:%H:%M:%S}'.format(datetime.datetime.now())
 def getItems(object):
     return [(a, getattr(object, a)) for a in dir(object)
             if not a.startswith('__') and not callable(getattr(object, a)) and not "ENDMARKER" in a and not "DUMMY" in a]
+
+def getItemTime(lst):
+    if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
+        return PluginItemType.PLUGIN_SERVER, "Server"
+    elif lst in [ChannelProperties, ChannelPropertiesRare]:
+        return PluginItemType.PLUGIN_CHANNEL, "Channel"
+    elif lst in [ConnectionProperties, ConnectionPropertiesRare, ClientProperties, ClientPropertiesRare]:
+        return PluginItemType.PLUGIN_CLIENT, "Client"
+    else: return None
 
 def channelURL(schid=None, cid=0, name=None):
     if schid == None:
@@ -87,7 +96,7 @@ class info(ts3plugin):
             for name, value in getmembers(ChannelPropertiesRare):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER_RARE'):
                     self.cfg.set("ChannelPropertiesRare", name, "False")
-            self.cfg.set("ClientProperties", "LAST_REQUESTED", "True");self.cfg.set("ClientProperties", "TYPE", "True");self.cfg.set("ClientProperties", "ID", "True")
+            self.cfg.set("ClientProperties", "LAST_REQUESTED", "True");self.cfg.set("ClientProperties", "TYPE", "True");self.cfg.set("ClientProperties", "ID", "True");self.cfg.set("ClientProperties", "DISPLAYNAME", "True")
             for name, value in getmembers(ClientProperties):
                 if not name.startswith('__') and not '_DUMMY_' in name and not name.endswith('_ENDMARKER'):
                     self.cfg.set("ClientProperties", name, "False")
@@ -113,11 +122,11 @@ class info(ts3plugin):
                         if not val == self.cfg.getboolean('general', name):
                             self.cfg.set('general', str(name), str(val))
                     except:
-                        if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+                        if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
         except:
-            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def configure(self, qParentWidget):
         try:
@@ -127,7 +136,7 @@ class info(ts3plugin):
             self.dlg.raise_()
             self.dlg.activateWindow()
         except:
-            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def processCommand(self, schid, cmd):
         cmd = cmd.split(' ', 1)
@@ -190,7 +199,7 @@ class info(ts3plugin):
         if name == "CLIENT_META_DATA":
             (err, ownID) = ts3.getClientID(schid)
             if id == ownID: return name, None
-        if name == "CHANNEL_PASSWORD": return name, None
+        elif name == "CHANNEL_PASSWORD": return name, None
         return name, var
 
     def postProcessVar(self, schid, id, name, val, lst):
@@ -211,6 +220,9 @@ class info(ts3plugin):
             "CONNECTION_IDLE_TIME"
         ]:
             val = '{0} ({1})'.format(datetime.timedelta(milliseconds=val), val)
+        elif name == "TYPE": (t,val) = getItemTime(lst)
+        elif name == "ID": return name, id
+        elif name == "DISPLAYNAME": (err, val) = ts3.getClientDisplayName(schid, id)
         if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
             name = name.replace("VIRTUALSERVER_", "")
         elif lst in [ChannelProperties, ChannelPropertiesRare]:
@@ -282,6 +294,7 @@ class info(ts3plugin):
         return i if len(i) > 0 else None
 
     def infoData(self, schid, id, atype):
+        if not self.cfg.getboolean('general', 'InfoData'): return
         if atype == PluginItemType.PLUGIN_SERVER:
             if not schid in self.requested:
                 ts3.requestServerVariables(schid)
@@ -294,10 +307,29 @@ class info(ts3plugin):
             return self.getClientInfo(schid, id)
         return None
 
+class VariablesDialog(QDialog):
+    def __init__(self, info, type, target, parent=None):
+        super(QDialog, self).__init__(parent)
+        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "variables.ui"))
+        self.setAttribute(Qt.WA_DeleteOnClose)
+        self.setupTable(type, target)
+
+    def setupTable(self, type, target):
+        tbl = self.tbl_variables
+        tbl.clear()
+        for k, v in info.getVariables(type, target):
+            pos = tbl.rowCount
+            tbl.insertRow(pos)
+            tbl.setItem(pos, 0, QTableWidgetItem(k))
+            tbl.setItem(pos, 1, QTableWidgetItem(v))
+        displayName = ts3.getClientDisplayName()
+        self.setWindowTitle("{}'s Variables".format(target))
+
 class SettingsDialog(QDialog):
     def __init__(self, info, parent=None):
         super(QDialog, self).__init__(parent)
         setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
+        self.setAttribute(Qt.WA_DeleteOnClose)
         self.setWindowTitle("Extended Info Settings")
         self.chk_debug.setChecked(info.cfg.getboolean('general', 'Debug'))
         self.chk_colored.setChecked(info.cfg.getboolean('general', 'Colored'))
@@ -368,6 +400,7 @@ class SettingsDialog(QDialog):
     def on_btn_apply_clicked(self):
         if self.info.cfg.getboolean('general', 'Debug'): ts3.printMessageToCurrentTab("on_btn_apply_clicked")
         self.info.cfg.set('general', 'Debug', str(self.chk_debug.isChecked()))
+        self.info.cfg.set('general', 'InfoData', str(self.chk_infodata.isChecked()))
         self.info.cfg.set('general', 'Colored', str(self.chk_colored.isChecked()))
         self.info.cfg.set('general', 'Autorequest Server Variables', str(self.chk_arsv.isChecked()))
         self.info.cfg.set('general', 'Autorequest Client Variables', str(self.chk_arcv.isChecked()))

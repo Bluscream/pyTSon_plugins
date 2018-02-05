@@ -47,7 +47,7 @@ class chatBot(ts3plugin):
     tmpsgroups = []
     tmpcgroups = []
 
-    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())
 
     def __init__(self):
         if path.isfile(self.ini):

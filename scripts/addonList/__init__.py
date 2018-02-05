@@ -40,7 +40,7 @@ class addonList(ts3plugin):
         schid = ts3.getCurrentServerConnectionHandlerID()
         err, status = ts3.getConnectionStatus(schid)
         if not err and status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.setMeta(ts3.getCurrentServerConnectionHandlerID())
-        if PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        if pluginhost.PluginHost.cfg.getboolean("general", "verbose"): ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
 
     def configure(self, qParentWidget):
         try:
