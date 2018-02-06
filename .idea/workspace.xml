@@ -79,8 +79,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="176" column="46" lean-forward="false" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
+            <state relative-caret-position="-527">
+              <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -689,13 +689,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00098" summary=":thinking:">
-      <created>1511780643707</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1511780643707</updated>
-    </task>
     <task id="LOCAL-00099" summary=":thinking:">
       <created>1511782087209</created>
       <option name="number" value="00099" />
@@ -1032,7 +1025,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517940294922</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary=":thinking:">
+      <created>1517944785190</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1517944785190</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1436,8 +1436,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="176" column="46" lean-forward="false" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
+        <state relative-caret-position="-527">
+          <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="30" />
           <folding />
         </state>
       </provider>

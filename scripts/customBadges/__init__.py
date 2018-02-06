@@ -130,66 +130,50 @@ class customBadges(ts3plugin):
         db = ts3client.Config()
         q = db.query("SELECT * FROM Badges") #  WHERE key = BadgesListData
         timestamp = 0
-        ret = b""
+        ret = []
         while q.next():
             key = q.value("key")
             print("DB: Key: {}".format(key))
             if key == "BadgesListTimestamp":
                 timestamp = q.value("value")
-                print("{} Type: {}".format(key, type(timestamp)))
             elif key == "BadgesListData":
-                ret = q.value("value")
-                print("{} Type: {}".format(key, type(ret)))
+                badges = q.value("value")
+                next = 12
+                guid_len = 0
+                guid = ""
+                name_len = 0
+                name = ""
+                url_len = 0
+                url = ""
+                desc_len = 0
+                desc = ""
+                try:
+                    for i in range(0, badges.size()):
+                        if i == next: #guid_len
+                            guid_len = int(badges.at(i))
+                            guid = str(badges.mid(i+1, guid_len))
+                        elif i == (next + 1 + guid_len + 1):
+                            name_len = int(badges.at(i))
+                            name = str(badges.mid(i+1, name_len))
+                        elif i == (next + 1 + guid_len + 1 + name_len + 2):
+                            url_len = int(badges.at(i))
+                            url = str(badges.mid(i+1, url_len))
+                        elif i == (next + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
+                            desc_len = int(badges.at(i))
+                            desc = str(badges.mid(i+1, desc_len))
+                            ret.append({"guid": guid, "name": name, "url": url, "description": desc})
+                            next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
+                except: print("error")
         del db
         return timestamp, ret
-
-    def readBadge(self, badges, start=0):
-        next = 12
-        ret = []
-        guid_len = 0
-        guid = ""
-        name_len = 0
-        name = ""
-        url_len = 0
-        url = ""
-        desc_len = 0
-        desc = ""
-        try:
-            for i in range(start, badges.size()):
-                if i == next: #guid_len
-                    guid_len = int(badges.at(i))
-                    print("#", i, "GUID Length:", guid_len)
-                    guid = str(badges.mid(i+1, guid_len))
-                    print("#", i, "GUID:", guid)
-                elif i == (next + 1 + guid_len + 1):
-                    name_len = int(badges.at(i))
-                    print("#", i, "Name Length:", name_len)
-                    name = str(badges.mid(i+1, name_len))
-                    print("#", i, "Name:", name)
-                elif i == (next + 1 + guid_len + 1 + name_len + 2):
-                    url_len = int(badges.at(i))
-                    print("#", i, "URL Length:", url_len)
-                    url = str(badges.mid(i+1, url_len))
-                    print("#", i, "URL:", url)
-                elif i == (next + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
-                    desc_len = int(badges.at(i))
-                    print("#", i, "DESC Length:", desc_len)
-                    desc = str(badges.mid(i+1, desc_len))
-                    print("#", i, "DESC:", desc)
-                    ret.append({"guid": guid, "name": name, "url": url, "description": desc})
-                    next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
-                    print(next)
-        except: print("error")
-        return ret
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
         if menuItemID == 0: self.openDialog()
         elif menuItemID == 1:
             (timestamp, badges) = self.parseLocalBadges()
-            print("Timestamp:", timestamp)
-            print("Badges:", badges.data())
-            print(self.readBadge(badges, 0))
+            ts3lib.printMessageToCurrentTab("Timestamp: {}".format(timestamp))
+            ts3lib.printMessageToCurrentTab("Badges: {}".format(badges))
             return
             for i in range(0,3):
                 # 0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript
