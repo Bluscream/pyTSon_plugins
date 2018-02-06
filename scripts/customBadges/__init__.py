@@ -51,7 +51,9 @@ class customBadges(ts3plugin):
     def __init__(self):
         try:
             loadCfg(self.ini, self.cfg)
-            self.requestBadges()
+            (timestamp, badges) = self.parseLocalBadges()
+            ts3lib.printMessageToCurrentTab("Timestamp: {}".format(timestamp))
+            ts3lib.printMessageToCurrentTab("Badges: {}".format(badges))
             self.requestBadgesExt()
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
@@ -81,15 +83,6 @@ class customBadges(ts3plugin):
         for badge in lst:
             if badge == uid: return lst[badge]["name"]
 
-    def requestBadges(self):
-        try:
-            with open(self.badges_local, encoding='utf-8-sig') as json_file:
-                self.badges = load(json_file)
-        except:
-            self.nwmc = QNetworkAccessManager()
-            self.nwmc.connect("finished(QNetworkReply*)", self.loadBadges)
-            self.nwmc.get(QNetworkRequest(QUrl(self.badges_remote)))
-
     def requestBadgesExt(self):
         try:
             with open(self.badges_ext, encoding='utf-8-sig') as json_file:
@@ -107,19 +100,6 @@ class customBadges(ts3plugin):
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{}".format(self.badges))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-
-    def loadBadges(self, reply):
-        try:
-            # print(reply)
-            _reason = reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
-            _reasonmsg = reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)
-            print('reason={}|reasonmsg={}'.format(_reason,_reasonmsg))
-            data = reply.readAll().data().decode('utf-8')
-            self.badges = loads(data)
-            print("badges: {}".format(self.badges))
-            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{}".format(self.badges))
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-
     def stop(self):
         saveCfg(self.ini, self.cfg)
 
@@ -130,7 +110,7 @@ class customBadges(ts3plugin):
         db = ts3client.Config()
         q = db.query("SELECT * FROM Badges") #  WHERE key = BadgesListData
         timestamp = 0
-        ret = []
+        ret = {}
         while q.next():
             key = q.value("key")
             print("DB: Key: {}".format(key))
@@ -139,14 +119,11 @@ class customBadges(ts3plugin):
             elif key == "BadgesListData":
                 badges = q.value("value")
                 next = 12
-                guid_len = 0
-                guid = ""
-                name_len = 0
-                name = ""
-                url_len = 0
-                url = ""
-                desc_len = 0
-                desc = ""
+                guid_len = 0;guid = ""
+                name_len = 0;name = ""
+                url_len = 0;url = ""
+                filename = ""
+                desc_len = 0;desc = ""
                 try:
                     for i in range(0, badges.size()):
                         if i == next: #guid_len
@@ -158,10 +135,11 @@ class customBadges(ts3plugin):
                         elif i == (next + 1 + guid_len + 1 + name_len + 2):
                             url_len = int(badges.at(i))
                             url = str(badges.mid(i+1, url_len))
+                            filename = url.rsplit('/', 1)[1]
                         elif i == (next + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
                             desc_len = int(badges.at(i))
                             desc = str(badges.mid(i+1, desc_len))
-                            ret.append({"guid": guid, "name": name, "url": url, "description": desc})
+                            ret[guid] = {"name": name, "url": url, "filename": filename, "description": desc}
                             next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
                 except: print("error")
         del db
@@ -171,10 +149,6 @@ class customBadges(ts3plugin):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
         if menuItemID == 0: self.openDialog()
         elif menuItemID == 1:
-            (timestamp, badges) = self.parseLocalBadges()
-            ts3lib.printMessageToCurrentTab("Timestamp: {}".format(timestamp))
-            ts3lib.printMessageToCurrentTab("Badges: {}".format(badges))
-            return
             for i in range(0,3):
                 # 0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript
                 uid = [random_string(size=8, chars=string.ascii_lowercase + string.digits)]
@@ -215,7 +189,7 @@ class BadgesDialog(QWidget):
             self.badges = customBadges.badges
             self.extbadges = customBadges.extbadges
             self.setCustomBadges = customBadges.setCustomBadges
-            self.requestBadges = customBadges.requestBadges
+            self.parseLocalBadges = customBadges.parseLocalBadges
             self.requestBadgesExt = customBadges.requestBadgesExt
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("Customize Badges")
@@ -362,7 +336,7 @@ class BadgesDialog(QWidget):
 
     def on_btn_reload_clicked(self):
         if not self.listen: return
-        self.requestBadges()
+        self.parseLocalBadges()
         self.requestBadgesExt()
         self.setupList()
 

@@ -3,12 +3,13 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="140" />
     <bookmark url="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" line="86" />
-    <bookmark url="file://$PROJECT_DIR$/scripts/customBadges/__init__.py" line="128" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/customBadges/__init__.py" line="108" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -79,8 +80,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-527">
-              <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="30" />
+            <state relative-caret-position="850">
+              <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -689,13 +690,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00099" summary=":thinking:">
-      <created>1511782087209</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1511782087211</updated>
-    </task>
     <task id="LOCAL-00100" summary=":thinking:">
       <created>1511782777653</created>
       <option name="number" value="00100" />
@@ -1032,7 +1026,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517944785190</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary=":thinking:">
+      <created>1517945428874</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1517945428874</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1436,8 +1437,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-527">
-          <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="30" />
+        <state relative-caret-position="850">
+          <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
           <folding />
         </state>
       </provider>
