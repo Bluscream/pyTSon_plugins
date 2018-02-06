@@ -8,8 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -690,13 +688,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00096" summary=":thinking:">
-      <created>1511774520208</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1511774520209</updated>
-    </task>
     <task id="LOCAL-00097" summary=":thinking:">
       <created>1511775447710</created>
       <option name="number" value="00097" />
@@ -1033,7 +1024,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517870206973</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary=":thinking:">
+      <created>1517940279393</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1517940279394</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TodoView">
