@@ -144,6 +144,7 @@ class customBadges(ts3plugin):
         return timestamp, ret
 
     def readBadge(self, badges, start=0):
+        next = 12
         ret = []
         guid_len = 0
         guid = ""
@@ -153,28 +154,32 @@ class customBadges(ts3plugin):
         url = ""
         desc_len = 0
         desc = ""
-        for i in range(start, badges.size()):
-            if i == 12: #guid_len
-                guid_len = int(badges.at(i))
-                print("#", i, "GUID Length:", guid_len)
-                guid = str(badges.mid(i+1, guid_len))
-                print("#", i, "GUID:", guid)
-            elif i == (12 + 1 + guid_len + 1):
-                name_len = int(badges.at(i))
-                print("#", i, "Name Length:", name_len)
-                name = str(badges.mid(i+1, name_len))
-                print("#", i, "Name:", name)
-            elif i == (12 + 1 + guid_len + 1 + name_len + 2):
-                url_len = int(badges.at(i))
-                print("#", i, "URL Length:", url_len)
-                url = str(badges.mid(i+1, url_len))
-                print("#", i, "URL:", url)
-            elif i == (12 + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
-                desc_len = int(badges.at(i))
-                print("#", i, "DESC Length:", desc_len)
-                desc = str(badges.mid(i+1, desc_len))
-                print("#", i, "DESC:", desc)
-                ret.append({"guid": guid, "name": name, "url": url, "description": desc})
+        try:
+            for i in range(start, badges.size()):
+                if i == next: #guid_len
+                    guid_len = int(badges.at(i))
+                    print("#", i, "GUID Length:", guid_len)
+                    guid = str(badges.mid(i+1, guid_len))
+                    print("#", i, "GUID:", guid)
+                elif i == (next + 1 + guid_len + 1):
+                    name_len = int(badges.at(i))
+                    print("#", i, "Name Length:", name_len)
+                    name = str(badges.mid(i+1, name_len))
+                    print("#", i, "Name:", name)
+                elif i == (next + 1 + guid_len + 1 + name_len + 2):
+                    url_len = int(badges.at(i))
+                    print("#", i, "URL Length:", url_len)
+                    url = str(badges.mid(i+1, url_len))
+                    print("#", i, "URL:", url)
+                elif i == (next + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
+                    desc_len = int(badges.at(i))
+                    print("#", i, "DESC Length:", desc_len)
+                    desc = str(badges.mid(i+1, desc_len))
+                    print("#", i, "DESC:", desc)
+                    ret.append({"guid": guid, "name": name, "url": url, "description": desc})
+                    next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
+                    print(next)
+        except: print("error")
         return ret
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
