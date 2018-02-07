@@ -1,6 +1,7 @@
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
-from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream, QSqlQuery
+from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream
+from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
 # from configparser import ConfigParser
@@ -120,42 +121,6 @@ def buildCommand(cmd, parameters):
             cmd += " {}".format(key)
         else: cmd += " {}={}".format(key[0], key[1])
     return cmd
-
-def saveBadges(external):
-    db = ts3client.Config()
-    query = QSqlQuery(db)
-    (timestamp, official, array) = loadBadges()
-    delimiter = array.mid(0, 12)
-    delimiter1 = 0;delimiter2 = 0;delimiter3 = 0;delimiter4 = 0
-    guid_len = 0;guid = ""
-    name_len = 0;name = ""
-    url_len = 0;url = ""
-    desc_len = 0;desc = ""
-    for i in range(0, array.size()):
-        if i == 12: #guid_len
-            guid_len = int(array.at(i))
-            guid = str(array.mid(i+1, guid_len))
-        elif i == (12 + 1 + guid_len + 1):
-            delimiter1 = array.mid(i - 1)
-            name_len = int(array.at(i))
-            name = str(array.mid(i+1, name_len))
-        elif i == (12 + 1 + guid_len + 1 + name_len + 2):
-            delimiter2 = array.mid(i - 1)
-            url_len = int(array.at(i))
-            url = str(array.mid(i+1, url_len))
-        elif i == (12 + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
-            delimiter3 = array.mid(i - 3)
-            desc_len = int(array.at(i))
-            desc = str(array.mid(i+1, desc_len))
-            break
-    print(delimiter)
-    print(delimiter1)
-    print(delimiter2)
-    print(delimiter3)
-    print(delimiter4)
-    print(array)
-    # query.prepare( "UPDATE Badges (BadgesListData) VALUES (:byteArray)" );
-    # query.bindValue( ":imageData", array);
 
 
 def loadBadges():

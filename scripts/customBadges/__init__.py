@@ -1,6 +1,7 @@
 from ts3plugin import ts3plugin
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt, QUrl
+from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from bluscream import *
@@ -49,7 +50,7 @@ class customBadges(ts3plugin):
     def __init__(self):
         try:
             loadCfg(self.ini, self.cfg)
-            (tstamp, self.badges) = loadBadges()
+            (tstamp, self.badges, array) = loadBadges()
             self.requestBadgesExt()
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
@@ -74,6 +75,43 @@ class customBadges(ts3plugin):
                 self.badgeNameByUID(badge, lst) if badge in lst else badge
             ))
         return _return
+
+    def saveBadges(self, external):
+        db = ts3client.Config()
+        query = QSqlQuery(db)
+        (timestamp, internal, array) = loadBadges()
+        delimiter = array.mid(0, 12)
+        delimiter1 = 0;delimiter2 = 0;delimiter3 = 0;delimiter4 = 0
+        guid_len = 0;guid = ""
+        name_len = 0;name = ""
+        url_len = 0;url = ""
+        desc_len = 0;desc = ""
+        for i in range(0, array.size()):
+            if i == 12: #guid_len
+                guid_len = int(array.at(i))
+                guid = str(array.mid(i+1, guid_len))
+            elif i == (12 + 1 + guid_len + 1):
+                delimiter1 = array.mid(i - 1,i - 1)
+                name_len = int(array.at(i))
+                name = str(array.mid(i+1, name_len))
+            elif i == (12 + 1 + guid_len + 1 + name_len + 2):
+                delimiter2 = array.mid(i - 1,i - 1)
+                url_len = int(array.at(i))
+                url = str(array.mid(i+1, url_len))
+            elif i == (12 + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
+                delimiter3 = array.mid(i - 3,i - 3)
+                delimiter4 = array.mid(i+desc_len,i+desc_len)
+                desc_len = int(array.at(i))
+                desc = str(array.mid(i+1, desc_len))
+                break
+        print("delimiter:", delimiter.toHex())
+        print("delimiter1:", delimiter1.toHex())
+        print("delimiter2:", delimiter2.toHex())
+        print("delimiter3:", delimiter3.toHex())
+        print("delimiter4:", delimiter4.toHex())
+        print("array:", array.toHex())
+        # query.prepare( "UPDATE Badges (BadgesListData) VALUES (:byteArray)" );
+        # query.bindValue( ":imageData", array);
 
     def badgeNameByUID(self, uid, lst=badges):
         for badge in lst:
@@ -104,6 +142,7 @@ class customBadges(ts3plugin):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
         if menuItemID == 0: self.openDialog()
         elif menuItemID == 1:
+            self.saveBadges(self.extbadges)
             for i in range(0,3):
                 # 0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript
                 uid = [random_string(size=8, chars=string.ascii_lowercase + string.digits)]
@@ -144,7 +183,7 @@ class BadgesDialog(QWidget):
             self.badges = customBadges.badges
             self.extbadges = customBadges.extbadges
             self.setCustomBadges = customBadges.setCustomBadges
-            self.requestBadgesExt = customBadges.requestBadgesExt
+            self.reloadPlugin = customBadges.__init__
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("Customize Badges")
             self.setupList()
@@ -291,8 +330,7 @@ class BadgesDialog(QWidget):
 
     def on_btn_reload_clicked(self):
         if not self.listen: return
-        loadBadges()
-        self.requestBadgesExt()
+        self.reloadPlugin()
         self.setupList()
 
     def on_btn_close_clicked(self):
