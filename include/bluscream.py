@@ -1,6 +1,6 @@
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
-from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream
+from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream, QSqlQuery
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
 # from configparser import ConfigParser
@@ -121,11 +121,43 @@ def buildCommand(cmd, parameters):
         else: cmd += " {}={}".format(key[0], key[1])
     return cmd
 
+def saveBadges(external):
+    db = ts3client.Config()
+    query = QSqlQuery(db)
+    (timestamp, official, array) = loadBadges()
+    delimiter = array.mid(0, 12)
+    delimiter1 = 0;delimiter2 = 0;delimiter3 = 0;delimiter4 = 0
+    guid_len = 0;guid = ""
+    name_len = 0;name = ""
+    url_len = 0;url = ""
+    desc_len = 0;desc = ""
+    for i in range(0, array.size()):
+        if i == 12: #guid_len
+            guid_len = int(array.at(i))
+            guid = str(array.mid(i+1, guid_len))
+        elif i == (12 + 1 + guid_len + 1):
+            delimiter1 = array.mid(i - 1)
+            name_len = int(array.at(i))
+            name = str(array.mid(i+1, name_len))
+        elif i == (12 + 1 + guid_len + 1 + name_len + 2):
+            url_len = int(array.at(i))
+            url = str(array.mid(i+1, url_len))
+            filename = url.rsplit('/', 1)[1]
+        elif i == (12 + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
+            desc_len = int(array.at(i))
+            desc = str(array.mid(i+1, desc_len))
+            break
+    print(array)
+    # query.prepare( "UPDATE Badges (BadgesListData) VALUES (:byteArray)" );
+    # query.bindValue( ":imageData", array);
+
+
 def loadBadges():
     db = ts3client.Config()
     q = db.query("SELECT * FROM Badges") #  WHERE key = BadgesListData
     timestamp = 0
     ret = {}
+    badges = b''
     while q.next():
         key = q.value("key")
         if key == "BadgesListTimestamp":
@@ -155,9 +187,10 @@ def loadBadges():
                         desc = str(badges.mid(i+1, desc_len))
                         ret[guid] = {"name": name, "url": url, "filename": filename, "description": desc}
                         next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
+                delimiter = badges.mid(0, 12)
             except: from traceback import format_exc; ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
     del db
-    return timestamp, ret
+    return timestamp, ret, badges
 
 def parseBadges(client_badges):
     overwolf = None
