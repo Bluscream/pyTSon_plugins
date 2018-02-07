@@ -121,10 +121,47 @@ def buildCommand(cmd, parameters):
         else: cmd += " {}={}".format(key[0], key[1])
     return cmd
 
+def loadBadges():
+    db = ts3client.Config()
+    q = db.query("SELECT * FROM Badges") #  WHERE key = BadgesListData
+    timestamp = 0
+    ret = {}
+    while q.next():
+        key = q.value("key")
+        if key == "BadgesListTimestamp":
+            timestamp = q.value("value")
+        elif key == "BadgesListData":
+            badges = q.value("value")
+            next = 12
+            guid_len = 0;guid = ""
+            name_len = 0;name = ""
+            url_len = 0;url = ""
+            filename = ""
+            desc_len = 0;desc = ""
+            try:
+                for i in range(0, badges.size()):
+                    if i == next: #guid_len
+                        guid_len = int(badges.at(i))
+                        guid = str(badges.mid(i+1, guid_len))
+                    elif i == (next + 1 + guid_len + 1):
+                        name_len = int(badges.at(i))
+                        name = str(badges.mid(i+1, name_len))
+                    elif i == (next + 1 + guid_len + 1 + name_len + 2):
+                        url_len = int(badges.at(i))
+                        url = str(badges.mid(i+1, url_len))
+                        filename = url.rsplit('/', 1)[1]
+                    elif i == (next + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
+                        desc_len = int(badges.at(i))
+                        desc = str(badges.mid(i+1, desc_len))
+                        ret[guid] = {"name": name, "url": url, "filename": filename, "description": desc}
+                        next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
+            except: from traceback import format_exc; ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+    del db
+    return timestamp, ret
+
 def parseBadges(client_badges):
     overwolf = None
     badges = []
-    # print("{}".format(client_badges))
     if "verwolf=" in client_badges and "badges=" in client_badges:
         client_badges = client_badges.split(":",1)
         overwolf = bool(int(client_badges[0].split("=",1)[1]))

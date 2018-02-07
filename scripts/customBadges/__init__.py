@@ -1,8 +1,6 @@
-import sip
-sip.setapi('QString', 1)
 from ts3plugin import ts3plugin
 from random import choice, getrandbits
-from PythonQt.QtCore import QTimer, Qt, QUrl#, QString
+from PythonQt.QtCore import QTimer, Qt, QUrl
 from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from bluscream import *
@@ -51,9 +49,7 @@ class customBadges(ts3plugin):
     def __init__(self):
         try:
             loadCfg(self.ini, self.cfg)
-            (timestamp, badges) = self.parseLocalBadges()
-            ts3lib.printMessageToCurrentTab("Timestamp: {}".format(timestamp))
-            ts3lib.printMessageToCurrentTab("Badges: {}".format(badges))
+            (tstamp, self.badges) = loadBadges()
             self.requestBadgesExt()
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
@@ -96,8 +92,6 @@ class customBadges(ts3plugin):
         try:
             data = reply.readAll().data().decode('utf-8')
             self.extbadges = loads(data)
-            print("extbadges: {}".format(self.extbadges))
-            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{}".format(self.badges))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def stop(self):
@@ -105,45 +99,6 @@ class customBadges(ts3plugin):
 
     def configure(self, qParentWidget):
         self.openDialog()
-
-    def parseLocalBadges(self):
-        db = ts3client.Config()
-        q = db.query("SELECT * FROM Badges") #  WHERE key = BadgesListData
-        timestamp = 0
-        ret = {}
-        while q.next():
-            key = q.value("key")
-            print("DB: Key: {}".format(key))
-            if key == "BadgesListTimestamp":
-                timestamp = q.value("value")
-            elif key == "BadgesListData":
-                badges = q.value("value")
-                next = 12
-                guid_len = 0;guid = ""
-                name_len = 0;name = ""
-                url_len = 0;url = ""
-                filename = ""
-                desc_len = 0;desc = ""
-                try:
-                    for i in range(0, badges.size()):
-                        if i == next: #guid_len
-                            guid_len = int(badges.at(i))
-                            guid = str(badges.mid(i+1, guid_len))
-                        elif i == (next + 1 + guid_len + 1):
-                            name_len = int(badges.at(i))
-                            name = str(badges.mid(i+1, name_len))
-                        elif i == (next + 1 + guid_len + 1 + name_len + 2):
-                            url_len = int(badges.at(i))
-                            url = str(badges.mid(i+1, url_len))
-                            filename = url.rsplit('/', 1)[1]
-                        elif i == (next + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
-                            desc_len = int(badges.at(i))
-                            desc = str(badges.mid(i+1, desc_len))
-                            ret[guid] = {"name": name, "url": url, "filename": filename, "description": desc}
-                            next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
-                except: print("error")
-        del db
-        return timestamp, ret
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
@@ -189,7 +144,6 @@ class BadgesDialog(QWidget):
             self.badges = customBadges.badges
             self.extbadges = customBadges.extbadges
             self.setCustomBadges = customBadges.setCustomBadges
-            self.parseLocalBadges = customBadges.parseLocalBadges
             self.requestBadgesExt = customBadges.requestBadgesExt
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("Customize Badges")
@@ -213,6 +167,7 @@ class BadgesDialog(QWidget):
         try:
             if uid in self.badges: lst = self.badges
             elif uid in self.extbadges: lst = self.extbadges
+            else: print("UID", uid, "not internal or external"); return
             # (QPixmap::fromImage(image.scaled(200,200))
             filename = "{}\\{}_details".format(self.icons, lst[uid]["filename"])
             if i == 0:
@@ -336,7 +291,7 @@ class BadgesDialog(QWidget):
 
     def on_btn_reload_clicked(self):
         if not self.listen: return
-        self.parseLocalBadges()
+        loadBadges()
         self.requestBadgesExt()
         self.setupList()
 
