@@ -140,13 +140,19 @@ def saveBadges(external):
             name_len = int(array.at(i))
             name = str(array.mid(i+1, name_len))
         elif i == (12 + 1 + guid_len + 1 + name_len + 2):
+            delimiter2 = array.mid(i - 1)
             url_len = int(array.at(i))
             url = str(array.mid(i+1, url_len))
-            filename = url.rsplit('/', 1)[1]
         elif i == (12 + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
+            delimiter3 = array.mid(i - 3)
             desc_len = int(array.at(i))
             desc = str(array.mid(i+1, desc_len))
             break
+    print(delimiter)
+    print(delimiter1)
+    print(delimiter2)
+    print(delimiter3)
+    print(delimiter4)
     print(array)
     # query.prepare( "UPDATE Badges (BadgesListData) VALUES (:byteArray)" );
     # query.bindValue( ":imageData", array);
