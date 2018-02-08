@@ -1,4 +1,4 @@
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt, QUrl
 from PythonQt.QtSql import QSqlQuery
@@ -17,23 +17,21 @@ class customBadges(ts3plugin):
     name = "Custom Badges"
     apiVersion = 21
     requestAutoload = True
-    version = "0.9"
+    version = "0.9.3.1"
     author = "Bluscream"
     description = "Automatically sets some badges for you :)"
     offersConfigure = True
     commandKeyword = ""
     infoTitle = "[b]Badges[/b]"
     menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Change " + name, ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Generate Badge UIDs", "")
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Change " + name, "")#,
+        #(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Generate Badge UIDs", "")
     ]
     hotkeys = []
     icons = path.join(ts3lib.getConfigPath(), "cache", "badges")
     ini = path.join(getPluginPath(), "scripts", "customBadges", "settings.ini")
     ui = path.join(getPluginPath(), "scripts", "customBadges", "badges.ui")
-    badges_local = path.join(getPluginPath(), "include", "badges.json")
     badges_ext = path.join(getPluginPath(), "include", "badges_ext.json")
-    badges_remote = "https://gist.githubusercontent.com/Bluscream/29b838f11adc409feac9874267b43b1e/raw"
     badges_ext_remote = "https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/badges.json"
     cfg = ConfigParser()
     dlg = None

@@ -4,7 +4,7 @@ from pytsonui import setupUi
 from getvalues import getValues, ValueType
 from PythonQt.QtCore import Qt
 from PythonQt.QtGui import (QDialog, QWidget, QTableWidgetItem, QHeaderView, QFont)
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from datetime import datetime
 from configparser import ConfigParser
 from os import path
@@ -14,7 +14,7 @@ class addonList(ts3plugin):
     tag = "addons"
     name = "Addon Scanner"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "App Scanner like, just addons here"
