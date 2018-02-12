@@ -7,7 +7,7 @@ from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkR
 from bluscream import *
 from os import path
 from configparser import ConfigParser
-from pytson import getPluginPath
+from pytson import getPluginPath, getCurrentApiVersion
 from pytsonui import setupUi
 from json import load, loads
 from traceback import format_exc
@@ -15,7 +15,8 @@ import ts3defines, ts3lib, ts3client
 
 class customBadges(ts3plugin):
     name = "Custom Badges"
-    apiVersion = 21
+    try: apiVersion = getCurrentApiVersion()
+    except: apiVersion = 21
     requestAutoload = True
     version = "0.9.3.1"
     author = "Bluscream"

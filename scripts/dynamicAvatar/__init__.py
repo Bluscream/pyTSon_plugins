@@ -163,7 +163,7 @@ class dynamicAvatar(ts3plugin):
         return ext if ext else None
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if self.retcode == returnCode: self.retcode = None;self.setAvatar(schid, self.tmp)
+        if hasattr(self, "retcode") and self.retcode == returnCode: self.retcode = None;self.setAvatar(schid, self.tmp)
         try: remove(self.tmp);self.tmp = None
         except: QTimer.singleShot(500, self.deltmp)
 

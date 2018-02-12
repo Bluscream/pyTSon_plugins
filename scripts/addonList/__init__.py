@@ -13,7 +13,8 @@ import xml.etree.ElementTree as xml
 class addonList(ts3plugin):
     tag = "addons"
     name = "Addon Scanner"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 21
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"
@@ -135,7 +136,8 @@ class addonList(ts3plugin):
                             addon.set("t", type)
                     except:from traceback import format_exc;ts3.logMessage("Error reading addon from Database:\n%s"%(name,format_exc()), ts3defines.LogLevel.LogLevel_ERROR, "{c}.{f}".format(c=self.__class__,f=__name__), schid);continue
             del db
-            pytson = [element for element in newmeta.iter() if element.text == 'pyTSon'][0]
+            try: pytson = [element for element in newmeta.iter() if element.text == 'pyTSon'][0]
+            except: pass
             if self.cfg.getboolean("general", "activeonly"): plugins = pluginhost.PluginHost.active.items()
             else: plugins = pluginhost.PluginHost.plugins.items()
             for name, plugin in plugins:
