@@ -3,7 +3,7 @@ from random import randint
 from datetime import datetime
 from ts3plugin import ts3plugin
 from PythonQt.QtCore import QTimer
-
+from bluscream import timestamp, sendCommand
 
 class antiAFK(ts3plugin):
     name = "Anti AFK"
@@ -18,48 +18,46 @@ class antiAFK(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
     hotkeys = []
     debug = False
-    timer = None
-    schid = 0
-    clid = 0
+    timers = {}
     text = "."
-
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+    ts3hook = True
+    interval = randint(30*1000,120*1000)
 
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
-        if hasattr(self.timer, "isActive") and self.timer.isActive():
-            self.toggleTimer(self.schid)
+        for schid, timer in self.timers.items():
+            self.stopTimer(schid)
 
-    def toggleTimer(self, schid):
-            if self.timer is None:
-                self.timer = QTimer()
-                self.timer.timeout.connect(self.tick)
-            if self.timer.isActive():
-                self.timer.stop()
-                self.timer = None
-                ts3lib.printMessageToCurrentTab('Timer stopped!')
-            else:
-                self.schid = schid
-                err, self.clid = ts3lib.getClientID(schid)
-                self.timer.start(randint(30*1000,120*1000))
-                ts3lib.printMessageToCurrentTab('Timer started!')
+    def startTimer(self, schid):
+        err, clid = ts3lib.getClientID(schid)
+        self.timers[schid] = {"timer": QTimer(), "clid": clid}
+        if self.ts3hook: self.timers[schid]["timer"].timeout.connect(self.tickhook)
+        else: self.timers[schid]["timer"].timeout.connect(self.tick)
+        self.timers[schid]["timer"].start(self.interval)
 
-    def tick(self): ts3lib.requestSendPrivateTextMsg(self.schid, self.text, self.clid, "antiAFK:auto")
+    def stopTimer(self, schid):
+        if schid in self.timers:
+            self.timers[schid]["timer"].stop()
+            del self.timers[schid]
+
+    def tickhook(self): sendCommand(self.name, "clientupdate")
+
+    def tick(self):
+        schid = ts3lib.getCurrentServerConnectionHandlerID()
+        ts3lib.requestSendPrivateTextMsg(schid, self.text, self.timers[schid]["clid"], "antiAFK:auto")
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
-            self.toggleTimer(schid)
+        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
+        if schid in self.timers: self.stopTimer(schid)
+        else: self.startTimer(schid)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
-            if hasattr(self.timer, "isActive") and self.timer.isActive():
-                self.toggleTimer(schid)
+        if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: self.stopTimer(schid)
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
-        if fromID == self.clid and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
+        if not self.ts3hook and fromID == self.timers[schid]["clid"] and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if returnCode == "antiAFK:auto": return True
