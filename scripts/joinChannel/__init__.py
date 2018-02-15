@@ -17,7 +17,7 @@ class joinChannel(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Queue", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Join Full", "")]
     hotkeys = []
-    debug = False
+    debug = True
     schid = 0
     channel = 0
     password = ""
@@ -31,7 +31,7 @@ class joinChannel(ts3plugin):
         try:
             (error, ownID) = ts3lib.getClientID(schid)
             (error, maxclients) = ts3lib.getChannelVariable(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
-            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxclients: {1}".format(error,maxclients))
+            if self.debug: ts3lib.printMessageToCurrentTab("error: {0} | maxclients: {1}".format(error, maxclients))
             if menuItemID == 0:
                 x = QWidget()
                 x.setAttribute(Qt.WA_DeleteOnClose)
@@ -53,7 +53,8 @@ class joinChannel(ts3plugin):
                 print("#1 error:", err, "msg:", ts3lib.getErrorMessage(err))
                 (error, ownID) = ts3lib.getClientID(schid)
                 ts3lib.requestClientMove(schid,ownID,channel,"123")
-                ts3lib.setChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, maxclients)
+                (error, maxclients) = ts3lib.getChannelVariable(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+                ts3lib.setChannelVariableAsInt(schid, channel, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, maxclients - 1)
                 err = ts3lib.flushChannelUpdates(schid, channel)
                 print("#2 error:", err, "msg:", ts3lib.getErrorMessage(err))
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
