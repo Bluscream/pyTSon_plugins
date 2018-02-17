@@ -35,7 +35,7 @@ class countContacts(ts3plugin):
                     elif status == ContactStatus.NEUTRAL: neutral += 1
                     else: unknown += 1
         del db
-        ts3lib.printMessageToCurrentTab("{}[b]Contacts:[/b] {} | Buddies: [color=green]{}[/color] | Blocked: [color=red]{}[/color] | Neutral: [color=white]{}[/color] | Unknown: [color=orange]{}[/color]".format(timestamp(), buddies+blocked+neutral+unknown, buddies, blocked, neutral, unknown))
+        ts3lib.printMessageToCurrentTab("{}[b]Contacts:[/b] {} | Buddies: [color=green]{}[/color] | Blocked: [color=red]{}[/color] | Neutral: [color=white]{}[/color]{}".format(timestamp(), buddies+blocked+neutral+unknown, buddies, blocked, neutral, " | Unknown: [color=orange]{}[/color]".format(unknown) if unknown > 0 else ""))
 
     def infoData(self, schid, id, atype):
         if self.count < 3: self.count += 1; return None
@@ -73,5 +73,5 @@ class countContacts(ts3plugin):
         _return.append("Buddies: [color=green]{}[/color]".format(buddies))
         _return.append("Blocked: [color=red]{}[/color]".format(blocked))
         _return.append("Neutral: {}".format(neutral))
-        _return.append("Unknown: [color=orange]{}[/color]".format(unknown))
+        if unknown > 0: _return.append("Unknown: [color=orange]{}[/color]".format(unknown))
         return _return
