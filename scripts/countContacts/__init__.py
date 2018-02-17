@@ -12,7 +12,7 @@ class countContacts(ts3plugin):
     author = "Bluscream"
     description = "Gives you numbers"
     offersConfigure = False
-    commandKeyword = ""
+    commandKeyword = "ccount"
     infoTitle = "[b]Contacts:[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, "")]
     hotkeys = []
@@ -23,6 +23,11 @@ class countContacts(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
+        self.printContacts()
+
+    def processCommand(self, schid, command): self.printContacts(); return True
+
+    def printContacts(self):
         buddies = 0;blocked = 0;neutral = 0;unknown = 0
         db = ts3client.Config()
         q = db.query("SELECT * FROM contacts")

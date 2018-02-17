@@ -56,8 +56,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="37" column="325" lean-forward="false" selection-start-line="37" selection-start-column="325" selection-end-line="37" selection-end-column="325" />
+            <state relative-caret-position="569">
+              <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="34" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -88,8 +88,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="105" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="105" />
+            <state relative-caret-position="311">
+              <caret line="125" column="8" lean-forward="true" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -146,7 +146,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>messageb</find>
       <find>traceback</find>
       <find>toggle</find>
       <find>self.schid</find>
@@ -176,6 +175,7 @@
       <find>blocked</find>
       <find>isFriend</find>
       <find>True</find>
+      <find>commandKeyword</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -713,13 +713,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00112" summary="oops">
-      <created>1511937217845</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1511937217845</updated>
-    </task>
     <task id="LOCAL-00113" summary="oops">
       <created>1511940599336</created>
       <option name="number" value="00113" />
@@ -1056,7 +1049,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518905734991</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary=":thinking:">
+      <created>1518906886428</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1518906886428</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1517,14 +1517,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="105" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="105" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Application Data/TS3Client/pyTSon/pyTSon - Copy.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
@@ -1541,10 +1533,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/channelWatcher/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="125" column="8" lean-forward="true" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="37" column="325" lean-forward="false" selection-start-line="37" selection-start-column="325" selection-end-line="37" selection-end-column="325" />
+        <state relative-caret-position="569">
+          <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="34" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
