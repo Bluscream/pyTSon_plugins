@@ -111,6 +111,30 @@ def downloadFileReply(reply):
     out << b;
     """
 
+# Database #
+def getContacts():
+    db = ts3client.Config()
+    ret = db.query("SELECT * FROM contacts")
+    del db
+    return ret
+
+def getContactStatus(uid):
+    db = ts3client.Config()
+    q = db.query("SELECT * FROM contacts WHERE value LIKE '%%IDS=%s%%'" % uid)
+    ret = 2
+    if q.next():
+        val = q.value("value")
+        for l in val.split('\n'):
+            if l.startswith('Friend='):
+                ret = int(l[-1])
+    del db
+    return ret
+
+class ContactStatus(object):
+    FRIEND = 0
+    BLOCKED = 1
+    NEUTRAL = 2
+
 # TS3Hook #
 def parseCommand(cmd):
     pass

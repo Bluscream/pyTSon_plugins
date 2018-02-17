@@ -12,7 +12,6 @@ try:
 
     class channelWatcher(ts3plugin):
         name = "Channel Watcher"
-
         apiVersion = 22
         requestAutoload = False
         version = "1.0"
