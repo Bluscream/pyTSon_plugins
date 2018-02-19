@@ -16,7 +16,7 @@ class clientInit(ts3plugin):
     infoTitle = None
     menuItems = [] # [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
     hotkeys = []
-    debug = True
+    debug = False
     requested = False
     clientinit = [
         ("client_nickname", "penis"),

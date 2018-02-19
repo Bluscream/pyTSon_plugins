@@ -17,7 +17,7 @@ class joinChannel(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Queue", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, "Join Full", "")]
     hotkeys = []
-    debug = True
+    debug = False
     schid = 0
     channel = 0
     password = ""

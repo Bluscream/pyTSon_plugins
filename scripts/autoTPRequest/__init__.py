@@ -23,7 +23,7 @@ class autoTPRequest(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Talk Power", ""),(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Talk Power Spam", "")]
     hotkeys = []
-    debug = True
+    debug = False
     msg = "Hey du <3"
     toggle = 0
     timer = QTimer()
