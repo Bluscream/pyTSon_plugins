@@ -14,8 +14,11 @@ class gommeHD(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = []
     hotkeys = []
+    menuItems = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Send Steam", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Send Steam", "")
+    ]
     debug = False
     suid = "QTRtPmYiSKpMS8Oyd4hyztcvLqU="
     channelAdminGroupID = 10
@@ -25,12 +28,26 @@ class gommeHD(ts3plugin):
     delay = 1500
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
+    steammsg = """
+    Steam: [url]https://steamcommunity.com/profiles/76561198022446661[/url]
+    Add as friend: [url]steam://friends/add/76561198022446661[/url]
+    Common games: [url]https://steamcommunity.com/profiles/76561198022446661/games/?tab=all&games_in_common=1[/url]
+    Account Value: [url]https://steamdb.info/calculator/76561198022446661/?cc=eu[/url]
+    Trade URL: [url]https://steamcommunity.com/tradeoffer/new/?partner=62180933&token=fSMYHMGM[/url]
+    """
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def __init__(self):
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+
+    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
+        if menuItemID != 0: return
+        if atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
+            ts3lib.requestSendChannelTextMsg(schid, self.steammsg, selectedItemID)
+        elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
+            ts3lib.requestSendPrivateTextMsg(schid, self.steammsg, selectedItemID)
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
         if fromUniqueIdentifier != "serveradmin": return False
