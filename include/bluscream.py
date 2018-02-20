@@ -55,8 +55,9 @@ def inputBox(title, text):
     x.setAttribute(Qt.WA_DeleteOnClose)
     return QInputDialog.getText(x, title, text)
 
-def msgBox(text, icon=QMessageBox.Information):
+def msgBox(text, icon=QMessageBox.Information, title=""):
     x = QMessageBox()
+    if title: x.setWindowTitle(title)
     x.setText(text)
     x.setIcon(icon)
     x.exec()

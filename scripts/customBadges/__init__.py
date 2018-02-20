@@ -42,15 +42,20 @@ class customBadges(ts3plugin):
         "enabled": "True",
         "badges": "",
         "overwolf": "False",
+        "lastnotice": ""
     }
     badges = {}
     extbadges = {}
+    notice = QTimer()
+    notice_nwmc = QNetworkAccessManager()
 
     def __init__(self):
         try:
             loadCfg(self.ini, self.cfg)
             (tstamp, self.badges, array) = loadBadges()
             self.requestBadgesExt()
+            self.notice.timeout.connect(self.checkNotice)
+            self.notice.start(30*1000) # 180
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -131,8 +136,21 @@ class customBadges(ts3plugin):
             self.extbadges = loads(data)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
+    def checkNotice(self):
+        self.notice_nwmc.connect("finished(QNetworkReply*)", self.loadNotice)
+        self.notice_nwmc.get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/notice")))
+
+    def loadNotice(self, reply):
+        _data = reply.readAll().data().decode('utf-8')
+        data = _data.split('|', 1)
+        icon = data[0]; text = data[1]
+        if text == "" or _data == self.cfg.get('general', 'lastnotice'): return
+        msgBox(text, int(icon), "{} Notice!".format(self.name))
+        self.cfg.set('general', 'lastnotice', _data)
+
     def stop(self):
         saveCfg(self.ini, self.cfg)
+        self.notice.stop()
 
     def configure(self, qParentWidget):
         self.openDialog()
