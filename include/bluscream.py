@@ -18,6 +18,9 @@ def varname(obj, callingLocals=locals()):
 def random_string(size=1, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
     return ''.join(random.SystemRandom().choice(chars) for _ in range(size))
 
+def percentage(part, whole):
+    return round(100 * float(part)/float(whole))
+
 # PARSING #
 def channelURL(schid=None, cid=0, name=None):
     if schid == None:

@@ -8,13 +8,16 @@ class countContacts(ts3plugin):
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
     requestAutoload = True
-    version = "0.1"
+    version = "1"
     author = "Bluscream"
     description = "Gives you numbers"
     offersConfigure = False
     commandKeyword = "ccount"
     infoTitle = "[b]Contacts:[/b]"
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, ""),
+                 (ts3defines.PluginItemType.PLUGIN_CHANNEL, 0, "Send Contact Stats", ""),
+                 (ts3defines.PluginItemType.PLUGIN_CLIENT, 0, "Send Contact Stats", "")
+                ]
     hotkeys = []
     count = 0
 
@@ -22,13 +25,22 @@ class countContacts(ts3plugin):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
-        self.printContacts()
+        if menuItemID != 0: return
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+            self.printContacts()
+        elif atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
+            ts3lib.requestSendChannelTextMsg(schid, self.contactStats(), selectedItemID)
+        elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
+            ts3lib.requestSendPrivateTextMsg(schid, self.contactStats(), selectedItemID)
 
     def processCommand(self, schid, command): self.printContacts(); return True
 
     def printContacts(self):
+        ts3lib.printMessageToCurrentTab("{}{}".format(timestamp(), self.contactStats()))
+
+    def contactStats(self):
         buddies = 0;blocked = 0;neutral = 0;unknown = 0
+        female = 0;male = 0
         db = ts3client.Config()
         q = db.query("SELECT * FROM contacts")
         while q.next():
@@ -39,8 +51,20 @@ class countContacts(ts3plugin):
                     elif status == ContactStatus.BLOCKED: blocked += 1
                     elif status == ContactStatus.NEUTRAL: neutral += 1
                     else: unknown += 1
+                elif line.lower().startswith('nickname=w/'):
+                    female += 1
+                elif line.lower().startswith('nickname=m/'):
+                    male += 1
         del db
-        ts3lib.printMessageToCurrentTab("{}[b]Contacts:[/b] {} | Buddies: [color=green]{}[/color] | Blocked: [color=red]{}[/color] | Neutral: [color=white]{}[/color]{}".format(timestamp(), buddies+blocked+neutral+unknown, buddies, blocked, neutral, " | Unknown: [color=orange]{}[/color]".format(unknown) if unknown > 0 else ""))
+        sum = buddies+blocked+neutral+unknown
+        msg = ["Contacts: [b]{}[/b]".format(sum)]
+        msg.append("[color=green]Buddies[/color]: [b]{}[/b] ({}%)".format(buddies, percentage(buddies, sum)))
+        msg.append("[color=red]Blocked[/color]: [b]{}[/b] ({}%)".format(blocked, percentage(blocked, sum)))
+        msg.append("Neutral: [b]{}[/b] ({}%)".format(neutral, percentage(neutral, sum)))# [color=white][/color]
+        if unknown > 0: msg.append("Unknown: [color=orange]{}[/color] ({}%)".format(unknown, percentage(unknown, sum)))
+        if female > 0: msg.append("[color=purple]Female[/color]: {} ({}%)".format(female, percentage(female, sum)))
+        if male > 0: msg.append("[color=lightblue]Male[/color]: {} ({}%)".format(male, percentage(male, sum)))
+        return " | ".join(msg)
 
     def infoData(self, schid, id, atype):
         if self.count < 3: self.count += 1; return None
@@ -80,3 +104,24 @@ class countContacts(ts3plugin):
         _return.append("Neutral: {}".format(neutral))
         if unknown > 0: _return.append("Unknown: [color=orange]{}[/color]".format(unknown))
         return _return
+
+
+"""
+Nickname=w/Tina Apokalypse
+Friend=0
+Automute=false
+IgnorePublicMessages=false
+IgnorePrivateMessages=false
+IgnorePokes=false
+IgnoreAvatar=false
+IgnoreAwayMessage=false
+NickShowType=2
+HaveVolumeModifier=true
+VolumeModifier=0
+WhisperAllow=true
+PhoneticNickname=
+LastSeen=2017-11-29T22:20:03
+LastSeenServerName=VIP CLAN
+LastSeenServerAddress=
+IDS=MLxQx2MkV48xigapaMiKkCXyOZQ=
+"""

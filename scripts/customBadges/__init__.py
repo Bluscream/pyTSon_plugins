@@ -141,12 +141,10 @@ class customBadges(ts3plugin):
         self.notice_nwmc.get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/notice")))
 
     def loadNotice(self, reply):
-        _data = reply.readAll().data().decode('utf-8')
-        data = _data.split('|', 1)
-        icon = data[0]; text = data[1]
-        if text == "" or _data == self.cfg.get('general', 'lastnotice'): return
-        msgBox(text, int(icon), "{} Notice!".format(self.name))
-        self.cfg.set('general', 'lastnotice', _data)
+        data = reply.readAll().data().decode('utf-8')
+        if data.strip() == "" or data == self.cfg.get('general', 'lastnotice'): return
+        msgBox(data, 0, "{} Notice!".format(self.name))
+        self.cfg.set('general', 'lastnotice', data)
 
     def stop(self):
         saveCfg(self.ini, self.cfg)
