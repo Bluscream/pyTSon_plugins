@@ -42,11 +42,11 @@ class antiAFK(ts3plugin):
         err, clid = ts3lib.getClientID(schid)
         self.servers[schid] = {"clid": clid}
         if len(self.servers) == 1: self.timer.start(randint(self.interval[0]*1000, self.interval[1]*1000))
-        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Added Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers),")")
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Added Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers)-1,")")
 
     def delTimer(self, schid):
         if schid in self.servers:
-            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Removing Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers),")")
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Removing Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers)-1,")")
             del self.servers[schid]
             if len(self.servers) == 0: self.timer.stop()
 
@@ -56,6 +56,7 @@ class antiAFK(ts3plugin):
             else:
                 self.retcode = ts3lib.createReturnCode()
                 ts3lib.requestSendPrivateTextMsg(schid, self.text, self.servers[schid]["clid"], self.retcode)
+            self.timer.setInterval(randint(self.interval[0]*1000, self.interval[1]*1000))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
