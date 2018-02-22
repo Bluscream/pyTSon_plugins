@@ -116,6 +116,20 @@ def downloadFileReply(reply):
     """
 
 # Database #
+def getAddons():
+    db = ts3client.Config()
+    q = db.query("SELECT value FROM addons")
+    ret = {}
+    while(q.next()):
+        key = q.value("key")
+        timestamp = q.value("timestamp")
+        val = q.value("value")
+        ret[key] = {}
+        for l in val.split('\n'):
+            l = l.split('=', 1)
+            ret[key][l[0]] = l[1]
+    return ret
+
 def getContacts():
     db = ts3client.Config()
     ret = db.query("SELECT * FROM contacts")

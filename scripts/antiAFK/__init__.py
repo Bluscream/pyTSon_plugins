@@ -18,52 +18,53 @@ class antiAFK(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
     hotkeys = []
     debug = False
-    timers = {}
+    timer = QTimer()
+    servers = {}
     text = "."
-    ts3hook = True
     interval = (10, 30)
 
     def __init__(self):
+        addons = getAddons()
+        hook = False
+        for k in addons:
+            if hasattr(k, "name") and k["name"] == "TS3Hook": hook = True; break
+        if hook: self.timer.timeout.connect(self.tickhook)
+        else: self.timer.timeout.connect(self.tick)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
-        for schid, timer in self.timers.items():
-            self.stopTimer(schid)
+        for schid in self.servers:
+            self.delTimer(schid)
 
-    def startTimer(self, schid):
+    def addTimer(self, schid):
         err, clid = ts3lib.getClientID(schid)
-        self.timers[schid] = {"timer": QTimer(), "clid": clid}
-        self.timers[schid]["tid"] = self.timers[schid]["timer"].timerId()
-        self.timers[schid]["timer"].setTimerType(2)
-        if self.ts3hook: self.timers[schid]["timer"].timeout.connect(self.tickhook)
-        else: self.timers[schid]["timer"].timeout.connect(self.tick)
-        self.timers[schid]["timer"].start(randint(self.interval[0]*1000,self.interval[1]*1000))
-        print("{}: Timer #{} started for {} with clid {}".format(self.name, self.timers[schid]["tid"], schid, clid))
+        self.servers[schid] = {"clid": clid}
+        self.servers[schid]["timer"].setTimerType(2)
+        if len(self.servers) == 1: self.timer.start(randint(self.interval[0]*1000, self.interval[1]*1000))
 
-    def stopTimer(self, schid):
-        if schid in self.timers:
-            self.timers[schid]["timer"].stop()
-            del self.timers[schid]
+    def delTimer(self, schid):
+        if schid in self.servers:
+            del self.servers[schid]
+        if len(self.servers) == 0: self.timer.stop()
 
-    def tickhook(self): sendCommand(self.name, "clientupdate")
+    def tickhook(self):
+        for schid in self.servers:
+            sendCommand(self.name, "clientupdate", schid)
 
     def tick(self):
-        timer = {}
-        # for key in self.timers.keys():
-            # if self.timers[key]["tid"] ==
-        schid = ts3lib.getCurrentServerConnectionHandlerID()
-        ts3lib.requestSendPrivateTextMsg(schid, self.text, self.timers[schid]["clid"], "antiAFK:auto")
+        for schid in self.servers:
+            ts3lib.requestSendPrivateTextMsg(schid, self.text, self.servers[schid]["clid"], "antiAFK:auto")
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
-        if schid in self.timers: self.stopTimer(schid)
-        else: self.startTimer(schid)
+        if schid in self.servers: self.delTimer(schid)
+        else: self.addTimer(schid)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: self.stopTimer(schid)
+        if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: self.delTimer(schid)
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
-        if not self.ts3hook and fromID == self.timers[schid]["clid"] and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
+        if fromID == self.servers[schid]["clid"] and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if returnCode == "antiAFK:auto": return True
