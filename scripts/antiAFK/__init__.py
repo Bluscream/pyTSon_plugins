@@ -64,7 +64,7 @@ class antiAFK(ts3plugin):
         if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED: self.delTimer(schid)
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
-        if fromID == self.servers[schid]["clid"] and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
+        if schid in self.servers and fromID == self.servers[schid]["clid"] and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if returnCode == self.retcode: self.retcode = ""; return True
