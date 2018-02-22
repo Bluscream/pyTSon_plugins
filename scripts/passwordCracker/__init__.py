@@ -6,6 +6,7 @@ from bluscream import timestamp, channelURL, clientURL, inputBox, confirm, msgBo
 from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox, QDialog
 from PythonQt.QtCore import Qt, QTimer
 from pytsonui import setupUi
+from collections import OrderedDict
 
 class passwordCracker(ts3plugin):
     name = "PW Cracker"
@@ -49,10 +50,6 @@ class passwordCracker(ts3plugin):
     requested = False
 
     def __init__(self):
-        content = []
-        with open(self.pwpath, encoding="utf8") as f:
-            content = f.readlines()
-        self.pws = [x.strip() for x in content]
         self.timer.timeout.connect(self.tick)
         ts3lib.requestServerVariables(ts3lib.getCurrentServerConnectionHandlerID())
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
@@ -84,12 +81,24 @@ class passwordCracker(ts3plugin):
                 self.dlg.activateWindow()
             elif menuItemID == 1:
                 (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_FLAG_PASSWORD)
+                (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_NAME)
                 if not haspw:
-                    (err, name) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_NAME)
                     msgBox("Channel \"{0}\" has no password to crack!".format(name), QMessageBox.Warning);return
                 self.mode = 0
                 self.step = 1
                 self.pwc = 0
+                content = []
+                with open(self.pwpath, encoding="utf8") as f:
+                    content = f.readlines()
+                self.pws = [x.strip() for x in content]
+                (err, clids) = ts3lib.getChannelClientList(schid, selectedItemID)
+                for clid in clids:
+                    (err, cname) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_NICKNAME)
+                    self.pws[:0] = [cname, cname.lower(), cname.upper()]
+                    (err, cnamep) = ts3lib.getClientVariable(schid, selectedItemID, ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
+                    if cnamep: self.pws[:0] = [cnamep, cnamep.lower(), cnamep.upper()]
+                self.pws[:0] = [name, name.lower(), name.upper()]
+                list(OrderedDict.fromkeys(self.pws))
                 self.startTimer(schid, selectedItemID)
             elif menuItemID == 2:
                 (err, haspw) = ts3lib.getChannelVariable(schid, selectedItemID, ChannelProperties.CHANNEL_FLAG_PASSWORD)
