@@ -1,9 +1,9 @@
 import ts3lib, ts3defines
 from random import randint
 from datetime import datetime
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
-from bluscream import timestamp, sendCommand
+from bluscream import timestamp, sendCommand, getAddons
 
 class antiAFK(ts3plugin):
     name = "Anti AFK"
@@ -17,20 +17,20 @@ class antiAFK(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
     hotkeys = []
-    debug = False
     timer = QTimer()
     servers = {}
     text = "."
     interval = (10, 30)
+    retcode = ""
+    hook = False
 
     def __init__(self):
         addons = getAddons()
-        hook = False
         for k in addons:
-            if hasattr(k, "name") and k["name"] == "TS3Hook": hook = True; break
-        if hook: self.timer.timeout.connect(self.tickhook)
-        else: self.timer.timeout.connect(self.tick)
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
+            if addons[k]["name"] == "TS3Hook": self.hook = True; break
+        self.timer.timeout.connect(self.tick)
+        self.timer.setTimerType(2)
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
         for schid in self.servers:
@@ -39,21 +39,21 @@ class antiAFK(ts3plugin):
     def addTimer(self, schid):
         err, clid = ts3lib.getClientID(schid)
         self.servers[schid] = {"clid": clid}
-        self.servers[schid]["timer"].setTimerType(2)
         if len(self.servers) == 1: self.timer.start(randint(self.interval[0]*1000, self.interval[1]*1000))
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Added Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers),")")
 
     def delTimer(self, schid):
         if schid in self.servers:
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Removing Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers),")")
             del self.servers[schid]
-        if len(self.servers) == 0: self.timer.stop()
-
-    def tickhook(self):
-        for schid in self.servers:
-            sendCommand(self.name, "clientupdate", schid)
+            if len(self.servers) == 0: self.timer.stop()
 
     def tick(self):
         for schid in self.servers:
-            ts3lib.requestSendPrivateTextMsg(schid, self.text, self.servers[schid]["clid"], "antiAFK:auto")
+            if self.hook: sendCommand(self.name, "clientupdate", schid)
+            else:
+                self.retcode = ts3lib.createReturnCode()
+                ts3lib.requestSendPrivateTextMsg(schid, self.text, self.servers[schid]["clid"], self.retcode)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
@@ -67,4 +67,4 @@ class antiAFK(ts3plugin):
         if fromID == self.servers[schid]["clid"] and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if returnCode == "antiAFK:auto": return True
+        if returnCode == self.retcode: self.retcode = ""; return True

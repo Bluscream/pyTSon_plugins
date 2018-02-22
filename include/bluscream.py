@@ -115,19 +115,25 @@ def downloadFileReply(reply):
     out << b;
     """
 
+# Stuff #
+def hasAddon():
+    pass
+
 # Database #
 def getAddons():
     db = ts3client.Config()
-    q = db.query("SELECT value FROM addons")
+    q = db.query("SELECT * FROM addons")
     ret = {}
-    while(q.next()):
-        key = q.value("key")
-        timestamp = q.value("timestamp")
-        val = q.value("value")
-        ret[key] = {}
-        for l in val.split('\n'):
-            l = l.split('=', 1)
-            ret[key][l[0]] = l[1]
+    while q.next():
+        try:
+            key = q.value("key")
+            timestamp = q.value("timestamp")
+            val = q.value("value")
+            ret[key] = {"timestamp": timestamp}
+            for l in val.split('\n'):
+                l = l.split('=', 1)
+                ret[key][l[0]] = l[1]
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
     return ret
 
 def getContacts():

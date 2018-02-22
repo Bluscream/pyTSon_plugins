@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/include/bluscream.py" afterPath="$PROJECT_DIR$/include/bluscream.py" />
       <change beforePath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" afterPath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -42,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bluscream.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bluscream.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1309">
-              <caret line="243" column="22" lean-forward="true" selection-start-line="243" selection-start-column="22" selection-end-line="243" selection-end-column="22" />
+            <state relative-caret-position="544">
+              <caret line="140" column="44" lean-forward="true" selection-start-line="140" selection-start-column="44" selection-end-line="140" selection-end-column="44" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -57,11 +58,9 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="33" selection-end-column="88" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="31" lean-forward="true" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="51" column="33" lean-forward="false" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="33" />
+            <state relative-caret-position="464">
+              <caret line="42" column="80" lean-forward="false" selection-start-line="42" selection-start-column="80" selection-end-line="42" selection-end-column="80" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -93,8 +92,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/addonList/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="135" selection-end-column="48" />
+            <state relative-caret-position="362">
+              <caret line="99" column="135" lean-forward="true" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="135" />
               <folding />
             </state>
           </provider>
@@ -103,8 +102,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2414">
-              <caret line="155" column="0" lean-forward="false" selection-start-line="155" selection-start-column="0" selection-end-line="157" selection-end-column="45" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="43" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -278,8 +277,8 @@
         <option value="$PROJECT_DIR$/scripts/countContacts/female.txt" />
         <option value="$PROJECT_DIR$/scripts/countContacts/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
       </list>
     </option>
   </component>
@@ -365,6 +364,11 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -711,13 +715,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00119" summary=":thonk:">
-      <created>1513012828294</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1513012828294</updated>
-    </task>
     <task id="LOCAL-00120" summary=":thonk:">
       <created>1513146055605</created>
       <option name="number" value="00120" />
@@ -1054,7 +1051,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519293243161</updated>
     </task>
-    <option name="localTasksCounter" value="168" />
+    <task id="LOCAL-00168" summary=":thinking:">
+      <created>1519298821496</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1519298821497</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1222,10 +1226,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scripts/antiAFK/__init__.py</url>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/scripts_/banUID/__init__.py</url>
           <option name="timeStamp" value="11" />
@@ -1528,16 +1528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2414">
-          <caret line="155" column="0" lean-forward="false" selection-start-line="155" selection-start-column="0" selection-end-line="157" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1550,38 +1540,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/addonList/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="135" selection-end-column="48" />
+        <state relative-caret-position="362">
+          <caret line="99" column="135" lean-forward="true" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="135" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="33" selection-end-column="88" />
+        <state relative-caret-position="0">
+          <caret line="0" column="31" lean-forward="true" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="42" column="80" lean-forward="false" selection-start-line="42" selection-start-column="80" selection-end-line="42" selection-end-column="80" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="243" column="22" lean-forward="true" selection-start-line="243" selection-start-column="22" selection-end-line="243" selection-end-column="22" />
+        <state relative-caret-position="544">
+          <caret line="140" column="44" lean-forward="true" selection-start-line="140" selection-start-column="44" selection-end-line="140" selection-end-column="44" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="51" column="33" lean-forward="false" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
