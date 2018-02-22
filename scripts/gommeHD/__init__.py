@@ -29,12 +29,12 @@ class gommeHD(ts3plugin):
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
     steammsg = """
-    Steam: [url]https://steamcommunity.com/profiles/76561198022446661[/url]
-    Add as friend: [url]steam://friends/add/76561198022446661[/url]
-    Common games: [url]https://steamcommunity.com/profiles/76561198022446661/games/?tab=all&games_in_common=1[/url]
-    Account Value: [url]https://steamdb.info/calculator/76561198022446661/?cc=eu[/url]
-    Trade URL: [url]https://steamcommunity.com/tradeoffer/new/?partner=62180933&token=fSMYHMGM[/url]
-    """
+Steam: [url]https://steamcommunity.com/profiles/76561198022446661[/url]
+Add as friend: [url]steam://friends/add/76561198022446661[/url]
+Common games: [url]https://steamcommunity.com/profiles/76561198022446661/games/?tab=all&games_in_common=1[/url]
+Account Value: [url]https://steamdb.info/calculator/76561198022446661/?cc=eu[/url]
+Trade URL: [url]https://steamcommunity.com/tradeoffer/new/?partner=62180933&token=fSMYHMGM[/url]
+"""
 
     @staticmethod
     def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())

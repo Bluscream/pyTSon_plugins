@@ -21,7 +21,7 @@ class antiAFK(ts3plugin):
     timers = {}
     text = "."
     ts3hook = True
-    interval = randint(30*1000,120*1000)
+    interval = (10, 30)
 
     def __init__(self):
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
@@ -33,9 +33,12 @@ class antiAFK(ts3plugin):
     def startTimer(self, schid):
         err, clid = ts3lib.getClientID(schid)
         self.timers[schid] = {"timer": QTimer(), "clid": clid}
+        self.timers[schid]["tid"] = self.timers[schid]["timer"].timerId()
+        self.timers[schid]["timer"].setTimerType(2)
         if self.ts3hook: self.timers[schid]["timer"].timeout.connect(self.tickhook)
         else: self.timers[schid]["timer"].timeout.connect(self.tick)
-        self.timers[schid]["timer"].start(self.interval)
+        self.timers[schid]["timer"].start(randint(self.interval[0]*1000,self.interval[1]*1000))
+        print("{}: Timer #{} started for {} with clid {}".format(self.name, self.timers[schid]["tid"], schid, clid))
 
     def stopTimer(self, schid):
         if schid in self.timers:
@@ -45,6 +48,9 @@ class antiAFK(ts3plugin):
     def tickhook(self): sendCommand(self.name, "clientupdate")
 
     def tick(self):
+        timer = {}
+        # for key in self.timers.keys():
+            # if self.timers[key]["tid"] ==
         schid = ts3lib.getCurrentServerConnectionHandlerID()
         ts3lib.requestSendPrivateTextMsg(schid, self.text, self.timers[schid]["clid"], "antiAFK:auto")
 
