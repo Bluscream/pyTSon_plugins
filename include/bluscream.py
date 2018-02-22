@@ -127,9 +127,8 @@ def getAddons():
     while q.next():
         try:
             key = q.value("key")
-            timestamp = q.value("timestamp")
+            ret[key] = {"timestamp": q.value("timestamp")}
             val = q.value("value")
-            ret[key] = {"timestamp": timestamp}
             for l in val.split('\n'):
                 l = l.split('=', 1)
                 ret[key][l[0]] = l[1]
@@ -138,7 +137,17 @@ def getAddons():
 
 def getContacts():
     db = ts3client.Config()
-    ret = db.query("SELECT * FROM contacts")
+    ret = {}
+    q = db.query("SELECT * FROM contacts")
+    while q.next():
+        try:
+            key = q.value("key")
+            ret[key] = {"timestamp": q.value("timestamp")}
+            val = q.value("value")
+            for l in val.split('\n'):
+                l = l.split('=', 1)
+                ret[key][l[0]] = l[1]
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
     del db
     return ret
 
