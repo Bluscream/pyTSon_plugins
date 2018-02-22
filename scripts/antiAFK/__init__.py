@@ -3,11 +3,13 @@ from random import randint
 from datetime import datetime
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
+from pytson import getCurrentApiVersion
 from bluscream import timestamp, sendCommand, getAddons
 
 class antiAFK(ts3plugin):
     name = "Anti AFK"
-    apiVersion = 22
+    try: apiVersion = getCurrentApiVersion()
+    except: apiVersion = 21
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"
