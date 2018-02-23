@@ -42,8 +42,6 @@ class channelGroupManager(ts3plugin):
         self.requested = True
         ts3lib.requestChannelGroupList(schid)
         ts3lib.requestServerVariables(schid)
-        (err, uid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
-        d = self.db.exec_("CREATE TABLE `KRBlpdxN19nmS4F5fl+dQG0PQdw=` (`Name` TEXT, `UID` TEXT, `DBID` INTEGER, `CGID` INTEGER);")
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING:
@@ -74,9 +72,18 @@ class channelGroupManager(ts3plugin):
         if self.requested: self.requested = False
 
     def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
+        if channelGroupID == self.cgroups[schid]["default"]: return
+        (err, uid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        query = "CREATE TABLE IF NOT EXISTS `{}|{}` (`NAME` TEXT, `UID` TEXT, `DBID` INTEGER, `CGID` INTEGER);".format(uid, channelID)
+        d = self.db.exec_(query)
+        print(query, ":", d)
+        (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        (err, dbid) = ts3lib.getClientVariableAsInt(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        query = "INSERT INTO `{}|{}` (NAME, UID, DBID, CGID) VALUES (`{}`, `{}`, {}, {})".format(uid, channelID, uid, dbid, channelGroupID) # TODO: https://stackoverflow.com/a/4330694
+        self.db.exec_(query)
 
 
-class channelGroupMembersDialog(QWidget):
+class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/questions/1332110/selecting-qcombobox-in-qtablewidget
     def __init__(self, channelGroupManager, schid, cid, parent=None):
         try:
             super(QWidget, self).__init__(parent)
