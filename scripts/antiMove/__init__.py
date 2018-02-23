@@ -5,7 +5,6 @@ from PythonQt.QtCore import QTimer
 from bluscream import timestamp, channelURL, clientURL
 from random import randint
 
-
 class antiMove(ts3plugin):
     name = "Anti Move"
     apiVersion = 22
