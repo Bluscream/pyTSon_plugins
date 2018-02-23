@@ -1,13 +1,9 @@
 import ts3defines, ts3lib
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QWidget
 from PythonQt.QtCore import Qt, QTimer
-
-def inputBox(title, text):
-    x = QWidget()
-    x.setAttribute(Qt.WA_DeleteOnClose)
-    return QInputDialog.getText(x, title, text)
+from bluscream import inputBox, timestamp
 
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
@@ -21,7 +17,6 @@ class autoCommander(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Channel Commander", ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Channel Commander Spam", "")]
     hotkeys = []
-    debug = False
     toggle = False
     timer = None
     schid = 0
@@ -30,11 +25,11 @@ class autoCommander(ts3plugin):
     mod_names = ["ADMIN", "MOD", "OPERATOR"]
     smgroup = []
 
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
-
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        schid = ts3lib.getCurrentServerConnectionHandlerID()
+        self.requested = True
+        ts3lib.requestChannelGroupList(schid)
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def toggleTimer(self, schid):
             if self.timer is None:
@@ -60,14 +55,14 @@ class autoCommander(ts3plugin):
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0:
             self.toggle = not self.toggle
-            ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.toggle))
+            ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(timestamp(),self.name,self.toggle))
         elif menuItemID == 1: self.toggleTimer(schid)
 
-    def onConnectStatusChangeEvent(self, serverConnectionHandlerID, newStatus, errorNumber):
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if not self.toggle: return
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING:
             self.requested = True
-            ts3lib.requestChannelGroupList(ts3lib.getCurrentServerConnectionHandlerID())
+            ts3lib.requestChannelGroupList(schid)
 
     def onChannelGroupListEvent(self, serverConnectionHandlerID, channelGroupID, name, atype, iconID, saveDB):
         if not self.toggle: return
@@ -77,7 +72,7 @@ class autoCommander(ts3plugin):
                     self.smgroup.extend([channelGroupID])
 
     def onChannelGroupListFinishedEvent(self, serverConnectionHandlerID):
-        if self.toggle: self.requested = False
+        if self.requested: self.requested = False
 
     # def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
          #if not self.toggle: return

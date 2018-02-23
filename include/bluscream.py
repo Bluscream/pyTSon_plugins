@@ -439,6 +439,11 @@ class AntiFloodPoints(object):
     VERSION = 0
     WHOAMI = 0
 
+class GroupType(object):
+    TEMPLATE = 0
+    REGULAR = 1
+
+
 """
     def log(self, logLevel, message, schid=0):
         ts3lib.logMessage(message, logLevel, self.name, schid)
