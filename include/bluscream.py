@@ -9,6 +9,7 @@ from urllib.parse import quote_plus
 import ts3lib, ts3defines, os.path, string, random, ts3client
 
 # GENERAL FUNCTIONS #
+
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 def date(): return '{:%Y-%m-%d}'.format(datetime.now())
 def time(): return '{:%H:%M:%S}'.format(datetime.now())
@@ -437,3 +438,11 @@ class AntiFloodPoints(object):
     VERIFYSERVERPASSWORD = 5
     VERSION = 0
     WHOAMI = 0
+
+"""
+    def log(self, logLevel, message, schid=0):
+        ts3lib.logMessage(message, logLevel, self.name, schid)
+        if logLevel in [ts3defines.LogLevel.LogLevel_DEBUG, ts3defines.LogLevel.LogLevel_DEVEL] and self.debug:
+            ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=self.timestamp(), name=self.name, message=message), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+
+"""

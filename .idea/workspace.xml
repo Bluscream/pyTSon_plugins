@@ -3,10 +3,17 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="140" />
     <bookmark url="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" line="86" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/antiMove/__init__.py" line="56" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/include/bluscream.py" afterPath="$PROJECT_DIR$/include/bluscream.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/antiMove/__init__.py" afterPath="$PROJECT_DIR$/scripts/antiMove/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
+      <change beforePath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" afterPath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" afterPath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -41,22 +48,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="24" column="67" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="67" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="57" column="64" lean-forward="false" selection-start-line="57" selection-start-column="64" selection-end-line="57" selection-end-column="64" />
+            <state relative-caret-position="736">
+              <caret line="69" column="8" lean-forward="true" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="190" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -65,34 +60,12 @@
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="63" column="45" lean-forward="false" selection-start-line="63" selection-start-column="41" selection-end-line="63" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="32" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="32" />
+            <state relative-caret-position="969">
+              <caret line="240" column="23" lean-forward="true" selection-start-line="240" selection-start-column="23" selection-end-line="240" selection-end-column="23" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="242" column="69" lean-forward="true" selection-start-line="242" selection-start-column="8" selection-end-line="242" selection-end-column="69" />
-              <folding>
-                <element signature="e#0#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,11 +74,33 @@
       <file leaf-file-name="bluscream.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="65" />
+            <state relative-caret-position="809">
+              <caret line="447" column="3" lean-forward="false" selection-start-line="447" selection-start-column="3" selection-end-line="447" selection-end-column="3" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="617">
+              <caret line="50" column="29" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="731">
+              <caret line="53" column="31" lean-forward="false" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -207,7 +202,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/massAction/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/pingHighScore/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/showQueries/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverBrowser/ui/servers.ui" />
@@ -249,15 +243,16 @@
         <option value="$PROJECT_DIR$/scripts/countContacts/male.txt" />
         <option value="$PROJECT_DIR$/scripts/countContacts/female.txt" />
         <option value="$PROJECT_DIR$/scripts/countContacts/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/rewinsideTV/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/joinChannel/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/info/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/searchEverything/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/joinChannel/__init__.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/antiMove/__init__.py" />
       </list>
     </option>
   </component>
@@ -353,7 +348,19 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="searchEverything" type="462c0819:PsiDirectoryNode" />
+              <item name="antiMove" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="gommeHD" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="passwordCracker" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -682,13 +689,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00128" summary=":thonk:">
-      <created>1513766802326</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1513766802327</updated>
     </task>
     <task id="LOCAL-00129" summary=":thonk:">
       <created>1513781858560</created>
@@ -1026,7 +1026,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519394177969</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary=":thinking:">
+      <created>1519394328359</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1519394328359</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1224,7 +1231,7 @@
           <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="23" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1461,34 +1468,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="100" column="32" lean-forward="false" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-408">
-          <caret line="18" column="34" lean-forward="false" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="240" column="128" lean-forward="false" selection-start-line="240" selection-start-column="128" selection-end-line="240" selection-end-column="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="46" column="25" lean-forward="true" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1524,14 +1507,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="63" column="45" lean-forward="false" selection-start-line="63" selection-start-column="41" selection-end-line="63" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1552,22 +1527,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="786">
+          <caret line="55" column="103" lean-forward="true" selection-start-line="55" selection-start-column="103" selection-end-line="55" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="53" column="31" lean-forward="false" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="69" column="8" lean-forward="true" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="190" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="65" />
+        <state relative-caret-position="809">
+          <caret line="447" column="3" lean-forward="false" selection-start-line="447" selection-start-column="3" selection-end-line="447" selection-end-column="3" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="969">
-          <caret line="57" column="64" lean-forward="false" selection-start-line="57" selection-start-column="64" selection-end-line="57" selection-end-column="64" />
+          <caret line="240" column="23" lean-forward="true" selection-start-line="240" selection-start-column="23" selection-end-line="240" selection-end-column="23" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="617">
+          <caret line="50" column="29" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,7 +1,9 @@
 import ts3lib, ts3defines
 from datetime import datetime
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
+from bluscream import timestamp, channelURL, clientURL
+from random import randint
 
 
 class antiMove(ts3plugin):
@@ -16,41 +18,43 @@ class antiMove(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Antimove", "")]
     hotkeys = []
-    enabled = False
-    debug = False
-    whitelistUIDs = [""]
+    whitelistUIDs = ["serveradmin"]
     whitelistSGIDs = [2]
-    delay = 0
-    schid=0;clid=0;cid=0;cpw="123"
-
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
-
-    def log(self, logLevel, message, schid=0):
-        ts3lib.logMessage(message, logLevel, self.name, schid)
-        if logLevel in [ts3defines.LogLevel.LogLevel_DEBUG, ts3defines.LogLevel.LogLevel_DEVEL] and self.debug:
-            ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=self.timestamp(), name=self.name, message=message), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+    delay = (250, 1500)
+    backup = None
 
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
+
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus != ts3defines.ConnectStatus.STATUS_DISCONNECTED: return
+        if self.backup is not None and hasattr(self.backup, "schid") and self.backup["schid"] == schid:
+            self.backup = None
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
-            self.enabled = not self.enabled
-            ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.enabled))
+            if self.backup is None:
+                self.backup = {}
+                ts3lib.printMessageToCurrentTab("{}[color=green]Enabled[/color] {}".format(timestamp(),self.name))
+            else:
+                self.backup = None
+                ts3lib.printMessageToCurrentTab("{}[color=red]Disabled[/color] {}".format(timestamp(),self.name))
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
-        if moverID == 0: return
+        if moverID == 0 and self.backup is not None: return
         (err, ownID) = ts3lib.getClientID(schid)
-        if clientID != ownID or moverID == ownID: return
+        if clientID != ownID or moverID == ownID or moverID == 0: return
         (err, sgids) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
         if not set(sgids).isdisjoint(self.whitelistSGIDs): return
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if uid in self.whitelistUIDs: return
-        self.schid=schid;self.clid=ownID;self.cid=oldChannelID
-        (err, cpath, self.cpw) = ts3lib.getChannelConnectInfo(schid, oldChannelID)
-        if self.delay >= 0: QTimer.singleShot(self.delay, self.moveBack)
-        else: self.moveBack()
+        self.backup = {"schid": schid, "cid": oldChannelID}
+        delay = randint(self.delay[0], self.delay[1])
+        ts3lib.printMessageToCurrentTab("{} {}: Switching back to channel {} in {}ms".format(timestamp(),self.name,clientURL(schid, self.backup["schid"]), channelURL(schid, self.backup["cid"]), delay))
+        QTimer.singleShot(delay, self.moveBack)
 
     def moveBack(self):
-        ts3lib.requestClientMove(self.schid, self.clid, self.cid, self.cpw)
+        (err, ownID) = ts3lib.getClientID(self.backup["schid"])
+        (err, path, pw) = ts3lib.getChannelConnectInfo(self.backup["schid"], self.backup["cid"])
+        ts3lib.requestClientMove(self.backup["schid"], ownID, self.backup["cid"], pw)
+        self.backup = {}

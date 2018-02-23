@@ -25,6 +25,10 @@ class autoFollow(ts3plugin):
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus != ts3defines.ConnectStatus.STATUS_DISCONNECTED: return
+        if schid in self.targets: del self.targets[schid]
+
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID != 0: return
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
@@ -59,6 +63,8 @@ class autoFollow(ts3plugin):
         QTimer.singleShot(delay, self.joinTarget)
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
+        if not schid in self.targets: return
+        if self.targets[schid] != clientID: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID or moverID == ownID: return
         ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-following[/color] {} because we were moved!".format(timestamp(),self.name,clientURL(schid, self.targets[schid])))

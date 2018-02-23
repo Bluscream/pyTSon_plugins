@@ -24,6 +24,7 @@ class gommeHD(ts3plugin):
     channelAdminGroupID = 10
     gommeBotNick = "Gomme-Bot"
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
+    blockMSG = "Diesen Befehl kannst du nur als Channel-Admin ausführen!"
     welcomeMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"']
     delay = 1500
     settings = { "maxclients": 10, "tp": 23 }
@@ -56,6 +57,7 @@ Trade URL: [url]https://steamcommunity.com/tradeoffer/new/?partner=62180933&toke
             self.schid = schid; self.gommeBotID = fromID
             QTimer.singleShot(self.delay, self.sendMessage)
         elif message in self.welcomeMSG: return True
+        elif message == self.blockMSG: QTimer.singleShot(self.delay, self.sendMessage)
 
     def sendMessage(self):
         ts3lib.requestSendPrivateTextMsg(self.schid, "registriert", self.gommeBotID)

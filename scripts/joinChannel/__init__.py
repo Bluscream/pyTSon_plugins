@@ -70,7 +70,7 @@ class joinChannel(ts3plugin):
                 ts3lib.requestClientMove(schid,ownID,oldChannelID,self.password)
                 self.schid = 0; self.channel = 0; self.password = "";self.name = ""
             else: ts3lib.printMessageToCurrentTab("{0} left channel {1}. [color=red]{2}[/color] client(s) remaining.".format(clientURL(schid, clientID),channelURL(schid, oldChannelID), maxclients-clients+1))
-        print("fullchannel:", self.fullchannel, "newCHannelID:", newChannelID)
+        print("fullchannel:", self.fullchannel, "newChannelID:", newChannelID)
         if self.fullchannel == newChannelID:
             self.fullchannel = 0
             (error, maxclients) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
