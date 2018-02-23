@@ -56,7 +56,9 @@ def saveCfg(path, cfg):
 def inputBox(title, text):
     x = QDialog()
     x.setAttribute(Qt.WA_DeleteOnClose)
-    return QInputDialog.getText(x, title, text)
+    (text, ok) = QInputDialog.getText(x, title, text)
+    if ok: return text
+    else: return False
 
 def msgBox(text, icon=QMessageBox.Information, title=""):
     x = QMessageBox()
