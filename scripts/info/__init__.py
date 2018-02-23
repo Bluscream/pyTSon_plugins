@@ -10,45 +10,7 @@ from collections import OrderedDict
 from inspect import getmembers
 from configparser import ConfigParser
 from urllib.parse import quote as urlencode
-
-def date(): return '{:%Y-%m-%d}'.format(datetime.datetime.now())
-def time(): return '{:%H:%M:%S}'.format(datetime.datetime.now())
-
-def getItems(object):
-    return [(a, getattr(object, a)) for a in dir(object)
-            if not a.startswith('__') and not callable(getattr(object, a)) and not "ENDMARKER" in a and not "DUMMY" in a]
-
-def getItemTime(lst):
-    if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
-        return PluginItemType.PLUGIN_SERVER, "Server"
-    elif lst in [ChannelProperties, ChannelPropertiesRare]:
-        return PluginItemType.PLUGIN_CHANNEL, "Channel"
-    elif lst in [ConnectionProperties, ConnectionPropertiesRare, ClientProperties, ClientPropertiesRare]:
-        return PluginItemType.PLUGIN_CLIENT, "Client"
-    else: return None
-
-def channelURL(schid=None, cid=0, name=None):
-    if schid == None:
-        try: schid = ts3.getCurrentServerConnectionHandlerID()
-        except: pass
-    if name == None:
-        try: (error, name) = ts3.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
-        except: name = cid
-    return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
-def clientURL(schid=None, clid=0, uid=None, nickname=None, encodednick=None):
-    if schid == None:
-        try: schid = ts3.getCurrentServerConnectionHandlerID()
-        except: pass
-    if uid == None:
-        try: (error, uid) = ts3.getClientVariable(schid, clid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        except: pass
-    if nickname == None:
-        try: (error, nickname) = ts3.getClientVariable(schid, clid, ClientProperties.CLIENT_NICKNAME)
-        except: nickname = uid
-    if encodednick == None:
-        try: encodednick = urlencode(nickname)
-        except: pass
-    return '[url=client://{0}/{1}~{2}]{3}[/url]'.format(clid, uid, encodednick, nickname)
+from bluscream import *
 
 class info(ts3plugin):
     name = "Extended Info"
@@ -68,9 +30,6 @@ class info(ts3plugin):
     runs = 0
     requested = []
     requestedCLIDS = []
-
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.datetime.now())
 
     def __init__(self):
         self.dlg = None

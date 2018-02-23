@@ -5,11 +5,13 @@ from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
 # from configparser import ConfigParser
+from urllib.parse import quote_plus
 import ts3lib, ts3defines, os.path, string, random, ts3client
 
 # GENERAL FUNCTIONS #
-def timestamp():
-    return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+def date(): return '{:%Y-%m-%d}'.format(datetime.now())
+def time(): return '{:%H:%M:%S}'.format(datetime.now())
 
 def varname(obj, callingLocals=locals()):
     for k, v in list(callingLocals.items()):
@@ -21,6 +23,19 @@ def random_string(size=1, chars=string.ascii_uppercase + string.ascii_lowercase 
 def percentage(part, whole):
     return round(100 * float(part)/float(whole))
 
+def getItems(object):
+    return [(a, getattr(object, a)) for a in dir(object)
+            if not a.startswith('__') and not callable(getattr(object, a)) and not "ENDMARKER" in a and not "DUMMY" in a]
+
+def getItemTime(lst):
+    if lst in [ts3defines.VirtualServerProperties, ts3defines.VirtualServerPropertiesRare]:
+        return ts3defines.PluginItemType.PLUGIN_SERVER, "Server"
+    elif lst in [ts3defines.ChannelProperties, ts3defines.ChannelPropertiesRare]:
+        return ts3defines.PluginItemType.PLUGIN_CHANNEL, "Channel"
+    elif lst in [ts3defines.ConnectionProperties, ts3defines.ConnectionPropertiesRare, ts3defines.ClientProperties, ts3defines.ClientPropertiesRare]:
+        return ts3defines.PluginItemType.PLUGIN_CLIENT, "Client"
+    else: return None
+
 # PARSING #
 def channelURL(schid=None, cid=0, name=None):
     if schid == None:
@@ -31,17 +46,20 @@ def channelURL(schid=None, cid=0, name=None):
         except: name = cid
     return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
 
-def clientURL(schid=None, clid=0, uid=None, nickname=None):
-    if schid == None:
+def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
+    if schid == 0:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
-    if uid == None:
+    if uid == "":
         try: (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         except: pass
-    if nickname == None:
+    if nickname == "":
         try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         except: nickname = uid
-    return '[url=client://{0}/{1}]{2}[/url]'.format(clid, uid, nickname)
+    if nickname_encoded == "":
+        try: (err, nickname_encoded) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        except: nickname_encoded = uid
+    return '[url=client://{0}/{1}~]"{2}"[/url]'.format(clid, uid, quote_plus(nickname_encoded), nickname)
 
 # I/O #
 def loadCfg(path, cfg):

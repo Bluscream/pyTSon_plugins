@@ -1,10 +1,11 @@
 import ts3lib, ts3defines, datetime
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
-
+from random import randint
+from bluscream import timestamp, clientURL, channelURL
 
 class autoFollow(ts3plugin):
-    name = "Anti Follow (former Love Plugin)"
+    name = "Auto Follow (former Love Plugin)"
     apiVersion = 22
     requestAutoload = True
     version = "1.0"
@@ -13,39 +14,52 @@ class autoFollow(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
+    menuItems = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Stop Auto-Follow", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Auto-Follow", "")
+    ]
     hotkeys = []
-    enabled = False
-    debug = False
-    whitelistUIDs = [""]
-    whitelistSGIDs = [2]
-    delay = 0
-    defaultPassword = "123"
-    schid=0;clid=0;cid=0;
-
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
+    delay = (250, 1500)
+    targets = {}
 
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL and menuItemID == 0:
-            self.enabled = not self.enabled
-            ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(self.timestamp(),self.name,self.enabled))
+        if menuItemID != 0: return
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+            if schid in self.targets:
+                ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-following[/color] {}".format(timestamp(),self.name,clientURL(schid, self.targets[schid])))
+                del self.targets[schid]
+            else: ts3lib.printMessageToCurrentTab("{} {}: [color=red]Not following anyone on this tab.[/color]".format(timestamp(),self.name))
+        elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
+            (err, ownID) = ts3lib.getClientID(schid)
+            if selectedItemID == ownID: return
+            self.targets[schid] = selectedItemID
+            ts3lib.printMessageToCurrentTab("{} {}: [color=green]Now auto-following[/color] {}".format(timestamp(),self.name,clientURL(schid, selectedItemID)))
+            self.joinTarget(schid)
+
+    def joinTarget(self, schid = 0):
+        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        (err, ownID) = ts3lib.getClientID(schid)
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID);(err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
+        if ownCID == cid: return
+        (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
+        ts3lib.requestClientMove(schid, ownID, cid, pw)
+
+    def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
+        if not schid in self.targets: return
+        if self.targets[schid] != clientID: return
+        (err, ownID) = ts3lib.getClientID(schid)
+        if clientID == ownID: return
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        if newChannelID == ownCID: return#
+        delay = randint(self.delay[0], self.delay[1])
+        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(),self.name,clientURL(schid, self.targets[schid]), channelURL(schid, newChannelID), delay))
+        QTimer.singleShot(delay, self.joinTarget)
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID or moverID == ownID: return
-        (err, sgids) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        if set(sgids).isdisjoint(self.whitelistSGIDs): return
-        (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        if uid in self.whitelistUIDs: return
-        self.schid=schid;self.clid=ownID;self.cid=oldChannelID
-        if self.delay >= 0: QTimer.singleShot(self.delay, self.moveBack)
-        else: self.moveBack()
-
-
-    def moveBack(self):
-        ts3lib.requestClientMove(self.schid, self.clid, self.cid, self.defaultPassword)
-        self.schid = 0;self.clid = 0;self.cid = 0
+        ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-following[/color] {} because we were moved!".format(timestamp(),self.name,clientURL(schid, self.targets[schid])))
+        del self.targets[schid]

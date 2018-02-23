@@ -6,7 +6,7 @@ from ts3plugin import ts3plugin
 from pluginhost import PluginHost
 from traceback import format_exc
 import ts3defines, ts3lib, pytson
-from urllib.parse import urlencode, quote_plus
+from urllib.parse import quote_plus
 
 class searchEverything(ts3plugin):
     name = "Search"
