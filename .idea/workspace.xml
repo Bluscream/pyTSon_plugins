@@ -7,12 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" afterPath="$PROJECT_DIR$/include/bluscream.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterPath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
-      <change beforePath="$PROJECT_DIR$/scripts/info/__init__.py" afterPath="$PROJECT_DIR$/scripts/info/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/info/settings.ini" afterPath="$PROJECT_DIR$/scripts/info/settings.ini" />
-      <change beforePath="$PROJECT_DIR$/scripts/searchEverything/__init__.py" afterPath="$PROJECT_DIR$/scripts/searchEverything/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -61,8 +55,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="16" />
+            <state relative-caret-position="969">
+              <caret line="57" column="64" lean-forward="false" selection-start-line="57" selection-start-column="64" selection-end-line="57" selection-end-column="64" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -689,13 +683,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00127" summary=":thonk:">
-      <created>1513766231084</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1513766231085</updated>
-    </task>
     <task id="LOCAL-00128" summary=":thonk:">
       <created>1513766802326</created>
       <option name="number" value="00128" />
@@ -1032,7 +1019,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519366354493</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary=":thinking:">
+      <created>1519394177969</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1519394177969</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1570,8 +1564,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="16" />
+        <state relative-caret-position="969">
+          <caret line="57" column="64" lean-forward="false" selection-start-line="57" selection-start-column="64" selection-end-line="57" selection-end-column="64" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
