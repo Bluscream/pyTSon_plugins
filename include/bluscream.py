@@ -37,6 +37,22 @@ def getItemTime(lst):
         return ts3defines.PluginItemType.PLUGIN_CLIENT, "Client"
     else: return None
 
+def find_between(s, first, last):
+    try:
+        start = s.index( first ) + len( first )
+        end = s.index( last, start )
+        return s[start:end]
+    except ValueError:
+        return ""
+
+def find_between_r(s, first, last):
+    try:
+        start = s.rindex( first ) + len( first )
+        end = s.rindex( last, start )
+        return s[start:end]
+    except ValueError:
+        return ""
+
 # PARSING #
 def channelURL(schid=None, cid=0, name=None):
     if schid == None:
