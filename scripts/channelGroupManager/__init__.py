@@ -16,7 +16,7 @@ class channelGroupManager(ts3plugin):
     except: apiVersion = 21
     requestAutoload = True
     version = "1.0"
-    author = "Bluscream"
+    author = "Bluscream, shitty720"
     description = ""
     offersConfigure = False
     commandKeyword = ""
@@ -119,7 +119,7 @@ class channelGroupManager(ts3plugin):
         if channelGroupID == self.cgroups[schid]["default"]: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         uuid = "{}|{}".format(suid, channelID)
-        d = self.execSQL("CREATE TABLE IF NOT EXISTS `{}` (`NAME` TEXT, `UID` TEXT, `DBID` INTEGER, `CGID` INTEGER);".format(uuid))
+        d = self.execSQL("CREATE TABLE IF NOT EXISTS `{}` (`NAME` TEXT, `UID` TEXT, `DBID` INTEGER UNIQUE, `CGID` INTEGER);".format(uuid))
         (err, name) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, dbid) = ts3lib.getClientVariableAsInt(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
@@ -137,6 +137,7 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
         try:
             super(QWidget, self).__init__(parent)
             setupUi(self, channelGroupManager.ui)
+            self.schid = schid;self.cid = cid
             self.db = channelGroupManager.db
             self.execSQL = channelGroupManager.execSQL
             self.setAttribute(Qt.WA_DeleteOnClose)
@@ -149,26 +150,36 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
 
     def setupTable(self, schid, cid, cgroups):
         self.tbl_members.clearContents()
+        cache = ts3client.ServerCache(schid)
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         q = self.execSQL("SELECT * FROM '{}|{}'".format(suid, cid))
         while q.next():
-            box = QComboBox()
-            i = 0
-            for cgroup in cgroups:
-                cache = ts3client.ServerCache(schid)
-                icon = QIcon(cache.icon(cgroups[cgroup]["icon"]))
-                text = "{} ({})".format(cgroups[cgroup]["name"], cgroup)
-                box.addItem(icon, text)
-                box.setItemData(i, cgroup)
-                i += 1
             rowPosition = self.tbl_members.rowCount
             self.tbl_members.insertRow(rowPosition)
             self.tbl_members.setItem(rowPosition, 0, QTableWidgetItem(q.value(0)))
             self.tbl_members.setItem(rowPosition, 1, QTableWidgetItem(q.value(1)))
             self.tbl_members.setItem(rowPosition, 2, QTableWidgetItem(str(q.value(2))))
-            if cgroup == q.value(3): box.setCurrentIndex(box.findData(cgroup))
-            self.tbl_members.setCellWidget(rowPosition, 3, box) # str(q.value(3)))
+            box = QComboBox()
+            box.connect("currentIndexChanged(int)", self.currentIndexChanged)
+            i = 0
+            for cgroup in cgroups:
+                icon = QIcon(cache.icon(cgroups[cgroup]["icon"]))
+                text = "{} ({})".format(cgroups[cgroup]["name"], cgroup)
+                box.addItem(icon, text)
+                box.setItemData(i, cgroup)
+                if cgroup == q.value(3): box.setCurrentIndex(i)
+                i += 1
+            self.tbl_members.setCellWidget(rowPosition, 3, box)
+
+    def currentIndexChanged(self, i):
+        print("test", i)
+        row = self.tbl_members.currentRow()
+        print("row:", row)
+        item = self.tbl_members.itemAt(const QPoint &point)
+        # item = self.tbl_members.selectedItems()
+        print("item:", item)
+        # self.tbl_members.at
+        # ts3lib.requestSetClientChannelGroup(self.schid, [item.itemData], [self.channel], [self.dbid])
 
     def on_btn_close_clicked(self):
         self.close()
-
