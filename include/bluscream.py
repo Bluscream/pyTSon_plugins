@@ -95,6 +95,14 @@ def inputBox(title, text):
     if ok: return text
     else: return False
 
+def inputInt(title, label, val=0):
+    x = QDialog()
+    x.setAttribute(Qt.WA_DeleteOnClose)
+    ok = False
+    i = QInputDialog.getInt(x, title, label, val, None, None, None, ok)
+    print("ok:", ok)
+    print("i:", i)
+
 def msgBox(text, icon=QMessageBox.Information, title=""):
     x = QMessageBox()
     if title: x.setWindowTitle(title)

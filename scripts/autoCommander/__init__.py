@@ -3,7 +3,8 @@ from ts3plugin import ts3plugin, PluginHost
 from datetime import datetime
 from PythonQt.QtGui import QInputDialog, QWidget
 from PythonQt.QtCore import Qt, QTimer
-from bluscream import inputBox, timestamp
+from PythonQt import BoolResult
+from bluscream import inputBox, timestamp, inputInt
 
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
@@ -56,7 +57,14 @@ class autoCommander(ts3plugin):
         if menuItemID == 0:
             self.toggle = not self.toggle
             ts3lib.printMessageToCurrentTab("{0}Set {1} to [color=yellow]{2}[/color]".format(timestamp(),self.name,self.toggle))
-        elif menuItemID == 1: self.toggleTimer(schid)
+        elif menuItemID == 1:
+            x = QWidget()
+            x.setAttribute(Qt.WA_DeleteOnClose)
+            ok = BoolResult()
+            i = QInputDialog.getInt(x, "test", "hallo", 1000, None, None, None, ok)
+            print("ok:", ok)
+            print("i:", i)
+            # self.toggleTimer(schid)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if not self.toggle: return
