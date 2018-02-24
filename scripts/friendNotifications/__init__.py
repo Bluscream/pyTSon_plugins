@@ -1,14 +1,15 @@
+
 from ts3plugin import ts3plugin
 from bluscream import *
 from pytson import getCurrentApiVersion
-from win10toast import ToastNotifier
+# from win10toast import ToastNotifier
 import ts3defines, ts3lib, ts3client
 
 class friendNotifications(ts3plugin):
     name = "Friend Notifications"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "0.1"
     author = "Bluscream"
     description = ""
@@ -17,7 +18,7 @@ class friendNotifications(ts3plugin):
     infoTitle = ""
     menuItems = []
     hotkeys = []
-    toaster = ToastNotifier()
+    toaster = None # ToastNotifier()
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))

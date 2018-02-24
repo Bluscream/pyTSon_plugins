@@ -23,7 +23,7 @@ class gommeHD(ts3plugin):
         # schid = ts3lib.getCurrentServerConnectionHandlerID()
         # err, clid = ts3lib.getClientID(schid)
         # err, self.mychan = ts3lib.getChannelOfClient(schid, clid)
-        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp,self.name,self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if self.mychan == 0: return
