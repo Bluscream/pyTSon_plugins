@@ -642,7 +642,7 @@ class SettingsDialog(QDialog):
             except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
         def loadCommands(self):
-            self.tbl_commands.clear()
+            self.tbl_commands.clearContents()
             self.tbl_commands.setRowCount(len(self.cmd.sections()))
             row = 0
             for i in self.cmd.sections():

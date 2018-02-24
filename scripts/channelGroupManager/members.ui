@@ -67,12 +67,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QComboBox" name="box_groups"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btn_set">
+      <widget class="QPushButton" name="btn_reload">
        <property name="text">
-        <string>Set</string>
+        <string>Reload</string>
        </property>
       </widget>
      </item>
