@@ -175,9 +175,9 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
         print("test", i)
         row = self.tbl_members.currentRow()
         print("row:", row)
-        item = self.tbl_members.itemAt(const QPoint &point)
+        # item = self.tbl_members.itemAt(const QPoint &point)
         # item = self.tbl_members.selectedItems()
-        print("item:", item)
+        # print("item:", item)
         # self.tbl_members.at
         # ts3lib.requestSetClientChannelGroup(self.schid, [item.itemData], [self.channel], [self.dbid])
 
