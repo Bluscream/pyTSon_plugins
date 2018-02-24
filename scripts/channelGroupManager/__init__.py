@@ -1,4 +1,4 @@
-import ts3lib, ts3defines, sip
+import ts3lib, ts3defines, sip, copy
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getPluginPath, getCurrentApiVersion
 from traceback import format_exc
@@ -123,7 +123,7 @@ class channelGroupManager(ts3plugin):
         (err, name) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, dbid) = ts3lib.getClientVariableAsInt(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        # q = "INSERT INTO '{}' (NAME, UID, DBID, CGID) VALUES ('{}', '{}', {}, {})".format(uuid, name, uid, dbid, channelGroupID) # TODO: https://stackoverflow.com/a/4330694
+        # q = "INSERT INTO '{}' (NAME, UID, DBID, CGID) VALUES ('{}', '{}', {}, {})".format(uuid, name, uid, dbid, channelGroupID)
         # q = "INSERT OR REPLACE INTO '{0}' (NAME, UID, DBID, CGID) VALUES (  '{1}', '{2}', {3}, COALESCE((SELECT CGID FROM '{0}' WHERE DBID = {3}), {4});".format(uuid, name, uid, dbid, channelGroupID)
         q = "INSERT OR REPLACE INTO '{}' (NAME, UID, DBID, CGID) VALUES ('{}', '{}', {}, {})".format(uuid, name, uid, dbid, channelGroupID)
         self.execSQL(q)
@@ -140,7 +140,10 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
             self.db = channelGroupManager.db
             self.execSQL = channelGroupManager.execSQL
             self.setAttribute(Qt.WA_DeleteOnClose)
-            self.setWindowTitle("Channel Group Members")
+            (err, cname) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+            self.setWindowTitle("Members of \"{}\"".format(cname))
+            self.tbl_members.setColumnWidth(0, 250)
+            self.tbl_members.setColumnWidth(1, 200)
             self.setupTable(schid, cid, channelGroupManager.cgroups[schid]["groups"])
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -148,29 +151,22 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
         self.tbl_members.clearContents()
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         q = self.execSQL("SELECT * FROM '{}|{}'".format(suid, cid))
-        # _cgroups = []
-        # for cgroup in cgroups:
-            # _cgroups.append("{} ({})".format(cgroups[cgroup]["name"],cgroup))
         while q.next():
+            box = QComboBox()
+            i = 0
+            for cgroup in cgroups:
+                cache = ts3client.ServerCache(schid)
+                icon = QIcon(cache.icon(cgroups[cgroup]["icon"]))
+                text = "{} ({})".format(cgroups[cgroup]["name"], cgroup)
+                box.addItem(icon, text)
+                box.setItemData(i, cgroup)
+                i += 1
             rowPosition = self.tbl_members.rowCount
             self.tbl_members.insertRow(rowPosition)
             self.tbl_members.setItem(rowPosition, 0, QTableWidgetItem(q.value(0)))
             self.tbl_members.setItem(rowPosition, 1, QTableWidgetItem(q.value(1)))
             self.tbl_members.setItem(rowPosition, 2, QTableWidgetItem(str(q.value(2))))
-            box = QComboBox()
-            i = 0
-            for cgroup in cgroups:
-                # first_cell.setData(Qt.UserRole, cgroup)
-                cache = ts3client.ServerCache(schid)
-                icon = QIcon(cache.icon(cgroups[cgroup]["icon"]))
-                text = "{} ({})".format(cgroups[cgroup]["name"], cgroup)
-                box.addItem(icon, text) # , QVariant(Qt.UserRole, cgroup)
-                if cgroup == q.value(3): box.setCurrentIndex(i)
-                i += 1
-            # box.addItems(_cgroups)
-            # find_between(, "(", ")")
-            # index = box.findData(q.value(3))
-            # if index != -1: box.setCurrentIndex(index)
+            if cgroup == q.value(3): box.setCurrentIndex(box.findData(cgroup))
             self.tbl_members.setCellWidget(rowPosition, 3, box) # str(q.value(3)))
 
     def on_btn_close_clicked(self):

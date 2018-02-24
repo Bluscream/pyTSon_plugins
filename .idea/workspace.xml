@@ -8,9 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" afterPath="$PROJECT_DIR$/include/bluscream.py" />
       <change beforePath="$PROJECT_DIR$/scripts/channelGroupManager/__init__.py" afterPath="$PROJECT_DIR$/scripts/channelGroupManager/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupManager/members.ui" afterPath="$PROJECT_DIR$/scripts/channelGroupManager/members.ui" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -60,10 +58,10 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-548">
-              <caret line="103" column="60" lean-forward="true" selection-start-line="103" selection-start-column="60" selection-end-line="103" selection-end-column="60" />
+            <state relative-caret-position="778">
+              <caret line="169" column="62" lean-forward="false" selection-start-line="169" selection-start-column="62" selection-end-line="169" selection-end-column="62" />
               <folding>
-                <element signature="e#0#30#0" expanded="true" />
+                <element signature="e#0#36#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,9 +70,11 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="78" lean-forward="true" selection-start-line="5" selection-start-column="78" selection-end-line="7" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="51">
+              <caret line="354" column="41" lean-forward="false" selection-start-line="354" selection-start-column="33" selection-end-line="354" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -137,9 +137,9 @@
       <find>setItem</find>
       <find>QVari</find>
       <find>QVariant</find>
-      <find>role</find>
-      <find>exec_</find>
       <find>userdata</find>
+      <find>exec_</find>
+      <find>role</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -690,13 +690,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00134" summary=":thonk:">
-      <created>1513866528139</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1513866528143</updated>
-    </task>
     <task id="LOCAL-00135" summary=":thonk:">
       <created>1513869497858</created>
       <option name="number" value="00135" />
@@ -1033,7 +1026,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519455134864</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL-00183" summary=":thinking:">
+      <created>1519465673869</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1519465673869</updated>
+    </task>
+    <option name="localTasksCounter" value="184" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1555,6 +1555,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/addonList/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="179" column="52" lean-forward="true" selection-start-line="178" selection-start-column="12" selection-end-line="179" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -1567,26 +1575,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="78" lean-forward="true" selection-start-line="5" selection-start-column="78" selection-end-line="7" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/addonList/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="179" column="52" lean-forward="true" selection-start-line="178" selection-start-column="12" selection-end-line="179" selection-end-column="52" />
-          <folding />
+        <state relative-caret-position="51">
+          <caret line="354" column="41" lean-forward="false" selection-start-line="354" selection-start-column="33" selection-end-line="354" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-548">
-          <caret line="103" column="60" lean-forward="true" selection-start-line="103" selection-start-column="60" selection-end-line="103" selection-end-column="60" />
+        <state relative-caret-position="778">
+          <caret line="169" column="62" lean-forward="false" selection-start-line="169" selection-start-column="62" selection-end-line="169" selection-end-column="62" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
