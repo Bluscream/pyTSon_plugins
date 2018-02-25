@@ -116,13 +116,14 @@ class channelGroupManager(ts3plugin):
         if self.requestedCGroups: self.requestedCGroups = False
 
     def dbInsert(self, schid, cid, clid, cgid, dbid=None, invokerName="", invokerUID=""):
+        print("got clid:", clid)
         for v in [schid, cid, clid, cgid]:
             if v is None: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         uuid = "{}|{}".format(suid, cid)
         self.execSQL("CREATE TABLE IF NOT EXISTS `{}` (`TIMESTAMP` NUMERIC, `NAME` TEXT, `UID` TEXT, `DBID` NUMERIC UNIQUE, `CGID` NUMERIC, `INVOKERNAME` TEXT, `INVOKERUID` TEXT);".format(uuid))
-        (err, name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        (err, name) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        (err, uid) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if dbid is None: (err, dbid) = ts3lib.getClientVariableAsInt(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
         q = "INSERT OR REPLACE INTO '{}' (TIMESTAMP, NAME, UID, DBID, CGID, INVOKERNAME, INVOKERUID) VALUES ({}, '{}', '{}', {}, {}, '{}', '{}')".format(uuid, int(time.time()), name, uid, dbid, cgid, invokerName, invokerUID)
         self.execSQL(q)
@@ -136,10 +137,10 @@ class channelGroupManager(ts3plugin):
         # if channelGroupID == self.cgroups[schid]["default"]: return # TODO: Maybe reimplement
         self.dbInsert(schid, channelID, clientID, channelGroupID, None, invokerName, invokerUniqueIdentity)
 
-    def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
+    def onNewChannelCreatedEvent(self, schid, cid, channelParentID, clid, invokerName, invokerUniqueIdentifier):
         if not self.toggle: return
         if not schid in self.cgroups: return
-        self.dbInsert(schid, channelID, invokerID, self.cgroups[schid]["admin"], None, "Server", "")
+        self.dbInsert(schid, cid, clid, self.cgroups[schid]["admin"], None, "Server", "")
 
     def onDelChannelEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentifier):
         if not self.toggle: return
@@ -188,7 +189,7 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
                 if cgroup == q.value("cgid"): box.setCurrentIndex(i)
                 i += 1
             self.tbl_members.setCellWidget(pos, 4, box)
-            self.tbl_members.setItem(pos, 5, QTableWidgetItem(str(q.value("invokername"))))
+            self.tbl_members.setItem(pos, 5, QTableWidgetItem("{} ({})".format(q.value("invokername"), q.value("INVOKERUID"))))
 
     def currentIndexChanged(self, i):
         print("test", i)

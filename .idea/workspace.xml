@@ -45,8 +45,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="139" column="34" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="141" selection-end-column="100" />
+            <state relative-caret-position="467">
+              <caret line="125" column="120" lean-forward="false" selection-start-line="125" selection-start-column="120" selection-end-line="125" selection-end-column="120" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -681,13 +681,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00141" summary=":thinking:">
-      <created>1517490149692</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1517490149693</updated>
-    </task>
     <task id="LOCAL-00142" summary=":thinking:">
       <created>1517490168294</created>
       <option name="number" value="00142" />
@@ -1024,7 +1017,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519551105065</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary=":thinking:">
+      <created>1519551720545</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1519551720545</updated>
+    </task>
+    <option name="localTasksCounter" value="191" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1572,8 +1572,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="139" column="34" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="141" selection-end-column="100" />
+        <state relative-caret-position="467">
+          <caret line="125" column="120" lean-forward="false" selection-start-line="125" selection-start-column="120" selection-end-line="125" selection-end-column="120" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
