@@ -45,8 +45,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="39" column="74" lean-forward="true" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
+            <state relative-caret-position="459">
+              <caret line="161" column="50" lean-forward="false" selection-start-line="161" selection-start-column="50" selection-end-line="161" selection-end-column="50" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -57,7 +57,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
+            <state relative-caret-position="3332">
               <caret line="207" column="137" lean-forward="false" selection-start-line="207" selection-start-column="60" selection-end-line="207" selection-end-column="137" />
               <folding />
             </state>
@@ -67,7 +67,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/autoCommander/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
+            <state relative-caret-position="629">
               <caret line="43" column="76" lean-forward="false" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="76" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -79,8 +79,8 @@
       <file leaf-file-name="pyTSon.conf" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Roaming/TS3Client/pyTSon/pyTSon.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="22" column="28" lean-forward="true" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+            <state relative-caret-position="374">
+              <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -89,7 +89,7 @@
       <file leaf-file-name="bluscream.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="1513">
               <caret line="98" column="12" lean-forward="false" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="12" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
@@ -315,12 +315,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches">
+      <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -337,32 +337,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
+      <pane id="Scratches">
         <subPane>
           <expand>
             <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="chatBot" type="462c0819:PsiDirectoryNode" />
+              <item name="" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
             </path>
           </expand>
           <select />
@@ -680,13 +660,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00143" summary=":thinking:">
-      <created>1517803423283</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
-      <option name="project" value="LOCAL" />
-      <updated>1517803423283</updated>
     </task>
     <task id="LOCAL-00144" summary=":thinking:">
       <created>1517870206973</created>
@@ -1024,7 +997,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519553739402</updated>
     </task>
-    <option name="localTasksCounter" value="192" />
+    <task id="LOCAL-00192" summary=":thinking:">
+      <created>1519554720489</created>
+      <option name="number" value="00192" />
+      <option name="presentableId" value="LOCAL-00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1519554720489</updated>
+    </task>
+    <option name="localTasksCounter" value="193" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1536,7 +1516,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="1513">
           <caret line="98" column="12" lean-forward="false" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="12" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
@@ -1546,7 +1526,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoCommander/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="629">
           <caret line="43" column="76" lean-forward="false" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="76" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
@@ -1556,7 +1536,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
+        <state relative-caret-position="3332">
           <caret line="207" column="137" lean-forward="false" selection-start-line="207" selection-start-column="60" selection-end-line="207" selection-end-column="137" />
           <folding />
         </state>
@@ -1564,16 +1544,16 @@
     </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/TS3Client/pyTSon/pyTSon.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="22" column="28" lean-forward="true" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+        <state relative-caret-position="374">
+          <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="74" lean-forward="true" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
+        <state relative-caret-position="459">
+          <caret line="161" column="50" lean-forward="false" selection-start-line="161" selection-start-column="50" selection-end-line="161" selection-end-column="50" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
