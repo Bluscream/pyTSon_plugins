@@ -185,7 +185,7 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
                 text = "{} ({})".format(self.cgroups[cgroup]["name"], cgroup)
                 box.addItem(icon, text)
                 box.setItemData(i, cgroup)
-                if cgroup == q.value(3): box.setCurrentIndex(i)
+                if cgroup == q.value("cgid"): box.setCurrentIndex(i)
                 i += 1
             self.tbl_members.setCellWidget(pos, 4, box)
             self.tbl_members.setItem(pos, 5, QTableWidgetItem(str(q.value("invokername"))))
