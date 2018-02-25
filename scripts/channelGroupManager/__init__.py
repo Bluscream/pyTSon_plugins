@@ -39,7 +39,7 @@ class channelGroupManager(ts3plugin):
         if not self.db.isValid(): raise Exception("Database invalid")
         if not self.db.open(): raise Exception("Could not open database.")
         self.loadVars()
-        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]Bluscream[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
         self.db.close()
