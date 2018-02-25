@@ -7,7 +7,7 @@ import ts3defines, ts3lib
 class clientInit(ts3plugin):
     name = "Client Init"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1"
     author = "Bluscream"
     description = ""

@@ -7,7 +7,7 @@ from PythonQt.QtCore import *
 class autoChannelChatTab(ts3plugin):
     name = "AutoChannelChatTab"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0.1"
     author = "Thomas \"PLuS\" Pathmann"
     description = "Automatically activates the channel chat (tabindex 1, so if you change order, it won't work as expected) tab when the server connection tab is changed"

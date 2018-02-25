@@ -6,7 +6,7 @@ import ts3defines, ts3lib
 class pluginCMD(ts3plugin):
     name = "Plugin CMD sender / viewer"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Ability to view incoming plugincmds and send own ones via chat commands."

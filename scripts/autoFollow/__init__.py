@@ -7,7 +7,7 @@ from bluscream import timestamp, clientURL, channelURL
 class autoFollow(ts3plugin):
     name = "Auto Follow (former Love Plugin)"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Auto Follow specified users around."

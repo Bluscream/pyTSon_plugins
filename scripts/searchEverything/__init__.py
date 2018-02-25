@@ -11,7 +11,7 @@ from urllib.parse import quote_plus
 class searchEverything(ts3plugin):
     name = "Search"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Let's you quickyly search for all kinds of stuff"

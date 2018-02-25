@@ -9,6 +9,7 @@ from PythonQt.QtCore import Qt# , QVariant
 from PythonQt.QtSql import QSqlDatabase
 from PythonQt.QtGui import QWidget, QTableWidgetItem, QComboBox, QIcon
 from os import path
+import time
 
 class channelGroupManager(ts3plugin):
     name = "Channel Group Manager"
@@ -21,7 +22,7 @@ class channelGroupManager(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Manage Members", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle {}".format(name), ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Manage Members", "")]
     hotkeys = []
     dbpath = path.join(getPluginPath(), "scripts", "channelGroupManager", "members.db")
     ui = path.join(getPluginPath(), "scripts", "channelGroupManager", "members.ui")
@@ -29,8 +30,10 @@ class channelGroupManager(ts3plugin):
     cgroups = {}
     requestedCGroups = False
     requestedRVars = False
+    toggle = False
 
     def __init__(self):
+        # if not self.toggle: self.stop(); return
         self.db = QSqlDatabase.addDatabase("QSQLITE", self.__class__.__name__)
         self.db.setDatabaseName(self.dbpath)
         if not self.db.isValid(): raise Exception("Database invalid")
@@ -86,15 +89,20 @@ class channelGroupManager(ts3plugin):
         if not self.requestedRVars: return
         self.requestedRVars = False
         (err, dcgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)
-        self.cgroups[schid]["default"] = dcgid
+        (err, acgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_ADMIN_GROUP)
+        self.cgroups[schid]["default"] = dcgid;self.cgroups[schid]["admin"] = acgid
         print(self.name, ">", "new default channel group for #", schid, ":", dcgid)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL or menuItemID != 0: return
-        if not self.dlg: self.dlg = channelGroupMembersDialog(self, schid, selectedItemID)
-        self.dlg.show()
-        self.dlg.raise_()
-        self.dlg.activateWindow()
+        if menuItemID != 0: return
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
+            if not self.dlg: self.dlg = channelGroupMembersDialog(self, schid, selectedItemID)
+            self.dlg.show()
+            self.dlg.raise_()
+            self.dlg.activateWindow()
+        elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+            self.toggle = not self.toggle
+            ts3lib.printMessageToCurrentTab("{} set to [color=orange]{}[/color]".format(self.name, self.toggle))
 
     def onChannelGroupListEvent(self, schid, cgid, name, atype, iconID, saveDB):
         if not self.requestedCGroups: return
@@ -107,28 +115,35 @@ class channelGroupManager(ts3plugin):
     def onChannelGroupListFinishedEvent(self, schid):
         if self.requestedCGroups: self.requestedCGroups = False
 
-    def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
-        if invokerClientID == 0: return
-        print(self.name, ">", "channelGroupID:", channelGroupID, "channelID:", channelID, "clientID:", clientID, "invokerClientID:", invokerClientID, "invokerName:", invokerName, "invokerUniqueIdentity:", invokerUniqueIdentity)
-        print(self.name, ">", "schid in self.cgroups:", schid in self.cgroups)
-        if not schid in self.cgroups: return
-        print(self.name, ">", "\"default\" in self.cgroups[schid]:", "default" in self.cgroups[schid])
-        # print(self.name, ">", self.cgroups[schid])
-        if not "default" in self.cgroups[schid]: return
-        # print(self.name, ">", type(channelGroupID), channelGroupID, "==", type(self.cgroups[schid]["default"]), self.cgroups[schid]["default"])
-        if channelGroupID == self.cgroups[schid]["default"]: return
+    def dbInsert(self, schid, cid, clid, cgid, dbid=None, invokerName="", invokerUID=""):
+        for v in [schid, cid, clid, cgid]:
+            if v is None: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
-        uuid = "{}|{}".format(suid, channelID)
-        d = self.execSQL("CREATE TABLE IF NOT EXISTS `{}` (`NAME` TEXT, `UID` TEXT, `DBID` INTEGER UNIQUE, `CGID` INTEGER);".format(uuid))
-        (err, name) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        (err, dbid) = ts3lib.getClientVariableAsInt(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        # q = "INSERT INTO '{}' (NAME, UID, DBID, CGID) VALUES ('{}', '{}', {}, {})".format(uuid, name, uid, dbid, channelGroupID)
-        # q = "INSERT OR REPLACE INTO '{0}' (NAME, UID, DBID, CGID) VALUES (  '{1}', '{2}', {3}, COALESCE((SELECT CGID FROM '{0}' WHERE DBID = {3}), {4});".format(uuid, name, uid, dbid, channelGroupID)
-        q = "INSERT OR REPLACE INTO '{}' (NAME, UID, DBID, CGID) VALUES ('{}', '{}', {}, {})".format(uuid, name, uid, dbid, channelGroupID)
+        uuid = "{}|{}".format(suid, cid)
+        self.execSQL("CREATE TABLE IF NOT EXISTS `{}` (`TIMESTAMP` NUMERIC, `NAME` TEXT, `UID` TEXT, `DBID` NUMERIC UNIQUE, `CGID` NUMERIC, `INVOKERNAME` TEXT, `INVOKERUID` TEXT);".format(uuid))
+        (err, name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if dbid is None: (err, dbid) = ts3lib.getClientVariableAsInt(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        q = "INSERT OR REPLACE INTO '{}' (TIMESTAMP, NAME, UID, DBID, CGID, INVOKERNAME, INVOKERUID) VALUES ({}, '{}', '{}', {}, {}, '{}', '{}')".format(uuid, int(time.time()), name, uid, dbid, cgid, invokerName, invokerUID)
         self.execSQL(q)
 
+    def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
+        if not self.toggle: return
+        if invokerClientID == 0: return
+        print(self.name, ">", "channelGroupID:", channelGroupID, "channelID:", channelID, "clientID:", clientID, "invokerClientID:", invokerClientID, "invokerName:", invokerName, "invokerUniqueIdentity:", invokerUniqueIdentity)
+        if not schid in self.cgroups: return
+        # if not "default" in self.cgroups[schid]: return
+        # if channelGroupID == self.cgroups[schid]["default"]: return # TODO: Maybe reimplement
+        self.dbInsert(schid, channelID, clientID, channelGroupID, None, invokerName, invokerUniqueIdentity)
+
+    def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
+        if not self.toggle: return
+        if not schid in self.cgroups: return
+        self.dbInsert(schid, channelID, invokerID, self.cgroups[schid]["admin"], None, "Server", "")
+
     def onDelChannelEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentifier):
+        if not self.toggle: return
+        if not schid in self.cgroups: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         self.execSQL("DROP TABLE IF EXISTS '{}|{}';".format(suid,channelID))
 
@@ -158,9 +173,10 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
             pos = self.tbl_members.rowCount
             print(pos)
             self.tbl_members.insertRow(pos)
-            self.tbl_members.setItem(pos, 0, QTableWidgetItem(q.value(0)))
-            self.tbl_members.setItem(pos, 1, QTableWidgetItem(q.value(1)))
-            self.tbl_members.setItem(pos, 2, QTableWidgetItem(str(q.value(2))))
+            self.tbl_members.setItem(pos, 0, QTableWidgetItem(datetime.utcfromtimestamp(q.value("timestamp")).strftime('%Y-%m-%d %H:%M:%S')))
+            self.tbl_members.setItem(pos, 1, QTableWidgetItem(q.value("name")))
+            self.tbl_members.setItem(pos, 2, QTableWidgetItem(q.value("uid")))
+            self.tbl_members.setItem(pos, 3, QTableWidgetItem(str(q.value("dbid"))))
             box = QComboBox()
             box.connect("currentIndexChanged(int)", self.currentIndexChanged)
             i = 0
@@ -171,7 +187,8 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
                 box.setItemData(i, cgroup)
                 if cgroup == q.value(3): box.setCurrentIndex(i)
                 i += 1
-            self.tbl_members.setCellWidget(pos, 3, box)
+            self.tbl_members.setCellWidget(pos, 4, box)
+            self.tbl_members.setItem(pos, 5, QTableWidgetItem(str(q.value("invokername"))))
 
     def currentIndexChanged(self, i):
         print("test", i)

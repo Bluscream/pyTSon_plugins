@@ -6,7 +6,7 @@ from bluscream import timestamp
 class gommeHD(ts3plugin):
     name = "Rewi nifty tricks"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = ""

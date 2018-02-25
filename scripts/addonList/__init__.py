@@ -15,7 +15,7 @@ class addonList(ts3plugin):
     name = "Addon Scanner"
     try: apiVersion = pytson.getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "App Scanner like, just addons here"

@@ -11,7 +11,7 @@ from collections import OrderedDict
 class passwordCracker(ts3plugin):
     name = "PW Cracker"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "<insert lenny face here>"

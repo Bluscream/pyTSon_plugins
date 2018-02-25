@@ -11,7 +11,7 @@ from PythonQt.QtGui import QDialog
 class autoFlee(ts3plugin):
     name = "Auto Flee"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Deny others to move you around."

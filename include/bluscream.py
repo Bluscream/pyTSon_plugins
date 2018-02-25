@@ -1,4 +1,5 @@
 from datetime import datetime
+from PythonQt import BoolResult
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
 from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream
 from PythonQt.QtSql import QSqlQuery
@@ -95,13 +96,13 @@ def inputBox(title, text):
     if ok: return text
     else: return False
 
-def inputInt(title, label, val=0):
+def inputInt(title="", label="", val=0, min=-2147483647, max=2147483647, step=1):
     x = QDialog()
     x.setAttribute(Qt.WA_DeleteOnClose)
-    ok = False
-    i = QInputDialog.getInt(x, title, label, val, None, None, None, ok)
-    print("ok:", ok)
-    print("i:", i)
+    ok = BoolResult()
+    i = QInputDialog.getInt(x, title, label, val, min, max, step, ok)
+    if ok: return i
+    else: return False
 
 def msgBox(text, icon=QMessageBox.Information, title=""):
     x = QMessageBox()

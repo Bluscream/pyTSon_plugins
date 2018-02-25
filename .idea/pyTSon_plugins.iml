@@ -11,6 +11,7 @@
     <orderEntry type="jdk" jdkName="pyTSon (3.6.1)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="include" />
+    <orderEntry type="module" module-name="pyTSon" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
