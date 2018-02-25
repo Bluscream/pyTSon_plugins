@@ -161,7 +161,9 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
             self.setWindowTitle("Members of \"{}\"".format(cname))
             self.tbl_members.setColumnWidth(0, 130)
             self.tbl_members.setColumnWidth(1, 250)
-            self.tbl_members.setColumnWidth(2, 200)
+            self.tbl_members.setColumnWidth(2, 215)
+            self.tbl_members.setColumnWidth(3, 50)
+            self.tbl_members.setColumnWidth(4, 140)
             self.setupTable()
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
