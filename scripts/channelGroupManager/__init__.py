@@ -47,9 +47,9 @@ class channelGroupManager(ts3plugin):
         QSqlDatabase.removeDatabase(self.__class__.__name__)
 
     def execSQL(self, query):
-        print(self.name, "> Query:", query)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Query:", query)
         d = self.db.exec_(query)
-        print(self.name, "> Result:", d)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Result:", d)
         return d
 
     def purgeDB(self, schid):
@@ -61,15 +61,15 @@ class channelGroupManager(ts3plugin):
             name = d.value("name").split('|')
             uid = name[0];cid = int(name[1])
             if uid != suid: continue
-            print(self.name, "> CID:", cid)
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> CID:", cid)
             if not cid in clist: drop.append(cid)
         for cid in drop:
             name = "{}|{}".format(suid,cid)
-            print(self.name, "> Deleting Table:", name)
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Deleting Table:", name)
             self.execSQL("DROP TABLE '{}';".format(name))
 
     def loadVars(self, schid=False):
-        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        if not schid: return; schid = ts3lib.getCurrentServerConnectionHandlerID()
         self.purgeDB(schid)
         # for cid in clist:
         if schid in self.cgroups: return
@@ -77,11 +77,10 @@ class channelGroupManager(ts3plugin):
         self.requestedCGroups = True;self.requestedRVars = True
         ts3lib.requestChannelGroupList(schid)
         ts3lib.requestServerVariables(schid)
-        print(self.name, ">", "requested vars for #", schid)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, ">", "requested vars for #", schid)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHING:
-            self.loadVars(schid)
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.loadVars(schid)
         elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             if schid in self.cgroups: del self.cgroups[schid]
 
@@ -91,7 +90,7 @@ class channelGroupManager(ts3plugin):
         (err, dcgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)
         (err, acgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_ADMIN_GROUP)
         self.cgroups[schid]["default"] = dcgid;self.cgroups[schid]["admin"] = acgid
-        print(self.name, ">", "new default channel group for #", schid, ":", dcgid)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, ">", "new default channel groups for #", schid, "default:", dcgid, "admin:", acgid)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID != 0: return
@@ -110,13 +109,13 @@ class channelGroupManager(ts3plugin):
         self.cgroups[schid]["groups"][cgid] = {}
         self.cgroups[schid]["groups"][cgid]["name"] = name
         self.cgroups[schid]["groups"][cgid]["icon"] = iconID
-        print(self.name, ">", "new channelgroup for #", schid, "(", cgid, ")", ":", self.cgroups[schid]["groups"][cgid])
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, ">", "new channelgroup for #", schid, "(", cgid, ")", ":", self.cgroups[schid]["groups"][cgid])
 
     def onChannelGroupListFinishedEvent(self, schid):
         if self.requestedCGroups: self.requestedCGroups = False
 
     def dbInsert(self, schid, cid, clid, cgid, dbid=None, invokerName="", invokerUID=""):
-        print("got clid:", clid)
+        if PluginHost.cfg.getboolean("general", "verbose"): print("got clid:", clid)
         for v in [schid, cid, clid, cgid]:
             if v is None: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
@@ -131,7 +130,7 @@ class channelGroupManager(ts3plugin):
     def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
         if not self.toggle: return
         if invokerClientID == 0: return
-        print(self.name, ">", "channelGroupID:", channelGroupID, "channelID:", channelID, "clientID:", clientID, "invokerClientID:", invokerClientID, "invokerName:", invokerName, "invokerUniqueIdentity:", invokerUniqueIdentity)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, ">", "channelGroupID:", channelGroupID, "channelID:", channelID, "clientID:", clientID, "invokerClientID:", invokerClientID, "invokerName:", invokerName, "invokerUniqueIdentity:", invokerUniqueIdentity)
         if not schid in self.cgroups: return
         # if not "default" in self.cgroups[schid]: return
         # if channelGroupID == self.cgroups[schid]["default"]: return # TODO: Maybe reimplement
@@ -175,7 +174,7 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
         q = self.execSQL("SELECT * FROM '{}|{}'".format(suid, self.cid))
         while q.next():
             pos = self.tbl_members.rowCount
-            print(pos)
+            if PluginHost.cfg.getboolean("general", "verbose"): print(pos)
             self.tbl_members.insertRow(pos)
             self.tbl_members.setItem(pos, 0, QTableWidgetItem(datetime.utcfromtimestamp(q.value("timestamp")).strftime('%Y-%m-%d %H:%M:%S')))
             self.tbl_members.setItem(pos, 1, QTableWidgetItem(q.value("name")))
@@ -195,9 +194,9 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
             self.tbl_members.setItem(pos, 5, QTableWidgetItem("{} ({})".format(q.value("invokername"), q.value("INVOKERUID"))))
 
     def currentIndexChanged(self, i):
-        print("test", i)
+        if PluginHost.cfg.getboolean("general", "verbose"): print("test", i)
         row = self.tbl_members.currentRow()
-        print("row:", row)
+        if PluginHost.cfg.getboolean("general", "verbose"): print("row:", row)
         # item = self.tbl_members.itemAt(const QPoint &point)
         # item = self.tbl_members.selectedItems()
         # print("item:", item)
