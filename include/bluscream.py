@@ -7,13 +7,12 @@ from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkR
 from ts3plugin import PluginHost
 # from configparser import ConfigParser
 from urllib.parse import quote_plus
-import ts3lib, ts3defines, os.path, string, random, ts3client
+import ts3lib, ts3defines, os.path, string, random, ts3client, time
 
 # GENERAL FUNCTIONS #
-
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 def date(): return '{:%Y-%m-%d}'.format(datetime.now())
-def time(): return '{:%H:%M:%S}'.format(datetime.now())
+def Time(): return '{:%H:%M:%S}'.format(datetime.now())
 
 def varname(obj, callingLocals=locals()):
     for k, v in list(callingLocals.items()):
@@ -188,11 +187,13 @@ def getContacts():
     while q.next():
         try:
             key = q.value("key")
-            ret[key] = {"timestamp": q.value("timestamp")}
+            ret[key] = {"Timestamp": q.value("timestamp")}
             val = q.value("value")
             for l in val.split('\n'):
                 l = l.split('=', 1)
-                ret[key][l[0]] = l[1]
+                try: ret[key][l[0]] = int(l[1])
+                except: ret[key][l[0]] = l[1]
+                if l[0] == "LastSeen" and l[1]: ret[key]["LastSeenEpoch"] = int(time.mktime(time.strptime(l[1], '%Y-%m-%dT%H:%M:%S')))
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
     del db
     return ret

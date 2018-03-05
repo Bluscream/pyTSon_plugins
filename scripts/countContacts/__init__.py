@@ -1,7 +1,7 @@
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from bluscream import *
 from pytson import getCurrentApiVersion
-import ts3defines, ts3lib, ts3client
+import ts3defines, ts3lib, ts3client, time
 
 class countContacts(ts3plugin):
     name = "Count Contacts"
@@ -41,30 +41,51 @@ class countContacts(ts3plugin):
     def contactStats(self):
         buddies = 0;blocked = 0;neutral = 0;unknown = 0
         female = 0;male = 0
-        db = ts3client.Config()
-        q = db.query("SELECT * FROM contacts")
-        while q.next():
-            for line in q.value("value").split('\n'):
-                if line.startswith('Friend='):
-                    status = int(line[-1])
-                    if status == ContactStatus.FRIEND: buddies += 1
-                    elif status == ContactStatus.BLOCKED: blocked += 1
-                    elif status == ContactStatus.NEUTRAL: neutral += 1
-                    else: unknown += 1
-                elif line.lower().startswith('nickname=w/'):
-                    female += 1
-                elif line.lower().startswith('nickname=m/'):
-                    male += 1
-        del db
+        f_buddies = 0;m_buddies = 0;
+        f_blocked = 0;m_blocked = 0;
+        f_neutral = 0;m_neutral = 0;
+        f_unknown = 0;m_unknown = 0;
+        contacts = getContacts()
+        contact = None
+        times = []
+        for contact in contacts:
+            nick = contact["Nickname"].lower()
+            if nick.startswith('w/'): female += 1
+            elif nick.startswith('m/'): male += 1
+            status = contact["Friend"]
+            if status == ContactStatus.FRIEND:
+                buddies += 1
+                if nick.startswith('w/'): f_buddies += 1
+                elif nick.startswith('m/'): m_buddies += 1
+            elif status == ContactStatus.BLOCKED:
+                blocked += 1
+                if nick.startswith('w/'): f_blocked += 1
+                elif nick.startswith('m/'): m_blocked += 1
+            elif status == ContactStatus.NEUTRAL:
+                neutral += 1
+                if nick.startswith('w/'): f_neutral += 1
+                elif nick.startswith('m/'): m_neutral += 1
+            else:
+                unknown += 1
+                if nick.startswith('w/'): f_unknown += 1
+                elif nick.startswith('m/'): m_unknown += 1
+            if hasattr(contact, "LastSeenEpoch"): times.append(contact["LastSeenEpoch"])
         sum = buddies+blocked+neutral+unknown
-        msg = ["Contacts: [b]{}[/b]".format(sum)]
-        msg.append("[color=green]Buddies[/color]: [b]{}[/b] ({}%)".format(buddies, percentage(buddies, sum)))
-        msg.append("[color=red]Blocked[/color]: [b]{}[/b] ({}%)".format(blocked, percentage(blocked, sum)))
-        msg.append("Neutral: [b]{}[/b] ({}%)".format(neutral, percentage(neutral, sum)))# [color=white][/color]
-        if unknown > 0: msg.append("Unknown: [color=orange]{}[/color] ({}%)".format(unknown, percentage(unknown, sum)))
-        if female > 0: msg.append("[color=purple]Female[/color]: {} ({}%)".format(female, percentage(female, sum)))
-        if male > 0: msg.append("[color=lightblue]Male[/color]: {} ({}%)".format(male, percentage(male, sum)))
-        return " | ".join(msg)
+        msg = ["My Contact Stats:"]
+        msg.append("Sum: [b]{}[/b] | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
+                    sum, female, percentage(female, sum), male, percentage(male, sum), sum-(male+female), percentage(sum-(male+female), sum)))
+        msg.append("[color=green]Buddies[/color]: [b]{}[/b] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
+                    buddies, percentage(buddies, sum), f_buddies, percentage(f_buddies, buddies), m_buddies, percentage(m_buddies, buddies), buddies-(m_buddies+f_buddies), percentage(buddies-(m_buddies+f_buddies), buddies)))
+        msg.append("[color=red]Blocked[/color]: [b]{}[/b] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
+                    blocked, percentage(blocked, sum), f_blocked, percentage(f_blocked, blocked), m_blocked, percentage(m_blocked, blocked), blocked-(m_blocked+f_blocked), percentage(blocked-(m_blocked+f_blocked), blocked)))
+        msg.append("Neutral: [b]{}[/b] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
+                    neutral, percentage(neutral, sum), f_neutral, percentage(f_neutral, neutral), m_neutral, percentage(m_neutral, neutral), neutral-(m_neutral+f_neutral), percentage(neutral-(m_neutral+f_neutral), neutral)))
+        if unknown > 0: msg.append("Unknown: [color=orange]{}[/color] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
+                    unknown, percentage(unknown, sum), f_unknown, percentage(f_unknown, unknown), m_unknown, percentage(m_unknown, unknown), unknown-(m_unknown+f_unknown), percentage(unknown-(m_unknown+f_unknown), unknown)))
+        # msg.append("First: {} ({}) | Last: {} ({})".format(contacts[0]["Nickname"], contacts[0]["LastSeen"], contacts[sorted(contacts.keys())[-1]]["Nickname"], contacts[sorted(contacts.keys())[-1]]["LastSeen"]))
+        # if female > 0: msg.append("[color=purple]Female[/color]: {} ({}%)".format(female, percentage(female, sum)))
+        # if male > 0: msg.append("[color=lightblue]Male[/color]: {} ({}%)".format(male, percentage(male, sum)))
+        return "\n".join(msg)
 
     def infoData(self, schid, id, atype):
         if self.count < 3: self.count += 1; return None
