@@ -46,6 +46,7 @@ class countContacts(ts3plugin):
         f_neutral = 0;m_neutral = 0;
         f_unknown = 0;m_unknown = 0;
         contacts = getContacts()
+        print(contacts)
         contact = None
         times = []
         for contact in contacts:
@@ -96,7 +97,7 @@ class countContacts(ts3plugin):
             return None
             (err, clist) = ts3lib.getChannelClientList(schid, id)
         else: return None
-        buddies = 0;blocked = 0;neutral = 0;unknown = 0
+        sum = 0;buddies = 0;blocked = 0;neutral = 0;unknown = 0
         uidlist = []
         for clid in clist:
             (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
@@ -104,6 +105,7 @@ class countContacts(ts3plugin):
         db = ts3client.Config()
         q = db.query("SELECT * FROM contacts")
         while q.next():
+            sum += 1
             val = q.value("value").split('\n')
             uid = ""
             for line in val:
@@ -119,11 +121,12 @@ class countContacts(ts3plugin):
                     else: unknown += 1
         del db
         _return = list()
-        _return.append("Online: {}".format(buddies+blocked+neutral+unknown))
-        _return.append("Buddies: [color=green]{}[/color]".format(buddies))
-        _return.append("Blocked: [color=red]{}[/color]".format(blocked))
-        _return.append("Neutral: {}".format(neutral))
-        if unknown > 0: _return.append("Unknown: [color=orange]{}[/color]".format(unknown))
+        _sum = buddies+blocked+neutral+unknown
+        _return.append("Online: {} / {} ({}%)".format(_sum, sum, percentage(_sum, sum)))
+        _return.append("[color=green]Buddies[/color]: {} ({}%)".format(buddies, percentage(buddies, _sum)))
+        _return.append("[color=red]Blocked[/color]: {} ({}%)".format(blocked, percentage(blocked, _sum)))
+        _return.append("Neutral: {} ({}%)".format(neutral, percentage(neutral, _sum)))
+        if unknown > 0: _return.append("[color=orange]Unknown[/color]: {} ({}%)".format(unknown, percentage(unknown, _sum)))
         return _return
 
 
