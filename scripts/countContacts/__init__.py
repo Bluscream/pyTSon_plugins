@@ -9,22 +9,20 @@ def getContacts():
     q = db.query("SELECT * FROM contacts")
     while q.next():
         try:
-            key = int(q.value("key"))
-            cur[key] = {"Timestamp": q.value("timestamp")}
+            cur = {"Key": int(q.value("key")), "Timestamp": q.value("timestamp")}
             val = q.value("value")
             for l in val.split('\n'):
                 try:
                     l = l.split('=', 1)
-                    if l[0] in ["Nickname", "LastSeenServerName"]: ret[key][l[0]] = u"".format(l[1])
-                    else:
-                        try: ret[key][l[0]] = int(l[1])
-                        except: ret[key][l[0]] = l[1]
-                    if l[0] == "LastSeen" and l[1]: ret[key]["LastSeenEpoch"] = int(time.mktime(time.strptime(l[1], '%Y-%m-%dT%H:%M:%S')))
+                    if len(l) != 2: continue
+                    if l[0] in ["Nickname","PhoneticNickname","LastSeenServerName","LastSeenServerAddress","IDS","VolumeModifier"]: cur[l[0]] = l[1].encode('ansii')
+                    elif l[0] in ["Friend","NickShowType"]: cur[l[0]] = int(l[1])
+                    elif l[0] in ["Automute","IgnorePublicMessages","IgnorePrivateMessages","IgnorePokes","IgnoreAvatar","IgnoreAwayMessage","HaveVolumeModifier","WhisperAllow"]:
+                        if l[1] == "false": cur[l[0]] = False
+                        elif l[1] == "true": cur[l[0]] = True
+                    if l[0] == "LastSeen" and l[1]: cur["LastSeenEpoch"] = int(time.mktime(time.strptime(l[1], '%Y-%m-%dT%H:%M:%S')))
                 except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
-            """
-            for k, v in ret[key].items():
-                print("key:", k, "val:", v)
-            """
+            ret.append(cur)
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
     del db
     return ret
@@ -77,6 +75,7 @@ class countContacts(ts3plugin):
         for contact in contacts:
             print("current contact:", contact)
             nick = contact["Nickname"].lower()
+            print(nick)
             if nick.startswith('w/'): female += 1
             elif nick.startswith('m/'): male += 1
             status = contact["Friend"]
