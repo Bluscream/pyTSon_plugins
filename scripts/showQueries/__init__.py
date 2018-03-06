@@ -3,10 +3,7 @@ from datetime import datetime
 from urllib.parse import quote as urlencode
 import ts3defines, ts3lib, _ts3lib
 from PythonQt.QtCore import QTimer
-
-
-def date(): return '{:%Y-%m-%d}'.format(datetime.now())
-def time(): return '{:%H:%M:%S}'.format(datetime.now())
+from bluscream import date, Time
 
 def channelURL(schid=None, cid=0, name=None):
     if schid == None:
@@ -58,7 +55,7 @@ class showQueries(ts3plugin):
     def __init__(self):
         self.cleartimer.timeout.connect(self.clearQueries)
         self.cleartimer.start(1000*18000)
-        if self.debug: ts3lib.printMessageToCurrentTab("[{0} {1}] [color=orange]{2}[/color] Plugin for pyTSon by [url=https://github.com/{3}]{4}[/url] loaded.".format(date(), time(), self.name, self.author))
+        if self.debug: ts3lib.printMessageToCurrentTab("[{0} {1}] [color=orange]{2}[/color] Plugin for pyTSon by [url=https://github.com/{3}]{4}[/url] loaded.".format(date(), Time(), self.name, self.author))
 
     def stop(self):
         self.timer.stop()
@@ -89,14 +86,14 @@ class showQueries(ts3plugin):
                 self.queries.append(c)
                 (err, cid) = ts3lib.getChannelOfClient(self.schid, c)
                 # (err, channelname) = ts3lib.getChannelVariable(self.schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
-                ts3lib.printMessage(self.schid, "<{0}> Found Query {1} in channel {2}".format(time(), clientURL(self.schid, c), channelURL(self.schid, cid)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+                ts3lib.printMessage(self.schid, "<{0}> Found Query {1} in channel {2}".format(Time(), clientURL(self.schid, c), channelURL(self.schid, cid)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         # self.waitingFor = self.query_uids[0]
         # self.retcode = ts3lib.createReturnCode()
         # ts3lib.requestClientIDs(self.schid, self.query_uids[0], self.retcode)
 
     def clearQueries(self):
         self.queries = []
-        ts3lib.printMessage(self.schid, "<{0}> Cleared Query List".format(time()), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        ts3lib.printMessage(self.schid, "<{0}> Cleared Query List".format(Time()), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
     def infoData(self, schid, id, atype):
         try:
@@ -117,7 +114,7 @@ class showQueries(ts3plugin):
         (err, clienttype) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
         if clienttype != ts3defines.ClientType.ClientType_SERVERQUERY: return
         # (err, channelname) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelProperties.CHANNEL_NAME)
-        ts3lib.printMessage(schid, "<{0}> {1} switched from channel {2} to {3}".format(time(), clientURL(schid, clientID), channelURL(schid, oldChannelID), channelURL(schid, newChannelID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        ts3lib.printMessage(schid, "<{0}> {1} switched from channel {2} to {3}".format(Time(), clientURL(schid, clientID), channelURL(schid, oldChannelID), channelURL(schid, newChannelID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         # <16:11:43> "charlie sheen" switched from channel "Intros Gratis <3" to "Serverteam-Gesucht Builder"
 
     def onClientIDsEvent(self, schid, uid, clid, nickname):
@@ -132,7 +129,7 @@ class showQueries(ts3plugin):
             # qstring = ", ".join("[url=client://{0}/{1}]{2}[/url]".format(tup) for tup in self.queries)
             qlist = ["[url=client://{}/{}]{}[/url]".format(*tup) for tup in self.hqueries]
             qstring = ", ".join(qlist)
-            ts3lib.printMessage(schid, "<{0}> Found {1} hidden Queries with UID \"{2}\": {3}".format(time(), len(self.hqueries), self.waitingFor, qstring), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+            ts3lib.printMessage(schid, "<{0}> Found {1} hidden Queries with UID \"{2}\": {3}".format(Time(), len(self.hqueries), self.waitingFor, qstring), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
             self.hqueries = []
         if self.waitingFor == self.query_uids[0]:
             self.waitingFor = self.query_uids[-1]
@@ -155,7 +152,7 @@ class showQueries(ts3plugin):
                     if ctype != ts3defines.ClientType.ClientType_SERVERQUERY: continue
                     msg.append(clientURL(schid, clid))
                 if len(msg) < 1: continue
-                ts3lib.printMessage(schid, "<{0}> {1} has [b]{2}[/b] Query Clients: {3}".format(time(), channelURL(schid, cid), len(msg), ", ".join(msg)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+                ts3lib.printMessage(schid, "<{0}> {1} has [b]{2}[/b] Query Clients: {3}".format(Time(), channelURL(schid, cid), len(msg), ", ".join(msg)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
             self.waitingFor = self.query_uids[0]
             self.retcode = ts3lib.createReturnCode()
             ts3lib.requestClientIDs(schid, self.query_uids[0], self.retcode)

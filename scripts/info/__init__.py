@@ -103,7 +103,7 @@ class info(ts3plugin):
         if command == "client":
             clid = int(cmd[1])
             (err, cid) = ts3.getChannelOfClient(schid, clid)
-            ts3.printMessageToCurrentTab("<{0}> Client {1} in channel {2}".format(time(), clientURL(schid, clid), channelURL(schid, cid)))
+            ts3.printMessageToCurrentTab("<{0}> Client {1} in channel {2}".format(Time(), clientURL(schid, clid), channelURL(schid, cid)))
         return 1
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):

@@ -74,9 +74,11 @@ def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
         try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         except: nickname = uid
     if nickname_encoded == "":
-        try: (err, nickname_encoded) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        try:
+            (err, nickname_encoded) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            nickname_encoded = quote_plus(nickname_encoded)
         except: nickname_encoded = uid
-    return '[url=client://{0}/{1}~]"{2}"[/url]'.format(clid, uid, quote_plus(nickname_encoded), nickname)
+    return '[url=client://{0}/{1}~]"{2}"[/url]'.format(clid, uid, nickname_encoded, nickname)
 
 # I/O #
 def loadCfg(path, cfg):

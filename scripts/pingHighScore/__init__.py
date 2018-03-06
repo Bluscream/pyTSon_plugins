@@ -1,13 +1,11 @@
 import pytson, ts3lib, ts3defines, itertools, re, textwrap, datetime
 from ts3plugin import ts3plugin
 from collections import defaultdict, OrderedDict
+from bluscream import timestamp
 
 def take(n, iterable):
     """Return first n items of the iterable as a list"""
     return list(itertools.islice(iterable, n))
-
-def date(): return '{:%Y-%m-%d}'.format(datetime.datetime.now())
-def time(): return '{:%H:%M:%S}'.format(datetime.datetime.now())
 
 def channelURL(schid=None, cid=0, name=None):
     if schid == None:
@@ -44,11 +42,8 @@ class pingHighScore(ts3plugin):
     debug = False
     c = []
 
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
-
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def processCommand(self, schid, cmd):
         cmd = cmd.split(' ', 1)
