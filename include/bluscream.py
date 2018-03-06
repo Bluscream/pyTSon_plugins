@@ -188,7 +188,7 @@ def getContacts():
     q = db.query("SELECT * FROM contacts")
     while q.next():
         try:
-            key = q.value("key")
+            key = int(q.value("key"))
             ret[key] = {"Timestamp": q.value("timestamp")}
             val = q.value("value")
             for l in val.split('\n'):
