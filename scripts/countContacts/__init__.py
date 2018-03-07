@@ -117,12 +117,18 @@ class countContacts(ts3plugin):
         if unknown > 0: msg.append("Unknown: [color=orange]{}[/color] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
                     unknown, percentage(unknown, sum), f_unknown, percentage(f_unknown, unknown), m_unknown, percentage(m_unknown, unknown), unknown-(m_unknown+f_unknown), percentage(unknown-(m_unknown+f_unknown), unknown)))
         if first:
-            msg.append("First: {}: {} on {}".format(
-            firstc["LastSeen"].replace("T", " "), clientURL(1, 0, firstc["IDS"], firstc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, firstc["LastSeenServerName"].decode("utf-8", "ignore"))))
+            msg.append("First: {} {} {} on {}".format(
+            firstc["LastSeen"].replace("T", " "), self.readableContactStatus(firstc), clientURL(1, 0, firstc["IDS"], firstc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, firstc["LastSeenServerName"].decode("utf-8", "ignore"))))
         if last:
-            msg.append("Last: {}: {} on {}".format(
-            lastc["LastSeen"].replace("T", " "), clientURL(1, 0, lastc["IDS"], lastc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, lastc["LastSeenServerName"].decode("utf-8", "ignore"))))
+            msg.append("Last: {} {} {} on {}".format(
+            lastc["LastSeen"].replace("T", " "), self.readableContactStatus(firstc), clientURL(1, 0, lastc["IDS"], lastc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, lastc["LastSeenServerName"].decode("utf-8", "ignore"))))
         return "\n".join(msg)
+
+    def readableContactStatus(self, contact):
+        if contact["Friend"] == 0: return "[color=green]Friend[/color]"
+        elif contact["Friend"] == 1: return "[color=red]Blocked[/color]"
+        elif contact["Friend"] == 2: return "Neutral"
+        else: return "[color=orange]Unknown[/color]"
 
     def infoData(self, schid, id, atype):
         if self.count < 3: self.count += 1; return None
