@@ -1,31 +1,10 @@
 from ts3plugin import ts3plugin, PluginHost
 from bluscream import *
-from pytson import getCurrentApiVersion
+from configparser import ConfigParser
+from getvalues import getValues, ValueType
+from pytson import getPluginPath, getCurrentApiVersion
+from PythonQt.QtGui import QDialog
 import ts3defines, ts3lib, ts3client, time
-
-def getContacts():
-    db = ts3client.Config()
-    ret = []
-    q = db.query("SELECT * FROM contacts")
-    while q.next():
-        try:
-            cur = {"Key": int(q.value("key")), "Timestamp": q.value("timestamp")}
-            val = q.value("value")
-            for l in val.split('\n'):
-                try:
-                    l = l.split('=', 1)
-                    if len(l) != 2: continue
-                    if l[0] in ["Nickname","PhoneticNickname","LastSeenServerName","LastSeenServerAddress","IDS","VolumeModifier"]: cur[l[0]] = l[1].encode('ansii')
-                    elif l[0] in ["Friend","NickShowType"]: cur[l[0]] = int(l[1])
-                    elif l[0] in ["Automute","IgnorePublicMessages","IgnorePrivateMessages","IgnorePokes","IgnoreAvatar","IgnoreAwayMessage","HaveVolumeModifier","WhisperAllow"]:
-                        if l[1] == "false": cur[l[0]] = False
-                        elif l[1] == "true": cur[l[0]] = True
-                    if l[0] == "LastSeen" and l[1]: cur["LastSeenEpoch"] = int(time.mktime(time.strptime(l[1], '%Y-%m-%dT%H:%M:%S')))
-                except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
-            ret.append(cur)
-        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
-    del db
-    return ret
 
 class countContacts(ts3plugin):
     name = "Count Contacts"
@@ -35,7 +14,7 @@ class countContacts(ts3plugin):
     version = "1"
     author = "Bluscream"
     description = "Gives you numbers"
-    offersConfigure = False
+    offersConfigure = True
     commandKeyword = "ccount"
     infoTitle = "[b]Contacts:[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, ""),
@@ -44,9 +23,32 @@ class countContacts(ts3plugin):
                 ]
     hotkeys = []
     count = 0
+    ini = os.path.join(getPluginPath(), "scripts", "countContacts", "settings.ini")
+    config = ConfigParser()
 
     def __init__(self):
+        if os.path.isfile(self.ini): self.config.read(self.ini)
+        else:
+            self.config['general'] = { "Male Prefix": "m/", "Female Prefix": "f/", "Soundboard Prefix": "s/" }
+            with open(self.ini, 'w') as configfile: self.config.write(configfile)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
+
+    def configure(self, qParentWidget):
+        d = dict()
+        d['Male Prefix'] = (ValueType.string, "Male", self.config['general']['Male Prefix'], None, 1)
+        d['Female Prefix'] = (ValueType.string, "Female", self.config['general']['Female Prefix'], None, 1)
+        d['Soundboard Prefix'] = (ValueType.string, "Soundboard", self.config['general']['Soundboard Prefix'], None, 1)
+        getValues(None, "Count Contacts Prefixes", d, self.configDialogClosed)
+
+    def configDialogClosed(self, r, vals):
+        if r != QDialog.Rejected:
+            self.config["general"] = {
+                "Male Prefix": str(vals["Male Prefix"]),
+                "Female Prefix": str(vals["Female Prefix"]),
+                "Soundboard Prefix": str(vals["Soundboard Prefix"])
+            }
+            with open(self.ini, 'w') as configfile:
+                self.config.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID != 0: return
@@ -64,42 +66,48 @@ class countContacts(ts3plugin):
 
     def contactStats(self):
         buddies = 0;blocked = 0;neutral = 0;unknown = 0
-        female = 0;male = 0
-        f_buddies = 0;m_buddies = 0;
-        f_blocked = 0;m_blocked = 0;
-        f_neutral = 0;m_neutral = 0;
-        f_unknown = 0;m_unknown = 0;
+        female = 0;male = 0;soundboard = 0
+        f_buddies = 0;m_buddies = 0
+        f_blocked = 0;m_blocked = 0
+        f_neutral = 0;m_neutral = 0
+        f_unknown = 0;m_unknown = 0
         contacts = getContacts()
         contact = None
-        times = []
+        first = round(time.time()); last = 0
+        firstc = None; lastc = None
         for contact in contacts:
-            print("current contact:", contact)
-            nick = contact["Nickname"].lower()
-            print(nick)
-            if nick.startswith('w/'): female += 1
-            elif nick.startswith('m/'): male += 1
+            nick = contact["Nickname"].decode("utf-8").lower()
+            if nick.startswith(self.config['general']['Female Prefix']): female += 1
+            elif nick.startswith(self.config['general']['Male Prefix']): male += 1
+            elif nick.startswith(self.config['general']['Soundboard Prefix']): soundboard += 1
             status = contact["Friend"]
             if status == ContactStatus.FRIEND:
                 buddies += 1
-                if nick.startswith('w/'): f_buddies += 1
-                elif nick.startswith('m/'): m_buddies += 1
+                if nick.startswith(self.config['general']['Female Prefix']): f_buddies += 1
+                elif nick.startswith(self.config['general']['Male Prefix']): m_buddies += 1
             elif status == ContactStatus.BLOCKED:
                 blocked += 1
-                if nick.startswith('w/'): f_blocked += 1
-                elif nick.startswith('m/'): m_blocked += 1
+                if nick.startswith(self.config['general']['Female Prefix']): f_blocked += 1
+                elif nick.startswith(self.config['general']['Male Prefix']): m_blocked += 1
             elif status == ContactStatus.NEUTRAL:
                 neutral += 1
-                if nick.startswith('w/'): f_neutral += 1
-                elif nick.startswith('m/'): m_neutral += 1
+                if nick.startswith(self.config['general']['Female Prefix']): f_neutral += 1
+                elif nick.startswith(self.config['general']['Male Prefix']): m_neutral += 1
             else:
                 unknown += 1
-                if nick.startswith('w/'): f_unknown += 1
-                elif nick.startswith('m/'): m_unknown += 1
-            if hasattr(contact, "LastSeenEpoch"): times.append(contact["LastSeenEpoch"])
+                if nick.startswith(self.config['general']['Female Prefix']): f_unknown += 1
+                elif nick.startswith(self.config['general']['Male Prefix']): m_unknown += 1
+            if "LastSeenEpoch" in contact:
+                if contact["LastSeenEpoch"] < first:
+                    first = contact["LastSeenEpoch"]
+                    firstc = contact
+                if contact["LastSeenEpoch"] > last:
+                    last = contact["LastSeenEpoch"]
+                    lastc = contact
         sum = buddies+blocked+neutral+unknown
         msg = ["My Contact Stats:"]
-        msg.append("Sum: [b]{}[/b] | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
-                    sum, female, percentage(female, sum), male, percentage(male, sum), sum-(male+female), percentage(sum-(male+female), sum)))
+        msg.append("Sum: [b]{}[/b] | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%){}".format(
+                    sum, female, percentage(female, sum), male, percentage(male, sum), sum-(male+female), percentage(sum-(male+female), sum), " | Soundboard: {} ({}%)".format(soundboard, percentage(soundboard, sum)) if soundboard > 0 else ""))
         msg.append("[color=green]Buddies[/color]: [b]{}[/b] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
                     buddies, percentage(buddies, sum), f_buddies, percentage(f_buddies, buddies), m_buddies, percentage(m_buddies, buddies), buddies-(m_buddies+f_buddies), percentage(buddies-(m_buddies+f_buddies), buddies)))
         msg.append("[color=red]Blocked[/color]: [b]{}[/b] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
@@ -108,9 +116,12 @@ class countContacts(ts3plugin):
                     neutral, percentage(neutral, sum), f_neutral, percentage(f_neutral, neutral), m_neutral, percentage(m_neutral, neutral), neutral-(m_neutral+f_neutral), percentage(neutral-(m_neutral+f_neutral), neutral)))
         if unknown > 0: msg.append("Unknown: [color=orange]{}[/color] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
                     unknown, percentage(unknown, sum), f_unknown, percentage(f_unknown, unknown), m_unknown, percentage(m_unknown, unknown), unknown-(m_unknown+f_unknown), percentage(unknown-(m_unknown+f_unknown), unknown)))
-        # msg.append("First: {} ({}) | Last: {} ({})".format(contacts[0]["Nickname"], contacts[0]["LastSeen"], contacts[sorted(contacts.keys())[-1]]["Nickname"], contacts[sorted(contacts.keys())[-1]]["LastSeen"]))
-        # if female > 0: msg.append("[color=purple]Female[/color]: {} ({}%)".format(female, percentage(female, sum)))
-        # if male > 0: msg.append("[color=lightblue]Male[/color]: {} ({}%)".format(male, percentage(male, sum)))
+        if first:
+            msg.append("First: {}: {} on {}".format(
+            firstc["LastSeen"].replace("T", " "), clientURL(1, 0, firstc["IDS"], firstc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, firstc["LastSeenServerName"].decode("utf-8", "ignore"))))
+        if last:
+            msg.append("Last: {}: {} on {}".format(
+            lastc["LastSeen"].replace("T", " "), clientURL(1, 0, lastc["IDS"], lastc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, lastc["LastSeenServerName"].decode("utf-8", "ignore"))))
         return "\n".join(msg)
 
     def infoData(self, schid, id, atype):
@@ -153,24 +164,3 @@ class countContacts(ts3plugin):
         _return.append("Neutral: {} ({}%)".format(neutral, percentage(neutral, _sum)))
         if unknown > 0: _return.append("[color=orange]Unknown[/color]: {} ({}%)".format(unknown, percentage(unknown, _sum)))
         return _return
-
-
-"""
-Nickname=w/Tina Apokalypse
-Friend=0
-Automute=false
-IgnorePublicMessages=false
-IgnorePrivateMessages=false
-IgnorePokes=false
-IgnoreAvatar=false
-IgnoreAwayMessage=false
-NickShowType=2
-HaveVolumeModifier=true
-VolumeModifier=0
-WhisperAllow=true
-PhoneticNickname=
-LastSeen=2017-11-29T22:20:03
-LastSeenServerName=VIP CLAN
-LastSeenServerAddress=
-IDS=MLxQx2MkV48xigapaMiKkCXyOZQ=
-"""

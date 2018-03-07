@@ -55,30 +55,28 @@ def find_between_r(s, first, last):
 
 # PARSING #
 def channelURL(schid=None, cid=0, name=None):
-    if schid == None:
+    if schid is None:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
-    if name == None:
+    if name is None:
         try: (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
         except: name = cid
     return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
 
 def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
-    if schid == 0:
+    if not schid:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
-    if uid == "":
+    if not uid:
         try: (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         except: pass
-    if nickname == "":
+    if not nickname:
         try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         except: nickname = uid
-    if nickname_encoded == "":
-        try:
-            (err, nickname_encoded) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-            nickname_encoded = quote_plus(nickname_encoded)
+    if not nickname_encoded:
+        try: nickname_encoded = quote_plus(nickname)
         except: nickname_encoded = uid
-    return '[url=client://{0}/{1}~]"{2}"[/url]'.format(clid, uid, nickname_encoded, nickname)
+    return '[url=client://{0}/{1}~{2}]"{3}"[/url]'.format(clid, uid, nickname_encoded, nickname)
 
 # I/O #
 def loadCfg(path, cfg):
@@ -184,19 +182,26 @@ def getAddons():
 
 def getContacts():
     db = ts3client.Config()
-    ret = {}
+    ret = []
     q = db.query("SELECT * FROM contacts")
     while q.next():
         try:
-            key = int(q.value("key"))
-            ret[key] = {"Timestamp": q.value("timestamp")}
+            cur = {"Key": int(q.value("key")), "Timestamp": q.value("timestamp")}
             val = q.value("value")
             for l in val.split('\n'):
-                l = l.split('=', 1)
-                try: ret[key][l[0]] = int(l[1])
-                except: ret[key][l[0]] = l[1]
-                if l[0] == "LastSeen" and l[1]: ret[key]["LastSeenEpoch"] = int(time.mktime(time.strptime(l[1], '%Y-%m-%dT%H:%M:%S')))
-        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
+                try:
+                    l = l.split('=', 1)
+                    if len(l) != 2: continue
+                    if l[0] in ["Nickname","PhoneticNickname","LastSeenServerName"]: cur[l[0]] = l[1].encode('ascii', 'ignore')
+                    elif l[0] in ["LastSeenServerAddress","IDS","VolumeModifier", "LastSeen"]: cur[l[0]] = l[1]
+                    elif l[0] in ["Friend","NickShowType"]: cur[l[0]] = int(l[1])
+                    elif l[0] in ["Automute","IgnorePublicMessages","IgnorePrivateMessages","IgnorePokes","IgnoreAvatar","IgnoreAwayMessage","HaveVolumeModifier","WhisperAllow"]:
+                        if l[1] == "false": cur[l[0]] = False
+                        elif l[1] == "true": cur[l[0]] = True
+                    if l[0] == "LastSeen" and l[1]: cur["LastSeenEpoch"] = int(time.mktime(time.strptime(l[1], '%Y-%m-%dT%H:%M:%S')))
+                except: continue
+            ret.append(cur)
+        except: continue
     del db
     return ret
 
