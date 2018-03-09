@@ -19,8 +19,7 @@ class countContacts(ts3plugin):
     infoTitle = "[b]Contacts:[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, ""),
                  (ts3defines.PluginItemType.PLUGIN_CHANNEL, 0, "Send Contact Stats", ""),
-                 (ts3defines.PluginItemType.PLUGIN_CLIENT, 0, "Send Contact Stats", "")
-                ]
+                 (ts3defines.PluginItemType.PLUGIN_CLIENT, 0, "Send Contact Stats", "")]
     hotkeys = []
     count = 0
     ini = os.path.join(getPluginPath(), "scripts", "countContacts", "settings.ini")
@@ -29,26 +28,22 @@ class countContacts(ts3plugin):
     def __init__(self):
         if os.path.isfile(self.ini): self.config.read(self.ini)
         else:
-            self.config['general'] = { "Male Prefix": "m/", "Female Prefix": "f/", "Soundboard Prefix": "s/" }
+            self.config['general'] = { "Male": "m/", "Female": "f/" }
             with open(self.ini, 'w') as configfile: self.config.write(configfile)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def configure(self, qParentWidget):
         d = dict()
-        d['Male Prefix'] = (ValueType.string, "Male", self.config['general']['Male Prefix'], None, 1)
-        d['Female Prefix'] = (ValueType.string, "Female", self.config['general']['Female Prefix'], None, 1)
-        d['Soundboard Prefix'] = (ValueType.string, "Soundboard", self.config['general']['Soundboard Prefix'], None, 1)
+        for k in self.config['general']:
+            d[k] = (ValueType.string, k, self.config['general'][k], None, 1)
         getValues(None, "Count Contacts Prefixes", d, self.configDialogClosed)
 
     def configDialogClosed(self, r, vals):
-        if r != QDialog.Rejected:
-            self.config["general"] = {
-                "Male Prefix": str(vals["Male Prefix"]),
-                "Female Prefix": str(vals["Female Prefix"]),
-                "Soundboard Prefix": str(vals["Soundboard Prefix"])
-            }
-            with open(self.ini, 'w') as configfile:
-                self.config.write(configfile)
+        if r == QDialog.Rejected: return
+        for val in vals:
+            self.config.set("general", val, vals[val])
+        with open(self.ini, 'w') as configfile:
+            self.config.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID != 0: return
@@ -62,9 +57,9 @@ class countContacts(ts3plugin):
     def processCommand(self, schid, command): self.printContacts(); return True
 
     def printContacts(self):
-        ts3lib.printMessageToCurrentTab("{}{}".format(timestamp(), self.contactStats()))
+        ts3lib.printMessageToCurrentTab("{}{}".format(timestamp(), self.contactStats(True)))
 
-    def contactStats(self):
+    def contactStats(self,detailed=False):
         buddies = 0;blocked = 0;neutral = 0;unknown = 0
         female = 0;male = 0;soundboard = 0
         f_buddies = 0;m_buddies = 0
@@ -72,9 +67,9 @@ class countContacts(ts3plugin):
         f_neutral = 0;m_neutral = 0
         f_unknown = 0;m_unknown = 0
         contacts = getContacts()
-        contact = None
-        first = round(time.time()); last = 0
-        firstc = None; lastc = None
+        if detailed:
+            first = round(time.time()); last = 0
+            firstc = None; lastc = None
         for contact in contacts:
             nick = contact["Nickname"].decode("utf-8").lower()
             if nick.startswith(self.config['general']['Female Prefix']): female += 1
@@ -97,7 +92,7 @@ class countContacts(ts3plugin):
                 unknown += 1
                 if nick.startswith(self.config['general']['Female Prefix']): f_unknown += 1
                 elif nick.startswith(self.config['general']['Male Prefix']): m_unknown += 1
-            if "LastSeenEpoch" in contact:
+            if "LastSeenEpoch" in contact and detailed:
                 if contact["LastSeenEpoch"] < first:
                     first = contact["LastSeenEpoch"]
                     firstc = contact
@@ -116,18 +111,18 @@ class countContacts(ts3plugin):
                     neutral, percentage(neutral, sum), f_neutral, percentage(f_neutral, neutral), m_neutral, percentage(m_neutral, neutral), neutral-(m_neutral+f_neutral), percentage(neutral-(m_neutral+f_neutral), neutral)))
         if unknown > 0: msg.append("Unknown: [color=orange]{}[/color] ({}%) | [color=purple]Female[/color]: {} ({}%) | [color=lightblue]Male[/color]: {} ({}%) | Others: {} ({}%)".format(
                     unknown, percentage(unknown, sum), f_unknown, percentage(f_unknown, unknown), m_unknown, percentage(m_unknown, unknown), unknown-(m_unknown+f_unknown), percentage(unknown-(m_unknown+f_unknown), unknown)))
-        if first:
+        if detailed and first:
             msg.append("First: {} {} {} on {}".format(
             firstc["LastSeen"].replace("T", " "), self.readableContactStatus(firstc), clientURL(1, 0, firstc["IDS"], firstc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, firstc["LastSeenServerName"].decode("utf-8", "ignore"))))
-        if last:
+        if detailed and last:
             msg.append("Last: {} {} {} on {}".format(
             lastc["LastSeen"].replace("T", " "), self.readableContactStatus(firstc), clientURL(1, 0, lastc["IDS"], lastc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, lastc["LastSeenServerName"].decode("utf-8", "ignore"))))
         return "\n".join(msg)
 
     def readableContactStatus(self, contact):
-        if contact["Friend"] == 0: return "[color=green]Friend[/color]"
-        elif contact["Friend"] == 1: return "[color=red]Blocked[/color]"
-        elif contact["Friend"] == 2: return "Neutral"
+        if contact["Friend"] == ContactStatus.FRIEND: return "[color=green]Friend[/color]"
+        elif contact["Friend"] == ContactStatus.BLOCKED: return "[color=red]Blocked[/color]"
+        elif contact["Friend"] == ContactStatus.NEUTRAL: return "Neutral"
         else: return "[color=orange]Unknown[/color]"
 
     def infoData(self, schid, id, atype):
