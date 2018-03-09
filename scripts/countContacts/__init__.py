@@ -2,8 +2,11 @@ from ts3plugin import ts3plugin, PluginHost
 from bluscream import *
 from configparser import ConfigParser
 from getvalues import getValues, ValueType
+from pytsonui import setupUi
 from pytson import getPluginPath, getCurrentApiVersion
-from PythonQt.QtGui import QDialog
+from PythonQt.QtGui import QDialog, QTableWidgetItem, QComboBox, QCheckBox
+from PythonQt.QtCore import Qt
+from traceback import format_exc
 import ts3defines, ts3lib, ts3client, time
 
 class countContacts(ts3plugin):
@@ -23,27 +26,35 @@ class countContacts(ts3plugin):
     hotkeys = []
     count = 0
     ini = os.path.join(getPluginPath(), "scripts", "countContacts", "settings.ini")
-    config = ConfigParser()
+    ui = os.path.join(getPluginPath(), "scripts", "countContacts", "filters.ui")
+    cfg = ConfigParser()
+    cfg.optionxform=str
+    dlg = None
 
     def __init__(self):
-        if os.path.isfile(self.ini): self.config.read(self.ini)
+        if os.path.isfile(self.ini): self.cfg.read(self.ini)
         else:
-            self.config['general'] = { "Male": "m/", "Female": "f/" }
-            with open(self.ini, 'w') as configfile: self.config.write(configfile)
+            self.cfg['filters'] = { "Male": "m/", "Female": "f/" }
+            with open(self.ini, 'w') as configfile: self.cfg.write(configfile)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def configure(self, qParentWidget):
+        if not self.dlg: self.dlg = contactStatsFilters(self)
+        self.dlg.show()
+        self.dlg.raise_()
+        self.dlg.activateWindow()
+        return QDialog.Rejected
         d = dict()
-        for k in self.config['general']:
-            d[k] = (ValueType.string, k, self.config['general'][k], None, 1)
+        for k in self.cfg['filters']:
+            d[k] = (ValueType.string, k, self.cfg['filters'][k], None, 1)
         getValues(None, "Count Contacts Prefixes", d, self.configDialogClosed)
 
     def configDialogClosed(self, r, vals):
         if r == QDialog.Rejected: return
         for val in vals:
-            self.config.set("general", val, vals[val])
+            self.cfg.set("general", val, vals[val])
         with open(self.ini, 'w') as configfile:
-            self.config.write(configfile)
+            self.cfg.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID != 0: return
@@ -72,26 +83,26 @@ class countContacts(ts3plugin):
             firstc = None; lastc = None
         for contact in contacts:
             nick = contact["Nickname"].decode("utf-8").lower()
-            if nick.startswith(self.config['general']['Female Prefix']): female += 1
-            elif nick.startswith(self.config['general']['Male Prefix']): male += 1
-            elif nick.startswith(self.config['general']['Soundboard Prefix']): soundboard += 1
+            if nick.startswith(self.cfg['filters']['Female Prefix']): female += 1
+            elif nick.startswith(self.cfg['filters']['Male Prefix']): male += 1
+            elif nick.startswith(self.cfg['filters']['Soundboard Prefix']): soundboard += 1
             status = contact["Friend"]
             if status == ContactStatus.FRIEND:
                 buddies += 1
-                if nick.startswith(self.config['general']['Female Prefix']): f_buddies += 1
-                elif nick.startswith(self.config['general']['Male Prefix']): m_buddies += 1
+                if nick.startswith(self.cfg['filters']['Female Prefix']): f_buddies += 1
+                elif nick.startswith(self.cfg['filters']['Male Prefix']): m_buddies += 1
             elif status == ContactStatus.BLOCKED:
                 blocked += 1
-                if nick.startswith(self.config['general']['Female Prefix']): f_blocked += 1
-                elif nick.startswith(self.config['general']['Male Prefix']): m_blocked += 1
+                if nick.startswith(self.cfg['filters']['Female Prefix']): f_blocked += 1
+                elif nick.startswith(self.cfg['filters']['Male Prefix']): m_blocked += 1
             elif status == ContactStatus.NEUTRAL:
                 neutral += 1
-                if nick.startswith(self.config['general']['Female Prefix']): f_neutral += 1
-                elif nick.startswith(self.config['general']['Male Prefix']): m_neutral += 1
+                if nick.startswith(self.cfg['filters']['Female Prefix']): f_neutral += 1
+                elif nick.startswith(self.cfg['filters']['Male Prefix']): m_neutral += 1
             else:
                 unknown += 1
-                if nick.startswith(self.config['general']['Female Prefix']): f_unknown += 1
-                elif nick.startswith(self.config['general']['Male Prefix']): m_unknown += 1
+                if nick.startswith(self.cfg['filters']['Female Prefix']): f_unknown += 1
+                elif nick.startswith(self.cfg['filters']['Male Prefix']): m_unknown += 1
             if "LastSeenEpoch" in contact and detailed:
                 if contact["LastSeenEpoch"] < first:
                     first = contact["LastSeenEpoch"]
@@ -165,3 +176,49 @@ class countContacts(ts3plugin):
         _return.append("Neutral: {} ({}%)".format(neutral, percentage(neutral, _sum)))
         if unknown > 0: _return.append("[color=orange]Unknown[/color]: {} ({}%)".format(unknown, percentage(unknown, _sum)))
         return _return
+
+
+class contactStatsFilters(QDialog):
+    listen = False
+    def __init__(self, script, parent=None):
+        try:
+            super(QDialog, self).__init__(parent)
+            setupUi(self, script.ui)
+            self.cfg = script.cfg
+            self.ini = script.ini
+            self.reloadPlugin = script.__init__
+            self.setAttribute(Qt.WA_DeleteOnClose)
+            self.setWindowTitle("Count Contacts Filters")
+            self.setupTable()
+            self.listen = True
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def setupTable(self):
+        try:
+            self.tbl_filters.clearContents()
+            self.tbl_filters.setRowCount(0)
+            for o in self.cfg.options('filters'):
+                pos = self.tbl_filters.rowCount
+                self.tbl_filters.insertRow(pos)
+                tmp = self.cfg.get('filters', o).split('|', 2)
+                chk_case = QCheckBox()
+                chk_case.setChecked(bool(int(tmp[0])))
+                self.tbl_filters.setCellWidget(pos, 0, chk_case)
+                box_type = QComboBox()
+                box_type.setCurrentText(tmp[1])
+                box_type.addItems(["Prefix", "Suffix", "Contains", "Equals"])
+                box_type.connect("currentIndexChanged(int)", self.currentIndexChanged)
+                self.tbl_filters.setCellWidget(pos, 1, box_type)
+                self.tbl_filters.setItem(pos, 2, QTableWidgetItem(o))
+                self.tbl_filters.setItem(pos, 3, QTableWidgetItem(tmp[2]))
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def currentIndexChanged(self, i):
+        if PluginHost.cfg.getboolean("filters", "verbose"): print("test", i)
+        row = self.tbl_filters.currentRow()
+        if PluginHost.cfg.getboolean("filters", "verbose"): print("row:", row)
+        # item = self.tbl_members.itemAt(const QPoint &point)
+        # item = self.tbl_members.selectedItems()
+        # print("item:", item)
+        # self.tbl_members.at
+        # ts3lib.requestSetClientChannelGroup(self.schid, [item.itemData], [self.channel], [self.dbid])

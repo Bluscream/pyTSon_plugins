@@ -34,6 +34,11 @@
      </column>
      <column>
       <property name="text">
+       <string>Filter</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>Text</string>
       </property>
      </column>
