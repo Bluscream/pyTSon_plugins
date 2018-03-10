@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>940</width>
-    <height>652</height>
+    <width>573</width>
+    <height>344</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -85,6 +85,20 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="btn_apply">
+       <property name="text">
+        <string>Apply</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="btn_save">
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
