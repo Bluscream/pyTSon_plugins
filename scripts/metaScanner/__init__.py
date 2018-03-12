@@ -23,10 +23,14 @@ class metaScanner(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
-        ts3lib.printMessageToCurrentTab("{}[u]Online users with metadata[/u]:".format(timestamp()))
         (err, clist) = ts3lib.getClientList(schid)
+        msg = []
         for c in clist:
             (err, mdata) = ts3lib.getClientVariable(schid, c, ts3defines.ClientProperties.CLIENT_META_DATA)
             if mdata and mdata.strip() != "":
-                mdata = (mdata[:100].replace("\\", "\\\\"))
-                ts3lib.printMessageToCurrentTab("{}: {}".format(clientURL(schid, c), mdata))
+                mdata = (mdata[:100].replace("\n", "\\n"))
+                msg.append("{}: {}".format(clientURL(schid, c), mdata))
+        ts3lib.printMessageToCurrentTab("{}[u]Online users with metadata[/u]: [b]{}[/b]".format(timestamp(), len(msg)))
+        msg.sort(key=lambda s: s.split()[1])
+        i = 1
+        for m in msg: ts3lib.printMessageToCurrentTab("{} {}".format(i, m)); i += 1
