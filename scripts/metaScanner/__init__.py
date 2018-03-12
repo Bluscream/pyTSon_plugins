@@ -31,6 +31,7 @@ class metaScanner(ts3plugin):
                 mdata = (mdata[:100].replace("\n", "\\n"))
                 msg.append("{}: {}".format(clientURL(schid, c), mdata))
         ts3lib.printMessageToCurrentTab("{}[u]Online users with metadata[/u]: [b]{}[/b]".format(timestamp(), len(msg)))
-        msg.sort(key=lambda s: s.split()[1])
+        try: msg.sort(key=lambda s: s.split(": ")[1])
+        except: pass
         i = 1
         for m in msg: ts3lib.printMessageToCurrentTab("{} {}".format(i, m)); i += 1
