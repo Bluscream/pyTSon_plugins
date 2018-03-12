@@ -70,6 +70,20 @@ class countContacts(ts3plugin):
     def printContacts(self):
         ts3lib.printMessageToCurrentTab("{}{}".format(timestamp(), self.contactStats(True)))
 
+    def checkFilters(self, counters, nick):
+        for k in self.cfg['filters']:
+            tmp = self.cfg.get('filters', k).split('|', 2)
+            case = bool(int(tmp[0]));mode = tmp[1];text = tmp[2]
+            if case: nick = nick.lower(); text = text.lower()
+            if mode == "Prefix":
+                if nick.startswith(text): counters[k] += 1
+            elif mode == "Suffix":
+                if nick.endswith(text): counters[k] += 1
+            elif mode == "Contains":
+                if text in nick: counters[k] += 1
+            elif mode == "Equals":
+                if text == nick: counters[k] += 1
+
     def contactStats(self,detailed=False):
         buddies = 0;blocked = 0;neutral = 0;unknown = 0
         counters = {};bcounters = {};blcounters = {};ncounters = {}; ucounters = {}
@@ -162,18 +176,22 @@ class countContacts(ts3plugin):
         tmp = []
         for c in counters: tmp.append("{}: {} ({}%)".format(c.title(), counters[c], percentage(counters[c], sum)))
         msg.append("Sum: [b]{}[/b] {}".format(sum, " | ".join(tmp)))
-        tmp = []
-        for c in bcounters: tmp.append("{}: {} ({}%)".format(c.title(), bcounters[c], percentage(bcounters[c], sum)))
-        msg.append("[color=green]Buddies[/color]: [b]{}[/b] ({}%) {}".format(buddies, percentage(buddies, sum), " | ".join(tmp)))
-        tmp = []
-        for c in blcounters: tmp.append("{}: {} ({}%)".format(c.title(), blcounters[c], percentage(blcounters[c], sum)))
-        msg.append("[color=red]Blocked[/color]: [b]{}[/b] ({}%) {}".format(blocked, percentage(blocked, sum), " | ".join(tmp)))
-        tmp = []
-        for c in ncounters: tmp.append("{}: {} ({}%)".format(c.title(), ncounters[c], percentage(ncounters[c], sum)))
-        msg.append("Neutral: [b]{}[/b] ({}%) {}".format(neutral, percentage(neutral, sum), " | ".join(tmp)))
-        tmp = []
-        for c in ucounters: tmp.append("{}: {} ({}%)".format(c.title(), ucounters[c], percentage(ucounters[c], sum)))
-        msg.append("[color=orange]Unknown[/color]: [b]{}[/b] ({}%) {}".format(unknown, percentage(unknown, sum), " | ".join(tmp)))
+        if buddies > 0:
+            tmp = []
+            for c in bcounters: tmp.append("{}: {} ({}%)".format(c.title(), bcounters[c], percentage(bcounters[c], sum)))
+            msg.append("[color=green]Buddies[/color]: [b]{}[/b] ({}%) {}".format(buddies, percentage(buddies, sum), " | ".join(tmp)))
+        if blocked > 0:
+            tmp = []
+            for c in blcounters: tmp.append("{}: {} ({}%)".format(c.title(), blcounters[c], percentage(blcounters[c], sum)))
+            msg.append("[color=red]Blocked[/color]: [b]{}[/b] ({}%) {}".format(blocked, percentage(blocked, sum), " | ".join(tmp)))
+        if neutral > 0:
+            tmp = []
+            for c in ncounters: tmp.append("{}: {} ({}%)".format(c.title(), ncounters[c], percentage(ncounters[c], sum)))
+            msg.append("Neutral: [b]{}[/b] ({}%) {}".format(neutral, percentage(neutral, sum), " | ".join(tmp)))
+        if unknown > 0:
+            tmp = []
+            for c in ucounters: tmp.append("{}: {} ({}%)".format(c.title(), ucounters[c], percentage(ucounters[c], sum)))
+            msg.append("[color=orange]Unknown[/color]: [b]{}[/b] ({}%) {}".format(unknown, percentage(unknown, sum), " | ".join(tmp)))
         if detailed and first:
             msg.append("First: {} {} {} on {}".format(
             firstc["LastSeen"].replace("T", " "), self.readableContactStatus(firstc), clientURL(1, 0, firstc["IDS"], firstc["Nickname"].decode("utf-8", "ignore")), channelURL(1, 0, firstc["LastSeenServerName"].decode("utf-8", "ignore"))))
