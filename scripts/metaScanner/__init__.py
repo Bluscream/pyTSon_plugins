@@ -30,7 +30,7 @@ class metaScanner(ts3plugin):
         if oldChannelID != 0: return
         (err, mdata) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_META_DATA)
         if not mdata or mdata.strip() == "": return
-        ts3lib.printMessage(schid, "{} {}'s Metadata: {}".format(timestamp(), clientURL(clientID), mdata), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        ts3lib.printMessage(schid, "{} {}'s Metadata: {}".format(timestamp(), clientURL(schid, clientID), mdata), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
     def printMetaUsers(self, schid):
         (err, clist) = ts3lib.getClientList(schid)

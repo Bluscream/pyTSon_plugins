@@ -6,9 +6,8 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/antiMove/__init__.py" line="55" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="kein bock mehr">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
       <change beforePath="$PROJECT_DIR$/scripts/metaScanner/__init__.py" afterPath="$PROJECT_DIR$/scripts/metaScanner/__init__.py" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -58,8 +57,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/metaScanner/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="26" column="91" lean-forward="false" selection-start-line="26" selection-start-column="91" selection-end-line="26" selection-end-column="91" />
+            <state relative-caret-position="518">
+              <caret line="32" column="74" lean-forward="false" selection-start-line="32" selection-start-column="65" selection-end-line="32" selection-end-column="74" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -695,13 +694,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00164" summary=":thinking:">
-      <created>1519096991464</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1519096991465</updated>
-    </task>
     <task id="LOCAL-00165" summary=":thinking:">
       <created>1519101551856</created>
       <option name="number" value="00165" />
@@ -1038,7 +1030,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520874430502</updated>
     </task>
-    <option name="localTasksCounter" value="213" />
+    <task id="LOCAL-00213" summary="kein bock mehr">
+      <created>1520879522530</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1520879522533</updated>
+    </task>
+    <option name="localTasksCounter" value="214" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1534,8 +1533,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/metaScanner/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="26" column="91" lean-forward="false" selection-start-line="26" selection-start-column="91" selection-end-line="26" selection-end-column="91" />
+        <state relative-caret-position="518">
+          <caret line="32" column="74" lean-forward="false" selection-start-line="32" selection-start-column="65" selection-end-line="32" selection-end-column="74" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
