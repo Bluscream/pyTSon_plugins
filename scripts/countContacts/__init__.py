@@ -21,6 +21,7 @@ class countContacts(ts3plugin):
     commandKeyword = "ccount"
     infoTitle = "[b]Contacts:[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, ""),
+                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Online Contacts", ""),
                  (ts3defines.PluginItemType.PLUGIN_CHANNEL, 0, "Send Contact Stats", ""),
                  (ts3defines.PluginItemType.PLUGIN_CLIENT, 0, "Send Contact Stats", "")]
     hotkeys = []
@@ -57,9 +58,9 @@ class countContacts(ts3plugin):
             self.cfg.write(configfile)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if menuItemID != 0: return
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
-            self.printContacts()
+            if menuItemID == 0: self.printContacts()
+            elif menuItemID == 1: ts3lib.printMessageToCurrentTab("{}{}".format(timestamp(), self.onlineContacts(schid, False)))
         elif atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
             ts3lib.requestSendChannelTextMsg(schid, self.contactStats(), selectedItemID)
         elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
@@ -83,6 +84,31 @@ class countContacts(ts3plugin):
                 if text in nick: counters[k] += 1
             elif mode == "Equals":
                 if text == nick: counters[k] += 1
+
+    def onlineContacts(self, schid, neutral=list()):
+        contacts = getContacts()
+        lst = {}
+        for contact in contacts:
+            lst[contact["IDS"]] = contact["Friend"]
+        del contacts
+        (err, clist) = ts3lib.getClientList(schid)
+        buddies = [];blocked = [];unknown = []
+        for clid in clist:
+            (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            if not uid in lst: continue
+            if lst[uid] == ContactStatus.FRIEND: buddies.append(clientURL(schid, clid, uid))
+            elif lst[uid] == ContactStatus.BLOCKED: blocked.append(clientURL(schid, clid, uid))
+            elif lst[uid] == ContactStatus.NEUTRAL:
+                if neutral: neutral.append(clientURL(schid, clid, uid))
+            else: unknown.append(clientURL(schid, clid, uid))
+        _sum = len(buddies)+len(blocked)+len(unknown)
+        if neutral: _sum += len(neutral)
+        msg = ["[u]My Online Contacts [/u]: [b]{}[/b]".format(_sum)]
+        if len(buddies) > 0: msg.append("[b]{}[/b] [color=green]Buddies[/color]: {}".format(len(buddies), " | ".join(buddies)))
+        if len(blocked) > 0: msg.append("[b]{}[/b] [color=red]Blocked[/color]: {}".format(len(blocked), " | ".join(blocked)))
+        if neutral and len(neutral) > 0: msg.append("[b]{}[/b] Neutral: {}".format(len(neutral), " | ".join(neutral)))
+        if len(unknown) > 0: msg.append("[b]{}[/b] [color=orange]Unknown[/color]: {}".format(len(unknown), " | ".join(unknown)))
+        return "\n".join(msg)
 
     def contactStats(self,detailed=False):
         buddies = 0;blocked = 0;neutral = 0;unknown = 0
