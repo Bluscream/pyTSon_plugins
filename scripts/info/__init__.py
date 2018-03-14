@@ -1,4 +1,4 @@
-import os.path, inspect, re, traceback, datetime, json, requests
+import os.path, inspect, re, traceback, json, requests
 import ts3lib as ts3
 from ts3plugin import ts3plugin, PluginHost
 from ts3defines import *
@@ -11,6 +11,7 @@ from inspect import getmembers
 from configparser import ConfigParser
 from urllib.parse import quote as urlencode
 from bluscream import *
+from datetime import timedelta, date
 
 class info(ts3plugin):
     name = "Extended Info"
@@ -71,7 +72,7 @@ class info(ts3plugin):
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
         if self.cfg.getboolean('general', 'Debug'):
-            ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+            ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def configDialogClosed(self, r, vals):
         try:
@@ -168,7 +169,7 @@ class info(ts3plugin):
             "CLIENT_CREATED",
             "CLIENT_LASTCONNECTED"
         ]:
-            val = datetime.datetime.fromtimestamp(val).strftime('%Y-%m-%d %H:%M:%S ({0})'.format(val))
+            pass# val = date().fromtimestamp(val).strftime('%Y-%m-%d %H:%M:%S ({0})'.format(val))
         elif name in [
             "VIRTUALSERVER_UPTIME",
             "VIRTUALSERVER_COMPLAIN_AUTOBAN_TIME",
@@ -178,7 +179,7 @@ class info(ts3plugin):
             "CONNECTION_CONNECTED_TIME",
             "CONNECTION_IDLE_TIME"
         ]:
-            val = '{0} ({1})'.format(datetime.timedelta(milliseconds=val), val)
+            val = '{0} ({1})'.format(timedelta(milliseconds=val), val)
         elif name == "TYPE": (t,val) = getItemTime(lst)
         elif name == "ID": return name, id
         elif name == "DISPLAYNAME": (err, val) = ts3.getClientDisplayName(schid, id)
