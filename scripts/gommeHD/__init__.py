@@ -56,6 +56,7 @@ Ich erklär dir auch wie's geht:
         if menuItemID != 0: return
         if atype == ts3defines.PluginItemType.PLUGIN_SERVER:
             self.askForAvatar = not self.askForAvatar
+            ts3lib.printMessageToCurrentTab("{}askForAvatar set to [color=orange]{}".format(timestamp(),self.askForAvatar))
         if atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
             ts3lib.requestSendChannelTextMsg(schid, self.steammsg, selectedItemID)
         elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
@@ -81,9 +82,10 @@ Ich erklär dir auch wie's geht:
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if getContactStatus(uid) == ContactStatus.BLOCKED: return
         if uid in self.alreadyAsked: return
-        (err, sgroups) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        if 17 in sgroups: return
-        if set(sgroups).isdisjoint([31,30,14]): return
+        (err, sgroups) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+        sgroups = sgroups.split(",")
+        if "17" in sgroups: return
+        if set(sgroups).isdisjoint(["31","30","14"]): return
         (err, myuid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, nick) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
         ts3lib.requestSendPrivateTextMsg(schid, self.avatarmsg.replace("{nick}", nick).replace("{myuid}", myuid).replace("{uid}", uid), clientID)
