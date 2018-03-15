@@ -131,7 +131,7 @@ class chatBot(ts3plugin):
 
     def answerMessage(self, schid, targetMode, toID, fromID, message, hideprefix=False):
         if schid in self.noperms: ts3lib.printMessageToCurrentTab("Insufficient permissions to answer message from {0}".format(fromID)); return
-        message = [message[i:i + 1024] for i in range(0, len(message), 1024)]
+        message = [message[i:i + 900] for i in range(0, len(message), 900)]
         if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT:
             for msg in message: self.returnCode = ts3lib.createReturnCode(); ts3lib.requestSendPrivateTextMsg(schid, msg, fromID, self.returnCode)
         elif targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL:
