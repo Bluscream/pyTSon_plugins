@@ -16,19 +16,22 @@ class gommeHD(ts3plugin):
     commandKeyword = ""
     infoTitle = None
     hotkeys = []
-    menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Ask for avatar", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Send Steam", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Send Steam", "")
-    ]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Ask for avatar", ""),
+                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Send Steam", ""),
+                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Send Steam", "")]
     suid = "QTRtPmYiSKpMS8Oyd4hyztcvLqU="
     channelAdminGroupID = 10
+    premiumGroupIDs = ["31","30","14"]
+    ruheGroupID = "17"
     gommeBotNick = "Gomme-Bot"
     delay = 1500
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
     askForAvatar = False
     alreadyAsked = []
+    schid = 0
+    clids = []
+    timer = QTimer()
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     blockMSG = "Diesen Befehl kannst du nur als Channel-Admin ausführen!"
     welcomeMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"']
@@ -50,6 +53,8 @@ Ich erklär dir auch wie's geht:
 """
 
     def __init__(self):
+        self.timer.timeout.connect(self.tick)
+        self.timer.setTimerType(2)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
@@ -57,10 +62,37 @@ Ich erklär dir auch wie's geht:
         if atype == ts3defines.PluginItemType.PLUGIN_SERVER:
             self.askForAvatar = not self.askForAvatar
             ts3lib.printMessageToCurrentTab("{}askForAvatar set to [color=orange]{}".format(timestamp(),self.askForAvatar))
+            if not self.askForAvatar:
+                self.clids = []
+                self.timer.stop()
+                return
+            (err, clids) = ts3lib.getClientList(schid)
+            for c in clids: ts3lib.requestClientVariables(schid, c)
+            for c in clids:
+                (err, uid) = ts3lib.getClientVariable(schid, c, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                if getContactStatus(uid) == ContactStatus.BLOCKED: continue
+                if uid in self.alreadyAsked: continue
+                (err, sgroups) = ts3lib.getClientVariableAsString(schid, c, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+                sgroups = sgroups.split(",")
+                if self.ruheGroupID in sgroups: continue
+                if set(sgroups).isdisjoint(self.premiumGroupIDs): continue
+                self.clids.append(c)
+            ts3lib.printMessageToCurrentTab("{}Asking {} clients for avatar".format(timestamp(),len(self.clids)))
+            self.schid = schid
+            self.timer.start(1000)
         if atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
             ts3lib.requestSendChannelTextMsg(schid, self.steammsg, selectedItemID)
         elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
             ts3lib.requestSendPrivateTextMsg(schid, self.steammsg, selectedItemID)
+
+    def tick(self):
+        if not self.askForAvatar or not self.schid or len(self.clids) < 1: self.timer.stop(); return
+        (err, myuid) = ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        (err, uid) = ts3lib.getClientVariable(self.schid, self.clids[0], ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        (err, nick) = ts3lib.getClientVariable(self.schid, self.clids[0], ts3defines.ClientProperties.CLIENT_NICKNAME)
+        ts3lib.requestSendPrivateTextMsg(self.schid, self.avatarmsg.replace("{nick}", nick).replace("{myuid}", myuid).replace("{uid}", uid), self.clids[0])
+        self.alreadyAsked.append(uid)
+        del self.clids[0]
 
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
         if fromUniqueIdentifier != "serveradmin": return False
@@ -84,8 +116,8 @@ Ich erklär dir auch wie's geht:
         if uid in self.alreadyAsked: return
         (err, sgroups) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
         sgroups = sgroups.split(",")
-        if "17" in sgroups: return
-        if set(sgroups).isdisjoint(["31","30","14"]): return
+        if self.ruheGroupID in sgroups: return
+        if set(sgroups).isdisjoint(self.premiumGroupIDs): return
         (err, myuid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, nick) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
         ts3lib.requestSendPrivateTextMsg(schid, self.avatarmsg.replace("{nick}", nick).replace("{myuid}", myuid).replace("{uid}", uid), clientID)
