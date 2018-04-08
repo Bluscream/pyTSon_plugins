@@ -13,7 +13,7 @@ class purgeContacts(ts3plugin):
     name = "Purge Contacts"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1"
     author = "Bluscream"
     description = "Allows you to clean your contact list "

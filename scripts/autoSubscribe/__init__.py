@@ -1,7 +1,8 @@
 import ts3lib, ts3defines, datetime
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from pytson import getPluginPath
 from os import path
+from bluscream import timestamp
 from PythonQt.QtCore import QTimer
 
 blacklist = [".fm", "radio", "music", "musik"]
@@ -34,8 +35,8 @@ def isSemiPermanent(schid, cid):
 
 class autoSubscribe(ts3plugin):
     name = "Auto Subscribe"
-
-    apiVersion = 22
+    try: apiVersion = getCurrentApiVersion()
+    except: apiVersion = 21
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -49,8 +50,6 @@ class autoSubscribe(ts3plugin):
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Sub all visible-pw channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "Unsub from all channels", "")]
     hotkeys = []
-    debug = False
-
     onlyOpen = False
     subAll = []
     subOpen = []
@@ -59,10 +58,9 @@ class autoSubscribe(ts3plugin):
     schid = 0
     toSub = []
 
-    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
-
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+        self.schid = ts3lib.getCurrentServerConnectionHandlerID()
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
@@ -79,13 +77,21 @@ class autoSubscribe(ts3plugin):
             elif uid in self.subNone: QTimer.singleShot(2500, self.unsubscribeAll)
             elif uid in self.subOpen: QTimer.singleShot(2500, self.subscribeOpen)
             if uid == "QTRtPmYiSKpMS8Oyd4hyztcvLqU=":
-                self.toSub = [46,48,136205,136209,545989]
+                self.toSub = [136205,136209,545989]#48=afk,46=iloveradio
                 QTimer.singleShot(2500, self.subChannels)
 
     def subChannels(self):
-        for cid in self.toSub:
-            ts3lib.requestChannelSubscribe(self.schid, [cid])
-        del self.toSub
+        ts3lib.printMessageToCurrentTab("schid: %s toSub: %s"%(self.schid, self.toSub))
+        try:
+            error = ts3lib.requestChannelSubscribe(self.schid, self.toSub)
+            ts3lib.printMessageToCurrentTab("error: %s"%error)
+            if not error == ts3defines.ERROR_ok: raise Exception("Error in requestChannelSubscribe")
+        except:
+            ts3lib.printMessageToCurrentTab("except")
+            for cid in self.toSub:
+                error = ts3lib.requestChannelSubscribe(self.schid, [cid])
+                ts3lib.printMessageToCurrentTab("error2: %s"%error)
+        self.toSub = []
 
     def subscribeAll(self, schid=None):
         if not schid: schid = self.schid
@@ -135,9 +141,15 @@ class autoSubscribe(ts3plugin):
         if not self.subscribeOpen: return False
         self.subscribe(schid, channelID)
 
+    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        ts3lib.printMessageToCurrentTab("schid: %s errorMessage: %s error: %s returnCode: %s extraMessage: %s"%(schid, errorMessage, error, returnCode, extraMessage))
+
+    def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+        ts3lib.printMessageToCurrentTab("schid: %s errorMessage: %s error: %s returnCode: %s failedPermissionID: %s"%(schid, errorMessage, error, returnCode, failedPermissionID))
+
     def subscribe(self, schid, cid):
         (error, subscribed) = ts3lib.getChannelVariableAsInt(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_ARE_SUBSCRIBED)
-        if self.debug:
+        if PluginHost.cfg.getboolean("general", "verbose"):
             ts3lib.printMessageToCurrentTab("==== #{0} ====".format(cid))
             ts3lib.printMessageToCurrentTab("Passworded: {0}".format(isPassworded(schid, cid)))
             ts3lib.printMessageToCurrentTab("PWInName: {0}".format(isPWInName(schid, cid)))

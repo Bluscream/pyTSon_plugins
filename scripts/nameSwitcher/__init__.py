@@ -10,7 +10,7 @@ class nameSwitcher(ts3plugin):
     name = "Name Switcher"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = ""
