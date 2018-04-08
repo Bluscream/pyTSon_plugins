@@ -77,7 +77,7 @@ class autoSubscribe(ts3plugin):
             elif uid in self.subNone: QTimer.singleShot(2500, self.unsubscribeAll)
             elif uid in self.subOpen: QTimer.singleShot(2500, self.subscribeOpen)
             if uid == "QTRtPmYiSKpMS8Oyd4hyztcvLqU=":
-                self.toSub = [136205,136209,545989]#48=afk,46=iloveradio
+                self.toSub = [136205,136209,545989]#support1-3,48=afk,46=iloveradio
                 QTimer.singleShot(2500, self.subChannels)
 
     def subChannels(self):
@@ -85,8 +85,7 @@ class autoSubscribe(ts3plugin):
             error = ts3lib.requestChannelSubscribe(self.schid, self.toSub)
             if not error == ts3defines.ERROR_ok: raise Exception("Error in requestChannelSubscribe")
         except:
-            for cid in self.toSub:
-                ts3lib.requestChannelSubscribe(self.schid, [cid])
+            for cid in self.toSub: ts3lib.requestChannelSubscribe(self.schid, [cid])
         self.toSub = []
 
     def subscribeAll(self, schid=None):
