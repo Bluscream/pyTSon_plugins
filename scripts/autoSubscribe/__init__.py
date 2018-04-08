@@ -81,16 +81,12 @@ class autoSubscribe(ts3plugin):
                 QTimer.singleShot(2500, self.subChannels)
 
     def subChannels(self):
-        ts3lib.printMessageToCurrentTab("schid: %s toSub: %s"%(self.schid, self.toSub))
         try:
             error = ts3lib.requestChannelSubscribe(self.schid, self.toSub)
-            ts3lib.printMessageToCurrentTab("error: %s"%error)
             if not error == ts3defines.ERROR_ok: raise Exception("Error in requestChannelSubscribe")
         except:
-            ts3lib.printMessageToCurrentTab("except")
             for cid in self.toSub:
-                error = ts3lib.requestChannelSubscribe(self.schid, [cid])
-                ts3lib.printMessageToCurrentTab("error2: %s"%error)
+                ts3lib.requestChannelSubscribe(self.schid, [cid])
         self.toSub = []
 
     def subscribeAll(self, schid=None):
@@ -140,12 +136,6 @@ class autoSubscribe(ts3plugin):
     def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if not self.subscribeOpen: return False
         self.subscribe(schid, channelID)
-
-    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        ts3lib.printMessageToCurrentTab("schid: %s errorMessage: %s error: %s returnCode: %s extraMessage: %s"%(schid, errorMessage, error, returnCode, extraMessage))
-
-    def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
-        ts3lib.printMessageToCurrentTab("schid: %s errorMessage: %s error: %s returnCode: %s failedPermissionID: %s"%(schid, errorMessage, error, returnCode, failedPermissionID))
 
     def subscribe(self, schid, cid):
         (error, subscribed) = ts3lib.getChannelVariableAsInt(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_ARE_SUBSCRIBED)
