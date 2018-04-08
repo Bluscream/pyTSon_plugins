@@ -42,7 +42,8 @@ class searchEverything(ts3plugin):
     def menuCreated(self):
         if not self.name in PluginHost.active: return
         for id in [0,10]:
-            ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
+            try: ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
+            except: pass
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         try:
