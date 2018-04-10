@@ -8,29 +8,48 @@ from PythonQt.QtCore import QTimer
 blacklist = [".fm", "radio", "music", "musik"]
 passwords = ["pw", "pass"]
 
+def isSubscribed(schid, cid):
+    (error, subscribed) = ts3lib.getChannelVariableAsInt(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_ARE_SUBSCRIBED)
+    if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Channel #{} is {}".format(cid, "[color=red]subscribed" if subscribed else "[color=green]not subscribed"))
+    return bool(subscribed)
+
 def isPassworded(schid, cid):
     (error, pw) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-    return pw
+    if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Channel #{} is {}".format(cid, "[color=red]passworded" if pw else "[color=green]not passworded"))
+    return bool(pw)
 
 def isBlacklisted(schid, cid):
     (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+    if PluginHost.cfg.getboolean("general", "verbose"):
+        bl = []
+        for b in blacklist:
+            if b in name.lower(): bl.append(b)
+        ts3lib.printMessageToCurrentTab("Channel #{} is {} ({})".format(cid, "[color=red]blacklisted ({})".format(", ".join(bl)) if any(x in name.lower() for x in blacklist) else "[color=green]not blacklisted", name))
     return any(x in name.lower() for x in blacklist)
 
 def isPWInName(schid, cid):
     (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+    if PluginHost.cfg.getboolean("general", "verbose"):
+        bl = []
+        for b in passwords:
+            if b in name.lower(): bl.append(b)
+        ts3lib.printMessageToCurrentTab("Channel #{} {} [{}]".format(cid, "[color=yellow]has pw in name ({})".format(", ".join(bl)) if any(x in name.lower() for x in passwords) else "[color=grey]doesn't have pw in name", name))
     return any(x in name.lower() for x in passwords)
 
 def isMusicChannel(schid, cid):
     (error, codec) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_CODEC)
+    if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Channel #{} is {} ({})".format(cid, "[color=red]music channel".format() if codec == 5 else "[color=green]no music channel", codec))
     return codec == ts3defines.CodecType.CODEC_OPUS_MUSIC
 
 def isPermanent(schid, cid):
     (error, permanent) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
-    return permanent
+    if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Channel #{} is {}".format(cid, "[color=red]permanent" if permanent else "[color=green]not permanent"))
+    return bool(permanent)
 
 def isSemiPermanent(schid, cid):
     (error, semipermanent) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
-    return semipermanent
+    if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Channel #{} is {}".format(cid, "[color=red]semi permanent" if semipermanent else "[color=green]not semi permanent"))
+    return bool(semipermanent)
 
 
 class autoSubscribe(ts3plugin):
@@ -50,13 +69,13 @@ class autoSubscribe(ts3plugin):
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Sub all visible-pw channels", ""),
                  (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "Unsub from all channels", "")]
     hotkeys = []
-    onlyOpen = False
     subAll = []
     subOpen = []
     subNone = []
     isFlooding = False
     schid = 0
     toSub = []
+    # subscribeOpen TODO
 
     def __init__(self):
         self.schid = ts3lib.getCurrentServerConnectionHandlerID()
@@ -80,15 +99,18 @@ class autoSubscribe(ts3plugin):
                 self.toSub = [136205,136209,545989]#support1-3,48=afk,46=iloveradio
                 QTimer.singleShot(2500, self.subChannels)
 
-    def subChannels(self):
+    def subChannels(self, schid=0):
+        if not schid: schid = self.schid
+        if len(self.toSub) < 1: return
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Trying to subscribe {}".format(self.toSub))
         try:
-            error = ts3lib.requestChannelSubscribe(self.schid, self.toSub)
+            error = ts3lib.requestChannelSubscribe(schid, self.toSub)
             if not error == ts3defines.ERROR_ok: raise Exception("Error in requestChannelSubscribe")
         except:
-            for cid in self.toSub: ts3lib.requestChannelSubscribe(self.schid, [cid])
+            for cid in self.toSub: ts3lib.requestChannelSubscribe(schid, [cid])
         self.toSub = []
 
-    def subscribeAll(self, schid=None):
+    def subscribeAll(self, schid=0):
         if not schid: schid = self.schid
         try:
             error = ts3lib.requestChannelSubscribeAll(schid)
@@ -97,7 +119,7 @@ class autoSubscribe(ts3plugin):
             (error, clist) = ts3lib.getChannelList(schid)
             ts3lib.requestChannelSubscribe(schid, clist)
 
-    def unsubscribeAll(self, schid=None):
+    def unsubscribeAll(self, schid=0):
         if not schid: schid = self.schid
         try:
             error = ts3lib.requestChannelUnsubscribeAll(schid)
@@ -106,40 +128,45 @@ class autoSubscribe(ts3plugin):
             (error, clist) = ts3lib.getChannelList(schid)
             ts3lib.requestChannelUnsubscribe(schid, clist)
 
-    def subscribeOpen(self, schid=None):
+    def subscribeOpen(self, schid=0):
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("==== subscribeOpen START ====")
         if not schid: schid = self.schid
         (error, clist) = ts3lib.getChannelList(schid)
         for c in clist:
-            if not isPassworded(schid, c) and not isPermanent(schid, c) and not isSemiPermanent(schid, c) and not isMusicChannel(schid, c) and isBlacklisted(schid, c):
-                self.toSub.append(c) #clist.remove(c)
-        self.subChannels()
-        # err = ts3lib.requestChannelSubscribe(schid, tosub)
-        # ts3lib.printMessageToCurrentTab("c: {} err: {}".format(tosub, err))
-        self.onlyOpen = True
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("==== #{0} ====".format(c))
+            if not isSubscribed(schid, c) and not isPassworded(schid, c) and not isPermanent(schid, c) and not isSemiPermanent(schid, c) and not isMusicChannel(schid, c) and not isBlacklisted(schid, c):
+                self.toSub.append(c)
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("==== #{0} ====".format(c))
+        self.subChannels(schid)
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("==== subscribeOpen END ====")
 
-    def subscribeOpenPW(self, schid=None):
+    def subscribeOpenPW(self, schid=0):
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("==== subscribeOpenPW START ====")
         if not schid: schid = self.schid
         (error, clist) = ts3lib.getChannelList(schid)
         for c in clist:
-            if not isPermanent(schid, c) and not isSemiPermanent(schid, c) and not isMusicChannel(schid, c) and not isBlacklisted(schid, c) and isPWInName(schid, c):
-                self.toSub.append(c) #clist.remove(c)
-        self.subChannels()
-        # err = ts3lib.requestChannelSubscribe(schid, tosub)
-        # ts3lib.printMessageToCurrentTab("c: {} err: {}".format(tosub, err))
-        self.onlyOpen = False
+            if not isSubscribed(schid, c) and not isPermanent(schid, c) and not isSemiPermanent(schid, c) and not isMusicChannel(schid, c) and not isBlacklisted(schid, c) and isPWInName(schid, c):
+                self.toSub.append(c)
+        self.subChannels(schid)
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("==== subscribeOpenPW END ====")
 
     def onNewChannelCreatedEvent(self, schid, channelID, channelParentID, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if not self.subscribeOpen: return False
+        err, clid = ts3lib.getClientID(schid)
+        if clid == invokerID: return False
         self.subscribe(schid, channelID)
 
     def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentiﬁer):
         if not self.subscribeOpen: return False
+        err, clid = ts3lib.getClientID(schid)
+        if clid == invokerID: return False
         self.subscribe(schid, channelID)
 
     def subscribe(self, schid, cid):
-        (error, subscribed) = ts3lib.getChannelVariableAsInt(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_ARE_SUBSCRIBED)
+        subscribed = isSubscribed(schid, cid)
         if PluginHost.cfg.getboolean("general", "verbose"):
             ts3lib.printMessageToCurrentTab("==== #{0} ====".format(cid))
+            ts3lib.printMessageToCurrentTab("Subscribed: {0}".format(subscribed))
             ts3lib.printMessageToCurrentTab("Passworded: {0}".format(isPassworded(schid, cid)))
             ts3lib.printMessageToCurrentTab("PWInName: {0}".format(isPWInName(schid, cid)))
             ts3lib.printMessageToCurrentTab("Blacklisted: {0}".format(isBlacklisted(schid, cid)))
