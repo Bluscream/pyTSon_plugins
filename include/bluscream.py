@@ -144,7 +144,6 @@ def getFile(url):
 def getFileReply(reply):
     del nwmc
 
-
 def downloadFile(url, path):
     nwmc = QNetworkAccessManager()
     nwmc.connect("finished(QNetworkReply*)", downloadFileReply)
@@ -223,8 +222,22 @@ class ContactStatus(object):
     NEUTRAL = 2
 
 # TS3Hook #
+def escapeStr(str):
+    return str\
+    .replace("\s", " ")\
+    .replace("\p", "|")\
+    .replace("\t", "    ")\
+
 def parseCommand(cmd):
-    pass
+    _cmd = cmd.split(' ', 1)
+    cmd = _cmd[0]
+    params = {}
+    if len(_cmd) > 1:
+        _params = _cmd[1].split(' ')
+        for param in _params:
+            param = param.split('=', 1)
+            params[param[0]] = escapeStr(param[1]) if len(param) > 1 else None
+    return cmd, params
 
 def buildCommand(cmd, parameters):
     for key, value in parameters:

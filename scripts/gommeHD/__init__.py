@@ -3,7 +3,8 @@ from ts3plugin import ts3plugin, PluginHost
 from datetime import datetime
 from PythonQt.QtCore import QTimer
 from collections import defaultdict
-from bluscream import timestamp, getContactStatus, ContactStatus
+from random import choice
+from bluscream import timestamp, getContactStatus, ContactStatus, parseCommand, clientURL
 
 class gommeHD(ts3plugin):
     name = "GommeHD nifty tricks"
@@ -17,6 +18,7 @@ class gommeHD(ts3plugin):
     infoTitle = None
     hotkeys = []
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Ask for avatar", ""),
+                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Dynamic Silence", ""),
                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Send Steam", ""),
                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Send Steam", "")]
     suid = "QTRtPmYiSKpMS8Oyd4hyztcvLqU="
@@ -24,13 +26,16 @@ class gommeHD(ts3plugin):
     premiumGroupIDs = ["31","30","14"]
     ruheGroupID = "17"
     gommeBotNick = "Gomme-Bot"
+    dynamicSilenceName = "msg me"
     delay = 1500
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
     askForAvatar = False
+    dynamicSilence = True
     alreadyAsked = []
     schid = 0
     clids = []
+    dynamicSilenceCache = []
     timer = QTimer()
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     blockMSG = "Diesen Befehl kannst du nur als Channel-Admin ausführen!"
@@ -49,7 +54,7 @@ Ich erklär dir auch wie's geht:
 2. Ich werde deinen mc namen dem gomme bot schreiben damit er mir premium geben kann
 3. Wenn ich dann Premium habe werde ich mir kurz nen avatar setzen max. 2 min
 4. Dann sag ich dir bescheid und du gibst in minecraft [color=green]/ts set {uid}[/color] ein und hast dein premium wieder
-5. Ich werde mich bei dir bedanken ;) 
+5. Ich werde mich bei dir bedanken ;)
 """
 
     def __init__(self):
@@ -58,28 +63,31 @@ Ich erklär dir auch wie's geht:
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if menuItemID != 0: return
         if atype == ts3defines.PluginItemType.PLUGIN_SERVER:
-            self.askForAvatar = not self.askForAvatar
-            ts3lib.printMessageToCurrentTab("{}askForAvatar set to [color=orange]{}".format(timestamp(),self.askForAvatar))
-            if not self.askForAvatar:
-                self.clids = []
-                self.timer.stop()
-                return
-            (err, clids) = ts3lib.getClientList(schid)
-            for c in clids: ts3lib.requestClientVariables(schid, c)
-            for c in clids:
-                (err, uid) = ts3lib.getClientVariable(schid, c, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-                if getContactStatus(uid) == ContactStatus.BLOCKED: continue
-                if uid in self.alreadyAsked: continue
-                (err, sgroups) = ts3lib.getClientVariableAsString(schid, c, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-                sgroups = sgroups.split(",")
-                if self.ruheGroupID in sgroups: continue
-                if set(sgroups).isdisjoint(self.premiumGroupIDs): continue
-                self.clids.append(c)
-            ts3lib.printMessageToCurrentTab("{}Asking {} clients for avatar".format(timestamp(),len(self.clids)))
-            self.schid = schid
-            self.timer.start(1000)
+            if menuItemID == 0:
+                self.dynamicSilence = not self.dynamicSilence
+                ts3lib.printMessageToCurrentTab("{}{}: DynamicSilence set to [color=orange]{}".format(timestamp(),self.name,self.dynamicSilence))
+            elif menuItemID == 1:
+                self.askForAvatar = not self.askForAvatar
+                ts3lib.printMessageToCurrentTab("{}askForAvatar set to [color=orange]{}".format(timestamp(),self.askForAvatar))
+                if not self.askForAvatar:
+                    self.clids = []
+                    self.timer.stop()
+                    return
+                (err, clids) = ts3lib.getClientList(schid)
+                for c in clids: ts3lib.requestClientVariables(schid, c)
+                for c in clids:
+                    (err, uid) = ts3lib.getClientVariable(schid, c, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                    if getContactStatus(uid) == ContactStatus.BLOCKED: continue
+                    if uid in self.alreadyAsked: continue
+                    (err, sgroups) = ts3lib.getClientVariableAsString(schid, c, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+                    sgroups = sgroups.split(",")
+                    if self.ruheGroupID in sgroups: continue
+                    if set(sgroups).isdisjoint(self.premiumGroupIDs): continue
+                    self.clids.append(c)
+                ts3lib.printMessageToCurrentTab("{}Asking {} clients for avatar".format(timestamp(),len(self.clids)))
+                self.schid = schid
+                self.timer.start(1000)
         if atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
             ts3lib.requestSendChannelTextMsg(schid, self.steammsg, selectedItemID)
         elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
@@ -169,3 +177,19 @@ Ich erklär dir auch wie's geht:
                 (err, dbid) = ts3lib.getClientVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
                 ts3lib.requestSetClientChannelGroup(schid, [9], [channelID], [dbid])
                 del self.violations[invokerUniqueIdentifier]
+
+    def onIncomingClientQueryEvent(self, schid, commandText):
+        if not self.dynamicSilence: return
+        (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        if suid != self.suid: return
+        if commandText.split(" ", 1)[0] != "notifyclientupdated": return
+        cmd, params = parseCommand(commandText)
+        if len(params) > 0 and "client_nickname" in params:
+            clid = int(params["clid"])
+            # (err, ownID) = ts3lib.getClientID(schid)
+            # if clid == ownID: return
+            (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            if getContactStatus(uid) != ContactStatus.FRIEND: return
+            if not self.dynamicSilenceName in params["client_nickname"].lower(): return
+            ts3lib.requestSendPrivateTextMsg(schid, "Yes, {}-{}?".format(clientURL(schid, clid), choice(["chan","san"])), clid)
+            # ts3lib.printMessageToCurrentTab("{} {}".format(cmd, params)) # ["client_nickname"][1]

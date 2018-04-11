@@ -68,6 +68,7 @@ class toggleBadges(ts3plugin):
             del self.timers[schid]
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        return
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             self.startTimer(schid)
         elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
