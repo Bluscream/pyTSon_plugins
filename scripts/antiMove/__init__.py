@@ -49,7 +49,7 @@ class antiMove(ts3plugin):
         if uid in self.whitelistUIDs: return
         self.backup = {"schid": schid, "cid": oldChannelID}
         delay = randint(self.delay[0], self.delay[1])
-        ts3lib.printMessageToCurrentTab("{} {}: Switching back to channel {} in {}ms".format(timestamp(),self.name,clientURL(schid, self.backup["schid"]), channelURL(schid, self.backup["cid"]), delay))
+        ts3lib.printMessageToCurrentTab("{} {}: Switching back to channel {} in {}ms".format(timestamp(),self.name,channelURL(schid, self.backup["cid"]), delay))# clientURL(schid, self.backup["schid"]), 
         QTimer.singleShot(delay, self.moveBack)
 
     def moveBack(self):
