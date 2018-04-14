@@ -46,7 +46,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="ts3defines.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3defines.py">
+        <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
               <caret line="731" column="34" lean-forward="false" selection-start-line="731" selection-start-column="4" selection-end-line="731" selection-end-column="34" />
@@ -240,7 +240,7 @@
         <option value="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" />
         <option value="$USER_HOME$/Application Data/TS3Client/pyTSon/pyTSon - Copy.conf" />
         <option value="$USER_HOME$/Application Data/TS3Client/pyTSon/pyTSon.conf" />
-        <option value="$USER_HOME$/AppData/Roaming/TS3Client/plugins/pyTSon/include/win10toast/__init__.py" />
+        <option value="$PROJECT_DIR$/include/win10toast/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
         <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/countContacts/male.txt" />
@@ -253,7 +253,7 @@
         <option value="$PROJECT_DIR$/scripts/rewinsideTV/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/friendNotifications/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
-        <option value="$USER_HOME$/AppData/Roaming/TS3Client/pyTSon/pyTSon.conf" />
+        <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/scripts/channelGroupManager/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/grieferGames/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/purgeContacts/__init__.py" />
@@ -404,19 +404,19 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="nodejs_interpreter_path" value="D:/Bars-and-Tools/NodeJS/node" />
-    <property name="js.eslint.eslintPackage" value="" />
-    <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Roaming/TS3Client/pyTSon" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
-    <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="editor.preferences.smartKeys" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="last.edited.regexp" value="Sample Text" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/include/_plugincmd.py&#10;C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3lib.py&#10;D:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3defines.py&#10;true" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="last.edited.regexp" value="Sample Text" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="options.lastSelected" value="editor.preferences.smartKeys" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="recentsLimit" value="5" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -445,6 +445,7 @@
   </component>
   <component name="RunManager" selected="Python tests.Unittests in scripts">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyTSon_plugins" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -455,9 +456,27 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="pyTSon_plugins" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -616,24 +635,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -663,16 +664,15 @@
       <method />
     </configuration>
     <configuration name="Unittests in scripts" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="pyTSon_plugins" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="pyTSon_plugins" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
@@ -680,26 +680,23 @@
       <ConfigurationWrapper RunnerId="PythonRunner" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
+      <module name="pyTSon_plugins" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="pyTSon_plugins" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in scripts" />
-      <item index="1" class="java.lang.String" itemvalue="Python.__init__" />
+    <list>
+      <item itemvalue="Python tests.Unittests in scripts" />
+      <item itemvalue="Python.__init__" />
     </list>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -1226,7 +1223,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/Application Data/TS3Client/pyTSon/pyTSon - Copy.conf" />
     <entry file="file://$USER_HOME$/Application Data/TS3Client/pyTSon/pyTSon.conf" />
-    <entry file="file://$USER_HOME$/AppData/Roaming/TS3Client/plugins/pyTSon/include/win10toast/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/include/win10toast/__init__.py" />
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -1327,7 +1324,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/TS3Client/pyTSon/pyTSon.conf">
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
@@ -1383,7 +1380,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/TS3Client/plugins/pyTSon/include/bluscream.py">
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
           <caret line="224" column="11" lean-forward="false" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="11" />
@@ -1502,7 +1499,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3defines.py">
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="731" column="34" lean-forward="false" selection-start-line="731" selection-start-column="4" selection-end-line="731" selection-end-column="34" />
