@@ -180,7 +180,7 @@ class info(ts3plugin):
             "CONNECTION_IDLE_TIME"
         ]:
             val = '{0} ({1})'.format(timedelta(milliseconds=val), val)
-        elif name == "TYPE": (t,val) = getItemTime(lst)
+        elif name == "TYPE": (t,val) = getItemType(lst)
         elif name == "ID": return name, id
         elif name == "DISPLAYNAME": (err, val) = ts3.getClientDisplayName(schid, id)
         if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:

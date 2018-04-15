@@ -1,18 +1,35 @@
 from datetime import datetime
 from PythonQt import BoolResult
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
-from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream
+from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream, QObject
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
 # from configparser import ConfigParser
 from urllib.parse import quote_plus
+from gc import get_objects
+from base64 import b64encode
 import ts3lib, ts3defines, os.path, string, random, ts3client, time
 
 # GENERAL FUNCTIONS #
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 def date(): return '{:%Y-%m-%d}'.format(datetime.now())
 def Time(): return '{:%H:%M:%S}'.format(datetime.now())
+
+def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
+    message = str(message)
+    _f = "{} ({}) ".format(Time(), channel)
+    if server > 0:
+        _f += "#"+str(server)+" "
+    _f += "Console> "+message
+    ts3lib.logMessage(message, channel, "pyTSon Console", server)
+    ts3lib.printMessageToCurrentTab(_f)
+    # if PluginHost.shell: PluginHost.shell.appendLine(_f)
+    print(_f)
+
+def toggle(boolean):
+    boolean = not boolean
+    return boolean
 
 def varname(obj, callingLocals=locals()):
     for k, v in list(callingLocals.items()):
@@ -24,11 +41,15 @@ def random_string(size=1, chars=string.ascii_uppercase + string.ascii_lowercase 
 def percentage(part, whole):
     return round(100 * float(part)/float(whole))
 
+def getItem(useList, name): # getitem(PluginHost.modules,'devTools')
+    for _name,value in useList.items():
+        if _name == name: return value
+
 def getItems(object):
     return [(a, getattr(object, a)) for a in dir(object)
             if not a.startswith('__') and not callable(getattr(object, a)) and not "ENDMARKER" in a and not "DUMMY" in a]
 
-def getItemTime(lst):
+def getItemType(lst):
     if lst in [ts3defines.VirtualServerProperties, ts3defines.VirtualServerPropertiesRare]:
         return ts3defines.PluginItemType.PLUGIN_SERVER, "Server"
     elif lst in [ts3defines.ChannelProperties, ts3defines.ChannelPropertiesRare]:
@@ -36,6 +57,21 @@ def getItemTime(lst):
     elif lst in [ts3defines.ConnectionProperties, ts3defines.ConnectionPropertiesRare, ts3defines.ClientProperties, ts3defines.ClientPropertiesRare]:
         return ts3defines.PluginItemType.PLUGIN_CLIENT, "Client"
     else: return None
+
+def getobjects(name, cls=True):
+    objects = []
+    for obj in get_objects():
+        if (isinstance(obj, QObject) and
+                ((cls and obj.inherits(name)) or
+                 (not cls and obj.objectName() == name))):
+            objects.append(obj)
+    return objects
+
+def objects():
+    import gc;
+    _ret = []
+    for x in gc.get_objects(): _ret.extend(str(repr(x)))
+    return _ret
 
 def find_between(s, first, last):
     try:
@@ -52,6 +88,11 @@ def find_between_r(s, first, last):
         return s[start:end]
     except ValueError:
         return ""
+
+def generateAvatarFileName(schid, clid=0):
+    if clid == 0: (error, clid) = ts3lib.getClientID(schid)
+    (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+    return "avatar_"+b64encode(uid.encode('ascii')).decode("ascii").split('=')[0]
 
 # PARSING #
 def channelURL(schid=None, cid=0, name=None):
