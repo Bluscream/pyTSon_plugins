@@ -22,7 +22,7 @@ class antiAFK(ts3plugin):
     timer = QTimer()
     servers = {}
     text = "."
-    interval = (4, 5)
+    interval = (10, 20)
     retcode = ""
     hook = False
 
