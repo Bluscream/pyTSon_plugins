@@ -9,6 +9,7 @@
           <option value="chatBot.*" />
           <option value="cfgDialog.*" />
           <option value="ts3lib.*" />
+          <option value="PythonQt" />
         </list>
       </option>
     </inspection_tool>

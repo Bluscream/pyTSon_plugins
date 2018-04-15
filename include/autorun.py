@@ -11,6 +11,7 @@ from PythonQt.Qt import *
 from PythonQt.private import *
 from PythonQt.QtSql import *
 from PythonQt.QtUiTools import *
+from bluscream import *
 
 self = QApplication.instance()
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
