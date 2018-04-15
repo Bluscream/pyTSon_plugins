@@ -1,7 +1,7 @@
 from datetime import datetime
 from PythonQt import BoolResult
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog
-from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream, QObject
+from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
