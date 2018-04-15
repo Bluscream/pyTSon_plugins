@@ -40,7 +40,7 @@ class antiMove(ts3plugin):
                 ts3lib.printMessageToCurrentTab("{}[color=red]Disabled[/color] {}".format(timestamp(),self.name))
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
-        if moverID == 0 and self.backup is not None: return
+        if moverID == 0 or self.backup is None: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID or moverID == ownID or moverID == 0: return
         (err, sgids) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
@@ -53,6 +53,7 @@ class antiMove(ts3plugin):
         QTimer.singleShot(delay, self.moveBack)
 
     def moveBack(self):
+        if self.backup is None: return
         (err, ownID) = ts3lib.getClientID(self.backup["schid"])
         (err, path, pw) = ts3lib.getChannelConnectInfo(self.backup["schid"], self.backup["cid"])
         ts3lib.requestClientMove(self.backup["schid"], ownID, self.backup["cid"], pw)
