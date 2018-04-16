@@ -230,7 +230,6 @@ VERSION
 #Own includes
 !include/autorun.py
 !include/getvalues.py
-!include/ts3ext.py
 !include/bluscream.py
 
 #Additional docs
@@ -250,3 +249,5 @@ VERSION
 /scripts/pip.exe
 /scripts/pip3.5.exe
 /scripts/pip3.exe
+/scripts/customBadges/settings.ini
+/scripts/audiobot/
