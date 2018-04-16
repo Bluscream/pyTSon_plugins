@@ -7,11 +7,14 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py" line="66" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/autorun.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/autorun.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/serverSwitcher/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverSwitcher/settings.ini" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -48,7 +51,7 @@
       <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8687">
+            <state relative-caret-position="629">
               <caret line="511" column="134" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
             </state>
           </provider>
@@ -57,8 +60,8 @@
       <file leaf-file-name="ts3defines.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14042">
-              <caret line="826" column="20" selection-start-line="826" selection-start-column="4" selection-end-line="826" selection-end-column="20" />
+            <state relative-caret-position="85">
+              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -66,8 +69,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
+            <state relative-caret-position="357">
+              <caret line="204" column="74" selection-start-line="204" selection-start-column="74" selection-end-line="204" selection-end-column="74" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -75,11 +78,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tree_tooltip_client.tpl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../styles/dark/tree_tooltip_client.tpl">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="685">
-              <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
+            <state relative-caret-position="3213">
+              <caret line="195" selection-start-line="195" selection-end-line="195" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1301">
+              <caret line="157" column="52" selection-start-line="157" selection-start-column="46" selection-end-line="157" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="autorun.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/autorun.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1666">
+              <caret line="98" column="43" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ts3lib.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4556">
+              <caret line="268" column="23" selection-start-line="268" selection-start-column="16" selection-end-line="268" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -95,8 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onclientmov</find>
-      <find>printmessage(</find>
       <find>[-1</find>
       <find>datetime</find>
       <find>onclientmove</find>
@@ -125,6 +159,8 @@
       <find>parsebad</find>
       <find>saveb</find>
       <find>:/gfx</find>
+      <find>choice</find>
+      <find>getrandbits</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -185,7 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../../pyTSon/pyTSon - Copy.conf" />
         <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/scripts/toggleBadges/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/info/settings.ini" />
@@ -219,13 +254,11 @@
         <option value="$PROJECT_DIR$/scripts/avatarScanner/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiSpam/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/nameSwitcher/suffixes.txt" />
         <option value="$PROJECT_DIR$/scripts/nameSwitcher/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
         <option value="$PROJECT_DIR$/.gitmodules" />
         <option value="$PROJECT_DIR$/scripts/info/__init__.py" />
-        <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/audiobot/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiMove/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/showQueries/__init__.py" />
@@ -235,6 +268,9 @@
         <option value="$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/include/autorun.py" />
+        <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
       </list>
     </option>
@@ -289,7 +325,7 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="customBadges" type="462c0819:PsiDirectoryNode" />
+              <item name="serverSwitcher" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -300,7 +336,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/include/_plugincmd.py&#10;C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3lib.py&#10;D:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3defines.py&#10;true" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/include/_plugincmd.py&#10;C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3lib.py&#10;D:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3defines.py&#10;C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/include/ts3client.py&#10;true" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
     <property name="dynamic.classpath" value="false" />
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
@@ -613,13 +649,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00189" summary=":thinking:">
-      <created>1519551105065</created>
-      <option name="number" value="00189" />
-      <option name="presentableId" value="LOCAL-00189" />
-      <option name="project" value="LOCAL" />
-      <updated>1519551105065</updated>
     </task>
     <task id="LOCAL-00190" summary=":thinking:">
       <created>1519551720545</created>
@@ -957,7 +986,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523860998278</updated>
     </task>
-    <option name="localTasksCounter" value="238" />
+    <task id="LOCAL-00238" summary=":thinking:">
+      <created>1523863544925</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1523863544929</updated>
+    </task>
+    <option name="localTasksCounter" value="239" />
     <servers />
   </component>
   <component name="TodoView">
@@ -983,7 +1019,6 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
       <window_info id="Favorites" order="7" side_tool="true" />
@@ -1002,6 +1037,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Properties" order="5" />
@@ -1126,43 +1162,23 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/friendNotifications/__init__.py">
+    <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        <state relative-caret-position="4437">
+          <caret line="268" column="23" selection-start-line="268" selection-start-column="16" selection-end-line="268" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/addonList/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="179" column="52" lean-forward="true" selection-start-line="178" selection-start-column="12" selection-end-line="179" selection-end-column="52" />
+        <state relative-caret-position="2601">
+          <caret line="164" column="53" lean-forward="true" selection-start-line="164" selection-start-column="53" selection-end-line="164" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="142" column="63" selection-start-line="142" selection-start-column="63" selection-end-line="142" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="997">
-          <caret line="130" column="118" lean-forward="true" selection-start-line="130" selection-start-column="16" selection-end-line="130" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoCommander/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="43" column="76" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/purgeContacts/male.txt" />
-    <entry file="file://$PROJECT_DIR$/scripts/purgeContacts/female.txt" />
     <entry file="file://$PROJECT_DIR$/scripts/grieferGames/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1284,16 +1300,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/notify/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1408,31 +1414,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/autorun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="32" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14042">
-          <caret line="826" column="20" selection-start-line="826" selection-start-column="4" selection-end-line="826" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8687">
-          <caret line="511" column="134" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
         </state>
       </provider>
     </entry>
@@ -1443,10 +1428,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1794">
+          <caret line="557" column="41" lean-forward="true" selection-start-line="557" selection-start-column="41" selection-end-line="557" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3help.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="393" column="50" selection-start-line="393" selection-start-column="50" selection-end-line="393" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/devtools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-290">
+          <caret line="194" lean-forward="true" selection-start-line="194" selection-end-line="194" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/autorun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1666">
+          <caret line="98" column="43" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3213">
+          <caret line="195" selection-start-line="195" selection-end-line="195" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4556">
+          <caret line="268" column="23" selection-start-line="268" selection-start-column="16" selection-end-line="268" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1301">
+          <caret line="157" column="52" selection-start-line="157" selection-start-column="46" selection-end-line="157" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="511" column="134" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
+        <state relative-caret-position="357">
+          <caret line="204" column="74" selection-start-line="204" selection-start-column="74" selection-end-line="204" selection-end-column="74" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>

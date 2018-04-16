@@ -1,9 +1,13 @@
-import os, json, configparser, webbrowser, traceback, urllib.parse, ts3defines, itertools
+import os, json, configparser, webbrowser, traceback, urllib.parse, itertools
+import ts3defines, ts3lib, ts3client, ts3help, ts3Ext, pytson, pytsonui
 from datetime import datetime
 from ts3lib import *
 from ts3plugin import *
 from pytsonui import *
+from ts3defines import *
 from devtools import *
+from ts3help import *
+from ts3client import *
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
 from PythonQt.QtNetwork import *

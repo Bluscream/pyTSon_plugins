@@ -144,6 +144,7 @@ class serverSwitcher(ts3plugin):
                     err, away = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY)
                     if away != ts3defines.AwayStatus.AWAY_ZZZ: ts3.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_ZZZ)
                     host = "";port = 0; name = ""
+                    err, name = ts3.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
                     if self.cfg.getboolean('general', 'enabled'):
                         err, host, port, pw = ts3.getServerConnectInfo(schid)
                         # err, ip = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
@@ -154,13 +155,13 @@ class serverSwitcher(ts3plugin):
                             newmeta = xml.Element(self.tag)
                             c = xml.SubElement(newmeta, "tab")
                             c.set("id", str(schid))
-                            err, name = ts3.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
                             if name: c.text = escape(name.strip())
                             c.set("host", escape(host))
                             if port and port != 9987: c.set("port", "{}".format(port))
                             if pw and self.cfg.getboolean('general', 'pw'): c.set("pw", pw)
                             meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
                             # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
+                    name = name[:75] + (name[75:] and '..')
                     _away_message = self.cfg.get('general', 'status').replace('{host}', host if host else "").replace('{name}', name if name else "").replace('{port}', str(port) if port else "")
                     if away_message != _away_message: ts3.setClientSelfVariableAsString(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE, _away_message)
                 ts3.setClientSelfVariableAsString(tab, ts3defines.ClientProperties.CLIENT_META_DATA, meta_data)

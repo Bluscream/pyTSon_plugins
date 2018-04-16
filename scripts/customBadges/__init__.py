@@ -1,5 +1,4 @@
 from ts3plugin import ts3plugin, PluginHost
-from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt, QUrl, QFile, QIODevice
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap, QToolTip
@@ -201,6 +200,9 @@ class customBadges(ts3plugin):
             # if len(badges) > 0: badges += ['0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript']
             (err, schids) = ts3lib.getServerConnectionHandlerList()
             for schid in schids:
+                err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
+                if "teaspeak" in ver.lower():
+                    badges = [x for x in badges if not x in self.extbadges]
                 sendCommand(self.name, buildBadges(badges, overwolf), schid)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
