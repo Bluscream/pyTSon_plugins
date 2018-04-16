@@ -109,12 +109,15 @@ class showQueries(ts3plugin):
         except: return
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
-        pass
         # if oldChannelID != 0: return
         (err, clienttype) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_TYPE)
         if clienttype != ts3defines.ClientType.ClientType_SERVERQUERY: return
         # (err, channelname) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelProperties.CHANNEL_NAME)
-        ts3lib.printMessage(schid, "<{0}> {1} switched from channel {2} to {3}".format(Time(), clientURL(schid, clientID), channelURL(schid, oldChannelID), channelURL(schid, newChannelID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        if visibility == ts3defines.Visibility.ENTER_VISIBILITY:
+            ts3lib.printMessage(schid, "<{0}> {1} enters view to channel {2}".format(Time(), clientURL(schid, clientID), channelURL(schid, newChannelID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        elif visibility == ts3defines.Visibility.LEAVE_VISIBILITY:
+            ts3lib.printMessage(schid, "<{0}> {1} leaves from channel {2}{3}".format(Time(), clientURL(schid, clientID), channelURL(schid, oldChannelID), " ({})".format(moveMessage) if moveMessage else ""), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        else: ts3lib.printMessage(schid, "<{0}> {1} switched from channel {2} to {3}".format(Time(), clientURL(schid, clientID), channelURL(schid, oldChannelID), channelURL(schid, newChannelID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         # <16:11:43> "charlie sheen" switched from channel "Intros Gratis <3" to "Serverteam-Gesucht Builder"
 
     def onClientIDsEvent(self, schid, uid, clid, nickname):
