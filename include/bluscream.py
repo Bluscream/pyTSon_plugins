@@ -263,11 +263,9 @@ class ContactStatus(object):
     NEUTRAL = 2
 
 # TS3Hook #
-def escapeStr(str):
-    return str\
-    .replace("\s", " ")\
-    .replace("\p", "|")\
-    .replace("\t", "    ")\
+def escapeStr(str,unescape=False):
+    if unescape: str.replace(" ","\s").replace("|","\p").replace("    ","\t")
+    return str.replace("\s"," ").replace("\p","|").replace("\t","    ")
 
 def parseCommand(cmd):
     _cmd = cmd.split(' ', 1)
@@ -345,8 +343,8 @@ def buildBadges(badges=[], overwolf=False):
     blocks = [",".join(badges[i:i+3]) for i in range(0, len(badges), 3)]
     return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ":badges=".join(blocks))
 
-def sendCommand(name, cmd, schid=0):
-    if PluginHost.cfg.getboolean("general", "verbose"):
+def sendCommand(name, cmd, schid=0, silent=True):
+    if PluginHost.cfg.getboolean("general", "verbose") or not silent:
         ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
     cmd = cmd.replace(" ", "~s")
     if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()

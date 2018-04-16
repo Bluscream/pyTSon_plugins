@@ -1,7 +1,7 @@
 from ts3plugin import ts3plugin
 from datetime import datetime
 from urllib.parse import quote as urlencode
-from bluscream import timestamp, sendCommand, clientURL
+from bluscream import timestamp, clientURL
 from traceback import format_exc
 import ts3defines, ts3lib, _ts3lib
 
@@ -45,7 +45,7 @@ class pluginCMD(ts3plugin):
             else: ts3lib.sendPluginCommand(schid, command, targetmode, target)
             return True
         except:
-            ts3lib.printMessageToCurrentTab("Syntax: [b]/py cmd <raw> <channel,server,channelsubscribed,client <clid>> <cmd>")
+            ts3lib.printMessageToCurrentTab("Syntax: [b]/py {} <raw> <channel,server,channelsubscribed,client <clid>> <cmd>".format(self.commandKeyword))
             ts3lib.logMessage("Error while processing \"{}\"\n{}".format(fullcmd, format_exc()), ts3defines.LogLevel.LogLevel_WARNING, self.name, schid)
 
 

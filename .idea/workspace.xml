@@ -8,10 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/rawCMD/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/pluginCMD/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/pluginCMD/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/rawPluginCMD/__init__.py" beforeDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -48,8 +48,8 @@
       <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-527">
-              <caret line="106" column="13" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="13" />
+            <state relative-caret-position="578">
+              <caret line="345" column="49" lean-forward="true" selection-start-line="345" selection-start-column="4" selection-end-line="345" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -73,10 +73,22 @@
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/rawCMD/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" column="40" lean-forward="true" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/pluginCMD/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="47" column="116" selection-start-line="47" selection-start-column="116" selection-end-line="47" selection-end-column="116" />
+            <state relative-caret-position="400">
+              <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -111,7 +123,7 @@
       <find>time</find>
       <find>pytson.get</find>
       <find>qu</find>
-      <find>from pyt</find>
+      <find />
       <find>imp</find>
       <find>'w/'</find>
       <find>quote</find>
@@ -140,17 +152,17 @@
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
-      <replace>apiVersion = 22</replace>
-      <replace>if self.debug: ts3lib.printMessageToCurrentTab( '{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.'.format(self.timestamp(), self.name, self.author))</replace>
+      <replace />
+      <replace />
       <replace>ts3lib.</replace>
       <replace>ts3.</replace>
       <replace>schid</replace>
       <replace>(Enum)</replace>
       <replace>(object)</replace>
       <replace />
-      <replace>self.config.get('GENERAL', '</replace>
+      <replace />
       <replace>False</replace>
-      <replace>requestAutoload = False</replace>
+      <replace />
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts</dir>
@@ -196,7 +208,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" />
         <option value="C:/Program Files/TeamSpeak 3 Client/HookConf.ini" />
         <option value="$PROJECT_DIR$/../../pyTSon/pyTSon - Copy.conf" />
         <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
@@ -241,12 +252,13 @@
         <option value="$PROJECT_DIR$/.gitmodules" />
         <option value="$PROJECT_DIR$/scripts/info/__init__.py" />
         <option value="$PROJECT_DIR$/include/autorun.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/audiobot/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiMove/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/showQueries/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/rawPluginCMD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/pluginCMD/__init__.py" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/rawCMD/__init__.py" />
       </list>
     </option>
   </component>
@@ -358,16 +370,16 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\ressources" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
+      <recent name="D:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -647,13 +659,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00181" summary=":thinking:">
-      <created>1519418389674</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1519418389674</updated>
     </task>
     <task id="LOCAL-00182" summary=":thinking:">
       <created>1519455134863</created>
@@ -991,7 +996,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523843093960</updated>
     </task>
-    <option name="localTasksCounter" value="230" />
+    <task id="LOCAL-00230" summary=":thinking: Combined the pluginCMD scripts into one and added some syntax help">
+      <created>1523849058254</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1523849058256</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1013,8 +1025,8 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32391304" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49791667" visible="true" weight="0.33687568" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49791667" weight="0.33687568" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
@@ -1127,7 +1139,8 @@
     <MESSAGE value="fixed it" />
     <MESSAGE value="kein bock mehr" />
     <MESSAGE value=":thinking:" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking:" />
+    <MESSAGE value=":thinking: Combined the pluginCMD scripts into one and added some syntax help" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking: Combined the pluginCMD scripts into one and added some syntax help" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1162,13 +1175,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="190" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16031">
@@ -1470,10 +1476,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/pluginCMD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-527">
-          <caret line="106" column="13" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="13" />
+        <state relative-caret-position="578">
+          <caret line="345" column="49" lean-forward="true" selection-start-line="345" selection-start-column="4" selection-end-line="345" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -1491,10 +1507,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pluginCMD/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/rawCMD/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="47" column="116" selection-start-line="47" selection-start-column="116" selection-end-line="47" selection-end-column="116" />
+        <state relative-caret-position="510">
+          <caret line="30" column="40" lean-forward="true" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
