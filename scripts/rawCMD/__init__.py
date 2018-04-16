@@ -6,7 +6,7 @@ from traceback import format_exc
 import ts3defines, ts3lib
 
 class rawCMD(ts3plugin):
-    name = "Raw command sender / viewer for TS3Hook"
+    name = "CMD Sender"
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
