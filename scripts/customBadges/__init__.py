@@ -129,10 +129,8 @@ class customBadges(ts3plugin):
     def loadBadgesExt(self, reply):
         try:
             data = reply.readAll().data().decode('utf-8')
-            print(data)
             self.extbadges = loads(data)
-            self.nwmc_exti = {}
-            self.tmpfile = {}
+            self.nwmc_exti = {}; self.tmpfile = {}
             for badge in self.extbadges:
                 _name = self.extbadges[badge]["filename"]
                 _path = path.join(self.icons_ext, _name)
@@ -144,43 +142,22 @@ class customBadges(ts3plugin):
     def requestExtIcon(self, filename):
         self.nwmc_exti[filename] = QNetworkAccessManager()
         self.nwmc_exti[filename].connect("finished(QNetworkReply*)", self.loadExtIcon)
-        # self.nwmc_exti.connect("downloadProgress(qint64, qint64)", self.progExtIcon)
-        # self.nwmc_exti.connect("readyRead()", self.readyExtIcon)
-        # self.nwmc_exti.connect("finished()", self.finExtIcon)
         self.tmpfile[filename] = QFile()
         self.tmpfile[filename].setFileName(path.join(ts3lib.getConfigPath(),"cache","badges","external",filename))
         self.tmpfile[filename].open(QIODevice.WriteOnly)
         url = "https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/img/{}".format(filename)
         self.nwmc_exti[filename].get(QNetworkRequest(QUrl(url)))
 
-    def progExtIcon(self, bytesRead, bytesTotal):
-        print("Progress: {} / {}".format(bytesRead, bytesTotal))
-
     def loadExtIcon(self, reply):
         try:
-            print("loadExtIcon")
-            err = reply.error()
-            if err == QNetworkReply.NoError:
-                print("file downloaded successfully.")
-            else:
-                print(reply.errorString())
-            name = reply.url().fileName()#.split("/")[-1]
-            print("name:", name)
+            if reply.error() != QNetworkReply.NoError:
+                ts3lib.logMessage("Requesting \"{}\" failed:\n{}".format(reply.url().toString(),reply.errorString()), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); return
+            name = reply.url().fileName()
             self.tmpfile[name].write(reply.readAll())
             if self.tmpfile[name].isOpen():
                 self.tmpfile[name].close()
                 self.tmpfile[name].deleteLater()
-            print(reply.readAll())
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-
-    def readyExtIcon(self):
-        print("readyExtIcon")
-
-    def finExtIcon(self):
-        print("finExtIcon")
-        if self.tmpfile.isOpen():
-            self.tmpfile.close()
-            self.tmpfile.deleteLater()
 
     def checkNotice(self):
         self.notice_nwmc.connect("finished(QNetworkReply*)", self.loadNotice)

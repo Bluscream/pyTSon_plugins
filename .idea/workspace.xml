@@ -8,8 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -46,8 +47,11 @@
       <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5865">
-              <caret line="345" column="49" selection-start-line="345" selection-start-column="4" selection-end-line="345" selection-end-column="49" />
+            <state relative-caret-position="525">
+              <caret line="511" column="134" lean-forward="true" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -55,35 +59,20 @@
       <file leaf-file-name="ts3defines.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14042">
+            <state relative-caret-position="17">
               <caret line="826" column="20" selection-start-line="826" selection-start-column="4" selection-end-line="826" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="autorun.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/autorun.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="53" column="52" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="592">
-              <caret line="252" column="18" selection-start-line="252" selection-start-column="18" selection-end-line="252" selection-end-column="18" />
+            <state relative-caret-position="407">
+              <caret line="158" column="48" selection-start-line="158" selection-start-column="48" selection-end-line="158" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,13 +88,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setenabled</find>
-      <find>time</find>
-      <find>pytson.get</find>
-      <find>qu</find>
-      <find>from pyt</find>
-      <find>imp</find>
-      <find>'w/'</find>
       <find>quote</find>
       <find>print</find>
       <find>config.set</find>
@@ -129,6 +111,13 @@
       <find>_ts3lib</find>
       <find>format_e</find>
       <find>LogLev</find>
+      <find>badges_ext</find>
+      <find>self.extbadges</find>
+      <find>saveBadges</find>
+      <find>loadBadgesExt</find>
+      <find>extbadges</find>
+      <find>requestBadgesExt</find>
+      <find>pluginhost</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -201,7 +190,6 @@
         <option value="$USER_HOME$/Application Data/TS3Client/pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/include/win10toast/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
-        <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/countContacts/male.txt" />
         <option value="$PROJECT_DIR$/scripts/countContacts/female.txt" />
         <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
@@ -235,10 +223,11 @@
         <option value="$PROJECT_DIR$/scripts/showQueries/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/rawPluginCMD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/pluginCMD/__init__.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/rawCMD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
       </list>
     </option>
   </component>
@@ -617,20 +606,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00185" summary=":thinking:">
-      <created>1519471700944</created>
-      <option name="number" value="00185" />
-      <option name="presentableId" value="LOCAL-00185" />
-      <option name="project" value="LOCAL" />
-      <updated>1519471700944</updated>
-    </task>
-    <task id="LOCAL-00186" summary=":thinking:">
-      <created>1519471819652</created>
-      <option name="number" value="00186" />
-      <option name="presentableId" value="LOCAL-00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1519471819652</updated>
-    </task>
     <task id="LOCAL-00187" summary=":thinking:">
       <created>1519474057005</created>
       <option name="number" value="00187" />
@@ -960,7 +935,21 @@
       <option name="project" value="LOCAL" />
       <updated>1523852188904</updated>
     </task>
-    <option name="localTasksCounter" value="234" />
+    <task id="LOCAL-00234" summary=":thinking:">
+      <created>1523852412111</created>
+      <option name="number" value="00234" />
+      <option name="presentableId" value="LOCAL-00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1523852412111</updated>
+    </task>
+    <task id="LOCAL-00235" summary=":thinking:&#10;+ some docs in bluscream.py&#10;+ now downloading external badges">
+      <created>1523858890713</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1523858890713</updated>
+    </task>
+    <option name="localTasksCounter" value="236" />
     <servers />
   </component>
   <component name="TodoView">
@@ -983,9 +972,10 @@
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49791667" weight="0.33687568" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
       <window_info id="Favorites" order="7" side_tool="true" />
@@ -1004,7 +994,6 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Properties" order="5" />
@@ -1097,7 +1086,8 @@
     <MESSAGE value="kein bock mehr" />
     <MESSAGE value=":thinking: Combined the pluginCMD scripts into one and added some syntax help" />
     <MESSAGE value=":thinking:" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking:" />
+    <MESSAGE value=":thinking:&#10;+ some docs in bluscream.py&#10;+ now downloading external badges" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking:&#10;+ some docs in bluscream.py&#10;+ now downloading external badges" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1119,12 +1109,8 @@
           <url>file://$PROJECT_DIR$/scripts/info/__init__.py</url>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py</url>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="28" />
+      <option name="time" value="29" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1243,13 +1229,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
           <caret line="190" column="65" selection-start-line="190" selection-start-column="50" selection-end-line="190" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4233">
-          <caret line="262" column="12" selection-start-line="262" selection-start-column="12" selection-end-line="271" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -1407,20 +1386,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5865">
-          <caret line="345" column="49" selection-start-line="345" selection-start-column="4" selection-end-line="345" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14042">
-          <caret line="826" column="20" selection-start-line="826" selection-start-column="4" selection-end-line="826" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/rawCMD/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1435,24 +1400,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="252" column="18" selection-start-line="252" selection-start-column="18" selection-end-line="252" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/autorun.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="17">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="53" column="52" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="52" />
+        <state relative-caret-position="51">
+          <caret line="3" column="32" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="252" column="18" selection-start-line="252" selection-start-column="18" selection-end-line="252" selection-end-column="18" />
+        <state relative-caret-position="17">
+          <caret line="826" column="20" selection-start-line="826" selection-start-column="4" selection-end-line="826" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="511" column="134" lean-forward="true" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="158" column="48" selection-start-line="158" selection-start-column="48" selection-end-line="158" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
