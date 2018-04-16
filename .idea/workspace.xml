@@ -7,7 +7,8 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py" line="66" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
@@ -47,11 +48,8 @@
       <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="511" column="134" lean-forward="true" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="8687">
+              <caret line="511" column="134" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
             </state>
           </provider>
         </entry>
@@ -59,7 +57,7 @@
       <file leaf-file-name="ts3defines.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="14042">
               <caret line="826" column="20" selection-start-line="826" selection-start-column="4" selection-end-line="826" selection-end-column="20" />
             </state>
           </provider>
@@ -68,11 +66,20 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="158" column="48" selection-start-line="158" selection-start-column="48" selection-end-line="158" selection-end-column="48" />
+            <state relative-caret-position="188">
+              <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tree_tooltip_client.tpl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../styles/dark/tree_tooltip_client.tpl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="685">
+              <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -88,11 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>quote</find>
-      <find>print</find>
-      <find>config.set</find>
-      <find>Config</find>
-      <find>self.cfg['filters']</find>
       <find>onclientmov</find>
       <find>printmessage(</find>
       <find>[-1</find>
@@ -118,6 +120,11 @@
       <find>extbadges</find>
       <find>requestBadgesExt</find>
       <find>pluginhost</find>
+      <find>icons_ext</find>
+      <find>buildBadges</find>
+      <find>parsebad</find>
+      <find>saveb</find>
+      <find>:/gfx</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -138,6 +145,7 @@
       <dir>C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon</dir>
       <dir>D:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon</dir>
       <dir>D:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts</dir>
+      <dir>C:\Users\blusc\AppData\Roaming\TS3Client</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -254,6 +262,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -276,17 +295,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -298,7 +306,7 @@
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last.edited.regexp" value="Sample Text" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/include" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="options.lastSelected" value="editor.preferences.smartKeys" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -605,20 +613,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00187" summary=":thinking:">
-      <created>1519474057005</created>
-      <option name="number" value="00187" />
-      <option name="presentableId" value="LOCAL-00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1519474057006</updated>
-    </task>
-    <task id="LOCAL-00188" summary=":thinking:">
-      <created>1519496361085</created>
-      <option name="number" value="00188" />
-      <option name="presentableId" value="LOCAL-00188" />
-      <option name="project" value="LOCAL" />
-      <updated>1519496361086</updated>
     </task>
     <task id="LOCAL-00189" summary=":thinking:">
       <created>1519551105065</created>
@@ -949,7 +943,21 @@
       <option name="project" value="LOCAL" />
       <updated>1523858890713</updated>
     </task>
-    <option name="localTasksCounter" value="236" />
+    <task id="LOCAL-00236" summary=":thinking:&#10;% remove debug stuff">
+      <created>1523859173183</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1523859173183</updated>
+    </task>
+    <task id="LOCAL-00237" summary=":thinking:">
+      <created>1523860998278</created>
+      <option name="number" value="00237" />
+      <option name="presentableId" value="LOCAL-00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1523860998278</updated>
+    </task>
+    <option name="localTasksCounter" value="238" />
     <servers />
   </component>
   <component name="TodoView">
@@ -972,7 +980,7 @@
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49791667" weight="0.33687568" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
@@ -1062,7 +1070,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="splitted commands into files" />
     <MESSAGE value="update" />
     <MESSAGE value="cleanup" />
     <MESSAGE value="a lot of changes o.O" />
@@ -1085,9 +1092,10 @@
     <MESSAGE value="fixed it" />
     <MESSAGE value="kein bock mehr" />
     <MESSAGE value=":thinking: Combined the pluginCMD scripts into one and added some syntax help" />
-    <MESSAGE value=":thinking:" />
     <MESSAGE value=":thinking:&#10;+ some docs in bluscream.py&#10;+ now downloading external badges" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking:&#10;+ some docs in bluscream.py&#10;+ now downloading external badges" />
+    <MESSAGE value=":thinking:&#10;% remove debug stuff" />
+    <MESSAGE value=":thinking:" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking:" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1118,13 +1126,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="25" column="208" selection-start-line="25" selection-start-column="208" selection-end-line="25" selection-end-column="208" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/friendNotifications/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1423,25 +1424,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="14042">
           <caret line="826" column="20" selection-start-line="826" selection-start-column="4" selection-end-line="826" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="511" column="134" lean-forward="true" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="8687">
+          <caret line="511" column="134" selection-start-line="511" selection-start-column="54" selection-end-line="511" selection-end-column="134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../styles/dark/tree_tooltip_client.tpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="685">
+          <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="158" column="48" selection-start-line="158" selection-start-column="48" selection-end-line="158" selection-end-column="48" />
+        <state relative-caret-position="188">
+          <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>

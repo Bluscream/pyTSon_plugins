@@ -4,7 +4,7 @@ from PythonQt.QtCore import QTimer, Qt, QUrl, QFile, QIODevice
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap, QToolTip
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from bluscream import *
+from bluscream import timestamp, buildBadges, sendCommand, loadBadges, parseBadges, saveCfg, loadCfg
 from os import path
 from configparser import ConfigParser
 from pytson import getPluginPath, getCurrentApiVersion
@@ -48,7 +48,6 @@ class customBadges(ts3plugin):
     extbadges = {}
     notice = QTimer()
     notice_nwmc = QNetworkAccessManager()
-
     def __init__(self):
         try:
             loadCfg(self.ini, self.cfg)
@@ -74,8 +73,10 @@ class customBadges(ts3plugin):
         for badge in badges:
             lst = self.badges
             if badge in self.extbadges: lst = self.extbadges
-            _return.append("{}".format(
-                # "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, lst[badge]["filename"] if badge in lst else "unknown"),
+            _return.append("{} {}".format(
+                # "[img]data://image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACp0lEQVR42qXSW0jTURwH8O/5/93mLm460alFXrKLqQ8aNUzRB6NWhOYG9ZDYlYiSHgoCs4d6qIwIiuipIOmtqClYUZEIhlDgbTIvealR7T6bm3Nz2///P/2bEURlRQd+L79zzuf8+HII/nOR5TYnduw+zjGMuuSJue2fgcltdRfT9BvO0kgY9pEPl8pedLb+NTCztb5cWZo3oM0GGI8PDi+B2xXauOl55+AfAZuhQQZ58pCudl0RlSiBJCmY0QFYJ4LjvEDK9M86ossDVQZjanXxI0VBOiSHWxI97vp5eF9bMOXjTTXdXebfAk5Dg4pZqZtPXasAL0+DvPlcoh+5eRns2zFMeHmE4kJKZcf90C8Be239Xc2eqgPEOQOiy4f82JlEP3ThFBjLMGJqHd5Me9sNfd0HfwKc2435is3F76TZFLHeV2BzC6Fsu5PYCx4yguvtgUq3Av2TPszMLhQ00dD7HwBX9c6+lNq8Lfz4EDi7ExJ9DVRX25eA5n3gerohS88BNx/H4yl7b+OCv+Y74JRkmGT1+oeyXBacKwAhMAd21Rqk3HqQAAL7d0KwWEEVadDwBFbHHPpn/aYjkaA5AXhyi9zKE9WZ/MgYaJIMiAsQnB+B1JzEC9zoINisQtAonyg1R2C22YN75/0a4ma0JxWnG26A84EGwqACheD1gl29Hqpr90Aog8BRE4RhCyDXgC7yUHHAp0AEXS53C/FXVMakxlIJb50Wvx0B5UXAaUdSeSVUbbe/ZdAkZvBSnCgDNMwDUQ5agcVTlwfkc0UVTW4qA52yAQJA4xwYsQSHGGRdI4hKjciVViRn5YFGqHhZABFLGiPocjiWQvQWl1CqlYVonAf3dQLxXDy6iLjNJpo8hMwcUFaGOMeD5wRxSgHu8KJql99DvgBZsjDj7AAlKgAAAABJRU5ErkJggg==[/img]",
+                # "[img]file:///C:/Users/blusc/AppData/Roaming/TS3Client/styles/dark/apply.svg[/img]",
+                "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, lst[badge]["filename"] if badge in lst else "unknown"),
                 self.badgeNameByUID(badge, lst) if badge in lst else badge
             ))
         return _return
