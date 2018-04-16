@@ -1,6 +1,6 @@
 from ts3plugin import ts3plugin, PluginHost
 from random import choice, getrandbits
-from PythonQt.QtCore import QTimer, Qt, QUrl
+from PythonQt.QtCore import QTimer, Qt, QUrl, QFile, QIODevice
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
@@ -25,14 +25,14 @@ class customBadges(ts3plugin):
     commandKeyword = ""
     infoTitle = "[b]Badges[/b]"
     menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Change " + name, "")#,
-        #(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Generate Badge UIDs", "")
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Change " + name, ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Generate Badge UIDs", "")
     ]
     hotkeys = []
-    icons = path.join(ts3lib.getConfigPath(), "cache", "badges")
     ini = path.join(getPluginPath(), "scripts", "customBadges", "settings.ini")
     ui = path.join(getPluginPath(), "scripts", "customBadges", "badges.ui")
-    badges_ext = path.join(getPluginPath(), "include", "badges_ext.json")
+    icons = path.join(ts3lib.getConfigPath(), "cache", "badges")
+    icons_ext = path.join(icons, "external")
     badges_ext_remote = "https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/badges.json"
     cfg = ConfigParser()
     dlg = None
@@ -122,19 +122,65 @@ class customBadges(ts3plugin):
             if badge == uid: return lst[badge]["name"]
 
     def requestBadgesExt(self):
-        try:
-            with open(self.badges_ext, encoding='utf-8-sig') as json_file:
-                self.extbadges = load(json_file)
-        except:
-            self.nwmc_ext = QNetworkAccessManager()
-            self.nwmc_ext.connect("finished(QNetworkReply*)", self.loadBadgesExt)
-            self.nwmc_ext.get(QNetworkRequest(QUrl(self.badges_ext_remote)))
+        self.nwmc_ext = QNetworkAccessManager()
+        self.nwmc_ext.connect("finished(QNetworkReply*)", self.loadBadgesExt)
+        self.nwmc_ext.get(QNetworkRequest(QUrl(self.badges_ext_remote)))
 
     def loadBadgesExt(self, reply):
         try:
             data = reply.readAll().data().decode('utf-8')
+            print(data)
             self.extbadges = loads(data)
+            self.nwmc_exti = {}
+            self.tmpfile = {}
+            for badge in self.extbadges:
+                _name = self.extbadges[badge]["filename"]
+                _path = path.join(self.icons_ext, _name)
+                if path.exists(_path) and path.getsize(_path) > 0: continue
+                self.requestExtIcon(_name)
+                self.requestExtIcon("{}_details".format(_name))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def requestExtIcon(self, filename):
+        self.nwmc_exti[filename] = QNetworkAccessManager()
+        self.nwmc_exti[filename].connect("finished(QNetworkReply*)", self.loadExtIcon)
+        # self.nwmc_exti.connect("downloadProgress(qint64, qint64)", self.progExtIcon)
+        # self.nwmc_exti.connect("readyRead()", self.readyExtIcon)
+        # self.nwmc_exti.connect("finished()", self.finExtIcon)
+        self.tmpfile[filename] = QFile()
+        self.tmpfile[filename].setFileName(path.join(ts3lib.getConfigPath(),"cache","badges","external",filename))
+        self.tmpfile[filename].open(QIODevice.WriteOnly)
+        url = "https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/img/{}".format(filename)
+        self.nwmc_exti[filename].get(QNetworkRequest(QUrl(url)))
+
+    def progExtIcon(self, bytesRead, bytesTotal):
+        print("Progress: {} / {}".format(bytesRead, bytesTotal))
+
+    def loadExtIcon(self, reply):
+        try:
+            print("loadExtIcon")
+            err = reply.error()
+            if err == QNetworkReply.NoError:
+                print("file downloaded successfully.")
+            else:
+                print(reply.errorString())
+            name = reply.url().fileName()#.split("/")[-1]
+            print("name:", name)
+            self.tmpfile[name].write(reply.readAll())
+            if self.tmpfile[name].isOpen():
+                self.tmpfile[name].close()
+                self.tmpfile[name].deleteLater()
+            print(reply.readAll())
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def readyExtIcon(self):
+        print("readyExtIcon")
+
+    def finExtIcon(self):
+        print("finExtIcon")
+        if self.tmpfile.isOpen():
+            self.tmpfile.close()
+            self.tmpfile.deleteLater()
 
     def checkNotice(self):
         self.notice_nwmc.connect("finished(QNetworkReply*)", self.loadNotice)
@@ -143,8 +189,8 @@ class customBadges(ts3plugin):
     def loadNotice(self, reply):
         data = reply.readAll().data().decode('utf-8')
         if data.strip() == "" or data == self.cfg.get('general', 'lastnotice'): return
-        msgBox(data, 0, "{} Notice!".format(self.name))
         self.cfg.set('general', 'lastnotice', data)
+        msgBox(data, 0, "{} Notice!".format(self.name))
 
     def stop(self):
         saveCfg(self.ini, self.cfg)
@@ -194,9 +240,10 @@ class BadgesDialog(QWidget):
             setupUi(self, customBadges.ui)
             self.cfg = customBadges.cfg
             self.ini = customBadges.ini
-            self.icons = customBadges.icons
             self.badges = customBadges.badges
             self.extbadges = customBadges.extbadges
+            self.icons = customBadges.icons
+            self.icons_ext = customBadges.icons_ext
             self.setCustomBadges = customBadges.setCustomBadges
             self.reloadPlugin = customBadges.__init__
             self.setAttribute(Qt.WA_DeleteOnClose)
@@ -212,24 +259,25 @@ class BadgesDialog(QWidget):
             item.setData(Qt.UserRole, badge)
             try: item.setToolTip(lst[badge]["description"])
             except: pass
-            try: item.setIcon(QIcon("{}\\{}{}".format(self.icons, lst[badge]["filename"],"_details" if alt else "")))
+            try: item.setIcon(QIcon("{}\\{}{}".format(self.icons_ext if ext else self.icons, lst[badge]["filename"],"_details" if alt else "")))
             except: pass
             return item
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def updatePreview(self, uid, i):
+    def updatePreview(self, uid, i, ext = False):
         try:
             if uid in self.badges: lst = self.badges
-            elif uid in self.extbadges: lst = self.extbadges
+            elif uid in self.extbadges:
+                lst = self.extbadges
+                ext = True
             else: print("UID", uid, "not internal or external"); return
             # (QPixmap::fromImage(image.scaled(200,200))
-            filename = "{}\\{}_details".format(self.icons, lst[uid]["filename"])
-            if i == 0:
-                self.badge1.setPixmap(QPixmap(filename).scaled(60,60))
-            elif i == 1:
-                self.badge2.setPixmap(QPixmap(filename).scaled(60,60))
-            elif i == 2:
-                self.badge3.setPixmap(QPixmap(filename).scaled(60,60))
+            filename = "{}\\{}_details".format(self.icons_ext if ext else self.icons, lst[uid]["filename"])
+            if i == 0: badge = self.badge1
+            elif i == 1: badge = self.badge2
+            elif i == 2: badge = self.badge3
+            else: return
+            badge.setPixmap(QPixmap(filename).scaled(60,60))
         except:
             ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -345,7 +393,7 @@ class BadgesDialog(QWidget):
 
     def on_btn_reload_clicked(self):
         if not self.listen: return
-        self.reloadPlugin()
+        self.reloadPlugin(True)
         self.setupList()
 
     def on_btn_close_clicked(self):

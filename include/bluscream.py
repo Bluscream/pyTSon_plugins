@@ -17,6 +17,12 @@ def date(): return '{:%Y-%m-%d}'.format(datetime.now())
 def Time(): return '{:%H:%M:%S}'.format(datetime.now())
 
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
+    """
+
+    :param message:
+    :param channel:
+    :param server:
+    """
     message = str(message)
     _f = "{} ({}) ".format(Time(), channel)
     if server > 0:
@@ -28,28 +34,67 @@ def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
     print(_f)
 
 def toggle(boolean):
+    """
+
+    :param boolean:
+    :return:
+    """
     boolean = not boolean
     return boolean
 
 def varname(obj, callingLocals=locals()):
+    """
+
+    :param obj:
+    :param callingLocals:
+    :return:
+    """
     for k, v in list(callingLocals.items()):
          if v is obj: return k
 
 def random_string(size=1, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+    """
+
+    :param size:
+    :param chars:
+    :return:
+    """
     return ''.join(random.SystemRandom().choice(chars) for _ in range(size))
 
 def percentage(part, whole):
+    """
+
+    :param part:
+    :param whole:
+    :return:
+    """
     return round(100 * float(part)/float(whole))
 
 def getItem(useList, name): # getitem(PluginHost.modules,'devTools')
+    """
+
+    :param useList:
+    :param name:
+    :return:
+    """
     for _name,value in useList.items():
         if _name == name: return value
 
 def getItems(object):
+    """
+
+    :param object:
+    :return:
+    """
     return [(a, getattr(object, a)) for a in dir(object)
             if not a.startswith('__') and not callable(getattr(object, a)) and not "ENDMARKER" in a and not "DUMMY" in a]
 
 def getItemType(lst):
+    """
+
+    :param lst:
+    :return:
+    """
     if lst in [ts3defines.VirtualServerProperties, ts3defines.VirtualServerPropertiesRare]:
         return ts3defines.PluginItemType.PLUGIN_SERVER, "Server"
     elif lst in [ts3defines.ChannelProperties, ts3defines.ChannelPropertiesRare]:
@@ -59,6 +104,12 @@ def getItemType(lst):
     else: return None
 
 def getobjects(name, cls=True):
+    """
+
+    :param name:
+    :param cls:
+    :return:
+    """
     objects = []
     for obj in get_objects():
         if (isinstance(obj, QObject) and
@@ -68,12 +119,23 @@ def getobjects(name, cls=True):
     return objects
 
 def objects():
-    import gc;
+    """
+
+    :return:
+    """
     _ret = []
-    for x in gc.get_objects(): _ret.extend(str(repr(x)))
+    for x in get_objects(): _ret.extend(str(repr(x)))
     return _ret
 
 def find_between(s, first, last):
+    """
+
+    :param s:
+    :param first:
+    :param last:
+    :return:
+    """
+    # type: (object, object, object) -> object
     try:
         start = s.index( first ) + len( first )
         end = s.index( last, start )
@@ -82,6 +144,13 @@ def find_between(s, first, last):
         return ""
 
 def find_between_r(s, first, last):
+    """
+
+    :param s:
+    :param first:
+    :param last:
+    :return:
+    """
     try:
         start = s.rindex( first ) + len( first )
         end = s.rindex( last, start )
@@ -90,12 +159,25 @@ def find_between_r(s, first, last):
         return ""
 
 def generateAvatarFileName(schid, clid=0):
+    """
+
+    :param schid:
+    :param clid:
+    :return:
+    """
     if clid == 0: (error, clid) = ts3lib.getClientID(schid)
     (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
     return "avatar_"+b64encode(uid.encode('ascii')).decode("ascii").split('=')[0]
 
 # PARSING #
 def channelURL(schid=None, cid=0, name=None):
+    """
+
+    :param schid:
+    :param cid:
+    :param name:
+    :return:
+    """
     if schid is None:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
@@ -105,6 +187,15 @@ def channelURL(schid=None, cid=0, name=None):
     return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
 
 def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
+    """
+
+    :param schid:
+    :param clid:
+    :param uid:
+    :param nickname:
+    :param nickname_encoded:
+    :return:
+    """
     if not schid:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
@@ -121,15 +212,31 @@ def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
 
 # I/O #
 def loadCfg(path, cfg):
+    """
+
+    :param path:
+    :param cfg:
+    """
     if not os.path.isfile(path) or os.path.getsize(path) < 1:
         saveCfg(path, cfg)
     cfg = cfg.read(path)
 
 def saveCfg(path, cfg):
+    """
+
+    :param path:
+    :param cfg:
+    """
     with open(path, 'w') as cfgfile:
         cfg.write(cfgfile)
 # GUI #
 def inputBox(title, text):
+    """
+
+    :param title:
+    :param text:
+    :return:
+    """
     x = QDialog()
     x.setAttribute(Qt.WA_DeleteOnClose)
     (text, ok) = QInputDialog.getText(x, title, text)
@@ -137,6 +244,16 @@ def inputBox(title, text):
     else: return False
 
 def inputInt(title="", label="", val=0, min=-2147483647, max=2147483647, step=1):
+    """
+
+    :param title:
+    :param label:
+    :param val:
+    :param min:
+    :param max:
+    :param step:
+    :return:
+    """
     x = QDialog()
     x.setAttribute(Qt.WA_DeleteOnClose)
     ok = BoolResult()
@@ -145,6 +262,12 @@ def inputInt(title="", label="", val=0, min=-2147483647, max=2147483647, step=1)
     else: return False
 
 def msgBox(text, icon=QMessageBox.Information, title=""):
+    """
+
+    :param text:
+    :param icon:
+    :param title:
+    """
     x = QMessageBox()
     if title: x.setWindowTitle(title)
     x.setText(text)
@@ -152,6 +275,12 @@ def msgBox(text, icon=QMessageBox.Information, title=""):
     x.exec()
 
 def confirm(title, message):
+    """
+
+    :param title:
+    :param message:
+    :return:
+    """
     x = QDialog()
     x.setAttribute(Qt.WA_DeleteOnClose)
     _x = QMessageBox.question(x, title, message, QMessageBox.Yes, QMessageBox.No)
@@ -159,12 +288,24 @@ def confirm(title, message):
 
 # AntiFlood
 def getAntiFloodSettings(schid):
+    """
+
+    :param schid:
+    :return:
+    """
     (err, cmdblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
     (err, ipblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
     (err, afreduce) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
     return (err, cmdblock, ipblock, afreduce)
 
 def calculateInterval(schid, command, name="pyTSon"):
+    """
+
+    :param schid:
+    :param command:
+    :param name:
+    :return:
+    """
     # ts3lib.requestServerVariables(schid)
     (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
     # strange = False
@@ -179,18 +320,27 @@ def calculateInterval(schid, command, name="pyTSon"):
 
 # Network #
 def getFile(url):
+    """
+
+    :param url:
+    """
     nwmc = QNetworkAccessManager()
-    nwmc.connect("finished(QNetworkReply*)", getFile)
+    nwmc.connect("finished(QNetworkReply*)", _getFileReply)
     nwmc.get(QNetworkRequest(QUrl(url)))
-def getFileReply(reply):
+def _getFileReply(reply):
     del nwmc
 
 def downloadFile(url, path):
+    """
+
+    :param url:
+    :param path:
+    """
     nwmc = QNetworkAccessManager()
-    nwmc.connect("finished(QNetworkReply*)", downloadFileReply)
+    nwmc.connect("finished(QNetworkReply*)", _downloadFileReply)
     dlpath = path
     nwmc.get(QNetworkRequest(QUrl(url)))
-def downloadFileReply(reply):
+def _downloadFileReply(reply):
     del nwmc
     """
     QByteArray b = reply->readAll();
@@ -202,10 +352,17 @@ def downloadFileReply(reply):
 
 # Stuff #
 def hasAddon():
+    """
+
+    """
     pass
 
 # Database #
 def getAddons():
+    """
+
+    :return:
+    """
     db = ts3client.Config()
     q = db.query("SELECT * FROM addons")
     ret = {}
@@ -221,6 +378,10 @@ def getAddons():
     return ret
 
 def getContacts():
+    """
+
+    :return:
+    """
     db = ts3client.Config()
     ret = []
     q = db.query("SELECT * FROM contacts")
@@ -246,6 +407,11 @@ def getContacts():
     return ret
 
 def getContactStatus(uid):
+    """
+
+    :param uid:
+    :return:
+    """
     db = ts3client.Config()
     q = db.query("SELECT * FROM contacts WHERE value LIKE '%%IDS=%s%%'" % uid)
     ret = 2
@@ -264,10 +430,21 @@ class ContactStatus(object):
 
 # TS3Hook #
 def escapeStr(str,unescape=False):
+    """
+
+    :param str:
+    :param unescape:
+    :return:
+    """
     if unescape: str.replace(" ","\s").replace("|","\p").replace("    ","\t")
     return str.replace("\s"," ").replace("\p","|").replace("\t","    ")
 
 def parseCommand(cmd):
+    """
+
+    :param cmd:
+    :return:
+    """
     _cmd = cmd.split(' ', 1)
     cmd = _cmd[0]
     params = {}
@@ -279,6 +456,12 @@ def parseCommand(cmd):
     return cmd, params
 
 def buildCommand(cmd, parameters):
+    """
+
+    :param cmd:
+    :param parameters:
+    :return:
+    """
     for key, value in parameters:
         if key.startswith('-') or not value:
             cmd += " {}".format(key)
@@ -287,6 +470,10 @@ def buildCommand(cmd, parameters):
 
 
 def loadBadges():
+    """
+    Loads Badges from ts3settings.db
+    :return: int(timestamp), str(ret), dict(badges)
+    """
     db = ts3client.Config()
     q = db.query("SELECT * FROM Badges") #  WHERE key = BadgesListData
     timestamp = 0
@@ -327,6 +514,11 @@ def loadBadges():
     return timestamp, ret, badges
 
 def parseBadges(client_badges):
+    """
+    Parses a string of badges.
+    :param client_badges:
+    :return: tuple(overwolf, dict(badges))
+    """
     overwolf = None
     badges = []
     if "verwolf=" in client_badges and "badges=" in client_badges:
@@ -340,10 +532,23 @@ def parseBadges(client_badges):
     return (overwolf, badges)
 
 def buildBadges(badges=[], overwolf=False):
+    """
+    Builds a badges command from a list of badges.
+    :param badges:
+    :param overwolf:
+    :return: str(clientupdate cmd with badges)
+    """
     blocks = [",".join(badges[i:i+3]) for i in range(0, len(badges), 3)]
     return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ":badges=".join(blocks))
 
 def sendCommand(name, cmd, schid=0, silent=True):
+    """
+    Sends a command through TS3Hook.
+    :param name:
+    :param cmd:
+    :param schid:
+    :param silent:
+    """
     if PluginHost.cfg.getboolean("general", "verbose") or not silent:
         ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
     cmd = cmd.replace(" ", "~s")
