@@ -2,7 +2,7 @@ from ts3plugin import ts3plugin, PluginHost
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt, QUrl, QFile, QIODevice
 from PythonQt.QtSql import QSqlQuery
-from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap
+from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap, QToolTip
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from bluscream import *
 from os import path
@@ -32,7 +32,7 @@ class customBadges(ts3plugin):
     ini = path.join(getPluginPath(), "scripts", "customBadges", "settings.ini")
     ui = path.join(getPluginPath(), "scripts", "customBadges", "badges.ui")
     icons = path.join(ts3lib.getConfigPath(), "cache", "badges")
-    icons_ext = path.join(icons, "external")
+    # icons_ext = path.join(icons, "external")
     badges_ext_remote = "https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/badges.json"
     cfg = ConfigParser()
     dlg = None
@@ -55,7 +55,7 @@ class customBadges(ts3plugin):
             (tstamp, self.badges, array) = loadBadges()
             self.requestBadgesExt()
             self.notice.timeout.connect(self.checkNotice)
-            self.notice.start(30*1000) # 180
+            self.notice.start(30*1000)
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -74,8 +74,8 @@ class customBadges(ts3plugin):
         for badge in badges:
             lst = self.badges
             if badge in self.extbadges: lst = self.extbadges
-            _return.append("{} {}".format(
-                "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, lst[badge]["filename"] if badge in lst else "unknown"),
+            _return.append("{}".format(
+                # "[img]https://badges-content.teamspeak.com/{}/{}.svg[/img]".format(badge, lst[badge]["filename"] if badge in lst else "unknown"),
                 self.badgeNameByUID(badge, lst) if badge in lst else badge
             ))
         return _return
@@ -133,7 +133,7 @@ class customBadges(ts3plugin):
             self.nwmc_exti = {}; self.tmpfile = {}
             for badge in self.extbadges:
                 _name = self.extbadges[badge]["filename"]
-                _path = path.join(self.icons_ext, _name)
+                _path = path.join(self.icons, _name)
                 if path.exists(_path) and path.getsize(_path) > 0: continue
                 self.requestExtIcon(_name)
                 self.requestExtIcon("{}_details".format(_name))
@@ -143,7 +143,7 @@ class customBadges(ts3plugin):
         self.nwmc_exti[filename] = QNetworkAccessManager()
         self.nwmc_exti[filename].connect("finished(QNetworkReply*)", self.loadExtIcon)
         self.tmpfile[filename] = QFile()
-        self.tmpfile[filename].setFileName(path.join(ts3lib.getConfigPath(),"cache","badges","external",filename))
+        self.tmpfile[filename].setFileName(path.join(self.icons,filename))
         self.tmpfile[filename].open(QIODevice.WriteOnly)
         url = "https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/img/{}".format(filename)
         self.nwmc_exti[filename].get(QNetworkRequest(QUrl(url)))
@@ -183,10 +183,10 @@ class customBadges(ts3plugin):
             self.saveBadges(self.extbadges)
             for i in range(0,3):
                 # 0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript
-                uid = [random_string(size=8, chars=string.ascii_lowercase + string.digits)]
+                uid = [random_string(8, string.ascii_lowercase + string.digits)]
                 for _i in range(0,3):
-                    uid.append(random_string(size=4, chars=string.ascii_lowercase + string.digits))
-                uid.append(random_string(size=12, chars=string.ascii_lowercase + string.digits))
+                    uid.append(random_string(4, string.ascii_lowercase + string.digits))
+                uid.append(random_string(12, string.ascii_lowercase + string.digits))
                 ts3lib.printMessageToCurrentTab("[color=red]Random UID #{}: [b]{}".format(i, '-'.join(uid)))
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
@@ -220,7 +220,7 @@ class BadgesDialog(QWidget):
             self.badges = customBadges.badges
             self.extbadges = customBadges.extbadges
             self.icons = customBadges.icons
-            self.icons_ext = customBadges.icons_ext
+            # self.icons_ext = customBadges.icons_ext
             self.setCustomBadges = customBadges.setCustomBadges
             self.reloadPlugin = customBadges.__init__
             self.setAttribute(Qt.WA_DeleteOnClose)
@@ -234,12 +234,11 @@ class BadgesDialog(QWidget):
             lst = self.extbadges if ext else self.badges
             item = QListWidgetItem(lst[badge]["name"])
             item.setData(Qt.UserRole, badge)
-            try: item.setToolTip(lst[badge]["description"])
-            except: pass
-            try: item.setIcon(QIcon("{}\\{}{}".format(self.icons_ext if ext else self.icons, lst[badge]["filename"],"_details" if alt else "")))
-            except: pass
+            path = "{}\\{}".format(self.icons, lst[badge]["filename"])
+            item.setToolTip('{}<br/><center><img width="64" height="64" src="{}_details">'.format(lst[badge]["description"], path))
+            item.setIcon(QIcon("{}{}".format(path, "_details" if alt else "")))
             return item
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
 
     def updatePreview(self, uid, i, ext = False):
         try:
@@ -249,14 +248,13 @@ class BadgesDialog(QWidget):
                 ext = True
             else: print("UID", uid, "not internal or external"); return
             # (QPixmap::fromImage(image.scaled(200,200))
-            filename = "{}\\{}_details".format(self.icons_ext if ext else self.icons, lst[uid]["filename"])
+            filename = "{}\\{}_details".format(self.icons, lst[uid]["filename"])
             if i == 0: badge = self.badge1
             elif i == 1: badge = self.badge2
             elif i == 2: badge = self.badge3
             else: return
             badge.setPixmap(QPixmap(filename).scaled(60,60))
-        except:
-            ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def setupList(self):
         try:
