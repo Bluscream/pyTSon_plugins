@@ -50,6 +50,12 @@ class crasher_3_1_7(ts3plugin):
         ("connection_bandwidth_received_last_minute_keepalive","0"),
         ("connection_bandwidth_received_last_minute_control","0")
     ]
+    connectioninfoautoupdate = [
+        ("connection_server2client_packetloss_speech","0.0000"),
+        ("connection_server2client_packetloss_keepalive","0.0000"),
+        ("connection_server2client_packetloss_control","0.0000"),
+        ("connection_server2client_packetloss_total","0.0000")
+    ]
 
     def __init__(self):
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
