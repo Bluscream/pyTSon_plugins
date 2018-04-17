@@ -170,7 +170,8 @@ class serverSwitcher(ts3plugin):
                             if nick: c.set("nick", ":".join(nick))
                             meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
                             # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
-                    name = name[:78] + (name[78:] and '..')
+                    try: name = name[:78] + (name[78:] and '..')
+                    except: pass
                     _away_message = self.cfg.get('general', 'status')\
                         .replace('{host}', host if host else "")\
                         .replace('{nick}', nick[0] if nick else "")\
