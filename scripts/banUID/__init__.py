@@ -54,7 +54,7 @@ class banUID(ts3plugin):
         self.dlg.activateWindow()
 
     def onConnectionInfoEvent(self, schid, clid):
-        if not self.clid or clid != self.clid: return
+        if not hasattr(self, "clid") or clid != self.clid: return
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         if ip and self.dlg: self.dlg.txt_ip.setText(ip)
         del self.clid
