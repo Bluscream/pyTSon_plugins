@@ -99,8 +99,8 @@ class serverSwitcher(ts3plugin):
         # err, tab = ts3.spawnNewServerConnectionHandler(0)
         # err = ts3.startConnection(tab, "", server.attrib["host"], server.attrib["port"] if hasattr(server, "port") else 0, "", [], "", server.attrib["pw"] if hasattr(server, "pw") else "")
         err, tab = ts3.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, server.text or "Server",
-                       '{}:{}'.format(server.attrib["host"], server.attrib["port"]) if hasattr(server, 'port') else server.attrib["host"],
-                       server.attrib["pw"] if hasattr(server, "pw") else "",
+                       '{}:{}'.format(server.attrib["h"], server.attrib["p"]) if hasattr(server, 'p') else server.attrib["h"],
+                       server.attrib["p"] if hasattr(server, "p") else "",
                        "TeamspeakUser","","","","","","","","", "")
 
     """
@@ -161,20 +161,22 @@ class serverSwitcher(ts3plugin):
                         if host:
                             newmeta = xml.Element(self.tag)
                             c = xml.SubElement(newmeta, "tab")
-                            c.set("id", str(schid))
+                            c.set("i", str(schid))
                             if name: c.text = escape(name.strip())
-                            c.set("host", escape(host))
+                            c.set("h", escape(host))
                             if port and port != 9987: c.set("port", "{}".format(port))
-                            if pw and self.cfg.getboolean('general', 'pw'): c.set("pw", pw)
-                            if ip and ip.strip(): c.set("ip", ip)
-                            if nick: c.set("nick", ":".join(nick))
+                            if pw and self.cfg.getboolean('general', 'pw'): c.set("p", pw)
+                            # if ip and ip.strip(): c.set("ip", ip)
+                            # if nick: c.set("nick", ":".join(nick))
                             meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
                             # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
                     try: name = name[:78] + (name[78:] and '..')
                     except: pass
-                    _away_message = self.cfg.get('general', 'status')\
+                    _away_message = self.cfg.get('general', 'status')
+                    if "{" in _away_message:
+                        _away_message = _away_message\
                         .replace('{host}', host if host else "")\
-                        .replace('{nick}', nick[0] if nick else "")\
+                        .replace('{nick}', nick[0] if nick and len(nick) > 0 else "")\
                         .replace('{name}', name if name else "")\
                         .replace('{nickname}', nick[0] if nick else name)\
                         .replace('{ip}', ip if ip else "")\
