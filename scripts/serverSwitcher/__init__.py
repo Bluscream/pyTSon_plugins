@@ -133,7 +133,22 @@ class serverSwitcher(ts3plugin):
         try:
             err, ownid = ts3.getClientID(schid)
             err, schids = ts3.getServerConnectionHandlerList()
+
             regex = re.compile(r'.*(<{0}>.*</{0}>).*'.format(self.tag), re.IGNORECASE)
+
+            host="";port=9987;pw="";name="";nick=""
+
+            err, host, port, pw = ts3.getServerConnectInfo(schid)
+            err, name = ts3.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+            err, nick = ts3.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_NICKNAME)
+            if err == ts3defines.ERROR_ok and nick.strip(): nick = nick.split(":")
+            err, ip = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+            if err != ts3defines.ERROR_ok or not ip.strip():
+                err, ip = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_IP)
+            err, port = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
+            if err != ts3defines.ERROR_ok or not port or port < 1:
+                err, port = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
+
             for tab in schids:
                 err, meta_data = ts3.getClientSelfVariable(tab, ts3defines.ClientProperties.CLIENT_META_DATA)
                 meta_data = regex.sub("", meta_data)
@@ -142,15 +157,6 @@ class serverSwitcher(ts3plugin):
                 else:
                     err, away = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY)
                     if away != ts3defines.AwayStatus.AWAY_ZZZ: ts3.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_ZZZ)
-                    host="";port=9987;pw="";name=""
-                    err, host, port, pw = ts3.getServerConnectInfo(schid)
-                    err, name = ts3.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-                    err, ip = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
-                    if err != ts3defines.ERROR_ok or not ip.strip():
-                        err, ip = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_IP)
-                    err, port = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
-                    if err != ts3defines.ERROR_ok or not port or port < 1:
-                        err, port = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
                     if self.cfg.getboolean('general', 'enabled'):
                         if host:
                             newmeta = xml.Element(self.tag)
@@ -160,12 +166,16 @@ class serverSwitcher(ts3plugin):
                             c.set("host", escape(host))
                             if port and port != 9987: c.set("port", "{}".format(port))
                             if pw and self.cfg.getboolean('general', 'pw'): c.set("pw", pw)
+                            if ip and ip.strip(): c.set("ip", ip)
+                            if nick: c.set("nick", ":".join(nick))
                             meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
                             # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
                     name = name[:78] + (name[78:] and '..')
                     _away_message = self.cfg.get('general', 'status')\
                         .replace('{host}', host if host else "")\
+                        .replace('{nick}', nick[0] if nick else "")\
                         .replace('{name}', name if name else "")\
+                        .replace('{nickname}', nick[0] if nick else name)\
                         .replace('{ip}', ip if ip else "")\
                         .replace('{port}', str(port) if port else "")
                     err, away_message = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE)
