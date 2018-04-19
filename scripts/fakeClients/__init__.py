@@ -13,11 +13,16 @@ class fakeClients(ts3plugin):
     offersConfigure = False
     commandKeyword = "fc"
     infoTitle = None
-    menuItems = []
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Disconnect", "")]
     hotkeys = []
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
+
+    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
+        if menuItemID != 0 or atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT: return
+        (err, cid) = ts3lib.getChannelOfClient(schid, selectedItemID)
+        sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=8 reasonmsg=disconnected clid={}".format(cid, selectedItemID), schid, True, "-")
 
     def processCommand(self, schid, command):
         clients = 1
