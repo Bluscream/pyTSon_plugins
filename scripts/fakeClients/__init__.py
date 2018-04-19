@@ -1,6 +1,7 @@
 from ts3plugin import ts3plugin, PluginHost
 from random import choice, getrandbits, randint
 from bluscream import timestamp, sendCommand, random_string, loadBadges
+from PythonQt.QtCore import QTimer
 import ts3defines, ts3lib, pytson
 
 class fakeClients(ts3plugin):
@@ -23,8 +24,11 @@ class fakeClients(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "== Hacks ==", "")
     ]
     hotkeys = []
+    i = 1
+    timer = QTimer()
 
     def __init__(self):
+        self.timer.timeout.connect(self.tick)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def menuCreated(self):
@@ -42,8 +46,12 @@ class fakeClients(ts3plugin):
         elif menuItemID == 4: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=3 reasonmsg=DDoS clid={}".format(cid, selectedItemID), schid, True, True)
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
-        if newChannelID == 0: return
-        sendCommand(self.name, "notifyclientupdated clid={} client_is_channel_commander=1".format(clientID), schid, True, True)
+        if oldChannelID != 0: return # if newChannelID == 0: return
+        (err, clid) = ts3lib.getClientID(schid)
+        if clientID == clid: return
+        (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if uid.startswith("FakeClient"): return
+        sendCommand(self.name, "notifyclientupdated clid={} client_is_channel_commander=1 client_country=JP client_is_recording=1 client_platform=Windoof".format(clientID), schid, True, True)
 
     def processCommand(self, schid, command):
         clients = 1
@@ -62,16 +70,35 @@ class fakeClients(ts3plugin):
         self.badges = []
         for badge in ret:
             self.badges.append(badge)
-        for i in range(clients):
-            cmd = "notifycliententerview"
-            client = self.fakeClient(schid)
-            for k in client:
-                if client[k] != "":
-                    cmd += " {}={}".format(k, client[k])
-                else: cmd += " {}".format(k)
-            sendCommand(self.name, cmd, schid, True, True)
-            self.clients.append(client["clid"])
+        if clients > 10:
+            self.schid = schid
+            self.c = clients+1
+            self.timer.start(10)
+        else:
+            for i in range(clients):
+                cmd = "notifycliententerview"
+                client = self.fakeClient(schid)
+                for k in client:
+                    if client[k] != "":
+                        cmd += " {}={}".format(k, client[k])
+                    else: cmd += " {}".format(k)
+                sendCommand(self.name, cmd, schid, True, True)
+                self.clients.append(client["clid"])
+                i += 1
         return True
+
+    def tick(self):
+        if self.i >= self.c: self.timer.stop()
+        cmd = "notifycliententerview"
+        client = self.fakeClient(self.schid)
+        for k in client:
+            if client[k] != "":
+                cmd += " {}={}".format(k, client[k])
+            else: cmd += " {}".format(k)
+        sendCommand(self.name, cmd, self.schid, True, True)
+        self.clients.append(client["clid"])
+        self.i += 1
+
 
     def fakeClient(self, schid):
         client = {}
@@ -104,7 +131,7 @@ class fakeClients(ts3plugin):
         client["client_unread_messages"] = randint(0,10)
         client["client_needed_serverquery_view_power"] = 0 # randint(0,65000)
         client["client_icon_id"] = "0" # = randint(0,65000)
-        client["client_unique_identifier"] = "{}=".format(random_string(27))
+        client["client_unique_identifier"] = "FakeClient#{}".format(self.i) # "{}=".format(random_string(27))
         client["client_nickname"] = random_string(randint(3,30))
         client["client_meta_data"] = random_string(randint(0,1)) # 30
         client["client_away_message"] = random_string(randint(0,10)) # 80
