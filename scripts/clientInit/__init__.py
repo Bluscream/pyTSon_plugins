@@ -1,4 +1,4 @@
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from random import choice, getrandbits
 from PythonQt.QtCore import QTimer, Qt
 from bluscream import timestamp, sendCommand, calculateInterval, AntiFloodPoints
@@ -16,7 +16,6 @@ class clientInit(ts3plugin):
     infoTitle = None
     menuItems = [] # [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
     hotkeys = []
-    debug = False
     requested = False
     clientinit = [
         ("client_nickname", "penis"),
@@ -38,7 +37,7 @@ class clientInit(ts3plugin):
     ]
 
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
         pass
