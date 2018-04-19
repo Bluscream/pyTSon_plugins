@@ -549,11 +549,17 @@ def sendCommand(name, cmd, schid=0, silent=True, prefix="~"):
     :param schid:
     :param silent:
     """
-    if PluginHost.cfg.getboolean("general", "verbose") or not silent:
-        ts3lib.printMessage(ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-    cmd = cmd.replace(" ", "~s")
     if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
-    ts3lib.requestSendServerTextMsg(schid, "{}cmd{}".format(prefix, cmd))
+    if PluginHost.cfg.getboolean("general", "verbose") or not silent:
+        ts3lib.printMessage(schid, '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+    cmd = "{}cmd{}".format(prefix, cmd.replace(" ", "~s"))
+    (err, clid) = ts3lib.getClientID(schid)
+    retcode = "" # "TS3Hook:Command:{}".format(ts3lib.createReturnCode(256))
+    err = ts3lib.requestSendPrivateTextMsg(schid, cmd, clid, retcode)
+    if err != ts3defines.ERROR_ok:
+        (err, cid) = ts3lib.getChannelOfClient(schid, clid)
+        ts3lib.requestSendChannelTextMsg(schid, cmd, cid, retcode)
+    if err != ts3defines.ERROR_ok: ts3lib.requestSendServerTextMsg(schid, cmd, retcode)
 
 # DEFINES #
 
