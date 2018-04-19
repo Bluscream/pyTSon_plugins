@@ -16,6 +16,7 @@ class fakeClients(ts3plugin):
     infoTitle = None
     path = "scripts/fakeClients"
     menuItems = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Timeout", "%s/ping_4.svg"%path),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "== Hacks ==", ""),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Disconnect", "%s/disconnect.svg"%path),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Kick", "%s/kick_server.svg"%path),
@@ -26,6 +27,7 @@ class fakeClients(ts3plugin):
     hotkeys = []
     timer = QTimer()
     count = 1
+    fakeclients = []
 
     def __init__(self):
         self.timer.timeout.connect(self.tick)
@@ -38,12 +40,16 @@ class fakeClients(ts3plugin):
             except: pass
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT: return
-        (err, cid) = ts3lib.getChannelOfClient(schid, selectedItemID)
-        if menuItemID == 1: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=8 reasonmsg=disconnected clid={}".format(cid, selectedItemID), schid, True, True)
-        elif menuItemID == 2: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=5 reasonmsg=kicked clid={} invokerid=0 invokername=Server invokeruid".format(cid, selectedItemID), schid, True, True)
-        elif menuItemID == 3: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=6 reasonmsg=ban clid={} invokerid=0 invokername=Server invokeruid bantime=0".format(cid, selectedItemID), schid, True, True)
-        elif menuItemID == 4: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=3 reasonmsg=DDoS clid={}".format(cid, selectedItemID), schid, True, True)
+        if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
+            (err, cid) = ts3lib.getChannelOfClient(schid, selectedItemID)
+            if menuItemID == 1: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=8 reasonmsg=disconnected clid={}".format(cid, selectedItemID), schid, True, True)
+            elif menuItemID == 2: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=5 reasonmsg=kicked clid={} invokerid=0 invokername=Server invokeruid".format(cid, selectedItemID), schid, True, True)
+            elif menuItemID == 3: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=6 reasonmsg=ban clid={} invokerid=0 invokername=Server invokeruid bantime=0".format(cid, selectedItemID), schid, True, True)
+            elif menuItemID == 4: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=3 reasonmsg=DDoS clid={}".format(cid, selectedItemID), schid, True, True)
+        elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+            for client in self.fakeclients:
+                sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=6 reasonmsg=ban clid={} invokerid=0 invokername=Server invokeruid bantime=0".format(client[1], client[0]), schid, True, True)
+            self.fakeclients = []
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if oldChannelID != 0: return # if newChannelID == 0: return
@@ -77,29 +83,23 @@ class fakeClients(ts3plugin):
             self.timer.start(1)
         else:
             for i in range(clients):
-                cmd = "notifycliententerview"
-                client = self.fakeClient(schid)
-                for k in client:
-                    if client[k] != "":
-                        cmd += " {}={}".format(k, client[k])
-                    else: cmd += " {}".format(k)
-                sendCommand(self.name, cmd, schid, True, True)
-                self.clients.append(client["clid"])
+                self.addClient(schid)
                 i += 1
         return True
 
     def tick(self):
         if self.i >= self.c: self.timer.stop()
+        self.addClient(self.schid)
+        self.i += 1
+
+    def addClient(self, schid):
         cmd = "notifycliententerview"
-        client = self.fakeClient(self.schid)
+        client = self.fakeClient(schid)
         for k in client:
             if client[k] != "":
                 cmd += " {}={}".format(k, client[k])
             else: cmd += " {}".format(k)
-        sendCommand(self.name, cmd, self.schid, True, True)
-        self.clients.append(client["clid"])
-        self.i += 1
-
+        sendCommand(self.name, cmd, schid, True, True)
 
     def fakeClient(self, schid):
         client = {}
@@ -143,4 +143,6 @@ class fakeClients(ts3plugin):
         client["client_country"] = random_string(2).upper() # "DE" #
         client["client_badges"] = "overwolf={}:badges={}".format(randint(0,1), choice(self.badges)) # random_string(randint(0,30))
         self.count += 1
+        self.clients.append(clid)
+        self.fakeclients.append((clid, cid))
         return client
