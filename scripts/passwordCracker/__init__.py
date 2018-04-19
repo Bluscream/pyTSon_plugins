@@ -43,7 +43,7 @@ class passwordCracker(ts3plugin):
     interval = 300
     antiflood_delay = 2500
     step = 1
-    retcode = ""
+    retcode = None
     mode = 0
     dlg = None
     status = ""
