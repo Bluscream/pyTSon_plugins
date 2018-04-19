@@ -24,8 +24,8 @@ class fakeClients(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "== Hacks ==", "")
     ]
     hotkeys = []
-    i = 1
     timer = QTimer()
+    count = 1
 
     def __init__(self):
         self.timer.timeout.connect(self.tick)
@@ -71,9 +71,10 @@ class fakeClients(ts3plugin):
         for badge in ret:
             self.badges.append(badge)
         if clients > 10:
+            self.i = 1
             self.schid = schid
             self.c = clients+1
-            self.timer.start(10)
+            self.timer.start(1)
         else:
             for i in range(clients):
                 cmd = "notifycliententerview"
@@ -131,7 +132,7 @@ class fakeClients(ts3plugin):
         client["client_unread_messages"] = randint(0,10)
         client["client_needed_serverquery_view_power"] = 0 # randint(0,65000)
         client["client_icon_id"] = "0" # = randint(0,65000)
-        client["client_unique_identifier"] = "FakeClient#{}".format(self.i) # "{}=".format(random_string(27))
+        client["client_unique_identifier"] = "FakeClient#{}".format(self.count) # "{}=".format(random_string(27))
         client["client_nickname"] = random_string(randint(3,30))
         client["client_meta_data"] = random_string(randint(0,1)) # 30
         client["client_away_message"] = random_string(randint(0,10)) # 80
@@ -141,4 +142,5 @@ class fakeClients(ts3plugin):
         client["client_nickname_phonetic"] = random_string(randint(3,30))
         client["client_country"] = random_string(2).upper() # "DE" #
         client["client_badges"] = "overwolf={}:badges={}".format(randint(0,1), choice(self.badges)) # random_string(randint(0,30))
+        self.count += 1
         return client
