@@ -541,7 +541,7 @@ def buildBadges(badges=[], overwolf=False):
     blocks = [",".join(badges[i:i+3]) for i in range(0, len(badges), 3)]
     return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ":badges=".join(blocks))
 
-def sendCommand(name, cmd, schid=0, silent=True, prefix="~"):
+def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
     """
     Sends a command through TS3Hook.
     :param name:
@@ -552,7 +552,7 @@ def sendCommand(name, cmd, schid=0, silent=True, prefix="~"):
     if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
     if PluginHost.cfg.getboolean("general", "verbose") or not silent:
         ts3lib.printMessage(schid, '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-    cmd = "{}cmd{}".format(prefix, cmd.replace(" ", "~s"))
+    cmd = "{}cmd{}".format("-" if reverse else "~", cmd.replace(" ", "~s"))
     (err, clid) = ts3lib.getClientID(schid)
     retcode = "" # "TS3Hook:Command:{}".format(ts3lib.createReturnCode(256))
     err = ts3lib.requestSendPrivateTextMsg(schid, cmd, clid, retcode)

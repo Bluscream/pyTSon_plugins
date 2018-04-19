@@ -24,7 +24,7 @@ class rawCMD(ts3plugin):
 
     def processCommand(self, schid, cmd):
         try:
-            sendCommand(self.name, cmd, schid, False)
+            sendCommand(self.name, cmd[1:], schid, False, cmd[0])
             return True
         except:
             ts3lib.printMessageToCurrentTab("Syntax: [b]/py {} <cmd>".format(self.commandKeyword))

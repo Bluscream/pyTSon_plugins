@@ -1,7 +1,7 @@
 from ts3plugin import ts3plugin, PluginHost
 from random import choice, getrandbits, randint
 from bluscream import timestamp, sendCommand, random_string, loadBadges
-import ts3defines, ts3lib
+import ts3defines, ts3lib, pytson
 
 class fakeClients(ts3plugin):
     name = "Fake Clients"
@@ -13,16 +13,37 @@ class fakeClients(ts3plugin):
     offersConfigure = False
     commandKeyword = "fc"
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Disconnect", "")]
+    path = "scripts/fakeClients"
+    menuItems = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "== Hacks ==", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Disconnect", "%s/disconnect.svg"%path),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Kick", "%s/kick_server.svg"%path),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Ban", "%s/ban_client.svg"%path),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Timeout", "%s/ping_4.svg"%path),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "== Hacks ==", "")
+    ]
     hotkeys = []
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
+    def menuCreated(self):
+        if not self.name in PluginHost.active: return
+        for id in [0,5]:
+            try: ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
+            except: pass
+
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if menuItemID != 0 or atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT: return
+        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT: return
         (err, cid) = ts3lib.getChannelOfClient(schid, selectedItemID)
-        sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=8 reasonmsg=disconnected clid={}".format(cid, selectedItemID), schid, True, "-")
+        if menuItemID == 1: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=8 reasonmsg=disconnected clid={}".format(cid, selectedItemID), schid, True, True)
+        elif menuItemID == 2: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=5 reasonmsg=kicked clid={} invokerid=0 invokername=Server invokeruid".format(cid, selectedItemID), schid, True, True)
+        elif menuItemID == 3: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=6 reasonmsg=ban clid={} invokerid=0 invokername=Server invokeruid bantime=0".format(cid, selectedItemID), schid, True, True)
+        elif menuItemID == 4: sendCommand(self.name, "notifyclientleftview cfid={} ctid=0 reasonid=3 reasonmsg=DDoS clid={}".format(cid, selectedItemID), schid, True, True)
+
+    def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
+        if newChannelID == 0: return
+        sendCommand(self.name, "notifyclientupdated clid={} client_is_channel_commander=1".format(clientID), schid, True, True)
 
     def processCommand(self, schid, command):
         clients = 1
@@ -48,7 +69,7 @@ class fakeClients(ts3plugin):
                 if client[k] != "":
                     cmd += " {}={}".format(k, client[k])
                 else: cmd += " {}".format(k)
-            sendCommand(self.name, cmd, schid, True, "-")
+            sendCommand(self.name, cmd, schid, True, True)
             self.clients.append(client["clid"])
         return True
 
