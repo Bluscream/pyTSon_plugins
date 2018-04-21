@@ -22,7 +22,11 @@ class antiAFK(ts3plugin):
     timer = QTimer()
     servers = {}
     text = "."
-    interval = (10, 20)
+    interval = {
+        "9Sx6wrlRV4i9klBiTanrksNFKvs=": (5, 10),
+        "QTRtPmYiSKpMS8Oyd4hyztcvLqU=": (30, 120),
+        "default": (10, 30)
+    }
     retcode = ""
     hook = False
 
@@ -41,8 +45,17 @@ class antiAFK(ts3plugin):
     def addTimer(self, schid):
         err, clid = ts3lib.getClientID(schid)
         self.servers[schid] = {"clid": clid}
-        if len(self.servers) == 1: self.timer.start(randint(self.interval[0]*1000, self.interval[1]*1000))
+        if len(self.servers) == 1: self.timer.start(self.getInterval(schid))
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Added Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers)-1,")")
+
+    def getInterval(self, schid=0):
+        if schid < 1: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        if not suid in self.interval: suid = "default"
+        interval = randint(self.interval[suid][0]*1000, self.interval[suid][1]*1000)
+        if PluginHost.cfg.getboolean("general", "verbose"):
+            print("schid:", schid, "suid:", suid, "min:", self.interval[suid][0]*1000, "max:", self.interval[suid][1]*1000, "interval:", interval)
+        return interval
 
     def delTimer(self, schid):
         if schid in self.servers:
@@ -56,7 +69,7 @@ class antiAFK(ts3plugin):
             else:
                 self.retcode = ts3lib.createReturnCode()
                 ts3lib.requestSendPrivateTextMsg(schid, self.text, self.servers[schid]["clid"], self.retcode)
-            self.timer.setInterval(randint(self.interval[0]*1000, self.interval[1]*1000))
+            self.timer.setInterval(self.getInterval())
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return

@@ -1,6 +1,6 @@
 from ts3plugin import ts3plugin, PluginHost
 from random import choice, getrandbits, randint
-from bluscream import timestamp, sendCommand, random_string, loadBadges
+from bluscream import timestamp, sendCommand, random_string, loadBadges, getContactStatus, ContactStatus
 from PythonQt.QtCore import QTimer
 import ts3defines, ts3lib, pytson
 
@@ -56,8 +56,9 @@ class fakeClients(ts3plugin):
         (err, clid) = ts3lib.getClientID(schid)
         if clientID == clid: return
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        if uid.startswith("FakeClient"): return
-        sendCommand(self.name, "notifyclientupdated clid={} client_is_channel_commander=1 client_country=JP client_is_recording=1 client_platform=Windoof".format(clientID), schid, True, True)
+        if uid and uid.startswith("FakeClient"): return
+        if getContactStatus(uid) != ContactStatus.FRIEND: return
+        sendCommand(self.name, "notifyclientupdated clid={} client_is_channel_commander=1".format(clientID), schid, True, True) #  client_country=JP client_is_recording=1 client_platform=Windoof
 
     def processCommand(self, schid, command):
         clients = 1

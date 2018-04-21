@@ -551,7 +551,7 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
     """
     if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
     if PluginHost.cfg.getboolean("general", "verbose") or not silent:
-        ts3lib.printMessage(schid, '{timestamp} [color=orange]{name}[/color]:[color=white] {message}'.format(timestamp=timestamp(), name=name, message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        ts3lib.printMessage(schid, '{timestamp} [color=orange]{name}[/color]:[color=white] {prefix}{message}'.format(timestamp=timestamp(), name=name, prefix="-" if reverse else "~", message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
     cmd = "{}cmd{}".format("-" if reverse else "~", cmd.replace(" ", "~s"))
     (err, clid) = ts3lib.getClientID(schid)
     retcode = "" # "TS3Hook:Command:{}".format(ts3lib.createReturnCode(256))
