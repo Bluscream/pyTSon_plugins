@@ -10,7 +10,7 @@ class teaspeakBot(ts3plugin):
     name = "TeaSpeak Bot"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = ""
@@ -20,7 +20,7 @@ class teaspeakBot(ts3plugin):
     menuItems = []
     hotkeys = []
     servers = {
-        "siAK/P4hf0ntXOfy3TaW3GwkoPA=": [15,18,23]
+        "siAK/P4hf0ntXOfy3TaW3GwkoPA=": [15,18,23],
     }
 
     def __init__(self):

@@ -3,14 +3,14 @@ from PythonQt.QtCore import QTimer, Qt, QUrl, QFile, QIODevice
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap, QToolTip
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from bluscream import timestamp, buildBadges, sendCommand, loadBadges, parseBadges, saveCfg, loadCfg
+from bluscream import *
 from os import path
 from configparser import ConfigParser
 from pytson import getPluginPath, getCurrentApiVersion
 from pytsonui import setupUi
 from json import load, loads
 from traceback import format_exc
-from re import match
+from re import compile
 import ts3defines, ts3lib, ts3client
 
 class customBadges(ts3plugin):
@@ -200,10 +200,12 @@ class customBadges(ts3plugin):
             badges = self.cfg.get('general', 'badges').split(",")
             # if len(badges) > 0: badges += ['0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript']
             (err, schids) = ts3lib.getServerConnectionHandlerList()
+            reg = compile('3(?:\.\d+)* \[Build: \d+\]')
             for schid in schids:
-                err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
                 _badges = badges
-                if ver and not match('3(?:\.\d+)* \[Build: \d+\]', ver): # "teaspeak" in ver.lower()
+                err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
+                err, platform = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_PLATFORM)
+                if (ver and not reg.match(ver)) or (platform and not platform in ["Windows","Linux","OS X","FreeBSD"]): # "teaspeak" in ver.lower()
                     _badges = [x for x in badges if not x in self.extbadges][:3]
                 _badges = buildBadges(_badges, overwolf)
                 sendCommand(self.name, _badges, schid)
