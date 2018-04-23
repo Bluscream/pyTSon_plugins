@@ -10,6 +10,7 @@ from pytson import getPluginPath, getCurrentApiVersion
 from pytsonui import setupUi
 from json import load, loads
 from traceback import format_exc
+from re import match
 import ts3defines, ts3lib, ts3client
 
 class customBadges(ts3plugin):
@@ -201,9 +202,11 @@ class customBadges(ts3plugin):
             (err, schids) = ts3lib.getServerConnectionHandlerList()
             for schid in schids:
                 err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
-                if ver and "teaspeak" in ver.lower():
-                    badges = [x for x in badges if not x in self.extbadges]
-                sendCommand(self.name, buildBadges(badges, overwolf), schid)
+                _badges = badges
+                if ver and not match('3(?:\.\d+)* \[Build: \d+\]', ver): # "teaspeak" in ver.lower()
+                    _badges = [x for x in badges if not x in self.extbadges][:3]
+                _badges = buildBadges(_badges, overwolf)
+                sendCommand(self.name, _badges, schid)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def openDialog(self):

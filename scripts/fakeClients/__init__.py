@@ -81,7 +81,7 @@ class fakeClients(ts3plugin):
             self.i = 1
             self.schid = schid
             self.c = clients+1
-            self.timer.start(1)
+            self.timer.start(2)
         else:
             for i in range(clients):
                 self.addClient(schid)

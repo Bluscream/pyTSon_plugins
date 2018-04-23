@@ -8,9 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/teaspeakBot/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/fakeClients/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/fakeClients/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -47,8 +50,11 @@
       <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="74" selection-start-line="2" selection-start-column="74" selection-end-line="2" selection-end-column="74" />
+            <state relative-caret-position="306">
+              <caret line="535" selection-start-line="535" selection-end-line="535" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,8 +71,23 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3451">
-              <caret line="203" column="26" selection-start-line="203" selection-start-column="23" selection-end-line="203" selection-end-column="26" />
+            <state relative-caret-position="475">
+              <caret line="208" selection-start-line="208" selection-end-line="208" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/teaspeakBot/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,8 +95,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="56" column="71" selection-start-line="56" selection-start-column="63" selection-end-line="56" selection-end-column="71" />
+            <state relative-caret-position="782">
+              <caret line="52" column="121" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="121" />
             </state>
           </provider>
         </entry>
@@ -83,7 +104,7 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/report/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
+            <state relative-caret-position="425">
               <caret line="31" column="61" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="61" />
             </state>
           </provider>
@@ -92,8 +113,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2006">
-              <caret line="118" column="121" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="121" />
+            <state relative-caret-position="2380">
+              <caret line="146" column="56" selection-start-line="146" selection-start-column="12" selection-end-line="146" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -109,9 +130,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>buildBadges</find>
-      <find>parsebad</find>
-      <find>saveb</find>
       <find>:/gfx</find>
       <find>choice</find>
       <find>getrandbits</find>
@@ -123,7 +141,7 @@
       <find>close</find>
       <find>CONNECTION_CLIENT_IP</find>
       <find>request</find>
-      <find>def __init</find>
+      <find />
       <find>loadcfg</find>
       <find>onservererror</find>
       <find>teaspeak</find>
@@ -139,20 +157,23 @@
       <find>contactst</find>
       <find>getCurrentServ</find>
       <find>x.exec()</find>
+      <find>onnew</find>
+      <find>client_serverg</find>
+      <find>setchannelv</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
-      <replace>apiVersion = 22</replace>
-      <replace>if self.debug: ts3lib.printMessageToCurrentTab( '{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.'.format(self.timestamp(), self.name, self.author))</replace>
+      <replace />
+      <replace />
       <replace>ts3lib.</replace>
       <replace>ts3.</replace>
       <replace>schid</replace>
       <replace>(Enum)</replace>
       <replace>(object)</replace>
       <replace />
-      <replace>self.config.get('GENERAL', '</replace>
+      <replace />
       <replace>False</replace>
-      <replace>requestAutoload = False</replace>
+      <replace />
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon</dir>
@@ -199,7 +220,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/Application Data/TS3Client/pyTSon/pyTSon - Copy.conf" />
         <option value="$USER_HOME$/Application Data/TS3Client/pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/include/win10toast/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
@@ -245,10 +265,11 @@
         <option value="$PROJECT_DIR$/scripts/silentError/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/clientInit/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/rawCMD/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/fakeClients/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/penTest/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/fakeClients/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/teaspeakBot/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
       </list>
     </option>
@@ -276,17 +297,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -315,6 +325,12 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="fakeClients" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="gommeHD" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -322,6 +338,23 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="rewinsideTV" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="teaspeakBot" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -356,16 +389,16 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
-      <recent name="D:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\ressources" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
+      <recent name="D:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -645,13 +678,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00207" summary="kein bock mehr">
-      <created>1520697317073</created>
-      <option name="number" value="00207" />
-      <option name="presentableId" value="LOCAL-00207" />
-      <option name="project" value="LOCAL" />
-      <updated>1520697317074</updated>
     </task>
     <task id="LOCAL-00208" summary="kein bock mehr">
       <created>1520861216382</created>
@@ -989,7 +1015,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524294590028</updated>
     </task>
-    <option name="localTasksCounter" value="256" />
+    <task id="LOCAL-00256" summary=":thinking:">
+      <created>1524377436969</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1524377436970</updated>
+    </task>
+    <option name="localTasksCounter" value="257" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1006,16 +1039,15 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32826087" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="12" sideWeight="0.5094837" side_tool="true" visible="true" weight="0.18384697" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5094837" side_tool="true" visible="true" weight="0.18384697" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32391304" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49791667" weight="0.33687568" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
       <window_info id="Favorites" order="7" side_tool="true" />
@@ -1034,6 +1066,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Properties" order="5" />
@@ -1125,9 +1158,9 @@
     <MESSAGE value="+ anti-teaspeak protection for custombadges&#10;:thinking:" />
     <MESSAGE value=":thinking: + serverSwitcher fixes" />
     <MESSAGE value=":thinking: + finally fixed serverSwitcher" />
-    <MESSAGE value=":thinking:" />
     <MESSAGE value=":thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking:" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking:" />
+    <MESSAGE value=":thinking:" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking:" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1149,8 +1182,12 @@
           <url>file://$PROJECT_DIR$/scripts/info/__init__.py</url>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scripts/fakeClients/__init__.py</url>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="29" />
+      <option name="time" value="30" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1158,20 +1195,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="56" column="71" selection-start-line="56" selection-start-column="63" selection-end-line="56" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2074">
@@ -1447,13 +1470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/fakeClients/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/penTest/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
@@ -1468,38 +1484,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2006">
-          <caret line="118" column="121" selection-start-line="118" selection-start-column="8" selection-end-line="118" selection-end-column="121" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/report/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
+        <state relative-caret-position="425">
           <caret line="31" column="61" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/fakeClients/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3451">
-          <caret line="203" column="26" selection-start-line="203" selection-start-column="23" selection-end-line="203" selection-end-column="26" />
+        <state relative-caret-position="-280">
+          <caret selection-end-line="4" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="138" selection-start-line="138" selection-end-line="141" selection-end-column="89" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="56" column="71" selection-start-line="56" selection-start-column="63" selection-end-line="56" selection-end-column="71" />
+        <state relative-caret-position="782">
+          <caret line="52" column="121" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2380">
+          <caret line="146" column="56" selection-start-line="146" selection-start-column="12" selection-end-line="146" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/teaspeakBot/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="208" selection-start-line="208" selection-end-line="208" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="74" selection-start-line="2" selection-start-column="74" selection-end-line="2" selection-end-column="74" />
+        <state relative-caret-position="306">
+          <caret line="535" selection-start-line="535" selection-end-line="535" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
