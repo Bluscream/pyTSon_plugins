@@ -1,7 +1,7 @@
 from datetime import datetime
 from PythonQt import BoolResult
 from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog, QLineEdit #, QObject
-from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream, QApplication # QDir
+from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream # , QApplication # QDir
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
@@ -230,7 +230,7 @@ def saveCfg(path, cfg):
     with open(path, 'w') as cfgfile:
         cfg.write(cfgfile)
 # GUI #
-def inputBox(title, text, default=None):
+def inputBox(title, text, default=""):
     """
 
     :param default:
@@ -241,7 +241,7 @@ def inputBox(title, text, default=None):
     x = QDialog()
     x.setAttribute(Qt.WA_DeleteOnClose)
     ok = BoolResult()
-    if not default: default = QApplication.clipboard().text()
+    # if default is None: default = QApplication.clipboard().text()
     text = QInputDialog.getText(x, title, text, QLineEdit.Normal, default, ok) # QDir.Home.dirName()
     if ok: return text
     else: return False
