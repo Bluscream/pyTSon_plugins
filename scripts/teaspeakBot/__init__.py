@@ -36,6 +36,3 @@ class teaspeakBot(ts3plugin):
         if not perm: return
         ts3lib.setChannelVariableAsInt(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT, 0)
         ts3lib.flushChannelUpdates(schid, cid)
-
-    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if hasattr(self, "retcode") and returnCode == self.retcode: self.retcode = ""; return True
