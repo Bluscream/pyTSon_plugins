@@ -6,6 +6,7 @@ import xml.etree.ElementTree as xml
 from getvalues import getValues, ValueType
 from configparser import ConfigParser
 from os import path
+from bluscream import timestamp
 from PythonQt.QtCore import Qt
 from PythonQt.QtGui import (QDialog, QWidget, QTableWidgetItem, QHeaderView, QFont)
 from pytsonui import setupUi
@@ -27,9 +28,6 @@ class serverSwitcher(ts3plugin):
     debug = False
     ini = path.join(pytson.getPluginPath(), "scripts", "serverSwitcher", "settings.ini")
     cfg = ConfigParser()
-
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 
     def parseMeta(self, schid, clid):
         (error, meta) = ts3.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_META_DATA)
@@ -61,10 +59,9 @@ class serverSwitcher(ts3plugin):
             err, status = ts3.getConnectionStatus(schid)
             if status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
                 self.setStatus(schid)
-        if self.debug: ts3.printMessageToCurrentTab( '{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.'.format(self.timestamp(), self.name, self.author))
+        if self.debug: ts3.printMessageToCurrentTab( '{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.'.format(timestamp(), self.name, self.author))
 
     def configure(self, qParentWidget):
-        try:
             d = dict()
             d['debug'] = (ValueType.boolean, "Debug", self.cfg['general']['debug'] == "True", None, None)
             d['enabled'] = (ValueType.boolean, "Broadcast own changes", self.cfg['general']['enabled'] == "True", None, None)
@@ -73,10 +70,6 @@ class serverSwitcher(ts3plugin):
             d['channelpw'] = (ValueType.boolean, "Broadcast channel pw", self.cfg['general']['channelpw'] == "True", None, None)
             d['status'] = (ValueType.string, "AFK status text:", self.cfg['general']['status'], None, 1)
             getValues(None, "{} Settings".format(self.name), d, self.configDialogClosed)
-        except:
-            from traceback import format_exc
-            try: ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon::"+self.name, 0)
-            except: print("Error in "+self.name+".configure: "+format_exc())
 
     def configDialogClosed(self, r, vals):
         if r == QDialog.Accepted:
@@ -117,72 +110,68 @@ class serverSwitcher(ts3plugin):
     """
 
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
-        try:
-            if flag == ts3defines.ClientProperties.CLIENT_INPUT_HARDWARE and newValue == "1":
-                self.setStatus(schid)
-        except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
+        if not self.cfg.getboolean("general", "enabled"): return
+        if flag == ts3defines.ClientProperties.CLIENT_INPUT_HARDWARE and newValue == "1":
+            self.setStatus(schid)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        try:
-            if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-                err, mic = ts3.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_INPUT_HARDWARE)
-                if not err and not mic: self.setStatus(schid)
-        except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
+        if not self.cfg.getboolean("general", "enabled"): return
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            err, mic = ts3.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_INPUT_HARDWARE)
+            if not err and not mic: self.setStatus(schid)
 
     def setStatus(self, schid):
-        try:
-            err, ownid = ts3.getClientID(schid)
-            err, schids = ts3.getServerConnectionHandlerList()
+        err, ownid = ts3.getClientID(schid)
+        err, schids = ts3.getServerConnectionHandlerList()
 
-            regex = re.compile(r'.*(<{0}>.*</{0}>).*'.format(self.tag), re.IGNORECASE)
+        regex = re.compile(r'.*(<{0}>.*</{0}>).*'.format(self.tag), re.IGNORECASE)
 
-            host="";port=9987;pw="";name="";nick=""
+        host="";port=9987;pw="";name="";nick=""
 
-            err, host, port, pw = ts3.getServerConnectInfo(schid)
-            err, name = ts3.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-            err, nick = ts3.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_NICKNAME)
-            if err == ts3defines.ERROR_ok and nick.strip(): nick = nick.split(":")
-            err, ip = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
-            if err != ts3defines.ERROR_ok or not ip.strip():
-                err, ip = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_IP)
-            err, port = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
-            if err != ts3defines.ERROR_ok or not port or port < 1:
-                err, port = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
+        err, host, port, pw = ts3.getServerConnectInfo(schid)
+        err, name = ts3.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+        err, nick = ts3.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_NICKNAME)
+        if err == ts3defines.ERROR_ok and nick.strip(): nick = nick.split(":")
+        err, ip = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+        if err != ts3defines.ERROR_ok or not ip.strip():
+            err, ip = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_IP)
+        err, port = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
+        if err != ts3defines.ERROR_ok or not port or port < 1:
+            err, port = ts3.getServerVariableAsString(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
 
-            for tab in schids:
-                err, meta_data = ts3.getClientSelfVariable(tab, ts3defines.ClientProperties.CLIENT_META_DATA)
-                meta_data = regex.sub("", meta_data)
-                if tab == schid:
-                    ts3.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_NONE)
-                else:
-                    err, away = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY)
-                    if away != ts3defines.AwayStatus.AWAY_ZZZ: ts3.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_ZZZ)
-                    if self.cfg.getboolean('general', 'enabled'):
-                        if host:
-                            newmeta = xml.Element(self.tag)
-                            c = xml.SubElement(newmeta, "tab")
-                            c.set("i", str(schid))
-                            if name: c.text = escape(name.strip())
-                            c.set("h", escape(host))
-                            if port and port != 9987: c.set("port", "{}".format(port))
-                            if pw and self.cfg.getboolean('general', 'pw'): c.set("p", pw)
-                            # if ip and ip.strip(): c.set("ip", ip)
-                            # if nick: c.set("nick", ":".join(nick))
-                            meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
-                            # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
-                    try: name = name[:78] + (name[78:] and '..')
-                    except: pass
-                    _away_message = self.cfg.get('general', 'status')
-                    if "{" in _away_message:
-                        _away_message = _away_message\
-                        .replace('{host}', host if host else "")\
-                        .replace('{nick}', nick[0] if nick and len(nick) > 0 else "")\
-                        .replace('{name}', name if name else "")\
-                        .replace('{nickname}', nick[0] if nick else name)\
-                        .replace('{ip}', ip if ip else "")\
-                        .replace('{port}', str(port) if port else "")
-                    err, away_message = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE)
-                    if away_message != _away_message: ts3.setClientSelfVariableAsString(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE, _away_message)
-                ts3.setClientSelfVariableAsString(tab, ts3defines.ClientProperties.CLIENT_META_DATA, meta_data)
-                ts3.flushClientSelfUpdates(tab)
-        except: from traceback import format_exc;ts3.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
+        for tab in schids:
+            err, meta_data = ts3.getClientSelfVariable(tab, ts3defines.ClientProperties.CLIENT_META_DATA)
+            meta_data = regex.sub("", meta_data)
+            if tab == schid:
+                ts3.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_NONE)
+            else:
+                err, away = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY)
+                if away != ts3defines.AwayStatus.AWAY_ZZZ: ts3.setClientSelfVariableAsInt(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY, ts3defines.AwayStatus.AWAY_ZZZ)
+                if self.cfg.getboolean('general', 'enabled'):
+                    if host:
+                        newmeta = xml.Element(self.tag)
+                        c = xml.SubElement(newmeta, "tab")
+                        c.set("i", str(schid))
+                        if name: c.text = escape(name.strip())
+                        c.set("h", escape(host))
+                        if port and port != 9987: c.set("port", "{}".format(port))
+                        if pw and self.cfg.getboolean('general', 'pw'): c.set("p", pw)
+                        # if ip and ip.strip(): c.set("ip", ip)
+                        # if nick: c.set("nick", ":".join(nick))
+                        meta_data = "{old}{new}".format(old=meta_data,new=xml.tostring(newmeta).decode("utf-8"))
+                        # meta_data = "{}<server>{}{}</server>".format(meta_data, ip, ":" + port if port else "")
+                try: name = name[:78] + (name[78:] and '..')
+                except: pass
+                _away_message = self.cfg.get('general', 'status')
+                if "{" in _away_message:
+                    _away_message = _away_message\
+                    .replace('{host}', host if host else "")\
+                    .replace('{nick}', nick[0] if nick and len(nick) > 0 else "")\
+                    .replace('{name}', name if name else "")\
+                    .replace('{nickname}', nick[0] if nick else name)\
+                    .replace('{ip}', ip if ip else "")\
+                    .replace('{port}', str(port) if port else "")
+                err, away_message = ts3.getClientSelfVariable(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE)
+                if away_message != _away_message: ts3.setClientSelfVariableAsString(tab, ts3defines.ClientPropertiesRare.CLIENT_AWAY_MESSAGE, _away_message)
+            ts3.setClientSelfVariableAsString(tab, ts3defines.ClientProperties.CLIENT_META_DATA, meta_data)
+            ts3.flushClientSelfUpdates(tab)

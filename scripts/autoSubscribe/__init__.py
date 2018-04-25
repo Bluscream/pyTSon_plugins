@@ -1,6 +1,6 @@
 import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin, PluginHost
-from pytson import getPluginPath
+from pytson import getPluginPath, getCurrentApiVersion
 from os import path
 from bluscream import timestamp
 from PythonQt.QtCore import QTimer
