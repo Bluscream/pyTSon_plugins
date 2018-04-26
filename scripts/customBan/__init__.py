@@ -1,5 +1,4 @@
 import ts3defines, ts3lib
-from pytson import getPluginPath
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
 from os import path
@@ -10,12 +9,13 @@ from getvalues import getValues, ValueType
 from PythonQt.QtGui import QDialog, QComboBox
 from PythonQt.QtCore import Qt, QUrl
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from bluscream import saveCfg, loadCfg, timestamp, msgBox
+from bluscream import saveCfg, loadCfg, timestamp, getScriptPath, percent
 from configparser import ConfigParser
 from traceback import format_exc
 
 class customBan(ts3plugin):
-    path = getPluginPath("scripts", __name__)
+    path = getScriptPath(__name__)
+    print(path)
     name = "Custom Ban"
     apiVersion = 22
     requestAutoload = False
@@ -25,7 +25,7 @@ class customBan(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Ban Client", "%s/ban_client.svg"%path)]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Ban Client", "scripts/%s/ban_client.svg"%__name__)]
     hotkeys = []
     ini = "%s/config.ini"%path
     dlg = None
@@ -80,7 +80,7 @@ class customBan(ts3plugin):
 class BanDialog(QDialog):
     def __init__(self, script, schid, clid, uid, name, ip, parent=None):
         super(QDialog, self).__init__(parent)
-        setupUi(self, getPluginPath(script.path,"ban.ui"))
+        setupUi(self, "%s/ban.ui"%script.path)
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
         self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))

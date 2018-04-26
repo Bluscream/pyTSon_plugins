@@ -9,12 +9,14 @@ from ts3plugin import PluginHost
 from urllib.parse import quote_plus
 from gc import get_objects
 from base64 import b64encode
+from pytson import getPluginPath
 import ts3lib, ts3defines, os.path, string, random, ts3client, time
 
 # GENERAL FUNCTIONS #
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 def date(): return '{:%Y-%m-%d}'.format(datetime.now())
 def Time(): return '{:%H:%M:%S}'.format(datetime.now())
+def getScriptPath(name): return getPluginPath("scripts", name)
 
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
     """
@@ -63,12 +65,21 @@ def random_string(size=1, chars=string.ascii_uppercase + string.ascii_lowercase 
 
 def percentage(part, whole):
     """
-
+    Returns rounded Percentage of <part> of <whole>
     :param part:
     :param whole:
     :return:
     """
     return round(100 * float(part)/float(whole))
+
+def percent(percent, whole):
+  """
+  Returns rounded <percent>% of <whole>
+  :param percent:
+  :param whole:
+  :return:
+  """
+  return round((percent * whole))
 
 def getItem(useList, name): # getitem(PluginHost.modules,'devTools')
     """

@@ -17,12 +17,12 @@ class fakeClients(ts3plugin):
     commandKeyword = "fc"
     infoTitle = None
     menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Timeout", "%s/ping_4.svg"%path),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Timeout", "scripts/%s/ping_4.svg"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "== Hacks ==", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Disconnect", "%s/disconnect.svg"%path),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Kick", "%s/kick_server.svg"%path),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Ban", "%s/ban_client.svg"%path),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Timeout", "%s/ping_4.svg"%path),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Disconnect", "scripts/%s/disconnect.svg"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Kick", "scripts/%s/kick_server.svg"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Ban", "scripts/%s/ban_client.svg"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Timeout", "scripts/%s/ping_4.svg"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "== Hacks ==", "")
     ]
     hotkeys = []
