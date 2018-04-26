@@ -29,10 +29,12 @@ class easyMod(ts3plugin):
         ("restrict_last_joined_server", "Restrict the last user that joined your server."),
         ("restrict_last_joined_channel", "Restrict the last user that joined your channel."),
         ("ban_last_joined_server", "Bans the last user that joined your server."),
-        ("ban_last_joined_channel", "Bans the last user that joined your channel.")
+        ("ban_last_joined_channel", "Bans the last user that joined your channel."),
+        ("revoke_last_talk_power", "Restrict the last user that got talk power in your channel.")
     ]
     last_joined_server = 0
     last_joined_channel = 0
+    last_talk_power = 0
     sgids = [17,21]
     requested = 0
 
@@ -53,18 +55,30 @@ class easyMod(ts3plugin):
             self.banClient(schid, self.last_joined_server)
         elif keyword == "ban_last_joined_channel":
             self.banClient(schid, self.last_joined_channel)
+        elif keyword == "revoke_last_talk_power_channel":
+            self.revokeTalkPower(schid, self.last_talk_power)
 
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
-        if clid != self.requested: return
-        (err, cldbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        print("cldbid:",cldbid)
-        (err, sgids) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        print("sgids:",sgids)
-        if set(self.sgids).issubset(sgids):
-            for sgid in self.sgids: ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
-        else:
-            for sgid in self.sgids: ts3lib.requestServerGroupAddClient(schid, sgid, cldbid)
-        self.requested = 0
+        (err, ownID) = ts3lib.getClientID(schid)
+        (err, cid) = ts3lib.getChannelOfClient(schid, clid)
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        (err, talker) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
+        if cid == ownCID and talker: self.last_talk_power = clid
+        if clid == self.requested:
+            if talker: self.revokeTalkPower(schid, clid)
+            else: self.revokeTalkPower(schid, clid, 1)
+            (err, cldbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+            print("cldbid:",cldbid)
+            (err, sgids) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+            print("sgids:",sgids)
+            if set(self.sgids).issubset(sgids):
+                for sgid in self.sgids: ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
+            else:
+                for sgid in self.sgids: ts3lib.requestServerGroupAddClient(schid, sgid, cldbid)
+            self.requested = 0
+
+    def revokeTalkPower(self, schid, clid, enabled=0):
+        ts3lib.requestClientSetIsTalker(schid, clid, enabled)
 
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
