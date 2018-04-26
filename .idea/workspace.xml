@@ -9,11 +9,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/fakeClients/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/fakeClients/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -50,8 +48,8 @@
       <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="76" column="17" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="17" />
+            <state relative-caret-position="231">
+              <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -62,10 +60,10 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-714">
-              <caret line="27" column="67" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="67" />
+            <state relative-caret-position="392">
+              <caret line="128" column="28" lean-forward="true" selection-start-line="128" selection-start-column="28" selection-end-line="128" selection-end-column="28" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,8 +84,8 @@
       <file leaf-file-name="config.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/customBan/config.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="110" selection-start-line="1" selection-start-column="110" selection-end-line="1" selection-end-column="110" />
+            <state relative-caret-position="187">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -142,8 +140,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>loadCfg</find>
-      <find>close</find>
       <find>CONNECTION_CLIENT_IP</find>
       <find>request</find>
       <find />
@@ -172,6 +168,8 @@
       <find>QNetworkAccessManager</find>
       <find>CLIENT_IS_TALKER</find>
       <find>percen</find>
+      <find>template</find>
+      <find>compile(</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -274,10 +272,10 @@
         <option value="$PROJECT_DIR$/scripts/easyMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/banUID/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/banAdd/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/fakeClients/__init__.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
         <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
       </list>
     </option>
@@ -657,20 +655,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00220" summary="kein bock mehr">
-      <created>1521140698653</created>
-      <option name="number" value="00220" />
-      <option name="presentableId" value="LOCAL-00220" />
-      <option name="project" value="LOCAL" />
-      <updated>1521140698654</updated>
-    </task>
-    <task id="LOCAL-00221" summary=":thinking:">
-      <created>1523693725754</created>
-      <option name="number" value="00221" />
-      <option name="presentableId" value="LOCAL-00221" />
-      <option name="project" value="LOCAL" />
-      <updated>1523693725755</updated>
-    </task>
     <task id="LOCAL-00222" summary=":thinking:">
       <created>1523763582827</created>
       <option name="number" value="00222" />
@@ -1000,7 +984,21 @@
       <option name="project" value="LOCAL" />
       <updated>1524722131711</updated>
     </task>
-    <option name="localTasksCounter" value="269" />
+    <task id="LOCAL-00269" summary=":thinking:">
+      <created>1524723344608</created>
+      <option name="number" value="00269" />
+      <option name="presentableId" value="LOCAL-00269" />
+      <option name="project" value="LOCAL" />
+      <updated>1524723344613</updated>
+    </task>
+    <task id="LOCAL-00270" summary=":thinking:">
+      <created>1524724588080</created>
+      <option name="number" value="00270" />
+      <option name="presentableId" value="LOCAL-00270" />
+      <option name="project" value="LOCAL" />
+      <updated>1524724588080</updated>
+    </task>
+    <option name="localTasksCounter" value="271" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1016,24 +1014,25 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32826087" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5094837" side_tool="true" visible="true" weight="0.18384697" />
-      <window_info active="true" anchor="right" x="0" y="0" width="434" height="856" id="Documentation" side_tool="true" visible="true" weight="0.3296875" />
-      <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32391304" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32752994" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3224401" />
+      <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
+      <window_info anchor="bottom" id="Version Control" order="16" sideWeight="0.5021322" side_tool="true" visible="true" weight="0.16213275" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49791667" weight="0.33687568" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12135417" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.124200426" />
+      <window_info active="true" anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.24973656" />
-      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
+      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Application Servers" order="8" />
       <window_info id="Designer" order="4" />
-      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -1041,18 +1040,17 @@
       <window_info id="Capture Tool" order="3" />
       <window_info id="UI Designer" order="5" />
       <window_info anchor="bottom" id="Changes" order="7" weight="0.32900432" />
-      <window_info anchor="right" id="Capture Analysis" order="8" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="9" />
+      <window_info anchor="bottom" x="1073" y="648" width="434" height="241" id="Documentation" order="15" sideWeight="0.4978678" weight="0.16213275" />
       <window_info id="Nl-Palette" order="2" />
-      <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" id="Properties" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info active="true" anchor="bottom" id="Floobits" order="13" sideWeight="0.49573562" visible="true" weight="0.32936078" />
-      <window_info anchor="right" id="Data View" order="10" />
+      <window_info anchor="right" id="Properties" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="10" />
+      <window_info active="true" anchor="bottom" id="Floobits" order="14" sideWeight="0.49573562" visible="true" weight="0.32936078" />
+      <window_info anchor="right" id="Data View" order="11" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1466,19 +1464,22 @@
     <entry file="file://$PROJECT_DIR$/scripts/banUID/config.ini" />
     <entry file="file://$PROJECT_DIR$/scripts/banUID/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/banAdd/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/scripts/customBan/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="110" selection-start-line="1" selection-start-column="110" selection-end-line="1" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="383">
           <caret line="69" selection-start-line="69" selection-end-line="69" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="74" column="4" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1493,22 +1494,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+    <entry file="file://$PROJECT_DIR$/scripts/customBan/config.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="76" column="17" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-714">
-          <caret line="27" column="67" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="67" />
+        <state relative-caret-position="392">
+          <caret line="128" column="28" lean-forward="true" selection-start-line="128" selection-start-column="28" selection-end-line="128" selection-end-column="28" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>

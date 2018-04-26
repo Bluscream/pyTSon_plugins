@@ -1,4 +1,4 @@
-import ts3defines, ts3lib
+import ts3defines, ts3lib, re
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
 from os import path
@@ -9,7 +9,7 @@ from getvalues import getValues, ValueType
 from PythonQt.QtGui import QDialog, QComboBox
 from PythonQt.QtCore import Qt, QUrl
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from bluscream import saveCfg, loadCfg, timestamp, getScriptPath #, percent
+from bluscream import saveCfg, loadCfg, timestamp, getScriptPath, confirm #, percent
 from configparser import ConfigParser
 from traceback import format_exc
 
@@ -38,7 +38,7 @@ class customBan(ts3plugin):
         "duration": "0"
     }
     templates = {}
-    whitelist = []
+    whitelist = ["127.0.0.1"]
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -84,7 +84,12 @@ class customBan(ts3plugin):
 
     def loadWhitelist(self, reply):
         data = reply.readAll().data().decode('utf-8')
-        self.whitelist = [s.strip() for s in data.splitlines()]
+        pat = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
+        self.whitelist = []
+        for line in data.splitlines():
+            if re.match(pat, line): self.whitelist.append(line.strip())
+            print(self.name,">",line,"is not a valid IP! Not adding to whitelist.")
+        # self.whitelist = [s.strip() for s in data.splitlines()]
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ip whitelist:", self.whitelist)
 
 class BanDialog(QDialog):
@@ -107,6 +112,7 @@ class BanDialog(QDialog):
         self.schid = schid
         self.templates = script.templates
         self.whitelist = script.whitelist
+        self.name = script.name
 
     def on_box_reason_currentTextChanged(self, text):
         if not text in self.templates: return
@@ -120,8 +126,10 @@ class BanDialog(QDialog):
             reason = self.box_reason.currentText # text
             duration = self.int_duration.value
             if ip:
-                if ip in self.whitelist: ts3lib.printMessageToCurrentTab("[color=red]Not banning whitelisted IP [b]{}".format(ip))
-                else: ts3lib.banadd(self.schid, ip, "", "", duration, reason)
+                check = True
+                if len(self.whitelist) < 1: check = confirm("Empty IP Whitelist!", "The IP whitelist is empty! Are you sure you want to ban \"{}\"?\n\nMake sure your whitelist URL\n{}\nis working!".format(ip, self.cfg.get("general", "whitelist")))
+                if ip in self.whitelist: ts3lib.printMessageToCurrentTab("{}: [color=red]Not banning whitelisted IP [b]{}".format(self.name, ip))
+                elif check: ts3lib.banadd(self.schid, ip, "", "", duration, reason)
             if name: ts3lib.banadd(self.schid, "", name, "", duration, reason)
             if uid: ts3lib.banadd(self.schid, "", "", uid, duration, reason)
             # msgBox("schid: %s\nip: %s\nname: %s\nuid: %s\nduration: %s\nreason: %s"%(self.schid, ip, name, uid, duration, reason))
