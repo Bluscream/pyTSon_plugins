@@ -2,9 +2,11 @@ from ts3plugin import ts3plugin, PluginHost
 from random import choice, getrandbits, randint
 from bluscream import timestamp, sendCommand, random_string, loadBadges, getContactStatus, ContactStatus
 from PythonQt.QtCore import QTimer
-import ts3defines, ts3lib, pytson
+import ts3defines, ts3lib
+from pytson import getPluginPath
 
 class fakeClients(ts3plugin):
+    path = getPluginPath("scripts", __name__)
     name = "Fake Clients"
     apiVersion = 21
     requestAutoload = False
@@ -14,7 +16,6 @@ class fakeClients(ts3plugin):
     offersConfigure = False
     commandKeyword = "fc"
     infoTitle = None
-    path = "scripts/fakeClients"
     menuItems = [
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Timeout", "%s/ping_4.svg"%path),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "== Hacks ==", ""),

@@ -15,6 +15,7 @@ from configparser import ConfigParser
 from traceback import format_exc
 
 class customBan(ts3plugin):
+    path = getPluginPath("scripts", __name__)
     name = "Custom Ban"
     apiVersion = 22
     requestAutoload = False
@@ -24,9 +25,9 @@ class customBan(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Ban Client", "ban_client.svg")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Ban Client", "%s/ban_client.svg"%path)]
     hotkeys = []
-    ini = getPluginPath("scripts", "customBan", "config.ini")
+    ini = "%s/config.ini"%path
     dlg = None
     cfg = ConfigParser()
     cfg["general"] = { "templateURL": "" }
@@ -79,7 +80,7 @@ class customBan(ts3plugin):
 class BanDialog(QDialog):
     def __init__(self, script, schid, clid, uid, name, ip, parent=None):
         super(QDialog, self).__init__(parent)
-        setupUi(self, getPluginPath("scripts",script.__class__.__name__,"ban.ui"))
+        setupUi(self, getPluginPath(script.path,"ban.ui"))
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
         self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))

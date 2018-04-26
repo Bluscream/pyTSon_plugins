@@ -2,8 +2,10 @@ import ts3defines, ts3lib
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
 from bluscream import timestamp
+from pytson import getPluginPath
 
 class quickMod(ts3plugin):
+    path = getPluginPath("scripts", __name__)
     name = "Quick Moderation"
     apiVersion = 22
     requestAutoload = False
