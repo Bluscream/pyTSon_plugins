@@ -9,13 +9,12 @@ from getvalues import getValues, ValueType
 from PythonQt.QtGui import QDialog, QComboBox
 from PythonQt.QtCore import Qt, QUrl
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from bluscream import saveCfg, loadCfg, timestamp, getScriptPath, percent
+from bluscream import saveCfg, loadCfg, timestamp, getScriptPath #, percent
 from configparser import ConfigParser
 from traceback import format_exc
 
 class customBan(ts3plugin):
     path = getScriptPath(__name__)
-    print(path)
     name = "Custom Ban"
     apiVersion = 22
     requestAutoload = False
@@ -30,7 +29,7 @@ class customBan(ts3plugin):
     ini = "%s/config.ini"%path
     dlg = None
     cfg = ConfigParser()
-    cfg["general"] = { "templateURL": "" }
+    cfg["general"] = { "template": "", "whitelist": "" }
     cfg["last"] = {
         "ip": "False",
         "name": "False",
@@ -39,14 +38,20 @@ class customBan(ts3plugin):
         "duration": "0"
     }
     templates = {}
+    whitelist = []
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
-        url = self.cfg.get("general", "templateURL")
+        url = self.cfg.get("general", "template")
         if url:
-            self.nwmc = QNetworkAccessManager()
-            self.nwmc.connect("finished(QNetworkReply*)", self.loadTemplates)
-            self.nwmc.get(QNetworkRequest(QUrl(url)))
+            self.nwmc_template = QNetworkAccessManager()
+            self.nwmc_template.connect("finished(QNetworkReply*)", self.loadTemplates)
+            self.nwmc_template.get(QNetworkRequest(QUrl(url)))
+        url = self.cfg.get("general", "whitelist")
+        if url:
+            self.nwmc_whitelist = QNetworkAccessManager()
+            self.nwmc_whitelist.connect("finished(QNetworkReply*)", self.loadWhitelist)
+            self.nwmc_whitelist.get(QNetworkRequest(QUrl(url)))
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def stop(self):
@@ -75,7 +80,12 @@ class customBan(ts3plugin):
     def loadTemplates(self, reply):
         data = reply.readAll().data().decode('utf-8')
         self.templates = loads(data)
-        if PluginHost.cfg.getboolean("general", "verbose"): print("Downloaded ban templates:", self.templates)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ban templates:", self.templates)
+
+    def loadWhitelist(self, reply):
+        data = reply.readAll().data().decode('utf-8')
+        self.whitelist = [s.strip() for s in data.splitlines()]
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ip whitelist:", self.whitelist)
 
 class BanDialog(QDialog):
     def __init__(self, script, schid, clid, uid, name, ip, parent=None):
@@ -96,6 +106,7 @@ class BanDialog(QDialog):
         self.ini = script.ini
         self.schid = schid
         self.templates = script.templates
+        self.whitelist = script.whitelist
 
     def on_box_reason_currentTextChanged(self, text):
         if not text in self.templates: return
@@ -108,7 +119,9 @@ class BanDialog(QDialog):
             uid = self.txt_uid.text if self.grp_uid.isChecked() else ""
             reason = self.box_reason.currentText # text
             duration = self.int_duration.value
-            if ip: ts3lib.banadd(self.schid, ip, "", "", duration, reason)
+            if ip:
+                if ip in self.whitelist: ts3lib.printMessageToCurrentTab("[color=red]Not banning whitelisted IP [b]{}".format(ip))
+                else: ts3lib.banadd(self.schid, ip, "", "", duration, reason)
             if name: ts3lib.banadd(self.schid, "", name, "", duration, reason)
             if uid: ts3lib.banadd(self.schid, "", "", uid, duration, reason)
             # msgBox("schid: %s\nip: %s\nname: %s\nuid: %s\nduration: %s\nreason: %s"%(self.schid, ip, name, uid, duration, reason))
