@@ -158,6 +158,7 @@ class BanDialog(QDialog):
             if not hasattr(self, "nwmc_ip"): return
             if not text: return
             if not re.match('^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', text): return
+            if text.strip() in ["127.0.0.1", "0.0.0.0", "255.255.255"]: return
             self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -169,6 +170,8 @@ class BanDialog(QDialog):
             else: self.txt_isp.setText(data["status"]); self.txt_loc.setVisible(False); return
             self.txt_isp.setText(data["isp"])
             self.txt_loc.setText("{}, {}, {}".format(data["city"], data["regionName"], data["country"]))
-            self.lbl_flag.setPixmap(self.countries.flag(data["countryCode"]))
-            self.lbl_flag.setVisible(True)
+            if hasattr(data, "countryCode") and data["countryCode"]:
+                self.lbl_flag.setPixmap(self.countries.flag(data["countryCode"]))
+                self.lbl_flag.setVisible(True)
+            else: self.lbl_flag.setVisible(False)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
