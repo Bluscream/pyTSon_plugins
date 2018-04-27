@@ -100,14 +100,13 @@ class BanDialog(QDialog):
             setupUi(self, "%s/ban.ui"%script.path)
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
-            self.lbl_flag.setVisible(False)
             url = script.cfg.getboolean("general", "ipapi")
             if url:
                 self.nwmc_ip = QNetworkAccessManager()
                 self.nwmc_ip.connect("finished(QNetworkReply*)", self.checkIP)
                 self.countries = CountryFlags()
                 self.countries.open()
-            else: self.lbl_isp.setVisible(False); self.txt_isp.setVisible(False); self.txt_loc.setVisible(False)
+            self.disableISP()
             self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
             if ip: self.txt_ip.setText(ip)
             self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
@@ -123,7 +122,37 @@ class BanDialog(QDialog):
             self.templates = script.templates
             self.whitelist = script.whitelist
             self.name = script.name
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);
+
+    def disableISP(self, enable=False):
+        try:
+            print("visibility change:", enable)
+            self.lbl_isp.setVisible(enable)
+            self.txt_isp.setVisible(enable)
+            self.lbl_flag.setVisible(enable)
+            self.txt_loc.setVisible(enable)
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);
+
+    def checkIP(self, reply):
+        try:
+            data = loads(reply.readAll().data().decode('utf-8'))
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Resolved IP ", self.txt_ip.text,":", data)
+            if data["status"] != "success": # self.txt_loc.setVisible(True)
+                self.txt_ip.setText(data["status"]); self.disableISP(); return
+            self.txt_isp.setText(data["isp"])
+            self.txt_loc.setText("{}, {}, {}".format(data["city"], data["regionName"], data["country"]))
+            self.lbl_flag.setPixmap(self.countries.flag(data["countryCode"]))
+            if not self.txt_isp.isVisible(): self.disableISP(True)
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_txt_ip_textChanged(self, text):
+        try:
+            if not hasattr(self, "nwmc_ip"): self.disableISP(); return
+            if not text: self.disableISP(); return
+            if not re.match('^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', text): self.disableISP(); return
+            if text.strip() in ["127.0.0.1", "0.0.0.0", "255.255.255"]: self.disableISP(); return
+            self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_box_reason_currentTextChanged(self, text):
         if not text in self.templates: return
@@ -151,27 +180,4 @@ class BanDialog(QDialog):
                 "reason": reason,
                 "duration": str(duration)
             }
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-
-    def on_txt_ip_textChanged(self, text):
-        try:
-            if not hasattr(self, "nwmc_ip"): return
-            if not text: return
-            if not re.match('^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', text): return
-            if text.strip() in ["127.0.0.1", "0.0.0.0", "255.255.255"]: return
-            self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
-
-    def checkIP(self, reply):
-        try:
-            data = loads(reply.readAll().data().decode('utf-8'))
-            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Resolved IP ", self.txt_ip.text,":", data)
-            if data["status"] == "success": self.txt_loc.setVisible(True)
-            else: self.txt_isp.setText(data["status"]); self.txt_loc.setVisible(False); return
-            self.txt_isp.setText(data["isp"])
-            self.txt_loc.setText("{}, {}, {}".format(data["city"], data["regionName"], data["country"]))
-            if hasattr(data, "countryCode") and data["countryCode"]:
-                self.lbl_flag.setPixmap(self.countries.flag(data["countryCode"]))
-                self.lbl_flag.setVisible(True)
-            else: self.lbl_flag.setVisible(False)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)

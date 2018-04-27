@@ -7,18 +7,11 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py" line="66" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/countNick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/countNick/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/ban.ui" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/ban.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/rotateNick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/rotateNick/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/rotateNick/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/rotateNick/dialog.ui" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/rotateNick/dialog.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -85,8 +78,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="626">
-              <caret line="167" column="44" selection-start-line="167" selection-start-column="44" selection-end-line="167" selection-end-column="44" />
+            <state relative-caret-position="262">
+              <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -644,20 +637,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00223" summary=":thinking:">
-      <created>1523764105564</created>
-      <option name="number" value="00223" />
-      <option name="presentableId" value="LOCAL-00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1523764105564</updated>
-    </task>
-    <task id="LOCAL-00224" summary=":thinking:">
-      <created>1523764833861</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1523764833863</updated>
-    </task>
     <task id="LOCAL-00225" summary=":thinking:">
       <created>1523765416873</created>
       <option name="number" value="00225" />
@@ -987,7 +966,21 @@
       <option name="project" value="LOCAL" />
       <updated>1524726186134</updated>
     </task>
-    <option name="localTasksCounter" value="272" />
+    <task id="LOCAL-00272" summary=":thinking:">
+      <created>1524817777197</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1524817777198</updated>
+    </task>
+    <task id="LOCAL-00273" summary=":thinking:">
+      <created>1524818100459</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1524818100459</updated>
+    </task>
+    <option name="localTasksCounter" value="274" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1540,8 +1533,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="167" column="44" selection-start-line="167" selection-start-column="44" selection-end-line="167" selection-end-column="44" />
+        <state relative-caret-position="262">
+          <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
