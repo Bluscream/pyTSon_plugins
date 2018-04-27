@@ -28,6 +28,7 @@ class quickMod(ts3plugin):
     last_talk_power = 0
     sgids = [17,21]
     requested = 0
+    retcode = ""
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
@@ -69,7 +70,8 @@ class quickMod(ts3plugin):
             self.requested = 0
 
     def revokeTalkPower(self, schid, clid, enabled=False):
-        ts3lib.requestClientSetIsTalker(schid, clid, enabled)
+        self.retcode = ts3lib.createReturnCode()
+        ts3lib.requestClientSetIsTalker(schid, clid, enabled, self.retcode)
 
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
@@ -81,3 +83,8 @@ class quickMod(ts3plugin):
         (err, ownID) = ts3lib.getClientID(schid)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         if newChannelID == ownCID: self.last_joined_channel = clid
+
+    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if not hasattr(self, "retcode") or returnCode != self.retcode: return
+        self.retcode = ""
+        return True

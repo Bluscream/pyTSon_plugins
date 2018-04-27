@@ -126,7 +126,6 @@ class BanDialog(QDialog):
 
     def disableISP(self, enable=False):
         try:
-            print("visibility change:", enable)
             self.lbl_isp.setVisible(enable)
             self.txt_isp.setVisible(enable)
             self.lbl_flag.setVisible(enable)
