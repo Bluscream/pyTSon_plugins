@@ -18,6 +18,11 @@ def date(): return '{:%Y-%m-%d}'.format(datetime.now())
 def Time(): return '{:%H:%M:%S}'.format(datetime.now())
 def getScriptPath(name): return getPluginPath("scripts", name)
 
+def boolean(_bool):
+    if _bool and _bool.lower() == "true": return True
+    elif _bool and _bool.lower() == "false": return False
+    else: return None
+
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
     """
 
@@ -287,6 +292,9 @@ def msgBox(text, icon=QMessageBox.Information, title=""):
     x.setText(text)
     x.setIcon(icon)
     x.exec()
+
+def errorMsgBox(title, text):
+    QMessageBox.critical(None, title, text)
 
 def confirm(title, message):
     """

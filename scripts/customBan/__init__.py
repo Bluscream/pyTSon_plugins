@@ -1,6 +1,7 @@
 import ts3defines, ts3lib, re
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
+from ts3client import CountryFlags
 from os import path
 from json import loads
 from datetime import datetime
@@ -29,7 +30,7 @@ class customBan(ts3plugin):
     ini = "%s/config.ini"%path
     dlg = None
     cfg = ConfigParser()
-    cfg["general"] = { "template": "", "whitelist": "" }
+    cfg["general"] = { "template": "", "whitelist": "", "ipapi": "True" } # , "http://ip-api.com/json/{ip}"
     cfg["last"] = {
         "ip": "False",
         "name": "False",
@@ -84,35 +85,45 @@ class customBan(ts3plugin):
 
     def loadWhitelist(self, reply):
         data = reply.readAll().data().decode('utf-8')
-        pat = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
         self.whitelist = []
+        pat_ipv4 = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
         for line in data.splitlines():
-            if re.match(pat, line): self.whitelist.append(line.strip())
-            print(self.name,">",line,"is not a valid IP! Not adding to whitelist.")
+            if re.match(pat_ipv4, line): self.whitelist.append(line.strip())
+            else: print(self.name,">",line,"is not a valid IP! Not adding to whitelist.")
         # self.whitelist = [s.strip() for s in data.splitlines()]
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ip whitelist:", self.whitelist)
 
 class BanDialog(QDialog):
     def __init__(self, script, schid, clid, uid, name, ip, parent=None):
-        super(QDialog, self).__init__(parent)
-        setupUi(self, "%s/ban.ui"%script.path)
-        self.setAttribute(Qt.WA_DeleteOnClose)
-        self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
-        self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
-        if ip: self.txt_ip.setText(ip)
-        self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
-        if name: self.txt_name.setText(name)
-        self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
-        if uid: self.txt_uid.setText(uid)
-        for reason in script.templates: self.box_reason.addItem(reason)
-        self.box_reason.setEditText(script.cfg.get("last", "reason")) # setItemText(0, )
-        self.int_duration.setValue(script.cfg.getint("last", "duration"))
-        self.cfg = script.cfg
-        self.ini = script.ini
-        self.schid = schid
-        self.templates = script.templates
-        self.whitelist = script.whitelist
-        self.name = script.name
+        try:
+            super(QDialog, self).__init__(parent)
+            setupUi(self, "%s/ban.ui"%script.path)
+            self.setAttribute(Qt.WA_DeleteOnClose)
+            self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
+            self.lbl_flag.setVisible(False)
+            url = script.cfg.getboolean("general", "ipapi")
+            if url:
+                self.nwmc_ip = QNetworkAccessManager()
+                self.nwmc_ip.connect("finished(QNetworkReply*)", self.checkIP)
+                self.countries = CountryFlags()
+                self.countries.open()
+            else: self.lbl_isp.setVisible(False); self.txt_isp.setVisible(False); self.txt_loc.setVisible(False)
+            self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
+            if ip: self.txt_ip.setText(ip)
+            self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
+            if name: self.txt_name.setText(name)
+            self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
+            if uid: self.txt_uid.setText(uid)
+            for reason in script.templates: self.box_reason.addItem(reason)
+            self.box_reason.setEditText(script.cfg.get("last", "reason")) # setItemText(0, )
+            self.int_duration.setValue(script.cfg.getint("last", "duration"))
+            self.cfg = script.cfg
+            self.ini = script.ini
+            self.schid = schid
+            self.templates = script.templates
+            self.whitelist = script.whitelist
+            self.name = script.name
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0); pass
 
     def on_box_reason_currentTextChanged(self, text):
         if not text in self.templates: return
@@ -140,4 +151,24 @@ class BanDialog(QDialog):
                 "reason": reason,
                 "duration": str(duration)
             }
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_txt_ip_textChanged(self, text):
+        try:
+            if not hasattr(self, "nwmc_ip"): return
+            if not text: return
+            if not re.match('^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', text): return
+            self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def checkIP(self, reply):
+        try:
+            data = loads(reply.readAll().data().decode('utf-8'))
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Resolved IP ", self.txt_ip.text,":", data)
+            if data["status"] == "success": self.txt_loc.setVisible(True)
+            else: self.txt_isp.setText(data["status"]); self.txt_loc.setVisible(False); return
+            self.txt_isp.setText(data["isp"])
+            self.txt_loc.setText("{}, {}, {}".format(data["city"], data["regionName"], data["country"]))
+            self.lbl_flag.setPixmap(self.countries.flag(data["countryCode"]))
+            self.lbl_flag.setVisible(True)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)

@@ -4,20 +4,8 @@ from datetime import datetime
 from PythonQt.QtCore import QTimer, Qt
 from PythonQt.QtGui import QMessageBox, QInputDialog, QWidget, QDialog
 from pytsonui import setupUi
+from bluscream import boolean
 from os import path
-
-def errorMsgBox(title, text):
-    QMessageBox.critical(None, title, text)
-
-def inputBox(title, text):
-    x = QWidget()
-    x.setAttribute(Qt.WA_DeleteOnClose)
-    return QInputDialog.getText(x, title, text)
-
-def boolean(arschloch):
-    if arschloch and arschloch.lower() == "true": return True
-    elif arschloch and arschloch.lower() == "false": return False
-    else: return None
 
 class rotateNick(ts3plugin):
     name = "Rotate Nickname"
@@ -29,7 +17,7 @@ class rotateNick(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle rotating nickname", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, "")]
     hotkeys = []
     timer = None
     debug = False
@@ -155,6 +143,10 @@ class dialog(QDialog):
             self.nick.setEnabled(customNick)
             self.interval.value = int(self.rotateNick.config.get('general', 'interval'))
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_currentNick_clicked(self): self.nick.setEnabled(False)
+
+    def on_customNick_clicked(self): self.nick.setEnabled(True)
 
     def on_btn_start_clicked(self):
         try:
