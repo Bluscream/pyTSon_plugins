@@ -34,23 +34,12 @@ class quickMod(ts3plugin):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def processCommand(self, schid, keyword):
-        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
-        if keyword == "restrict_last_joined_server":
-            self.requested = self.last_joined_server
-            ts3lib.requestClientVariables(schid, self.last_joined_server)
-            # self.restrictClient(schid, self.last_joined_server)
-        elif keyword == "restrict_last_joined_channel":
-            self.requested = self.last_joined_channel
-            ts3lib.requestClientVariables(schid, self.last_joined_channel)
-            # self.restrictClient(schid, self.last_joined_channel)
-        elif keyword == "ban_last_joined_server":
-            self.banClient(schid, self.last_joined_server)
-        elif keyword == "ban_last_joined_channel":
-            self.banClient(schid, self.last_joined_channel)
-        elif keyword == "revoke_last_talk_power_channel":
-            self.revokeTalkPower(schid, self.last_talk_power)
+        self.onHotkeyOrCommandEvent(keyword, schid)
 
     def onHotkeyEvent(self, keyword):
+        self.onHotkeyOrCommandEvent(keyword)
+
+    def onHotkeyOrCommandEvent(self, keyword, schid=0):
         schid = ts3lib.getCurrentServerConnectionHandlerID()
         if keyword == "restrict_last_joined_server":
             self.requested = self.last_joined_server
