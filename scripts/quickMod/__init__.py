@@ -13,7 +13,7 @@ class quickMod(ts3plugin):
     author = "Bluscream"
     description = "Allows you to set hotkeys for quick moderation (ban/restrict/remove tp)"
     offersConfigure = False
-    commandKeyword = ""
+    commandKeyword = "qm"
     infoTitle = None
     menuItems = []
     hotkeys = [
@@ -32,6 +32,23 @@ class quickMod(ts3plugin):
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
+
+    def processCommand(self, schid, keyword):
+        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        if keyword == "restrict_last_joined_server":
+            self.requested = self.last_joined_server
+            ts3lib.requestClientVariables(schid, self.last_joined_server)
+            # self.restrictClient(schid, self.last_joined_server)
+        elif keyword == "restrict_last_joined_channel":
+            self.requested = self.last_joined_channel
+            ts3lib.requestClientVariables(schid, self.last_joined_channel)
+            # self.restrictClient(schid, self.last_joined_channel)
+        elif keyword == "ban_last_joined_server":
+            self.banClient(schid, self.last_joined_server)
+        elif keyword == "ban_last_joined_channel":
+            self.banClient(schid, self.last_joined_channel)
+        elif keyword == "revoke_last_talk_power_channel":
+            self.revokeTalkPower(schid, self.last_talk_power)
 
     def onHotkeyEvent(self, keyword):
         schid = ts3lib.getCurrentServerConnectionHandlerID()
@@ -57,17 +74,15 @@ class quickMod(ts3plugin):
         (err, talker) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_IS_TALKER)
         if cid == ownCID and talker: self.last_talk_power = clid
         if clid == self.requested:
+            self.requested = 0
             if talker: self.revokeTalkPower(schid, clid)
             else: self.revokeTalkPower(schid, clid, True)
             (err, cldbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-            print("cldbid:",cldbid)
             (err, sgids) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-            print("sgids:",sgids)
             if set(self.sgids).issubset(sgids):
                 for sgid in self.sgids: ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
             else:
                 for sgid in self.sgids: ts3lib.requestServerGroupAddClient(schid, sgid, cldbid)
-            self.requested = 0
 
     def revokeTalkPower(self, schid, clid, enabled=False):
         self.retcode = ts3lib.createReturnCode()
@@ -85,6 +100,4 @@ class quickMod(ts3plugin):
         if newChannelID == ownCID: self.last_joined_channel = clid
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if not hasattr(self, "retcode") or returnCode != self.retcode: return
-        self.retcode = ""
-        return True
+        if returnCode == self.retcode: return True
