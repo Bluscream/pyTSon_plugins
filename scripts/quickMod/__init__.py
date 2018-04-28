@@ -28,16 +28,16 @@ class quickMod(ts3plugin):
     last_talk_power = 0
     sgids = [17,21]
     requested = 0
+    requestedIP = 0
     retcode = ""
+    customBan = None
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
-    def processCommand(self, schid, keyword):
-        self.onHotkeyOrCommandEvent(keyword, schid)
+    def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
 
-    def onHotkeyEvent(self, keyword):
-        self.onHotkeyOrCommandEvent(keyword)
+    def onHotkeyEvent(self, keyword): self.onHotkeyOrCommandEvent(keyword)
 
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
         schid = ts3lib.getCurrentServerConnectionHandlerID()
@@ -57,6 +57,11 @@ class quickMod(ts3plugin):
             self.revokeTalkPower(schid, self.last_talk_power)
 
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
+        if clid == self.requestedIP:
+            (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
+            self.banIP(schid, ip)
+            self.requestedIP = 0
+            return
         (err, ownID) = ts3lib.getClientID(schid)
         (err, cid) = ts3lib.getChannelOfClient(schid, clid)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
@@ -64,8 +69,8 @@ class quickMod(ts3plugin):
         if cid == ownCID and talker: self.last_talk_power = clid
         if clid == self.requested:
             self.requested = 0
-            if talker: self.revokeTalkPower(schid, clid)
-            else: self.revokeTalkPower(schid, clid, True)
+            if talker == 1: self.revokeTalkPower(schid, clid, True)
+            # else: self.revokeTalkPower(schid, clid, False)
             (err, cldbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
             (err, sgids) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
             if set(self.sgids).issubset(sgids):
@@ -73,13 +78,26 @@ class quickMod(ts3plugin):
             else:
                 for sgid in self.sgids: ts3lib.requestServerGroupAddClient(schid, sgid, cldbid)
 
-    def revokeTalkPower(self, schid, clid, enabled=False):
+    def revokeTalkPower(self, schid, clid, revoke=True):
         self.retcode = ts3lib.createReturnCode()
-        ts3lib.requestClientSetIsTalker(schid, clid, enabled, self.retcode)
+        ts3lib.requestClientSetIsTalker(schid, clid, revoke, self.retcode)
 
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         ts3lib.banadd(schid, "", "", uid, 2678400, "Ban Evading / Bannumgehung")
+        (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
+        if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid); return
+        else: self.banIP(schid, ip)
+
+    def banIP(self, schid, ip):
+        active = PluginHost.active
+        if "Custom Ban" in active:
+            whitelist = active["Custom Ban"].whitelist
+            print("whitelist",whitelist)
+            if len(whitelist) > 1:
+                if ip in whitelist: ts3lib.printMessageToCurrentTab("{}: [color=red]Not banning whitelisted IP [b]{}".format(self.name, ip)); return
+            else: ts3lib.printMessageToCurrentTab("{}: \"Custom Ban\"'s IP Whitelist faulty, please check!".format(self.name)); return
+        ts3lib.banadd(schid, ip, "", "", 2678400, "Ban Evading / Bannumgehung")
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         if schid != ts3lib.getCurrentServerConnectionHandlerID(): return
