@@ -17,7 +17,6 @@ from PythonQt.QtSql import *
 from PythonQt.QtUiTools import *
 from bluscream import *
 
-self = QApplication.instance()
 
 urlrequest = False
 def url(url):
@@ -133,8 +132,12 @@ def getvar(clid):
     #             print("Sent command "+cmd+" to PluginCommandTarget_MAX")
     #         sendPluginCommand(schid, cmd, c, [])
 
+self = QApplication.instance()
 schid = getCurrentServerConnectionHandlerID()
 (_e, ownid) = getClientID(schid)
+(_e, owncid) = getChannelOfClient(schid, ownid)
+if "aaa_ts3Ext" in PluginHost.active: ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
+else: ts3host = ts3Ext.ts3SessionHost(next(iter(PluginHost.active.values())))
 
 print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.now()))
 for item in sys.path:

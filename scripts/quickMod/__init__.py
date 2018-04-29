@@ -58,9 +58,9 @@ class quickMod(ts3plugin):
 
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
         if clid == self.requestedIP:
+            self.requestedIP = 0
             (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
             self.banIP(schid, ip)
-            self.requestedIP = 0
             return
         (err, ownID) = ts3lib.getClientID(schid)
         (err, cid) = ts3lib.getChannelOfClient(schid, clid)
@@ -90,6 +90,7 @@ class quickMod(ts3plugin):
         else: self.banIP(schid, ip)
 
     def banIP(self, schid, ip):
+        if not ip: return
         active = PluginHost.active
         if "Custom Ban" in active:
             whitelist = active["Custom Ban"].whitelist
