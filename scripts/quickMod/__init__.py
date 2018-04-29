@@ -26,11 +26,13 @@ class quickMod(ts3plugin):
     last_joined_server = 0
     last_joined_channel = 0
     last_talk_power = 0
-    sgids = [17,21]
+    sgids = [17,21,83]
     requested = 0
     requestedIP = 0
     retcode = ""
     customBan = None
+    bantime = 2678400
+    banreason = "Ban Evading / Bannumgehung"
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
@@ -85,9 +87,12 @@ class quickMod(ts3plugin):
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid); return
+        if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid)
         else: self.banIP(schid, ip)
-        ts3lib.banadd(schid, "", "", uid, 2678400, "Ban Evading / Bannumgehung")
+        self.banUID(schid, uid)
+
+
+    def banUID(self, schid, uid): ts3lib.banadd(schid, "", "", uid, self.bantime, self.banreason)
 
     def banIP(self, schid, ip):
         if not ip: return
@@ -98,7 +103,7 @@ class quickMod(ts3plugin):
             if len(whitelist) > 1:
                 if ip in whitelist: ts3lib.printMessageToCurrentTab("{}: [color=red]Not banning whitelisted IP [b]{}".format(self.name, ip)); return
             else: ts3lib.printMessageToCurrentTab("{}: \"Custom Ban\"'s IP Whitelist faulty, please check!".format(self.name)); return
-        ts3lib.banadd(schid, ip, "", "", 2678400, "Ban Evading / Bannumgehung")
+        ts3lib.banadd(schid, ip, "", "", self.bantime, self.banreason)
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         if schid != ts3lib.getCurrentServerConnectionHandlerID(): return

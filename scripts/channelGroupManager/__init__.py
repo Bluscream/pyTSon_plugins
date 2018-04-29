@@ -30,7 +30,7 @@ class channelGroupManager(ts3plugin):
     cgroups = {}
     requestedCGroups = False
     requestedRVars = False
-    toggle = False
+    toggle = True
 
     def __init__(self):
         # if not self.toggle: self.stop(); return
@@ -152,7 +152,12 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
         try:
             super(QWidget, self).__init__(parent)
             setupUi(self, channelGroupManager.ui)
-            self.schid = schid;self.cid = cid;self.cgroups = channelGroupManager.cgroups[schid]["groups"]
+            self.schid = schid
+            self.cid = cid
+            cgroups = channelGroupManager.cgroups
+            cgroups = cgroups[schid]
+            cgroups = cgroups["groups"]
+            self.cgroups = cgroups
             self.db = channelGroupManager.db
             self.execSQL = channelGroupManager.execSQL
             self.setAttribute(Qt.WA_DeleteOnClose)
@@ -167,41 +172,50 @@ class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/ques
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def setupTable(self):
-        self.tbl_members.clearContents()
-        self.tbl_members.setRowCount(0)
-        cache = ts3client.ServerCache(self.schid)
-        (err, suid) = ts3lib.getServerVariable(self.schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
-        q = self.execSQL("SELECT * FROM '{}|{}'".format(suid, self.cid))
-        while q.next():
-            pos = self.tbl_members.rowCount
-            if PluginHost.cfg.getboolean("general", "verbose"): print(pos)
-            self.tbl_members.insertRow(pos)
-            self.tbl_members.setItem(pos, 0, QTableWidgetItem(datetime.utcfromtimestamp(q.value("timestamp")).strftime('%Y-%m-%d %H:%M:%S')))
-            self.tbl_members.setItem(pos, 1, QTableWidgetItem(q.value("name")))
-            self.tbl_members.setItem(pos, 2, QTableWidgetItem(q.value("uid")))
-            self.tbl_members.setItem(pos, 3, QTableWidgetItem(str(q.value("dbid"))))
-            box = QComboBox()
-            box.connect("currentIndexChanged(int)", self.currentIndexChanged)
-            i = 0
-            for cgroup in self.cgroups:
-                icon = QIcon(cache.icon(self.cgroups[cgroup]["icon"]))
-                text = "{} ({})".format(self.cgroups[cgroup]["name"], cgroup)
-                box.addItem(icon, text)
-                box.setItemData(i, cgroup)
-                if cgroup == q.value("cgid"): box.setCurrentIndex(i)
-                i += 1
-            self.tbl_members.setCellWidget(pos, 4, box)
-            self.tbl_members.setItem(pos, 5, QTableWidgetItem("{} ({})".format(q.value("invokername"), q.value("INVOKERUID"))))
+        try:
+            self.tbl_members.clearContents()
+            self.tbl_members.setRowCount(0)
+            cache = ts3client.ServerCache(self.schid)
+            (err, suid) = ts3lib.getServerVariable(self.schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+            q = self.execSQL("SELECT * FROM '{}|{}'".format(suid, self.cid))
+            while q.next():
+                pos = self.tbl_members.rowCount
+                if PluginHost.cfg.getboolean("general", "verbose"): print(pos)
+                self.tbl_members.insertRow(pos)
+                self.tbl_members.setItem(pos, 0, QTableWidgetItem(datetime.utcfromtimestamp(q.value("timestamp")).strftime('%Y-%m-%d %H:%M:%S')))
+                self.tbl_members.setItem(pos, 1, QTableWidgetItem(q.value("name")))
+                self.tbl_members.setItem(pos, 2, QTableWidgetItem(q.value("uid")))
+                self.tbl_members.setItem(pos, 3, QTableWidgetItem(str(q.value("dbid"))))
+                box = QComboBox()
+                box.connect("currentIndexChanged(int index)", self.currentIndexChanged)
+                i = 0
+                for cgroup in self.cgroups:
+                    icon = QIcon(cache.icon(self.cgroups[cgroup]["icon"]))
+                    text = "{} ({})".format(self.cgroups[cgroup]["name"], cgroup)
+                    box.addItem(icon, text)
+                    box.setItemData(i, cgroup)
+                    if cgroup == q.value("cgid"): box.setCurrentIndex(i)
+                    i += 1
+                self.tbl_members.setCellWidget(pos, 4, box)
+                self.tbl_members.setItem(pos, 5, QTableWidgetItem("{} ({})".format(q.value("invokername"), q.value("INVOKERUID"))))
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def currentIndexChanged(self, i):
-        if PluginHost.cfg.getboolean("general", "verbose"): print("test", i)
-        row = self.tbl_members.currentRow()
-        if PluginHost.cfg.getboolean("general", "verbose"): print("row:", row)
-        # item = self.tbl_members.itemAt(const QPoint &point)
-        # item = self.tbl_members.selectedItems()
-        # print("item:", item)
-        # self.tbl_members.at
-        # ts3lib.requestSetClientChannelGroup(self.schid, [item.itemData], [self.channel], [self.dbid])
+        try:
+            # schid, cgid, cid, cldbid
+            schid = self.schid
+            # cgid = ?
+            cid = self.cid
+            # cldbid = ?
+            if PluginHost.cfg.getboolean("general", "verbose"): print("test", i)
+            row = self.tbl_members.currentRow()
+            if PluginHost.cfg.getboolean("general", "verbose"): print("row:", row)
+            # item = self.tbl_members.itemAt(const QPoint &point)
+            # item = self.tbl_members.selectedItems()
+            # print("item:", item)
+            # self.tbl_members.at
+            # ts3lib.requestSetClientChannelGroup(self.schid, [item.itemData], [self.channel], [self.dbid])
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_btn_close_clicked(self): self.close()
 
