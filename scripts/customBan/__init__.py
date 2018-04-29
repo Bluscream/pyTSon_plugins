@@ -68,6 +68,7 @@ class customBan(ts3plugin):
         self.clid = selectedItemID
         if not ip: ip = "";ts3lib.requestConnectionInfo(schid, selectedItemID)
         if not self.dlg: self.dlg = BanDialog(self, schid, selectedItemID, uid, name, ip)
+        else: self.dlg.setup(self, schid, selectedItemID, uid, name, ip)
         self.dlg.show()
         self.dlg.raise_()
         self.dlg.activateWindow()
@@ -100,29 +101,32 @@ class BanDialog(QDialog):
             setupUi(self, "%s/ban.ui"%script.path)
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
-            url = script.cfg.getboolean("general", "ipapi")
-            if url:
-                self.nwmc_ip = QNetworkAccessManager()
-                self.nwmc_ip.connect("finished(QNetworkReply*)", self.checkIP)
-                self.countries = CountryFlags()
-                self.countries.open()
-            self.disableISP()
-            self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
-            if ip: self.txt_ip.setText(ip)
-            self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
-            if name: self.txt_name.setText(name)
-            self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
-            if uid: self.txt_uid.setText(uid)
-            for reason in script.templates: self.box_reason.addItem(reason)
-            self.box_reason.setEditText(script.cfg.get("last", "reason")) # setItemText(0, )
-            self.int_duration.setValue(script.cfg.getint("last", "duration"))
             self.cfg = script.cfg
             self.ini = script.ini
             self.schid = schid
             self.templates = script.templates
             self.whitelist = script.whitelist
             self.name = script.name
+            self.setup(script, schid, clid, uid, name, ip)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);
+
+    def setup(self, script, schid, clid, uid, name, ip):
+        url = script.cfg.getboolean("general", "ipapi")
+        if url:
+            self.nwmc_ip = QNetworkAccessManager()
+            self.nwmc_ip.connect("finished(QNetworkReply*)", self.checkIP)
+            self.countries = CountryFlags()
+            self.countries.open()
+        self.disableISP()
+        self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
+        if ip: self.txt_ip.setText(ip)
+        self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
+        if name: self.txt_name.setText(name)
+        self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
+        if uid: self.txt_uid.setText(uid)
+        for reason in script.templates: self.box_reason.addItem(reason)
+        self.box_reason.setEditText(script.cfg.get("last", "reason")) # setItemText(0, )
+        self.int_duration.setValue(script.cfg.getint("last", "duration"))
 
     def disableISP(self, enable=False):
         try:
