@@ -62,6 +62,24 @@ Ich erklär dir auch wie's geht:
         self.timer.setTimerType(2)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
+    def menuCreated(self): self.checkMenus()
+
+    def currentServerConnectionChanged(self, schid): self.checkMenus(schid)
+
+    def checkMenus(self, schid=0):
+        if not self.name in PluginHost.active: return
+        if schid < 1: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        err, status = ts3lib.getConnectionStatus(schid)
+        if status != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
+        (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        if suid != self.suid: self.toggleMenus(False)
+        else: self.toggleMenus(True)
+
+    def toggleMenus(self, enabled):
+        for menuItem in self.menuItems:
+            try: ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, menuItem[1]), enabled)
+            except: pass
+
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginItemType.PLUGIN_SERVER:
             if menuItemID == 0:

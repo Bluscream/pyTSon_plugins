@@ -25,8 +25,8 @@ class customBadges(ts3plugin):
     commandKeyword = ""
     infoTitle = "[b]Badges[/b]"
     menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Change " + name, ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Generate Badge UIDs", "")
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Change " + name, "")# ,
+        # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Generate Badge UIDs", "")
     ]
     hotkeys = []
     ini = path.join(getPluginPath(), "scripts", "customBadges", "settings.ini")

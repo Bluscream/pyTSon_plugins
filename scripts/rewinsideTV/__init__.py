@@ -3,7 +3,7 @@ from ts3plugin import ts3plugin, PluginHost
 from datetime import datetime
 from bluscream import timestamp
 
-class gommeHD(ts3plugin):
+class rewinsideTV(ts3plugin):
     name = "Rewi nifty tricks"
     apiVersion = 22
     requestAutoload = False
@@ -24,6 +24,8 @@ class gommeHD(ts3plugin):
         # err, clid = ts3lib.getClientID(schid)
         # err, self.mychan = ts3lib.getChannelOfClient(schid, clid)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
+
+
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if self.mychan == 0: return

@@ -4,133 +4,16 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/rotateNick/__init__.py" line="128" />
     <bookmark url="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" line="86" />
     <bookmark url="file://$PROJECT_DIR$/scripts/antiMove/__init__.py" line="56" mnemonic="2" />
-    <bookmark url="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py" line="66" />
+    <bookmark url="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py" line="84" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/FileBrowser/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ISPValidator/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/NoX/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/aaa_ts3Ext/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/addonList/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/antiAFK/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/antiChannelKick/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/antiMove/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/antiServerKick/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/antiSpam/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoCasino/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoChannelCreate/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoCommander/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoEncode/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoFlee/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoFollow/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoMSG/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoSubscribe/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoSupport/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoTPRequest/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/avatarScanner/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/cfgDialog/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/channelGroupChanger/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/channelGroupManager/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/channelWatcher/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/chatBot/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/clientInit/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/countContacts/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/countNick/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/crasher_3_1_7/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/customBadges/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/customBan/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/dataChanger/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/dataDump/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/devTools/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/discordify/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/dynamicAvatar/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/exporter/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/fakeClients/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/faker/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/friendNotifications/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/gommeChecker/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/gommeHD/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/grieferGames/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/info/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/infoHTML/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/joinChannel/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/kickCounter/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/kickself/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/longMessages/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/massAction/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/metaScanner/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/msgRedirect/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/nameSwitcher/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/notify/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/nowPlaying/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/onlineOfflineMessages/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/passwordCracker/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/penTest/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/pingHighScore/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/pingNick/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/pluginCMD/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/profile/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/purgeContacts/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/queryConsole/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/quickMod/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/rawCMD/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/recreateChannel/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/report/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/rewinsideTV/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/rotateNick/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/searchEverything/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/serverBrowser/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/serverGroupChanger/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/serverSwitcher/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/settings/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/showQueries/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/silentError/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/streamChat/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/teaspeakBot/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/toggleBadges/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/unlocker/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/welcomeBot/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/AutoChannelChatTab/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/AutoReplyAway/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/FileBrowser/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/FileBrowser/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/NoX/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/NoX/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/addonList/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/addonList/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFlee/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFlee/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoSupport/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoSupport/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autopokeback/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/avatarScanner/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/avatarScanner/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/cfgDialog/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/cfgDialog/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dataChanger/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dataChanger/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/devTools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/devTools/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/discordify/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/discordify/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dynamicAvatar/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dynamicAvatar/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/eventlog/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/exporter/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/exporter/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/faker/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/faker/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/gommeChecker/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/gommeChecker/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/infoHTML/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/infoHTML/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/ipc/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/kickself/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/kickself/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/linkinfo/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/linkinfo/linkinfo.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/linkinfo/linkinfo.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/linkinfo/luemmel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/metaScanner/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/metaScanner/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/multiselectmove/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/onlineOfflineMessages/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/onlineOfflineMessages/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/penTest/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/penTest/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/profile/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/profile/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/quickMod/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickMod/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/rawCMD/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/rawCMD/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/settings/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/settings/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/socketplugin/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/tweakui/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/unlocker/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/unlocker/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/welcomeBot/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/welcomeBot/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/rewinsideTV/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/rewinsideTV/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -167,7 +50,7 @@
       <file leaf-file-name="ts3lib.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="918">
               <caret line="61" column="45" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="45" />
             </state>
           </provider>
@@ -176,11 +59,8 @@
       <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="5032">
               <caret line="296" column="24" selection-start-line="296" selection-start-column="16" selection-end-line="296" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -188,84 +68,40 @@
       <file leaf-file-name="ts3defines.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="48" column="30" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/toggleBadges/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor>
-                <caret column="16" selection-start-column="16" selection-end-column="16" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/unlocker/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor>
-                <caret column="10" selection-start-column="10" selection-end-column="10" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/welcomeBot/settings.ini">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/welcomeBot/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor>
-                <caret column="13" selection-start-column="13" selection-end-column="13" />
-              </first_editor>
-              <second_editor />
+            <state relative-caret-position="265">
+              <caret line="732" column="33" selection-start-line="732" selection-start-column="4" selection-end-line="732" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/welcomeBot/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+            <state relative-caret-position="153">
+              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="80" selection-end-column="24" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#0#33#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/unlocker/__init__.py">
+      <file leaf-file-name="pluginhost.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/pluginhost.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="20" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="20" />
+            <state relative-caret-position="452">
+              <caret line="609" column="36" selection-start-line="609" selection-start-column="30" selection-end-line="609" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="10" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/toggleBadges/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="26" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -282,8 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>meta</find>
-      <find>MAX_SIZE</find>
       <find>processCommand</find>
       <find>sendco</find>
       <find>onservererrorevent</find>
@@ -312,6 +146,8 @@
       <find>commandKeyword = &quot;</find>
       <find>PluginHost</find>
       <find>ts3SessionHost</find>
+      <find>menuen</find>
+      <find>suid) =</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -368,9 +204,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/infoHTML/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/infoHTML/README.md" />
-        <option value="$PROJECT_DIR$/scripts/ISPValidator/README.md" />
         <option value="$PROJECT_DIR$/scripts/joinChannel/README.md" />
         <option value="$PROJECT_DIR$/scripts/kickCounter/README.md" />
         <option value="$PROJECT_DIR$/scripts/kickself/__init__.py" />
@@ -419,6 +252,9 @@
         <option value="$PROJECT_DIR$/scripts/unlocker/README.md" />
         <option value="$PROJECT_DIR$/scripts/welcomeBot/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/welcomeBot/README.md" />
+        <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/rewinsideTV/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
       </list>
     </option>
   </component>
@@ -469,49 +305,12 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="aaa_ts3Ext" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="addonList" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="antiAFK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="antiChannelKick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="antiMove" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="antiServerKick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="antiSpam" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -523,193 +322,7 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoChannelCreate" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoCommander" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoEncode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoFlee" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoFollow" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoMSG" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoSubscribe" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoSupport" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoTPRequest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="avatarScanner" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="cfgDialog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="channelGroupChanger" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="channelGroupManager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="channelWatcher" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="chatBot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="clientInit" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="countContacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="countNick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="crasher_3_1_7" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="customBadges" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="customBan" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="dataChanger" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="dataDump" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="devTools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="discordify" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="dynamicAvatar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="exporter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="fakeClients" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="faker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="FileBrowser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="friendNotifications" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="gommeChecker" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -727,139 +340,7 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="info" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="infoHTML" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="ISPValidator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="joinChannel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="kickCounter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="kickself" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="longMessages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="massAction" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="metaScanner" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="msgRedirect" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="nameSwitcher" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="notify" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="nowPlaying" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="NoX" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="onlineOfflineMessages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="passwordCracker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="penTest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="pingHighScore" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="pingNick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="pluginCMD" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="profile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="purgeContacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="queryConsole" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -871,103 +352,7 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="rawCMD" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="recreateChannel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="report" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="rewinsideTV" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="rotateNick" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="searchEverything" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="serverBrowser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="serverGroupChanger" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="serverSwitcher" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="settings" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="showQueries" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="silentError" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="streamChat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="teaspeakBot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="toggleBadges" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="unlocker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="welcomeBot" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1294,13 +679,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00233" summary=":thinking:">
-      <created>1523852188903</created>
-      <option name="number" value="00233" />
-      <option name="presentableId" value="LOCAL-00233" />
-      <option name="project" value="LOCAL" />
-      <updated>1523852188904</updated>
     </task>
     <task id="LOCAL-00234" summary=":thinking:">
       <created>1523852412111</created>
@@ -1638,7 +1016,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524987671169</updated>
     </task>
-    <option name="localTasksCounter" value="282" />
+    <task id="LOCAL-00282" summary=":thinking: removed stuff that didnt belong here+added readmes for scripts">
+      <created>1524991654449</created>
+      <option name="number" value="00282" />
+      <option name="presentableId" value="LOCAL-00282" />
+      <option name="project" value="LOCAL" />
+      <updated>1524991654449</updated>
+    </task>
+    <option name="localTasksCounter" value="283" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1661,9 +1046,10 @@
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1337953" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.13486141" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
@@ -1683,7 +1069,6 @@
       <window_info active="true" anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.25" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="5" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Properties" order="6" />
@@ -1712,11 +1097,11 @@
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3224401" />
       <window_info anchor="bottom" x="1073" y="648" width="434" height="241" id="Documentation" order="15" sideWeight="0.4978678" weight="0.16213275" />
       <window_info active="true" anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.25" />
+      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info anchor="right" id="Data View" order="11" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="5" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.12633263" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
@@ -1728,7 +1113,7 @@
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Version Control" order="16" sideWeight="0.5021322" side_tool="true" visible="true" weight="0.16213275" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
     </layout-to-restore>
   </component>
@@ -1791,7 +1176,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="even more stuff?" />
     <MESSAGE value="o.O" />
     <MESSAGE value="added base64 stuff to the chatbot" />
     <MESSAGE value="fixed all obvious errors" />
@@ -1816,7 +1200,8 @@
     <MESSAGE value=":thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking:" />
     <MESSAGE value=":thinking:" />
     <MESSAGE value=":thinking: fix customBans + edit README" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking: fix customBans + edit README" />
+    <MESSAGE value=":thinking: removed stuff that didnt belong here+added readmes for scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking: removed stuff that didnt belong here+added readmes for scripts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1851,66 +1236,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/penTest/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/penTest/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="12" selection-start-column="12" selection-end-column="12" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pingHighScore/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pingHighScore/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="17" selection-start-column="17" selection-end-column="17" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pingNick/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/pluginCMD/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/pluginCMD/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1945,9 +1270,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1955,9 +1277,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1991,16 +1310,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/quickMod/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -2015,9 +1324,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2055,9 +1361,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="18" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2068,16 +1371,6 @@
             <caret column="8" selection-start-column="8" selection-end-column="8" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2195,9 +1488,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="29" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2235,9 +1525,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="25" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2279,13 +1566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="48" column="30" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/toggleBadges/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -2310,9 +1590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="20" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2325,9 +1602,6 @@
           <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/welcomeBot/settings.ini">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/welcomeBot/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -2343,9 +1617,95 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor>
-            <caret column="13" selection-start-column="13" selection-end-column="13" />
+            <caret column="13" selection-start-column="10" selection-end-column="13" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/pyTSon.url">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="110" column="21" selection-start-line="110" selection-start-column="11" selection-end-line="110" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="732" column="33" selection-start-line="732" selection-start-column="4" selection-end-line="732" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/grieferGames/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoCasino/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="80" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/massAction/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="58" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/pluginhost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="609" column="36" selection-start-line="609" selection-start-column="30" selection-end-line="609" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="10" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
