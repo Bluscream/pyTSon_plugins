@@ -21,16 +21,20 @@ class quickMod(ts3plugin):
         ("restrict_last_joined_channel", "Restrict the last user that joined your channel."),
         ("ban_last_joined_server", "Bans the last user that joined your server."),
         ("ban_last_joined_channel", "Bans the last user that joined your channel."),
-        ("revoke_last_talk_power", "Restrict the last user that got talk power in your channel.")
+        ("revoke_last_talk_power", "Restrict the last user that got talk power in your channel."),
+        ("restrict_last_joined_channel_from_local_channels", "Gives the last user that joined your channel a cgid and sgid in certain channels.")
     ]
     last_joined_server = 0
     last_joined_channel = 0
     last_talk_power = 0
-    sgids = [17,21,83]
     requested = 0
     requestedIP = 0
     retcode = ""
     customBan = None
+    sgids = [17,21,83]
+    sgid = 83
+    cgid = 16
+    cids = [60,61,62,63]
     bantime = 2678400
     banreason = "Ban Evading / Bannumgehung"
 
@@ -57,6 +61,8 @@ class quickMod(ts3plugin):
             self.banClient(schid, self.last_joined_channel)
         elif keyword == "revoke_last_talk_power_channel":
             self.revokeTalkPower(schid, self.last_talk_power)
+        elif keyword == "restrict_last_joined_channel_from_local_channels":
+            self.restrictForeigners(schid, self.last_joined_channel)
 
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
         if clid == self.requestedIP:
@@ -83,6 +89,17 @@ class quickMod(ts3plugin):
     def revokeTalkPower(self, schid, clid, revoke=True):
         self.retcode = ts3lib.createReturnCode()
         ts3lib.requestClientSetIsTalker(schid, clid, revoke, self.retcode)
+
+    def restrictForeigners(self, schid, clid):
+        (err, cldbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        (err, sgids) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+        if sgids and self.sgid in sgids:
+            ts3lib.requestServerGroupDelClient(schid, self.sgid, cldbid)
+            (err, dcgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)
+            ts3lib.requestSetClientChannelGroup(schid, [dcgid]*len(self.cids), self.cids, [cldbid]*len(self.cids))
+            return
+        ts3lib.requestServerGroupAddClient(schid, self.sgid, cldbid)
+        ts3lib.requestSetClientChannelGroup(schid, [self.cgid]*len(self.cids), self.cids, [cldbid]*len(self.cids))
 
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
