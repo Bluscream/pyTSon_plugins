@@ -9,7 +9,6 @@ from os import path
 
 class welcomeBot(ts3plugin):
     name = "Welcome Bot"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

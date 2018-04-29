@@ -7,7 +7,6 @@ from PythonQt.QtCore import *
 
 class discordify(ts3plugin):
     name = "Discordify"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

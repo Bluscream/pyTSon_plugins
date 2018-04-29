@@ -15,7 +15,7 @@ class avatarScanner(ts3plugin):
     offersConfigure = False
     commandKeyword = "avatar"
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, "")]
+    menuItems = [] # [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, "")]
     hotkeys = []
 
     def __init__(self):

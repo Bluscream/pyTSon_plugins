@@ -7,7 +7,6 @@ class infoHTML(ts3plugin):
     name = "Extended HTML Support"
     requestAutoload = False
     version = "1.0"
-
     apiVersion = 22
     author = "Bluscream"
     description =  "Extends the infoData Frame for extended HTML support."

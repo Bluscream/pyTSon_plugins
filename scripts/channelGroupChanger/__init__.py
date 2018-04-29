@@ -10,7 +10,6 @@ from pytsonui import setupUi
 
 class channelGroupChanger(ts3plugin):
     name = "Channel Group Changer"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

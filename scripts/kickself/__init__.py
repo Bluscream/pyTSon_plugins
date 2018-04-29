@@ -7,7 +7,7 @@ class autopoke(ts3plugin):
     requestAutoload = False
     version = "1.0"
     apiVersion = 22
-    author = "Thomas \"PLuS\" Pathmann"
+    author = "Thomas \"PLuS\" Pathmann, Edited by Bluscream"
     description = "Kick my zombie eg after a crash"
     offersConfigure = False
     commandKeyword = ""

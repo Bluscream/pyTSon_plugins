@@ -5,9 +5,8 @@ import ts3defines
 from PythonQt.QtGui import *
 from PythonQt.QtCore import *
 
-class info(ts3plugin):
+class unlocker(ts3plugin):
     name = "Unlocker"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

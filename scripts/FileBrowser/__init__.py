@@ -5,7 +5,6 @@ import ts3lib, ts3defines
 
 class FileBrowser(ts3plugin):
     name = "File Browser"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

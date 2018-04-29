@@ -5,7 +5,6 @@ from os import path
 
 class faker(ts3plugin):
     name = "Fake Anything"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

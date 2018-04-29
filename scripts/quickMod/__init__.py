@@ -84,10 +84,10 @@ class quickMod(ts3plugin):
 
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        ts3lib.banadd(schid, "", "", uid, 2678400, "Ban Evading / Bannumgehung")
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid); return
         else: self.banIP(schid, ip)
+        ts3lib.banadd(schid, "", "", uid, 2678400, "Ban Evading / Bannumgehung")
 
     def banIP(self, schid, ip):
         if not ip: return

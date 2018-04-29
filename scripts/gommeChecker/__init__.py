@@ -9,7 +9,6 @@ from pytson import getPluginPath
 
 class gommeChecker(ts3plugin):
     name = "Gomme Checker"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

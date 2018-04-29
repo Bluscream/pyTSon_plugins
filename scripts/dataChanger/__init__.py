@@ -8,8 +8,7 @@ from os import path
 from configparser import ConfigParser
 
 class dataChanger(ts3plugin):
-    name = "Name Changer"
-
+    name = "Data Changer"
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

@@ -14,7 +14,7 @@ class autoFlee(ts3plugin):
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
-    description = "Deny others to move you around."
+    description = "Flee from other users"
     offersConfigure = True
     commandKeyword = ""
     infoTitle = None

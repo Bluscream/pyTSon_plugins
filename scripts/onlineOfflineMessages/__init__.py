@@ -8,7 +8,6 @@ import ts3defines, ts3lib, pytson
 
 class onlineOfflineMessages(ts3plugin):
     name = "Online Offline Messages"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

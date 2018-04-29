@@ -9,7 +9,6 @@ import ts3lib, ts3defines, os, json, configparser, webbrowser, traceback, urllib
 class exporter(ts3plugin):
     shortname = "EX"
     name = "Teamspeak Export/Import"
-
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

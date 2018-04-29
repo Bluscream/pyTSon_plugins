@@ -6,7 +6,7 @@ from traceback import format_exc
 import ts3defines, ts3lib
 
 class rawCMD(ts3plugin):
-    name = "CMD Sender"
+    name = "Protocol CMD sender / reciever"
     apiVersion = 22
     requestAutoload = False
     version = "1.0"

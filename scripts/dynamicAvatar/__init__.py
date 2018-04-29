@@ -15,7 +15,7 @@ from PythonQt.QtGui import QDialog, QFileDialog
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 
 class dynamicAvatar(ts3plugin):
-    shortname = "PS"
+    shortname = "AC"
     name = "Dynamic Avatar Changer"
     requestAutoload = False
     version = "1.0"
