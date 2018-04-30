@@ -76,11 +76,21 @@ class quickMod(ts3plugin):
         elif keyword == "restrict_last_joined_channel_from_local_channels":
             self.restrictForeigners(schid, self.last_joined_channel)
 
+    def banClient(self, schid, clid):
+        (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
+        if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid)
+        else:
+            self.banIP(schid, ip)
+            self.banUID(schid, uid)
+
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
         if clid == self.requestedIP:
             self.requestedIP = 0
+            (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
             (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
             self.banIP(schid, ip)
+            self.banUID(schid, uid)
             return
         (err, ownID) = ts3lib.getClientID(schid)
         (err, cid) = ts3lib.getChannelOfClient(schid, clid)
@@ -118,14 +128,6 @@ class quickMod(ts3plugin):
         msg = self.cfg.get("restrict local", "poke")
         if msg: ts3lib.requestClientPoke(schid, self.last_joined_channel, msg)
         # ts3lib.requestClientKickFromChannel(schid, clid, msg)
-
-    def banClient(self, schid, clid):
-        (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid)
-        else:
-            self.banIP(schid, ip)
-            self.banUID(schid, uid)
 
 
     def banUID(self, schid, uid):
