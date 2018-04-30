@@ -1,8 +1,9 @@
 import ts3defines, ts3lib
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
-from bluscream import timestamp
 from pytson import getPluginPath
+from bluscream import saveCfg, loadCfg, timestamp, intList
+from configparser import ConfigParser
 
 class quickMod(ts3plugin):
     path = getPluginPath("scripts", __name__)
@@ -31,15 +32,18 @@ class quickMod(ts3plugin):
     requestedIP = 0
     retcode = ""
     customBan = None
-    sgids = [17,21,83]
-    sgid = 83
-    cgid = 16
-    cids = [60,61,62,63]
-    bantime = 2678400
-    banreason = "Ban Evading / Bannumgehung"
+    ini = "%s/config.ini" % path
+    cfg = ConfigParser()
+    cfg["ban"] = { "duration": "2678400", "reason": "Ban Evading / Bannumgehung", "poke": "[color=red][b]You we're banned from the server!" }
+    cfg["restrict"] = { "sgids": "", "reason": "Ban Evading / Bannumgehung", "poke": "" }
+    cfg["restrict local"] = { "cids": "", "sgids": "", "cgid": "", "poke": "" }
 
     def __init__(self):
+        loadCfg(self.ini, self.cfg)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
+
+    def stop(self):
+        pass # saveCfg(self.ini, self.cfg)
 
     def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
 
@@ -49,15 +53,23 @@ class quickMod(ts3plugin):
         schid = ts3lib.getCurrentServerConnectionHandlerID()
         if keyword == "restrict_last_joined_server":
             self.requested = self.last_joined_server
+            msg = self.cfg.get("restrict", "poke")
+            if msg: ts3lib.requestClientPoke(schid, self.requested, msg)
             ts3lib.requestClientVariables(schid, self.last_joined_server)
             # self.restrictClient(schid, self.last_joined_server)
         elif keyword == "restrict_last_joined_channel":
             self.requested = self.last_joined_channel
+            msg = self.cfg.get("restrict", "poke")
+            if msg: ts3lib.requestClientPoke(schid, self.requested, msg)
             ts3lib.requestClientVariables(schid, self.last_joined_channel)
             # self.restrictClient(schid, self.last_joined_channel)
         elif keyword == "ban_last_joined_server":
+            msg = self.cfg.get("ban", "poke")
+            if msg: ts3lib.requestClientPoke(schid, self.last_joined_server, msg)
             self.banClient(schid, self.last_joined_server)
         elif keyword == "ban_last_joined_channel":
+            msg = self.cfg.get("ban", "poke")
+            if msg: ts3lib.requestClientPoke(schid, self.last_joined_channel, msg)
             self.banClient(schid, self.last_joined_channel)
         elif keyword == "revoke_last_talk_power_channel":
             self.revokeTalkPower(schid, self.last_talk_power)
@@ -81,10 +93,11 @@ class quickMod(ts3plugin):
             # else: self.revokeTalkPower(schid, clid, False)
             (err, cldbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
             (err, sgids) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-            if set(self.sgids).issubset(sgids):
-                for sgid in self.sgids: ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
+            loc_sgids = intList(self.cfg.get("restrict", "sgids"))
+            if set(loc_sgids).issubset(sgids):
+                for sgid in loc_sgids: ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
             else:
-                for sgid in self.sgids: ts3lib.requestServerGroupAddClient(schid, sgid, cldbid)
+                for sgid in loc_sgids: ts3lib.requestServerGroupAddClient(schid, sgid, cldbid)
 
     def revokeTalkPower(self, schid, clid, revoke=True):
         self.retcode = ts3lib.createReturnCode()
@@ -93,23 +106,31 @@ class quickMod(ts3plugin):
     def restrictForeigners(self, schid, clid):
         (err, cldbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
         (err, sgids) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        if sgids and self.sgid in sgids:
-            ts3lib.requestServerGroupDelClient(schid, self.sgid, cldbid)
+        loc_sgids = intList(self.cfg.get("restrict local", "sgids"))
+        loc_cids = intList(self.cfg.get("restrict local", "cids"))
+        if sgids and set(loc_sgids).issubset(sgids):
+            for sgid in loc_sgids: ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
             (err, dcgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)
-            ts3lib.requestSetClientChannelGroup(schid, [dcgid]*len(self.cids), self.cids, [cldbid]*len(self.cids))
+            ts3lib.requestSetClientChannelGroup(schid, [dcgid]*len(loc_cids), loc_cids, [cldbid]*len(loc_cids))
             return
-        ts3lib.requestServerGroupAddClient(schid, self.sgid, cldbid)
-        ts3lib.requestSetClientChannelGroup(schid, [self.cgid]*len(self.cids), self.cids, [cldbid]*len(self.cids))
+        for sgid in loc_sgids: ts3lib.requestServerGroupAddClient(schid, sgid, cldbid)
+        ts3lib.requestSetClientChannelGroup(schid, [self.cfg.getint("restrict local", "cgid")]*len(loc_cids), loc_cids, [cldbid]*len(loc_cids))
+        msg = self.cfg.get("restrict local", "poke")
+        if msg: ts3lib.requestClientPoke(schid, self.last_joined_channel, msg)
+        # ts3lib.requestClientKickFromChannel(schid, clid, msg)
 
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid)
-        else: self.banIP(schid, ip)
-        self.banUID(schid, uid)
+        else:
+            self.banIP(schid, ip)
+            self.banUID(schid, uid)
 
 
-    def banUID(self, schid, uid): ts3lib.banadd(schid, "", "", uid, self.bantime, self.banreason)
+    def banUID(self, schid, uid):
+        ts3lib.banadd(schid, "", "", uid, self.cfg.getint("ban", "duration"), self.cfg.get("ban", "reason"))
+        print("banned uid",uid)
 
     def banIP(self, schid, ip):
         if not ip: return
@@ -120,7 +141,8 @@ class quickMod(ts3plugin):
             if len(whitelist) > 1:
                 if ip in whitelist: ts3lib.printMessageToCurrentTab("{}: [color=red]Not banning whitelisted IP [b]{}".format(self.name, ip)); return
             else: ts3lib.printMessageToCurrentTab("{}: \"Custom Ban\"'s IP Whitelist faulty, please check!".format(self.name)); return
-        ts3lib.banadd(schid, ip, "", "", self.bantime, self.banreason)
+        ts3lib.banadd(schid, ip, "", "", self.cfg.getint("ban", "duration"), self.cfg.get("ban", "reason"))
+        print("banned ip",ip)
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         if schid != ts3lib.getCurrentServerConnectionHandlerID(): return

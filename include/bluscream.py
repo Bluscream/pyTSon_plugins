@@ -86,6 +86,15 @@ def percent(percent, whole):
   """
   return round((percent * whole))
 
+def intList(str, sep=","):
+    """
+    Returns a list of ints from a string
+    :param str:
+    :param sep:
+    :return:
+    """
+    return [int(x) for x in str.split(sep)]
+
 def getItem(useList, name): # getitem(PluginHost.modules,'devTools')
     """
 
