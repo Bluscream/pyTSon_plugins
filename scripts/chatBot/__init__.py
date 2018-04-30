@@ -409,6 +409,7 @@ class chatBot(ts3plugin):
     # except:
 
     def onBanListEvent(self, schid, banid, ip, name, uid, creationTime, durationTime, invokerName, invokercldbid, invokeruid, reason, numberOfEnforcements, lastNickName):
+        return
         item = ""
         item += "#%s" % banid
         if name: item += " | Name: %s" % name

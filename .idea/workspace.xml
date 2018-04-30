@@ -9,9 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/addonList/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/addonList/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/quickMod/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickMod/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -72,11 +71,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="97" column="51" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="51" />
+            <state relative-caret-position="544">
+              <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="367">
+              <caret line="411" column="14" selection-start-line="411" selection-start-column="14" selection-end-line="411" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -84,8 +92,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="89" column="130" lean-forward="true" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="130" />
+            <state relative-caret-position="1513">
+              <caret line="89" column="130" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="130" />
             </state>
           </provider>
         </entry>
@@ -101,7 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ts3hook</find>
       <find>contactst</find>
       <find>getCurrentServ</find>
       <find>x.exec()</find>
@@ -131,6 +138,7 @@
       <find>.connect(&quot;</find>
       <find>requestSetClientChannelGroup</find>
       <find>VIRTUALSERVER_DEFAULT_CHANNEL_GROUP</find>
+      <find>chatbot</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -187,7 +195,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/kickself/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/kickself/README.md" />
         <option value="$PROJECT_DIR$/scripts/longMessages/README.md" />
         <option value="$PROJECT_DIR$/scripts/massAction/README.md" />
@@ -238,6 +245,7 @@
         <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/channelGroupManager/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
       </list>
     </option>
   </component>
@@ -267,17 +275,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -301,6 +298,17 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="quickMod" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -627,13 +635,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00236" summary=":thinking:&#10;% remove debug stuff">
-      <created>1523859173183</created>
-      <option name="number" value="00236" />
-      <option name="presentableId" value="LOCAL-00236" />
-      <option name="project" value="LOCAL" />
-      <updated>1523859173183</updated>
     </task>
     <task id="LOCAL-00237" summary=":thinking:">
       <created>1523860998278</created>
@@ -971,7 +972,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525015675642</updated>
     </task>
-    <option name="localTasksCounter" value="285" />
+    <task id="LOCAL-00285" summary=":thinking:">
+      <created>1525022636406</created>
+      <option name="number" value="00285" />
+      <option name="presentableId" value="LOCAL-00285" />
+      <option name="project" value="LOCAL" />
+      <updated>1525022636408</updated>
+    </task>
+    <option name="localTasksCounter" value="286" />
     <servers />
   </component>
   <component name="TodoView">
@@ -994,7 +1002,7 @@
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1401919" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.14179105" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.74791664" weight="0.32624868" />
@@ -1030,6 +1038,7 @@
       <window_info id="Designer" order="4" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
+      <window_info anchor="right" id="Properties" order="6" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -1037,7 +1046,7 @@
       <window_info anchor="bottom" id="Changes" order="7" weight="0.32900432" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="UI Designer" order="5" />
-      <window_info anchor="right" id="Properties" order="6" />
+      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Capture Analysis" order="9" />
@@ -1045,7 +1054,6 @@
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3224401" />
       <window_info anchor="bottom" x="1073" y="648" width="434" height="241" id="Documentation" order="15" sideWeight="0.4978678" weight="0.16213275" />
       <window_info active="true" anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.25" />
-      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info anchor="right" id="Data View" order="11" />
       <window_info id="Nl-Palette" order="2" />
@@ -1184,13 +1192,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1649">
-          <caret line="97" column="30" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -1599,15 +1600,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/channelGroupManager/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="89" column="130" lean-forward="true" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="130" />
+        <state relative-caret-position="1513">
+          <caret line="89" column="130" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="130" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="97" column="51" selection-start-line="97" selection-start-column="34" selection-end-line="97" selection-end-column="51" />
+        <state relative-caret-position="544">
+          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="411" column="14" selection-start-line="411" selection-start-column="14" selection-end-line="411" selection-end-column="14" />
         </state>
       </provider>
     </entry>
