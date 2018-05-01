@@ -205,7 +205,7 @@ class customBadges(ts3plugin):
                 _badges = badges
                 err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
                 err, platform = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_PLATFORM)
-                if (ver and not reg.match(ver)) or (platform and not platform in ["Windows","Linux","OS X","FreeBSD"]): # "teaspeak" in ver.lower()
+                if getServerType(schid, reg) in [ServerInstanceType.TEASPEAK, ServerInstanceType.UNKNOWN]:
                     _badges = [x for x in badges if not x in self.extbadges][:3]
                 _badges = buildBadges(_badges, overwolf)
                 sendCommand(self.name, _badges, schid)

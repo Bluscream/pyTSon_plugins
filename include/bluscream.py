@@ -10,6 +10,7 @@ from urllib.parse import quote_plus
 from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
+from re import match
 import ts3lib, ts3defines, os.path, string, random, ts3client, time
 
 # GENERAL FUNCTIONS #
@@ -235,6 +236,50 @@ def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
         except: nickname_encoded = uid
     return '[url=client://{0}/{1}~{2}]"{3}"[/url]'.format(clid, uid, nickname_encoded, nickname)
 
+def getServerType(schid, pattern=None):
+    err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
+    if err != ts3defines.ERROR_ok or not ver: return ServerInstanceType.UNKNOWN
+    err, platform = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_PLATFORM)
+    if err != ts3defines.ERROR_ok or not platform: return ServerInstanceType.UNKNOWN
+    valid_platform = platform in ["Windows", "Linux", "OS X", "FreeBSD"]
+    if pattern is not None: valid_version = pattern.match(ver)
+    else: valid_version = match('3(?:\.\d+)* \[Build: \d+\]', ver)
+    if valid_version and valid_platform: return ServerInstanceType.VANILLA
+    elif "teaspeak" in ver.lower(): return ServerInstanceType.TEASPEAK
+    else: return ServerInstanceType.UNKNOWN
+
+# AntiFlood
+def getAntiFloodSettings(schid):
+    """
+
+    :param schid:
+    :return:
+    """
+    (err, cmdblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
+    (err, ipblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
+    (err, afreduce) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
+    return (err, cmdblock, ipblock, afreduce)
+
+def calculateInterval(schid, command, name="pyTSon"):
+    """
+
+    :param schid:
+    :param command:
+    :param name:
+    :return:
+    """
+    # ts3lib.requestServerVariables(schid)
+    (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
+    # strange = False
+    # for var in [cmdblock, ipblock, afreduce]:
+        # if not var or var < 0 or var == "": strange = True
+    # if err != ts3defines.ERROR_ok or strange:
+        # ts3lib.requestServerVariables(schid)
+        # (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
+    interval = round(1000/((afreduce/command)))
+    ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command), command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
+    return interval
+
 # I/O #
 def loadCfg(path, cfg):
     """
@@ -316,38 +361,6 @@ def confirm(title, message):
     x.setAttribute(Qt.WA_DeleteOnClose)
     _x = QMessageBox.question(x, title, message, QMessageBox.Yes, QMessageBox.No)
     if _x == QMessageBox.Yes: return True if _x == QMessageBox.Yes else False
-
-# AntiFlood
-def getAntiFloodSettings(schid):
-    """
-
-    :param schid:
-    :return:
-    """
-    (err, cmdblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
-    (err, ipblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
-    (err, afreduce) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
-    return (err, cmdblock, ipblock, afreduce)
-
-def calculateInterval(schid, command, name="pyTSon"):
-    """
-
-    :param schid:
-    :param command:
-    :param name:
-    :return:
-    """
-    # ts3lib.requestServerVariables(schid)
-    (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
-    # strange = False
-    # for var in [cmdblock, ipblock, afreduce]:
-        # if not var or var < 0 or var == "": strange = True
-    # if err != ts3defines.ERROR_ok or strange:
-        # ts3lib.requestServerVariables(schid)
-        # (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
-    interval = round(1000/((afreduce/command)))
-    ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command), command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
-    return interval
 
 # Network #
 def getFile(url):
@@ -595,6 +608,12 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
 # DEFINES #
 
 dlpath = ""
+
+class ServerInstanceType(object):
+    VANILLA = 0
+    SDK = 1
+    TEASPEAK = 2
+    UNKNOWN = 3
 
 class AntiFloodPoints(object):
     AUTH = 0

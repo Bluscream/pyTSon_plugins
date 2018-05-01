@@ -264,7 +264,7 @@
      <item>
       <widget class="QPushButton" name="btn_reasons">
        <property name="text">
-        <string>Reasons</string>
+        <string>Reasons &gt;</string>
        </property>
       </widget>
      </item>
