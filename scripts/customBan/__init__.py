@@ -3,10 +3,11 @@ from pluginhost import PluginHost
 from ts3plugin import ts3plugin
 from ts3client import CountryFlags
 from os import path
-from json import loads
+from json import loads, dumps
 from datetime import datetime
 from pytsonui import setupUi
 from getvalues import getValues, ValueType
+from collections import OrderedDict
 from PythonQt.QtGui import QDialog, QComboBox
 from PythonQt.QtCore import Qt, QUrl
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
@@ -80,19 +81,24 @@ class customBan(ts3plugin):
         del self.clid
 
     def loadTemplates(self, reply):
-        data = reply.readAll().data().decode('utf-8')
-        self.templates = loads(data)
-        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ban templates:", self.templates)
+        try:
+            data = reply.readAll().data().decode('utf-8')
+            self.templates = loads(data, object_pairs_hook=OrderedDict)
+            print(self.templates)
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ban templates:", self.templates)
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def loadWhitelist(self, reply):
-        data = reply.readAll().data().decode('utf-8')
-        self.whitelist = []
-        pat_ipv4 = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
-        for line in data.splitlines():
-            if re.match(pat_ipv4, line): self.whitelist.append(line.strip())
-            else: print(self.name,">",line,"is not a valid IP! Not adding to whitelist.")
-        # self.whitelist = [s.strip() for s in data.splitlines()]
-        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ip whitelist:", self.whitelist)
+        try:
+            data = reply.readAll().data().decode('utf-8')
+            self.whitelist = []
+            pat_ipv4 = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
+            for line in data.splitlines():
+                if re.match(pat_ipv4, line): self.whitelist.append(line.strip())
+                else: print(self.name,">",line,"is not a valid IP! Not adding to whitelist.")
+            # self.whitelist = [s.strip() for s in data.splitlines()]
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ip whitelist:", self.whitelist)
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
 class BanDialog(QDialog):
     def __init__(self, script, schid, clid, uid, name, ip, parent=None):
@@ -108,7 +114,7 @@ class BanDialog(QDialog):
             self.whitelist = script.whitelist
             self.name = script.name
             self.setup(script, schid, clid, uid, name, ip)
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def setup(self, script, schid, clid, uid, name, ip):
         url = script.cfg.getboolean("general", "ipapi")
@@ -166,7 +172,9 @@ class BanDialog(QDialog):
             ip = self.txt_ip.text if self.grp_ip.isChecked() else ""
             name = self.txt_name.text if self.grp_name.isChecked() else ""
             uid = self.txt_uid.text if self.grp_uid.isChecked() else ""
-            reason = self.box_reason.currentText # text
+            reason = self.box_reason.currentText
+            if reason[0].isdigit():
+                reason = "§" + reason
             duration = self.int_duration.value
             if ip:
                 check = True

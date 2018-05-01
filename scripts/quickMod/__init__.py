@@ -129,9 +129,14 @@ class quickMod(ts3plugin):
         if msg: ts3lib.requestClientPoke(schid, self.last_joined_channel, msg)
         # ts3lib.requestClientKickFromChannel(schid, clid, msg)
 
+    def banReason(self):
+        reason = self.cfg.get("ban", "reason")
+        if reason[0].isdigit():
+            reason = "§" + reason
+        return reason
 
     def banUID(self, schid, uid):
-        ts3lib.banadd(schid, "", "", uid, self.cfg.getint("ban", "duration"), self.cfg.get("ban", "reason"))
+        ts3lib.banadd(schid, "", "", uid, self.cfg.getint("ban", "duration"), self.banReason())
         print("banned uid",uid)
 
     def banIP(self, schid, ip):
@@ -143,7 +148,7 @@ class quickMod(ts3plugin):
             if len(whitelist) > 1:
                 if ip in whitelist: ts3lib.printMessageToCurrentTab("{}: [color=red]Not banning whitelisted IP [b]{}".format(self.name, ip)); return
             else: ts3lib.printMessageToCurrentTab("{}: \"Custom Ban\"'s IP Whitelist faulty, please check!".format(self.name)); return
-        ts3lib.banadd(schid, ip, "", "", self.cfg.getint("ban", "duration"), self.cfg.get("ban", "reason"))
+        ts3lib.banadd(schid, ip, "", "", self.cfg.getint("ban", "duration"), self.banReason())
         print("banned ip",ip)
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
