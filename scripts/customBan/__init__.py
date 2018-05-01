@@ -173,7 +173,7 @@ class BanDialog(QDialog):
         try:
             if not hasattr(self, "nwmc_ip"): self.disableISP(); return
             if not text: self.disableISP(); return
-            if len(text) < 7: return
+            if len(text) < 7: self.disableISP(); return
             if not re.match('^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', text): self.disableISP(); return
             if text.strip() in ["127.0.0.1", "0.0.0.0", "255.255.255"]: self.disableISP(); return
             self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
