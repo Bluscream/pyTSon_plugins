@@ -8,11 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/ban.ui" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/ban.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -95,8 +92,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="113" column="39" lean-forward="true" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="39" />
+            <state relative-caret-position="558">
+              <caret line="190" column="47" selection-start-line="190" selection-start-column="47" selection-end-line="190" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -129,11 +126,11 @@
       <find>print</find>
       <find>onserver</find>
       <find>createreturn</find>
-      <find>commandKeyword = &quot;</find>
+      <find />
       <find>PluginHost</find>
       <find>ts3SessionHost</find>
       <find>menuen</find>
-      <find>suid) =</find>
+      <find />
       <find>.connect(&quot;</find>
       <find>requestSetClientChannelGroup</find>
       <find>VIRTUALSERVER_DEFAULT_CHANNEL_GROUP</find>
@@ -270,7 +267,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="502" />
     <option name="y" value="-8" />
     <option name="width" value="1450" />
@@ -648,13 +645,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00242" summary=":thinking:">
-      <created>1523934605211</created>
-      <option name="number" value="00242" />
-      <option name="presentableId" value="LOCAL-00242" />
-      <option name="project" value="LOCAL" />
-      <updated>1523934605211</updated>
-    </task>
     <task id="LOCAL-00243" summary=":thinking:">
       <created>1523952264906</created>
       <option name="number" value="00243" />
@@ -991,7 +981,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525151670728</updated>
     </task>
-    <option name="localTasksCounter" value="291" />
+    <task id="LOCAL-00291" summary=":thinking:">
+      <created>1525153943389</created>
+      <option name="number" value="00291" />
+      <option name="presentableId" value="LOCAL-00291" />
+      <option name="project" value="LOCAL" />
+      <updated>1525153943389</updated>
+    </task>
+    <option name="localTasksCounter" value="292" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1621,8 +1618,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="113" column="39" lean-forward="true" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="39" />
+        <state relative-caret-position="558">
+          <caret line="190" column="47" selection-start-line="190" selection-start-column="47" selection-end-line="190" selection-end-column="47" />
         </state>
       </provider>
     </entry>

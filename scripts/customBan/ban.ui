@@ -247,7 +247,7 @@
      <item>
       <widget class="QPushButton" name="btn_ban">
        <property name="styleSheet">
-        <string notr="true">background-color: red;</string>
+        <string notr="true">QPushButton{background-color:#E62727;}QPushButton:hover{background-color:red;}</string>
        </property>
        <property name="text">
         <string>Ban</string>

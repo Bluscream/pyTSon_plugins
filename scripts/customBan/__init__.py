@@ -188,7 +188,7 @@ class BanDialog(QDialog):
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_lst_reasons_itemDoubleClicked(self, item):
-        if not self.cfg.getboolean("last", "ban on doubleclick"): return
+        if not self.chk_doubleclick.isChecked(): return
         self.box_reason.setEditText(item.text())
         self.on_btn_ban_clicked()
 
