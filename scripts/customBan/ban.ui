@@ -283,6 +283,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QCheckBox" name="chk_keep">
+       <property name="text">
+        <string>Keep</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
