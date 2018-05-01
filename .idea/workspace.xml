@@ -7,12 +7,8 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py" line="84" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking: use QHostAddress">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/ban.ui" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/ban.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -91,8 +87,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="78" selection-start-line="78" selection-end-line="78" />
+            <state relative-caret-position="558">
+              <caret line="175" column="29" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="29" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -332,7 +328,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="last.edited.regexp" value="Sample Text" />
+    <property name="last.edited.regexp" value="1.1.1.999" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/635bjRmC.ini" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="options.lastSelected" value="editor.preferences.smartKeys" />
@@ -643,20 +639,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00249" summary=":thinking:">
-      <created>1524156035388</created>
-      <option name="number" value="00249" />
-      <option name="presentableId" value="LOCAL-00249" />
-      <option name="project" value="LOCAL" />
-      <updated>1524156035389</updated>
-    </task>
-    <task id="LOCAL-00250" summary=":thinking:">
-      <created>1524157068764</created>
-      <option name="number" value="00250" />
-      <option name="presentableId" value="LOCAL-00250" />
-      <option name="project" value="LOCAL" />
-      <updated>1524157068779</updated>
     </task>
     <task id="LOCAL-00251" summary=":thinking:">
       <created>1524160395212</created>
@@ -987,7 +969,21 @@
       <option name="project" value="LOCAL" />
       <updated>1525162137863</updated>
     </task>
-    <option name="localTasksCounter" value="298" />
+    <task id="LOCAL-00298" summary=":thinking: added getServerType and ServerInstanceType">
+      <created>1525174152684</created>
+      <option name="number" value="00298" />
+      <option name="presentableId" value="LOCAL-00298" />
+      <option name="project" value="LOCAL" />
+      <updated>1525174152684</updated>
+    </task>
+    <task id="LOCAL-00299" summary=":thinking: use QHostAddress">
+      <created>1525175107490</created>
+      <option name="number" value="00299" />
+      <option name="presentableId" value="LOCAL-00299" />
+      <option name="project" value="LOCAL" />
+      <updated>1525175107490</updated>
+    </task>
+    <option name="localTasksCounter" value="300" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1001,7 +997,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32752994" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3224401" />
@@ -1140,8 +1135,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="added base64 stuff to the chatbot" />
-    <MESSAGE value="fixed all obvious errors" />
     <MESSAGE value="added command to list all queries on demand ^^" />
     <MESSAGE value="fixed serverlist only showing ~10 servers + added alternate row colors." />
     <MESSAGE value=":thinking: it twerks! yay" />
@@ -1165,7 +1158,9 @@
     <MESSAGE value=":thinking: removed stuff that didnt belong here+added readmes for scripts" />
     <MESSAGE value=":thinking:" />
     <MESSAGE value=":thinking: added keep checkbox to custom ban dialog" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking: added keep checkbox to custom ban dialog" />
+    <MESSAGE value=":thinking: added getServerType and ServerInstanceType" />
+    <MESSAGE value=":thinking: use QHostAddress" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking: use QHostAddress" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1623,8 +1618,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        <state relative-caret-position="558">
+          <caret line="175" column="29" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="29" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
