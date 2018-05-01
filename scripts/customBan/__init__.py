@@ -31,8 +31,8 @@ class customBan(ts3plugin):
     ini = "%s/config.ini"%path
     dlg = None
     cfg = ConfigParser()
-    cfg["general"] = { "template": "", "whitelist": "", "ipapi": "True" }
-    cfg["last"] = { "ip": "False", "name": "False", "uid": "True", "reason": "", "duration": "0", "expanded": "False", "height": "" }
+    cfg["general"] = { "template": "", "whitelist": "", "ipapi": "True" , "stylesheet": "alternate-background-color: white;background-color: black;"}
+    cfg["last"] = { "ip": "False", "name": "False", "uid": "True", "reason": "", "duration": "0", "expanded": "False", "height": "", "alternate": "False", "ban on doubleclick": "False" }
     templates = {}
     whitelist = ["127.0.0.1"]
 
@@ -112,6 +112,10 @@ class BanDialog(QDialog):
             height = script.cfg.get("last", "height")
             if height: self.resize(self.width, int(height))
             else: self.disableReasons()
+            alt = script.cfg.getboolean("last", "alternate")
+            if alt: self.chk_alternate.setChecked(True)
+            dblclick = script.cfg.getboolean("last", "ban on doubleclick")
+            if dblclick: self.chk_doubleclick.setChecked(True)
             self.setup(script, schid, clid, uid, name, ip)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -135,25 +139,23 @@ class BanDialog(QDialog):
         self.box_reason.setEditText(script.cfg.get("last", "reason")) # setItemText(0, )
         self.int_duration.setValue(script.cfg.getint("last", "duration"))
 
-    def disableReasons(self, enabled=False):
-        self.lst_reasons.setVisible(enabled)
-        self.line.setVisible(enabled)
-        if enabled:
+    def disableReasons(self, enable=False):
+        for item in [self.lst_reasons,self.line,self.chk_alternate,self.chk_doubleclick]:
+            item.setVisible(enable)
+        if enable:
             self.btn_reasons.setText("Reasons <")
-            self.setFixedWidth(675)
-            # self.resize(675, self.height)
+            self.setFixedWidth(675) # self.resize(675, self.height)
         else:
             self.btn_reasons.setText("Reasons >")
-            self.setFixedWidth(320)
-            # self.resize(320, self.height)
+            self.setFixedWidth(320) # self.resize(320, self.height)
 
     def disableISP(self, enable=False):
-        try:
-            self.lbl_isp.setVisible(enable)
-            self.txt_isp.setVisible(enable)
-            self.lbl_flag.setVisible(enable)
-            self.txt_loc.setVisible(enable)
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);
+        for item in [self.lbl_isp,self.txt_isp,self.lbl_flag,self.txt_loc]:
+            item.setVisible(enable)
+
+    def disableAlt(self, enable=False):
+        self.lst_reasons.setAlternatingRowColors(enable)
+        self.lst_reasons.setStyleSheet(self.cfg.get("general", "stylesheet") if enable else "")
 
     def checkIP(self, reply):
         try:
@@ -186,9 +188,12 @@ class BanDialog(QDialog):
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_lst_reasons_itemDoubleClicked(self, item):
-        return # Remove this line to enable doubleclick ban
+        if not self.cfg.getboolean("last", "ban on doubleclick"): return
         self.box_reason.setEditText(item.text())
         self.on_btn_ban_clicked()
+
+    def on_chk_alternate_toggled(self, enabled):
+        self.disableAlt(enabled)
 
     def on_btn_ban_clicked(self):
         try:
@@ -214,7 +219,9 @@ class BanDialog(QDialog):
                 "reason": reason,
                 "duration": str(duration),
                 "expanded": str(self.lst_reasons.isVisible()),
-                "height": str(self.height)
+                "height": str(self.height),
+                "alternate": str(self.chk_alternate.isChecked()),
+                "ban on doubleclick": str(self.chk_doubleclick.isChecked())
             }
             self.close()
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
@@ -222,6 +229,8 @@ class BanDialog(QDialog):
     def on_btn_cancel_clicked(self):
         self.cfg.set("last", "expanded", str(self.lst_reasons.isVisible()))
         self.cfg.set("last", "height", str(self.height))
+        self.cfg.set("last", "alternate", str(self.chk_alternate.isChecked()))
+        self.cfg.set("last", "ban on doubleclick", str(self.chk_doubleclick.isChecked()))
         self.close()
 
     def on_btn_reasons_clicked(self):

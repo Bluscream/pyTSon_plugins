@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>675</width>
+    <width>725</width>
     <height>349</height>
    </rect>
   </property>
@@ -213,6 +213,18 @@
          <height>0</height>
         </size>
        </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::DoubleClicked</set>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::Adjust</enum>
+       </property>
+       <property name="modelColumn">
+        <number>0</number>
+       </property>
+       <property name="selectionRectVisible">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
     </layout>
@@ -253,6 +265,20 @@
       <widget class="QPushButton" name="btn_reasons">
        <property name="text">
         <string>Reasons</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chk_alternate">
+       <property name="text">
+        <string>Colors</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chk_doubleclick">
+       <property name="text">
+        <string>Doubleclick</string>
        </property>
       </widget>
      </item>
