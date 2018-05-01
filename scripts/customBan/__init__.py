@@ -8,7 +8,7 @@ from datetime import datetime
 from pytsonui import setupUi
 from getvalues import getValues, ValueType
 from collections import OrderedDict
-from PythonQt.QtGui import QDialog, QComboBox
+from PythonQt.QtGui import QDialog, QComboBox, QListWidget, QListWidgetItem
 from PythonQt.QtCore import Qt, QUrl
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from bluscream import saveCfg, loadCfg, timestamp, getScriptPath, confirm #, percent
@@ -31,14 +31,8 @@ class customBan(ts3plugin):
     ini = "%s/config.ini"%path
     dlg = None
     cfg = ConfigParser()
-    cfg["general"] = { "template": "", "whitelist": "", "ipapi": "True" } # , "http://ip-api.com/json/{ip}"
-    cfg["last"] = {
-        "ip": "False",
-        "name": "False",
-        "uid": "True",
-        "reason": "",
-        "duration": "0"
-    }
+    cfg["general"] = { "template": "", "whitelist": "", "ipapi": "True" }
+    cfg["last"] = { "ip": "False", "name": "False", "uid": "True", "reason": "", "duration": "0", "expanded": "False", "height": "" }
     templates = {}
     whitelist = ["127.0.0.1"]
 
@@ -113,6 +107,11 @@ class BanDialog(QDialog):
             self.templates = script.templates
             self.whitelist = script.whitelist
             self.name = script.name
+            if script.cfg.getboolean("last", "expanded"):
+                self.disableReasons(True)
+            height = script.cfg.get("last", "height")
+            if height: self.resize(self.width, int(height))
+            else: self.disableReasons()
             self.setup(script, schid, clid, uid, name, ip)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -130,9 +129,23 @@ class BanDialog(QDialog):
         if name: self.txt_name.setText(name)
         self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
         if uid: self.txt_uid.setText(uid)
-        for reason in script.templates: self.box_reason.addItem(reason)
+        for reason in script.templates:
+            self.lst_reasons.addItem(reason)
+            self.box_reason.addItem(reason)
         self.box_reason.setEditText(script.cfg.get("last", "reason")) # setItemText(0, )
         self.int_duration.setValue(script.cfg.getint("last", "duration"))
+
+    def disableReasons(self, enabled=False):
+        self.lst_reasons.setVisible(enabled)
+        self.line.setVisible(enabled)
+        if enabled:
+            self.btn_reasons.setText("Reasons <")
+            self.setFixedWidth(675)
+            # self.resize(675, self.height)
+        else:
+            self.btn_reasons.setText("Reasons >")
+            self.setFixedWidth(320)
+            # self.resize(320, self.height)
 
     def disableISP(self, enable=False):
         try:
@@ -158,6 +171,7 @@ class BanDialog(QDialog):
         try:
             if not hasattr(self, "nwmc_ip"): self.disableISP(); return
             if not text: self.disableISP(); return
+            if len(text) < 7: return
             if not re.match('^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', text): self.disableISP(); return
             if text.strip() in ["127.0.0.1", "0.0.0.0", "255.255.255"]: self.disableISP(); return
             self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
@@ -167,7 +181,16 @@ class BanDialog(QDialog):
         if not text in self.templates: return
         self.int_duration.setValue(self.templates[text])
 
-    def on_buttonBox_accepted(self):
+    def on_lst_reasons_itemClicked(self, item):
+        try: self.box_reason.setEditText(item.text())
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_lst_reasons_itemDoubleClicked(self, item):
+        return # Remove this line to enable doubleclick ban
+        self.box_reason.setEditText(item.text())
+        self.on_btn_ban_clicked()
+
+    def on_btn_ban_clicked(self):
         try:
             ip = self.txt_ip.text if self.grp_ip.isChecked() else ""
             name = self.txt_name.text if self.grp_name.isChecked() else ""
@@ -189,6 +212,19 @@ class BanDialog(QDialog):
                 "name": str(self.grp_name.isChecked()),
                 "uid": str(self.grp_uid.isChecked()),
                 "reason": reason,
-                "duration": str(duration)
+                "duration": str(duration),
+                "expanded": str(self.lst_reasons.isVisible()),
+                "height": str(self.height)
             }
+            self.close()
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_btn_cancel_clicked(self):
+        self.cfg.set("last", "expanded", str(self.lst_reasons.isVisible()))
+        self.cfg.set("last", "height", str(self.height))
+        self.close()
+
+    def on_btn_reasons_clicked(self):
+        if self.lst_reasons.isVisible():
+            self.disableReasons()
+        else: self.disableReasons(True)
