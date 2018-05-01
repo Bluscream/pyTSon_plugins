@@ -15,6 +15,7 @@ Some of the scripts i created require special dependencies. So if you want a scr
 8. Restart your Teamspeak client
 9. Open the pyTSon settings dialog via "Plugins" -> "pyTSon" -> "Settings" and check all the scripts that you want.
 10. Eventually the scripts have settings so make sure to adjust them by clicking on the cog wheel next to them!
+11. If any of the scripts use menuItems you need to restart your client after activating them before you can see their menus.
 
 ## Long Tutorial
 In case the short tutorial didn't work for you or if you want more indepth informations i provided a more detailed tutorial series on YouTube.
