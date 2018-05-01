@@ -15,6 +15,24 @@ The only current disatvantages are that it can't ban the HWID and can't find the
 ## Installation
 To install this script follow one of the tutorials on [this page](https://github.com/Bluscream/pyTSon_plugins/#short-tutorial).
 
+## Configuration
+Configuration is mostly done in the ban dialog itself but you have to set the template and whitelist URLs in `%APPDATA%\TS3Client\plugin\pyTSon\scripts\customBan\config.ini` manually (Make sure Teamspeak is closed beforehand!)
+
+## Templates
+The whitelist must be a newline seperated textfile, example
+```
+1.1.1.1
+1.1.1.2
+1.1.1.3
+```
+The ban template file must be valid json, example:
+```json
+{
+  "Soundboard": 604800 /*means 7 days*/,
+  "Ban Evading": 0 /*means infinite*/
+}
+```
+
 ## Deployment
 To deploy it to your moderators you should create a .ts3_plugin file including
 - [include/](https://github.com/Bluscream/pyTSon_plugins/tree/master/include)
