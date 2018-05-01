@@ -7,7 +7,7 @@ from ts3Ext import ts3SessionHost, logLevel
 class aaa_ts3Ext(ts3plugin):
     name = "aaa_ts3Ext"
     try: apiVersion = getCurrentApiVersion()
-    except: apiVersion = 21
+    except: apiVersion = 22
     requestAutoload = True
     version = "1.0"
     author = "Bluscream"
