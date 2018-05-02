@@ -9,8 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/quickMod/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickMod/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/quickMod/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickMod/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -68,7 +70,7 @@
       <file leaf-file-name="ts3defines.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="16626">
               <caret line="978" column="19" selection-start-line="978" selection-start-column="6" selection-end-line="978" selection-end-column="19" />
             </state>
           </provider>
@@ -77,18 +79,30 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="100" />
+            <state relative-caret-position="252">
+              <caret line="82" column="55" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="55" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/quickMod/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="323">
-                <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+                <caret line="19" selection-start-line="19" selection-end-line="19" />
               </first_editor>
               <second_editor />
             </state>
@@ -118,7 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.cfg</find>
       <find>print</find>
       <find>onserver</find>
       <find>createreturn</find>
@@ -148,6 +161,7 @@
       <find>match(</find>
       <find>print(</find>
       <find>revoke_last_talk_power</find>
+      <find>requestClientMove</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -251,10 +265,10 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
-        <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBan/README.md" />
         <option value="$PROJECT_DIR$/scripts/quickMod/README.md" />
+        <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
       </list>
     </option>
   </component>
@@ -645,20 +659,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00256" summary=":thinking:">
-      <created>1524377436969</created>
-      <option name="number" value="00256" />
-      <option name="presentableId" value="LOCAL-00256" />
-      <option name="project" value="LOCAL" />
-      <updated>1524377436970</updated>
-    </task>
-    <task id="LOCAL-00257" summary=":thinking:">
-      <created>1524456022463</created>
-      <option name="number" value="00257" />
-      <option name="presentableId" value="LOCAL-00257" />
-      <option name="project" value="LOCAL" />
-      <updated>1524456022464</updated>
-    </task>
     <task id="LOCAL-00258" summary=":thinking:">
       <created>1524456846045</created>
       <option name="number" value="00258" />
@@ -988,7 +988,21 @@
       <option name="project" value="LOCAL" />
       <updated>1525240513414</updated>
     </task>
-    <option name="localTasksCounter" value="305" />
+    <task id="LOCAL-00305" summary=":thinking:">
+      <created>1525241129771</created>
+      <option name="number" value="00305" />
+      <option name="presentableId" value="LOCAL-00305" />
+      <option name="project" value="LOCAL" />
+      <updated>1525241129772</updated>
+    </task>
+    <task id="LOCAL-00306" summary=":thinking:">
+      <created>1525242099490</created>
+      <option name="number" value="00306" />
+      <option name="presentableId" value="LOCAL-00306" />
+      <option name="project" value="LOCAL" />
+      <updated>1525242099491</updated>
+    </task>
+    <option name="localTasksCounter" value="307" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1011,7 +1025,7 @@
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.15938166" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1609808" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -1047,6 +1061,7 @@
       <window_info id="Designer" order="4" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
+      <window_info anchor="right" id="Properties" order="6" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -1054,7 +1069,7 @@
       <window_info anchor="bottom" id="Changes" order="7" weight="0.32900432" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="UI Designer" order="5" />
-      <window_info anchor="right" id="Properties" order="6" />
+      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Capture Analysis" order="9" />
@@ -1062,7 +1077,6 @@
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3224401" />
       <window_info anchor="bottom" x="1073" y="648" width="434" height="241" id="Documentation" order="15" sideWeight="0.4978678" weight="0.16213275" />
       <window_info active="true" anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.25" />
-      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info anchor="right" id="Data View" order="11" />
       <window_info id="Nl-Palette" order="2" />
@@ -1561,16 +1575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="205" column="40" selection-start-line="205" selection-start-column="28" selection-end-line="205" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1583,15 +1587,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="16626">
           <caret line="978" column="19" selection-start-line="978" selection-start-column="6" selection-end-line="978" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="100" />
         </state>
       </provider>
     </entry>
@@ -1623,9 +1620,26 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="323">
-            <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <caret line="19" selection-start-line="19" selection-end-line="19" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="82" column="55" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

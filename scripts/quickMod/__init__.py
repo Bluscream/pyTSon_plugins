@@ -37,6 +37,7 @@ class quickMod(ts3plugin):
     cfg["ban"] = { "duration": "2678400", "reason": "Ban Evading / Bannumgehung", "poke": "[color=red][b]You we're banned from the server!" }
     cfg["restrict"] = { "sgids": "", "reason": "Ban Evading / Bannumgehung", "poke": "" }
     cfg["restrict local"] = { "cids": "", "sgids": "", "cgid": "", "poke": "" }
+    moveBeforeBan = True
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -79,10 +80,9 @@ class quickMod(ts3plugin):
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
+        if self.moveBeforeBan: ts3lib.requestClientMove(schid, clid, 26, "")
         if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid)
-        else:
-            self.banIP(schid, ip)
-            self.banUID(schid, uid)
+        else: self.banIP(schid, ip); self.banUID(schid, uid)
 
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
         if clid == self.requestedIP:

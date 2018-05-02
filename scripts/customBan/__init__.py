@@ -33,6 +33,7 @@ class customBan(ts3plugin):
     cfg["last"] = { "ip": "False", "name": "False", "uid": "True", "reason": "", "duration": "0", "expanded": "False", "height": "", "alternate": "False", "ban on doubleclick": "False" }
     templates = {}
     whitelist = ["127.0.0.1"]
+    moveBeforeBan = True
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -103,6 +104,7 @@ class BanDialog(QDialog):
             self.templates = script.templates
             self.whitelist = script.whitelist
             self.name = script.name
+            self.clid = clid
             if script.cfg.getboolean("last", "expanded"):
                 self.disableReasons(True)
             height = script.cfg.get("last", "height")
@@ -204,6 +206,7 @@ class BanDialog(QDialog):
             if reason[0].isdigit():
                 reason = "§" + reason
             duration = self.int_duration.value
+            if self.moveBeforeBan: ts3lib.requestClientMove(self.schid, self.clid, 26, "")
             if ip:
                 check = True
                 if len(self.whitelist) < 1: check = confirm("Empty IP Whitelist!", "The IP whitelist is empty! Are you sure you want to ban \"{}\"?\n\nMake sure your whitelist URL\n{}\nis working!".format(ip, self.cfg.get("general", "whitelist")))
