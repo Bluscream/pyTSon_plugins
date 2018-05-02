@@ -43,4 +43,4 @@ and tell your mods they need to install the [latest pyTSon nightly](https://repo
 You can find an example [here](https://puu.sh/AdP2f/8f9123f539.ts3_plugin) (Just open it as ZIP archive)
 
 ## Showcase
-![](https://i.imgur.com/o1tlaF7.gif)
+! [](https://i.imgur.com/o1tlaF7.gif)
