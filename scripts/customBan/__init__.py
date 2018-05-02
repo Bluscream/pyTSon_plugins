@@ -18,7 +18,7 @@ class customBan(ts3plugin):
     try: apiVersion = pytson.getCurrentApiVersion()
     except: apiVersion = 22
     requestAutoload = True
-    version = "1"
+    version = "1.0"
     author = "Bluscream"
     description = "Requested by @mrcraigtunstall (217.61.6.128)\nExtended for @SossenSystems (ts3public.de)"
     offersConfigure = False
