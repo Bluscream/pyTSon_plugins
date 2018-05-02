@@ -9,10 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/quickMod/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickMod/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -88,8 +84,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+            <state relative-caret-position="408">
+              <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -659,13 +655,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00258" summary=":thinking:">
-      <created>1524456846045</created>
-      <option name="number" value="00258" />
-      <option name="presentableId" value="LOCAL-00258" />
-      <option name="project" value="LOCAL" />
-      <updated>1524456846046</updated>
-    </task>
     <task id="LOCAL-00259" summary=":thinking:">
       <created>1524560516734</created>
       <option name="number" value="00259" />
@@ -1002,7 +991,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525242099491</updated>
     </task>
-    <option name="localTasksCounter" value="307" />
+    <task id="LOCAL-00307" summary=":thinking:">
+      <created>1525283246755</created>
+      <option name="number" value="00307" />
+      <option name="presentableId" value="LOCAL-00307" />
+      <option name="project" value="LOCAL" />
+      <updated>1525283246756</updated>
+    </task>
+    <option name="localTasksCounter" value="308" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1635,8 +1631,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+        <state relative-caret-position="408">
+          <caret line="93" column="24" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>

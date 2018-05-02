@@ -33,7 +33,6 @@ class customBan(ts3plugin):
     cfg["last"] = { "ip": "False", "name": "False", "uid": "True", "reason": "", "duration": "0", "expanded": "False", "height": "", "alternate": "False", "ban on doubleclick": "False" }
     templates = {}
     whitelist = ["127.0.0.1"]
-    moveBeforeBan = True
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -92,6 +91,7 @@ class customBan(ts3plugin):
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
 class BanDialog(QDialog):
+    moveBeforeBan = True
     def __init__(self, script, schid, clid, uid, name, ip, parent=None):
         try:
             super(QDialog, self).__init__(parent)
