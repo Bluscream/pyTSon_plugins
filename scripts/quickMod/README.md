@@ -1,6 +1,6 @@
 # Quick Moderation pyTSon script
 
-<div style="display:none!important">You can find a more recent version of this text [here](https://github.com/Bluscream/pyTSon_plugins/tree/master/scripts/quickMod)</div>
+<div>You can find a more recent version of this text [here](https://github.com/Bluscream/pyTSon_plugins/tree/master/scripts/quickMod) />
 
 This plugin allows you to set hotkeys for
 - Restrict the last user that joined your server
