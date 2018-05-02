@@ -18,12 +18,12 @@ class quickMod(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = [
-        ("restrict_last_joined_server", "Restrict the last user that joined your server."),
-        ("restrict_last_joined_channel", "Restrict the last user that joined your channel."),
-        ("ban_last_joined_server", "Bans the last user that joined your server."),
-        ("ban_last_joined_channel", "Bans the last user that joined your channel."),
-        ("revoke_last_talk_power", "Restrict the last user that got talk power in your channel."),
-        ("restrict_last_joined_channel_from_local_channels", "Gives the last user that joined your channel a cgid and sgid in certain channels.")
+        ("restrict_last_joined_server", "Restrict the last user that joined your server"),
+        ("restrict_last_joined_channel", "Restrict the last user that joined your channel"),
+        ("ban_last_joined_server", "Bans the last user that joined your server"),
+        ("ban_last_joined_channel", "Bans the last user that joined your channel"),
+        ("revoke_last_talk_power", "Revoke talk power from the last user that got TP in your channel"),
+        ("restrict_last_joined_channel_from_local_channels", "Give the last user that joined your channel a cgid and sgid in certain channels")
     ]
     last_joined_server = 0
     last_joined_channel = 0
@@ -144,7 +144,6 @@ class quickMod(ts3plugin):
         active = PluginHost.active
         if "Custom Ban" in active:
             whitelist = active["Custom Ban"].whitelist
-            print("whitelist",whitelist)
             if len(whitelist) > 1:
                 if ip in whitelist: ts3lib.printMessageToCurrentTab("{}: [color=red]Not banning whitelisted IP [b]{}".format(self.name, ip)); return
             else: ts3lib.printMessageToCurrentTab("{}: \"Custom Ban\"'s IP Whitelist faulty, please check!".format(self.name)); return
