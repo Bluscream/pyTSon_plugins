@@ -32,12 +32,19 @@ class customDisconnect(ts3plugin):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
         self.disconnect(schid, True if mID == 1 else False)
 
+    def menuCreated(self): print("test"); self.checkServer()
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber): self.checkServer(schid, newStatus)
-    def currentServerConnectionChanged(self, schid): self.checkServer(schid, ts3lib.getConnectionStatus(schid))
-    def checkServer(self, schid, status):
+    def currentServerConnectionChanged(self, schid): self.checkServer(schid)
+    def checkServer(self, schid=0, status=None):
+        print("schid:",schid,"status:",status)
+        if schid < 1: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        print("schid:",schid,"status:",status)
+        if status is None: status = ts3lib.getConnectionStatus(schid)
+        print("schid:",schid,"status:",status)
         if status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: status = True
         elif status == ts3defines.ConnectStatus.STATUS_DISCONNECTED: status = False
         else: return
+        print("schid:",schid,"status:",status)
         for menuItem in self.menuItems:
             try: ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, menuItem[1]), status)
             except: pass
