@@ -33,12 +33,14 @@ class customDisconnect(ts3plugin):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
         self.disconnect(schid, True if mID == 1 else False)
 
-    def menuCreated(self): print("test"); self.checkServer()
+    def menuCreated(self): self.checkServer()
     def currentServerConnectionChanged(self, schid):self.checkServer(schid)
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        print("schid:",schid,"self.schid:",self.schid,"status:",newStatus,"err:",errorNumber)
         if schid == self.schid:
             self.schid = 0
             ts3lib.destroyServerConnectionHandler(schid)
+            print("destroyed", schid)
         else: self.checkServer(schid, newStatus)
 
 
