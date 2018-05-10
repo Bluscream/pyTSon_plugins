@@ -36,11 +36,9 @@ class customDisconnect(ts3plugin):
     def menuCreated(self): self.checkServer()
     def currentServerConnectionChanged(self, schid):self.checkServer(schid)
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        print("schid:",schid,"self.schid:",self.schid,"status:",newStatus,"err:",errorNumber)
         if schid == self.schid:
             self.schid = 0
             ts3lib.destroyServerConnectionHandler(schid)
-            print("destroyed", schid)
         else: self.checkServer(schid, newStatus)
 
 
