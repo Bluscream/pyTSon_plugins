@@ -9,8 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -69,8 +67,8 @@
       <file leaf-file-name="ts3defines.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20538">
-              <caret line="978" column="19" selection-start-line="978" selection-start-column="6" selection-end-line="978" selection-end-column="19" />
+            <state relative-caret-position="21">
+              <caret line="727" column="6" selection-start-line="727" selection-start-column="6" selection-end-line="727" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -87,8 +85,20 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
+            <state relative-caret-position="710">
+              <caret line="68" column="56" selection-start-line="68" selection-start-column="56" selection-end-line="68" selection-end-column="56" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="689">
+              <caret line="52" column="47" lean-forward="true" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="47" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -131,7 +141,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>menuen</find>
       <find>suid) =</find>
       <find>.connect(&quot;</find>
       <find>requestSetClientChannelGroup</find>
@@ -161,6 +170,7 @@
       <find>setplugin</find>
       <find>created</find>
       <find>menuitemscr</find>
+      <find>singlesh</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -663,20 +673,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00262" summary=":thinking:">
-      <created>1524664483659</created>
-      <option name="number" value="00262" />
-      <option name="presentableId" value="LOCAL-00262" />
-      <option name="project" value="LOCAL" />
-      <updated>1524664483661</updated>
-    </task>
-    <task id="LOCAL-00263" summary=":thinking:">
-      <created>1524669298797</created>
-      <option name="number" value="00263" />
-      <option name="presentableId" value="LOCAL-00263" />
-      <option name="project" value="LOCAL" />
-      <updated>1524669298797</updated>
-    </task>
     <task id="LOCAL-00264" summary=":thinking:">
       <created>1524708745948</created>
       <option name="number" value="00264" />
@@ -1006,7 +1002,21 @@
       <option name="project" value="LOCAL" />
       <updated>1525986147453</updated>
     </task>
-    <option name="localTasksCounter" value="311" />
+    <task id="LOCAL-00311" summary=":thinking:">
+      <created>1525986419029</created>
+      <option name="number" value="00311" />
+      <option name="presentableId" value="LOCAL-00311" />
+      <option name="project" value="LOCAL" />
+      <updated>1525986419029</updated>
+    </task>
+    <task id="LOCAL-00312" summary=":thinking:">
+      <created>1525986827424</created>
+      <option name="number" value="00312" />
+      <option name="presentableId" value="LOCAL-00312" />
+      <option name="project" value="LOCAL" />
+      <updated>1525986827424</updated>
+    </task>
+    <option name="localTasksCounter" value="313" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1223,16 +1233,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/report/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="8" selection-start-column="8" selection-end-column="8" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1538,13 +1538,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20538">
-          <caret line="978" column="19" selection-start-line="978" selection-start-column="6" selection-end-line="978" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/quickMod/config.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1640,10 +1633,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="689">
+          <caret line="52" column="47" lean-forward="true" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="727" column="6" selection-start-line="727" selection-start-column="6" selection-end-line="727" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
+        <state relative-caret-position="710">
+          <caret line="68" column="56" selection-start-line="68" selection-start-column="56" selection-end-line="68" selection-end-column="56" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

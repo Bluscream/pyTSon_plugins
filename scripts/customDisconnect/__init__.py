@@ -1,5 +1,4 @@
 import ts3lib, ts3defines
-from ts3defines import ConnectStatus
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
 from PythonQt.Qt import QApplication
@@ -35,15 +34,20 @@ class customDisconnect(ts3plugin):
         self.disconnect(schid, True if mID == 1 else False)
 
     def menuCreated(self): print("test"); self.checkServer()
-    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber): self.checkServer(schid, newStatus)
-    def currentServerConnectionChanged(self, schid): self.checkServer(schid)
+    def currentServerConnectionChanged(self, schid):self.checkServer(schid)
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if schid == self.schid:
+            self.schid = 0
+            ts3lib.destroyServerConnectionHandler(schid)
+        else: self.checkServer(schid, newStatus)
+
+
     def checkServer(self, schid=0, status=None):
         if schid < 1: schid = ts3lib.getCurrentServerConnectionHandlerID()
         if status is None: (err, status) = ts3lib.getConnectionStatus(schid)
         if status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: status = True
         elif status == ts3defines.ConnectStatus.STATUS_DISCONNECTED: status = False
         else: return
-        if PluginHost.cfg.getboolean("general", "verbose"): print("schid:",schid,"status:",status)
         for menuItem in self.menuItems:
             try: ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, menuItem[1]), status)
             except: pass
@@ -61,7 +65,5 @@ class customDisconnect(ts3plugin):
         if status != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
         clipboard = QApplication.clipboard().text()
         msg = inputBox("Disconnect", "Message", clipboard)
+        if close_tab: self.schid = schid
         ts3lib.stopConnection(schid, msg if msg else "")
-        if close_tab: self.schid = schid; QTimer.singleShot(100, self.close_tab)
-
-    def close_tab(self): ts3lib.destroyServerConnectionHandler(self.schid); self.schid = 0
