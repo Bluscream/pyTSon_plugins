@@ -92,17 +92,22 @@ class quickMod(ts3plugin):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         if self.moveBeforeBan: ts3lib.requestClientMove(schid, clid, self.moveBeforeBan, "")
-        if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid)
-        else: self.banIP(schid, ip); self.banUID(schid, uid)
+        if not ip:
+            self.requestedIP = clid
+            ts3lib.requestConnectionInfo(schid, clid)
+        else:
+            self.banIP(schid, ip)
+            self.banUID(schid, uid)
 
-    def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
+    def onConnectionInfoEvent(self, schid, clid):
         if clid == self.requestedIP:
             self.requestedIP = 0
             (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
             (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
             self.banIP(schid, ip)
             self.banUID(schid, uid)
-            return
+
+    def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
         (err, ownID) = ts3lib.getClientID(schid)
         (err, cid) = ts3lib.getChannelOfClient(schid, clid)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
@@ -148,7 +153,6 @@ class quickMod(ts3plugin):
 
     def banUID(self, schid, uid):
         ts3lib.banadd(schid, "", "", uid, self.cfg.getint("ban", "duration"), self.banReason())
-        print("banned uid",uid)
 
     def banIP(self, schid, ip):
         if not ip: return
@@ -159,7 +163,6 @@ class quickMod(ts3plugin):
                 if ip in whitelist: ts3lib.printMessageToCurrentTab("{}: [color=red]Not banning whitelisted IP [b]{}".format(self.name, ip)); return
             else: ts3lib.printMessageToCurrentTab("{}: \"Custom Ban\"'s IP Whitelist faulty, please check!".format(self.name)); return
         ts3lib.banadd(schid, ip, "", "", self.cfg.getint("ban", "duration"), self.banReason())
-        print("banned ip",ip)
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         if schid != ts3lib.getCurrentServerConnectionHandlerID(): return

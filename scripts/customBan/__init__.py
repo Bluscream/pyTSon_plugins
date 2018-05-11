@@ -160,7 +160,9 @@ class BanDialog(QDialog):
 
     def checkIP(self, reply):
         try:
-            data = loads(reply.readAll().data().decode('utf-8'))
+            data = reply.readAll().data().decode('utf-8')
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"> checkIP() data:",data)
+            data = loads(data)
             if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Resolved IP ", self.txt_ip.text,":", data)
             if data["status"] != "success": self.disableISP(); return
             self.txt_isp.setText(data["isp"])
