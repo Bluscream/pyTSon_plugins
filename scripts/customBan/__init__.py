@@ -92,19 +92,18 @@ class customBan(ts3plugin):
 
 class BanDialog(QDialog):
     moveBeforeBan = True
+    clid = 0
     def __init__(self, script, schid, clid, uid, name, ip, parent=None):
         try:
             super(QDialog, self).__init__(parent)
             setupUi(self, "%s/ban.ui"%script.path)
             self.setAttribute(Qt.WA_DeleteOnClose)
-            self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
             self.cfg = script.cfg
             self.ini = script.ini
             self.schid = schid
             self.templates = script.templates
             self.whitelist = script.whitelist
             self.name = script.name
-            self.clid = clid
             if script.cfg.getboolean("last", "expanded"):
                 self.disableReasons(True)
             height = script.cfg.get("last", "height")
@@ -122,6 +121,8 @@ class BanDialog(QDialog):
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def setup(self, script, schid, clid, uid, name, ip):
+        self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
+        self.clid = clid
         url = script.cfg.getboolean("general", "ipapi")
         if url:
             self.nwmc_ip = QNetworkAccessManager()
