@@ -9,7 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/quickMod/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickMod/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -46,17 +46,26 @@
       <file leaf-file-name="ts3lib.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
+            <state relative-caret-position="1470">
               <caret line="77" column="80" selection-start-line="77" selection-start-column="39" selection-end-line="77" selection-end-column="80" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="668">
+              <caret line="169" column="66" selection-start-line="169" selection-start-column="66" selection-end-line="169" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="94" column="12" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="12" />
+            <state relative-caret-position="882">
+              <caret line="54" column="69" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="69" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -67,7 +76,7 @@
       <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1638">
+            <state relative-caret-position="1911">
               <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
             </state>
           </provider>
@@ -93,7 +102,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.connect(&quot;</find>
       <find>requestSetClientChannelGroup</find>
       <find>VIRTUALSERVER_DEFAULT_CHANNEL_GROUP</find>
       <find>chatbot</find>
@@ -123,6 +131,7 @@
       <find>menuitemscr</find>
       <find>singlesh</find>
       <find>intlist</find>
+      <find>PluginHost</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -221,7 +230,6 @@
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/customBan/README.md" />
         <option value="$PROJECT_DIR$/scripts/quickMod/README.md" />
-        <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
         <option value="$PROJECT_DIR$/scripts/customDisconnect/README.md" />
         <option value="$PROJECT_DIR$/scripts/autoServerGroup/README.md" />
@@ -230,6 +238,7 @@
         <option value="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoConnect/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
       </list>
     </option>
   </component>
@@ -259,6 +268,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -277,16 +297,11 @@
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="customBan" type="462c0819:PsiDirectoryNode" />
             </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
             <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="quickMod" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -613,20 +628,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00271" summary=":thinking:">
-      <created>1524726186134</created>
-      <option name="number" value="00271" />
-      <option name="presentableId" value="LOCAL-00271" />
-      <option name="project" value="LOCAL" />
-      <updated>1524726186134</updated>
-    </task>
-    <task id="LOCAL-00272" summary=":thinking:">
-      <created>1524817777197</created>
-      <option name="number" value="00272" />
-      <option name="presentableId" value="LOCAL-00272" />
-      <option name="project" value="LOCAL" />
-      <updated>1524817777198</updated>
     </task>
     <task id="LOCAL-00273" summary=":thinking:">
       <created>1524818100459</created>
@@ -957,7 +958,21 @@
       <option name="project" value="LOCAL" />
       <updated>1526038663305</updated>
     </task>
-    <option name="localTasksCounter" value="320" />
+    <task id="LOCAL-00320" summary=":thinking:">
+      <created>1526041926318</created>
+      <option name="number" value="00320" />
+      <option name="presentableId" value="LOCAL-00320" />
+      <option name="project" value="LOCAL" />
+      <updated>1526041926324</updated>
+    </task>
+    <task id="LOCAL-00321" summary=":thinking: added last_joined_channel_to_customBan and last_joined_server_to_customBan to quickMod">
+      <created>1526042960199</created>
+      <option name="number" value="00321" />
+      <option name="presentableId" value="LOCAL-00321" />
+      <option name="project" value="LOCAL" />
+      <updated>1526042960200</updated>
+    </task>
+    <option name="localTasksCounter" value="322" />
     <servers />
   </component>
   <component name="TodoView">
@@ -980,7 +995,7 @@
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.17377399" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.17537314" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -1016,7 +1031,6 @@
       <window_info id="Designer" order="4" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
-      <window_info anchor="right" id="Properties" order="6" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -1024,7 +1038,7 @@
       <window_info anchor="bottom" id="Changes" order="7" weight="0.32900432" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
+      <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Capture Analysis" order="9" />
@@ -1032,6 +1046,7 @@
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3224401" />
       <window_info anchor="bottom" x="1073" y="648" width="434" height="241" id="Documentation" order="15" sideWeight="0.4978678" weight="0.16213275" />
       <window_info active="true" anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.25" />
+      <window_info anchor="right" id="Theme Preview" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info anchor="right" id="Data View" order="11" />
       <window_info id="Nl-Palette" order="2" />
@@ -1042,7 +1057,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32752994" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="10" />
+      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info active="true" anchor="bottom" id="Floobits" order="14" sideWeight="0.49573562" visible="true" weight="0.32936078" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Version Control" order="16" sideWeight="0.5021322" side_tool="true" visible="true" weight="0.16213275" />
@@ -1110,7 +1125,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="added command to list all queries on demand ^^" />
     <MESSAGE value="fixed serverlist only showing ~10 servers + added alternate row colors." />
     <MESSAGE value=":thinking: it twerks! yay" />
     <MESSAGE value=":thinking: now with much ipinfo" />
@@ -1135,7 +1149,8 @@
     <MESSAGE value=":thinking: added getServerType and ServerInstanceType" />
     <MESSAGE value=":thinking: use QHostAddress" />
     <MESSAGE value=":thinking:" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking:" />
+    <MESSAGE value=":thinking: added last_joined_channel_to_customBan and last_joined_server_to_customBan to quickMod" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking: added last_joined_channel_to_customBan and last_joined_server_to_customBan to quickMod" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1503,13 +1518,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="689">
@@ -1539,7 +1547,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1638">
+        <state relative-caret-position="1911">
           <caret line="91" column="22" selection-start-line="91" selection-start-column="22" selection-end-line="91" selection-end-column="22" />
         </state>
       </provider>
@@ -1565,9 +1573,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
           <caret line="31" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1575,26 +1580,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="899">
           <caret line="58" column="48" selection-start-line="58" selection-start-column="48" selection-end-line="58" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
+        <state relative-caret-position="1470">
           <caret line="77" column="80" selection-start-line="77" selection-start-column="39" selection-end-line="77" selection-end-column="80" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="94" column="12" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="12" />
+        <state relative-caret-position="882">
+          <caret line="54" column="69" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="69" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="169" column="66" selection-start-line="169" selection-start-column="66" selection-end-line="169" selection-end-column="66" />
         </state>
       </provider>
     </entry>

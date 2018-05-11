@@ -163,8 +163,9 @@ class quickMod(ts3plugin):
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         if schid != ts3lib.getCurrentServerConnectionHandlerID(): return
-        if oldChannelID == 0: self.last_joined_server = clid
         (err, ownID) = ts3lib.getClientID(schid)
+        if clid == ownID: return
+        if oldChannelID == 0: self.last_joined_server = clid
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         if newChannelID == ownCID: self.last_joined_channel = clid
 
