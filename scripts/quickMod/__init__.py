@@ -23,7 +23,9 @@ class quickMod(ts3plugin):
         ("ban_last_joined_server", "Bans the last user that joined your server"),
         ("ban_last_joined_channel", "Bans the last user that joined your channel"),
         ("revoke_last_talk_power", "Revoke talk power from the last user that got TP in your channel"),
-        ("restrict_last_joined_channel_from_local_channels", "Give the last user that joined your channel a cgid and sgid in certain channels")
+        ("restrict_last_joined_channel_from_local_channels", "Give the last user that joined your channel a cgid and sgid in certain channels"),
+        ("last_joined_channel_to_customBan", "Gives the last user that joined your channel to the customBan dialog"),
+        ("last_joined_server_to_customBan", "Gives the last user that joined your server to the customBan dialog"),
     ]
     last_joined_server = 0
     last_joined_channel = 0
@@ -37,7 +39,7 @@ class quickMod(ts3plugin):
     cfg["ban"] = { "duration": "2678400", "reason": "Ban Evading / Bannumgehung", "poke": "[color=red][b]You we're banned from the server!" }
     cfg["restrict"] = { "sgids": "", "reason": "Ban Evading / Bannumgehung", "poke": "" }
     cfg["restrict local"] = { "cids": "", "sgids": "", "cgid": "", "poke": "" }
-    moveBeforeBan = True
+    moveBeforeBan = 26
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -76,11 +78,20 @@ class quickMod(ts3plugin):
             self.revokeTalkPower(schid, self.last_talk_power)
         elif keyword == "restrict_last_joined_channel_from_local_channels":
             self.restrictForeigners(schid, self.last_joined_channel)
+        elif keyword == "last_joined_channel_to_customBan":
+            self.toCustomBan(schid, self.last_joined_channel)
+        elif keyword == "last_joined_server_to_customBan":
+            self.toCustomBan(schid, self.last_joined_server)
+
+    def toCustomBan(self, schid, clid):
+        active = PluginHost.active
+        if not "Custom Ban" in active: return
+        active["Custom Ban"].onMenuItemEvent(schid, ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, clid)
 
     def banClient(self, schid, clid):
         (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        if self.moveBeforeBan: ts3lib.requestClientMove(schid, clid, 26, "")
+        if self.moveBeforeBan: ts3lib.requestClientMove(schid, clid, self.moveBeforeBan, "")
         if not ip: self.requestedIP = clid; ts3lib.requestConnectionInfo(schid, clid)
         else: self.banIP(schid, ip); self.banUID(schid, uid)
 
