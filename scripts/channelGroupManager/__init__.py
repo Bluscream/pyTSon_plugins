@@ -85,6 +85,7 @@ class channelGroupManager(ts3plugin):
             if schid in self.cgroups: del self.cgroups[schid]
 
     def onServerUpdatedEvent(self, schid):
+        return # TODO: Check
         if not self.requestedRVars: return
         self.requestedRVars = False
         (err, dcgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)

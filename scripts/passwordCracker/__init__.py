@@ -234,6 +234,7 @@ class passwordCracker(ts3plugin):
         self.cracking = False
 
     def onServerUpdatedEvent(self, schid):
+        return # TODO: Check
         if not self.requested: return
         self.requested = False
         self.interval = calculateInterval(schid, AntiFloodPoints.VERIFYCHANNELPASSWORD, self.name)

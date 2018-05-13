@@ -195,6 +195,7 @@ class info(ts3plugin):
         return name, val
 
     def onServerUpdatedEvent(self, schid):
+        return # TODO: Check
         if schid in self.requested: return
         self.requested.append(schid)
         ts3.requestInfoUpdate(schid, PluginItemType.PLUGIN_SERVER, schid)

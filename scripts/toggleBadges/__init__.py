@@ -51,6 +51,7 @@ class toggleBadges(ts3plugin):
         self.setRandomBadges()
 
     def onServerUpdatedEvent(self, schid):
+        return # TODO: Check
         if not self.requested: return
         self.requested = False
         self.timers[schid] = QTimer()
