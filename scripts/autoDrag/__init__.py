@@ -56,9 +56,7 @@ class autoDrag(ts3plugin):
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not schid in self.targets: return
         (err, ownID) = ts3lib.getClientID(schid)
-        print("test3")
         if clientID != ownID: return
-        print("test4")
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         # if newChannelID == ownCID: return
         delay = randint(self.delay[0], self.delay[1])
