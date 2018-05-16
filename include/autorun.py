@@ -139,13 +139,20 @@ schid = getCurrentServerConnectionHandlerID()
 if "aaa_ts3Ext" in PluginHost.active: ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
 else: ts3host = ts3Ext.ts3SessionHost(next(iter(PluginHost.active.values())))
 
-print('(pyTSon Console started at: {:%Y-%m-%d %H:%M:%S})'.format(datetime.now()))
+print('(pyTSon v{} on {} | Console started at: {:%Y-%m-%d %H:%M:%S})'.format(pytson.getVersion(),pytson.platformstr(),datetime.now()))
+print("ts3lib.getAppPath(): %s"%ts3lib.getAppPath())
+print("ts3lib.getConfigPath(): %s"%ts3lib.getConfigPath())
+print("ts3lib.getResourcesPath(): %s"%ts3lib.getResourcesPath())
+print("ts3lib.getPluginPath(): %s"%ts3lib.getPluginPath())
+print("pytson.getConfigPath(): %s"%pytson.getConfigPath())
+print("pytson.getPluginPath(): %s"%pytson.getPluginPath())
+
 for item in sys.path:
     print('"'+item+'"')
 print("")
 print(sys.flags)
-print("")
-print(sys.executable+" "+sys.platform+" "+sys.version+" API: "+str(sys.api_version))
+print("sys.executable: %s"%sys.executable)
+print("{} {} API: {}".format(sys.platform, sys.version, str(sys.api_version)))
 print("")
 
 class testClass(object):
