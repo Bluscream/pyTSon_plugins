@@ -36,10 +36,11 @@ class quickMod(ts3plugin):
     customBan = None
     ini = "%s/config.ini" % path
     cfg = ConfigParser()
-    cfg["ban"] = { "duration": "2678400", "reason": "Ban Evading / Bannumgehung", "poke": "[color=red][b]You we're banned from the server!" }
-    cfg["restrict"] = { "sgids": "", "reason": "Ban Evading / Bannumgehung", "poke": "" }
+    cfg["ban"] = { "duration": "2678400", "reason": "Ban Evading / Bannumgehung", "poke": "[color=red][b]You we're banned from the server!", "name duration ": 120 }
+    cfg["restrict"] = { "sgids": "", "poke": "" }
     cfg["restrict local"] = { "cids": "", "sgids": "", "cgid": "", "poke": "" }
     moveBeforeBan = 26
+    sgids = [8,42]
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -98,6 +99,9 @@ class quickMod(ts3plugin):
         else:
             self.banIP(schid, ip)
             self.banUID(schid, uid)
+            if self.cfg.getint("ban", "duration") != 0:
+                (err, name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                self.banName(schid, clid, name)
 
     def onConnectionInfoEvent(self, schid, clid):
         if clid == self.requestedIP:
@@ -106,6 +110,9 @@ class quickMod(ts3plugin):
             (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
             self.banIP(schid, ip)
             self.banUID(schid, uid)
+            if self.cfg.getint("ban", "duration") != 0:
+                (err, name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                self.banName(schid, clid, name)
 
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
         (err, ownID) = ts3lib.getClientID(schid)
@@ -164,13 +171,27 @@ class quickMod(ts3plugin):
             else: ts3lib.printMessageToCurrentTab("{}: \"Custom Ban\"'s IP Whitelist faulty, please check!".format(self.name)); return
         ts3lib.banadd(schid, ip, "", "", self.cfg.getint("ban", "duration"), self.banReason())
 
+    def banName(self, schid, target, name):
+        name_in_use = False
+        (err, clids) = ts3lib.getClientList(schid)
+        for clid in clids:
+            if clid == target: continue
+            (err, _name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            if name in _name: name_in_use = True
+        if not name_in_use: name = ".*{}.*".format(name)
+        print("inuse:", name_in_use, "name:",name)
+        ts3lib.banadd(schid, "", name, "", self.cfg.getint("ban", "name duration"), self.banReason())
+
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         if schid != ts3lib.getCurrentServerConnectionHandlerID(): return
         (err, ownID) = ts3lib.getClientID(schid)
         if clid == ownID: return
-        if oldChannelID == 0: self.last_joined_server = clid
-        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-        if newChannelID == ownCID: self.last_joined_channel = clid
+        (err, sgids) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+        sgids = intList(sgids)
+        if any(x in sgids for x in self.sgids):
+            if oldChannelID == 0: self.last_joined_server = clid
+            (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+            if newChannelID == ownCID: self.last_joined_channel = clid
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if returnCode == self.retcode: return True

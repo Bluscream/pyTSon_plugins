@@ -37,7 +37,7 @@ class mySupport(ts3plugin):
             "i_channel_needed_subscribe_power": 75,
             "i_channel_needed_description_view_power": 1,
             "i_channel_needed_permission_modify_power": 75,
-            "i_client_needed_talk_power": 1337,
+            # "i_client_needed_talk_power": 1337,
             "b_client_request_talker": 0
         }
     }
@@ -62,7 +62,7 @@ class mySupport(ts3plugin):
             if schid in self.schids: self.schids.remove(schid)
             if len(self.schids) < 1 and self.supchan:
                 with ts3.query.TS3ServerConnection("51.255.133.6", 1976) as ts3conn:
-                    err = ts3conn.query("login", client_login_name="bl", client_login_password="") # TODO: REMOVE BEFORE COMMIT
+                    err = ts3conn.query("login", client_login_name="bl", client_login_password="")# TODO: Remove before commit!
                     print("login:",err.all())
                     err = ts3conn.query("use", port=9987)
                     print("use:",err.all())
@@ -108,6 +108,7 @@ class mySupport(ts3plugin):
         ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_DESCRIPTION, self.supchan_props["description"])
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT, 1)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
+        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, 1337)
         ts3lib.flushChannelCreation(schid, self.mychan)
         self.waitforchannel = True
 
@@ -132,7 +133,7 @@ class mySupport(ts3plugin):
         self.checkChannel(schid)
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
-        if schid != self.schids[0]: return
+        if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
         if not self.supchan in [newChannelID, oldChannelID]: return
         (err, ownID) = ts3lib.getClientID(schid)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
@@ -142,17 +143,17 @@ class mySupport(ts3plugin):
         else: self.checkChannel(schid)
 
     def onClientMoveMovedEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
-        if schid != self.schids[0]: return
+        if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
         if self.supchan in [newChannelID, oldChannelID]: self.checkChannel(schid)
 
     def onClientKickFromChannelEvent(self, schid, clid, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
-        if schid != self.schids[0]: return
+        if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
         if self.supchan == oldChannelID: self.checkChannel(schid)
 
     def onClientKickFromServerEvent(self, schid, clid, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
-        if schid != self.schids[0]: return
+        if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
         if self.supchan == oldChannelID: self.checkChannel(schid)
 
     def onClientBanFromServerEvent(self, schid, clid, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, time, kickMessage):
-        if schid != self.schids[0]: return
+        if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
         if self.supchan == oldChannelID: self.checkChannel(schid)
