@@ -1,7 +1,7 @@
-import ts3lib, ts3defines, datetime
+import ts3lib, ts3defines, datetime, ts3
 from ts3plugin import ts3plugin, PluginHost
-from random import randint
-from bluscream import timestamp, clientURL, channelURL
+from PythonQt.QtCore import QTimer
+from bluscream import timestamp
 
 class mySupport(ts3plugin):
     name = "my Support"
@@ -15,6 +15,7 @@ class mySupport(ts3plugin):
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, "")]
     hotkeys = []
+    schid = 1
     schids = []
     waitforchannel = False
     suid = "9lBVIDJRSSgAGy+cWJgNlUQRd64="
@@ -51,14 +52,28 @@ class mySupport(ts3plugin):
         if menuItemID != 0 or atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
         print("schids:",self.schids); print("suid:",self.suid); print("mychan:",self.mychan); print("supchan:",self.supchan); print("myuid:",self.myuid)
         cid = self.getChannel(schid)
-        if cid: ts3lib.requestChannelDelete(schid, cid, True)
+        if not cid: return
+        ts3lib.requestChannelDelete(schid, cid, True)
+        self.supchan = 0
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.checkServer(schid)
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.schid = schid; QTimer.singleShot(10000, self.checkServer)
         elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             if schid in self.schids: self.schids.remove(schid)
+            if len(self.schids) < 1 and self.supchan:
+                with ts3.query.TS3ServerConnection("51.255.133.6", 1976) as ts3conn:
+                    err = ts3conn.query("login", client_login_name="bl", client_login_password="") # TODO: REMOVE BEFORE COMMIT
+                    print("login:",err.all())
+                    err = ts3conn.query("use", port=9987)
+                    print("use:",err.all())
+                    err = ts3conn.query("clientupdate", client_nickname="Bluscream")
+                    print("clientupdate client_nickname=Bluscream:",err.all())
+                    err = ts3conn.query("channeldelete", cid=self.supchan, force=1)
+                    print("channeldelete cid=%s force=1: %s"%(self.supchan, err.all()))
+                    self.supchan = 0
 
-    def checkServer(self, schid):
+    def checkServer(self, schid=None):
+        if not schid: schid = self.schid
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         (err, ownuid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if suid != self.suid: return
