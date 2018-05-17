@@ -187,11 +187,12 @@ class quickMod(ts3plugin):
         (err, ownID) = ts3lib.getClientID(schid)
         if clid == ownID: return
         (err, sgids) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        sgids = intList(sgids)
-        if any(x in sgids for x in self.sgids):
-            if oldChannelID == 0: self.last_joined_server = clid
-            (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-            if newChannelID == ownCID: self.last_joined_channel = clid
+        if sgids is not None:
+            sgids = intList(sgids)
+            if not any(x in sgids for x in self.sgids): return
+        if oldChannelID == 0: self.last_joined_server = clid
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        if newChannelID == ownCID: self.last_joined_channel = clid
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if returnCode == self.retcode: return True
