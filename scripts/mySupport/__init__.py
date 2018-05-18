@@ -140,7 +140,7 @@ class mySupport(ts3plugin):
             ts3lib.setChannelVariableAsInt(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.supchan_props["maxclients"])
             ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, "{} [OFFEN]".format(self.supchan_props["name"]))
             ts3lib.flushChannelUpdates(schid, self.supchan)
-            self.checkChannel(schid)
+            # self.checkChannel(schid)
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
