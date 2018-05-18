@@ -62,14 +62,10 @@ class mySupport(ts3plugin):
             if schid in self.schids: self.schids.remove(schid)
             if len(self.schids) < 1 and self.supchan:
                 with ts3.query.TS3ServerConnection("51.255.133.6", 1976) as ts3conn:
-                    err = ts3conn.query("login", client_login_name="bl", client_login_password="")# TODO: Remove before commit!
-                    print("login:",err.all())
-                    err = ts3conn.query("use", port=9987)
-                    print("use:",err.all())
-                    err = ts3conn.query("clientupdate", client_nickname="Bluscream")
-                    print("clientupdate client_nickname=Bluscream:",err.all())
-                    err = ts3conn.query("channeldelete", cid=self.supchan, force=1)
-                    print("channeldelete cid=%s force=1: %s"%(self.supchan, err.all()))
+                    ts3conn.query("login", client_login_name="bl", client_login_password="")# TODO: Remove before commit!
+                    ts3conn.query("use", port=9987)
+                    ts3conn.query("clientupdate", client_nickname="Bluscream")
+                    ts3conn.query("channeldelete", cid=self.supchan, force=1)
                     self.supchan = 0
 
     def checkServer(self, schid=None):
@@ -131,6 +127,20 @@ class mySupport(ts3plugin):
             (err, id) = ts3lib.getPermissionIDByName(schid, perm)
             ts3lib.requestChannelAddPerm(schid, cid, [id], [self.supchan_props["permissions"][perm]])
         self.checkChannel(schid)
+
+    def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue) :
+        if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
+        newValue = int(newValue)
+        if flag != ts3defines.ClientPropertiesRare.CLIENT_AWAY: return
+        if newValue == ts3defines.AwayStatus.AWAY_ZZZ:
+            ts3lib.setChannelVariableAsInt(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, 0)
+            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, "{} [GESCHLOSSEN]".format(self.supchan_props["name"]))
+            ts3lib.flushChannelUpdates(schid, self.supchan)
+        elif newValue == ts3defines.AwayStatus.AWAY_NONE:
+            ts3lib.setChannelVariableAsInt(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.supchan_props["maxclients"])
+            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, "{} [OFFEN]".format(self.supchan_props["name"]))
+            ts3lib.flushChannelUpdates(schid, self.supchan)
+            self.checkChannel(schid)
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return

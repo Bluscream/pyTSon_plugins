@@ -1,12 +1,10 @@
-import ts3lib, ts3defines, configparser #, spotilib, spotimeta
+import ts3lib, ts3defines, configparser, spotipy #, spotilib, spotimeta
 from ts3plugin import ts3plugin
 from os import path
 from pytsonui import setupUi
-from collections import OrderedDict
-from inspect import getmembers
-from datetime import datetime
 from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem
 from PythonQt.QtCore import Qt, QTimer
+from bluscream import timestamp
 
 
 class nowPlaying(ts3plugin):
@@ -31,9 +29,6 @@ class nowPlaying(ts3plugin):
     interval = 10000
     enabled = False
 
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
-
     def __init__(self):
         self.dlg = None
         if path.isfile(self.ini):
@@ -45,7 +40,7 @@ class nowPlaying(ts3plugin):
                 self.cfg.write(configfile)
         # self.timer.timeout.connect(self.tick)
         if self.cfg.getboolean('general', 'Debug'):
-            ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+            ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if not self.enabled: return
