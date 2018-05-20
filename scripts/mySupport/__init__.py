@@ -26,29 +26,29 @@ class mySupport(ts3plugin):
     cfg["general"] = {
         "suid": "9lBVIDJRSSgAGy+cWJgNlUQRd64=",
         "myuid": "e3dvocUFTE1UWIvtW8qzulnWErI=",
-        "mychan": 1272
+        "mychan": 0
     }
-    supchan_props = {
-        "name": "Warteraum",
+    chan = ConfigParser()
+    chan["props"] = {
+        "name": "Waiting For Support",
         "maxclients": 1,
         "codec": ts3defines.CodecType.CODEC_SPEEX_NARROWBAND,
         "codec_quality": 0,
-        "description": """Channel Owner: [URL=client://0/e3dvocUFTE1UWIvtW8qzulnWErI=~Bluscream]Bluscream[/URL][hr]
-[url=https://steamcommunity.com/profiles/76561198022446661][img]https://steamsignature.com/profile/german/76561198022446661.png[/img][/url]
-[url=steam://friends/add/76561198022446661]Add as friend[/url] | [url=https://steamcommunity.com/profiles/76561198022446661/games/?tab=all&games_in_common=1]Common games[/url] | [url=https://steamdb.info/calculator/76561198022446661/?cc=eu]Account Value[/url] | [url=https://steamcommunity.com/tradeoffer/new/?partner=62180933&token=fSMYHMGM]Trade[/url]""",
-        "permissions": {
-            "i_channel_needed_modify_power": 75,
-            "i_channel_needed_delete_power": 75,
-            "i_channel_needed_join_power": 1,
-            "i_channel_needed_subscribe_power": 75,
-            "i_channel_needed_description_view_power": 1,
-            "i_channel_needed_permission_modify_power": 75,
-            "b_client_request_talker": 0
-        }
+        "name open": "Waiting For Support [OPEN]",
+        "name closed": "Waiting For Support [CLOSED]",
+        "name in use": "Waiting For Support [IN USE]"
+    }
+    chan["permissions"] = {
+        "i_channel_needed_modify_power": 75,
+        "i_channel_needed_permission_modify_power": 75,
+        "i_channel_needed_delete_power": 75,
+        "i_channel_needed_subscribe_power": 75,
+        "b_client_request_talker": 0
     }
 
     def __init__(self):
         loadCfg(self.path+"/config.ini", self.cfg)
+        loadCfg(self.path+"/channel.ini", self.chan)
         self.checkServer(ts3lib.getCurrentServerConnectionHandlerID())
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
@@ -62,11 +62,14 @@ class mySupport(ts3plugin):
         self.supchan = 0
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.schid = schid; QTimer.singleShot(10000, self.checkServer)
+        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            self.schid = schid
+            QTimer.singleShot(10000, self.checkServer)
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab(self.name+"> Checking for channel in 10 seconds")
         elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             if schid in self.schids: self.schids.remove(schid)
             if len(self.schids) < 1 and self.supchan:
-                with ts3.query.TS3ServerConnection(self.cfg.get("serverquery","host"), self.cfg.getint("serverquery","port")) as ts3conn:
+                with ts3.query.TS3ServerConnection(self.cfg.get("serverquery","host"), self.cfg.getint("serverquery","qport")) as ts3conn:
                     err = ts3conn.query("login", client_login_name=self.cfg.get("serverquery","name"), client_login_password=self.cfg.get("serverquery","pw"))
                     print("[OUT] login client_login_name client_login_password [IN]",err.all())
                     err = ts3conn.query("use", port=self.cfg.getint("serverquery","port"))
@@ -81,17 +84,24 @@ class mySupport(ts3plugin):
         if not schid: schid = self.schid
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         (err, ownuid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        if suid != self.cfg.get("serverquery","suid"): return
-        if ownuid != self.cfg.get("serverquery","myuid"): return
+        if PluginHost.cfg.getboolean("general", "verbose"):
+            ts3lib.printMessageToCurrentTab(self.name+"> Checking for channel....")
+            print("suid:",suid,self.cfg.get("general","suid"))
+            print("myuid",ownuid,self.cfg.get("general","myuid"))
+        if suid != self.cfg.get("general","suid"): return
+        if ownuid != self.cfg.get("general","myuid"): return
         self.toggleChannel(schid)
         self.schids.append(schid)
 
     def toggleChannel(self, schid):
         supchan = self.getChannel(schid)
         if supchan:
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Channel #%s does exist"%supchan)
             self.supchan = supchan
             self.getChannel(schid)
-        else: self.createChannel(schid)
+        else:
+            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Channel does not exist, creating...")
+            self.createChannel(schid)
 
     def getChannel(self, schid):
         (err, cids) = ts3lib.getChannelList(schid)
@@ -99,42 +109,42 @@ class mySupport(ts3plugin):
             (err, perm) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
             if not perm: continue
             (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
-            if not self.supchan_props["name"] in name: continue
+            if not self.chan.get("props", "name") in name: continue
             (err, parent) = ts3lib.getParentChannelOfChannel(schid, cid)
-            if not parent == self.cfg.getint("serverquery","mychan"): continue
+            if not parent == self.cfg.getint("general","mychan"): continue
             return cid
         return 0
 
     def createChannel(self, schid):
-        ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_NAME, self.supchan_props["name"])
-        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.supchan_props["maxclients"])
-        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC, self.supchan_props["codec"])
-        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC_QUALITY, self.supchan_props["codec_quality"])
-        ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_DESCRIPTION, self.supchan_props["description"])
+        ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_NAME, self.chan.get("props", "name"))
+        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.chan.getint("props", "maxclients"))
+        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC, self.chan.getint("props", "codec"))
+        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC_QUALITY, self.chan.getint("props", "codec_quality"))
+        ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_DESCRIPTION, self.chan.get("props", "description"))
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT, 1)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, 1337)
-        ts3lib.flushChannelCreation(schid, self.cfg.getint("serverquery","mychan"))
+        ts3lib.flushChannelCreation(schid, self.cfg.getint("general","mychan"))
         self.waitforchannel = True
 
     def checkChannel(self, schid):
         (err, clients) = ts3lib.getChannelClientList(schid, self.supchan); clients = len(clients)
         (err, maxclients) = ts3lib.getChannelVariable(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
         if clients < maxclients:
-            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, "{} [OFFEN]".format(self.supchan_props["name"]))
+            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME,self.chan.get("props", "name open"))
         elif clients >= maxclients:
-            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, "{} [BESETZT]".format(self.supchan_props["name"]))
+            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, self.chan.get("props", "name in use"))
         else: return
         ts3lib.flushChannelUpdates(schid, self.supchan)
 
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
         if not self.waitforchannel: return
-        if not channelParentID == self.cfg.getint("serverquery","mychan"): return
+        if not channelParentID == self.cfg.getint("general","mychan"): return
         self.waitforchannel = False
         self.supchan = cid
-        for perm in self.supchan_props["permissions"]:
-            (err, id) = ts3lib.getPermissionIDByName(schid, perm)
-            ts3lib.requestChannelAddPerm(schid, cid, [id], [self.supchan_props["permissions"][perm]])
+        for (key, val) in self.chan.items("permissions"):
+            (err, id) = ts3lib.getPermissionIDByName(schid, key)
+            ts3lib.requestChannelAddPerm(schid, cid, [id], [int(val)])
         self.checkChannel(schid)
 
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue) :
@@ -143,11 +153,11 @@ class mySupport(ts3plugin):
         newValue = int(newValue)
         if newValue == ts3defines.AwayStatus.AWAY_ZZZ:
             ts3lib.setChannelVariableAsInt(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, 0)
-            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, "{} [GESCHLOSSEN]".format(self.supchan_props["name"]))
+            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, self.chan.get("props", "name closed"))
             ts3lib.flushChannelUpdates(schid, self.supchan)
         elif newValue == ts3defines.AwayStatus.AWAY_NONE:
-            ts3lib.setChannelVariableAsInt(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.supchan_props["maxclients"])
-            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, "{} [OFFEN]".format(self.supchan_props["name"]))
+            ts3lib.setChannelVariableAsInt(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.chan.getint("props", "maxclients"))
+            ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, self.chan.get("props", "name open"))
             ts3lib.flushChannelUpdates(schid, self.supchan)
             # self.checkChannel(schid)
 
@@ -156,7 +166,7 @@ class mySupport(ts3plugin):
         if not self.supchan in [newChannelID, oldChannelID]: return
         (err, ownID) = ts3lib.getClientID(schid)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-        mychan = self.cfg.getint("serverquery","mychan")
+        mychan = self.cfg.getint("general","mychan")
         (err, clients) = ts3lib.getChannelClientList(schid, mychan); clients = len(clients)
         if ownCID == mychan and clients == 1:
             ts3lib.requestClientMove(schid, clid, mychan, "")
