@@ -62,10 +62,10 @@ class mySupport(ts3plugin):
             if schid in self.schids: self.schids.remove(schid)
             if len(self.schids) < 1 and self.supchan:
                 with ts3.query.TS3ServerConnection("51.255.133.6", 1976) as ts3conn:
-                    ts3conn.query("login", client_login_name="bl", client_login_password="")# TODO: Remove before commit!
-                    ts3conn.query("use", port=9987)
-                    ts3conn.query("clientupdate", client_nickname="Bluscream")
-                    ts3conn.query("channeldelete", cid=self.supchan, force=1)
+                    err = ts3conn.query("login", client_login_name="bl", client_login_password="") # TODO: Remove before commit!
+                    err = ts3conn.query("use", port=9987)
+                    err = ts3conn.query("clientupdate", client_nickname="Bluscream")
+                    err = ts3conn.query("channeldelete", cid=self.supchan, force=1)
                     self.supchan = 0
 
     def checkServer(self, schid=None):
@@ -130,8 +130,8 @@ class mySupport(ts3plugin):
 
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue) :
         if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
-        newValue = int(newValue)
         if flag != ts3defines.ClientPropertiesRare.CLIENT_AWAY: return
+        newValue = int(newValue)
         if newValue == ts3defines.AwayStatus.AWAY_ZZZ:
             ts3lib.setChannelVariableAsInt(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, 0)
             ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, "{} [GESCHLOSSEN]".format(self.supchan_props["name"]))

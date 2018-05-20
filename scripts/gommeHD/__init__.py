@@ -46,6 +46,7 @@ Add as friend: [url]steam://friends/add/76561198022446661[/url]
 Common games: [url]https://steamcommunity.com/profiles/76561198022446661/games/?tab=all&games_in_common=1[/url]
 Account Value: [url]https://steamdb.info/calculator/76561198022446661/?cc=eu[/url]
 Trade URL: [url]https://steamcommunity.com/tradeoffer/new/?partner=62180933&token=fSMYHMGM[/url]
+Live Broadcast: [url]https://steamcommunity.com/broadcast/watch/76561198022446661[/url]
 """
     avatarmsg = """Hey {nick}, es wäre voll knorke von dir wenn du mir erlauben würdest dein Premium zu benutzen damit ich mir nen avatar setzen kann.
 Dabei gehst du keine scam Gefahr ein weil du mir das jederzeit wieder wegnehmen kannst auch wenn ich schon disconnected bin (frag jeden das ist so)
