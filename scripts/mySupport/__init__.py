@@ -70,14 +70,10 @@ class mySupport(ts3plugin):
             if schid in self.schids: self.schids.remove(schid)
             if len(self.schids) < 1 and self.supchan:
                 with ts3.query.TS3ServerConnection(self.cfg.get("serverquery","host"), self.cfg.getint("serverquery","qport")) as ts3conn:
-                    err = ts3conn.query("login", client_login_name=self.cfg.get("serverquery","name"), client_login_password=self.cfg.get("serverquery","pw"))
-                    print("[OUT] login client_login_name client_login_password [IN]",err.all())
-                    err = ts3conn.query("use", port=self.cfg.getint("serverquery","port"))
-                    print("[OUT] use port [IN]",err.all())
-                    err = ts3conn.query("clientupdate", client_nickname=self.cfg.get("serverquery","nick"))
-                    print("[OUT] clientupdate client_nickname [IN]",err.all())
-                    err = ts3conn.query("channeldelete", cid=self.supchan, force=1)
-                    print("[OUT] channeldelete cid=%s force=1 [IN] %s"%(self.supchan, err.all()))
+                    ts3conn.query("login", client_login_name=self.cfg.get("serverquery","name"), client_login_password=self.cfg.get("serverquery","pw")).fetch()
+                    ts3conn.query("use", port=self.cfg.getint("serverquery","port")).fetch()
+                    ts3conn.query("clientupdate", client_nickname=self.cfg.get("serverquery","nick")).fetch()
+                    ts3conn.query("channeldelete", cid=self.supchan, force=1).fetch()
                     self.supchan = 0
 
     def checkServer(self, schid=None):
@@ -168,7 +164,7 @@ class mySupport(ts3plugin):
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         mychan = self.cfg.getint("general","mychan")
         (err, clients) = ts3lib.getChannelClientList(schid, mychan); clients = len(clients)
-        if ownCID == mychan and clients == 1:
+        if ownCID == mychan and clients == 1 and newChannelID == self.supchan:
             ts3lib.requestClientMove(schid, clid, mychan, "")
         else: self.checkChannel(schid)
 
