@@ -13,10 +13,10 @@ class mySupport(ts3plugin):
     author = "Bluscream"
     description = ""
     offersConfigure = False
-    commandKeyword = ""
+    commandKeyword = "ms"
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, name, "")]
-    hotkeys = []
+    hotkeys = [("move_first_from_waiting_room", "Move the first client from your waiting room to your room")]
     schid = 1
     schids = []
     waitforchannel = False
@@ -60,6 +60,17 @@ class mySupport(ts3plugin):
         if not cid: return
         ts3lib.requestChannelDelete(schid, cid, True)
         self.supchan = 0
+
+    def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
+
+    def onHotkeyEvent(self, keyword): self.onHotkeyOrCommandEvent(keyword)
+
+    def onHotkeyOrCommandEvent(self, keyword, schid=0):
+        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        if not self.schids or len(self.schids) < 1 or schid != self.schids[0] or not self.supchan: return
+        if keyword == "move_first_from_waiting_room":
+            (err, clids) = ts3lib.getChannelClientList(schid, self.supchan)
+            ts3lib.requestClientMove(schid, clids[0], self.cfg.getint("general","mychan"), "")
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:

@@ -54,7 +54,7 @@ class quickMod(ts3plugin):
     def onHotkeyEvent(self, keyword): self.onHotkeyOrCommandEvent(keyword)
 
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
-        schid = ts3lib.getCurrentServerConnectionHandlerID()
+        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         if keyword == "restrict_last_joined_server":
             self.requested = self.last_joined_server
             msg = self.cfg.get("restrict", "poke")
