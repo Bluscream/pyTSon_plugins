@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from configparser import ConfigParser
 from os import path
 from urllib.parse import quote as urlencode
@@ -10,16 +11,7 @@ import time as timestamp
 from base64 import b64encode, b64decode
 from pytsonui import setupUi
 from pytson import *
-
-class color(object):
-    DEFAULT = "[color=white]"
-    DEBUG = "[color=grey]"
-    INFO = "[color=lightblue]"
-    SUCCESS = "[color=green]"
-    WARNING = "[color=orange]"
-    ERROR = "[color=red]"
-    FATAL = "[color=darkred]"
-    ENDMARKER = "[/color]"
+from bluscream import intList, clientURL, color
 
 class chatBot(ts3plugin):
     name = "Chat Bot"
@@ -113,7 +105,8 @@ class chatBot(ts3plugin):
             except: pass
             if _params != "": params = _params  # ;params = bytes(_params, "utf-8").decode("unicode_escape")
             self.lastcmd = {"cmd": cmd, "params": params, "time": int(timestamp.time()), "user": fromID}
-            ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
+            if PluginHost.cfg.getboolean("general", "verbose"):
+                ts3lib.printMessageToCurrentTab("{0}".format(self.lastcmd))
             if targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CHANNEL: (
             error, toID) = ts3lib.getChannelOfClient(schid, _clid)
             evalstring = "self.%s(%s,%s,%s,%s,'%s')" % (
@@ -610,6 +603,27 @@ class chatBot(ts3plugin):
     def commandAbortShutdown(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, "Executing \"shutdown -a\"")
         os.system('shutdown -a')
+
+    def commandToggleSupport(self, schid, targetMode, toID, fromID, params=""):
+        (err, sgids) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+        sgids = intList(sgids, ",")
+        tsgids = [145,115,130,131,117,132,118,133,134,135,136,137,138]
+        print(err, sgids)
+        if not any(x in sgids for x in tsgids): return
+        cid = 331
+        (err, unlimited) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED)
+        if unlimited:
+            ts3lib.setChannelVariableAsString(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME, "╔-● Support Warteraum [Geschlossen]")
+            ts3lib.setChannelVariableAsInt(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
+            ts3lib.setChannelVariableAsInt(schid, cid, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, 0)
+            ts3lib.flushChannelUpdates(schid, cid)
+            ts3lib.requestSendServerTextMsg(schid, "[color=red]Der Support wurde von {} geschlossen!".format(clientURL(schid, fromID)))
+        else:
+            ts3lib.setChannelVariableAsString(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME, "╔-● Support Warteraum [Geöffnet]")
+            ts3lib.setChannelVariableAsInt(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 1)
+            ts3lib.setChannelVariableAsInt(schid, cid, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, -1)
+            ts3lib.flushChannelUpdates(schid, cid)
+            ts3lib.requestSendServerTextMsg(schid, "[color=green]Der Support wurde von {} geöffnet!".format(clientURL(schid, fromID)))
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         (error, _clid) = ts3lib.getClientID(schid)

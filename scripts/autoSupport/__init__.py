@@ -1,15 +1,6 @@
 import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin
-
-class color(object):
-    DEFAULT = "[color=white]"
-    DEBUG = "[color=grey]"
-    INFO = "[color=lightblue]"
-    SUCCESS = "[color=green]"
-    WARNING = "[color=orange]"
-    ERROR = "[color=red]"
-    FATAL = "[color=darkred]"
-    ENDMARKER = "[/color]"
+from bluscream import timestamp, color
 
 class autoSupport(ts3plugin):
     name = "Auto Support"
@@ -24,22 +15,20 @@ class autoSupport(ts3plugin):
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Support", ""),
                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Force Stop Supporting", "")]
     hotkeys = [("autosupport", "Toggle Auto Support")]
-    debug = False
+    debug = True
     enabled = False
-    supserver = "a5BUMeIEbvaQEVzU85UP8UY+6DY=" # BergwerkLabs
-    afkchan = 356150
-    supchanmain = 368144 # » Support | Warteraum
-    supchans = [355971,355972,355972]
-    supbot = "Z1OUM2IvRvIpdmKIyFV3tZQXkq4=" # bergwerkLABS | Support
+    supserver = "NVLnvMbVj2xt18RLay9u3n8WRfc="
+    afkchan = 362
+    supchanmain = 331
+    supchans = [332,333,334,335,336]
+    supbot = "serveradmin"
     insupport = 0
     cursupchan = 0
     oldchan = 0
     wasmuted = 0
 
-    def timestamp(self): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
-
     def __init__(self):
-        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(), self.name, self.author))
+        if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:

@@ -789,6 +789,15 @@ class GroupType(object):
     TEMPLATE = 0
     REGULAR = 1
 
+class color(object):
+    DEFAULT = "[color=white]"
+    DEBUG = "[color=grey]"
+    INFO = "[color=lightblue]"
+    SUCCESS = "[color=green]"
+    WARNING = "[color=orange]"
+    ERROR = "[color=red]"
+    FATAL = "[color=darkred]"
+    ENDMARKER = "[/color]"
 
 """
     def log(self, logLevel, message, schid=0):

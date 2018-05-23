@@ -21,6 +21,7 @@ class mySupport(ts3plugin):
     schids = []
     waitforchannel = False
     supchan = 0
+    perm = (0,"","")
     cfg = ConfigParser()
     # cfg.optionxform = str
     cfg["general"] = {
@@ -30,7 +31,6 @@ class mySupport(ts3plugin):
     }
     chan = ConfigParser()
     chan["props"] = {
-        "name": "Waiting For Support",
         "maxclients": 1,
         "codec": ts3defines.CodecType.CODEC_SPEEX_NARROWBAND,
         "codec_quality": 0,
@@ -71,7 +71,9 @@ class mySupport(ts3plugin):
         if not self.schids or len(self.schids) < 1 or schid != self.schids[0] or not self.supchan: return
         if keyword == "move_first_from_waiting_room":
             (err, clids) = ts3lib.getChannelClientList(schid, self.supchan)
-            ts3lib.requestClientMove(schid, clids[0], self.cfg.getint("general","mychan"), "")
+            (err, ownID) = ts3lib.getClientID(schid)
+            (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+            ts3lib.requestClientMove(schid, clids[0], ownCID, "")
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
@@ -124,7 +126,7 @@ class mySupport(ts3plugin):
         return 0
 
     def createChannel(self, schid):
-        ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_NAME, self.chan.get("props", "name"))
+        ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_NAME, self.chan.get("props", "name open"))
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.chan.getint("props", "maxclients"))
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC, self.chan.getint("props", "codec"))
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC_QUALITY, self.chan.getint("props", "codec_quality"))
@@ -135,6 +137,24 @@ class mySupport(ts3plugin):
         ts3lib.flushChannelCreation(schid, self.cfg.getint("general","mychan"))
         self.waitforchannel = True
 
+    def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
+        if not self.waitforchannel: return
+        if not channelParentID == self.cfg.getint("general","mychan"): return
+        self.waitforchannel = False
+        self.supchan = cid
+        for (key, val) in self.chan.items("permissions"):
+            (err, id) = ts3lib.getPermissionIDByName(schid, key)
+            self.perm = (id, key, ts3lib.createReturnCode())
+            ts3lib.requestChannelAddPerm(schid, cid, [id], [int(val)])
+        # self.checkChannel(schid)
+
+    def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+        print(returnCode, self.perm[2])
+        if returnCode != self.perm[2]: return
+        perm = self.perm
+        ts3lib.printMessage(schid, "{}: Error setting permission [{}] #{} ({}): {} ({})".format(self.name, failedPermissionID, perm[0],perm[1],error,errorMessage), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        self.perm = (0,"","")
+
     def checkChannel(self, schid):
         (err, clients) = ts3lib.getChannelClientList(schid, self.supchan); clients = len(clients)
         (err, maxclients) = ts3lib.getChannelVariable(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
@@ -144,16 +164,6 @@ class mySupport(ts3plugin):
             ts3lib.setChannelVariableAsString(schid, self.supchan, ts3defines.ChannelProperties.CHANNEL_NAME, self.chan.get("props", "name in use"))
         else: return
         ts3lib.flushChannelUpdates(schid, self.supchan)
-
-    def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
-        if not self.waitforchannel: return
-        if not channelParentID == self.cfg.getint("general","mychan"): return
-        self.waitforchannel = False
-        self.supchan = cid
-        for (key, val) in self.chan.items("permissions"):
-            (err, id) = ts3lib.getPermissionIDByName(schid, key)
-            ts3lib.requestChannelAddPerm(schid, cid, [id], [int(val)])
-        self.checkChannel(schid)
 
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue) :
         if not self.schids or len(self.schids) < 1 or schid != self.schids[0]: return
