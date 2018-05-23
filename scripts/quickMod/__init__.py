@@ -39,8 +39,8 @@ class quickMod(ts3plugin):
     cfg["ban"] = { "duration": "2678400", "reason": "Ban Evading / Bannumgehung", "poke": "[color=red][b]You we're banned from the server!", "name duration ": 120 }
     cfg["restrict"] = { "sgids": "", "poke": "" }
     cfg["restrict local"] = { "cids": "", "sgids": "", "cgid": "", "poke": "" }
-    moveBeforeBan = 26
-    sgids = [8,42]
+    moveBeforeBan = 277
+    sgids = [129,127,126,124]
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)

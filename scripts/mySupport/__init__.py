@@ -49,6 +49,7 @@ class mySupport(ts3plugin):
     def __init__(self):
         loadCfg(self.path+"/config.ini", self.cfg)
         loadCfg(self.path+"/channel.ini", self.chan)
+        with open(self.path+"/description.txt", 'r') as myfile: self.description = myfile.read()
         self.checkServer(ts3lib.getCurrentServerConnectionHandlerID())
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
@@ -127,7 +128,7 @@ class mySupport(ts3plugin):
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS, self.chan.getint("props", "maxclients"))
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC, self.chan.getint("props", "codec"))
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC_QUALITY, self.chan.getint("props", "codec_quality"))
-        ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_DESCRIPTION, self.chan.get("props", "description"))
+        ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_DESCRIPTION, self.description)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT, 1)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, 1337)
