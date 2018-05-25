@@ -89,7 +89,10 @@ class mySupport(ts3plugin):
                     from devtools import PluginInstaller
                     PluginInstaller().installPackages(['ts3'])
                     import ts3
-                with ts3.query.TS3Connection(self.cfg.get("serverquery","host"), self.cfg.getint("serverquery","qport")) as ts3conn:
+                con = None
+                if hasattr(ts3.query, "TS3ServerConnection"): con = ts3.query.TS3ServerConnection
+                else: con = ts3.query.TS3Connection
+                with con(self.cfg.get("serverquery","host"), self.cfg.getint("serverquery","qport")) as ts3conn:
                     ts3conn.query("login", client_login_name=self.cfg.get("serverquery","name"), client_login_password=self.cfg.get("serverquery","pw")).fetch()
                     ts3conn.query("use", port=self.cfg.getint("serverquery","port")).fetch()
                     ts3conn.query("clientupdate", client_nickname=self.cfg.get("serverquery","nick")).fetch()
