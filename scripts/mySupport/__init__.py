@@ -86,11 +86,9 @@ class mySupport(ts3plugin):
             if len(self.schids) < 1 and self.supchan:
                 try: import ts3
                 except ImportError:
-                      _t = QMessageBox.question(self, "Can't delete channel", "Python package \"ts3\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
-                      if _t == QMessageBox.Yes:
-                            from devtools import PluginInstaller
-                            PluginInstaller().installPackages(['ts3'])
-                            import ts3
+                    from devtools import PluginInstaller
+                    PluginInstaller().installPackages(['ts3'])
+                    import ts3
                 with ts3.query.TS3ServerConnection(self.cfg.get("serverquery","host"), self.cfg.getint("serverquery","qport")) as ts3conn:
                     ts3conn.query("login", client_login_name=self.cfg.get("serverquery","name"), client_login_password=self.cfg.get("serverquery","pw")).fetch()
                     ts3conn.query("use", port=self.cfg.getint("serverquery","port")).fetch()
