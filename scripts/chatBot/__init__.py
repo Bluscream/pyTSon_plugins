@@ -608,7 +608,7 @@ class chatBot(ts3plugin):
         (err, sgids) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
         sgids = intList(sgids, ",")
         tsgids = [145,115,130,131,117,132,118,133,134,135,136,137,138]
-        print(err, sgids)
+        # print(err, sgids)
         if not any(x in sgids for x in tsgids): return
         cid = 331
         (err, unlimited) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED)

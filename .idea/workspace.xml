@@ -12,14 +12,8 @@
       <change afterPath="$PROJECT_DIR$/scripts/mySupport/channel.ini" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/scripts/mySupport/config.ini" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/scripts/mySupport/description.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/playShot/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/playShot/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoSupport/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoSupport/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/mySupport/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mySupport/__init__.py" afterDir="false" />
@@ -77,62 +71,29 @@
       <file leaf-file-name="ts3defines.py" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="802">
+            <state relative-caret-position="13440">
               <caret line="640" column="30" selection-start-line="640" selection-start-column="29" selection-end-line="640" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/mySupport/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="122" column="57" selection-start-line="122" selection-start-column="57" selection-end-line="122" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="689">
-              <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="46" selection-end-column="65" />
+            <state relative-caret-position="420">
+              <caret line="98" column="16" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="16" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="commands.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="579">
-              <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="619" column="63" selection-start-line="619" selection-start-column="63" selection-end-line="619" selection-end-column="63" />
-              <folding>
-                <element signature="e#24#61#0" expanded="true" />
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="23" column="10" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="72">
+              <caret line="295" lean-forward="true" selection-start-line="295" selection-end-line="303" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -148,7 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onserverupdate</find>
       <find>onserverup</find>
       <find>virtualserver_un</find>
       <find>getcurrentserv</find>
@@ -178,6 +138,7 @@
       <find>sgids) =</find>
       <find>sgids</find>
       <find>printmess</find>
+      <find>install</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -272,7 +233,6 @@
         <option value="$PROJECT_DIR$/scripts/troll/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/mySupport/config.ini" />
         <option value="$PROJECT_DIR$/scripts/quickMod/config.ini" />
-        <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
         <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/mySupport/description.txt" />
@@ -280,11 +240,12 @@
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/autoSupport/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/scripts/mySupport/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/playShot/README.md" />
         <option value="$PROJECT_DIR$/scripts/playShot/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
         <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
+        <option value="$PROJECT_DIR$/scripts/mySupport/__init__.py" />
       </list>
     </option>
   </component>
@@ -314,6 +275,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -330,24 +302,13 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="chatBot" type="462c0819:PsiDirectoryNode" />
+              <item name="customBan" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="playShot" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -674,13 +635,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00295" summary=":thinking:">
-      <created>1525158988935</created>
-      <option name="number" value="00295" />
-      <option name="presentableId" value="LOCAL-00295" />
-      <option name="project" value="LOCAL" />
-      <updated>1525158988935</updated>
     </task>
     <task id="LOCAL-00296" summary=":thinking:">
       <created>1525159675738</created>
@@ -1018,7 +972,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527071287524</updated>
     </task>
-    <option name="localTasksCounter" value="344" />
+    <task id="LOCAL-00344" summary=":thinking:">
+      <created>1527103325975</created>
+      <option name="number" value="00344" />
+      <option name="presentableId" value="LOCAL-00344" />
+      <option name="project" value="LOCAL" />
+      <updated>1527103325977</updated>
+    </task>
+    <option name="localTasksCounter" value="345" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1034,11 +995,11 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.13277134" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.13277134" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.3264418" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3224401" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.32535365" />
-      <window_info anchor="bottom" id="Version Control" order="16" sideWeight="0.25266525" side_tool="true" weight="0.32535365" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="16" sideWeight="0.25266525" side_tool="true" visible="true" weight="0.32535365" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
@@ -1059,12 +1020,12 @@
       <window_info anchor="right" id="Capture Analysis" order="9" />
       <window_info anchor="bottom" x="1073" y="648" width="434" height="241" id="Documentation" order="15" sideWeight="0.4978678" weight="0.16213275" />
       <window_info active="true" anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.25" />
-      <window_info anchor="right" id="Data View" order="11" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="5" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Data View" order="11" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
@@ -1080,6 +1041,11 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
   </component>
   <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_WIDTH">
+      <map>
+        <entry key="3" value="132" />
+      </map>
+    </option>
     <option name="COLUMN_ORDER">
       <list>
         <option value="0" />
@@ -1196,16 +1162,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/autoServerGroup/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="33" lean-forward="true" selection-start-column="19" selection-end-column="33" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoServerGroup/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1455,13 +1411,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/customBan/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1638">
@@ -1511,16 +1460,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="23" column="10" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/playShot/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1535,29 +1474,53 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="20" column="16" lean-forward="true" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="802">
+        <state relative-caret-position="13440">
           <caret line="640" column="30" selection-start-line="640" selection-start-column="29" selection-end-line="640" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoSupport/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="23" column="10" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customBan/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="611" column="24" selection-start-line="611" selection-start-column="24" selection-end-line="611" selection-end-column="24" />
+          <folding>
+            <element signature="e#24#61#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
-          <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+        <state relative-caret-position="553">
+          <caret line="176" selection-start-line="176" selection-end-line="176" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiMove/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
+        <state relative-caret-position="117">
           <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="46" selection-end-column="65" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
@@ -1565,19 +1528,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/mySupport/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="122" column="57" selection-start-line="122" selection-start-column="57" selection-end-line="122" selection-end-column="57" />
+        <state relative-caret-position="72">
+          <caret line="295" lean-forward="true" selection-start-line="295" selection-end-line="303" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/mySupport/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="619" column="63" selection-start-line="619" selection-start-column="63" selection-end-line="619" selection-end-column="63" />
+        <state relative-caret-position="420">
+          <caret line="98" column="16" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="16" />
           <folding>
-            <element signature="e#24#61#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>

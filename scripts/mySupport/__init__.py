@@ -1,7 +1,8 @@
-import ts3lib, ts3defines, datetime, ts3
+import ts3lib, ts3defines, datetime
 from configparser import ConfigParser
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
+from PythonQt.QtGui import QMessageBox
 from bluscream import timestamp, getScriptPath, loadCfg
 
 class mySupport(ts3plugin):
@@ -83,12 +84,19 @@ class mySupport(ts3plugin):
         elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             if schid in self.schids: self.schids.remove(schid)
             if len(self.schids) < 1 and self.supchan:
+                try: import ts3
+                except ImportError:
+                      _t = QMessageBox.question(self, "Can't delete channel", "Python package \"ts3\" could not be loaded.\nDo you want to try installing it now?", QMessageBox.Yes, QMessageBox.No)
+                      if _t == QMessageBox.Yes:
+                            from devtools import PluginInstaller
+                            PluginInstaller().installPackages(['ts3'])
+                            import ts3
                 with ts3.query.TS3ServerConnection(self.cfg.get("serverquery","host"), self.cfg.getint("serverquery","qport")) as ts3conn:
                     ts3conn.query("login", client_login_name=self.cfg.get("serverquery","name"), client_login_password=self.cfg.get("serverquery","pw")).fetch()
                     ts3conn.query("use", port=self.cfg.getint("serverquery","port")).fetch()
                     ts3conn.query("clientupdate", client_nickname=self.cfg.get("serverquery","nick")).fetch()
                     ts3conn.query("channeldelete", cid=self.supchan, force=1).fetch()
-                    self.supchan = 0
+                self.supchan = 0
 
     def checkServer(self, schid=None):
         if not schid: schid = self.schid
