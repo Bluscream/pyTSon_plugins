@@ -80,10 +80,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/mySupport/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
-              <caret line="91" column="24" selection-start-line="91" selection-start-column="21" selection-end-line="91" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
+              <caret line="91" column="44" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -91,8 +88,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="295" lean-forward="true" selection-start-line="295" selection-end-line="303" selection-end-column="28" />
+            <state relative-caret-position="6195">
+              <caret line="299" column="47" selection-start-line="299" selection-start-column="47" selection-end-line="299" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -230,7 +227,6 @@
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/troll/README.md" />
         <option value="$PROJECT_DIR$/scripts/troll/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/mySupport/config.ini" />
         <option value="$PROJECT_DIR$/scripts/quickMod/config.ini" />
         <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
@@ -244,6 +240,7 @@
         <option value="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
         <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
+        <option value="$PROJECT_DIR$/scripts/mySupport/config.ini" />
         <option value="$PROJECT_DIR$/scripts/mySupport/__init__.py" />
       </list>
     </option>
@@ -301,13 +298,7 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="customBan" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="playShot" type="462c0819:PsiDirectoryNode" />
+              <item name="mySupport" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -634,13 +625,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00297" summary=":thinking: added keep checkbox to custom ban dialog">
-      <created>1525162137863</created>
-      <option name="number" value="00297" />
-      <option name="presentableId" value="LOCAL-00297" />
-      <option name="project" value="LOCAL" />
-      <updated>1525162137863</updated>
     </task>
     <task id="LOCAL-00298" summary=":thinking: added getServerType and ServerInstanceType">
       <created>1525174152684</created>
@@ -978,7 +962,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527252095893</updated>
     </task>
-    <option name="localTasksCounter" value="346" />
+    <task id="LOCAL-00346" summary=":thinking:">
+      <created>1527252197848</created>
+      <option name="number" value="00346" />
+      <option name="presentableId" value="LOCAL-00346" />
+      <option name="project" value="LOCAL" />
+      <updated>1527252197848</updated>
+    </task>
+    <option name="localTasksCounter" value="347" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -994,11 +985,10 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.13277134" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.13277134" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.3264418" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3224401" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.32535365" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="16" sideWeight="0.25266525" side_tool="true" visible="true" weight="0.32535365" />
+      <window_info anchor="bottom" id="Version Control" order="16" sideWeight="0.25266525" side_tool="true" visible="true" weight="0.32535365" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32864866" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
@@ -1023,6 +1013,7 @@
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.32535365" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Data View" order="11" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1445,13 +1436,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/mySupport/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="35" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/mySupport/channel.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1487,9 +1471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
           <caret line="23" column="10" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1504,9 +1485,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="611" column="24" selection-start-line="611" selection-start-column="24" selection-end-line="611" selection-end-column="24" />
-          <folding>
-            <element signature="e#24#61#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1529,18 +1507,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="295" lean-forward="true" selection-start-line="295" selection-end-line="303" selection-end-column="28" />
+        <state relative-caret-position="6195">
+          <caret line="299" column="47" selection-start-line="299" selection-start-column="47" selection-end-line="299" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/mySupport/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/mySupport/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
-          <caret line="91" column="24" selection-start-line="91" selection-start-column="21" selection-end-line="91" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
+          <caret line="91" column="44" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="44" />
         </state>
       </provider>
     </entry>
