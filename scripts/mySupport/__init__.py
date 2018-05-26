@@ -89,14 +89,24 @@ class mySupport(ts3plugin):
                     from devtools import PluginInstaller
                     PluginInstaller().installPackages(['ts3'])
                     import ts3
-                con = None
-                if hasattr(ts3.query, "TS3ServerConnection"): con = ts3.query.TS3ServerConnection
-                else: con = ts3.query.TS3Connection
-                with con(self.cfg.get("serverquery","host"), self.cfg.getint("serverquery","qport")) as ts3conn:
-                    ts3conn.query("login", client_login_name=self.cfg.get("serverquery","name"), client_login_password=self.cfg.get("serverquery","pw")).fetch()
-                    ts3conn.query("use", port=self.cfg.getint("serverquery","port")).fetch()
-                    ts3conn.query("clientupdate", client_nickname=self.cfg.get("serverquery","nick")).fetch()
-                    ts3conn.query("channeldelete", cid=self.supchan, force=1).fetch()
+                host=self.cfg.get("serverquery","host")
+                qport=self.cfg.getint("serverquery","qport")
+                client_login_name=self.cfg.get("serverquery","name")
+                client_login_password=self.cfg.get("serverquery","pw")
+                port=self.cfg.getint("serverquery","port")
+                client_nickname=self.cfg.get("serverquery","nick")
+                if hasattr(ts3.query, "TS3ServerConnection"):
+                    with ts3.query.TS3ServerConnection(host, qport) as ts3conn:
+                        ts3conn.query("login", client_login_name=client_login_name, client_login_password=client_login_password).fetch()
+                        ts3conn.query("use", port=port).fetch()
+                        ts3conn.query("clientupdate", client_nickname=client_nickname).fetch()
+                        ts3conn.query("channeldelete", cid=self.supchan, force=1).fetch()
+                else:
+                    with ts3.query.TS3Connection(host, qport) as ts3conn:
+                        ts3conn.login(client_login_name=client_login_name, client_login_password=client_login_password)
+                        ts3conn.use(port=port)
+                        ts3conn.clientupdate(client_nickname=client_nickname)
+                        ts3conn.channeldelete(cid=self.supchan, force=True)
                 self.supchan = 0
 
     def checkServer(self, schid=None):
@@ -140,7 +150,7 @@ class mySupport(ts3plugin):
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC, self.chan.getint("props", "codec"))
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_CODEC_QUALITY, self.chan.getint("props", "codec_quality"))
         ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_DESCRIPTION, self.description)
-        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT, 1)
+        ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT, 1)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, 1337)
         ts3lib.flushChannelCreation(schid, self.cfg.getint("general","mychan"))
