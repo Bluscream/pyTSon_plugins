@@ -89,15 +89,18 @@ class YaTQA(ts3plugin):
         elif keyword == "yatqa_stats_current":
             (err, ownID) = ts3lib.getClientID(schid)
             (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
-            self.yatqa.setArguments(["-s", ip]) # IP
+            (err, port) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
+            self.yatqa.setArguments(["-s", ip, port]) # IP
         elif keyword == "yatqa_blacklist_current":
             (err, ownID) = ts3lib.getClientID(schid)
             (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
             self.yatqa.setArguments(["-b", ip]) # IP
         elif keyword == "yatqa_lookup_dns":
-            self.yatqa.setArguments(["-d"])
+            (err, host, port, pw) = ts3lib.getServerConnectInfo(schid)
+            self.yatqa.setArguments(["-d", host])
         elif keyword == "yatqa_browse_icons":
-            self.yatqa.setArguments(["-i"])
+            (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+            self.yatqa.setArguments(["-i", suid])
         elif keyword == "yatqa_permission_editor":
             self.yatqa.setArguments(["-p"])
         elif keyword == "yatqa_connect_default":
