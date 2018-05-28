@@ -3,7 +3,7 @@ from PythonQt.QtGui import QDesktopServices
 from os.path import isfile
 from ts3plugin import ts3plugin
 from pluginhost import PluginHost
-from bluscream import timestamp, getScriptPath, msgBox, inputInt
+from bluscream import timestamp, getScriptPath, msgBox, inputInt, inputBox
 import ts3defines, ts3lib, pytson
 
 class YaTQA(ts3plugin):
@@ -16,7 +16,7 @@ class YaTQA(ts3plugin):
     author = "Bluscream"
     description = "Script to utilize YaTQA"
     offersConfigure = False
-    commandKeyword = ""
+    commandKeyword = "yatqa"
     infoTitle = None
     hotkeys = [
         # ("yatqa_start", "Start YaTQA"),
@@ -29,26 +29,27 @@ class YaTQA(ts3plugin):
         ("yatqa_connect_default", "Start YaTQA and connect to default server"),
     ]
     menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "== {0} ==".format(name), "scripts/%s/yatqa.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "== {0} ==".format(name),""),
         # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Start YaTQA", "scripts/%s/yatqa.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Connect to current", "scripts/%s/connect_current.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Connect to current", "scripts/%s/yatqa.png"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 3, "Statistics", "scripts/%s/stats.png"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 4, "Blacklist", "scripts/%s/blacklist_check.png"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 5, "Lookup (TS)DNS", "scripts/%s/dns.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 6, "View Icons", "scripts/%s/icons.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 7, "Permission Editor", "scripts/%s/permission_editor.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 8, "Connect to default", "scripts/%s/default.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 10, "== {0} ==".format(name), "scripts/%s/yatqa.png"%__name__)
+        # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 6, "View Icons", "scripts/%s/icons.png"%__name__),
+        # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 7, "Permission Editor", "scripts/%s/permission_editor.png"%__name__),
+        # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 8, "Connect to default", "scripts/%s/default.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 10, "== {0} ==".format(name),"")
     ]
     yatqa = QProcess()
     bin = "C:/Program Files (x86)/YaTQA/yatqa.exe"
+    lastpass = {}
 
     def __init__(self):
         if isfile(self.bin):
             self.yatqa = QProcess()
             self.yatqa.setProgram(self.bin)
         else:
-            msgBox("Cannot find YatQA\nPlease make sure it's installed at\n\n\"{}\"".format(self.bin))
+            msgBox("Cannot find YatQA!\nPlease make sure it's installed at\n\n\"{}\"".format(self.bin))
             QDesktopServices.openUrl(QUrl("http://yat.qa/"))
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
@@ -72,8 +73,8 @@ class YaTQA(ts3plugin):
         else: return
         self.onHotkeyOrCommandEvent(keyword, schid)
 
-    def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
-    def onHotkeyEvent(self, keyword): self.onHotkeyOrCommandEvent(keyword)
+    def processCommand(self, schid, keyword): return self.onHotkeyOrCommandEvent(keyword, schid)
+    def onHotkeyEvent(self, keyword): return self.onHotkeyOrCommandEvent(keyword)
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         # (err, status) = ts3lib.getConnectionStatus(schid)
@@ -81,11 +82,15 @@ class YaTQA(ts3plugin):
         arguments = []
         if keyword == "yatqa_start": pass
         elif keyword == "yatqa_connect_current":
-            query_port = inputInt(self.name, "Query Port:",10011,1,65535)
             (err, ownID) = ts3lib.getClientID(schid)
             (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
             (err, port) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
-            self.yatqa.setArguments(["-c", ip, query_port, port]) # IP Query_Port [User Pass] [Voice_Port]
+            title = ("{} > {}".format(self.name, ip))
+            qport = inputInt(title, "Query Port:",10011,1,65535)
+            name = inputBox(title, "Query Login Name:","serveradmin")
+            pw = self.lastpass[schid] if schid in self.lastpass else inputBox(title, "Query Login Password:","")
+            if name and pw: self.yatqa.setArguments(["-c", ip, qport, name, pw, port]) # IP Query_Port [User Pass] [Voice_Port]
+            else: self.yatqa.setArguments(["-c", ip, qport, port])
         elif keyword == "yatqa_stats_current":
             (err, ownID) = ts3lib.getClientID(schid)
             (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
@@ -105,8 +110,11 @@ class YaTQA(ts3plugin):
             self.yatqa.setArguments(["-p"])
         elif keyword == "yatqa_connect_default":
             self.yatqa.setArguments(["-a"])
-        else: return
-        if PluginHost.cfg.getboolean("general", "verbose"): print(self.yatqa.arguments())
+        else: return False
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.bin, self.yatqa.arguments())
         self.yatqa.start()
+        return True
 
-    # def onClientServerQueryLoginPasswordEvent(self, serverConnectionHandlerID, loginPassword): pass
+    def onClientServerQueryLoginPasswordEvent(self, schid, loginPassword):
+        self.lastpass[schid] = loginPassword
+        ts3lib.printMessage(schid, "Created new query login password: {}".format(loginPassword), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
