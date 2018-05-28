@@ -41,8 +41,9 @@ class YaTQA(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 10, "== {0} ==".format(name),"")
     ]
     yatqa = QProcess()
-    bin = "C:/Program Files (x86)/YaTQA/yatqa.exe"
     lastpass = {}
+    bin = "C:/Program Files (x86)/YaTQA/yatqa.exe"
+    autoBlackListCheck = False
 
     def __init__(self):
         if isfile(self.bin):
@@ -118,3 +119,11 @@ class YaTQA(ts3plugin):
     def onClientServerQueryLoginPasswordEvent(self, schid, loginPassword):
         self.lastpass[schid] = loginPassword
         ts3lib.printMessage(schid, "Created new query login password: {}".format(loginPassword), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if not self.autoBlackListCheck: return
+        if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
+        (err, ownID) = ts3lib.getClientID(schid)
+        (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+        self.yatqa.setArguments(["-b", ip])
+        self.yatqa.start()
