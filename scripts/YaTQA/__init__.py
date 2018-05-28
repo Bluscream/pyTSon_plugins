@@ -11,7 +11,7 @@ class YaTQA(ts3plugin):
     name = "YaTQA"
     try: apiVersion = pytson.getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Script to utilize YaTQA"
@@ -89,9 +89,11 @@ class YaTQA(ts3plugin):
             title = ("{} > {}".format(self.name, ip))
             qport = inputInt(title, "Query Port:",10011,1,65535)
             name = inputBox(title, "Query Login Name:","serveradmin")
-            pw = self.lastpass[schid] if schid in self.lastpass else inputBox(title, "Query Login Password:","")
-            if name and pw: self.yatqa.setArguments(["-c", ip, qport, name, pw, port]) # IP Query_Port [User Pass] [Voice_Port]
-            else: self.yatqa.setArguments(["-c", ip, qport, port])
+            pw = inputBox(title, "Query Login Password:", self.lastpass[schid] if schid in self.lastpass else "")
+            args = ["-c", ip, qport]
+            if name and pw: args.extend([name, pw, port])
+            else: args.append(port)
+            self.yatqa.setArguments(args) # IP Query_Port [User Pass] [Voice_Port]
         elif keyword == "yatqa_stats_current":
             (err, ownID) = ts3lib.getClientID(schid)
             (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
