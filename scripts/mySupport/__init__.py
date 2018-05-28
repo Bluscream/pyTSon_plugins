@@ -1,4 +1,4 @@
-import ts3lib, ts3defines, datetime
+import ts3lib, ts3defines, datetime, pytson
 from configparser import ConfigParser
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
@@ -8,7 +8,8 @@ from bluscream import timestamp, getScriptPath, loadCfg
 class mySupport(ts3plugin):
     path = getScriptPath(__name__)
     name = "my Support"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 21
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
@@ -84,30 +85,33 @@ class mySupport(ts3plugin):
         elif newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             if schid in self.schids: self.schids.remove(schid)
             if len(self.schids) < 1 and self.supchan:
-                try: import ts3
-                except ImportError:
-                    from devtools import PluginInstaller
-                    PluginInstaller().installPackages(['ts3'])
-                    import ts3
-                host=self.cfg.get("serverquery","host")
-                qport=self.cfg.getint("serverquery","qport")
-                client_login_name=self.cfg.get("serverquery","name")
-                client_login_password=self.cfg.get("serverquery","pw")
-                port=self.cfg.getint("serverquery","port")
-                client_nickname=self.cfg.get("serverquery","nick")
-                if hasattr(ts3.query, "TS3ServerConnection"):
-                    with ts3.query.TS3ServerConnection(host, qport) as ts3conn:
-                        ts3conn.query("login", client_login_name=client_login_name, client_login_password=client_login_password).fetch()
-                        ts3conn.query("use", port=port).fetch()
-                        ts3conn.query("clientupdate", client_nickname=client_nickname).fetch()
-                        ts3conn.query("channeldelete", cid=self.supchan, force=1).fetch()
-                else:
-                    with ts3.query.TS3Connection(host, qport) as ts3conn:
-                        ts3conn.login(client_login_name=client_login_name, client_login_password=client_login_password)
-                        ts3conn.use(port=port)
-                        ts3conn.clientupdate(client_nickname=client_nickname)
-                        ts3conn.channeldelete(cid=self.supchan, force=True)
-                self.supchan = 0
+                self.deleteChan()
+
+    def deleteChan(self):
+        try: import ts3
+        except ImportError:
+            from devtools import PluginInstaller
+            PluginInstaller().installPackages(['ts3'])
+            import ts3
+        host=self.cfg.get("serverquery","host")
+        qport=self.cfg.getint("serverquery","qport")
+        client_login_name=self.cfg.get("serverquery","name")
+        client_login_password=self.cfg.get("serverquery","pw")
+        port=self.cfg.getint("serverquery","port")
+        client_nickname=self.cfg.get("serverquery","nick")
+        if hasattr(ts3.query, "TS3ServerConnection"):
+            with ts3.query.TS3ServerConnection(host, qport) as ts3conn:
+                ts3conn.query("login", client_login_name=client_login_name, client_login_password=client_login_password).fetch()
+                ts3conn.query("use", port=port).fetch()
+                ts3conn.query("clientupdate", client_nickname=client_nickname).fetch()
+                ts3conn.query("channeldelete", cid=self.supchan, force=1).fetch()
+        else:
+            with ts3.query.TS3Connection(host, qport) as ts3conn:
+                ts3conn.login(client_login_name=client_login_name, client_login_password=client_login_password)
+                ts3conn.use(port=port)
+                ts3conn.clientupdate(client_nickname=client_nickname)
+                ts3conn.channeldelete(cid=self.supchan, force=True)
+        self.supchan = 0
 
     def checkServer(self, schid=None):
         if not schid: schid = self.schid
@@ -135,7 +139,7 @@ class mySupport(ts3plugin):
     def getChannel(self, schid):
         (err, cids) = ts3lib.getChannelList(schid)
         for cid in cids:
-            (err, perm) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PERMANENT)
+            (err, perm) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT)
             if not perm: continue
             (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
             if not self.chan.get("props", "name") in name: continue

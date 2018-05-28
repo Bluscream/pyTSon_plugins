@@ -10,7 +10,8 @@ from urllib.parse import quote_plus
 
 class searchEverything(ts3plugin):
     name = "Search"
-    apiVersion = 22
+    try: apiVersion = pytson.getCurrentApiVersion()
+    except: apiVersion = 21
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
