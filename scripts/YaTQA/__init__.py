@@ -3,7 +3,7 @@ from PythonQt.QtGui import QDesktopServices
 from os.path import isfile
 from ts3plugin import ts3plugin
 from pluginhost import PluginHost
-from bluscream import timestamp, getScriptPath, msgBox
+from bluscream import timestamp, getScriptPath, msgBox, inputInt
 import ts3defines, ts3lib, pytson
 
 class YaTQA(ts3plugin):
@@ -78,13 +78,22 @@ class YaTQA(ts3plugin):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         # (err, status) = ts3lib.getConnectionStatus(schid)
         # if status != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
+        arguments = []
         if keyword == "yatqa_start": pass
         elif keyword == "yatqa_connect_current":
-            self.yatqa.setArguments(["-c"]) # IP Query_Port [User Pass] [Voice_Port]
+            query_port = inputInt(self.name, "Query Port:",10011,1,65535)
+            (err, ownID) = ts3lib.getClientID(schid)
+            (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+            (err, port) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_PORT)
+            self.yatqa.setArguments(["-c", ip, query_port, port]) # IP Query_Port [User Pass] [Voice_Port]
         elif keyword == "yatqa_stats_current":
-            self.yatqa.setArguments(["-s"]) # IP
+            (err, ownID) = ts3lib.getClientID(schid)
+            (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+            self.yatqa.setArguments(["-s", ip]) # IP
         elif keyword == "yatqa_blacklist_current":
-            self.yatqa.setArguments(["-b"]) # IP
+            (err, ownID) = ts3lib.getClientID(schid)
+            (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+            self.yatqa.setArguments(["-b", ip]) # IP
         elif keyword == "yatqa_lookup_dns":
             self.yatqa.setArguments(["-d"])
         elif keyword == "yatqa_browse_icons":
@@ -94,4 +103,7 @@ class YaTQA(ts3plugin):
         elif keyword == "yatqa_connect_default":
             self.yatqa.setArguments(["-a"])
         else: return
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.yatqa.arguments())
         self.yatqa.start()
+
+    # def onClientServerQueryLoginPasswordEvent(self, serverConnectionHandlerID, loginPassword): pass
