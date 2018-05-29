@@ -14,7 +14,6 @@
       <change afterPath="$PROJECT_DIR$/scripts/mySupport/config.ini" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/scripts/mySupport/description.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/NoX/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/NoX/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/NoX/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/NoX/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/NoX/settings.ini" afterDir="false" />
@@ -88,8 +87,8 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+            <state relative-caret-position="218">
+              <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -659,13 +658,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
     </task>
-    <task id="LOCAL-00310" summary=":thinking:">
-      <created>1525986147453</created>
-      <option name="number" value="00310" />
-      <option name="presentableId" value="LOCAL-00310" />
-      <option name="project" value="LOCAL" />
-      <updated>1525986147453</updated>
-    </task>
     <task id="LOCAL-00311" summary=":thinking:">
       <created>1525986419029</created>
       <option name="number" value="00311" />
@@ -1002,7 +994,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527574559379</updated>
     </task>
-    <option name="localTasksCounter" value="359" />
+    <task id="LOCAL-00359" summary=":thinking:">
+      <created>1527578741345</created>
+      <option name="number" value="00359" />
+      <option name="presentableId" value="LOCAL-00359" />
+      <option name="project" value="LOCAL" />
+      <updated>1527578741345</updated>
+    </task>
+    <option name="localTasksCounter" value="360" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1529,8 +1528,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+        <state relative-caret-position="218">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

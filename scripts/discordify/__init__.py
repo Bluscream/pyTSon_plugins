@@ -1,12 +1,11 @@
-import ts3lib, ts3defines, re, devtools
+import ts3lib, ts3defines, re
 from copy import deepcopy as copy
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
-from discoIPC import ipc
 from time import time
 from PythonQt.QtCore import QTimer
 from traceback import format_exc
-from unidecode import unidecode
+from devtools import PluginInstaller, installedPackages
 from bluscream import timestamp, parseCommand, sanitize
 
 class discordify(ts3plugin):
@@ -37,17 +36,13 @@ class discordify(ts3plugin):
     }
 
     def __init__(self):
-        for i in range(len(devtools.installedPackages())):
-            name = self.devTools[i]['name']
-            if name == "requests":
-                ts3lib.printMessageToCurrentTab("Yay! eveything is installed :)")
-                break
-        else:
-            from devtools import PluginInstaller
-            PluginInstaller().installPackages(['requests'])
-            ts3lib.printMessageToCurrentTab("I've downloaded everything you need :D")
-            ts3lib.printMessageToCurrentTab("post them steam links!")
-        from requests import get
+        try: import unidecode
+        except ImportError:
+            PluginInstaller().installPackages(['unidecode'])
+        try: from discoIPC import ipc
+        except ImportError:
+            PluginInstaller().installPackages(['discoIPC'])
+            from discoIPC import ipc
         self.discord = ipc.DiscordIPC("450824928841957386")
         self.discord.connect()
         self.timer.timeout.connect(self.tick)
@@ -97,6 +92,7 @@ class discordify(ts3plugin):
     def updateServer(self, schid, ownID=0):
         if not ownID: (err, ownID) = ts3lib.getClientID(schid)
         (err, name) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+        from unidecode import unidecode
         self.activity["details"] = unidecode(name)
         self.update = True
 
@@ -105,6 +101,7 @@ class discordify(ts3plugin):
         if not ownCID: (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         (err, cname) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_NAME)
         name = re.sub(r'^\[[crl\*]spacer(\d+)?\]', '', cname, flags=re.IGNORECASE|re.UNICODE)
+        from unidecode import unidecode
         self.activity["state"] = unidecode(name)
         (err, clist) = ts3lib.getChannelClientList(schid, ownCID)
         (err, cmax) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
@@ -122,6 +119,7 @@ class discordify(ts3plugin):
 
     def updateClient(self, schid):
         (err, name) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        from unidecode import unidecode
         self.activity["assets"]["large_text"] = unidecode(name)
 
     def updateVoice(self, schid, status=None):
