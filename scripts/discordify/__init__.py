@@ -1,11 +1,13 @@
-import ts3lib, ts3defines, re
+import ts3lib, ts3defines, re, devtools
+from copy import deepcopy as copy
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
 from discoIPC import ipc
 from time import time
 from PythonQt.QtCore import QTimer
 from traceback import format_exc
-from bluscream import timestamp, parseCommand
+from unidecode import unidecode
+from bluscream import timestamp, parseCommand, sanitize
 
 class discordify(ts3plugin):
     name = "Discord Rich Presence"
@@ -33,31 +35,19 @@ class discordify(ts3plugin):
             "large_image": "logo"
         }
     }
-    test = {
-        'state': 'In the white house.',
-        'details': 'The player has to find the secret item that\'s hidden inside the white house, before the time ends.',
-        'timestamps': {
-            'start': time()
-        },
-        'assets': {
-            'large_image': '32db72f5-826b-4cd7-bfed-a72c3890eccd',
-            'large_text': 'Level 4',
-            'small_image': 'e76c00bd-a8d7-41e8-aa34-92a843e03e5e',
-            'small_text': 'Salvation',
-        },
-        'party': {
-            'id': 'dcb5c08f-0bae-4e1c-98c0-09343939c965',
-            'size': [1, 2]
-        },
-        'secrets': {
-            'match': 'MmhuZToxMjMxMjM6cWl3amR3MWlqZA==',
-            'spectate': 'MTIzNDV8MTIzNDV8MTMyNDU0',
-            'join': 'MTI4NzM0OjFpMmhuZToxMjMxMjM=',
-        },
-        'instance': True,
-}
 
     def __init__(self):
+        for i in range(len(devtools.installedPackages())):
+            name = self.devTools[i]['name']
+            if name == "requests":
+                ts3lib.printMessageToCurrentTab("Yay! eveything is installed :)")
+                break
+        else:
+            from devtools import PluginInstaller
+            PluginInstaller().installPackages(['requests'])
+            ts3lib.printMessageToCurrentTab("I've downloaded everything you need :D")
+            ts3lib.printMessageToCurrentTab("post them steam links!")
+        from requests import get
         self.discord = ipc.DiscordIPC("450824928841957386")
         self.discord.connect()
         self.timer.timeout.connect(self.tick)
@@ -68,7 +58,6 @@ class discordify(ts3plugin):
         (err, status) = ts3lib.getConnectionStatus(schid)
         if status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             self.updateServer(schid); self.updateChannel(schid); self.updateVoice(schid);self.updateClient(schid)
-        else: self.update = True
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
@@ -107,28 +96,33 @@ class discordify(ts3plugin):
 
     def updateServer(self, schid, ownID=0):
         if not ownID: (err, ownID) = ts3lib.getClientID(schid)
-        (err, sname) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-        self.activity["details"] = sname
+        (err, name) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+        self.activity["details"] = unidecode(name)
         self.update = True
 
     def updateChannel(self, schid, ownID=0, ownCID=0):
         if not ownID: (err, ownID) = ts3lib.getClientID(schid)
         if not ownCID: (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         (err, cname) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_NAME)
-        cname = re.sub(r'^\[[crl]spacer(\d+)?\]', '', cname, flags=re.IGNORECASE|re.UNICODE)
-        self.activity["state"] = cname
+        name = re.sub(r'^\[[crl\*]spacer(\d+)?\]', '', cname, flags=re.IGNORECASE|re.UNICODE)
+        self.activity["state"] = unidecode(name)
         (err, clist) = ts3lib.getChannelClientList(schid, ownCID)
         (err, cmax) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
         (err, smax) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_MAXCLIENTS)
         self.activity["party"] = {
             "id": str(ownCID),
-            "size": [len(clist), cmax if cmax > -1 else smax] # cmax if cmax else 0
+            "size": [len(clist), cmax if cmax >= len(clist) else smax] # cmax if cmax else 0
+        }
+        (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
+        (err, port) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
+        self.activity["secrets"] = {
+            "join": "ts3server://{}?port={}&cid={}".format(ip, port, ownCID)
         }
         self.update = True
 
     def updateClient(self, schid):
         (err, name) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        self.activity["assets"]["large_text"] = name
+        self.activity["assets"]["large_text"] = unidecode(name)
 
     def updateVoice(self, schid, status=None):
         if not status: (err, status) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_FLAG_TALKING)
@@ -137,31 +131,35 @@ class discordify(ts3plugin):
         (err, input_deactivated) = ts3lib.getClientSelfVariable(schid,ts3defines.ClientProperties.CLIENT_INPUT_DEACTIVATED)
         (err, input_muted) = ts3lib.getClientSelfVariable(schid,ts3defines.ClientProperties.CLIENT_INPUT_MUTED)
         (err, commander) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER)
+        activity = copy(self.activity)
         if not output_activated:
-            self.activity["assets"]["small_text"] = "Output Deactivated"
-            self.activity["assets"]["small_image"] = "hardware_output_muted"
+            activity["assets"]["small_text"] = "Output Deactivated"
+            activity["assets"]["small_image"] = "hardware_output_muted"
         elif output_muted:
-            self.activity["assets"]["small_text"] = "Output Muted"
-            self.activity["assets"]["small_image"] = "output_muted"
+            activity["assets"]["small_text"] = "Output Muted"
+            activity["assets"]["small_image"] = "output_muted"
         elif input_deactivated:
-            self.activity["assets"]["small_text"] = "Input Deactivated"
-            self.activity["assets"]["small_image"] = "hardware_input_muted"
+            activity["assets"]["small_text"] = "Input Deactivated"
+            activity["assets"]["small_image"] = "hardware_input_muted"
         elif input_muted:
-            self.activity["assets"]["small_text"] = "Input Muted"
-            self.activity["assets"]["small_image"] = "input_muted"
+            activity["assets"]["small_text"] = "Input Muted"
+            activity["assets"]["small_image"] = "input_muted"
         elif status and commander:
-            self.activity["assets"]["small_text"] = "Talking with Channel Commander"
-            self.activity["assets"]["small_image"] = "player_commander_on"
+            activity["assets"]["small_text"] = "Talking with Channel Commander"
+            activity["assets"]["small_image"] = "player_commander_on"
         elif status and not commander:
-            self.activity["assets"]["small_text"] = "Talking"
-            self.activity["assets"]["small_image"] = "player_on"
+            activity["assets"]["small_text"] = "Talking"
+            activity["assets"]["small_image"] = "player_on"
         elif not status and commander:
-            self.activity["assets"]["small_text"] = "Silent"
-            self.activity["assets"]["small_image"] = "player_commander_off"
+            activity["assets"]["small_text"] = "Silent"
+            activity["assets"]["small_image"] = "player_commander_off"
         elif not status and not commander:
-            self.activity["assets"]["small_text"] = "Silent"
-            self.activity["assets"]["small_image"] = "player_off"
-        self.update = True
+            activity["assets"]["small_text"] = "Silent"
+            activity["assets"]["small_image"] = "player_off"
+        if activity != self.activity:
+            self.activity = activity
+            self.update = True
+        del activity
 
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
         props = ts3defines.ClientProperties
@@ -184,17 +182,3 @@ class discordify(ts3plugin):
     def onTalkStatusChangeEvent(self, schid, status, isReceivedWhisper, clientID):
         (err, ownID) = ts3lib.getClientID(schid)
         if ownID == clientID: self.updateVoice(schid, status)
-
-    def onIncomingClientQueryEvent(self, schid, commandText):
-        return
-        if commandText.split(" ", 1)[0] != "notifyclientupdated": return
-        (cmd, params) = parseCommand(commandText)
-        if len(params) > 0 and "client_nickname" in params:
-            clid = int(params["clid"])
-            # (err, ownID) = ts3lib.getClientID(schid)
-            # if clid == ownID: return
-            (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-            if getContactStatus(uid) != ContactStatus.FRIEND: return
-            if not self.dynamicSilenceName in params["client_nickname"].lower(): return
-            ts3lib.requestSendPrivateTextMsg(schid, "Yes, {}-{}?".format(clientURL(schid, clid), choice(["chan","san"])), clid)
-            # ts3lib.printMessageToCurrentTab("{} {}".format(cmd, params)) # ["client_nickname"][1]

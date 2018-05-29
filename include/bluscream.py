@@ -10,7 +10,7 @@ from urllib.parse import quote_plus
 from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
-from re import match
+from re import match, sub
 import ts3lib, ts3defines, os.path, string, random, ts3client, time
 
 # GENERAL FUNCTIONS #
@@ -23,6 +23,10 @@ def boolean(_bool):
     if _bool and _bool.lower() == "true": return True
     elif _bool and _bool.lower() == "false": return False
     else: return None
+
+def sanitize(s,hard=False):
+    if hard: return sub('[^a-zA-Z]', '', s)
+    return "".join(i for i in s if ord(i)<128)
 
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
     """
