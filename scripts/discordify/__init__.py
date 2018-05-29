@@ -98,7 +98,7 @@ class discordify(ts3plugin):
         if not ownID: (err, ownID) = ts3lib.getClientID(schid)
         (err, name) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
         from unidecode import unidecode
-        self.activity["details"] = unidecode(name)
+        self.activity["state"] = unidecode(name)
         server_type = getServerType(schid)
         if server_type == ServerInstanceType.TEASPEAK:
             self.activity["assets"]["large_text"] = "TeaSpeak"
@@ -120,14 +120,19 @@ class discordify(ts3plugin):
         (err, cname) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_NAME)
         name = re.sub(r'^\[[crl\*]spacer(.*)?\]', '', cname, flags=re.IGNORECASE|re.UNICODE)
         from unidecode import unidecode
-        self.activity["state"] = unidecode(name)
-        (err, clist) = ts3lib.getChannelClientList(schid, ownCID)
+        self.activity["details"] = unidecode(name)
+        """
+        clients = len(ts3lib.getChannelClientList(schid, ownCID)[1])
+        # (err, clients) = ts3lib.getChannelVariable(schid, ts3defines.ChannelPropertiesRare.)
         (err, cmax) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
+        if cmax >= clients:
+            self.activity["party"]["size"] = [clients, cmax]
+        else:
+        """
         (err, smax) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_MAXCLIENTS)
-        self.activity["party"] = {
-            "id": str(ownCID),
-            "size": [len(clist), cmax if cmax >= len(clist) else smax] # cmax if cmax else 0
-        }
+        (err, clients) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_CLIENTS_ONLINE)
+        # clients = len(ts3lib.getClientList(schid)[1])
+        self.activity["party"] = { "size": [clients, smax] }
         (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
         (err, port) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
         self.activity["secrets"] = {
@@ -142,44 +147,58 @@ class discordify(ts3plugin):
 
     def updateVoice(self, schid, status=None):
         if not status: (err, status) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_FLAG_TALKING)
+        (err, afk) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_AWAY)
         (err, output_activated) = ts3lib.getClientSelfVariable(schid,ts3defines.ClientProperties.CLIENT_OUTPUT_HARDWARE)
         (err, output_muted) = ts3lib.getClientSelfVariable(schid,ts3defines.ClientProperties.CLIENT_OUTPUT_MUTED)
-        (err, input_deactivated) = ts3lib.getClientSelfVariable(schid,ts3defines.ClientProperties.CLIENT_INPUT_DEACTIVATED)
+        (err, input_activated) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_INPUT_HARDWARE)
         (err, input_muted) = ts3lib.getClientSelfVariable(schid,ts3defines.ClientProperties.CLIENT_INPUT_MUTED)
         (err, commander) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER)
-        activity = copy(self.activity)
-        if not output_activated:
-            activity["assets"]["small_text"] = "Output Deactivated"
-            activity["assets"]["small_image"] = "hardware_output_muted"
-        elif output_muted:
-            activity["assets"]["small_text"] = "Output Muted"
-            activity["assets"]["small_image"] = "output_muted"
-        elif input_deactivated:
-            activity["assets"]["small_text"] = "Input Deactivated"
-            activity["assets"]["small_image"] = "hardware_input_muted"
-        elif input_muted:
-            activity["assets"]["small_text"] = "Input Muted"
-            activity["assets"]["small_image"] = "input_muted"
-        elif status and commander:
-            activity["assets"]["small_text"] = "Talking with Channel Commander"
-            activity["assets"]["small_image"] = "player_commander_on"
-        elif status and not commander:
-            activity["assets"]["small_text"] = "Talking"
-            activity["assets"]["small_image"] = "player_on"
-        elif not status and commander:
-            activity["assets"]["small_text"] = "Silent"
-            activity["assets"]["small_image"] = "player_commander_off"
-        elif not status and not commander:
-            activity["assets"]["small_text"] = "Silent"
-            activity["assets"]["small_image"] = "player_off"
-        if activity != self.activity:
-            self.activity = activity
+        if PluginHost.cfg.getboolean("general", "verbose"):
+            print("CLIENT_AWAY",afk,"CLIENT_OUTPUT_HARDWARE",output_activated,"CLIENT_OUTPUT_MUTED",output_muted,"CLIENT_INPUT_HARDWARE",input_activated,"CLIENT_INPUT_MUTED",input_muted)
+        if afk:
+            self.activity["assets"]["small_text"] = "Away From Keyboard"
+            self.activity["assets"]["small_image"] = "away"
             self.update = True
-        del activity
+        elif not output_activated:
+            self.activity["assets"]["small_text"] = "Output Deactivated"
+            self.activity["assets"]["small_image"] = "hardware_output_muted"
+            self.update = True
+        elif output_muted:
+            self.activity["assets"]["small_text"] = "Output Muted"
+            self.activity["assets"]["small_image"] = "output_muted"
+            self.update = True
+        elif not input_activated:
+            self.activity["assets"]["small_text"] = "Input Deactivated"
+            self.activity["assets"]["small_image"] = "hardware_input_muted"
+            self.update = True
+        elif input_muted:
+            self.activity["assets"]["small_text"] = "Input Muted"
+            self.activity["assets"]["small_image"] = "input_muted"
+            self.update = True
+        elif status and commander:
+            self.activity["assets"]["small_text"] = "Talking with Channel Commander"
+            self.activity["assets"]["small_image"] = "player_commander_on"
+            self.update = True
+        elif status and not commander:
+            self.activity["assets"]["small_text"] = "Talking"
+            self.activity["assets"]["small_image"] = "player_on"
+            self.update = True
+        elif not status and commander:
+            self.activity["assets"]["small_text"] = "Silent"
+            self.activity["assets"]["small_image"] = "player_commander_off"
+            self.update = True
+        elif not status and not commander:
+            self.activity["assets"]["small_text"] = "Silent"
+            self.activity["assets"]["small_image"] = "player_off"
+            self.update = True
 
     def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
-        props = ts3defines.ClientProperties
-        if flag in [props.CLIENT_OUTPUT_HARDWARE,props.CLIENT_OUTPUT_MUTED,props.CLIENT_INPUT_DEACTIVATED,props.CLIENT_INPUT_MUTED,ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER]:
+        props = ts3defines.ClientProperties; rare = ts3defines.ClientPropertiesRare
+        if flag in [
+            props.CLIENT_OUTPUT_HARDWARE, props.CLIENT_OUTPUT_MUTED,
+            props.CLIENT_INPUT_DEACTIVATED, props.CLIENT_INPUT_HARDWARE, props.CLIENT_INPUT_MUTED,
+            rare.CLIENT_IS_CHANNEL_COMMANDER, rare.CLIENT_AWAY
+        ]:
             self.updateVoice(schid)
         elif flag == props.CLIENT_NICKNAME: self.updateClient(schid)
 
