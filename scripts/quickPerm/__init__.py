@@ -1,7 +1,7 @@
 import ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
-from bluscream import timestamp
+from bluscream import timestamp, clientURL
 
 class quickPerm(ts3plugin):
     name = "Quick Permissions"
@@ -14,7 +14,9 @@ class quickPerm(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
+    menuItems = [
+        # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")
+    ]
     hotkeys = []
     enabled = True
     retcode = ""
@@ -55,8 +57,11 @@ class quickPerm(ts3plugin):
             pvals.append(100 if sgid == 2 and perm[1] == 75 else perm[1])
             pskips.append(perm[2])
         result = ts3lib.requestClientAddPerm(schid, cldbid, pids, pvals, pskips)
-        if result: ts3lib.printMessageToCurrentTab("[color=green]Completed exploiting dumb people")
-        else: ts3lib.printMessageToCurrentTab("[color=red]Failed giving permissions")
+        msg = ""
+        if result == ts3defines.ERROR_ok:
+            msg = "[color=green] Successfully sneaked"
+        else: msg = "[color=red]Failed giving"
+        ts3lib.printMessageToCurrentTab("{} {} {} permissions for {}".format(self.name, msg,len(self.permissions),clientURL(schid, ownID, clientUniqueIdentity, clientName)))
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if returnCode == self.retcode: self.retcode = ""; return True
