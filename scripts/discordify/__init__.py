@@ -64,7 +64,7 @@ class discordify(ts3plugin):
             if not self.update: return
             self.discord.update_activity(self.activity)
             self.update = False
-            print("updated discord with ", self.activity)
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "updated:", self.activity)
         except: # ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
             print(format_exc())
 
