@@ -6,7 +6,7 @@ from time import time
 from PythonQt.QtCore import QTimer
 from traceback import format_exc
 from devtools import PluginInstaller, installedPackages
-from bluscream import timestamp, parseCommand, sanitize
+from bluscream import timestamp, parseCommand, sanitize, getServerType, ServerInstanceType
 
 class discordify(ts3plugin):
     name = "Discord Rich Presence"
@@ -22,6 +22,7 @@ class discordify(ts3plugin):
     menuItems = []
     hotkeys = []
     discord = None
+    connected = False
     update = False
     timer = QTimer()
     activity = {
@@ -44,7 +45,10 @@ class discordify(ts3plugin):
             PluginInstaller().installPackages(['discoIPC'])
             from discoIPC import ipc
         self.discord = ipc.DiscordIPC("450824928841957386")
-        self.discord.connect()
+        try:
+            self.discord.connect()
+            self.connected = True
+        except: pass
         self.timer.timeout.connect(self.tick)
         self.timer.setTimerType(2)
         self.timer.start(1000)
@@ -62,6 +66,11 @@ class discordify(ts3plugin):
     def tick(self):
         try:
             if not self.update: return
+            if not self.connected:
+                try:
+                    self.discord.connect()
+                    self.connected = True
+                except: pass
             self.discord.update_activity(self.activity)
             self.update = False
             if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "updated:", self.activity)
@@ -77,8 +86,8 @@ class discordify(ts3plugin):
         if status is None: (err, status) = ts3lib.getConnectionStatus(schid)
         if status == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             self.activity["details"] = "Disconnected"
-            if hasattr(self.activity, "state"): del self.activity["state"]
-            if hasattr(self.activity, "party"): del self.activity["party"]
+            self.activity["state"] = ""
+            del self.activity["party"]
             self.activity["assets"] = {
                 "small_text": "Disconnected",
                 "small_image": "",
@@ -94,13 +103,26 @@ class discordify(ts3plugin):
         (err, name) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
         from unidecode import unidecode
         self.activity["details"] = unidecode(name)
+        server_type = getServerType(schid)
+        if server_type == ServerInstanceType.TEASPEAK:
+            self.activity["assets"]["large_text"] = "TeaSpeak"
+            self.activity["assets"]["large_image"] = "teaspeak"
+        elif server_type == ServerInstanceType.VANILLA:
+            self.activity["assets"]["large_text"] = "TeamSpeak 3"
+            self.activity["assets"]["large_image"] = "teamspeak"
+        elif server_type == ServerInstanceType.SDK:
+            self.activity["assets"]["large_text"] = "TeamSpeak 3 SDK"
+            self.activity["assets"]["large_image"] = "teamspeak"
+        else:
+            self.activity["assets"]["large_text"] = "Unknown"
+            self.activity["assets"]["large_image"] = "logo"
         self.update = True
 
     def updateChannel(self, schid, ownID=0, ownCID=0):
         if not ownID: (err, ownID) = ts3lib.getClientID(schid)
         if not ownCID: (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         (err, cname) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_NAME)
-        name = re.sub(r'^\[[crl\*]spacer(\d+)?\]', '', cname, flags=re.IGNORECASE|re.UNICODE)
+        name = re.sub(r'^\[[crl\*]spacer(.*)?\]', '', cname, flags=re.IGNORECASE|re.UNICODE)
         from unidecode import unidecode
         self.activity["state"] = unidecode(name)
         (err, clist) = ts3lib.getChannelClientList(schid, ownCID)
