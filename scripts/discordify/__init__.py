@@ -22,7 +22,6 @@ class discordify(ts3plugin):
     menuItems = []
     hotkeys = []
     discord = None
-    connected = False
     update = False
     timer = QTimer()
     activity = {
@@ -47,7 +46,6 @@ class discordify(ts3plugin):
         self.discord = ipc.DiscordIPC("450824928841957386")
         try:
             self.discord.connect()
-            self.connected = True
         except: pass
         self.timer.timeout.connect(self.tick)
         self.timer.setTimerType(2)
@@ -66,10 +64,8 @@ class discordify(ts3plugin):
     def tick(self):
         try:
             if not self.update: return
-            if not self.connected:
-                try:
-                    self.discord.connect()
-                    self.connected = True
+            if not self.discord.connected:
+                try: self.discord.connect()
                 except: pass
             self.discord.update_activity(self.activity)
             self.update = False
