@@ -14,12 +14,9 @@ class quickPerm(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [
-        # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")
-    ]
+    menuItems = [] # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")
     hotkeys = []
     enabled = True
-    retcode = ""
     permissions = [
         ("i_permission_modify_power", 75, True),
         ("i_client_permission_modify_power", 75, True),
@@ -50,18 +47,15 @@ class quickPerm(ts3plugin):
         (err, dgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_SERVER_GROUP)
         if sgid == dgid: return
         (err, cldbid) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        pids = [];pvals = [];pskips = []
         for perm in self.permissions:
             (err, pid) = ts3lib.getPermissionIDByName(schid, perm[0])
-            pids.append(pid)
-            pvals.append(100 if sgid == 2 and perm[1] == 75 else perm[1])
-            pskips.append(perm[2])
-        result = ts3lib.requestClientAddPerm(schid, cldbid, pids, pvals, pskips)
-        msg = ""
-        if result == ts3defines.ERROR_ok:
-            msg = "[color=green] Successfully sneaked"
-        else: msg = "[color=red]Failed giving"
-        ts3lib.printMessageToCurrentTab("{} {} {} permissions for {}".format(self.name, msg,len(self.permissions),clientURL(schid, ownID, clientUniqueIdentity, clientName)))
+            v = 100 if sgid == 2 and perm[1] == 75 else perm[1]
+            ts3lib.requestClientAddPerm(schid, cldbid, [pid], [v], [perm[2]], "quickperm")
+            (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+            ts3lib.requestChannelClientAddPerm(schid, ownCID, [pid], [v], [perm[2]], "quickperm")
+            ts3lib.requestChannelAddPerm(schid, ownCID, [pid], v, "quickperm")
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if returnCode == self.retcode: self.retcode = ""; return True
+        if returnCode == "quickperm": return True
+    def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+        if returnCode == "quickperm": return True

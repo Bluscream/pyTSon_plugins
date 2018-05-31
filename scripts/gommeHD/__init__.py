@@ -36,6 +36,7 @@ class gommeHD(ts3plugin):
     schid = 0
     clids = []
     dynamicSilenceCache = []
+    gommeBotID = 0
     timer = QTimer()
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     blockMSG = "Diesen Befehl kannst du nur als Channel-Admin ausführen!"
@@ -164,8 +165,7 @@ Ich erklär dir auch wie's geht:
             (err, cnp) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC)
             if not cnp or cnp == "": ts3lib.setChannelVariableAsString(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC, "Team | Lounge 1")
             ts3lib.flushChannelUpdates(schid, channelID)
-        return
-        if self.gommeBotID == 0: return
+        if self.gommeBotID < 1: return
         ts3lib.requestSendPrivateTextMsg(schid, "registriert", self.gommeBotID)
 
     def onUpdateChannelEditedEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentifier):

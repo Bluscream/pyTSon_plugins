@@ -44,9 +44,8 @@ class discordify(ts3plugin):
             PluginInstaller().installPackages(['discoIPC'])
             from discoIPC import ipc
         self.discord = ipc.DiscordIPC("450824928841957386")
-        try:
-            self.discord.connect()
-        except: pass
+        try: self.discord.connect()
+        except: ts3lib.logMessage("Discord not running!", ts3defines.LogLevel.LogLevel_WARNING, "pyTSon Discord Rich Presence", 0)
         self.timer.timeout.connect(self.tick)
         self.timer.setTimerType(2)
         self.timer.start(1000)
@@ -62,16 +61,13 @@ class discordify(ts3plugin):
         self.discord.disconnect()
 
     def tick(self):
+        if not self.update: return
         try:
-            if not self.update: return
-            if not self.discord.connected:
-                try: self.discord.connect()
-                except: pass
+            if not self.discord.connected: self.discord.connect()
             self.discord.update_activity(self.activity)
-            self.update = False
-            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "updated:", self.activity)
-        except: # ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
-            print(format_exc())
+        except: pass
+        self.update = False
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "updated:", self.activity)
 
     def currentServerConnectionChanged(self, schid):
         self.onTabChangedEvent(schid)
@@ -83,7 +79,7 @@ class discordify(ts3plugin):
         if status == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             self.activity["details"] = "Disconnected"
             self.activity["state"] = ""
-            del self.activity["party"]
+            if hasattr(self.activity, "party"): del self.activity["party"]
             self.activity["assets"] = {
                 "small_text": "Disconnected",
                 "small_image": "",
@@ -146,6 +142,8 @@ class discordify(ts3plugin):
         self.activity["assets"]["large_text"] = unidecode(name)
 
     def updateVoice(self, schid, status=None):
+        curschid = ts3lib.getCurrentServerConnectionHandlerID()
+        if schid != curschid: return
         if not status: (err, status) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_FLAG_TALKING)
         (err, afk) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_AWAY)
         (err, output_activated) = ts3lib.getClientSelfVariable(schid,ts3defines.ClientProperties.CLIENT_OUTPUT_HARDWARE)
