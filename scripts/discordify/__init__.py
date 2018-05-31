@@ -58,7 +58,7 @@ class discordify(ts3plugin):
 
     def stop(self):
         self.timer.stop()
-        self.discord.disconnect()
+        if self.discord.connected: self.discord.disconnect()
 
     def tick(self):
         if not self.update: return

@@ -17,33 +17,40 @@ class autoCommander(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Channel Commander Spam", "")
     ]
     hotkeys = []
-    timer = None
+    timer = QTimer()
     schid = 0
+    requested = 0
+    retcode = __name__
 
     def __init__(self):
+        self.timer.timeout.connect(self.tick)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
+    def stop(self):
+        if self.timer.isActive(): self.timer.stop()
+        del self.timer
+
     def toggleTimer(self, schid):
-        if self.timer is None:
-            self.timer = QTimer()
-            self.timer.timeout.connect(self.tick)
         if self.timer.isActive():
             self.timer.stop()
-            self.timer = None
         else:
             interval = inputInt(self.name, 'Interval in Milliseconds:')
             self.schid = schid
-            if interval < 1: ts3lib.requestServerVariables(schid)
+            if interval < 1:
+                self.requested = schid
+                ts3lib.requestServerVariables(schid)
             else: self.timer.start(interval)
 
     def onServerUpdatedEvent(self, schid):
-        if not self.schid == schid: return
+        if self.requested != schid: return
+        self.requested = 0
+        self.schid = schid
         self.timer.start(calculateInterval(schid, AntiFloodPoints.CLIENTUPDATE, self.name))
 
     def tick(self):
         (err, commander) =ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER)
         ts3lib.setClientSelfVariableAsInt(self.schid, ts3lib.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER, not commander)
-        ts3lib.flushClientSelfUpdates(self.schid)
+        ts3lib.flushClientSelfUpdates(self.schid, self.retcode)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID == 0: self.toggleTimer(schid)
@@ -54,7 +61,18 @@ class autoCommander(ts3plugin):
         (err, val) = ts3lib.getClientNeededPermission(schid, "b_client_use_channel_commander")
         if val: return
         ts3lib.setClientSelfVariableAsInt(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER, 1)
-        ts3lib.flushClientSelfUpdates(schid)
+        ts3lib.flushClientSelfUpdates(schid, self.retcode)
 
     def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
-        if failedPermissionID == 185: return True
+        if returnCode != self.retcode: return
+        # if failedPermissionID == 185: return True
+        return True
+
+    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if returnCode != self.retcode: return
+        if error == ts3defines.ERROR_client_is_flooding:
+            ts3lib.printMessageToCurrentTab("{}: [color=red][b]Client is flooding, stopping!".format(self.name))
+            self.timer.stop()
+            return True
+        elif error == ts3defines.ERROR_ok:
+            return True

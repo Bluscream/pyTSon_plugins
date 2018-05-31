@@ -55,6 +55,14 @@ class recordSpam(ts3plugin):
             if interval < 1: ts3lib.requestServerVariables(schid)
             else: self.timer.start(interval)
 
+    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if not self.timer.isActive(): return
+        if error == ts3defines.ERROR_client_is_flooding:
+            ts3lib.printMessageToCurrentTab("{}: [color=red][b]Client is flooding, stopping!".format(self.name))
+            self.timer.stop()
+            if self.hook: sendCommand(self.name, "clientupdate client_is_recording=0", self.schid)
+            else: ts3lib.stopVoiceRecording(self.schid)
+            return True
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus != ts3defines.ConnectStatus.STATUS_DISCONNECTED: return

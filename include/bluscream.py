@@ -471,11 +471,6 @@ def getContactStatus(uid):
     del db
     return ret
 
-class ContactStatus(object):
-    FRIEND = 0
-    BLOCKED = 1
-    NEUTRAL = 2
-
 # TS3Hook #
 def escapeStr(str,unescape=False):
     """
@@ -613,11 +608,21 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
 
 dlpath = ""
 
+class ContactStatus(object):
+    FRIEND = 0
+    BLOCKED = 1
+    NEUTRAL = 2
+
 class ServerInstanceType(object):
     VANILLA = 0
     SDK = 1
     TEASPEAK = 2
     UNKNOWN = 3
+
+class GroupType(object):
+    TEMPLATE = 0
+    REGULAR = 1
+    QUERY = 2
 
 class AntiFloodPoints(object):
     AUTH = 0
@@ -788,10 +793,6 @@ class AntiFloodPoints(object):
     VERIFYSERVERPASSWORD = 5
     VERSION = 0
     WHOAMI = 0
-
-class GroupType(object):
-    TEMPLATE = 0
-    REGULAR = 1
 
 class color(object):
     DEFAULT = "[color=white]"
