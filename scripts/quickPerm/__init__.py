@@ -52,7 +52,7 @@ class quickPerm(ts3plugin):
             v = 100 if sgid == 2 and perm[1] == 75 else perm[1]
             ts3lib.requestClientAddPerm(schid, cldbid, [pid], [v], [perm[2]], "quickperm")
             (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-            ts3lib.requestChannelClientAddPerm(schid, ownCID, [pid], [v], [perm[2]], "quickperm")
+            ts3lib.requestChannelClientAddPerm(schid, ownCID, cldbid, [pid], [v], "quickperm")
             ts3lib.requestChannelAddPerm(schid, ownCID, [pid], v, "quickperm")
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):

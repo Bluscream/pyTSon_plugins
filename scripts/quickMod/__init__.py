@@ -50,9 +50,7 @@ class quickMod(ts3plugin):
         pass # saveCfg(self.ini, self.cfg)
 
     def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
-
     def onHotkeyEvent(self, keyword): self.onHotkeyOrCommandEvent(keyword)
-
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         if keyword == "restrict_last_joined_server":

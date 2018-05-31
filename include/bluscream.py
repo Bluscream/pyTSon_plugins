@@ -262,7 +262,7 @@ def getAntiFloodSettings(schid):
     (err, cmdblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
     (err, ipblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
     (err, afreduce) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
-    return (err, cmdblock, ipblock, afreduce)
+    return err, cmdblock, ipblock, afreduce
 
 def calculateInterval(schid, command, name="pyTSon"):
     """
@@ -270,7 +270,7 @@ def calculateInterval(schid, command, name="pyTSon"):
     :param schid:
     :param command:
     :param name:
-    :return:
+    :return: interval: int
     """
     # ts3lib.requestServerVariables(schid)
     (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
@@ -280,8 +280,8 @@ def calculateInterval(schid, command, name="pyTSon"):
     # if err != ts3defines.ERROR_ok or strange:
         # ts3lib.requestServerVariables(schid)
         # (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
-    interval = round(1000/((afreduce/command)))
-    ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command), command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
+    interval = round(1000/(afreduce/command))
+    ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command, locals()), command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
     return interval
 
 # I/O #
