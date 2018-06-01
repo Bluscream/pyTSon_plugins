@@ -4,6 +4,10 @@ from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
 from bluscream import timestamp, sendCommand, getAddons, inputInt, calculateInterval, AntiFloodPoints, intList, parseTime, getContactStatus, ContactStatus, varname
 
+class Mode(object):
+    REVOKE_TALK_POWER = 0
+    CHANNEL_BAN = 1
+
 def parseMessage(logMessage):
     log = intList(logMessage, ";")
     return log[0], log[1]
@@ -24,6 +28,8 @@ class volumeLeveler(ts3plugin):
     clients = {}
     maxlevel = 20000
     maxviolations = 15
+    mode = Mode.REVOKE_TALK_POWER
+    bancgid = 12
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
@@ -37,10 +43,17 @@ class volumeLeveler(ts3plugin):
         # date = parseTime(logTime)
         if self.clients[clid] > self.maxviolations:
             self.clients[clid] = 0
-            ts3lib.requestClientSetIsTalker(schid, clid, False)
             (err, country) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_COUNTRY)
+            err = 0
             msg = "[color=red]You exceeded the volume limit {violations} times, your talk power has been revoked!"
             if country in ["DE", "AT", "CH"]: msg = "[color=red]Du hast {violations} mal das Lautstaerkelimit von {limit} ueberschritten, deine Talk Power wurde entzogen!"
+            if self.mode == Mode.REVOKE_TALK_POWER:
+                err = ts3lib.requestClientSetIsTalker(schid, clid, False)
+            elif self.mode == Mode.CHANNEL_BAN:
+                (err, cid) = ts3lib.getChannelOfClient(schid, clid)
+                (err, dbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+                err = ts3lib.requestSetClientChannelGroup(schid, [self.bancgid], [cid], [dbid])
+            if err != ts3defines.ERROR_ok: return
             ts3lib.requestSendPrivateTextMsg(schid, msg.replace("{violations}",str(self.maxviolations)).replace("{limit}",str(self.maxlevel)), clid)
             return
         if level > self.maxlevel:
@@ -53,7 +66,8 @@ class volumeLeveler(ts3plugin):
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         if not ownCID in [newChannelID, oldChannelID]: return
         (err, tp) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
-        if not tp or tp < 1: return
+        if not tp or tp < 1: self.mode = Mode.CHANNEL_BAN
+        else: self.mode = Mode.REVOKE_TALK_POWER
         """
         (err, acgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_ADMIN_GROUP)
         (err, ownCGID) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)

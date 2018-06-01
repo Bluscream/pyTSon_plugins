@@ -109,7 +109,7 @@ class serverSwitcher(ts3plugin):
             self.setStatus(schid, ownid)
     """
 
-    def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
+    def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue): # todo use INPUT_DEACTIVATED
         if not self.cfg.getboolean("general", "enabled"): return
         if flag == ts3defines.ClientProperties.CLIENT_INPUT_HARDWARE and newValue == "1":
             self.setStatus(schid)

@@ -448,11 +448,13 @@ class chatBot(ts3plugin):
         try:
             import json;from PythonQt.QtNetwork import QNetworkRequest, QNetworkReply
             results = json.loads(reply.readAll().data().decode('utf-8'))["items"]
-            i = 1
+            i = 0
+            msg = ""
             for result in results:
-                if i == 3: break
-                self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], "[url={0}]{1}[/url]".format(result["link"],result["title"]), True)
+                if i == 5: break
+                msg += "\n"+"[url={0}]{1}[/url]".format(result["link"], result["title"])
                 i += 1
+            self.answerMessage(self.cmdevent["schid"], self.cmdevent["targetMode"], self.cmdevent["toID"], self.cmdevent["fromID"], str(i)+" Results found:"+msg, True)
             self.cmdevent = {"event": "", "returnCode": "", "schid": 0, "targetMode": 4, "toID": 0, "fromID": 0, "params": ""}
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 

@@ -28,6 +28,7 @@ class gommeHD(ts3plugin):
     gommeBotNick = "Gomme-Bot"
     dynamicSilenceName = "msg me"
     delay = 1500
+    nicknames = ["Qmx1c2NyZWFt=","Q2hyaXN0b3BoZXIgQXVyaWNo=","RGFubnkgUmFkbWFjaGVy="]
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
     askForAvatar = False
@@ -212,3 +213,10 @@ Ich erklär dir auch wie's geht:
             if not self.dynamicSilenceName in params["client_nickname"].lower(): return
             ts3lib.requestSendPrivateTextMsg(schid, "Yes, {}-{}?".format(clientURL(schid, clid), choice(["chan","san"])), clid)
             # ts3lib.printMessageToCurrentTab("{} {}".format(cmd, params)) # ["client_nickname"][1]
+
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
+        (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        if suid != self.suid: return
+        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, choice(self.nicknames))
+        ts3lib.flushClientSelfUpdates(schid)
