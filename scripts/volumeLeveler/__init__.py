@@ -53,6 +53,7 @@ class volumeLeveler(ts3plugin):
                 (err, cid) = ts3lib.getChannelOfClient(schid, clid)
                 (err, dbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
                 err = ts3lib.requestSetClientChannelGroup(schid, [self.bancgid], [cid], [dbid])
+                err = ts3lib.requestClientSetIsTalker(schid, clid, False)
             if err != ts3defines.ERROR_ok: return
             ts3lib.requestSendPrivateTextMsg(schid, msg.replace("{violations}",str(self.maxviolations)).replace("{limit}",str(self.maxlevel)), clid)
             return
@@ -62,11 +63,15 @@ class volumeLeveler(ts3plugin):
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         (err, ownID) = ts3lib.getClientID(schid)
-        if clid == ownID: return #(err, clids) = ts3lib.getChannelClientList(schid, newChannelID)
+        if clid == ownID:
+            self.clients = {}
+            return #(err, clids) = ts3lib.getChannelClientList(schid, newChannelID)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         if not ownCID in [newChannelID, oldChannelID]: return
+        (err, owncgid) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
+        if not owncgid in [10,11]: return
         (err, tp) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
-        if not tp or tp < 1: self.mode = Mode.CHANNEL_BAN
+        if not tp or tp < 1 or tp == "-1": self.mode = Mode.CHANNEL_BAN
         else: self.mode = Mode.REVOKE_TALK_POWER
         """
         (err, acgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_ADMIN_GROUP)
@@ -85,6 +90,14 @@ class volumeLeveler(ts3plugin):
             self.clients[clid] = 0
         elif oldChannelID == ownCID:
             if clid in self.clients: del self.clients[clid]
+
+    def onUpdateChannelEditedEvent(self, schid, cid, clid, invokerName, invokerUniqueIdentifier):
+        (err, ownID) = ts3lib.getClientID(schid)
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        if cid != ownCID: return
+        (err, tp) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+        if not tp or tp < 1 or tp == "-1": self.mode = Mode.CHANNEL_BAN
+        else: self.mode = Mode.REVOKE_TALK_POWER
 
 """
     fullchannel: 0 newChannelID: 0
