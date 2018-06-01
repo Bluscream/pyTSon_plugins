@@ -252,6 +252,9 @@ def getServerType(schid, pattern=None):
     elif "teaspeak" in ver.lower(): return ServerInstanceType.TEASPEAK
     else: return ServerInstanceType.UNKNOWN
 
+def parseTime(time_str):
+    return datetime.strptime(time_str.rsplit('.', 1)[0], "%Y-%m-%d %H:%M:%S") # 2017-05-31 21:51:28.563532
+
 # AntiFlood
 def getAntiFloodSettings(schid):
     """
@@ -609,20 +612,25 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
 dlpath = ""
 
 class ContactStatus(object):
+    """
+    Order is important!
+    """
     FRIEND = 0
     BLOCKED = 1
     NEUTRAL = 2
-
-class ServerInstanceType(object):
-    VANILLA = 0
-    SDK = 1
-    TEASPEAK = 2
     UNKNOWN = 3
 
+class ServerInstanceType(object):
+    UNKNOWN = 0
+    VANILLA = 1
+    SDK = 2
+    TEASPEAK = 3
+
 class GroupType(object):
-    TEMPLATE = 0
-    REGULAR = 1
-    QUERY = 2
+    UNKNOWN = 0
+    TEMPLATE = 1
+    REGULAR = 2
+    QUERY = 3
 
 class AntiFloodPoints(object):
     AUTH = 0
