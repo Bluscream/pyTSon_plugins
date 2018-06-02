@@ -1,9 +1,8 @@
 import ts3lib, ts3defines
-from datetime import datetime
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
-from ts3Ext import ts3SessionHost, logLevel
-from bluscream import timestamp, sendCommand, getAddons, inputInt, calculateInterval, AntiFloodPoints, intList, parseTime, getContactStatus, ContactStatus, varname
+from PythonQt.QtCore import QTimer
+from bluscream import timestamp, intList, getContactStatus, ContactStatus
 
 class Mode(object):
     REVOKE_TALK_POWER = 0
@@ -27,18 +26,18 @@ class volumeLeveler(ts3plugin):
     menuItems = []
     hotkeys = []
     clients = {}
-    maxlevel = 20000
-    maxviolations = 15
-    mode = Mode.REVOKE_TALK_POWER
-    guiLogLvl = logLevel.ALL
     ts3host = None
-    banned_names = ["BAN", "NOT WELCOME"]
-    mod_names = ["MOD", "OPERATOR"]
-    admin_names = ["ADMIN"]
+    tabs = {}
+    mode = Mode.REVOKE_TALK_POWER
+    maxlevel = 30000
+    maxviolations = 15
 
     def __init__(self):
-        if "aaa_ts3Ext" in PluginHost.active: self.ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
-        else: self.ts3host = ts3SessionHost(self)
+        if "aaa_ts3Ext" in PluginHost.active:
+            ts3ext = PluginHost.active["aaa_ts3Ext"]
+            self.ts3host = ts3ext.ts3host
+            self.tabs = ts3ext.tabs
+        else: QTimer.singleShot(500, self.__init__)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onUserLoggingMessageEvent(self, logMessage, logLevel, logChannel, schid, logTime, completeLogString):
@@ -50,62 +49,45 @@ class volumeLeveler(ts3plugin):
         # date = parseTime(logTime)
         if self.clients[clid] > self.maxviolations:
             self.clients[clid] = 0
-            groups = self.ts3host.getServer(schid)._ts3ChannelGroups
+            client = self.ts3host.getUser(schid, clid)
+            if not client.server.me.getChannelGroupId() in [self.tabs[schid]["channelModGroup"], client.server.defaultChannelAdminGroup]:
+                client.mute()
+                return
             (err, country) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_COUNTRY)
-            err = 0
             msg = "[color=red]You exceeded the volume limit {violations} times, your talk power has been revoked!"
             if country in ["DE", "AT", "CH"]: msg = "[color=red]Du hast {violations} mal das Lautstaerkelimit von {limit} ueberschritten, deine Talk Power wurde entzogen!"
-            if self.mode == Mode.REVOKE_TALK_POWER:
-                err = ts3lib.requestClientSetIsTalker(schid, clid, False)
-            elif self.mode == Mode.CHANNEL_BAN:
-                (err, cid) = ts3lib.getChannelOfClient(schid, clid)
-                (err, dbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-                err = ts3lib.requestSetClientChannelGroup(schid, [self.bancgid], [cid], [dbid])
-                err = ts3lib.requestClientSetIsTalker(schid, clid, False)
+            tp = client.channel.neededTalkPower
+            if not tp or tp < 1 or tp == "-1":
+                ts3lib.requestSetClientChannelGroup(schid, [self.tabs[schid]["channelBanGroup"]], [client.channel.channelID], [client.databaseID])
+            err = ts3lib.requestClientSetIsTalker(schid, clid, False)
             if err != ts3defines.ERROR_ok: return
-            ts3lib.requestSendPrivateTextMsg(schid, msg.replace("{violations}",str(self.maxviolations)).replace("{limit}",str(self.maxlevel)), clid)
+            client.sendTextMsg(msg.replace("{violations}",str(self.maxviolations)).replace("{limit}",str(self.maxlevel)))
             return
         if level > self.maxlevel:
             self.clients[clid] += 1
             print(clid, level, self.clients[clid])
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
-        (err, ownID) = ts3lib.getClientID(schid)
-        if clid == ownID:
+        srv = self.ts3host.getServer(schid)
+        if clid == srv.me.clientID:
             self.clients = {}
-            return #(err, clids) = ts3lib.getChannelClientList(schid, newChannelID)
-        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-        if not ownCID in [newChannelID, oldChannelID]: return
-        (err, owncgid) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
-        if not owncgid in [10,11]: return
-        (err, tp) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
-        if not tp or tp < 1 or tp == "-1": self.mode = Mode.CHANNEL_BAN
-        else: self.mode = Mode.REVOKE_TALK_POWER
-        """
-        (err, acgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_ADMIN_GROUP)
-        (err, ownCGID) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
-        if ownCGID != acgid: return
-        """
-        (err, perm) = ts3lib.getClientNeededPermission(schid, "b_client_set_flag_talker")
-        if not perm: return
-        if newChannelID == ownCID:
-            (err, cgid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
-            (err, dcgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)
-            if cgid != dcgid: return
-            (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-            status = getContactStatus(uid)
+            (err, clids) = ts3lib.getChannelClientList(schid, newChannelID)
+            for clid in clids:
+                if clid == srv.me.clientID: continue
+                self.onClientMoveEvent(schid, clid, 0, srv.me.channel.channelID, ts3defines.Visibility.ENTER_VISIBILITY, "")
+            return
+        if not srv.me.channel.channelID in [newChannelID, oldChannelID]: return
+        # if not srv.me.getChannelGroupId() in [self.tabs[schid]["channelModGroup"],srv.defaultChannelAdminGroup]: return
+        # (err, perm) = ts3lib.getClientNeededPermission(schid, "b_client_set_flag_talker")
+        # if not perm: return
+        if newChannelID == srv.me.channel.channelID:
+            client = srv.getUser(clid)
+            if client.getChannelGroupId() != srv.defaultChannelGroup: return
+            status = getContactStatus(srv.me.uid)
             if status == ContactStatus.FRIEND: return
             self.clients[clid] = 0
-        elif oldChannelID == ownCID:
+        elif oldChannelID == srv.me.channel.channelID:
             if clid in self.clients: del self.clients[clid]
-
-    def onUpdateChannelEditedEvent(self, schid, cid, clid, invokerName, invokerUniqueIdentifier):
-        (err, ownID) = ts3lib.getClientID(schid)
-        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-        if cid != ownCID: return
-        (err, tp) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
-        if not tp or tp < 1 or tp == "-1": self.mode = Mode.CHANNEL_BAN
-        else: self.mode = Mode.REVOKE_TALK_POWER
 
 """
     fullchannel: 0 newChannelID: 0
