@@ -627,10 +627,10 @@ class ServerInstanceType(object):
     TEASPEAK = 3
 
 class GroupType(object):
-    UNKNOWN = 0
-    TEMPLATE = 1
-    REGULAR = 2
-    QUERY = 3
+    TEMPLATE = 0
+    REGULAR = 1
+    QUERY = 2
+    UNKNOWN = 3
 
 class AntiFloodPoints(object):
     AUTH = 0

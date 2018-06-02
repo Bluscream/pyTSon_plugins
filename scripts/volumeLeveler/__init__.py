@@ -2,6 +2,7 @@ import ts3lib, ts3defines
 from datetime import datetime
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
+from ts3Ext import ts3SessionHost, logLevel
 from bluscream import timestamp, sendCommand, getAddons, inputInt, calculateInterval, AntiFloodPoints, intList, parseTime, getContactStatus, ContactStatus, varname
 
 class Mode(object):
@@ -29,9 +30,15 @@ class volumeLeveler(ts3plugin):
     maxlevel = 20000
     maxviolations = 15
     mode = Mode.REVOKE_TALK_POWER
-    bancgid = 12
+    guiLogLvl = logLevel.ALL
+    ts3host = None
+    banned_names = ["BAN", "NOT WELCOME"]
+    mod_names = ["MOD", "OPERATOR"]
+    admin_names = ["ADMIN"]
 
     def __init__(self):
+        if "aaa_ts3Ext" in PluginHost.active: self.ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
+        else: self.ts3host = ts3SessionHost(self)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onUserLoggingMessageEvent(self, logMessage, logLevel, logChannel, schid, logTime, completeLogString):
@@ -43,6 +50,7 @@ class volumeLeveler(ts3plugin):
         # date = parseTime(logTime)
         if self.clients[clid] > self.maxviolations:
             self.clients[clid] = 0
+            groups = self.ts3host.getServer(schid)._ts3ChannelGroups
             (err, country) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_COUNTRY)
             err = 0
             msg = "[color=red]You exceeded the volume limit {violations} times, your talk power has been revoked!"
