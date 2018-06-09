@@ -22,7 +22,7 @@ class addonList(ts3plugin):
     offersConfigure = True
     commandKeyword = ""
     infoTitle = "[b]Addons[/b]:"
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "List Addons", "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "List Addons", "scripts/info/meta_data.svg")]
     hotkeys = []
     ini = path.join(pytson.getPluginPath(), "scripts", "addonList", "settings.ini")
     cfg = ConfigParser()

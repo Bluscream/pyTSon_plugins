@@ -132,6 +132,10 @@ def getvar(clid):
     #             print("Sent command "+cmd+" to PluginCommandTarget_MAX")
     #         sendPluginCommand(schid, cmd, c, [])
 
+def error(errorCode):
+    (err, msg) = ts3lib.getErrorMessage(errorCode)
+    print("{}: \"{}\" ({})".format(errorCode,msg,err))
+
 self = QApplication.instance()
 schid = getCurrentServerConnectionHandlerID()
 (_e, ownid) = getClientID(schid)
