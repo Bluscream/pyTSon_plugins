@@ -27,6 +27,8 @@ class quickPerm(ts3plugin):
         ("b_virtualserver_token_use", True, True),
         ("b_virtualserver_token_delete", True, True),
         ("b_client_ignore_bans", True, True),
+        ("i_client_ban_power", 75, True),
+        ("i_client_needed_ban_power", 75, True),
         ("b_client_remoteaddress_view", True, True)
     ]
 
@@ -53,7 +55,7 @@ class quickPerm(ts3plugin):
             ts3lib.requestClientAddPerm(schid, cldbid, [pid], [v], [perm[2]], "quickperm")
             (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
             ts3lib.requestChannelClientAddPerm(schid, ownCID, cldbid, [pid], [v], "quickperm")
-            ts3lib.requestChannelAddPerm(schid, ownCID, [pid], v, "quickperm")
+            # ts3lib.requestChannelAddPerm(schid, ownCID, [pid], [v], "quickperm")
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if returnCode == "quickperm": return True

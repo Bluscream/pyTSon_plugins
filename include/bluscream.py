@@ -200,6 +200,14 @@ def generateAvatarFileName(schid, clid=0):
     return "avatar_"+b64encode(uid.encode('ascii')).decode("ascii").split('=')[0]
 
 # PARSING #
+def serverURL(schid=None, name=None):
+    if schid is None:
+        try: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        except: pass
+    if name is None:
+        try: (error, name) = ts3lib.getServerVariable(schid, schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+        except: name = schid
+    return '[b][url=channelid://0]"{}"[/url][/b]'.format(name)
 def channelURL(schid=None, cid=0, name=None):
     """
 

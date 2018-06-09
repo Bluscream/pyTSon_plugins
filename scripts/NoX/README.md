@@ -1,2 +1,0 @@
-# BanBypasser (NoX) pyTSon script
-

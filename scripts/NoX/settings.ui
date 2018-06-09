@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_general">
       <attribute name="title">
@@ -241,6 +241,20 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBox_2">
+         <property name="text">
+          <string>Default Status</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_3">
+         <property name="text">
+          <string>Send Message to Mover</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -255,25 +269,10 @@
        </item>
       </layout>
       <zorder>chk_enabled_2</zorder>
-      <zorder>groupBox</zorder>
-      <zorder>groupBox_2</zorder>
-      <zorder>toolButton</zorder>
-      <zorder>toolButton_2</zorder>
-      <zorder>toolButton_3</zorder>
-      <zorder>toolButton_4</zorder>
-      <zorder>horizontalSpacer_2</zorder>
-      <zorder>horizontalSpacer_3</zorder>
-      <zorder>groupBox_2</zorder>
-      <zorder>groupBox_2</zorder>
-      <zorder>horizontalSpacer_2</zorder>
-      <zorder>toolButton_4</zorder>
-      <zorder>toolButton_3</zorder>
-      <zorder>groupBox</zorder>
       <zorder></zorder>
       <zorder>verticalSpacer_2</zorder>
-      <zorder>label_4</zorder>
-      <zorder>spn_antimove_delay</zorder>
-      <zorder>label_5</zorder>
+      <zorder>checkBox_2</zorder>
+      <zorder>checkBox_3</zorder>
      </widget>
      <widget class="QWidget" name="tab_antichannelkick">
       <attribute name="title">
@@ -320,6 +319,13 @@
           </spacer>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_4">
+         <property name="text">
+          <string>Default Status</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer_3">
@@ -465,6 +471,20 @@
         </layout>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkBox_5">
+         <property name="text">
+          <string>Default Status</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_6">
+         <property name="text">
+          <string>Rejoin Channel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_7">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -538,6 +558,34 @@
           </spacer>
          </item>
         </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_17">
+         <item>
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>Max Sleep Time:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="spm_antiserverban_maxsleeptime">
+           <property name="maximumSize">
+            <size>
+             <width>599</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_7">
+         <property name="text">
+          <string>Rejoin Channel</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer_4">

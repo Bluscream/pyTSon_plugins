@@ -614,9 +614,9 @@ class chatBot(ts3plugin):
         sgids = intList(sgids, ",")
         # tsgids = [145,115,130,131,117,132,118,133,134,135,136,137,138]
         # print(err, sgids)
-        if not 289 in sgids: return
+        if not 396 in sgids: return
         # if not any(x in sgids for x in tsgids): return
-        cid = 331
+        cid = 187
         (err, unlimited) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED)
         if unlimited:
             ts3lib.setChannelVariableAsString(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME, "╔-● Support Warteraum [Geschlossen]")

@@ -29,7 +29,7 @@ class volumeLeveler(ts3plugin):
     ts3host = None
     tabs = {}
     mode = Mode.REVOKE_TALK_POWER
-    maxlevel = 30000
+    maxlevel = 25000
     maxviolations = 15
 
     def __init__(self):
@@ -50,6 +50,7 @@ class volumeLeveler(ts3plugin):
         if self.clients[clid] > self.maxviolations:
             self.clients[clid] = 0
             client = self.ts3host.getUser(schid, clid)
+            if client.getChannelGroupId() != client.server.defaultChannelGroup: return
             if not client.server.me.getChannelGroupId() in [self.tabs[schid]["channelModGroup"], client.server.defaultChannelAdminGroup]:
                 client.mute()
                 return

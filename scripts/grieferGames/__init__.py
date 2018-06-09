@@ -15,7 +15,7 @@ class grieferGames(ts3plugin):
     infoTitle = None
     hotkeys = []
     menuItems = []
-    suid = "asd="
+    suid = "LCMpAlkzGXWdejugs5rHUnwjxro="
     waiting = {}
     mychan = 0
 

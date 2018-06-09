@@ -1,17 +1,16 @@
-import os.path, inspect, re, traceback, json, requests
-import ts3lib as ts3
+import os.path, inspect, re, traceback, json, ts3lib, requests
 from ts3plugin import ts3plugin, PluginHost
 from ts3defines import *
 from PythonQt.QtGui import QDialog, QInputDialog, QMessageBox, QWidget, QListWidgetItem, QTableWidgetItem
-from PythonQt.QtCore import Qt #, QUrl
-# from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
+from PythonQt.QtCore import Qt, QUrl
+from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest
 from pytsonui import setupUi
 from collections import OrderedDict
 from inspect import getmembers
 from configparser import ConfigParser
 from urllib.parse import quote as urlencode
-from bluscream import *
-from datetime import timedelta, date
+from bluscream import timestamp, clientURL, channelURL, serverURL, Time, getItems, getItemType
+from datetime import timedelta, date, datetime
 
 class info(ts3plugin):
     name = "Extended Info"
@@ -23,9 +22,15 @@ class info(ts3plugin):
     offersConfigure = True
     commandKeyword = "info"
     infoTitle = "[b]Extendend Info[/b]"
-    menuItems = [(PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Set Meta Data", ""),(PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Avatar Flag", "")]
+    menuItems = [
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Meta Data", "scripts/%s/avatar_flag.svg"%__name__),
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Set Avatar Flag", "scripts/%s/meta_data.svg"%__name__),
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Extended Info", "scripts/%s/info.svg"%__name__),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Extended Info", "scripts/%s/info.svg"%__name__),
+        (PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Extended Info", "scripts/%s/info.svg"%__name__)
+    ]
     hotkeys = []
-    ini = os.path.join(ts3.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
+    ini = os.path.join(ts3lib.getConfigPath(), "plugins", "pyTSon", "scripts", "info", "settings.ini")
     cfg = ConfigParser()
     cfg.optionxform = str
     runs = 0
@@ -72,7 +77,7 @@ class info(ts3plugin):
             with open(self.ini, 'w') as configfile:
                 self.cfg.write(configfile)
         if self.cfg.getboolean('general', 'Debug'):
-            ts3.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
+            ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def configDialogClosed(self, r, vals):
         try:
@@ -82,11 +87,11 @@ class info(ts3plugin):
                         if not val == self.cfg.getboolean('general', name):
                             self.cfg.set('general', str(name), str(val))
                     except:
-                        if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
+                        if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
                 with open(self.ini, 'w') as configfile:
                     self.cfg.write(configfile)
         except:
-            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def configure(self, qParentWidget):
         try:
@@ -96,43 +101,60 @@ class info(ts3plugin):
             self.dlg.raise_()
             self.dlg.activateWindow()
         except:
-            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
+            if self.cfg.getboolean('general', 'Debug'): from traceback import format_exc;ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
     def processCommand(self, schid, cmd):
         cmd = cmd.split(' ', 1)
         command = cmd[0].lower()
+        id = int(cmd[1])
         if command == "client":
-            clid = int(cmd[1])
-            (err, cid) = ts3.getChannelOfClient(schid, clid)
-            ts3.printMessageToCurrentTab("<{0}> Client {1} in channel {2}".format(Time(), clientURL(schid, clid), channelURL(schid, cid)))
-        return 1
+            (err, cid) = ts3lib.getChannelOfClient(schid, id)
+            ts3lib.printMessageToCurrentTab("<{}> Client {} in channel {}".format(Time(), clientURL(schid, id), channelURL(schid, cid)))
+            return True
+        elif command == "channel":
+            (err, clids) = ts3lib.getChannelClientList(schid, id)
+            channel_clients = []
+            for clid in clids: channel_clients.append(clientURL(schid, clid))
+            ts3lib.printMessageToCurrentTab("<{}> Channel {} with [b]{}[/b] clients: {}".format(Time(), channelURL(schid, id), len(clids), ','.join(channel_clients)))
+            return True
+        elif command == "server":
+            ts3lib.printMessageToCurrentTab("<{}> Server {}".format(Time(), serverURL(schid)))
+            return True
+        else:
+            ts3lib.printMessageToCurrentTab(schid, "Syntax: /py info client/channel/server <id>")
+            return False
+
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if atype == PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
-            if menuItemID == 0:
-                error, ownid = ts3.getClientID(schid)
-                if error == ERROR_ok:
-                    error, meta = ts3.getClientVariableAsString(schid, ownid, ClientProperties.CLIENT_META_DATA)
+        if menuItemID == 0:
+            if not self.dlg:
+                self.dlg = VariablesDialog(self, schid, atype, selectedItemID)
+            self.dlg.show()
+            self.dlg.raise_()
+            self.dlg.activateWindow()
+        else:
+            if atype == PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+                err, ownid = ts3lib.getClientID(schid)
+                if err != ERROR_ok: return
+                if menuItemID == 1:
+                    error, meta = ts3lib.getClientVariableAsString(schid, ownid, ClientProperties.CLIENT_META_DATA)
                     if error == ERROR_ok:
                         x = QWidget()
                         _meta = QInputDialog.getMultiLineText(x, "Change own Meta Data", "Meta Data:", meta)
                         if _meta == meta: return
-                        error = ts3.setClientSelfVariableAsString(schid, ClientProperties.CLIENT_META_DATA, _meta)
+                        error = ts3lib.setClientSelfVariableAsString(schid, ClientProperties.CLIENT_META_DATA, _meta)
                         if not error == ERROR_ok:
                             _t = QMessageBox(QMessageBox.Critical, "Error #%s"%error, "Unable to set own meta data!");_t.show()
-            elif menuItemID == 1:
-                error, ownid = ts3.getClientID(schid)
-                if error == ERROR_ok:
-                    error, flag = ts3.getClientVariableAsString(schid, ownid, ClientPropertiesRare.CLIENT_FLAG_AVATAR)
-                    ts3.printMessageToCurrentTab("Your current avatar flag is: %s"%flag)
-                    if error == ERROR_ok:
-                        x = QWidget()
-                        _flag = QInputDialog.getText(x, "Change own Avatar Flag", "Avatar File MD5:")
-                        if _flag == "x" or _flag.strip() == flag.strip(): return
-                        error = ts3.setClientSelfVariableAsString(schid, ClientPropertiesRare.CLIENT_FLAG_AVATAR, _flag)
-                        error2 = ts3.flushClientSelfUpdates(schid)
-                        if not error == ERROR_ok or not error2 == ERROR_ok:
-                            _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own avatar flag!");_t.show()
+                elif menuItemID == 2:
+                    err, flag = ts3lib.getClientVariableAsString(schid, ownid, ClientPropertiesRare.CLIENT_FLAG_AVATAR)
+                    ts3lib.printMessageToCurrentTab("Your current avatar flag is: %s"%flag)
+                    x = QWidget()
+                    _flag = QInputDialog.getText(x, "Change own Avatar Flag", "Avatar File MD5:")
+                    if _flag == "x" or _flag.strip() == flag.strip(): return
+                    error = ts3lib.setClientSelfVariableAsString(schid, ClientPropertiesRare.CLIENT_FLAG_AVATAR, _flag)
+                    error2 = ts3lib.flushClientSelfUpdates(schid)
+                    if not error == ERROR_ok or not error2 == ERROR_ok:
+                        _t = QMessageBox(QMessageBox.Critical, "Error", "Unable to set own avatar flag!");_t.show()
 
     def getInfo(self, schid, selectedItemID, lists):
         i = []
@@ -141,13 +163,13 @@ class info(ts3plugin):
                 (name, var) = self.preProcessVar(schid, selectedItemID, name, var, lst)
                 if var is None: continue
                 if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
-                    (err, var) = ts3.getServerVariable(schid, var)
+                    (err, var) = ts3lib.getServerVariable(schid, var)
                 elif lst in [ChannelProperties, ChannelPropertiesRare]:
-                    (err, var) = ts3.getChannelVariable(schid, selectedItemID, var)
+                    (err, var) = ts3lib.getChannelVariable(schid, selectedItemID, var)
                 elif lst in [ConnectionProperties, ConnectionPropertiesRare]:
-                    (err, var) = ts3.getConnectionVariable(schid, selectedItemID, var)
+                    (err, var) = ts3lib.getConnectionVariable(schid, selectedItemID, var)
                 else:
-                    (err, var) = ts3.getClientVariable(schid, selectedItemID, var)
+                    (err, var) = ts3lib.getClientVariable(schid, selectedItemID, var)
                 if err != ERROR_ok or var == "" or var == 0: continue
                 if isinstance(var, map): var = ", ".join(map(str, var))
                 if name in ["VIRTUALSERVER_IP","CONNECTION_CLIENT_IP"]: i.extend(self.ipInfo(var))
@@ -156,59 +178,63 @@ class info(ts3plugin):
         return i
 
     def preProcessVar(self, schid, id, name, var, lst):
+        return name, var
         if name == "CLIENT_META_DATA":
-            (err, ownID) = ts3.getClientID(schid)
+            (err, ownID) = ts3lib.getClientID(schid)
             if id == ownID: return name, None
         elif name == "CHANNEL_PASSWORD": return name, None
         return name, var
 
-    def postProcessVar(self, schid, id, name, val, lst):
+    def postProcessVar(self, schid, id, name, val, lst): # TODO Check Why version is "3.1.3 [Build"
         if name in [
             "VIRTUALSERVER_CREATED",
             "CLIENT_LAST_VAR_REQUEST",
             "CLIENT_CREATED",
             "CLIENT_LASTCONNECTED"
         ]:
-            pass# val = date().fromtimestamp(val).strftime('%Y-%m-%d %H:%M:%S ({0})'.format(val))
+            timeobj = datetime.fromtimestamp(val).strftime('%Y-%m-%d %H:%M:%S')
+            val = "{} ({})".format(timeobj, val)
         elif name in [
             "VIRTUALSERVER_UPTIME",
             "VIRTUALSERVER_COMPLAIN_AUTOBAN_TIME",
             "VIRTUALSERVER_COMPLAIN_REMOVE_TIME",
             "CHANNEL_DELETE_DELAY",
             "CLIENT_IDLE_TIME",
-            "CONNECTION_CONNECTED_TIME",
             "CONNECTION_IDLE_TIME"
+        ]:
+            val = '{0} ({1})'.format(timedelta(seconds=val), val)
+        elif name in [
+            "CONNECTION_CONNECTED_TIME"
         ]:
             val = '{0} ({1})'.format(timedelta(milliseconds=val), val)
         elif name == "TYPE": (t,val) = getItemType(lst)
         elif name == "ID": return name, id
-        elif name == "DISPLAYNAME": (err, val) = ts3.getClientDisplayName(schid, id)
+        elif name == "DISPLAYNAME": (err, val) = ts3lib.getClientDisplayName(schid, id)
         if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
             name = name.replace("VIRTUALSERVER_", "")
         elif lst in [ChannelProperties, ChannelPropertiesRare]:
             name = name.replace("CHANNEL_", "")
         elif lst in [ConnectionProperties, ConnectionPropertiesRare]:
             name = name.replace("CONNECTION_", "")
-        elif list in [ClientProperties, ClientPropertiesRare]:
+        elif lst in [ClientProperties, ClientPropertiesRare]:
             name = name.replace("CLIENT_", "")
-        name = name.replace("_", " ").title()
-        return name, val
+        return name.replace("_", " ").title(), val
 
     def onServerUpdatedEvent(self, schid):
         return # TODO: Check
         if schid in self.requested: return
         self.requested.append(schid)
-        ts3.requestInfoUpdate(schid, PluginItemType.PLUGIN_SERVER, schid)
+        ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_SERVER, schid)
 
     def onConnectionInfoEvent(self, schid, clid):
         if clid in self.requestedCLIDS: return
         self.requestedCLIDS.append(clid)
-        ts3.requestInfoUpdate(schid, PluginItemType.PLUGIN_CLIENT, schid)
+        ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CLIENT, schid)
 
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
         if clid in self.requestedCLIDS: return
         self.requestedCLIDS.append(clid)
-        ts3.requestInfoUpdate(schid, PluginItemType.PLUGIN_CLIENT, schid)
+        ts3lib.requestInfoUpdate(schid, PluginItemType.PLUGIN_CLIENT, schid)
 
     def ipInfo(self, ip):
         url = 'http://ip-api.com/json/{0}'.format(ip)
@@ -233,7 +259,7 @@ class info(ts3plugin):
 
     def getServerInfo(self, schid):
         i = []
-        (err, host, port, password) = ts3.getServerConnectInfo(schid)
+        (err, host, port, password) = ts3lib.getServerConnectInfo(schid)
         i.append('Host: {0}'.format(host))
         if port: i.append('Port: {0}'.format(port))
         if password != "": i.append('Password: {0}'.format(password))
@@ -242,8 +268,8 @@ class info(ts3plugin):
 
     def getChannelInfo(self, schid, cid):
         i = []
-        (err, path, password) = ts3.getChannelConnectInfo(schid, cid)
-        (err, name) = ts3.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
+        (err, path, password) = ts3lib.getChannelConnectInfo(schid, cid)
+        (err, name) = ts3lib.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
         if path != name: i.append('Path: {0}'.format(path))
         if password != "": i.append('Password: {0}'.format(password))
         i.extend(self.getInfo(schid, cid, [ChannelProperties, ChannelPropertiesRare]))
@@ -256,40 +282,61 @@ class info(ts3plugin):
 
     def infoData(self, schid, id, atype):
         if not self.cfg.getboolean('general', 'InfoData'): return
+        return self.getInfoData(schid, id, atype)
+
+    def getInfoData(self, schid, id, atype):
+        print("schid",schid,"id",id,"atype",atype)
         if atype == PluginItemType.PLUGIN_SERVER:
             if not schid in self.requested:
-                ts3.requestServerVariables(schid)
+                ts3lib.requestServerVariables(schid)
             return self.getServerInfo(schid)
         elif atype == PluginItemType.PLUGIN_CHANNEL:
             return self.getChannelInfo(schid, id)
         elif atype == PluginItemType.PLUGIN_CLIENT:
             if not id in self.requestedCLIDS:
-                ts3.requestConnectionInfo(schid, id)
+                ts3lib.requestConnectionInfo(schid, id)
             return self.getClientInfo(schid, id)
         return None
 
 class VariablesDialog(QDialog):
-    def __init__(self, info, type, target, parent=None):
+    def __init__(self, info, schid, atype, selectedItemID, parent=None):
         super(QDialog, self).__init__(parent)
-        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "variables.ui"))
+        setupUi(self, os.path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "info", "variables.ui"))
         self.setAttribute(Qt.WA_DeleteOnClose)
-        self.setupTable(type, target)
+        self.info = info
+        self.schid = schid
+        self.atype = atype
+        self.selectedItemID = selectedItemID
+        self.setupTable()
 
-    def setupTable(self, type, target):
+    def setupTable(self):
         tbl = self.tbl_variables
-        tbl.clear()
-        for k, v in info.getVariables(type, target):
+        tbl.clearContents()
+        tbl.setRowCount(0)
+        for i in self.info.getInfoData(self.schid, self.selectedItemID, self.atype):
+            k = i.split(': ')[0]
+            v = i.split(': ')[1]
             pos = tbl.rowCount
             tbl.insertRow(pos)
             tbl.setItem(pos, 0, QTableWidgetItem(k))
             tbl.setItem(pos, 1, QTableWidgetItem(v))
-        displayName = ts3.getClientDisplayName()
-        self.setWindowTitle("{}'s Variables".format(target))
+        name = info.name
+        if self.atype == PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
+            err, name = ts3lib.getServerVariable(self.schid, VirtualServerProperties.VIRTUALSERVER_NAME)
+        elif self.atype == PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL:
+            err, name = ts3lib.getChannelVariable(self.schid, self.selectedItemID, ChannelProperties.CHANNEL_NAME)
+        elif self.atype == PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
+            err, name = ts3lib.getClientVariable(self.schid, self.selectedItemID, ClientProperties.CLIENT_NICKNAME)
+        tbl.sortItems(0)
+        self.setWindowTitle("{}'s Variables".format(name))
+
+    def on_btn_close_clicked(self): self.close()
+    def on_btn_reload_clicked(self): self.setupTable()
 
 class SettingsDialog(QDialog):
     def __init__(self, info, parent=None):
         super(QDialog, self).__init__(parent)
-        setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
+        setupUi(self, os.path.join(ts3lib.getPluginPath(), "pyTSon", "scripts", "info", "settings.ui"))
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.setWindowTitle("Extended Info Settings")
         self.chk_debug.setChecked(info.cfg.getboolean('general', 'Debug'))
@@ -359,7 +406,7 @@ class SettingsDialog(QDialog):
             yield parent.item(i)
 
     def on_btn_apply_clicked(self):
-        if self.info.cfg.getboolean('general', 'Debug'): ts3.printMessageToCurrentTab("on_btn_apply_clicked")
+        if self.info.cfg.getboolean('general', 'Debug'): ts3lib.printMessageToCurrentTab("on_btn_apply_clicked")
         self.info.cfg.set('general', 'Debug', str(self.chk_debug.isChecked()))
         self.info.cfg.set('general', 'InfoData', str(self.chk_infodata.isChecked()))
         self.info.cfg.set('general', 'Colored', str(self.chk_colored.isChecked()))
