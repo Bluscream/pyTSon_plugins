@@ -2,7 +2,7 @@ import ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
 from pytson import getCurrentApiVersion
-from bluscream import timestamp, sendCommand, getAddons, inputInt, calculateInterval, AntiFloodPoints
+from bluscream import timestamp, sendCommand, getAddons, inputInt, calculateInterval, AntiFloodPoints, escapeStr
 
 class recordSpam(ts3plugin):
     name = "Record Spam"
@@ -15,13 +15,14 @@ class recordSpam(ts3plugin):
     offersConfigure = False
     commandKeyword = "rec"
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle " + name, "scripts/%s/record.svg"%__name__)]
     hotkeys = [
         ("request_talk_power", "Request Talk Power")
     ]
     timer = QTimer()
     hook = False
     schid = 0
+    tpr_name = "Talk Power bitte?"
 
     def __init__(self):
         addons = getAddons()
@@ -39,12 +40,16 @@ class recordSpam(ts3plugin):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         if keyword == "request_talk_power":
             (err, oldnick) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-            ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, "Talk Power bitte?")
-            ts3lib.flushClientSelfUpdates(schid)
-            self.startVoiceRecording(schid)
-            self.stopVoiceRecording(schid)
-            ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, oldnick)
-            ts3lib.flushClientSelfUpdates(schid)
+            if self.hook:
+                sendCommand(self.name, "clientupdate client_nickname={} client_is_recording=1".format(escapeStr(self.tpr_name)), schid)
+                sendCommand(self.name, "clientupdate client_nickname={} client_is_recording=1".format(escapeStr(oldnick)), schid)
+            else:
+                ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, "Talk Power bitte?")
+                ts3lib.flushClientSelfUpdates(schid)
+                ts3lib.startVoiceRecording(schid)
+                ts3lib.stopVoiceRecording(schid)
+                ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, oldnick)
+                ts3lib.flushClientSelfUpdates(schid)
 
     def onServerUpdatedEvent(self, schid):
         if not self.schid == schid: return
@@ -62,9 +67,16 @@ class recordSpam(ts3plugin):
             ts3lib.stopVoiceRecording(schid)
 
     def tick(self):
-        if not self.schid or self.schid < 1: self.timer.stop()
-        self.startVoiceRecording(self.schid)
-        self.stopVoiceRecording(self.schid)
+        schid = self.schid
+        if not schid or schid < 1: self.timer.stop()
+        # self.startVoiceRecording(self.schid)
+        # self.stopVoiceRecording(self.schid)
+        if self.hook:
+            sendCommand(self.name, "clientupdate client_is_recording=1", schid)
+            sendCommand(self.name, "clientupdate client_is_recording=0", schid)
+        else:
+            ts3lib.startVoiceRecording(schid)
+            ts3lib.stopVoiceRecording(schid)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return

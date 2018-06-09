@@ -1,7 +1,7 @@
 import ts3defines, ts3lib
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import Qt, QTimer
-from bluscream import timestamp, inputInt, calculateInterval, AntiFloodPoints
+from bluscream import timestamp, inputInt, calculateInterval, AntiFloodPoints, escapeStr
 
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
@@ -14,7 +14,7 @@ class autoCommander(ts3plugin):
     commandKeyword = ""
     infoTitle = None
     menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Channel Commander Spam", "")
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Channel Commander Spam", "scripts/%s/commander.svg"%__name__)
     ]
     hotkeys = []
     timer = QTimer()
@@ -64,11 +64,13 @@ class autoCommander(ts3plugin):
         ts3lib.flushClientSelfUpdates(schid, self.retcode)
 
     def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+        print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
         if returnCode != self.retcode: return
         # if failedPermissionID == 185: return True
         return True
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
         if returnCode != self.retcode: return
         if error == ts3defines.ERROR_client_is_flooding:
             ts3lib.printMessageToCurrentTab("{}: [color=red][b]Client is flooding, stopping!".format(self.name))
