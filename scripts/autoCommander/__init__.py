@@ -72,6 +72,7 @@ class autoCommander(ts3plugin):
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
         if returnCode != self.retcode: return
+        print("test")
         if error == ts3defines.ERROR_client_is_flooding:
             ts3lib.printMessageToCurrentTab("{}: [color=red][b]Client is flooding, stopping!".format(self.name))
             self.timer.stop()

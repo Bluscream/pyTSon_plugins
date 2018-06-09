@@ -485,12 +485,11 @@ def getContactStatus(uid):
 # TS3Hook #
 def escapeStr(str,unescape=False):
     """
-
     :param str:
     :param unescape:
     :return:
     """
-    if unescape: str.replace(" ","\s").replace("|","\p").replace("    ","\t")
+    if unescape: return str.replace(" ","\s").replace("|","\p").replace("    ","\t")
     return str.replace("\s"," ").replace("\p","|").replace("\t","    ")
 
 def parseCommand(cmd):
@@ -610,9 +609,7 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
     (err, clid) = ts3lib.getClientID(schid)
     retcode = "" # "TS3Hook:Command:{}".format(ts3lib.createReturnCode(256))
     err = ts3lib.requestSendPrivateTextMsg(schid, cmd, clid, retcode)
-    if err != ts3defines.ERROR_ok:
-        (err, cid) = ts3lib.getChannelOfClient(schid, clid)
-        ts3lib.requestSendChannelTextMsg(schid, cmd, cid, retcode)
+    if err != ts3defines.ERROR_ok: ts3lib.requestSendChannelTextMsg(schid, cmd, 0, retcode)
     if err != ts3defines.ERROR_ok: ts3lib.requestSendServerTextMsg(schid, cmd, retcode)
 
 # DEFINES #

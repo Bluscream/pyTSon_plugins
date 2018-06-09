@@ -40,16 +40,16 @@ class recordSpam(ts3plugin):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         if keyword == "request_talk_power":
             (err, oldnick) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, self.tpr_name)
+            ts3lib.flushClientSelfUpdates(schid)
             if self.hook:
-                sendCommand(self.name, "clientupdate client_nickname={} client_is_recording=1".format(escapeStr(self.tpr_name)), schid)
-                sendCommand(self.name, "clientupdate client_nickname={} client_is_recording=1".format(escapeStr(oldnick)), schid)
+                sendCommand(self.name, "clientupdate client_is_recording=1", schid)
+                sendCommand(self.name, "clientupdate client_is_recording=0", schid)
             else:
-                ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, "Talk Power bitte?")
-                ts3lib.flushClientSelfUpdates(schid)
                 ts3lib.startVoiceRecording(schid)
                 ts3lib.stopVoiceRecording(schid)
-                ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, oldnick)
-                ts3lib.flushClientSelfUpdates(schid)
+            ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, oldnick)
+            ts3lib.flushClientSelfUpdates(schid)
 
     def onServerUpdatedEvent(self, schid):
         if not self.schid == schid: return
