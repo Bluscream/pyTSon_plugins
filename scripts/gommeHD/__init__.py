@@ -4,7 +4,7 @@ from datetime import datetime
 from PythonQt.QtCore import QTimer
 from collections import defaultdict
 from random import choice
-from bluscream import timestamp, getContactStatus, ContactStatus, parseCommand, clientURL
+from bluscream import timestamp, getContactStatus, ContactStatus, parseCommand, clientURL, inputBox
 
 class gommeHD(ts3plugin):
     name = "GommeHD nifty tricks"
@@ -17,10 +17,11 @@ class gommeHD(ts3plugin):
     commandKeyword = ""
     infoTitle = None
     hotkeys = []
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Ask for avatar", ""),
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Ask for avatar", "scripts/%s/upload_avatar.svg"%__name__),
                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Dynamic Silence", ""),
-                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Send Steam", ""),
-                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Send Steam", "")]
+                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Send Steam", "scripts/%s/steam.png"%__name__),
+                (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Send Steam", "scripts/%s/steam.png"%__name__),
+                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Toggle aka", "")]
     suid = "QTRtPmYiSKpMS8Oyd4hyztcvLqU="
     channelAdminGroupID = 10
     premiumGroupIDs = ["31","30","14"]
@@ -39,6 +40,7 @@ class gommeHD(ts3plugin):
     dynamicSilenceCache = []
     gommeBotID = 0
     timer = QTimer()
+    aka = (0, 0, "", "")
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     blockMSG = "Diesen Befehl kannst du nur als Channel-Admin ausführen!"
     welcomeMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"']
@@ -112,7 +114,19 @@ Ich erklär dir auch wie's geht:
         if atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
             ts3lib.requestSendChannelTextMsg(schid, self.steammsg, selectedItemID)
         elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
-            ts3lib.requestSendPrivateTextMsg(schid, self.steammsg, selectedItemID)
+            if menuItemID == 0:
+                ts3lib.requestSendPrivateTextMsg(schid, self.steammsg, selectedItemID)
+            elif menuItemID == 1:
+                print(self.aka)
+                if self.aka != (0, 0, "", ""):
+                    self.aka = (0, 0, "", "")
+                    return
+                realname = inputBox(self.name, "Real name:")
+                if not realname: return
+                (err, name) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, "{} aka {}".format(realname, name))
+                ts3lib.flushClientSelfUpdates(schid)
+                self.aka = (schid, selectedItemID, realname, name)
 
     def tick(self):
         if not self.askForAvatar or not self.schid or len(self.clids) < 1: self.timer.stop(); return
@@ -197,6 +211,14 @@ Ich erklär dir auch wie's geht:
                 (err, dbid) = ts3lib.getClientVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
                 ts3lib.requestSetClientChannelGroup(schid, [9], [channelID], [dbid])
                 del self.violations[invokerUniqueIdentifier]
+
+    def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUniqueIdentifier):
+        if schid != self.aka[0]: return
+        if clid != self.aka[1]: return
+        (err, name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        if name == self.aka[3]: return
+        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, "{} aka {}".format(self.aka[2], name))
+        ts3lib.flushClientSelfUpdates(schid)
 
     def onIncomingClientQueryEvent(self, schid, commandText):
         if not self.dynamicSilence: return

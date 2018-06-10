@@ -27,9 +27,9 @@ class mySupport(ts3plugin):
     cfg = ConfigParser()
     # cfg.optionxform = str
     cfg["general"] = {
-        "suid": "9lBVIDJRSSgAGy+cWJgNlUQRd64=",
+        "servername": "Mein Server",
         "myuid": "e3dvocUFTE1UWIvtW8qzulnWErI=",
-        "mychan": 0
+        "mychan": "Vater Channel,Mein Channel"
     }
     chan = ConfigParser()
     chan["props"] = {
@@ -49,10 +49,15 @@ class mySupport(ts3plugin):
     }
 
     def __init__(self):
+        print("test")
         loadCfg(self.path+"/config.ini", self.cfg)
+        print("test")
         loadCfg(self.path+"/channel.ini", self.chan)
+        print("test")
         with open(self.path+"/description.txt", 'r') as myfile: self.description = myfile.read()
+        print("test")
         self.checkServer(ts3lib.getCurrentServerConnectionHandlerID())
+        print("test")
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self): pass
@@ -115,16 +120,22 @@ class mySupport(ts3plugin):
 
     def checkServer(self, schid=None):
         if not schid: schid = self.schid
-        (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        (err, servername) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
         (err, ownuid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if PluginHost.cfg.getboolean("general", "verbose"):
             ts3lib.printMessageToCurrentTab(self.name+"> Checking for channel....")
-            print("suid:",suid,self.cfg.get("general","suid"))
-            print("myuid",ownuid,self.cfg.get("general","myuid"))
-        if suid != self.cfg.get("general","suid"): return
+            print("servername:", servername, "cfg:",self.cfg.get("general","servername"), servername == self.cfg.get("general","servername"))
+            print("myuid",ownuid,self.cfg.get("general","myuid"), ownuid == self.cfg.get("general","myuid"))
+        if servername != self.cfg.get("general","servername"): return
         if ownuid != self.cfg.get("general","myuid"): return
+        print("test1")
+        mychan = self.cfg.get("general", "mychan") # .split(",")
+        return
+        mycid = ts3lib.getChannelIDFromChannelNames(schid, mychan)
+        print("test3")
+        self.schids.append({schid: mycid})
+        print("test4")
         self.toggleChannel(schid)
-        self.schids.append(schid)
 
     def toggleChannel(self, schid):
         supchan = self.getChannel(schid)
@@ -144,7 +155,7 @@ class mySupport(ts3plugin):
             (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
             if not self.chan.get("props", "name") in name: continue
             (err, parent) = ts3lib.getParentChannelOfChannel(schid, cid)
-            if not parent == self.cfg.getint("general","mychan"): continue
+            if not parent == self.schids[schid]: continue
             return cid
         return 0
 
@@ -157,12 +168,16 @@ class mySupport(ts3plugin):
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelProperties.CHANNEL_FLAG_SEMI_PERMANENT, 1)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_MAXCLIENTS_UNLIMITED, 0)
         ts3lib.setChannelVariableAsInt(schid, 0, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER, 1337)
-        ts3lib.flushChannelCreation(schid, self.cfg.getint("general","mychan"))
+        print(self.schids)
+        print(self.schids[schid])
+        return
+        ts3lib.flushChannelCreation(schid, self.schids[schid])
         self.waitforchannel = True
 
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
         if not self.waitforchannel: return
-        if not channelParentID == self.cfg.getint("general","mychan"): return
+        mycid = ts3lib.getChannelIDFromChannelNames(schid, self.cfg.get("general", "mychan").split(","))
+        if not channelParentID == mycid: return
         self.waitforchannel = False
         self.supchan = cid
         for (key, val) in self.chan.items("permissions"):
@@ -207,10 +222,10 @@ class mySupport(ts3plugin):
         if not self.supchan in [newChannelID, oldChannelID]: return
         (err, ownID) = ts3lib.getClientID(schid)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-        mychan = self.cfg.getint("general","mychan")
-        (err, clients) = ts3lib.getChannelClientList(schid, mychan); clients = len(clients)
-        if ownCID == mychan and clients == 1 and newChannelID == self.supchan:
-            ts3lib.requestClientMove(schid, clid, mychan, "")
+        mycid = ts3lib.getChannelIDFromChannelNames(schid, self.cfg.get("general", "mychan").split(","))
+        (err, clients) = ts3lib.getChannelClientList(schid, mycid); clients = len(clients)
+        if ownCID == mycid and clients == 1 and newChannelID == self.supchan:
+            ts3lib.requestClientMove(schid, clid, mycid, "")
         else: self.checkChannel(schid)
 
     def onClientMoveMovedEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):

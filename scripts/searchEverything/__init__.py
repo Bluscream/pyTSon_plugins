@@ -22,15 +22,15 @@ class searchEverything(ts3plugin):
     hotkeys = []
     menuItems = [
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "== {0} ==".format(name), ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Nickname (TSViewer)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Nickname (GameTracker)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Nickname (TS3Index)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Nickname (Google)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "Profile (GameTracker)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 6, "UID (TS3Index)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 7, "UID (Google)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 8, "Owner (TSViewer)", ""),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 9, "Badges (TS3Index)", ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 1, "Nickname (TSViewer)", "scripts/%s/tsviewer.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 2, "Nickname (GameTracker)", "scripts/%s/gametracker.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Nickname (TS3Index)", "scripts/%s/ts3index.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Nickname (Google)", "scripts/%s/google.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "Profile (GameTracker)", "scripts/%s/gametracker.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 6, "UID (TS3Index)", "scripts/%s/ts3index.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 7, "UID (Google)", "scripts/%s/google.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 8, "Owner (TSViewer)", "scripts/%s/tsviewer.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 9, "Badges (TS3Index)", "scripts/%s/ts3index.png"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 10, "== {0} ==".format(name), "")
     ]
 

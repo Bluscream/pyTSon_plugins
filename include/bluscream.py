@@ -304,7 +304,7 @@ def loadCfg(path, cfg):
     """
     if not os.path.isfile(path) or os.path.getsize(path) < 1:
         saveCfg(path, cfg)
-    cfg = cfg.read(path)
+    cfg = cfg.read(path, encoding='utf-8')
 
 def saveCfg(path, cfg):
     """
