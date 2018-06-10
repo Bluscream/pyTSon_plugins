@@ -23,8 +23,8 @@ class info(ts3plugin):
     commandKeyword = "info"
     infoTitle = "[b]Extendend Info[/b]"
     menuItems = [
-        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Meta Data", "scripts/%s/avatar_flag.svg"%__name__),
-        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Set Avatar Flag", "scripts/%s/meta_data.svg"%__name__),
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Set Meta Data", "scripts/%s/meta_data.svg"%__name__),
+        (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Set Avatar Flag", "scripts/%s/avatar_flag.svg"%__name__),
         (PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Extended Info", "scripts/%s/info.svg"%__name__),
         (PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Extended Info", "scripts/%s/info.svg"%__name__),
         (PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Extended Info", "scripts/%s/info.svg"%__name__)

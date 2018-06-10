@@ -21,6 +21,7 @@ class autoFollow(ts3plugin):
     hotkeys = []
     delay = (250, 1500)
     targets = {}
+    cid = 0
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
@@ -43,13 +44,15 @@ class autoFollow(ts3plugin):
             ts3lib.printMessageToCurrentTab("{} {}: [color=green]Now auto-following[/color] {}".format(timestamp(),self.name,clientURL(schid, selectedItemID)))
             self.joinTarget(schid)
 
-    def joinTarget(self, schid = 0):
+    def joinTarget(self, schid = 0, cid = 0):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         (err, ownID) = ts3lib.getClientID(schid)
-        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID);(err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
         if ownCID == cid: return
         (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
         ts3lib.requestClientMove(schid, ownID, cid, pw)
+        self.cid = 0
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not schid in self.targets: return
@@ -57,9 +60,10 @@ class autoFollow(ts3plugin):
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID == ownID: return
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-        if newChannelID == ownCID: return#
+        if newChannelID == ownCID: return
         delay = randint(self.delay[0], self.delay[1])
         ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(),self.name,clientURL(schid, self.targets[schid]), channelURL(schid, newChannelID), delay))
+        self.cid = newChannelID
         QTimer.singleShot(delay, self.joinTarget)
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
