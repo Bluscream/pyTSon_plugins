@@ -17,7 +17,7 @@ class gommeHD(ts3plugin):
     commandKeyword = ""
     infoTitle = None
     hotkeys = []
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Ask for avatar", "scripts/%s/upload_avatar.svg"%__name__),
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Ask for avatar", "scripts/%s/ask_for_avatar.png"%__name__),
                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Dynamic Silence", ""),
                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Send Steam", "scripts/%s/steam.png"%__name__),
                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Send Steam", "scripts/%s/steam.png"%__name__),

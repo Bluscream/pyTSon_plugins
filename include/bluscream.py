@@ -17,7 +17,7 @@ import ts3lib, ts3defines, os.path, string, random, ts3client, time
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 def date(): return '{:%Y-%m-%d}'.format(datetime.now())
 def Time(): return '{:%H:%M:%S}'.format(datetime.now())
-def getScriptPath(name): return getPluginPath("scripts", name)
+def getScriptPath(name): return getPluginPath("scripts", name) # TODO: use plugin.name
 
 def boolean(_bool):
     if _bool and _bool.lower() == "true": return True
