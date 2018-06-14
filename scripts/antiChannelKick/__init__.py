@@ -2,7 +2,7 @@ import ts3lib, ts3defines
 from datetime import datetime
 from ts3plugin import ts3plugin
 from PythonQt.QtCore import QTimer
-
+from bluscream import intList
 
 class antiChannelKick(ts3plugin):
     name = "Anti Channel Kick"
@@ -37,15 +37,15 @@ class antiChannelKick(ts3plugin):
     def onClientKickFromChannelEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID or kickerID == ownID: return
-        (err, sgids) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        if set(sgids).isdisjoint(self.whitelistSGIDs): return
+        (err, sgids) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+        sgids = intList(sgids)
+        if any(i in sgids for i in self.whitelistSGIDs): return
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if uid in self.whitelistUIDs: return
         (err, cpath, self.cpw) = ts3lib.getChannelConnectInfo(schid, oldChannelID)
         self.schid=schid;self.clid=ownID;self.cid=oldChannelID
         if self.delay >= 0: QTimer.singleShot(self.delay, self.moveBack)
         else: self.moveBack()
-
 
     def moveBack(self):
         ts3lib.requestClientMove(self.schid, self.clid, self.cid, self.cpw)

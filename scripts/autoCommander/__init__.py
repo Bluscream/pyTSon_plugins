@@ -14,13 +14,15 @@ class autoCommander(ts3plugin):
     commandKeyword = ""
     infoTitle = None
     menuItems = [
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Channel Commander Spam", "scripts/%s/commander.svg"%__name__)
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle %s"%name, "scripts/%s/commander_off.svg"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Channel Commander Spam", "scripts/%s/commander.svg"%__name__)
     ]
     hotkeys = []
     timer = QTimer()
     schid = 0
     requested = 0
     retcode = __name__
+    enabled = False
 
     def __init__(self):
         self.timer.timeout.connect(self.tick)
@@ -42,6 +44,7 @@ class autoCommander(ts3plugin):
             else: self.timer.start(interval)
 
     def onServerUpdatedEvent(self, schid):
+        if not self.enabled: return
         if self.requested != schid: return
         self.requested = 0
         self.schid = schid
@@ -53,9 +56,11 @@ class autoCommander(ts3plugin):
         ts3lib.flushClientSelfUpdates(self.schid, self.retcode)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if menuItemID == 0: self.toggleTimer(schid)
+        if menuItemID == 0: self.enabled = not self.enabled
+        elif menuItemID == 1: self.toggleTimer(schid)
 
     def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
+        if not self.enabled: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID: return
         (err, val) = ts3lib.getClientNeededPermission(schid, "b_client_use_channel_commander")
@@ -64,12 +69,14 @@ class autoCommander(ts3plugin):
         ts3lib.flushClientSelfUpdates(schid, self.retcode)
 
     def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+        if not self.enabled: return
         print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
         if returnCode != self.retcode: return
         # if failedPermissionID == 185: return True
         return True
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if not self.enabled: return
         print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
         if returnCode != self.retcode: return
         print("test")

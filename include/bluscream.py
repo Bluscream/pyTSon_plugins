@@ -582,7 +582,7 @@ def parseBadges(client_badges):
         overwolf = bool(int(client_badges.split("=")[1]))
     elif "badges=" in client_badges:
         badges = client_badges.split("=",1)[1].replace(":badges=", ",").split(",")
-    return (overwolf, badges)
+    return overwolf, badges
 
 def buildBadges(badges=[], overwolf=False):
     """
@@ -597,6 +597,7 @@ def buildBadges(badges=[], overwolf=False):
 def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
     """
     Sends a command through TS3Hook.
+    :param reverse:
     :param name:
     :param cmd:
     :param schid:

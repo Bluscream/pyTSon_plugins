@@ -29,6 +29,7 @@ class fakeClients(ts3plugin):
     timer = QTimer()
     count = 1
     fakeclients = []
+    friend_autocommander = False
 
     def __init__(self):
         self.timer.timeout.connect(self.tick)
@@ -53,6 +54,7 @@ class fakeClients(ts3plugin):
             self.fakeclients = []
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
+        if not self.friend_autocommander: return
         if oldChannelID != 0: return # if newChannelID == 0: return
         (err, clid) = ts3lib.getClientID(schid)
         if clientID == clid: return

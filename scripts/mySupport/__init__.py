@@ -4,6 +4,7 @@ from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
 from PythonQt.QtGui import QMessageBox
 from bluscream import timestamp, getScriptPath, loadCfg
+from io import StringIO
 
 class mySupport(ts3plugin):
     path = getScriptPath(__name__)
@@ -49,15 +50,10 @@ class mySupport(ts3plugin):
     }
 
     def __init__(self):
-        print("test")
         loadCfg(self.path+"/config.ini", self.cfg)
-        print("test")
         loadCfg(self.path+"/channel.ini", self.chan)
-        print("test")
         with open(self.path+"/description.txt", 'r') as myfile: self.description = myfile.read()
-        print("test")
         self.checkServer(ts3lib.getCurrentServerConnectionHandlerID())
-        print("test")
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self): pass
@@ -128,13 +124,21 @@ class mySupport(ts3plugin):
             print("myuid",ownuid,self.cfg.get("general","myuid"), ownuid == self.cfg.get("general","myuid"))
         if servername != self.cfg.get("general","servername"): return
         if ownuid != self.cfg.get("general","myuid"): return
-        print("test1")
-        mychan = self.cfg.get("general", "mychan") # .split(",")
+        print("mein test 1")
+        content = StringIO("[general]\nmychan = ╠-● Administrator | Blu") 
+        cfg = ConfigParser() 
+        cfg.readfp(content)
+         print(cfg.get("general", "mychan") )
+        print(type(cfg.get("general", "mychan")) )
+        print(cfg.get("general", "mychan").split(",") )
         return
+        # mychan = StringIO("╠-● Administrator | Blu").split(",")
+        # mychan = self.cfg.get("general", "mychan") # .split(",")
+        print(mychan)
         mycid = ts3lib.getChannelIDFromChannelNames(schid, mychan)
-        print("test3")
+        print("mein test 2")
         self.schids.append({schid: mycid})
-        print("test4")
+        print("mein test 3")
         self.toggleChannel(schid)
 
     def toggleChannel(self, schid):

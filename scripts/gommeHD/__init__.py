@@ -29,6 +29,7 @@ class gommeHD(ts3plugin):
     gommeBotNick = "Gomme-Bot"
     dynamicSilenceName = "msg me"
     delay = 1500
+    nick_enabled = False
     nicknames = ["Qmx1c2NyZWFt=","Q2hyaXN0b3BoZXIgQXVyaWNo=","RGFubnkgUmFkbWFjaGVy="]
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
@@ -238,6 +239,7 @@ Ich erklär dir auch wie's geht:
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
+        if not self.nick_enabled: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         if suid != self.suid: return
         ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, choice(self.nicknames))

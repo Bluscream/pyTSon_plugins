@@ -20,6 +20,7 @@ class guestLounge(ts3plugin):
     menuItems = []
     timer = QTimer()
     ts3host = None
+    tabs = {}
     """
     cfg = ConfigParser()
     cfg["9lBVIDJRSSgAGy+cWJgNlUQRd64="] = { "enabled": True }
@@ -44,24 +45,24 @@ class guestLounge(ts3plugin):
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
         client = self.ts3host.getUser(schid, clid)
-        if client.server.me.channel.cid
+        # if client.server.me.channel.cid == client.cid
         if not client.server.me.getChannelGroupId() in [self.tabs[schid]["channelModGroup"], client.server.defaultChannelAdminGroup]: return
-        if clientID in self.waiting and (newChannelID == 0 or newChannelID == self.mychan):
+        if clid in self.waiting and (newChannelID == 0 or newChannelID == self.mychan):
             # if newChannelID == self.mychan:
                 # (err, dbid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-            ts3lib.printMessage(schid, "{}: [color=orange]Removing channel mod from {}".format(self.name, self.waiting[clientID] if newChannelID == 0 else clientURL(schid, clientID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-            ts3lib.requestSetClientChannelGroup(schid, [self.sgid_guest], [self.mychan], [self.waiting[clientID]])
-            del self.waiting[clientID]
+            ts3lib.printMessage(schid, "{}: [color=orange]Removing channel mod from {}".format(self.name, self.waiting[clid] if newChannelID == 0 else clientURL(schid, clid)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+            ts3lib.requestSetClientChannelGroup(schid, [self.sgid_guest], [self.mychan], [self.waiting[clid]])
+            del self.waiting[clid]
             return
         if newChannelID == 0 or oldChannelID != 0: return
-        (err, sgids) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
+        (err, sgids) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
         if not self.sgid_guest in intList(sgids): return
         # TODO Any way to get the cgid in another channel?
-        (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if getContactStatus(uid) == ContactStatus.BLOCKED:
-            ts3lib.printMessage(schid, "{}: [color=red]Not allowing blocked user {} in your channel.".format(self.name, clientURL(schid, clientID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+            ts3lib.printMessage(schid, "{}: [color=red]Not allowing blocked user {} in your channel.".format(self.name, clientURL(schid, clid)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
             return
-        (err, dbid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
-        self.waiting[clientID] = dbid
-        ts3lib.printMessage(schid, "{}:  [color=green]Found new guest {} giving him channel mod until he's here ;)".format(self.name, clientURL(schid, clientID)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        (err, dbid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        self.waiting[clid] = dbid
+        ts3lib.printMessage(schid, "{}:  [color=green]Found new guest {} giving him channel mod until he's here ;)".format(self.name, clientURL(schid, clid)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         ts3lib.requestSetClientChannelGroup(schid, [self.cgid_mod], [self.mychan], [dbid])

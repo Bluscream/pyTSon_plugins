@@ -67,16 +67,13 @@ class recordSpam(ts3plugin):
             ts3lib.stopVoiceRecording(schid)
 
     def tick(self):
-        schid = self.schid
-        if not schid or schid < 1: self.timer.stop()
-        # self.startVoiceRecording(self.schid)
-        # self.stopVoiceRecording(self.schid)
+        if not self.schid or self.schid < 1: self.timer.stop()
         if self.hook:
-            sendCommand(self.name, "clientupdate client_is_recording=1", schid)
-            sendCommand(self.name, "clientupdate client_is_recording=0", schid)
+            sendCommand(self.name, "clientupdate client_is_recording=1", self.schid)
+            sendCommand(self.name, "clientupdate client_is_recording=0", self.schid)
         else:
-            ts3lib.startVoiceRecording(schid)
-            ts3lib.stopVoiceRecording(schid)
+            ts3lib.startVoiceRecording(self.schid)
+            ts3lib.stopVoiceRecording(self.schid)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return
@@ -101,5 +98,6 @@ class recordSpam(ts3plugin):
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus != ts3defines.ConnectStatus.STATUS_DISCONNECTED: return
         if schid != self.schid: return
+        return
         self.timer.stop()
         self.schid = 0
