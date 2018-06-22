@@ -107,7 +107,7 @@ class discordify(ts3plugin):
         from unidecode import unidecode
         if not ownID: (err, ownID) = ts3lib.getClientID(schid)
         (err, name) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-        self.activity["state"] = unidecode(name)
+        self.activity["details"] = unidecode(name)
         server_type = getServerType(schid)
         if server_type == ServerInstanceType.TEASPEAK:
             self.activity["assets"]["large_text"] = "TeaSpeak"
@@ -129,19 +129,18 @@ class discordify(ts3plugin):
         (err, cname) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_NAME)
         name = re.sub(r'^\[[crl\*]spacer(.*)?\]', '', cname, flags=re.IGNORECASE|re.UNICODE)
         from unidecode import unidecode
-        self.activity["details"] = unidecode(name)
-        """
+        self.activity["state"] = unidecode(name)
         clients = len(ts3lib.getChannelClientList(schid, ownCID)[1])
         # (err, clients) = ts3lib.getChannelVariable(schid, ts3defines.ChannelPropertiesRare.)
         (err, cmax) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
         if cmax >= clients:
+            print("cmax",cmax,">=","clients",clients)
             self.activity["party"]["size"] = [clients, cmax]
         else:
-        """
-        (err, smax) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_MAXCLIENTS)
-        (err, clients) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_CLIENTS_ONLINE)
-        # clients = len(ts3lib.getClientList(schid)[1])
-        self.activity["party"] = { "size": [clients, smax] }
+            (err, smax) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_MAXCLIENTS)
+            # (err, clients) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_CLIENTS_ONLINE)
+            # clients = len(ts3lib.getClientList(schid)[1])
+            self.activity["party"] = { "size": [clients, smax] }
         (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
         (err, port) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
         self.activity["secrets"] = {
