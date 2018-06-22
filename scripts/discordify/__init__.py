@@ -24,11 +24,10 @@ class discordify(ts3plugin):
     discord = None
     update = False
     timer = QTimer()
+    tabs = {}
     activity = {
         "details": "Disconnected",
-        "timestamps": {
-            "start": time()
-        },
+        "timestamps": {},
         "assets": {
             "large_text": "TeamSpeak 3",
             "large_image": "logo"
@@ -48,12 +47,14 @@ class discordify(ts3plugin):
         except: ts3lib.logMessage("Discord not running!", ts3defines.LogLevel.LogLevel_WARNING, "pyTSon Discord Rich Presence", 0)
         self.timer.timeout.connect(self.tick)
         self.timer.setTimerType(2)
-        self.timer.start(1000)
-        self.update = True
         schid = ts3lib.getCurrentServerConnectionHandlerID()
+        self.onTabChangedEvent(schid)
+        self.timer.start(1000)
+        """
         (err, status) = ts3lib.getConnectionStatus(schid)
         if status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             self.updateServer(schid); self.updateChannel(schid); self.updateVoice(schid);self.updateClient(schid)
+        """
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def stop(self):
@@ -76,7 +77,12 @@ class discordify(ts3plugin):
         if curschid == schid: self.onTabChangedEvent(schid, newStatus)
     def onTabChangedEvent(self, schid, status=None):
         if status is None: (err, status) = ts3lib.getConnectionStatus(schid)
+        print(schid, status)
         if status == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
+            if schid in self.tabs:
+                del self.tabs[schid]
+            start = time()
+            self.activity["timestamps"]["start"] = start
             self.activity["details"] = "Disconnected"
             self.activity["state"] = ""
             if hasattr(self.activity, "party"): del self.activity["party"]
@@ -88,12 +94,19 @@ class discordify(ts3plugin):
             }
             self.update = True
         elif status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            if schid in self.tabs:
+                self.activity["timestamps"]["start"] = self.tabs[schid]
+            else:
+                start = time()
+                self.tabs[schid] = start
+                print("self.tabs[schid]", self.tabs[schid])
+                self.activity["timestamps"]["start"] = start
             self.updateServer(schid); self.updateChannel(schid); self.updateVoice(schid);self.updateClient(schid)
 
     def updateServer(self, schid, ownID=0):
+        from unidecode import unidecode
         if not ownID: (err, ownID) = ts3lib.getClientID(schid)
         (err, name) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-        from unidecode import unidecode
         self.activity["state"] = unidecode(name)
         server_type = getServerType(schid)
         if server_type == ServerInstanceType.TEASPEAK:

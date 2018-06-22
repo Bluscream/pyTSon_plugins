@@ -11,26 +11,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
-      <change afterPath="$PROJECT_DIR$/scripts/autoCommander/commander_off.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/forceNick/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/forceNick/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/usage.statistics.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/scripts/mySupport/channel.ini" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/scripts/mySupport/config.ini" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/scripts/mySupport/description.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/fakeClients/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/fakeClients/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/guestLounge/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/guestLounge/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/mySupport/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mySupport/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/recordSpam/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/recordSpam/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/discordify/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/discordify/__init__.py" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -38,7 +28,6 @@
     <ignored path="scripts/pip3.exe" />
     <ignored path="LICENSE.txt" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,55 +48,58 @@
       </PATH_ELEMENT>
     </PATH>
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1604380212">
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="147" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="147" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="conf" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="pyTSon" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ts3lib.py" pinned="true" current-in-tab="false">
+      <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4935">
+            <state relative-caret-position="5124">
               <caret line="244" column="47" selection-start-line="244" selection-start-column="47" selection-end-line="244" selection-end-column="47" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
+      <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12726">
+            <state relative-caret-position="12999">
               <caret line="619" column="28" selection-start-line="619" selection-start-column="28" selection-end-line="619" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/antiServerKick/__init__.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="746">
-              <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/guestLounge/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -123,7 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>descrip</find>
       <find>phone</find>
       <find>countr</find>
       <find>contactsta</find>
@@ -153,6 +144,7 @@
       <find>vanilla</find>
       <find>mychan = self.cfg.get(&quot;general&quot;</find>
       <find>delay = (</find>
+      <find>tabs</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -212,7 +204,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/mySupport/channel.ini" />
         <option value="$PROJECT_DIR$/scripts/autoSupport/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/playShot/README.md" />
         <option value="$PROJECT_DIR$/scripts/playShot/__init__.py" />
@@ -230,7 +221,6 @@
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/Steamlinker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/recordSpam/README.md" />
-        <option value="$PROJECT_DIR$/scripts/discordify/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3lib.py" />
         <option value="$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" />
@@ -263,6 +253,8 @@
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/guestLounge/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" />
+        <option value="$PROJECT_DIR$/../../pyTSon/eventlog.conf" />
+        <option value="$PROJECT_DIR$/scripts/discordify/__init__.py" />
       </list>
     </option>
   </component>
@@ -274,9 +266,6 @@
   </component>
   <component name="NamedScopeManager">
     <scope name="scripts" pattern="file[pyTSon_plugins]:scripts//*" />
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
@@ -295,17 +284,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -322,13 +300,24 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="antiServerKick" type="462c0819:PsiDirectoryNode" />
+              <item name="discordify" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="guestLounge" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -346,7 +335,7 @@
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last.edited.regexp" value="[cspacer94]test" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pyTSon/eventlog.conf" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="options.lastSelected" value="editor.preferences.smartKeys" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -359,7 +348,6 @@
       <console-settings module-name="pyTSon_plugins" is-module-sdk="true">
         <option name="myUseModuleSdk" value="true" />
         <option name="myModuleName" value="pyTSon_plugins" />
-        <option name="myAddSourceRoots" value="true" />
       </console-settings>
     </option>
   </component>
@@ -392,44 +380,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python tests.Unittests in scripts">
-    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="pyTSon_plugins" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/chatBot" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -611,6 +561,50 @@
       <listeners />
       <method />
     </configuration>
+    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyTSon_plugins" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/chatBot" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unittests in scripts" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="pyTSon_plugins" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -626,6 +620,7 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <module name="pyTSon_plugins" />
@@ -640,6 +635,7 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python tests.Unittests in scripts" />
@@ -661,13 +657,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485139848807</updated>
-    </task>
-    <task id="LOCAL-00330" summary=":thinking: added mySupport">
-      <created>1526564444418</created>
-      <option name="number" value="00330" />
-      <option name="presentableId" value="LOCAL-00330" />
-      <option name="project" value="LOCAL" />
-      <updated>1526564444419</updated>
     </task>
     <task id="LOCAL-00331" summary=":thinking: added mySupport">
       <created>1526570056337</created>
@@ -1005,7 +994,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528707006610</updated>
     </task>
-    <option name="localTasksCounter" value="379" />
+    <task id="LOCAL-00379" summary=":thinking:">
+      <created>1528989037679</created>
+      <option name="number" value="00379" />
+      <option name="presentableId" value="LOCAL-00379" />
+      <option name="project" value="LOCAL" />
+      <updated>1528989037688</updated>
+    </task>
+    <option name="localTasksCounter" value="380" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1026,43 +1022,43 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.13856691" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32535365" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.32208923" />
-      <window_info anchor="bottom" id="Version Control" order="15" sideWeight="0.25266525" side_tool="true" weight="0.32535365" />
-      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.32826087" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32861805" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.14392324" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
-      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Application Servers" order="8" />
-      <window_info id="Designer" order="4" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info id="Image Layers" order="6" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="Capture Tool" order="3" />
-      <window_info id="UI Designer" order="5" />
-      <window_info anchor="bottom" id="Changes" order="7" weight="0.32900432" />
-      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
-      <window_info anchor="right" id="Capture Analysis" order="9" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="12" sideWeight="0.4978678" side_tool="true" weight="0.21268657" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
-      <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info id="Nl-Palette" order="2" />
-      <window_info anchor="right" id="Maven Projects" order="5" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.32535365" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Data View" order="11" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Designer" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Image Layers" order="6" />
+      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" id="Properties" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="10" />
-      <window_info active="true" anchor="bottom" id="Floobits" order="14" sideWeight="0.49573562" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.32535365" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32861805" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32535365" />
+      <window_info anchor="bottom" id="Changes" order="7" weight="0.32900432" />
+      <window_info anchor="bottom" id="Application Servers" order="8" />
+      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.3275488" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.32208923" />
+      <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Floobits" order="14" sideWeight="0.49573562" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="15" sideWeight="0.25266525" side_tool="true" weight="0.32535365" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="right" id="Properties" order="6" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Capture Analysis" order="9" />
+      <window_info anchor="right" id="Theme Preview" order="10" />
+      <window_info anchor="right" id="Data View" order="11" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="12" sideWeight="0.4978678" side_tool="true" weight="0.21268657" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1190,7 +1186,6 @@
           <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="35" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1198,30 +1193,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="211" column="52" selection-start-line="211" selection-start-column="52" selection-end-line="211" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="829">
-          <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/nameSwitcher/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="41" column="59" selection-start-line="41" selection-start-column="59" selection-end-line="44" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -1271,16 +1242,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/teaspeak/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="24" selection-start-column="24" selection-end-column="24" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/teaspeak/README.md" />
     <entry file="file://$PROJECT_DIR$/scripts/teaspeak/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="693">
@@ -1297,14 +1259,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/grieferGames/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/grieferGames/README.md" />
     <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/dontHide/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1366,20 +1321,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="430">
           <caret line="138" column="23" lean-forward="true" selection-start-line="138" selection-start-column="23" selection-end-line="138" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#77#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/README.md" />
     <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5065">
@@ -1446,9 +1391,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
           <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1463,9 +1405,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4935">
           <caret line="241" column="40" selection-start-line="241" selection-start-column="40" selection-end-line="241" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1531,33 +1470,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+    <entry file="file://$PROJECT_DIR$/scripts/antiServerKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12726">
-          <caret line="619" column="28" selection-start-line="619" selection-start-column="28" selection-end-line="619" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="517">
+          <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/guestLounge/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="420">
+          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/antiServerKick/__init__.py">
+    <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="746">
-          <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="5124">
+          <caret line="244" column="47" selection-start-line="244" selection-start-column="47" selection-end-line="244" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12999">
+          <caret line="619" column="28" selection-start-line="619" selection-start-column="28" selection-end-line="619" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/eventlog.conf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
         </state>
       </provider>
     </entry>
