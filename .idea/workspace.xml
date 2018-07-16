@@ -182,8 +182,8 @@
       <find>loadcf</find>
       <find>suid</find>
       <find>vanilla</find>
-      <find>mychan = self.cfg.get(&quot;general&quot;</find>
-      <find>delay = (</find>
+      <find />
+      <find />
       <find>tabs</find>
       <find>ui</find>
       <find>qurl</find>
@@ -688,6 +688,8 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.__init__" />
+        <item itemvalue="Python tests.Unittests in scripts" />
         <item itemvalue="Python tests.Unittests in scripts" />
       </list>
     </recent_temporary>
