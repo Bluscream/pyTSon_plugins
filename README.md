@@ -1,15 +1,15 @@
 # Bluscream's pyTSon Scripts
-This repository contains [pyTSon](https://github.com/pathmann/pyTSon) scripts that we're either created or modified by me.
+This repository contains [pyTSon](https://github.com/pathmann/pyTSon) scripts that were either created or modified by me.
 For a list of all the scripts available check the [scripts](https://github.com/Bluscream/pyTSon_plugins/tree/master/scripts) subdirectory.
 
-Some of the scripts i created require special dependencies. So if you want a script to run smoothly run make sure that you have up-to-date versions of all the possible requirements.
+Some of the scripts I created require special dependencies. Confirm you have updated versions of all the requirements if you want a script to run smoothly.
 
 ## Short Tutorial
 1. Uninstall your old pyTSon version if you already have it installed via "Tools" -> "Options" -> "Addons" -> "Plugins" -> `pyTSon` -> "Uninstall"
 2. Close your Teamspeak Client and make sure no `ts3client_*.exe` is running in your Task Manager
 3. Download and install the latest pyTSon nightly for your system from https://repo.4qt.de/pyTSon/nightlies/latest/
 4. Download the latest version of this repository from https://github.com/Bluscream/pyTSon_plugins/archive/master.zip
-5. Extract the `include/` folder from the ZIP to `%APPDATA%/TS3Client/plugins/pyTSon/` so windows asks you to merge them
+5. Extract the `include/` folder from the ZIP to `%APPDATA%/TS3Client/plugins/pyTSon/` so Windows asks you to merge them
 6. Extract **only** the scripts you need from `master.zip/scripts` to `%APPDATA%/TS3Client/plugins/pyTSon/scripts/`
 7. Make sure "Accept different API Versions" is checked in "Plugins" -> "pyTSon" -> "Settings"
 8. Restart your Teamspeak client
@@ -18,7 +18,7 @@ Some of the scripts i created require special dependencies. So if you want a scr
 11. If any of the scripts use menuItems you need to restart your client after activating them before you can see their menus.
 
 ## Long Tutorial
-In case the short tutorial didn't work for you or if you want more indepth informations i provided a more detailed tutorial series on YouTube.
+In case the short tutorial did not work for you or if you want more in-depth information I provided a more detailed tutorial series on YouTube.
 You can find it at https://r4p3.net/resources/pytson.170/field?field=faq!
 
 ## FAQ
