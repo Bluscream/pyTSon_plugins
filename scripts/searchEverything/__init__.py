@@ -2,11 +2,13 @@ from os import path
 from datetime import datetime
 from PythonQt.QtCore import QUrl
 from PythonQt.QtGui import QDesktopServices
+from PythonQt.Qt import QApplication
 from ts3plugin import ts3plugin
 from pluginhost import PluginHost
 from traceback import format_exc
 import ts3defines, ts3lib, pytson
-from urllib.parse import quote_plus
+from bluscream import inputBox, timestamp
+# from urllib.parse import quote_plus
 
 class searchEverything(ts3plugin):
     name = "Search"
@@ -34,11 +36,8 @@ class searchEverything(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 10, "== {0} ==".format(name), "")
     ]
 
-    @staticmethod
-    def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
-
     def __init__(self):
-        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def menuCreated(self):
         if not self.name in PluginHost.active: return
@@ -73,13 +72,16 @@ class searchEverything(ts3plugin):
                 # nickname_encoded = urlencode(nickname, quote_via=quote_plus)
                 # nickname_encoded = nickname_encoded.replace("+", "%2B").replace("/", "%2F").replace("=", "%3D")
                 if "%%CLIENT_NAME_PERCENT_ENCODED%%" in url:
-                    (err, nickname) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
-                    url = url.replace("%%CLIENT_NAME_PERCENT_ENCODED%%", quote_plus(nickname))
+                    if selectedItemID:  (err, nickname) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+                    else: nickname = inputBox(self.name, "Nickname:", QApplication.clipboard().text())
+                    url = url.replace("%%CLIENT_NAME_PERCENT_ENCODED%%", "{}".format(QUrl.toPercentEncoding(nickname)))
                 if "%%CLIENT_UNIQUE_ID%%" in url:
-                    (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-                    url = url.replace("%%CLIENT_UNIQUE_ID%%", quote_plus(uid))
+                    if selectedItemID:  (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+                    else: uid = inputBox(self.name, "UID:", QApplication.clipboard().text())
+                    url = url.replace("%%CLIENT_UNIQUE_ID%%", "{}".format(QUrl.toPercentEncoding(uid)))
                 if "%%CLIENT_BADGES%%" in url:
-                    (err, badges) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
+                    if selectedItemID:  (err, badges) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_BADGES)
+                    else: badges = inputBox(self.name, "Badges:", QApplication.clipboard().text())
                     url = url.replace("%%CLIENT_BADGES%%", badges)
             else: return
             if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Opening URL: \"{}\"".format(url))

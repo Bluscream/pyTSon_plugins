@@ -1,7 +1,7 @@
 from datetime import datetime
 from PythonQt import BoolResult
-from PythonQt.QtGui import QInputDialog, QMessageBox, QDialog, QLineEdit #, QObject
-from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream # , QApplication # QDir
+from PythonQt.QtGui import QInputDialog, QMessageBox, QWidget, QLineEdit #, QObject
+from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream, QUrl # , QApplication # QDir
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 from ts3plugin import PluginHost
@@ -323,7 +323,7 @@ def inputBox(title, text, default=""):
     :param text:
     :return:
     """
-    x = QDialog()
+    x = QWidget()
     x.setAttribute(Qt.WA_DeleteOnClose)
     ok = BoolResult()
     # if default is None: default = QApplication.clipboard().text()
@@ -342,7 +342,7 @@ def inputInt(title="", label="", val=0, min=-2147483647, max=2147483647, step=1)
     :param step:
     :return:
     """
-    x = QDialog()
+    x = QWidget()
     x.setAttribute(Qt.WA_DeleteOnClose)
     ok = BoolResult()
     i = QInputDialog.getInt(x, title, label, val, min, max, step, ok)
@@ -372,7 +372,7 @@ def confirm(title, message):
     :param message:
     :return:
     """
-    x = QDialog()
+    x = QWidget()
     x.setAttribute(Qt.WA_DeleteOnClose)
     _x = QMessageBox.question(x, title, message, QMessageBox.Yes, QMessageBox.No)
     if _x == QMessageBox.Yes: return True if _x == QMessageBox.Yes else False
