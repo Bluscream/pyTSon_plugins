@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from datetime import datetime
 from PythonQt import BoolResult
 from PythonQt.QtGui import QInputDialog, QMessageBox, QWidget, QLineEdit #, QObject
@@ -11,7 +13,7 @@ from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
 from re import match, sub
-import ts3lib, ts3defines, os.path, string, random, ts3client, time
+import ts3lib, ts3defines, os.path, string, random, ts3client, time, sys, codecs
 
 # GENERAL FUNCTIONS #
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -27,6 +29,17 @@ def boolean(_bool):
 def sanitize(s,hard=False):
     if hard: return sub('[^a-zA-Z]', '', s)
     return "".join(i for i in s if ord(i)<128)
+
+class EncodedOut:
+    def __init__(self, enc):
+        self.enc = enc
+        self.stdout = sys.stdout
+    def __enter__(self):
+        if sys.stdout.encoding is None:
+            w = codecs.getwriter(self.enc)
+            sys.stdout = w(sys.stdout)
+    def __exit__(self, exc_ty, exc_val, tb):
+        sys.stdout = self.stdout
 
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
     """
@@ -825,3 +838,6 @@ class color(object):
             ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=self.timestamp(), name=self.name, message=message), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
 """
+
+with EncodedOut('utf-8'):
+    print("Loaded", __file__, "äöü♥")
