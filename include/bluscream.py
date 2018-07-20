@@ -312,7 +312,7 @@ def saveCfg(path, cfg):
     :param path:
     :param cfg:
     """
-    with open(path, 'w') as cfgfile:
+    with open(path, mode='w', encoding="utf-8") as cfgfile:
         cfg.write(cfgfile)
 # GUI #
 def inputBox(title, text, default=""):

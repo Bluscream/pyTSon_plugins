@@ -1,4 +1,4 @@
-import ts3lib, ts3defines
+import ts3lib, ts3defines, sys
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
 from bluscream import timestamp, GroupType
@@ -23,6 +23,7 @@ class aaa_ts3Ext(ts3plugin):
     tabs =  {}
 
     def __init__(self):
+        sys.setdefaultencoding('utf-8')
         self.ts3host = ts3SessionHost(self)
         schid = ts3lib.getCurrentServerConnectionHandlerID()
         (err, status) = ts3lib.getConnectionStatus(schid)

@@ -33,10 +33,17 @@ class faker(ts3plugin):
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT and menuItemID == 0: self.fakeClient(schid, selectedItemID)
 
     def fakeChannel(self, schid, channelID):
+        import sys, locale, os
+        print(sys.stdout.encoding)
+        print(sys.stdout.isatty())
+        print(locale.getpreferredencoding())
+        print(sys.getfilesystemencoding())
+        print(os.environ["PYTHONIOENCODING"])
+        print(chr(246), chr(9786), chr(9787))
         channel = self.ts3host.getChannel(schid, channelID)
         debug = PluginHost.cfg.getboolean("general", "verbose")
         (error, name) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
-        name = name.encode("utf-8").decode(sys.stdout.encoding)
+        # name = name.encode("utf-8").decode(sys.stdout.encoding)
         # TODO MODIFY NAME
         if debug: print("err:", error, "CHANNEL_NAME", name)
         if not error and name: ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelProperties.CHANNEL_NAME,name)
