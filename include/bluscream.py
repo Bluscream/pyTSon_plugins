@@ -838,6 +838,7 @@ class color(object):
             ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=self.timestamp(), name=self.name, message=message), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
 """
-
+"""
 with EncodedOut('utf-8'):
-    print("Loaded", __file__, "äöü♥")
+    print("Loaded", __file__)
+"""
