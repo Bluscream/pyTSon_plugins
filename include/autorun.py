@@ -1,4 +1,4 @@
-import os, json, configparser, webbrowser, traceback, urllib.parse, itertools
+import os, json, configparser, webbrowser, traceback, urllib.parse, itertools, sys, locale, os
 import ts3defines, ts3lib, ts3client, ts3help, ts3Ext, pytson, pytsonui
 from datetime import datetime
 from ts3lib import *
@@ -135,6 +135,15 @@ def getvar(clid):
 def error(errorCode):
     (err, msg) = ts3lib.getErrorMessage(errorCode)
     print("{}: \"{}\" ({})".format(errorCode,msg,err))
+
+def encoding():
+    print(sys.stdout.encoding)
+    print(sys.stdout.isatty())
+    print(locale.getpreferredencoding())
+    print(sys.getfilesystemencoding())
+    print(os.environ["PYTHONIOENCODING"])
+    print(chr(9786).encode("utf8"))
+    print(chr(246), chr(9786), chr(9787))
 
 self = QApplication.instance()
 schid = getCurrentServerConnectionHandlerID()
