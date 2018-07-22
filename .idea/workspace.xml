@@ -2,6 +2,7 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="136" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
@@ -9,8 +10,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/autorun.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/autorun.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/faker/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/faker/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/discordify/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/discordify/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/guestLounge/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/guestLounge/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mySupport/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mySupport/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/mySupport/channel.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mySupport/channel.ini" afterDir="false" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
@@ -100,31 +106,52 @@
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/faker/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/guestLounge/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="autorun.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/autorun.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="144" column="35" lean-forward="true" selection-start-line="144" selection-start-column="35" selection-end-line="144" selection-end-column="35" />
+            <state relative-caret-position="336">
+              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding>
-                <element signature="e#0#94#0" expanded="true" />
+                <element signature="e#0#33#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="25" selection-start-column="25" selection-end-column="25" />
+            <state relative-caret-position="252">
+              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/mySupport/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-987">
+              <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="451">
+              <caret line="56" column="41" lean-forward="true" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="24" column="54" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -140,12 +167,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.me</find>
-      <find>cid</find>
-      <find>ts3.</find>
-      <find>gfetvari</find>
-      <find>setrow</find>
-      <find>time</find>
       <find>tbl_</find>
       <find>sort</find>
       <find>PluginMenuType</find>
@@ -170,6 +191,12 @@
       <find>QApplication.clipboard().text()</find>
       <find>inputb</find>
       <find>qurl.</find>
+      <find>print(&quot;self.</find>
+      <find>print</find>
+      <find>print(schid</find>
+      <find>pri</find>
+      <find>&gt;= clients</find>
+      <find>if PluginHost.cfg.getboolean(&quot;general&quot;, &quot;verbose&quot;):</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -229,7 +256,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/YaTQA/__init__.py" />
         <option value="$PROJECT_DIR$/include/discoIPC/ipc.py" />
         <option value="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiVPN/settings.ini" />
@@ -260,14 +286,11 @@
         <option value="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/forceNick/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/mySupport/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/fakeClients/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/recordSpam/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/guestLounge/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" />
         <option value="$PROJECT_DIR$/../../pyTSon/eventlog.conf" />
-        <option value="$PROJECT_DIR$/scripts/discordify/__init__.py" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp03105/data/discord_main.py" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp29330/data/discord_main.py" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp32552/data/discord.py" />
@@ -278,8 +301,12 @@
         <option value="$PROJECT_DIR$/scripts/searchEverything/__init__.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/faker/__init__.py" />
-        <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/guestLounge/__init__.py" />
+        <option value="$PROJECT_DIR$/include/autorun.py" />
+        <option value="$PROJECT_DIR$/scripts/discordify/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/mySupport/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
       </list>
     </option>
   </component>
@@ -330,24 +357,25 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="faker" type="462c0819:PsiDirectoryNode" />
+              <item name="antiAFK" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="searchEverything" type="462c0819:PsiDirectoryNode" />
+              <item name="mySupport" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="rewinsideTV" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -682,13 +710,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
-    </task>
-    <task id="LOCAL-00340" summary=":thinking:">
-      <created>1526835252335</created>
-      <option name="number" value="00340" />
-      <option name="presentableId" value="LOCAL-00340" />
-      <option name="project" value="LOCAL" />
-      <updated>1526835252347</updated>
     </task>
     <task id="LOCAL-00341" summary=":thinking:">
       <created>1526916598739</created>
@@ -1027,7 +1048,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532128659734</updated>
     </task>
-    <option name="localTasksCounter" value="389" />
+    <task id="LOCAL-00389" summary=":thinking:">
+      <created>1532129095304</created>
+      <option name="number" value="00389" />
+      <option name="presentableId" value="LOCAL-00389" />
+      <option name="project" value="LOCAL" />
+      <updated>1532129095306</updated>
+    </task>
+    <option name="localTasksCounter" value="390" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1051,7 +1079,7 @@
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1459431" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32535365" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" visible="true" weight="0.31664854" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.31447226" />
       <window_info anchor="bottom" id="Version Control" order="15" sideWeight="0.25266525" side_tool="true" weight="0.32535365" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.3275488" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32861805" />
@@ -1073,13 +1101,13 @@
       <window_info anchor="right" id="Capture Analysis" order="9" />
       <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="12" sideWeight="0.4978678" side_tool="true" weight="0.21268657" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Data View" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info id="Nl-Palette" order="2" />
       <window_info anchor="right" id="Maven Projects" order="5" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.32535365" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Data View" order="11" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" id="Properties" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
@@ -1220,8 +1248,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/grieferGames/README.md" />
-    <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/dontHide/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-252">
@@ -1365,13 +1391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/mySupport/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="141" column="33" selection-start-line="141" selection-start-column="33" selection-end-line="141" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/forceNick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -1414,13 +1433,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/guestLounge/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../pyTSon/eventlog.conf">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1431,13 +1443,6 @@
     <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp12740/data/discord.py" />
     <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp11315/data/discord.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
-    <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="829">
-          <caret line="149" selection-start-line="149" selection-end-line="149" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/patch-test/__init__.py" />
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1477,6 +1482,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/faker/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/autorun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="139" column="41" selection-start-line="139" selection-start-column="41" selection-end-line="139" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17304">
@@ -1484,27 +1513,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/faker/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/rewinsideTV/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+        <state relative-caret-position="441">
+          <caret line="24" column="54" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/autorun.py">
+    <entry file="file://$PROJECT_DIR$/scripts/guestLounge/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="144" column="35" lean-forward="true" selection-start-line="144" selection-start-column="35" selection-end-line="144" selection-end-column="35" />
+        <state relative-caret-position="336">
+          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding>
-            <element signature="e#0#94#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="25" selection-start-column="25" selection-end-column="25" />
+        <state relative-caret-position="252">
+          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/mySupport/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-987">
+          <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="56" column="41" lean-forward="true" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

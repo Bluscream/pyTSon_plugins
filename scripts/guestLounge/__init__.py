@@ -21,6 +21,7 @@ class guestLounge(ts3plugin):
     timer = QTimer()
     ts3host = None
     tabs = {}
+    waiting = {}
     """
     cfg = ConfigParser()
     cfg["9lBVIDJRSSgAGy+cWJgNlUQRd64="] = { "enabled": True }

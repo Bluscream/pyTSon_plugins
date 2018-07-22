@@ -137,13 +137,13 @@ def error(errorCode):
     print("{}: \"{}\" ({})".format(errorCode,msg,err))
 
 def encoding():
-    print(sys.stdout.encoding)
-    print(sys.stdout.isatty())
-    print(locale.getpreferredencoding())
-    print(sys.getfilesystemencoding())
-    print(os.environ["PYTHONIOENCODING"])
-    print(chr(9786).encode("utf8"))
+    print('locale.getpreferredencoding()', locale.getpreferredencoding())
+    print('sys.getfilesystemencoding()', sys.getfilesystemencoding())
+    print('os.environ["PYTHONIOENCODING"]', os.environ["PYTHONIOENCODING"])
+    print('chr(9786).encode("utf8"): ', chr(9786).encode("utf8"))
     print(chr(246), chr(9786), chr(9787))
+    print("sys.stdout.encoding:", sys.stdout.encoding)
+    print("sys.stdout.isatty()", sys.stdout.isatty())
 
 self = QApplication.instance()
 schid = getCurrentServerConnectionHandlerID()

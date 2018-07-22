@@ -77,7 +77,7 @@ class discordify(ts3plugin):
         if curschid == schid: self.onTabChangedEvent(schid, newStatus)
     def onTabChangedEvent(self, schid, status=None):
         if status is None: (err, status) = ts3lib.getConnectionStatus(schid)
-        print(schid, status)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, schid, status)
         if status == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             if schid in self.tabs:
                 del self.tabs[schid]
@@ -99,7 +99,7 @@ class discordify(ts3plugin):
             else:
                 start = time()
                 self.tabs[schid] = start
-                print("self.tabs[schid]", self.tabs[schid])
+                if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "self.tabs[schid]", self.tabs[schid])
                 self.activity["timestamps"]["start"] = start
             self.updateServer(schid); self.updateChannel(schid); self.updateVoice(schid);self.updateClient(schid)
 
@@ -134,7 +134,7 @@ class discordify(ts3plugin):
         # (err, clients) = ts3lib.getChannelVariable(schid, ts3defines.ChannelPropertiesRare.)
         (err, cmax) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
         if cmax >= clients:
-            print("cmax",cmax,">=","clients",clients)
+            if PluginHost.cfg.getboolean("general", "verbose"): print("cmax",cmax,">=","clients",clients)
             self.activity["party"]["size"] = [clients, cmax]
         else:
             (err, smax) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_MAXCLIENTS)

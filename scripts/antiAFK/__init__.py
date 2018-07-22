@@ -45,23 +45,27 @@ class antiAFK(ts3plugin):
     def addTimer(self, schid):
         err, clid = ts3lib.getClientID(schid)
         self.servers[schid] = {"clid": clid}
-        if len(self.servers) == 1: self.timer.start(self.getInterval(schid))
-        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Added Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers)-1,")")
+        interval = self.getInterval(schid)
+        if len(self.servers) == 1:
+            self.timer.start(interval["interval"])
+        ts3lib.printMessageToCurrentTab("{}> Enabled for tab #{} with interval {} (server uid: {})".format(self.name, schid, interval["interval"], interval["suid"]))
 
     def getInterval(self, schid=0):
         if schid < 1: schid = ts3lib.getCurrentServerConnectionHandlerID()
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         if not suid in self.interval: suid = "default"
-        interval = randint(self.interval[suid][0]*1000, self.interval[suid][1]*1000)
-        if PluginHost.cfg.getboolean("general", "verbose"):
-            print("schid:", schid, "suid:", suid, "min:", self.interval[suid][0]*1000, "max:", self.interval[suid][1]*1000, "interval:", interval)
-        return interval
+        min = self.interval[suid][0]*1000
+        max = self.interval[suid][1] * 1000
+        _return = { "schid": schid, "suid": suid, "min": min, "max": max, "interval": randint(min, max) }
+        if PluginHost.cfg.getboolean("general", "verbose"): print(_return)
+        return _return
 
     def delTimer(self, schid):
         if schid in self.servers:
-            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Removing Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers)-1,")")
+            # print(self.name, "> Removing Timer:", self.servers[schid], "for #", schid, "(servers:", len(self.servers)-1,")")
             del self.servers[schid]
             if len(self.servers) == 0: self.timer.stop()
+            ts3lib.printMessageToCurrentTab("{}> Disabled for tab #{}".format(self.name, schid))
 
     def tick(self):
         for schid in self.servers:

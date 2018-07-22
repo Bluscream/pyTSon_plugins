@@ -124,21 +124,9 @@ class mySupport(ts3plugin):
             print("myuid",ownuid,self.cfg.get("general","myuid"), ownuid == self.cfg.get("general","myuid"))
         if servername != self.cfg.get("general","servername"): return
         if ownuid != self.cfg.get("general","myuid"): return
-        print("mein test 1")
-        content = StringIO("[general]\nmychan = ╠-● Administrator | Blu") 
-        cfg = ConfigParser() 
-        cfg.readfp(content)
-         print(cfg.get("general", "mychan") )
-        print(type(cfg.get("general", "mychan")) )
-        print(cfg.get("general", "mychan").split(",") )
-        return
-        # mychan = StringIO("╠-● Administrator | Blu").split(",")
-        # mychan = self.cfg.get("general", "mychan") # .split(",")
-        print(mychan)
+        mychan = self.cfg.get("general", "mychan").split(",")
         mycid = ts3lib.getChannelIDFromChannelNames(schid, mychan)
-        print("mein test 2")
         self.schids.append({schid: mycid})
-        print("mein test 3")
         self.toggleChannel(schid)
 
     def toggleChannel(self, schid):
