@@ -12,7 +12,8 @@ from urllib.parse import quote_plus
 from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
-from re import match, sub
+from re import match, sub, compile, escape, IGNORECASE, MULTILINE
+from psutil import Process
 import ts3lib, ts3defines, os.path, string, random, ts3client, time, sys, codecs
 
 # GENERAL FUNCTIONS #
@@ -423,11 +424,27 @@ def _downloadFileReply(reply):
     """
 
 # Stuff #
-def hasAddon():
+def getAddonStatus(filename_without_extension, name=""): # getAddonStatus("TS3Hook", "test")
     """
-
+    :param filename_without_extension:
+    :param name:
+    :return: AddonStatus
     """
-    pass
+    p = Process(os.getpid())
+    filename = filename_without_extension.lower()
+    print("filename {}".format(filename))
+    pattern = compile("^(?:.*)(_win64|_win32|_x64|_x86)?\.dll$", IGNORECASE|MULTILINE)
+    for dll in p.memory_maps():
+        file = dll.path.lower().rsplit('\\', 1)[1]
+        if not file.endswith(".dll") and not file.endswith(".DLL"): continue # TODO: Remove
+        print("file: {}".format(file))
+        print("pattern: {}".format(pattern.sub("", file)))
+        if pattern.sub("", file).endswith(filename): return AddonStatus.LOADED
+    if name:
+        addons = getAddons()
+        for k in addons:
+            if addons[k]["name"] == name: return AddonStatus.INSTALLED
+    return AddonStatus.UNKNOWN
 
 # Database #
 def getAddons():
@@ -629,6 +646,12 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
 # DEFINES #
 
 dlpath = ""
+
+class AddonStatus(object):
+    UNKNOWN = 0
+    INSTALLED = 1
+    LOADED = 2
+    ENABLED = 3
 
 class ContactStatus(object):
     """

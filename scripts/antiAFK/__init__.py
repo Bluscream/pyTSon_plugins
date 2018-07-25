@@ -21,7 +21,7 @@ class antiAFK(ts3plugin):
     hotkeys = []
     timer = QTimer()
     servers = {}
-    text = "."
+    text = "~cmdclientupdate"
     interval = {
         "9Sx6wrlRV4i9klBiTanrksNFKvs=": (5, 10),
         "QTRtPmYiSKpMS8Oyd4hyztcvLqU=": (30, 120),

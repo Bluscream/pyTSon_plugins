@@ -5,14 +5,15 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/ignoreFirstMessage/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ignoreFirstMessage/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" afterDir="false" />
-    </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
+    </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="scripts/pip.exe" />
     <ignored path="scripts/pip3.5.exe" />
@@ -91,44 +92,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="false">
+      <file leaf-file-name="bluscream.py" pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="480" column="4" selection-start-line="480" selection-start-column="4" selection-end-line="480" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/complaintReminder/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
-              <caret line="76" column="20" lean-forward="true" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
+            <state relative-caret-position="399">
+              <caret line="433" column="49" lean-forward="true" selection-start-line="433" selection-start-column="49" selection-end-line="433" selection-end-column="49" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#46#75#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/ignoreFirstMessage/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="42" column="38" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="594" column="68" lean-forward="true" selection-start-line="594" selection-start-column="35" selection-end-line="594" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -136,7 +107,7 @@
       <file leaf-file-name="ts3defines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
+            <state relative-caret-position="6132">
               <caret line="292" selection-start-line="292" selection-end-line="292" />
             </state>
           </provider>
@@ -153,7 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PluginMenuType</find>
       <find>datetime</find>
       <find>setclientsel</find>
       <find>\p</find>
@@ -165,8 +135,8 @@
       <find>loadcf</find>
       <find>suid</find>
       <find>vanilla</find>
-      <find>mychan = self.cfg.get(&quot;general&quot;</find>
-      <find>delay = (</find>
+      <find />
+      <find />
       <find>tabs</find>
       <find>ui</find>
       <find>qurl</find>
@@ -178,11 +148,12 @@
       <find>print(&quot;self.</find>
       <find>print(schid</find>
       <find>pri</find>
-      <find>&gt;= clients</find>
-      <find>if PluginHost.cfg.getboolean(&quot;general&quot;, &quot;verbose&quot;):</find>
+      <find />
+      <find />
       <find>print</find>
       <find>b64e</find>
       <find>path.joi</find>
+      <find>getAddons</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -280,19 +251,19 @@
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp11315/data/discord.py" />
         <option value="$PROJECT_DIR$/scripts/patch-test/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/searchEverything/__init__.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/faker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/guestLounge/__init__.py" />
         <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/discordify/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/mySupport/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/rewinsideTV/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/complainReminder/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/ignoreFirstMessage/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
       </list>
     </option>
   </component>
@@ -322,6 +293,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -368,17 +350,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -391,7 +362,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="last.edited.regexp" value="[cspacer94]test" />
+    <property name="last.edited.regexp" value="penis_Win64.dll" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="options.lastSelected" value="editor.preferences.smartKeys" />
@@ -708,13 +679,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
-    </task>
-    <task id="LOCAL-00344" summary=":thinking:">
-      <created>1527103325975</created>
-      <option name="number" value="00344" />
-      <option name="presentableId" value="LOCAL-00344" />
-      <option name="project" value="LOCAL" />
-      <updated>1527103325977</updated>
     </task>
     <task id="LOCAL-00345" summary=":thinking:">
       <created>1527252095892</created>
@@ -1053,7 +1017,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532509531350</updated>
     </task>
-    <option name="localTasksCounter" value="393" />
+    <task id="LOCAL-00393" summary=":thinking:">
+      <created>1532512327516</created>
+      <option name="number" value="00393" />
+      <option name="presentableId" value="LOCAL-00393" />
+      <option name="project" value="LOCAL" />
+      <updated>1532512327516</updated>
+    </task>
+    <option name="localTasksCounter" value="394" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1062,7 +1033,7 @@
       <configuration name="Unittests in scripts" configurationId="tests" />
     </history-entry>
   </component>
-  <component name="TodoView" selected-index="2">
+  <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -1075,7 +1046,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1459431" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1459431" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32535365" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.31447226" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.32535365" />
@@ -1481,9 +1452,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1491,25 +1459,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="87" selection-start-line="87" selection-end-line="89" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
+        <state relative-caret-position="6132">
           <caret line="292" selection-start-line="292" selection-end-line="292" />
         </state>
       </provider>
@@ -1521,20 +1476,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/complainReminder/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/complainReminder/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="44" column="73" lean-forward="true" selection-start-line="44" selection-start-column="73" selection-end-line="44" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="12222">
+          <caret line="594" column="68" selection-start-line="594" selection-start-column="35" selection-end-line="594" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/ignoreFirstMessage/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/complaintReminder/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="76" column="20" lean-forward="true" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
+        <state relative-caret-position="619">
+          <caret line="76" column="20" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -1543,24 +1510,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="480" column="4" selection-start-line="480" selection-start-column="4" selection-end-line="480" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="594" column="68" lean-forward="true" selection-start-line="594" selection-start-column="35" selection-end-line="594" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/ignoreFirstMessage/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="42" column="38" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="38" />
+        <state relative-caret-position="399">
+          <caret line="433" column="49" lean-forward="true" selection-start-line="433" selection-start-column="49" selection-end-line="433" selection-end-column="49" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#46#75#0" expanded="true" />
           </folding>
         </state>
       </provider>
