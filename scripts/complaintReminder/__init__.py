@@ -22,7 +22,7 @@ class complaintReminder(ts3plugin):
     timer = QTimer()
     servers = {}
     waitingForList = []
-    interval = 10*1000
+    interval = 60*1000
 
     def __init__(self):
         self.timer.timeout.connect(self.tick)
