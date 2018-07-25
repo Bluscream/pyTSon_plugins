@@ -40,7 +40,7 @@ class rewinsideTV(ts3plugin):
             return
         if newChannelID == 0: return
         (err, sgroups) = ts3lib.getClientVariableAsString(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
-        (err2, errmsg) = ts3lib.getErrorMessage(err)
+        # (err2, errmsg) = ts3lib.getErrorMessage(err)
         if oldChannelID != 0: return
         if "10" in sgroups.split(','):
             (err, dbid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)

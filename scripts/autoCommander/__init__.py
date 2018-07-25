@@ -30,7 +30,6 @@ class autoCommander(ts3plugin):
 
     def stop(self):
         if self.timer.isActive(): self.timer.stop()
-        del self.timer
 
     def toggleTimer(self, schid):
         if self.timer.isActive():
