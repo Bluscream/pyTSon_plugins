@@ -433,13 +433,13 @@ def getAddonStatus(filename_without_extension, name=""): # getAddonStatus("TS3Ho
     p = Process(os.getpid())
     filename = filename_without_extension.lower()
     print("filename {}".format(filename))
-    pattern = compile("^(?:.*)(_win64|_win32|_x64|_x86)?\.dll$", IGNORECASE|MULTILINE)
+    # pattern = compile("^(?:.*)(_win64|_win32|_x64|_x86)?\.dll$", IGNORECASE|MULTILINE)
     for dll in p.memory_maps():
-        file = dll.path.lower().rsplit('\\', 1)[1]
-        if not file.endswith(".dll") and not file.endswith(".DLL"): continue # TODO: Remove
+        file = dll.path.lower().rsplit('\\', 1)[1].replace("_win64","").replace("_win32","").replace("_x86","").replace("_x64","").replace(".DLL","").replace(".dll","")
+        # if not file.endswith(".dll") and not file.endswith(".DLL"): continue # TODO: Remove
         print("file: {}".format(file))
-        print("pattern: {}".format(pattern.sub("", file)))
-        if pattern.sub("", file).endswith(filename): return AddonStatus.LOADED
+        # print("pattern: {}".format(pattern.sub("", file)))
+        if file.endswith(filename): return AddonStatus.LOADED # pattern.sub("", file)
     if name:
         addons = getAddons()
         for k in addons:
