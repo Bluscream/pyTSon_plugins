@@ -5,15 +5,12 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/info/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/info/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/mySupport/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/mySupport/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/searchEverything/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/searchEverything/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -46,27 +43,27 @@
     <session id="1604380212">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1998" />
+          <entry key="py" value="2555" />
           <entry key="txt" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1998" />
+          <entry key="Python" value="2555" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="conf" value="1" />
-          <entry key="py" value="7" />
+          <entry key="py" value="10" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="7" />
+          <entry key="Python" value="10" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -90,7 +87,7 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1323">
+            <state relative-caret-position="832">
               <caret line="70" column="19" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
             </state>
           </provider>
@@ -99,24 +96,27 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-84">
-              <caret line="215" column="11" lean-forward="true" selection-start-line="215" selection-start-column="11" selection-end-line="215" selection-end-column="11" />
+            <state relative-caret-position="924">
+              <caret line="221" column="15" selection-start-line="221" selection-start-column="15" selection-end-line="221" selection-end-column="15" />
               <folding>
                 <element signature="e#46#75#0" expanded="true" />
-                <marker date="1532940696980" expanded="true" signature="6741:6962" ph="..." />
-                <marker date="1532940696980" expanded="true" signature="7840:8173" ph="..." />
+                <marker date="1532942811925" expanded="true" signature="6262:6518" ph="..." />
+                <marker date="1532942811925" expanded="true" signature="7470:7691" ph="..." />
+                <marker date="1532942811925" expanded="true" signature="8569:8902" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/searchEverything/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="77" column="50" selection-start-line="77" selection-start-column="50" selection-end-line="77" selection-end-column="50" />
+            <state relative-caret-position="601">
+              <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#0#35#0" expanded="true" />
+                <marker date="1532944600688" expanded="true" signature="2776:3100" ph="..." />
+                <marker date="1532944600688" expanded="true" signature="3792:3798" ph="..." />
               </folding>
             </state>
           </provider>
@@ -125,7 +125,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6132">
+            <state relative-caret-position="805">
               <caret line="292" selection-start-line="292" selection-end-line="292" />
             </state>
           </provider>
@@ -142,9 +142,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mychan</find>
-      <find>cfg</find>
-      <find>loadcf</find>
       <find>suid</find>
       <find>vanilla</find>
       <find>mychan = self.cfg.get(&quot;general&quot;</find>
@@ -171,7 +168,10 @@
       <find>print(&quot;schi</find>
       <find>returnCode</find>
       <find>getchannelinfo</find>
+      <find>inputbox</find>
+      <find>getchannelco</find>
       <find>compile</find>
+      <find>channelcreated</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -249,7 +249,6 @@
         <option value="$PROJECT_DIR$/include/ts3Ext/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/grieferGames/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/addonList/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/mySupport/config.ini" />
         <option value="$PROJECT_DIR$/scripts/massAction/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" />
@@ -280,8 +279,9 @@
         <option value="$PROJECT_DIR$/scripts/ignoreFirstMessage/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/info/__init__.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/searchEverything/__init__.py" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
       </list>
     </option>
   </component>
@@ -333,6 +333,12 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="autoFollow" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -682,20 +688,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00347" summary=":thinking:">
-      <created>1527259146888</created>
-      <option name="number" value="00347" />
-      <option name="presentableId" value="LOCAL-00347" />
-      <option name="project" value="LOCAL" />
-      <updated>1527259146889</updated>
-    </task>
-    <task id="LOCAL-00348" summary=":thinking:">
-      <created>1527260096129</created>
-      <option name="number" value="00348" />
-      <option name="presentableId" value="LOCAL-00348" />
-      <option name="project" value="LOCAL" />
-      <updated>1527260096145</updated>
-    </task>
     <task id="LOCAL-00349" summary=":thinking:">
       <created>1527378280395</created>
       <option name="number" value="00349" />
@@ -1026,7 +1018,21 @@
       <option name="project" value="LOCAL" />
       <updated>1532532915745</updated>
     </task>
-    <option name="localTasksCounter" value="396" />
+    <task id="LOCAL-00396" summary=":thinking:">
+      <created>1532941407443</created>
+      <option name="number" value="00396" />
+      <option name="presentableId" value="LOCAL-00396" />
+      <option name="project" value="LOCAL" />
+      <updated>1532941407444</updated>
+    </task>
+    <task id="LOCAL-00397" summary=":thinking:">
+      <created>1532943085511</created>
+      <option name="number" value="00397" />
+      <option name="presentableId" value="LOCAL-00397" />
+      <option name="project" value="LOCAL" />
+      <updated>1532943085511</updated>
+    </task>
+    <option name="localTasksCounter" value="398" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1219,13 +1225,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/grieferGames/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="43" column="50" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/addonList/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="924">
@@ -1257,13 +1256,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/settings.ini">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/kickself/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1465,30 +1457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1323">
-          <caret line="70" column="19" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5754">
-          <caret line="286" column="20" selection-start-line="286" selection-start-column="20" selection-end-line="286" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6132">
-          <caret line="292" selection-start-line="292" selection-end-line="292" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/complaintReminder/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -1496,24 +1464,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+    <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-84">
-          <caret line="215" column="11" lean-forward="true" selection-start-line="215" selection-start-column="11" selection-end-line="215" selection-end-column="11" />
-          <folding>
-            <element signature="e#46#75#0" expanded="true" />
-            <marker date="1532940696980" expanded="true" signature="6741:6962" ph="..." />
-            <marker date="1532940696980" expanded="true" signature="7840:8173" ph="..." />
-          </folding>
+        <state relative-caret-position="651">
+          <caret line="36" column="68" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="68" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/searchEverything/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="77" column="50" selection-start-line="77" selection-start-column="50" selection-end-line="77" selection-end-column="50" />
+        <state relative-caret-position="1701">
+          <caret line="81" column="94" selection-start-line="81" selection-start-column="94" selection-end-line="81" selection-end-column="94" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="270" column="28" selection-start-line="270" selection-start-column="20" selection-end-line="270" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="832">
+          <caret line="70" column="19" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="221" column="15" selection-start-line="221" selection-start-column="15" selection-end-line="221" selection-end-column="15" />
+          <folding>
+            <element signature="e#46#75#0" expanded="true" />
+            <marker date="1532942811925" expanded="true" signature="6262:6518" ph="..." />
+            <marker date="1532942811925" expanded="true" signature="7470:7691" ph="..." />
+            <marker date="1532942811925" expanded="true" signature="8569:8902" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="292" selection-start-line="292" selection-end-line="292" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1532944600688" expanded="true" signature="2776:3100" ph="..." />
+            <marker date="1532944600688" expanded="true" signature="3792:3798" ph="..." />
           </folding>
         </state>
       </provider>

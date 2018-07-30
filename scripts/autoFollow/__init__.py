@@ -54,6 +54,12 @@ class autoFollow(ts3plugin):
         ts3lib.requestClientMove(schid, ownID, cid, pw if pw else "")
         self.cid = 0
 
+    def join(self, schid, clid, cid):
+        delay = randint(self.delay[0], self.delay[1])
+        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, self.targets[schid]), channelURL(schid, cid), delay))
+        self.cid = cid
+        QTimer.singleShot(delay, self.joinTarget)
+
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not schid in self.targets: return
         if self.targets[schid] != clientID: return
@@ -61,10 +67,12 @@ class autoFollow(ts3plugin):
         if clientID == ownID: return
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         if newChannelID == ownCID: return
-        delay = randint(self.delay[0], self.delay[1])
-        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(),self.name,clientURL(schid, self.targets[schid]), channelURL(schid, newChannelID), delay))
-        self.cid = newChannelID
-        QTimer.singleShot(delay, self.joinTarget)
+        self.join(schid, clientID, newChannelID)
+
+    def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
+        if not schid in self.targets: return
+        if self.targets[schid] != invokerID: return
+        self.join(schid, invokerID, cid)
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
         if not schid in self.targets: return
