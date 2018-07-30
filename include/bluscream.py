@@ -214,6 +214,20 @@ def generateAvatarFileName(schid, clid=0):
     return "avatar_"+b64encode(uid.encode('ascii')).decode("ascii").split('=')[0]
 
 # PARSING #
+def getChannelPassword(schid, cid, noinput=False):
+    (err, passworded) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+    if err != ts3defines.ERROR_ok or not passworded: return False
+    (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
+    if pw: return pw
+    (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+    if err != ts3defines.ERROR_ok or not name: return False
+    pattern = r"^.*[PW|password|passwort|pass][\s|=|:|\|](.*)$"
+    regex = search(pattern, name, IGNORECASE)
+    if regex: return regex.group(1).strip()
+    if noinput: return False
+    pw = inputBox("Enter Channel Password", "Password:")
+    return pw
+
 def serverURL(schid=None, name=None):
     if schid is None:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()

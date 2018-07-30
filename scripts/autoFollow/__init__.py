@@ -2,7 +2,7 @@ import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
 from random import randint
-from bluscream import timestamp, clientURL, channelURL
+from bluscream import timestamp, clientURL, channelURL, getChannelPassword
 
 class autoFollow(ts3plugin):
     name = "Auto Follow (former Love Plugin)"
@@ -50,8 +50,8 @@ class autoFollow(ts3plugin):
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
         if ownCID == cid: return
-        (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
-        ts3lib.requestClientMove(schid, ownID, cid, pw)
+        pw = getChannelPassword(schid, cid, True)
+        ts3lib.requestClientMove(schid, ownID, cid, pw if pw else "")
         self.cid = 0
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
