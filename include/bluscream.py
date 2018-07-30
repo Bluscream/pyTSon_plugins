@@ -12,7 +12,7 @@ from urllib.parse import quote_plus
 from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
-from re import match, sub, compile, escape, IGNORECASE, MULTILINE
+from re import match, sub, compile, escape, search, IGNORECASE, MULTILINE
 from psutil import Process
 import ts3lib, ts3defines, os.path, string, random, ts3client, time, sys, codecs
 
@@ -222,6 +222,7 @@ def serverURL(schid=None, name=None):
         try: (error, name) = ts3lib.getServerVariable(schid, schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
         except: name = schid
     return '[b][url=channelid://0]"{}"[/url][/b]'.format(name)
+
 def channelURL(schid=None, cid=0, name=None):
     """
 
@@ -237,6 +238,16 @@ def channelURL(schid=None, cid=0, name=None):
         try: (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
         except: name = cid
     return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
+
+# pattern_channelurl = compile("^\[URL=channelid:\/\/(\d+)\](.*)\[\/URL\]$")
+def parseChannelURL(url):
+    pattern = "^\[URL=channelid:\/\/(\d+)\](.*)\[\/URL\]$"
+    regex = search(pattern, url, IGNORECASE)
+    if regex:
+        cid = regex.group(1)
+        name = regex.group(2)
+        return cid, name
+    return False
 
 def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
     """
@@ -261,6 +272,17 @@ def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
         try: nickname_encoded = quote_plus(nickname)
         except: nickname_encoded = uid
     return '[url=client://{0}/{1}~{2}]"{3}"[/url]'.format(clid, uid, nickname_encoded, nickname)
+
+def parseClientURL(url):
+    pattern = "^\[URL=client:\/\/(\d+)\/(.*)~(.*)\](.*)\[\/URL\]$"
+    regex = search(pattern, url, IGNORECASE)
+    if regex:
+        clid = regex.group(1)
+        uid = regex.group(2)
+        nickname_encoded = regex.group(3)
+        nickname = regex.group(4)
+        return clid, uid, nickname_encoded, nickname
+    return False
 
 def getServerType(schid, pattern=None):
     err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)

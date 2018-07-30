@@ -7,7 +7,7 @@ from ts3plugin import ts3plugin
 from pluginhost import PluginHost
 from traceback import format_exc
 import ts3defines, ts3lib, pytson
-from bluscream import inputBox, timestamp
+from bluscream import inputBox, timestamp, parseClientURL
 # from urllib.parse import quote_plus
 
 class searchEverything(ts3plugin):
@@ -74,10 +74,15 @@ class searchEverything(ts3plugin):
                 if "%%CLIENT_NAME_PERCENT_ENCODED%%" in url:
                     if selectedItemID:  (err, nickname) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
                     else: nickname = inputBox(self.name, "Nickname:", QApplication.clipboard().text())
-                    url = url.replace("%%CLIENT_NAME_PERCENT_ENCODED%%", "{}".format(QUrl.toPercentEncoding(nickname)))
+                    parsed = parseClientURL(nickname)
+                    if parsed: nickname = parsed[2]
+                    else: nickname = QUrl.toPercentEncoding(nickname)
+                    url = url.replace("%%CLIENT_NAME_PERCENT_ENCODED%%", "{}".format(nickname))
                 if "%%CLIENT_UNIQUE_ID%%" in url:
                     if selectedItemID:  (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
                     else: uid = inputBox(self.name, "UID:", QApplication.clipboard().text())
+                    parsed = parseClientURL(uid)
+                    if parsed: uid = parsed[1]
                     url = url.replace("%%CLIENT_UNIQUE_ID%%", "{}".format(QUrl.toPercentEncoding(uid)))
                 if "%%CLIENT_BADGES%%" in url:
                     if selectedItemID:  (err, badges) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientPropertiesRare.CLIENT_BADGES)

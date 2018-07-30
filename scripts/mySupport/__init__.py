@@ -179,7 +179,6 @@ class mySupport(ts3plugin):
         # self.checkChannel(schid)
 
     def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
-        print(returnCode, self.perm[2])
         if returnCode != self.perm[2]: return
         perm = self.perm
         ts3lib.printMessage(schid, "{}: Error setting permission [{}] #{} ({}): {} ({})".format(self.name, failedPermissionID, perm[0],perm[1],error,errorMessage), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)

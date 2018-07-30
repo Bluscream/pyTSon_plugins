@@ -285,7 +285,7 @@ class info(ts3plugin):
         return self.getInfoData(schid, id, atype)
 
     def getInfoData(self, schid, id, atype):
-        print("schid",schid,"id",id,"atype",atype)
+        # print("schid",schid,"id",id,"atype",atype)
         if atype == PluginItemType.PLUGIN_SERVER:
             if not schid in self.requested:
                 ts3lib.requestServerVariables(schid)
