@@ -5,14 +5,12 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoDrag/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoDrag/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/quickPerm/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickPerm/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -45,13 +43,14 @@
     <session id="1604380212">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2580" />
-          <entry key="txt" value="14" />
+          <entry key="py" value="3036" />
+          <entry key="txt" value="91" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2580" />
+          <entry key="PLAIN_TEXT" value="77" />
+          <entry key="Python" value="3036" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -73,13 +72,14 @@
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.100" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="2" />
+          <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.42" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
     </session>
@@ -101,7 +101,7 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="832">
+            <state relative-caret-position="11277">
               <caret line="551" column="13" selection-start-line="551" selection-start-column="4" selection-end-line="551" selection-end-column="13" />
               <folding>
                 <element signature="e#46#75#0" expanded="true" />
@@ -113,12 +113,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="601">
-              <caret line="78" column="40" lean-forward="true" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+            <state relative-caret-position="475">
+              <caret line="82" column="74" selection-start-line="82" selection-start-column="74" selection-end-line="82" selection-end-column="74" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <marker date="1533028446345" expanded="true" signature="3009:3333" ph="..." />
-                <marker date="1533028446345" expanded="true" signature="4025:4031" ph="..." />
+                <marker date="1533041980158" expanded="true" signature="1427:1433" ph="..." />
               </folding>
             </state>
           </provider>
@@ -684,13 +683,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00350" summary=":thinking:">
-      <created>1527523939665</created>
-      <option name="number" value="00350" />
-      <option name="presentableId" value="LOCAL-00350" />
-      <option name="project" value="LOCAL" />
-      <updated>1527523939666</updated>
-    </task>
     <task id="LOCAL-00351" summary=":thinking:">
       <created>1527525856077</created>
       <option name="number" value="00351" />
@@ -1028,7 +1020,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532944620807</updated>
     </task>
-    <option name="localTasksCounter" value="399" />
+    <task id="LOCAL-00399" summary="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow">
+      <created>1533028643919</created>
+      <option name="number" value="00399" />
+      <option name="presentableId" value="LOCAL-00399" />
+      <option name="project" value="LOCAL" />
+      <updated>1533028643929</updated>
+    </task>
+    <option name="localTasksCounter" value="400" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1153,7 +1152,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value=":thinking: it twerks! yay" />
     <MESSAGE value=":thinking: now with much ipinfo" />
     <MESSAGE value="fixed servergroups" />
     <MESSAGE value="query viewer now also lists the invisible queries" />
@@ -1178,7 +1176,8 @@
     <MESSAGE value=":thinking: added last_joined_channel_to_customBan and last_joined_server_to_customBan to quickMod" />
     <MESSAGE value=":thinking: added mySupport" />
     <MESSAGE value=":thinking:" />
-    <option name="LAST_COMMIT_MESSAGE" value=":thinking:" />
+    <MESSAGE value="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow" />
+    <option name="LAST_COMMIT_MESSAGE" value="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1489,10 +1488,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.MD">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1323">
           <caret line="70" column="19" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11277">
+          <caret line="551" column="13" selection-start-line="551" selection-start-column="4" selection-end-line="551" selection-end-column="13" />
+          <folding>
+            <element signature="e#46#75#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1503,32 +1520,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.MD">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="832">
-          <caret line="551" column="13" selection-start-line="551" selection-start-column="4" selection-end-line="551" selection-end-column="13" />
-          <folding>
-            <element signature="e#46#75#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="78" column="40" lean-forward="true" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+        <state relative-caret-position="475">
+          <caret line="82" column="74" selection-start-line="82" selection-start-column="74" selection-end-line="82" selection-end-column="74" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <marker date="1533028446345" expanded="true" signature="3009:3333" ph="..." />
-            <marker date="1533028446345" expanded="true" signature="4025:4031" ph="..." />
+            <marker date="1533041980158" expanded="true" signature="1427:1433" ph="..." />
           </folding>
         </state>
       </provider>

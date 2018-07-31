@@ -26,6 +26,13 @@ class autoFollow(ts3plugin):
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
+    def stop(self, reason=" because plugin was stopped", schid=0, target=0):
+        ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-following[/color] {}{}!".format(timestamp(),self.name,clientURL(schid, target) if target else "anyone", reason))
+        if schid and target != "anyone":
+            del self.targets[schid]
+        else:
+            self.targets = {}
+
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus != ts3defines.ConnectStatus.STATUS_DISCONNECTED: return
         if schid in self.targets: del self.targets[schid]
@@ -33,14 +40,13 @@ class autoFollow(ts3plugin):
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if menuItemID != 0: return
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
-            if schid in self.targets:
-                ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-following[/color] {}".format(timestamp(),self.name,clientURL(schid, self.targets[schid])))
-                del self.targets[schid]
+            if schid in self.targets: self.stop("", schid, self.targets[schid])
             else: ts3lib.printMessageToCurrentTab("{} {}: [color=red]Not following anyone on this tab.[/color]".format(timestamp(),self.name))
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
             (err, ownID) = ts3lib.getClientID(schid)
             if selectedItemID == ownID: return
-            self.targets[schid] = selectedItemID
+            (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            self.targets[schid] = uid
             ts3lib.printMessageToCurrentTab("{} {}: [color=green]Now auto-following[/color] {}".format(timestamp(),self.name,clientURL(schid, selectedItemID)))
             self.joinTarget(schid)
 
@@ -60,17 +66,21 @@ class autoFollow(ts3plugin):
         if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
         if ownCID == cid: return
         delay = randint(self.delay[0], self.delay[1])
-        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, self.targets[schid]), channelURL(schid, cid), delay))
+        # (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, clid), channelURL(schid, cid), delay))
         self.cid = cid
         QTimer.singleShot(delay, self.joinTarget)
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not schid in self.targets: return
-        if self.targets[schid] != clientID: return
+        (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if self.targets[schid] != uid: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID == ownID: return
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         if newChannelID == ownCID: return
+        if newChannelID == 0 and visibility == ts3defines.Visibility.RETAIN_VISIBILITY:
+            self.stop(" because he disconnected", schid, clientID); return
         self.join(schid, clientID, newChannelID)
 
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
@@ -83,5 +93,4 @@ class autoFollow(ts3plugin):
         if self.targets[schid] != clientID: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID or moverID == ownID: return
-        ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-following[/color] {} because we were moved!".format(timestamp(),self.name,clientURL(schid, self.targets[schid])))
-        del self.targets[schid]
+        self.stop(" because we were moved", schid, clientID)
