@@ -55,6 +55,10 @@ class autoFollow(ts3plugin):
         self.cid = 0
 
     def join(self, schid, clid, cid):
+        (err, ownID) = ts3lib.getClientID(schid)
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
+        if ownCID == cid: return
         delay = randint(self.delay[0], self.delay[1])
         ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, self.targets[schid]), channelURL(schid, cid), delay))
         self.cid = cid

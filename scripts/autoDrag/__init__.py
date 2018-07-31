@@ -68,5 +68,5 @@ class autoDrag(ts3plugin):
         if self.targets[schid] != clientID: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID or moverID == ownID: return
-        ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-following[/color] {} because we were moved!".format(timestamp(),self.name,clientURL(schid, self.targets[schid])))
+        ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-dragging[/color] {} because we were moved!".format(timestamp(),self.name,clientURL(schid, self.targets[schid])))
         del self.targets[schid]
