@@ -50,26 +50,12 @@ class autoFollow(ts3plugin):
             ts3lib.printMessageToCurrentTab("{} {}: [color=green]Now auto-following[/color] {}".format(timestamp(),self.name,clientURL(schid, selectedItemID)))
             self.joinTarget(schid)
 
-    def joinTarget(self, schid = 0, cid = 0):
-        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+    def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
+        if not schid in self.targets: return
+        if self.targets[schid] != clientID: return
         (err, ownID) = ts3lib.getClientID(schid)
-        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-        if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
-        if ownCID == cid: return
-        pw = getChannelPassword(schid, cid, True)
-        ts3lib.requestClientMove(schid, ownID, cid, pw if pw else "")
-        self.cid = 0
-
-    def join(self, schid, clid, cid):
-        (err, ownID) = ts3lib.getClientID(schid)
-        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
-        if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
-        if ownCID == cid: return
-        delay = randint(self.delay[0], self.delay[1])
-        # (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, clid), channelURL(schid, cid), delay))
-        self.cid = cid
-        QTimer.singleShot(delay, self.joinTarget)
+        if clientID != ownID or moverID == ownID: return
+        self.stop(" because we were moved", schid, clientID)
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not schid in self.targets: return
@@ -85,12 +71,27 @@ class autoFollow(ts3plugin):
 
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
         if not schid in self.targets: return
-        if self.targets[schid] != invokerID: return
+        (err, uid) = ts3lib.getClientVariable(schid, invokerID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if self.targets[schid] != uid: return
         self.join(schid, invokerID, cid)
 
-    def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
-        if not schid in self.targets: return
-        if self.targets[schid] != clientID: return
+    def join(self, schid, clid, cid):
         (err, ownID) = ts3lib.getClientID(schid)
-        if clientID != ownID or moverID == ownID: return
-        self.stop(" because we were moved", schid, clientID)
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
+        if ownCID == cid: return
+        delay = randint(self.delay[0], self.delay[1])
+        # (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, clid), channelURL(schid, cid), delay))
+        self.cid = cid
+        QTimer.singleShot(delay, self.joinTarget)
+
+    def joinTarget(self, schid = 0, cid = 0):
+        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+        (err, ownID) = ts3lib.getClientID(schid)
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
+        if ownCID == cid: return
+        pw = getChannelPassword(schid, cid, True)
+        ts3lib.requestClientMove(schid, ownID, cid, pw if pw else "")
+        self.cid = 0

@@ -5,12 +5,10 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% some changes for autoFollow">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -43,14 +41,14 @@
     <session id="1604380212">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3036" />
-          <entry key="txt" value="91" />
+          <entry key="py" value="3043" />
+          <entry key="txt" value="120" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="77" />
-          <entry key="Python" value="3036" />
+          <entry key="PLAIN_TEXT" value="106" />
+          <entry key="Python" value="3043" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -113,11 +111,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="82" column="74" selection-start-line="82" selection-start-column="74" selection-end-line="82" selection-end-column="74" />
+            <state relative-caret-position="538">
+              <caret line="73" column="62" selection-start-line="73" selection-start-column="62" selection-end-line="73" selection-end-column="62" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <marker date="1533041980158" expanded="true" signature="1427:1433" ph="..." />
+                <marker date="1533043595989" expanded="true" signature="1427:1433" ph="..." />
               </folding>
             </state>
           </provider>
@@ -683,13 +681,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00351" summary=":thinking:">
-      <created>1527525856077</created>
-      <option name="number" value="00351" />
-      <option name="presentableId" value="LOCAL-00351" />
-      <option name="project" value="LOCAL" />
-      <updated>1527525856078</updated>
-    </task>
     <task id="LOCAL-00352" summary=":thinking:">
       <created>1527526402047</created>
       <option name="number" value="00352" />
@@ -1027,7 +1018,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533028643929</updated>
     </task>
-    <option name="localTasksCounter" value="400" />
+    <task id="LOCAL-00400" summary="% some changes for autoFollow">
+      <created>1533042002444</created>
+      <option name="number" value="00400" />
+      <option name="presentableId" value="LOCAL-00400" />
+      <option name="project" value="LOCAL" />
+      <updated>1533042002446</updated>
+    </task>
+    <option name="localTasksCounter" value="401" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1049,7 +1047,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1459431" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1459431" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info id="Nl-Palette" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -1068,7 +1066,7 @@
       <window_info anchor="bottom" id="Application Servers" order="8" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.3275488" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.33623505" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.31447226" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.31344903" />
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info active="true" anchor="bottom" id="Floobits" order="14" sideWeight="0.49573562" visible="true" weight="0.32936078" />
@@ -1152,7 +1150,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value=":thinking: now with much ipinfo" />
     <MESSAGE value="fixed servergroups" />
     <MESSAGE value="query viewer now also lists the invisible queries" />
     <MESSAGE value="oops" />
@@ -1177,7 +1174,8 @@
     <MESSAGE value=":thinking: added mySupport" />
     <MESSAGE value=":thinking:" />
     <MESSAGE value="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow" />
-    <option name="LAST_COMMIT_MESSAGE" value="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow" />
+    <MESSAGE value="% some changes for autoFollow" />
+    <option name="LAST_COMMIT_MESSAGE" value="% some changes for autoFollow" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1522,11 +1520,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="82" column="74" selection-start-line="82" selection-start-column="74" selection-end-line="82" selection-end-column="74" />
+        <state relative-caret-position="538">
+          <caret line="73" column="62" selection-start-line="73" selection-start-column="62" selection-end-line="73" selection-end-column="62" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <marker date="1533041980158" expanded="true" signature="1427:1433" ph="..." />
+            <marker date="1533043595989" expanded="true" signature="1427:1433" ph="..." />
           </folding>
         </state>
       </provider>
