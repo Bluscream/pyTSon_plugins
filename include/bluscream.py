@@ -298,6 +298,12 @@ def parseClientURL(url):
         return clid, uid, nickname_encoded, nickname
     return False
 
+def getClientIDByUID(self, schid, uid):
+    (err, clids) = ts3lib.getClientList(schid)
+    for clid in clids:
+        (err, _uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if uid == _uid: return clid
+
 def getServerType(schid, pattern=None):
     err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
     if err != ts3defines.ERROR_ok or not ver: return ServerInstanceType.UNKNOWN

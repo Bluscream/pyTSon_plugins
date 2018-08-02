@@ -5,10 +5,11 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% hopefully Fixed autoFollow completely&#10;+ autoFollow works now with UID">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="- temporary removed psutil dependency (fixes #43)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -41,14 +42,14 @@
     <session id="1604380212">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3070" />
-          <entry key="txt" value="190" />
+          <entry key="py" value="3293" />
+          <entry key="txt" value="244" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="176" />
-          <entry key="Python" value="3070" />
+          <entry key="PLAIN_TEXT" value="230" />
+          <entry key="Python" value="3293" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -70,15 +71,16 @@
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.100" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="2" />
+          <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.42" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
     </session>
@@ -97,23 +99,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="true" current-in-tab="true">
+      <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+            <state relative-caret-position="452">
+              <caret line="301" column="39" selection-start-line="301" selection-start-column="26" selection-end-line="301" selection-end-column="39" />
+              <folding>
+                <element signature="e#46#75#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1701">
-              <caret line="81" column="32" lean-forward="true" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
+            <state relative-caret-position="84">
+              <caret line="4" column="92" selection-start-line="4" selection-start-column="92" selection-end-line="4" selection-end-column="92" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <marker date="1533043595989" expanded="true" signature="1427:1433" ph="..." />
+                <marker date="1533234263168" expanded="true" signature="1445:1451" ph="..." />
               </folding>
             </state>
           </provider>
@@ -277,8 +282,8 @@
         <option value="$PROJECT_DIR$/scripts/searchEverything/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoDrag/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/quickPerm/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
       </list>
     </option>
   </component>
@@ -292,8 +297,8 @@
     <scope name="scripts" pattern="file[pyTSon_plugins]:scripts//*" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="442" />
+    <option name="y" value="-21" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -679,13 +684,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00353" summary=":thinking:">
-      <created>1527528142338</created>
-      <option name="number" value="00353" />
-      <option name="presentableId" value="LOCAL-00353" />
-      <option name="project" value="LOCAL" />
-      <updated>1527528142338</updated>
-    </task>
     <task id="LOCAL-00354" summary=":thinking:">
       <created>1527528346550</created>
       <option name="number" value="00354" />
@@ -1023,7 +1021,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533043800715</updated>
     </task>
-    <option name="localTasksCounter" value="402" />
+    <task id="LOCAL-00402" summary="- temporary removed psutil dependency (fixes #43)">
+      <created>1533196084410</created>
+      <option name="number" value="00402" />
+      <option name="presentableId" value="LOCAL-00402" />
+      <option name="project" value="LOCAL" />
+      <updated>1533196084430</updated>
+    </task>
+    <option name="localTasksCounter" value="403" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1148,7 +1153,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="query viewer now also lists the invisible queries" />
     <MESSAGE value="oops" />
     <MESSAGE value="doubleclick works OMFG" />
     <MESSAGE value="added hotkey for serverbrowser" />
@@ -1173,7 +1177,8 @@
     <MESSAGE value="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow" />
     <MESSAGE value="% some changes for autoFollow" />
     <MESSAGE value="% hopefully Fixed autoFollow completely&#10;+ autoFollow works now with UID" />
-    <option name="LAST_COMMIT_MESSAGE" value="% hopefully Fixed autoFollow completely&#10;+ autoFollow works now with UID" />
+    <MESSAGE value="- temporary removed psutil dependency (fixes #43)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- temporary removed psutil dependency (fixes #43)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1506,21 +1511,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1701">
-          <caret line="81" column="32" lean-forward="true" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
+        <state relative-caret-position="452">
+          <caret line="301" column="39" selection-start-line="301" selection-start-column="26" selection-end-line="301" selection-end-column="39" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
-            <marker date="1533043595989" expanded="true" signature="1427:1433" ph="..." />
+            <element signature="e#46#75#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+    <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+        <state relative-caret-position="84">
+          <caret line="4" column="92" selection-start-line="4" selection-start-column="92" selection-end-line="4" selection-end-column="92" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1533234263168" expanded="true" signature="1445:1451" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
