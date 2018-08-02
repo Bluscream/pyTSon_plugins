@@ -13,7 +13,7 @@ from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
 from re import match, sub, compile, escape, search, IGNORECASE, MULTILINE
-from psutil import Process
+# from psutil import Process # TODO: Auto-install
 import ts3lib, ts3defines, os.path, string, random, ts3client, time, sys, codecs
 
 # GENERAL FUNCTIONS #
