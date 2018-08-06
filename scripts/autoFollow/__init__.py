@@ -46,12 +46,17 @@ class autoFollow(ts3plugin):
             (err, ownID) = ts3lib.getClientID(schid)
             if selectedItemID == ownID: return
             (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            if not uid:
+                ts3lib.printMessageToCurrentTab(  "{} {}: [color=red]Cannot follow[/color] {}".format(timestamp(), self.name, selectedItemID))
+                return
             self.targets[schid] = uid
             ts3lib.printMessageToCurrentTab("{} {}: [color=green]Now auto-following[/color] {}".format(timestamp(),self.name,clientURL(schid, selectedItemID)))
+            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"> self.targets[schid]",self.targets[schid],"selectedItemID",selectedItemID)
             self.joinTarget(schid)
 
     def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
         if not schid in self.targets: return
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"onClientMoveMovedEvent > self.targets[schid]",self.targets[schid],"moverUniqueIdentifier",moverUniqueIdentifier)
         if self.targets[schid] != clientID: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID or moverID == ownID: return
@@ -60,6 +65,7 @@ class autoFollow(ts3plugin):
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not schid in self.targets: return
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"onClientMoveEvent > self.targets[schid]",self.targets[schid],"uid",uid)
         if self.targets[schid] != uid: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID == ownID: return
@@ -72,6 +78,7 @@ class autoFollow(ts3plugin):
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
         if not schid in self.targets: return
         (err, uid) = ts3lib.getClientVariable(schid, invokerID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"onNewChannelCreatedEvent > self.targets[schid]",self.targets[schid],"uid",uid)
         if self.targets[schid] != uid: return
         self.join(schid, invokerID, cid)
 

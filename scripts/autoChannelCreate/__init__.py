@@ -17,7 +17,10 @@ class autoChannelCreate(ts3plugin):
     offersConfigure = True
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle Auto Talk Power", "")]
+    menuItems = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle {}".format(name), ""),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Create Channel", "")
+    ]
     hotkeys = []
     debug = False
     ini = path.join(pytson.getPluginPath(), "scripts", __name__, "settings.ini")
@@ -33,6 +36,13 @@ class autoChannelCreate(ts3plugin):
             self.cfg['general'] = {"cfgversion": "1", "debug": "False", "enabled": "True"}
             with open(self.ini, 'w') as configfile: self.cfg.write(configfile)
         if self.debug: ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(self.timestamp(),self.name,self.author))
+
+    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
+        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
+        if menuItemID == 0: pass
+        elif menuItemID == 1:
+            ts3lib.setChannelVariableAsString(schid, 0, ts3defines.ChannelProperties.CHANNEL_NAME, "test")
+            ts3lib.flushChannelCreation(schid, 0)
 
     def configure(self, qParentWidget): pass
 

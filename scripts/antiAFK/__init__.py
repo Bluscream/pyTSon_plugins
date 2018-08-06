@@ -87,4 +87,7 @@ class antiAFK(ts3plugin):
         if schid in self.servers and fromID == self.servers[schid]["clid"] and targetMode == ts3defines.TextMessageTargetMode.TextMessageTarget_CLIENT and message == self.text: return 1
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if returnCode == self.retcode: self.retcode = ""; return True
+        if returnCode == self.retcode: return True
+
+    def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+        if returnCode == self.retcode: return True
