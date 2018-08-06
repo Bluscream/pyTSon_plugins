@@ -17,11 +17,15 @@ class faker(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Fake this channel", "scripts/%s/fake.png"%__name__),
-                 (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Fake this client", "scripts/%s/fake.png"%__name__)]
+    menuItems = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Fake this channel", "scripts/%s/fake.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Fake this client", "scripts/%s/fake.png"%__name__)
+    ]
     hotkeys = []
     ts3host = None
     guiLogLvl = logLevel.ALL
+    replace = { 'O': ['О', '0'], 'o': ['о'], 'e': ['е'], 'E': ['Е', '3'], 'c': ['с'], 'C': ['С'], 'a': ['а'], 'A': ['А', '4'], 'B': ['В'], 'T': ['Т'], 'X': ['Х'], 'x': ['х'] }
+    extra = "ᅚᅚᅚᅚ"
 
     def __init__(self):
         if "aaa_ts3Ext" in PluginHost.active: self.ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
@@ -33,14 +37,11 @@ class faker(ts3plugin):
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT and menuItemID == 0: self.fakeClient(schid, selectedItemID)
 
     def fakeChannel(self, schid, channelID):
-        channel = self.ts3host.getChannel(schid, channelID)
-        debug = PluginHost.cfg.getboolean("general", "verbose")
+        # channel = self.ts3host.getChannel(schid, channelID)
         (error, name) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_NAME)
         # name = name.encode("utf-8").decode(sys.stdout.encoding)
-        # TODO MODIFY NAME
-        if debug: print("err:", error, "CHANNEL_NAME", name)
-        if not error and name: ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelProperties.CHANNEL_NAME,name)
-
+        if not error and name: ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelProperties.CHANNEL_NAME,self.str_replace(name))
+        """
         (error, phonetic) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC)
         if debug: print("err:", error, "CHANNEL_NAME_PHONETIC", phonetic)
         if not error and phonetic: ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelPropertiesRare.CHANNEL_NAME_PHONETIC,phonetic)
@@ -52,6 +53,7 @@ class faker(ts3plugin):
             if debug: print("err:", error, "_pw", _pw)
             ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelProperties.CHANNEL_PASSWORD,_pw if _pw else ".")
         """
+        """
         (error, topic) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_TOPIC)
         if debug: print("err:", error, "CHANNEL_TOPIC", topic)
         if not error and topic: ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelProperties.CHANNEL_TOPIC,topic)
@@ -60,6 +62,7 @@ class faker(ts3plugin):
         (error, description) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelProperties.CHANNEL_DESCRIPTION)
         if debug: print("err:", error, "CHANNEL_DESCRIPTION", description)
         if not error and description: ts3lib.setChannelVariableAsString(schid, 0,ts3defines.ChannelProperties.CHANNEL_DESCRIPTION,description.decode('utf-8'))
+        """
         """
         (error, neededtp) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
         if debug: print("err:", error, "CHANNEL_NEEDED_TALK_POWER", neededtp)
@@ -92,11 +95,33 @@ class faker(ts3plugin):
         (error, iconid) = ts3lib.getChannelVariable(schid, channelID, ts3defines.ChannelPropertiesRare.CHANNEL_ICON_ID)
         if debug: print("err:", error, "CHANNEL_ICON_ID", iconid)
         if not error and iconid: ts3lib.setChannelVariableAsInt(schid, 0,ts3defines.ChannelPropertiesRare.CHANNEL_ICON_ID,iconid)
+        """
+        retcode = ts3lib.createReturnCode()
+        err, ownID = ts3lib.getClientID(schid)
+        err, ownCID = ts3lib.getChannelOfClient(schid, ownID)
+        err = ts3lib.flushChannelUpdates(schid, ownCID, retcode)
+        _err, errmsg = ts3lib.getErrorMessage(err)
+        print("ts3lib.flushChannelUpdates", "schid:",schid, "ownID:",ownID, "ownCID:",ownCID, "retcode",retcode, "err",err, "errmsg",errmsg)
+        if err == ts3defines.ERROR_ok: return
+        err = ts3lib.flushChannelCreation(schid, 0, retcode)
+        _err, errmsg = ts3lib.getErrorMessage(err)
+        print("ts3lib.flushChannelCreation", "schid:",schid, "0", "retcode",retcode, "err",err, "errmsg",errmsg)
 
-        ts3lib.flushChannelCreation(schid, 0)
+    def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
+        print(schid, errorMessage, error, returnCode, failedPermissionID)
 
     def fakeClient(self, schid, clientID):
         (error, _clid) = ts3lib.getClientID(schid)
-        (error, tnick) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        (error, tnickp) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
+        (error, nick) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        nick = self.str_replace(nick)
+        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, nick)
+        # (error, nickp) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
+        # ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC, nickp)
         ts3lib.flushClientSelfUpdates(schid)
+
+    def str_replace(self, name):
+        _name = name
+        for k, v in self.replace.items():
+            if k in _name: _name = _name.replace(k, v[0])
+        if _name == name: _name += self.extra
+        return _name
