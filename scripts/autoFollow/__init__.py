@@ -73,7 +73,6 @@ class autoFollow(ts3plugin):
         if newChannelID == ownCID: return
         if newChannelID == 0 and visibility == ts3defines.Visibility.RETAIN_VISIBILITY:
             self.stop(" because he disconnected", schid, clientID); return
-        print("onClientMoveEvent")
         self.join(schid, clientID, newChannelID)
 
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
@@ -81,7 +80,6 @@ class autoFollow(ts3plugin):
         (err, uid) = ts3lib.getClientVariable(schid, invokerID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"onNewChannelCreatedEvent > self.targets[schid]",self.targets[schid],"uid",uid)
         if self.targets[schid] != uid: return
-        print("onNewChannelCreatedEvent")
         self.join(schid, invokerID, cid)
 
     def join(self, schid, clid, cid):
@@ -90,7 +88,6 @@ class autoFollow(ts3plugin):
         if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
         if ownCID == cid: return
         delay = randint(self.delay[0], self.delay[1])
-        # (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, clid), channelURL(schid, cid), delay))
         self.cid = cid
         QTimer.singleShot(delay, self.joinTarget)

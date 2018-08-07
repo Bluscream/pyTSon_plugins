@@ -44,7 +44,6 @@ class EncodedOut:
 
 def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
     """
-
     :param message:
     :param channel:
     :param server:
@@ -61,7 +60,6 @@ def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
 
 def toggle(boolean):
     """
-
     :param boolean:
     :return:
     """
@@ -70,7 +68,6 @@ def toggle(boolean):
 
 def varname(obj, callingLocals=locals()):
     """
-
     :param obj:
     :param callingLocals:
     :return:
@@ -80,7 +77,6 @@ def varname(obj, callingLocals=locals()):
 
 def random_string(size=1, chars=string.ascii_uppercase + string.ascii_lowercase + string.digits):
     """
-
     :param size:
     :param chars:
     :return:
@@ -116,7 +112,6 @@ def intList(str, sep=","):
 
 def getItem(useList, name): # getitem(PluginHost.modules,'devTools')
     """
-
     :param useList:
     :param name:
     :return:
@@ -126,7 +121,6 @@ def getItem(useList, name): # getitem(PluginHost.modules,'devTools')
 
 def getItems(object):
     """
-
     :param object:
     :return:
     """
@@ -135,7 +129,6 @@ def getItems(object):
 
 def getItemType(lst):
     """
-
     :param lst:
     :return:
     """
@@ -149,7 +142,6 @@ def getItemType(lst):
 
 def getobjects(name, cls=True):
     """
-
     :param name:
     :param cls:
     :return:
@@ -164,7 +156,6 @@ def getobjects(name, cls=True):
 
 def objects():
     """
-
     :return:
     """
     _ret = []
@@ -173,7 +164,6 @@ def objects():
 
 def find_between(s, first, last):
     """
-
     :param s:
     :param first:
     :param last:
@@ -189,7 +179,6 @@ def find_between(s, first, last):
 
 def find_between_r(s, first, last):
     """
-
     :param s:
     :param first:
     :param last:
@@ -204,7 +193,6 @@ def find_between_r(s, first, last):
 
 def generateAvatarFileName(schid, clid=0):
     """
-
     :param schid:
     :param clid:
     :return:
@@ -239,7 +227,6 @@ def serverURL(schid=None, name=None):
 
 def channelURL(schid=None, cid=0, name=None):
     """
-
     :param schid:
     :param cid:
     :param name:
@@ -265,7 +252,6 @@ def parseChannelURL(url):
 
 def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
     """
-
     :param schid:
     :param clid:
     :param uid:
@@ -298,11 +284,12 @@ def parseClientURL(url):
         return clid, uid, nickname_encoded, nickname
     return False
 
-def getClientIDByUID(self, schid, uid):
+def getClientIDByUID(schid, uid):
     (err, clids) = ts3lib.getClientList(schid)
     for clid in clids:
         (err, _uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if uid == _uid: return clid
+    return False
 
 def getServerType(schid, pattern=None):
     err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
@@ -322,7 +309,6 @@ def parseTime(time_str):
 # AntiFlood
 def getAntiFloodSettings(schid):
     """
-
     :param schid:
     :return:
     """
@@ -333,7 +319,6 @@ def getAntiFloodSettings(schid):
 
 def calculateInterval(schid, command, name="pyTSon"):
     """
-
     :param schid:
     :param command:
     :param name:
@@ -354,7 +339,6 @@ def calculateInterval(schid, command, name="pyTSon"):
 # I/O #
 def loadCfg(path, cfg):
     """
-
     :param path:
     :param cfg:
     """
@@ -364,7 +348,6 @@ def loadCfg(path, cfg):
 
 def saveCfg(path, cfg):
     """
-
     :param path:
     :param cfg:
     """
@@ -373,7 +356,6 @@ def saveCfg(path, cfg):
 # GUI #
 def inputBox(title, text, default=""):
     """
-
     :param default:
     :param title:
     :param text:
@@ -389,7 +371,6 @@ def inputBox(title, text, default=""):
 
 def inputInt(title="", label="", val=0, min=-2147483647, max=2147483647, step=1):
     """
-
     :param title:
     :param label:
     :param val:
@@ -407,7 +388,6 @@ def inputInt(title="", label="", val=0, min=-2147483647, max=2147483647, step=1)
 
 def msgBox(text, icon=QMessageBox.Information, title=""):
     """
-
     :param text:
     :param icon:
     :param title:
@@ -423,7 +403,6 @@ def errorMsgBox(title, text):
 
 def confirm(title, message):
     """
-
     :param title:
     :param message:
     :return:
@@ -434,36 +413,34 @@ def confirm(title, message):
     if _x == QMessageBox.Yes: return True if _x == QMessageBox.Yes else False
 
 # Network #
-def getFile(url):
-    """
-
-    :param url:
-    """
+class network(object):
     nwmc = QNetworkAccessManager()
-    nwmc.connect("finished(QNetworkReply*)", _getFileReply)
-    nwmc.get(QNetworkRequest(QUrl(url)))
-def _getFileReply(reply):
-    del nwmc
+    def getFile(self, url):
+        """
+        :param url:
+        """
+        self.nwmc.connect("finished(QNetworkReply*)", self._getFileReply)
+        self.nwmc.get(QNetworkRequest(QUrl(url)))
+    def _getFileReply(self, reply):
+        del self.nwmc
 
-def downloadFile(url, path):
-    """
-
-    :param url:
-    :param path:
-    """
-    nwmc = QNetworkAccessManager()
-    nwmc.connect("finished(QNetworkReply*)", _downloadFileReply)
-    dlpath = path
-    nwmc.get(QNetworkRequest(QUrl(url)))
-def _downloadFileReply(reply):
-    del nwmc
-    """
-    QByteArray b = reply->readAll();
-    fil = QFile(dlpath);
-    fil.open(QIODevice.WriteOnly);
-    out QDataStream(fil);
-    out << b;
-    """
+    def downloadFile(self, url, path):
+        """
+        :param url:
+        :param path:
+        """
+        self.nwmc.connect("finished(QNetworkReply*)", self._downloadFileReply)
+        dlpath = path
+        self.nwmc.get(QNetworkRequest(QUrl(url)))
+    def _downloadFileReply(self, reply):
+        del self.nwmc
+        """
+        QByteArray b = reply->readAll();
+        fil = QFile(dlpath);
+        fil.open(QIODevice.WriteOnly);
+        out QDataStream(fil);
+        out << b;
+        """
 
 # Stuff #
 def getAddonStatus(filename_without_extension, name=""): # getAddonStatus("TS3Hook", "test")
@@ -472,6 +449,7 @@ def getAddonStatus(filename_without_extension, name=""): # getAddonStatus("TS3Ho
     :param name:
     :return: AddonStatus
     """
+    """ # TODO FIX PSUTIL
     p = Process(os.getpid())
     filename = filename_without_extension.lower()
     print("filename {}".format(filename))
@@ -482,6 +460,7 @@ def getAddonStatus(filename_without_extension, name=""): # getAddonStatus("TS3Ho
         print("file: {}".format(file))
         # print("pattern: {}".format(pattern.sub("", file)))
         if file.endswith(filename): return AddonStatus.LOADED # pattern.sub("", file)
+    """
     if name:
         addons = getAddons()
         for k in addons:
@@ -491,7 +470,6 @@ def getAddonStatus(filename_without_extension, name=""): # getAddonStatus("TS3Ho
 # Database #
 def getAddons():
     """
-
     :return:
     """
     db = ts3client.Config()
@@ -510,7 +488,6 @@ def getAddons():
 
 def getContacts():
     """
-
     :return:
     """
     db = ts3client.Config()
@@ -539,7 +516,6 @@ def getContacts():
 
 def getContactStatus(uid):
     """
-
     :param uid:
     :return:
     """
