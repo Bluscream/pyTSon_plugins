@@ -1,8 +1,9 @@
 import ts3lib, ts3defines, datetime
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
+from PythonQt.Qt import QApplication
 from random import randint
-from bluscream import timestamp, clientURL, channelURL, getChannelPassword, getClientIDByUID
+from bluscream import timestamp, clientURL, channelURL, getChannelPassword, getClientIDByUID, inputBox, parseClientURL
 
 class autoFollow(ts3plugin):
     name = "Auto Follow (former Love Plugin)"
@@ -41,7 +42,11 @@ class autoFollow(ts3plugin):
         if menuItemID != 0: return
         if atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL:
             if schid in self.targets: self.stop("", schid, self.targets[schid])
-            else: ts3lib.printMessageToCurrentTab("{} {}: [color=red]Not following anyone on this tab.[/color]".format(timestamp(),self.name))
+            else:
+                ts3lib.printMessageToCurrentTab("{} {}: [color=red]Not following anyone on this tab.[/color]".format(timestamp(),self.name))
+                uid = inputBox(self.name, "UID:", QApplication.clipboard().text())
+                parsed = parseClientURL(uid)
+                if parsed: uid = parsed[1]
         elif atype == ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT:
             (err, ownID) = ts3lib.getClientID(schid)
             if selectedItemID == ownID: return

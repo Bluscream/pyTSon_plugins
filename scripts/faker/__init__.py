@@ -113,11 +113,15 @@ class faker(ts3plugin):
     def fakeClient(self, schid, clientID):
         (error, _clid) = ts3lib.getClientID(schid)
         (error, nick) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        nick = self.str_replace(nick)
-        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, nick)
+        _nick = self.str_replace(nick)
+        # if PluginHost.cfg.getboolean("general", "verbose"):
+        print(_nick, "==",nick,":",_nick == nick)
+        if _nick == nick: return False
+        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _nick)
         # (error, nickp) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
         # ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC, nickp)
-        ts3lib.flushClientSelfUpdates(schid)
+        err = ts3lib.flushClientSelfUpdates(schid)
+        return err
 
     def str_replace(self, name):
         _name = name

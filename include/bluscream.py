@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from PythonQt import BoolResult
+from PythonQt.Qt import QApplication
 from PythonQt.QtGui import QInputDialog, QMessageBox, QWidget, QLineEdit #, QObject
 from PythonQt.QtCore import Qt, QFile, QByteArray, QIODevice, QDataStream, QUrl # , QApplication # QDir
 from PythonQt.QtSql import QSqlQuery
@@ -364,7 +365,7 @@ def inputBox(title, text, default=""):
     x = QWidget()
     x.setAttribute(Qt.WA_DeleteOnClose)
     ok = BoolResult()
-    # if default is None: default = QApplication.clipboard().text()
+    if not default: default = QApplication.clipboard().text()
     text = QInputDialog.getText(x, title, text, QLineEdit.Normal, default, ok) # QDir.Home.dirName()
     if ok: return text
     else: return False
