@@ -256,3 +256,4 @@ VERSION
 /scripts/mySupport/config.ini
 /scripts/mySupport/description.txt
 /scripts/Steamlinker/
+!/include/ts3enums.py

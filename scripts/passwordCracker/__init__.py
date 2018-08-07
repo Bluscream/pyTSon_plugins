@@ -2,7 +2,7 @@ import pytson, ts3lib, os
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
 from ts3defines import *
-from bluscream import timestamp, channelURL, clientURL, inputBox, confirm, msgBox, calculateInterval, AntiFloodPoints
+from bluscream import timestamp, channelURL, clientURL, inputBox, confirm, msgBox, calculateInterval, AntiFloodPoints, getChannelPassword
 from PythonQt.QtGui import QInputDialog, QWidget, QMessageBox, QDialog
 from PythonQt.QtCore import Qt, QTimer
 from pytsonui import setupUi
@@ -89,7 +89,7 @@ class passwordCracker(ts3plugin):
                 self.step = 1
                 self.pwc = 0
                 content = []
-                with open(self.pwpath, encoding="utf8") as f:
+                with open(self.pwpath, encoding="utf-8") as f:
                     content = f.readlines()
                 self.pws = [x.strip() for x in content]
                 (err, clids) = ts3lib.getChannelClientList(schid, selectedItemID)

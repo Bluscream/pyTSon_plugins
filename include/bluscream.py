@@ -272,7 +272,16 @@ def parseClientURL(url):
         return clid, uid, nickname_encoded, nickname
     return False
 
-def getChannelPassword(schid, cid, noinput=False):
+def getChannelPassword(schid, cid, crack=False, ask=False):
+    """
+    Tries several methods to get the channel password.
+    :param schid: serverConnectionHandlerID
+    :param cid: channelID of the target channel
+    :param crack: wether to try a dictionary attack on the channel to get the password
+    :param ask: wether to ask the user for the password in case he knows
+    :return password: the possible password
+    """
+    # type: (int, int, bool, bool) -> str
     (err, passworded) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
     if err != ts3defines.ERROR_ok or not passworded: return False
     (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
@@ -293,9 +302,13 @@ def getChannelPassword(schid, cid, noinput=False):
         result = sub(r"[)|\]|\}]$", "", result)
         return result
     if name.isdigit(): return name
-    if noinput: return name
-    pw = inputBox("Enter Channel Password", "Password:")
-    return pw
+    if crack:
+        active = PluginHost.active
+        if "PW Cracker" in active: active["PW Cracker"].onMenuItemEvent(schid, ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, cid)
+    if ask:
+        pw = inputBox("Enter Channel Password", "Password:", name)
+        return pw
+    return name
 
 def getClientIDByUID(schid, uid):
     (err, clids) = ts3lib.getClientList(schid)

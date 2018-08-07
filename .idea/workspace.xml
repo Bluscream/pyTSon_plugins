@@ -5,10 +5,13 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% finally fixed autoFollow, it works now xD">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="+ getChannelPassword improvements">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ts3enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3enums.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -41,14 +44,14 @@
     <session id="1604380212">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="5145" />
-          <entry key="txt" value="717" />
+          <entry key="py" value="5932" />
+          <entry key="txt" value="805" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="703" />
-          <entry key="Python" value="5145" />
+          <entry key="PLAIN_TEXT" value="791" />
+          <entry key="Python" value="5932" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -56,16 +59,18 @@
         <counts>
           <entry key="MD" value="1" />
           <entry key="conf" value="1" />
-          <entry key="py" value="27" />
+          <entry key="gitignore" value="1" />
+          <entry key="py" value="30" />
           <entry key="txt" value="1" />
           <entry key="url" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="Git file" value="1" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="27" />
+          <entry key="Python" value="30" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -105,8 +110,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="217" column="13" selection-start-line="217" selection-start-column="11" selection-end-line="217" selection-end-column="13" />
+            <state relative-caret-position="304">
+              <caret line="693" selection-start-line="693" selection-end-line="898" selection-end-column="26" />
               <folding>
                 <element signature="e#46#75#0" expanded="true" />
               </folding>
@@ -115,10 +120,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/antiChannelKick/__init__.py">
+        <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
+            <state relative-caret-position="727">
+              <caret line="599" column="10" selection-start-line="599" selection-start-column="10" selection-end-line="599" selection-end-column="10" />
+              <folding>
+                <element signature="e#17969#17989#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="903">
+              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -129,7 +155,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6132">
+            <state relative-caret-position="805">
               <caret line="292" selection-start-line="292" selection-end-line="292" />
             </state>
           </provider>
@@ -235,10 +261,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/Steamlinker/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/recordSpam/README.md" />
-        <option value="$PROJECT_DIR$/include/ts3lib.py" />
         <option value="$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/teaspeak/README.md" />
@@ -283,9 +305,13 @@
         <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoChannelCreate/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/faker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/include/ts3enums.py" />
       </list>
     </option>
   </component>
@@ -336,7 +362,7 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -359,7 +385,34 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="passwordCracker" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="quickMod" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="searchEverything" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; pyTSon &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; pyTSon &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -377,7 +430,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
-    <property name="last.edited.regexp" value="penis_Win64.dll" />
+    <property name="last.edited.regexp" value="}" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="options.lastSelected" value="editor.preferences.smartKeys" />
@@ -702,20 +755,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
-    </task>
-    <task id="LOCAL-00360" summary=":thinking:">
-      <created>1527578991674</created>
-      <option name="number" value="00360" />
-      <option name="presentableId" value="LOCAL-00360" />
-      <option name="project" value="LOCAL" />
-      <updated>1527578991674</updated>
-    </task>
-    <task id="LOCAL-00361" summary=":thinking:">
-      <created>1527579124719</created>
-      <option name="number" value="00361" />
-      <option name="presentableId" value="LOCAL-00361" />
-      <option name="project" value="LOCAL" />
-      <updated>1527579124720</updated>
     </task>
     <task id="LOCAL-00362" summary=":thinking:">
       <created>1527624529332</created>
@@ -1047,7 +1086,21 @@
       <option name="project" value="LOCAL" />
       <updated>1533668706970</updated>
     </task>
-    <option name="localTasksCounter" value="409" />
+    <task id="LOCAL-00409" summary="+ added getChannelPassword() to antiChannelKick">
+      <created>1533670073031</created>
+      <option name="number" value="00409" />
+      <option name="presentableId" value="LOCAL-00409" />
+      <option name="project" value="LOCAL" />
+      <updated>1533670073033</updated>
+    </task>
+    <task id="LOCAL-00410" summary="+ getChannelPassword improvements">
+      <created>1533674815390</created>
+      <option name="number" value="00410" />
+      <option name="presentableId" value="LOCAL-00410" />
+      <option name="project" value="LOCAL" />
+      <updated>1533674815390</updated>
+    </task>
+    <option name="localTasksCounter" value="411" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1172,8 +1225,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="kein bock mehr" />
-    <MESSAGE value=":thinking: Combined the pluginCMD scripts into one and added some syntax help" />
     <MESSAGE value=":thinking:&#10;+ some docs in bluscream.py&#10;+ now downloading external badges" />
     <MESSAGE value=":thinking:&#10;% remove debug stuff" />
     <MESSAGE value="+ anti-teaspeak protection for custombadges&#10;:thinking:" />
@@ -1197,7 +1248,9 @@
     <MESSAGE value="+ faking client and channel names is now working" />
     <MESSAGE value="% removed ok error event&#10;&#10;P.S: Dominik ist ein Bauer" />
     <MESSAGE value="% finally fixed autoFollow, it works now xD" />
-    <option name="LAST_COMMIT_MESSAGE" value="% finally fixed autoFollow, it works now xD" />
+    <MESSAGE value="+ added getChannelPassword() to antiChannelKick" />
+    <MESSAGE value="+ getChannelPassword improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ getChannelPassword improvements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1244,34 +1297,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/kickself/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/massAction/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4935">
-          <caret line="241" column="40" selection-start-line="241" selection-start-column="40" selection-end-line="241" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/mySupport/channel.ini">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1531,29 +1556,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6132">
-          <caret line="292" selection-start-line="292" selection-end-line="292" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="217" column="13" selection-start-line="217" selection-start-column="11" selection-end-line="217" selection-end-column="13" />
+        <state relative-caret-position="567">
+          <caret line="84" column="39" lean-forward="true" selection-start-line="84" selection-start-column="39" selection-end-line="87" selection-end-column="111" />
           <folding>
-            <element signature="e#46#75#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiChannelKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="44" column="56" selection-start-line="44" selection-start-column="56" selection-end-line="44" selection-end-column="56" />
+        <state relative-caret-position="221">
+          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="903">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="292" selection-start-line="292" selection-end-line="292" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="693" selection-start-line="693" selection-end-line="898" selection-end-column="26" />
+          <folding>
+            <element signature="e#46#75#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="727">
+          <caret line="599" column="10" selection-start-line="599" selection-start-column="10" selection-end-line="599" selection-end-column="10" />
+          <folding>
+            <element signature="e#17969#17989#0" />
           </folding>
         </state>
       </provider>
