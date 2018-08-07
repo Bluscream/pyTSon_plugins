@@ -2,7 +2,7 @@ import ts3lib, ts3defines
 from datetime import datetime
 from ts3plugin import ts3plugin
 from PythonQt.QtCore import QTimer
-from bluscream import intList
+from bluscream import intList, getChannelPassword
 
 class antiChannelKick(ts3plugin):
     name = "Anti Channel Kick"
@@ -42,7 +42,8 @@ class antiChannelKick(ts3plugin):
         if any(i in sgids for i in self.whitelistSGIDs): return
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if uid in self.whitelistUIDs: return
-        (err, cpath, self.cpw) = ts3lib.getChannelConnectInfo(schid, oldChannelID)
+        self.pw = getChannelPassword(schid, oldChannelID)
+        # (err, cpath, self.cpw) = ts3lib.getChannelConnectInfo(schid, oldChannelID)
         self.schid=schid;self.clid=ownID;self.cid=oldChannelID
         if self.delay >= 0: QTimer.singleShot(self.delay, self.moveBack)
         else: self.moveBack()
