@@ -11,7 +11,11 @@ class autoFollow(ts3plugin):
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
-    description = "Auto Follow specified users around."
+    description = """Auto Follow specified users around. Supports several methods to read channel passwords.
+    
+    Required dependencies: https://github.com/Bluscream/pyTSon_plugins/blob/master/include/bluscream.py
+    Recommended dependencies: https://github.com/Bluscream/pyTSon_plugins/tree/master/scripts/passwordCracker
+    """
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
@@ -70,6 +74,7 @@ class autoFollow(ts3plugin):
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if not schid in self.targets: return
         (err, uid) = ts3lib.getClientVariable(schid, clientID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if err != ts3defines.ERROR_ok or not uid: return
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"onClientMoveEvent > self.targets[schid]",self.targets[schid],"uid",uid)
         if self.targets[schid] != uid: return
         (err, ownID) = ts3lib.getClientID(schid)
@@ -83,9 +88,12 @@ class autoFollow(ts3plugin):
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
         if not schid in self.targets: return
         (err, uid) = ts3lib.getClientVariable(schid, invokerID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if err != ts3defines.ERROR_ok or not uid: return
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"onNewChannelCreatedEvent > self.targets[schid]",self.targets[schid],"uid",uid)
         if self.targets[schid] != uid: return
         self.join(schid, invokerID, cid)
+
+    def check(self, schid, clid, cid): pass
 
     def join(self, schid, clid, cid):
         (err, ownID) = ts3lib.getClientID(schid)
