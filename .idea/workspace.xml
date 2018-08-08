@@ -5,7 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="%reworked regex for getChannelPassword&#10;%added more aliases to autorun.py">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="%improved autoFollow description">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
@@ -43,15 +43,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="py" value="6207" />
-          <entry key="txt" value="930" />
+          <entry key="py" value="6208" />
+          <entry key="txt" value="964" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Git file" value="1" />
-          <entry key="PLAIN_TEXT" value="916" />
-          <entry key="Python" value="6207" />
+          <entry key="PLAIN_TEXT" value="950" />
+          <entry key="Python" value="6208" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -124,10 +124,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="13" column="108" selection-start-line="13" selection-start-column="108" selection-end-line="13" selection-end-column="108" />
+            <state relative-caret-position="126">
+              <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
               <folding>
-                <marker date="1533748667530" expanded="true" signature="5616:5627" ph="..." />
+                <marker date="1533748705567" expanded="true" signature="5616:5627" ph="..." />
               </folding>
             </state>
           </provider>
@@ -693,13 +693,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00365" summary=":thinking:">
-      <created>1527729449125</created>
-      <option name="number" value="00365" />
-      <option name="presentableId" value="LOCAL-00365" />
-      <option name="project" value="LOCAL" />
-      <updated>1527729449126</updated>
-    </task>
     <task id="LOCAL-00366" summary=":thinking:">
       <created>1527740652180</created>
       <option name="number" value="00366" />
@@ -1037,7 +1030,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533735137961</updated>
     </task>
-    <option name="localTasksCounter" value="414" />
+    <task id="LOCAL-00414" summary="%improved autoFollow description">
+      <created>1533748702731</created>
+      <option name="number" value="00414" />
+      <option name="presentableId" value="LOCAL-00414" />
+      <option name="project" value="LOCAL" />
+      <updated>1533748702732</updated>
+    </task>
+    <option name="localTasksCounter" value="415" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1057,7 +1057,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.1459431" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
@@ -1162,7 +1161,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value=":thinking: + serverSwitcher fixes" />
     <MESSAGE value=":thinking: + finally fixed serverSwitcher" />
     <MESSAGE value=":thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking::thinking:" />
     <MESSAGE value=":thinking: fix customBans + edit README" />
@@ -1187,7 +1185,8 @@
     <MESSAGE value="+ even more getChannelPassword improvements" />
     <MESSAGE value="+ added ts3enums.py" />
     <MESSAGE value="%reworked regex for getChannelPassword&#10;%added more aliases to autorun.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="%reworked regex for getChannelPassword&#10;%added more aliases to autorun.py" />
+    <MESSAGE value="%improved autoFollow description" />
+    <option name="LAST_COMMIT_MESSAGE" value="%improved autoFollow description" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1546,10 +1545,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="13" column="108" selection-start-line="13" selection-start-column="108" selection-end-line="13" selection-end-column="108" />
+        <state relative-caret-position="126">
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
           <folding>
-            <marker date="1533748667530" expanded="true" signature="5616:5627" ph="..." />
+            <marker date="1533748705567" expanded="true" signature="5616:5627" ph="..." />
           </folding>
         </state>
       </provider>

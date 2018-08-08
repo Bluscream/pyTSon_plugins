@@ -9,7 +9,7 @@ class autoFollow(ts3plugin):
     name = "Auto Follow (former Love Plugin)"
     apiVersion = 22
     requestAutoload = False
-    version = "1.0"
+    version = "1.1"
     author = "Bluscream"
     description = """Auto Follow specified users around. Supports several methods to read channel passwords.
     
