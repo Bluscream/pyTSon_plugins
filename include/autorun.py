@@ -147,8 +147,8 @@ def encoding():
 
 self = QApplication.instance()
 schid = getCurrentServerConnectionHandlerID()
-(_e, ownid) = getClientID(schid)
-(_e, owncid) = getChannelOfClient(schid, ownid)
+(_e, ownid) = getClientID(schid);clid=ownid;ownID=ownid
+(_e, owncid) = getChannelOfClient(schid, ownid);cid=owncid;ownCID=owncid
 if "aaa_ts3Ext" in PluginHost.active: ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
 else: ts3host = ts3Ext.ts3SessionHost(next(iter(PluginHost.active.values())))
 
