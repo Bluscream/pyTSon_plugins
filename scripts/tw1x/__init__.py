@@ -1,6 +1,5 @@
-import pytson, ts3lib, ts3defines
+import ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
-from datetime import datetime
 from bluscream import timestamp
 
 class tw1x(ts3plugin):
@@ -26,12 +25,9 @@ class tw1x(ts3plugin):
         if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         if suid != self.suid: return
-        (err, clid) = ts3lib.getClientID(schid)
         (err, uid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         self.requested = True
         ts3lib.requestClientDBIDfromUID(schid, uid)
-       #  (err, cldbid) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
-        # if not err and cldbid: ts3lib.requestServerGroupAddClient(schid, self.sgid_nopoke, cldbid)
 
     def onClientDBIDfromUIDEvent(self, schid, uniqueClientIdentifier, cldbid):
         if not self.requested or not cldbid: return

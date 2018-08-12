@@ -5,12 +5,10 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="+removed debug stuff from autoCommander">
-      <change afterPath="$PROJECT_DIR$/scripts/tw1x/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/tw1x/__init__.py" afterDir="false" />
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="+ added twix script">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/tw1x/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/tw1x/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -44,15 +42,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="py" value="8018" />
-          <entry key="txt" value="1100" />
+          <entry key="py" value="8021" />
+          <entry key="txt" value="1119" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Git file" value="1" />
-          <entry key="PLAIN_TEXT" value="1086" />
-          <entry key="Python" value="8018" />
+          <entry key="PLAIN_TEXT" value="1105" />
+          <entry key="Python" value="8021" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -143,11 +141,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/tw1x/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
+            <state>
+              <caret column="7" selection-start-column="7" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -739,13 +734,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00369" summary=":thinking:">
-      <created>1527831310064</created>
-      <option name="number" value="00369" />
-      <option name="presentableId" value="LOCAL-00369" />
-      <option name="project" value="LOCAL" />
-      <updated>1527831310065</updated>
-    </task>
     <task id="LOCAL-00370" summary=":thinking:">
       <created>1527844023194</created>
       <option name="number" value="00370" />
@@ -1083,7 +1071,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534091799254</updated>
     </task>
-    <option name="localTasksCounter" value="418" />
+    <task id="LOCAL-00418" summary="+ added twix script">
+      <created>1534095271472</created>
+      <option name="number" value="00418" />
+      <option name="presentableId" value="LOCAL-00418" />
+      <option name="project" value="LOCAL" />
+      <updated>1534095271473</updated>
+    </task>
+    <option name="localTasksCounter" value="419" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1208,7 +1203,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value=":thinking: removed stuff that didnt belong here+added readmes for scripts" />
     <MESSAGE value=":thinking: added keep checkbox to custom ban dialog" />
     <MESSAGE value=":thinking: added getServerType and ServerInstanceType" />
     <MESSAGE value=":thinking: use QHostAddress" />
@@ -1233,7 +1227,8 @@
     <MESSAGE value="%increased autoFollow version" />
     <MESSAGE value="+added START_TALKING mode to autoCommander, closes #46" />
     <MESSAGE value="+removed debug stuff from autoCommander" />
-    <option name="LAST_COMMIT_MESSAGE" value="+removed debug stuff from autoCommander" />
+    <MESSAGE value="+ added twix script" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ added twix script" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1615,11 +1610,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/tw1x/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
         </state>
       </provider>
     </entry>
