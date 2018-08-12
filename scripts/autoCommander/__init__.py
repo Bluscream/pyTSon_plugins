@@ -2,7 +2,7 @@ import ts3defines, ts3lib
 from enum import Enum
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import Qt, QTimer
-from bluscream import timestamp, inputInt, calculateInterval, AntiFloodPoints, escapeStr
+from bluscream import timestamp, inputInt, calculateInterval, AntiFloodPoints
 
 class autoCommanderMode(Enum):
     OFF = 0
@@ -13,7 +13,7 @@ class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
     apiVersion = 22
     requestAutoload = False
-    version = "1.0"
+    version = "1.1"
     author = "Bluscream"
     description = "Automatically enable channel commander when switching channels.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."
     offersConfigure = False
@@ -21,8 +21,8 @@ class autoCommander(ts3plugin):
     infoTitle = None
     menuItems = [
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle %s"%name, "scripts/%s/commander_off.svg"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Commander while talking", "scripts/%s/commander_off.svg"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Toggle Channel Commander Spam", "scripts/%s/commander.svg"%__name__)
+        # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Commander while talking", "scripts/%s/commander_off.svg"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Channel Commander Spam", "scripts/%s/commander.svg"%__name__)
     ]
     hotkeys = []
     timer = QTimer()
