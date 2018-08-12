@@ -85,27 +85,19 @@ class autoCommander(ts3plugin):
         ts3lib.flushClientSelfUpdates(schid, self.retcode)
 
     def onTalkStatusChangeEvent(self, schid, status, isReceivedWhisper, clid):
-        # print(self.mode, "==", autoCommanderMode.START_TALKING)
         if not self.mode == autoCommanderMode.START_TALKING: return
         (err, ownID) = ts3lib.getClientID(schid)
-        # print(ownID, "==", clid)
         if ownID != clid: return
         (err, commander) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER)
-        # print("status == ts3defines.TalkStatus.STATUS_TALKING and not commander", status == ts3defines.TalkStatus.STATUS_TALKING and not commander)
-        # print("status == ts3defines.TalkStatus.STATUS_NOT_TALKING and commander", status == ts3defines.TalkStatus.STATUS_NOT_TALKING and commander)
-        if status == ts3defines.TalkStatus.STATUS_TALKING and not commander: print("commander ON"); self.setChannelCommander(schid, True)
-        elif status == ts3defines.TalkStatus.STATUS_NOT_TALKING and commander: print("commander OFF"); self.setChannelCommander(schid, False)
+        if status == ts3defines.TalkStatus.STATUS_TALKING and not commander: self.setChannelCommander(schid, True)
+        elif status == ts3defines.TalkStatus.STATUS_NOT_TALKING and commander: self.setChannelCommander(schid, False)
 
     def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
-        # print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
         if returnCode != self.retcode: return
-        # if failedPermissionID == 185: return True
         return True
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        # print(self.name, "returnCode", returnCode, "self.__class__.__name__", self.__class__.__name__, returnCode == self.__class__.__name__)
         if returnCode != self.retcode: return
-        # print(self.name, error)
         if error == ts3defines.ERROR_client_is_flooding:
             ts3lib.printMessageToCurrentTab("{}: [color=red][b]Client is flooding, stopping!".format(self.name))
             self.timer.stop()
