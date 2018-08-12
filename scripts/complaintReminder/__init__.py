@@ -23,6 +23,7 @@ class complaintReminder(ts3plugin):
     servers = {}
     waitingForList = []
     interval = 60*1000
+    retcode = ""
 
     def __init__(self):
         self.timer.timeout.connect(self.tick)
@@ -42,7 +43,8 @@ class complaintReminder(ts3plugin):
         if len(self.servers) < 1: self.timer.stop(); return
         for schid in self.servers:
             self.waitingForList.append(schid)
-            ts3lib.requestComplainList(schid, 0, self.__class__.__name__)
+            self.retcode = ts3lib.createReturnCode()
+            ts3lib.requestComplainList(schid, 0, self.retcode)
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
@@ -50,7 +52,7 @@ class complaintReminder(ts3plugin):
             if len(self.servers) < 1: self.timer.stop()
         elif newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             self.waitingForList.append(schid)
-            ts3lib.requestComplainList(schid, 0, self.__class__.__name__)
+            ts3lib.requestComplainList(schid, 0, self.retcode)
 
     def onComplainListEvent(self, schid, targetClientDatabaseID, targetClientNickName, fromClientDatabaseID, fromClientNickName, complainReason, timestamp):
         if not schid in self.waitingForList and not schid in self.servers: return
@@ -64,7 +66,7 @@ class complaintReminder(ts3plugin):
             ts3lib.requestClientPoke(schid, ownID, 'New complaint for "{}" by "{}"'.format(targetClientNickName, fromClientNickName))  # clientURL(schid, nickname=targetClientNickName), clientURL(schid, nickname=fromClientNickName)
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if returnCode != self.__class__.__name__: return False
+        if returnCode != self.retcode: return False
         if error == ts3defines.ERROR_database_empty_result:
             if schid in self.servers:
                 if len(self.servers[schid]) > 0: self.servers[schid].clear()
@@ -77,7 +79,7 @@ class complaintReminder(ts3plugin):
         return False
 
     def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
-        if returnCode != self.__class__.__name__ or error != ts3defines.ERROR_permissions_client_insufficient or failedPermissionID != 207: return False
+        if returnCode != self.retcode or error != ts3defines.ERROR_permissions_client_insufficient or failedPermissionID != 207: return False
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,">","not enough permissions on tab ", schid, "!")
         if schid in self.waitingForList: self.waitingForList.remove(schid)
         return True
