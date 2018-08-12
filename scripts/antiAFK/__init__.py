@@ -21,7 +21,7 @@ class antiAFK(ts3plugin):
     hotkeys = []
     timer = QTimer()
     servers = {}
-    text = "~cmdclientupdate"
+    text = "." #~cmdclientupdate
     interval = {
         "9Sx6wrlRV4i9klBiTanrksNFKvs=": (5, 10),
         "QTRtPmYiSKpMS8Oyd4hyztcvLqU=": (30, 120),
@@ -73,7 +73,9 @@ class antiAFK(ts3plugin):
             else:
                 self.retcode = ts3lib.createReturnCode()
                 ts3lib.requestSendPrivateTextMsg(schid, self.text, self.servers[schid]["clid"], self.retcode)
-            self.timer.setInterval(self.getInterval())
+            interval = self.getInterval()
+            # print(self.name, ">", "Sent", self.text, "for schid", schid, "to clid", self.servers[schid]["clid"], "| new interval:", interval)
+            self.timer.setInterval(interval)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL or menuItemID != 0: return

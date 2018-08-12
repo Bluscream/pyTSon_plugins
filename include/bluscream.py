@@ -287,7 +287,7 @@ def getChannelPassword(schid, cid, crack=False, ask=False):
     (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
     if pw: return pw
     (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
-    if err != ts3defines.ERROR_ok or not name: return False
+    if err != ts3defines.ERROR_ok or not name: return err
     name = name.strip()
     pattern = r"(?:p|pw|pass(?:wor[dt])?)[|:=]?\s*(.*)"
     regex = search(pattern, name, IGNORECASE)
@@ -682,7 +682,7 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
     if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
     if PluginHost.cfg.getboolean("general", "verbose") or not silent:
         ts3lib.printMessage(schid, '{timestamp} [color=orange]{name}[/color]:[color=white] {prefix}{message}'.format(timestamp=timestamp(), name=name, prefix="-" if reverse else "~", message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-    cmd = "{}cmd{}".format("-" if reverse else "~", cmd.replace(" ", "~s"))
+    cmd = "{}{}".format("-" if reverse else "~", cmd) # .replace(" ", "~s")
     (err, clid) = ts3lib.getClientID(schid)
     retcode = "" # "TS3Hook:Command:{}".format(ts3lib.createReturnCode(256))
     err = ts3lib.requestSendPrivateTextMsg(schid, cmd, clid, retcode)

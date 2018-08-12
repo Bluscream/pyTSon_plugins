@@ -164,17 +164,21 @@ class autoSubscribe(ts3plugin):
 
     def subscribe(self, schid, cid):
         subscribed = isSubscribed(schid, cid)
-        if PluginHost.cfg.getboolean("general", "verbose"):
-            ts3lib.printMessageToCurrentTab("==== #{0} ====".format(cid))
-            ts3lib.printMessageToCurrentTab("Subscribed: {0}".format(subscribed))
-            ts3lib.printMessageToCurrentTab("Passworded: {0}".format(isPassworded(schid, cid)))
-            ts3lib.printMessageToCurrentTab("PWInName: {0}".format(isPWInName(schid, cid)))
-            ts3lib.printMessageToCurrentTab("Blacklisted: {0}".format(isBlacklisted(schid, cid)))
-            ts3lib.printMessageToCurrentTab("MusicChannel: {0}".format(isMusicChannel(schid, cid)))
-            ts3lib.printMessageToCurrentTab("==== #{0} ====".format(cid))
+        # if PluginHost.cfg.getboolean("general", "verbose"):
+        passworded = isPassworded(schid, cid)
+        pwinname = isPWInName(schid, cid)
+        blacklisted = isBlacklisted(schid, cid)
+        music = isMusicChannel(schid, cid)
         if not subscribed:
-            if (isPassworded(schid, cid) and isPWInName(schid, cid)) or (not isPassworded(schid, cid) and not isBlacklisted(schid, cid) and not isMusicChannel(schid, cid)):
+            if (passworded and pwinname) or (not passworded and not blacklisted and not music):
                 return ts3lib.requestChannelSubscribe(schid, [cid])
         elif subscribed:
-            if (isPassworded(schid, cid) and not isPWInName(schid, cid)) or isBlacklisted(schid, cid) or isMusicChannel(schid, cid):
+            if (passworded and not pwinname) or blacklisted or music:
+                ts3lib.printMessageToCurrentTab("==== #{0} ====".format(cid))
+                ts3lib.printMessageToCurrentTab("Subscribed: {0}".format(subscribed))
+                ts3lib.printMessageToCurrentTab("Passworded: {0}".format(passworded))
+                ts3lib.printMessageToCurrentTab("PWInName: {0}".format(pwinname))
+                ts3lib.printMessageToCurrentTab("Blacklisted: {0}".format(blacklisted))
+                ts3lib.printMessageToCurrentTab("MusicChannel: {0}".format(music))
+                ts3lib.printMessageToCurrentTab("==== #{0} ====".format(cid))
                 return ts3lib.requestChannelUnsubscribe(schid, [cid])

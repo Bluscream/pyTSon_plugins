@@ -1,7 +1,13 @@
 import ts3defines, ts3lib
+from enum import Enum
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import Qt, QTimer
 from bluscream import timestamp, inputInt, calculateInterval, AntiFloodPoints, escapeStr
+
+class autoCommanderMode(Enum):
+    OFF = 0
+    CHANNELGROUP_ASSIGNED = 1
+    START_TALKING = 2
 
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
@@ -15,14 +21,15 @@ class autoCommander(ts3plugin):
     infoTitle = None
     menuItems = [
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle %s"%name, "scripts/%s/commander_off.svg"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Channel Commander Spam", "scripts/%s/commander.svg"%__name__)
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Toggle Commander while talking", "scripts/%s/commander_off.svg"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Toggle Channel Commander Spam", "scripts/%s/commander.svg"%__name__)
     ]
     hotkeys = []
     timer = QTimer()
     schid = 0
     requested = 0
-    retcode = __name__
-    enabled = False
+    mode = autoCommanderMode.OFF
+    retcode = ""
 
     def __init__(self):
         self.timer.timeout.connect(self.tick)
@@ -43,23 +50,33 @@ class autoCommander(ts3plugin):
             else: self.timer.start(interval)
 
     def onServerUpdatedEvent(self, schid):
-        if not self.enabled: return
+        if not self.mode: return
         if self.requested != schid: return
         self.requested = 0
         self.schid = schid
         self.timer.start(calculateInterval(schid, AntiFloodPoints.CLIENTUPDATE, self.name))
 
+    def setChannelCommander(self, schid, enabled):
+        ts3lib.setClientSelfVariableAsInt(schid, ts3lib.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER, enabled)
+        self.retcode = ts3lib.createReturnCode()
+        ts3lib.flushClientSelfUpdates(schid, self.retcode)
+
     def tick(self):
         (err, commander) =ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER)
-        ts3lib.setClientSelfVariableAsInt(self.schid, ts3lib.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER, not commander)
-        ts3lib.flushClientSelfUpdates(self.schid, self.retcode)
+        self.setChannelCommander(self.schid, not commander)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        if menuItemID == 0: self.enabled = not self.enabled
-        elif menuItemID == 1: self.toggleTimer(schid)
+        if menuItemID == 0:
+            if self.mode == autoCommanderMode.OFF:
+                self.mode = autoCommanderMode.CHANNELGROUP_ASSIGNED
+            elif self.mode == autoCommanderMode.CHANNELGROUP_ASSIGNED:
+                self.mode = autoCommanderMode.START_TALKING
+            else: self.mode = autoCommanderMode.OFF
+        elif menuItemID == 1: self.toggleTimer(schid); return
+        ts3lib.printMessageToCurrentTab("{} > Switched mode to: [color=orange]{}".format(self.name, self.mode.name))
 
     def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
-        if not self.enabled: return
+        if not self.mode == autoCommanderMode.CHANNELGROUP_ASSIGNED: return
         (err, ownID) = ts3lib.getClientID(schid)
         if clientID != ownID: return
         (err, val) = ts3lib.getClientNeededPermission(schid, "b_client_use_channel_commander")
@@ -67,21 +84,29 @@ class autoCommander(ts3plugin):
         ts3lib.setClientSelfVariableAsInt(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER, 1)
         ts3lib.flushClientSelfUpdates(schid, self.retcode)
 
+    def onTalkStatusChangeEvent(self, schid, status, isReceivedWhisper, clid):
+        # print(self.mode, "==", autoCommanderMode.START_TALKING)
+        if not self.mode == autoCommanderMode.START_TALKING: return
+        (err, ownID) = ts3lib.getClientID(schid)
+        # print(ownID, "==", clid)
+        if ownID != clid: return
+        (err, commander) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER)
+        # print("status == ts3defines.TalkStatus.STATUS_TALKING and not commander", status == ts3defines.TalkStatus.STATUS_TALKING and not commander)
+        # print("status == ts3defines.TalkStatus.STATUS_NOT_TALKING and commander", status == ts3defines.TalkStatus.STATUS_NOT_TALKING and commander)
+        if status == ts3defines.TalkStatus.STATUS_TALKING and not commander: print("commander ON"); self.setChannelCommander(schid, True)
+        elif status == ts3defines.TalkStatus.STATUS_NOT_TALKING and commander: print("commander OFF"); self.setChannelCommander(schid, False)
+
     def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
-        if not self.enabled: return
-        print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
+        # print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
         if returnCode != self.retcode: return
         # if failedPermissionID == 185: return True
         return True
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if not self.enabled: return
-        print(self.name, "returnCode", returnCode, "self.retcode", self.retcode)
+        # print(self.name, "returnCode", returnCode, "self.__class__.__name__", self.__class__.__name__, returnCode == self.__class__.__name__)
         if returnCode != self.retcode: return
-        print("test")
+        # print(self.name, error)
         if error == ts3defines.ERROR_client_is_flooding:
             ts3lib.printMessageToCurrentTab("{}: [color=red][b]Client is flooding, stopping!".format(self.name))
             self.timer.stop()
-            return True
-        elif error == ts3defines.ERROR_ok:
-            return True
+        return True

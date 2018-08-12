@@ -26,6 +26,7 @@ class faker(ts3plugin):
     guiLogLvl = logLevel.ALL
     replace = { 'O': ['О', '0'], 'o': ['о'], 'e': ['е'], 'E': ['Е', '3'], 'c': ['с'], 'C': ['С'], 'a': ['а'], 'A': ['А', '4'], 'B': ['В'], 'T': ['Т'], 'X': ['Х'], 'x': ['х'] }
     extra = "." # ᅚᅚᅚᅚ
+    retcode = ""
 
     def __init__(self):
         if "aaa_ts3Ext" in PluginHost.active: self.ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
