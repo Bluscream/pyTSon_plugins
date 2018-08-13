@@ -5,11 +5,14 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% cleaned up tw1x script">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% fixed returncodes for complaint reminder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/countNick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/countNick/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -43,15 +46,17 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="py" value="8082" />
-          <entry key="txt" value="1144" />
+          <entry key="ini" value="23" />
+          <entry key="py" value="8447" />
+          <entry key="txt" value="1184" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Git file" value="1" />
-          <entry key="PLAIN_TEXT" value="1130" />
-          <entry key="Python" value="8082" />
+          <entry key="Ini" value="23" />
+          <entry key="PLAIN_TEXT" value="1170" />
+          <entry key="Python" value="8447" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -60,8 +65,9 @@
           <entry key="MD" value="1" />
           <entry key="conf" value="1" />
           <entry key="gitignore" value="1" />
+          <entry key="ini" value="1" />
           <entry key="md" value="1" />
-          <entry key="py" value="46" />
+          <entry key="py" value="52" />
           <entry key="txt" value="4" />
           <entry key="url" value="1" />
         </counts>
@@ -69,16 +75,20 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Git file" value="1" />
+          <entry key="Ini" value="1" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="46" />
+          <entry key="Python" value="52" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="21" />
+          <entry key="project.closed" value="25" />
           <entry key="project.open.time.100" value="1" />
+          <entry key="project.open.time.11" value="2" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="4" />
           <entry key="project.open.time.16" value="1" />
@@ -95,7 +105,7 @@
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.43" value="1" />
           <entry key="project.open.time.69" value="1" />
-          <entry key="project.opened" value="25" />
+          <entry key="project.opened" value="30" />
         </counts>
       </usages-collector>
     </session>
@@ -117,7 +127,7 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="832">
+            <state relative-caret-position="12369">
               <caret line="604" column="7" selection-start-line="604" selection-start-column="7" selection-end-line="604" selection-end-column="7" />
               <folding>
                 <element signature="e#46#75#0" expanded="true" />
@@ -126,24 +136,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoCommander/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="74" column="40" lean-forward="true" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+            <state relative-caret-position="323">
+              <caret line="62" column="55" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-                <marker date="1534101251805" expanded="true" signature="2531:2537" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/complaintReminder/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="81" column="30" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -168,8 +168,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>QApplication.clipboard().text()</find>
-      <find>qurl.</find>
       <find>print(&quot;self.</find>
       <find>print(schid</find>
       <find>pri</find>
@@ -198,6 +196,8 @@
       <find>interval</find>
       <find>self.mo</find>
       <find>onconnec</find>
+      <find>move</find>
+      <find>single</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -257,9 +257,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/teaspeak/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
-        <option value="$PROJECT_DIR$/include/update.py" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp12546/home/teaspeak/update.py" />
         <option value="$PROJECT_DIR$/scripts/dontHide/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3Ext/__init__.py" />
@@ -306,8 +303,11 @@
         <option value="$PROJECT_DIR$/scripts/antiAFK/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/tw1x/README.md" />
         <option value="$PROJECT_DIR$/scripts/tw1x/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
+        <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
       </list>
     </option>
   </component>
@@ -708,13 +708,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00371" summary=":thinking:">
-      <created>1527920658049</created>
-      <option name="number" value="00371" />
-      <option name="presentableId" value="LOCAL-00371" />
-      <option name="project" value="LOCAL" />
-      <updated>1527920658053</updated>
-    </task>
     <task id="LOCAL-00372" summary=":thinking:">
       <created>1527932032781</created>
       <option name="number" value="00372" />
@@ -1052,7 +1045,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534095314799</updated>
     </task>
-    <option name="localTasksCounter" value="420" />
+    <task id="LOCAL-00420" summary="% fixed returncodes for complaint reminder">
+      <created>1534108735343</created>
+      <option name="number" value="00420" />
+      <option name="presentableId" value="LOCAL-00420" />
+      <option name="project" value="LOCAL" />
+      <updated>1534108735344</updated>
+    </task>
+    <option name="localTasksCounter" value="421" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1177,7 +1177,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value=":thinking: added getServerType and ServerInstanceType" />
     <MESSAGE value=":thinking: use QHostAddress" />
     <MESSAGE value=":thinking: added last_joined_channel_to_customBan and last_joined_server_to_customBan to quickMod" />
     <MESSAGE value=":thinking: added mySupport" />
@@ -1202,7 +1201,8 @@
     <MESSAGE value="+removed debug stuff from autoCommander" />
     <MESSAGE value="+ added twix script" />
     <MESSAGE value="% cleaned up tw1x script" />
-    <option name="LAST_COMMIT_MESSAGE" value="% cleaned up tw1x script" />
+    <MESSAGE value="% fixed returncodes for complaint reminder" />
+    <option name="LAST_COMMIT_MESSAGE" value="% fixed returncodes for complaint reminder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1253,12 +1253,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp03105/data/discord_main.py" />
-    <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp29330/data/discord_main.py" />
-    <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp32482/data/discord_net.py" />
-    <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp32552/data/discord.py" />
-    <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp12740/data/discord.py" />
-    <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp11315/data/discord.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
     <entry file="file://$PROJECT_DIR$/scripts/longMessages/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1547,10 +1541,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/complaintReminder/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="71" column="76" selection-start-line="71" selection-start-column="76" selection-end-line="71" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="903">
+          <caret line="43" column="46" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/countNick/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="40" column="37" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="664">
+          <caret line="67" column="51" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoEncode/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="159" column="74" selection-start-line="159" selection-start-column="64" selection-end-line="159" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customBan/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1323">
           <caret line="70" column="19" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12369">
+          <caret line="604" column="7" selection-start-line="604" selection-start-column="7" selection-end-line="604" selection-end-column="7" />
+          <folding>
+            <element signature="e#46#75#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1561,31 +1610,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="832">
-          <caret line="604" column="7" selection-start-line="604" selection-start-column="7" selection-end-line="604" selection-end-column="7" />
-          <folding>
-            <element signature="e#46#75#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoCommander/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="74" column="40" lean-forward="true" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        <state relative-caret-position="323">
+          <caret line="62" column="55" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-            <marker date="1534101251805" expanded="true" signature="2531:2537" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/complaintReminder/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="81" column="30" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
         </state>
       </provider>
     </entry>

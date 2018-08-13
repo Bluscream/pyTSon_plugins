@@ -29,7 +29,7 @@ class autoCommander(ts3plugin):
     schid = 0
     requested = 0
     mode = autoCommanderMode.OFF
-    retcode = ""
+    retcodes = []
 
     def __init__(self):
         self.timer.timeout.connect(self.tick)
@@ -58,8 +58,9 @@ class autoCommander(ts3plugin):
 
     def setChannelCommander(self, schid, enabled):
         ts3lib.setClientSelfVariableAsInt(schid, ts3lib.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER, enabled)
-        self.retcode = ts3lib.createReturnCode()
-        ts3lib.flushClientSelfUpdates(schid, self.retcode)
+        returnCode = ts3lib.createReturnCode()
+        self.retcodes.append(returnCode)
+        ts3lib.flushClientSelfUpdates(schid, returnCode)
 
     def tick(self):
         (err, commander) =ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientPropertiesRare.CLIENT_IS_CHANNEL_COMMANDER)
@@ -93,12 +94,20 @@ class autoCommander(ts3plugin):
         elif status == ts3defines.TalkStatus.STATUS_NOT_TALKING and commander: self.setChannelCommander(schid, False)
 
     def onServerPermissionErrorEvent(self, schid, errorMessage, error, returnCode, failedPermissionID):
-        if returnCode != self.retcode: return
+        if not returnCode in self.retcodes: return
+        self.retcodes.remove(returnCode)
         return True
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
-        if returnCode != self.retcode: return
+        if not returnCode in self.retcodes: return
+        self.retcodes.remove(returnCode)
         if error == ts3defines.ERROR_client_is_flooding:
             ts3lib.printMessageToCurrentTab("{}: [color=red][b]Client is flooding, stopping!".format(self.name))
             self.timer.stop()
+            self._mode = self.mode
+            QTimer.singleShot(10000, self.enable)
+            self.mode = autoCommanderMode.OFF
         return True
+
+    def enable(self):
+        self.mode = self._mode

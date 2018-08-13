@@ -59,7 +59,7 @@ class customBan(ts3plugin):
         if err != ts3defines.ERROR_ok: name = ""
         (err, ip) = ts3lib.getConnectionVariable(schid, selectedItemID, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         self.clid = selectedItemID
-        if not ip: ip = "";ts3lib.requestConnectionInfo(schid, selectedItemID)
+        if err or not ip: ip = "";ts3lib.requestConnectionInfo(schid, selectedItemID); print("requested for", selectedItemID, "on", schid) #TODO: Check
         if not self.dlg: self.dlg = BanDialog(self, schid, selectedItemID, uid, name, ip)
         else: self.dlg.setup(self, schid, selectedItemID, uid, name, ip)
         self.dlg.show()
@@ -67,6 +67,7 @@ class customBan(ts3plugin):
         self.dlg.activateWindow()
 
     def onConnectionInfoEvent(self, schid, clid):
+        print(self.name,"> onConnectionInfoEvent", schid, clid)
         if not hasattr(self, "clid") or clid != self.clid: return
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         if ip and self.dlg: self.dlg.txt_ip.setText(ip)
@@ -91,7 +92,7 @@ class customBan(ts3plugin):
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
 class BanDialog(QDialog):
-    moveBeforeBan = True
+    moveBeforeBan = False
     clid = 0
     def __init__(self, script, schid, clid, uid, name, ip, parent=None):
         try:
@@ -161,7 +162,7 @@ class BanDialog(QDialog):
     def checkIP(self, reply):
         try:
             data = reply.readAll().data().decode('utf-8')
-            if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"> checkIP() data:",data)
+            # if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"> checkIP() data:",data)
             data = loads(data)
             if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Resolved IP ", self.txt_ip.text,":", data)
             if data["status"] != "success": self.disableISP(); return
