@@ -69,6 +69,7 @@ class volumeLeveler(ts3plugin):
             print(clid, level, self.clients[clid])
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
+        if not newChannelID: return
         srv = self.ts3host.getServer(schid)
         if clid == srv.me.clientID:
             self.clients = {}
