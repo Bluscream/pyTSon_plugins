@@ -10,9 +10,9 @@ class autoProxy(ts3plugin):
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
     requestAutoload = True
-    version = "1.0"
+    version = "1.1"
     author = "Bluscream"
-    description = ""
+    description = "Uses ts3.cloud's ts3proxy service to switch to a proxy on every connection.\nRequires ts3cloud_proxy.py in your include folder!"
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
@@ -21,6 +21,8 @@ class autoProxy(ts3plugin):
     proxied = False
     host = "127.0.0.1"
     port = 9987
+
+    nickname = "Bluscream"
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
@@ -40,4 +42,4 @@ class autoProxy(ts3plugin):
         address = '{}:{}'.format(proxy[0], proxy[1])
         self.proxied = True
         ts3lib.printMessageToCurrentTab("[color=green]Connecting to proxy %s"%address)
-        ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT, address, address, self.pw, "Bluscream", "", "", "", "", "", "", "", "", "")
+        ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT, address, address, self.pw, self.nickname, "", "", "", "", "", "", "", "", "")

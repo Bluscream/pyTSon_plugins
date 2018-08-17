@@ -16,7 +16,6 @@ class TS3CloudProxy(object):
         'Cache-Control': "no-cache"
     }
     def generateProxy(self, host, port=9987):
-        print("data:", self.payload.format(host=host,port=port))
         response = request("POST", self.url, data=self.payload.format(host=host,port=port), headers=self.headers, verify=False)
         page = response.content
         soup = BeautifulSoup(page, features="html.parser")
