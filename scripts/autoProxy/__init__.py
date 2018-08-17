@@ -11,7 +11,7 @@ class autoProxy(ts3plugin):
     name = "Automatic Proxy"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.2"
     author = "Bluscream"
     description = "Uses ts3.cloud's ts3proxy service to switch to a proxy on every connection.\nRequires ts3cloud_proxy.py in your include folder!"
@@ -25,7 +25,7 @@ class autoProxy(ts3plugin):
     request = QNetworkRequest(QUrl("https://www.ts3.cloud/ts3proxy"))
     payload = "input={host}:{port}&proxy="
 
-    nickname = "Bluscream"
+    backup = {"nickname": "Bluscream", "phonetic": "Bluscream", "token": "", "c": "AFK", "cpw": "123", "pw": "123"}
     whitelist = ["127.0.0.1","192.168.2.38","192.168.2.39"] # all lower case
 
     def __init__(self):
@@ -44,9 +44,17 @@ class autoProxy(ts3plugin):
         address = "{}:{}".format(host,port)
         ts3lib.printMessageToCurrentTab("[color=red]Not proxied on %s, disconnecting!"%address)
         ts3lib.stopConnection(schid, "switching to proxy")
-        err, nick = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        print(err, nick)
-        self.pw = pw
+        err, nickname = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        if not err and nickname: self.backup["nickname"] = nickname
+        err, nickname_phonetic = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
+        if not err and nickname_phonetic: self.backup["phonetic"] = nickname_phonetic
+        err, c = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_DEFAULT_CHANNEL)
+        if not err and c: self.backup["c"] = c
+        err, cpw = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_DEFAULT_CHANNEL_PASSWORD)
+        if not err and cpw: self.backup["cpw"] = cpw
+        err, default_token = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DEFAULT_TOKEN)
+        if not err and default_token: self.backup["token"] = default_token
+        if pw: self.backup["pw"] = pw
         payload = self.payload.format(host=host,port=port)
         self.nwmc.post(self.request, payload)
 
@@ -55,6 +63,16 @@ class autoProxy(ts3plugin):
         soup = BeautifulSoup(page, features="html.parser")
         div_alert = soup.find("div", {"class": "alert alert-success alert-dismissable"})
         proxy_adress = div_alert.find("center").find("b").text
-        self.proxied = True
         ts3lib.printMessageToCurrentTab("[color=green]Connecting to proxy %s"%proxy_adress)
-        ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT, proxy_adress, proxy_adress, self.pw, self.nickname, "", "", "", "", "", "", "", "", "")
+        self.proxied = True
+        ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT,
+            proxy_adress, # Name
+            proxy_adress, # Address
+            self.backup["pw"], # Server Password
+            self.backup["nickname"], # Nickname
+            self.backup["c"], # Channel Path
+            self.backup["cpw"], # Channel Password
+            "", "", "", "", "",
+            self.backup["token"], # Privilege Key
+            self.backup["phonetic"] # Phonetic Nickname
+        )
