@@ -5,12 +5,12 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% gave nickname a own variable (now it feels special)">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% added additional checks to autoProxy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -45,16 +45,16 @@
         <counts>
           <entry key="gitignore" value="2" />
           <entry key="ini" value="23" />
-          <entry key="py" value="9770" />
-          <entry key="txt" value="1379" />
+          <entry key="py" value="10065" />
+          <entry key="txt" value="1417" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Git file" value="2" />
           <entry key="Ini" value="23" />
-          <entry key="PLAIN_TEXT" value="1365" />
-          <entry key="Python" value="9770" />
+          <entry key="PLAIN_TEXT" value="1403" />
+          <entry key="Python" value="10065" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -65,7 +65,7 @@
           <entry key="gitignore" value="2" />
           <entry key="ini" value="1" />
           <entry key="md" value="1" />
-          <entry key="py" value="58" />
+          <entry key="py" value="59" />
           <entry key="txt" value="4" />
           <entry key="url" value="1" />
         </counts>
@@ -76,7 +76,7 @@
           <entry key="Ini" value="1" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="58" />
+          <entry key="Python" value="59" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -139,8 +139,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="41" column="166" selection-start-line="41" selection-start-column="166" selection-end-line="41" selection-end-column="166" />
+            <state relative-caret-position="572">
+              <caret line="53" column="94" selection-start-line="53" selection-start-column="94" selection-end-line="53" selection-end-column="94" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -149,19 +149,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="182" column="92" lean-forward="true" selection-start-line="182" selection-start-column="12" selection-end-line="182" selection-end-column="92" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3cloud_proxy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="24" column="50" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="50" />
+            <state relative-caret-position="90">
+              <caret line="5" column="42" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -169,7 +163,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13086">
+            <state relative-caret-position="272">
               <caret line="727" column="16" selection-start-line="727" selection-start-column="6" selection-end-line="727" selection-end-column="16" />
             </state>
           </provider>
@@ -186,7 +180,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>path.joi</find>
       <find>getAddons</find>
       <find>print(self.name</find>
       <find>print(returnCode</find>
@@ -216,6 +209,7 @@
       <find>SingleShot</find>
       <find>from PythonQt.QTCor</find>
       <find>QHostAddress</find>
+      <find>nwmc</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -749,13 +743,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00378" summary=":thinking:">
-      <created>1528707006609</created>
-      <option name="number" value="00378" />
-      <option name="presentableId" value="LOCAL-00378" />
-      <option name="project" value="LOCAL" />
-      <updated>1528707006610</updated>
-    </task>
     <task id="LOCAL-00379" summary=":thinking:">
       <created>1528989037679</created>
       <option name="number" value="00379" />
@@ -1093,7 +1080,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534516607497</updated>
     </task>
-    <option name="localTasksCounter" value="427" />
+    <task id="LOCAL-00427" summary="% added additional checks to autoProxy">
+      <created>1534517906459</created>
+      <option name="number" value="00427" />
+      <option name="presentableId" value="LOCAL-00427" />
+      <option name="project" value="LOCAL" />
+      <updated>1534517906460</updated>
+    </task>
+    <option name="localTasksCounter" value="428" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1257,7 +1251,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="% hopefully Fixed autoFollow completely&#10;+ autoFollow works now with UID" />
     <MESSAGE value="- temporary removed psutil dependency (fixes #43)" />
     <MESSAGE value="% finally fixed autofollow&#10;+ autoFollow now works via UID so even when the client disconnected" />
     <MESSAGE value="% fixed some typos&#10;% now supressing permission errors in antiAFK (resets idle time even if no permissions)&#10;% added Create channel button to autoChannelCreate to test missing permissions" />
@@ -1282,7 +1275,8 @@
     <MESSAGE value="% added autoProxy (requires include/ts3cloud_proxy.py)" />
     <MESSAGE value="% make autoProxy more fancy" />
     <MESSAGE value="% gave nickname a own variable (now it feels special)" />
-    <option name="LAST_COMMIT_MESSAGE" value="% gave nickname a own variable (now it feels special)" />
+    <MESSAGE value="% added additional checks to autoProxy" />
+    <option name="LAST_COMMIT_MESSAGE" value="% added additional checks to autoProxy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1325,6 +1319,10 @@
           <url>file://$PROJECT_DIR$/scripts/antiAFK/__init__.py</url>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py</url>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -1333,13 +1331,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/include/ts3widgets/filetransfer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21273">
-          <caret line="1037" column="47" selection-start-line="1037" selection-start-column="24" selection-end-line="1037" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/fakeClients/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1678,20 +1669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3cloud_proxy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="24" column="50" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13086">
-          <caret line="727" column="16" selection-start-line="727" selection-start-column="6" selection-end-line="727" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="543">
@@ -1699,10 +1676,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="727" column="16" selection-start-line="727" selection-start-column="6" selection-end-line="727" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3cloud_proxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="42" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="41" column="166" selection-start-line="41" selection-start-column="166" selection-end-line="41" selection-end-column="166" />
+        <state relative-caret-position="572">
+          <caret line="53" column="94" selection-start-line="53" selection-start-column="94" selection-end-line="53" selection-end-column="94" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
