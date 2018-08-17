@@ -5,14 +5,12 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% yet another try to fix remaining returncode issues for autoCommander">
-      <change afterPath="$PROJECT_DIR$/scripts/autoProxy/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% update repo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -45,18 +43,18 @@
     <session id="1604380212">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gitignore" value="1" />
+          <entry key="gitignore" value="2" />
           <entry key="ini" value="23" />
-          <entry key="py" value="8480" />
-          <entry key="txt" value="1237" />
+          <entry key="py" value="9188" />
+          <entry key="txt" value="1257" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Git file" value="1" />
+          <entry key="Git file" value="2" />
           <entry key="Ini" value="23" />
-          <entry key="PLAIN_TEXT" value="1223" />
-          <entry key="Python" value="8480" />
+          <entry key="PLAIN_TEXT" value="1243" />
+          <entry key="Python" value="9188" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -64,21 +62,21 @@
         <counts>
           <entry key="MD" value="1" />
           <entry key="conf" value="1" />
-          <entry key="gitignore" value="1" />
+          <entry key="gitignore" value="2" />
           <entry key="ini" value="1" />
           <entry key="md" value="1" />
-          <entry key="py" value="55" />
+          <entry key="py" value="57" />
           <entry key="txt" value="4" />
           <entry key="url" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Git file" value="1" />
+          <entry key="Git file" value="2" />
           <entry key="Ini" value="1" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="55" />
+          <entry key="Python" value="57" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -139,19 +137,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="734">
-              <caret line="70" column="56" lean-forward="true" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+            <state relative-caret-position="738">
+              <caret line="41" column="14" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="14" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -159,11 +148,32 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/include/ts3cloud_proxy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="70">
+              <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5256">
-              <caret line="292" selection-start-line="292" selection-end-line="292" />
+            <state relative-caret-position="272">
+              <caret line="727" column="16" selection-start-line="727" selection-start-column="6" selection-end-line="727" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -179,10 +189,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>print(schid</find>
-      <find>pri</find>
-      <find>&gt;= clients</find>
-      <find>if PluginHost.cfg.getboolean(&quot;general&quot;, &quot;verbose&quot;):</find>
       <find>print</find>
       <find>b64e</find>
       <find>path.joi</find>
@@ -209,6 +215,10 @@
       <find>move</find>
       <find>single</find>
       <find>create</find>
+      <find>connectsta</find>
+      <find>startConnection</find>
+      <find>getServerConnectInfo</find>
+      <find>SingleShot</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -268,7 +278,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/include/ts3Ext/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/grieferGames/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/addonList/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/mySupport/config.ini" />
@@ -303,7 +312,6 @@
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3enums.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" />
@@ -318,7 +326,9 @@
         <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/scripts/autoProxy/__init__.py" />
+        <option value="$PROJECT_DIR$/include/ts3cloud_proxy.py" />
       </list>
     </option>
   </component>
@@ -358,13 +368,12 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoProxy" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -431,10 +440,10 @@
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\tweakui" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\ressources" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
     </key>
   </component>
@@ -730,20 +739,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
-    </task>
-    <task id="LOCAL-00373" summary=":thinking:">
-      <created>1528522234358</created>
-      <option name="number" value="00373" />
-      <option name="presentableId" value="LOCAL-00373" />
-      <option name="project" value="LOCAL" />
-      <updated>1528522234359</updated>
-    </task>
-    <task id="LOCAL-00374" summary=":thinking:">
-      <created>1528524106294</created>
-      <option name="number" value="00374" />
-      <option name="presentableId" value="LOCAL-00374" />
-      <option name="project" value="LOCAL" />
-      <updated>1528524106295</updated>
     </task>
     <task id="LOCAL-00375" summary=":thinking:">
       <created>1528531510368</created>
@@ -1075,7 +1070,21 @@
       <option name="project" value="LOCAL" />
       <updated>1534187246377</updated>
     </task>
-    <option name="localTasksCounter" value="422" />
+    <task id="LOCAL-00422" summary="% update repo">
+      <created>1534513315144</created>
+      <option name="number" value="00422" />
+      <option name="presentableId" value="LOCAL-00422" />
+      <option name="project" value="LOCAL" />
+      <updated>1534513315145</updated>
+    </task>
+    <task id="LOCAL-00423" summary="% update gitignore">
+      <created>1534513356777</created>
+      <option name="number" value="00423" />
+      <option name="presentableId" value="LOCAL-00423" />
+      <option name="project" value="LOCAL" />
+      <updated>1534513356777</updated>
+    </task>
+    <option name="localTasksCounter" value="424" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1200,8 +1209,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value=":thinking: added last_joined_channel_to_customBan and last_joined_server_to_customBan to quickMod" />
-    <MESSAGE value=":thinking: added mySupport" />
     <MESSAGE value=":thinking:" />
     <MESSAGE value="% Fixed typo in autoDrag&#10;% Fixed onChannelCreatedEvent in autoFollow" />
     <MESSAGE value="% some changes for autoFollow" />
@@ -1225,7 +1232,9 @@
     <MESSAGE value="% cleaned up tw1x script" />
     <MESSAGE value="% fixed returncodes for complaint reminder" />
     <MESSAGE value="% yet another try to fix remaining returncode issues for autoCommander" />
-    <option name="LAST_COMMIT_MESSAGE" value="% yet another try to fix remaining returncode issues for autoCommander" />
+    <MESSAGE value="% update repo" />
+    <MESSAGE value="% update gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="% update gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1276,13 +1285,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/longMessages/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3widgets/filetransfer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21273">
@@ -1441,13 +1443,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5208">
-          <caret line="248" column="21" selection-start-line="248" selection-start-column="21" selection-end-line="248" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/autorun.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1601,13 +1596,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5256">
-          <caret line="292" selection-start-line="292" selection-end-line="292" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/volumeLeveler/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1368">
@@ -1625,6 +1613,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="249" column="27" selection-start-line="249" selection-start-column="27" selection-end-line="249" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="727" column="16" selection-start-line="727" selection-start-column="6" selection-end-line="727" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="838">
@@ -1635,19 +1644,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="70" column="56" lean-forward="true" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="56" />
+        <state relative-caret-position="738">
+          <caret line="41" column="14" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
+    <entry file="file://$PROJECT_DIR$/include/ts3cloud_proxy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+        <state relative-caret-position="36">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
