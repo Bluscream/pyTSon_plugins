@@ -4,7 +4,7 @@ from pytson import getCurrentApiVersion
 # from configparser import ConfigParser
 from PythonQt.QtCore import QUrl, QTimer, QByteArray
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply, QHostAddress
-from bluscream import timestamp, getScriptPath, inputBox
+from bluscream import timestamp, getScriptPath, inputBox, msgBox
 from os import path
 from bs4 import BeautifulSoup
 
@@ -20,11 +20,11 @@ class autoProxy(ts3plugin):
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
-    menuItems = []
-    hotkeys = [
+    menuItems = [
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle %s"%name, "scripts/%s/proxy.png"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Proxy whitelist", "scripts/%s/whitelist.png"%__name__)
     ]
+    hotkeys = []
     proxied = False
     nwmc = QNetworkAccessManager()
     request = QNetworkRequest(QUrl("https://www.ts3.cloud/ts3proxy"))
@@ -46,10 +46,14 @@ class autoProxy(ts3plugin):
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
-        if menuItemID == 0: self.enabled = not self.enabled
+        if menuItemID == 0:
+            self.enabled = not self.enabled
+            if self.enabled: ts3lib.printMessageToCurrentTab("{} > [color=green]Enabled!".format(self.name))
+            else: ts3lib.printMessageToCurrentTab("{} > [color=red]Disabled!".format(self.name))
         elif menuItemID == 1:
             err, host, port, pw = ts3lib.getServerConnectInfo(schid)
             host = inputBox(self.name, "Server address:", host)
+            if not host: msgBox("Nothing to add!", title=self.name); return
             if host in self.whitelist:
                 self.whitelist.remove(host)
                 ts3lib.printMessageToCurrentTab("{} > Removed {} from whitelist!".format(self.name,host))
