@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% autoProxy has now buttons to toggle itself and it's whitelist">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% fixed autoProxy not starting without whitelist">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -42,8 +40,8 @@
           <entry key="gitignore" value="2" />
           <entry key="ini" value="23" />
           <entry key="md" value="469" />
-          <entry key="py" value="11650" />
-          <entry key="txt" value="1652" />
+          <entry key="py" value="11651" />
+          <entry key="txt" value="1711" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -51,8 +49,8 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="23" />
           <entry key="Markdown" value="469" />
-          <entry key="PLAIN_TEXT" value="1638" />
-          <entry key="Python" value="11650" />
+          <entry key="PLAIN_TEXT" value="1697" />
+          <entry key="Python" value="11651" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -138,11 +136,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+            <state relative-caret-position="1688">
+              <caret line="97" column="20" lean-forward="true" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-                <marker date="1534534121406" expanded="true" signature="2320:2329" ph="..." />
               </folding>
             </state>
           </provider>
@@ -743,13 +740,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00385" summary=":thinking:">
-      <created>1531761453554</created>
-      <option name="number" value="00385" />
-      <option name="presentableId" value="LOCAL-00385" />
-      <option name="project" value="LOCAL" />
-      <updated>1531761453575</updated>
-    </task>
     <task id="LOCAL-00386" summary=":thinking:">
       <created>1532047126571</created>
       <option name="number" value="00386" />
@@ -1086,7 +1076,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534533903267</updated>
     </task>
-    <option name="localTasksCounter" value="434" />
+    <task id="LOCAL-00434" summary="% fixed autoProxy not starting without whitelist">
+      <created>1534534187284</created>
+      <option name="number" value="00434" />
+      <option name="presentableId" value="LOCAL-00434" />
+      <option name="project" value="LOCAL" />
+      <updated>1534534187284</updated>
+    </task>
+    <option name="localTasksCounter" value="435" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1250,7 +1247,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="+ added getChannelPassword() to antiChannelKick" />
     <MESSAGE value="+ getChannelPassword improvements" />
     <MESSAGE value="+ even more getChannelPassword improvements" />
     <MESSAGE value="+ added ts3enums.py" />
@@ -1275,7 +1271,8 @@
     <MESSAGE value="% autoProxy now saves some vars before reconnecting" />
     <MESSAGE value="% autoProxy now uses the original address as tab name" />
     <MESSAGE value="% autoProxy has now buttons to toggle itself and it's whitelist" />
-    <option name="LAST_COMMIT_MESSAGE" value="% autoProxy has now buttons to toggle itself and it's whitelist" />
+    <MESSAGE value="% fixed autoProxy not starting without whitelist" />
+    <option name="LAST_COMMIT_MESSAGE" value="% fixed autoProxy not starting without whitelist" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1689,11 +1686,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+        <state relative-caret-position="1688">
+          <caret line="97" column="20" lean-forward="true" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-            <marker date="1534534121406" expanded="true" signature="2320:2329" ph="..." />
           </folding>
         </state>
       </provider>

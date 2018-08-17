@@ -4,7 +4,7 @@ from pytson import getCurrentApiVersion
 # from configparser import ConfigParser
 from PythonQt.QtCore import QUrl, QTimer, QByteArray
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply, QHostAddress
-from bluscream import timestamp, getScriptPath, inputBox # , loadCfg, saveCfg
+from bluscream import timestamp, getScriptPath, inputBox
 from os import path
 from bs4 import BeautifulSoup
 
@@ -31,14 +31,10 @@ class autoProxy(ts3plugin):
     payload = "input={host}:{port}&proxy="
     whitelist_ini = "%s/whitelist.txt" % path
     whitelist = []
-    # cfg = ConfigParser()
-    # cfg["general"] = {"whitelist": "127.0.0.1,ts.minopia.de"}
     backup = {"address": "127.0.0.1:9987", "nickname": "", "phonetic": "", "token": "", "c": "AFK", "cpw": "123", "pw": "123"}
-    # whitelist = ["127.0.0.1","192.168.2.38","192.168.2.39"] # all lower case
     enabled = True
 
     def __init__(self):
-        # loadCfg(self.ini, self.cfg)
         content = []
         if not path.exists(self.whitelist_ini):
             with open(self.whitelist_ini, 'w'): pass
@@ -47,9 +43,6 @@ class autoProxy(ts3plugin):
         self.whitelist = [x.strip() for x in content]
         self.nwmc.connect("finished(QNetworkReply*)", self.reply)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
-
-    def stop(self):
-        pass # saveCfg(self.ini, self.cfg)
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
