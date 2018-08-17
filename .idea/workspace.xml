@@ -5,12 +5,10 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% autoProxy QNetworkAccessManager (broken)">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% fixed autoProxy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -46,14 +44,14 @@
           <entry key="gitignore" value="2" />
           <entry key="ini" value="23" />
           <entry key="py" value="10157" />
-          <entry key="txt" value="1458" />
+          <entry key="txt" value="1467" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Git file" value="2" />
           <entry key="Ini" value="23" />
-          <entry key="PLAIN_TEXT" value="1444" />
+          <entry key="PLAIN_TEXT" value="1453" />
           <entry key="Python" value="10157" />
           <entry key="Scratch" value="14" />
         </counts>
@@ -139,8 +137,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+            <state relative-caret-position="572">
+              <caret line="49" column="58" selection-start-line="49" selection-start-column="58" selection-end-line="49" selection-end-column="58" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -743,13 +741,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00380" summary=":thinking:">
-      <created>1529685978315</created>
-      <option name="number" value="00380" />
-      <option name="presentableId" value="LOCAL-00380" />
-      <option name="project" value="LOCAL" />
-      <updated>1529685978316</updated>
-    </task>
     <task id="LOCAL-00381" summary=":thinking:">
       <created>1529686234478</created>
       <option name="number" value="00381" />
@@ -1087,7 +1078,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534522578796</updated>
     </task>
-    <option name="localTasksCounter" value="429" />
+    <task id="LOCAL-00429" summary="% fixed autoProxy">
+      <created>1534522839033</created>
+      <option name="number" value="00429" />
+      <option name="presentableId" value="LOCAL-00429" />
+      <option name="project" value="LOCAL" />
+      <updated>1534522839033</updated>
+    </task>
+    <option name="localTasksCounter" value="430" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1251,7 +1249,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="% finally fixed autofollow&#10;+ autoFollow now works via UID so even when the client disconnected" />
     <MESSAGE value="% fixed some typos&#10;% now supressing permission errors in antiAFK (resets idle time even if no permissions)&#10;% added Create channel button to autoChannelCreate to test missing permissions" />
     <MESSAGE value="+ faking client and channel names is now working" />
     <MESSAGE value="% removed ok error event&#10;&#10;P.S: Dominik ist ein Bauer" />
@@ -1276,7 +1273,8 @@
     <MESSAGE value="% gave nickname a own variable (now it feels special)" />
     <MESSAGE value="% added additional checks to autoProxy" />
     <MESSAGE value="% autoProxy QNetworkAccessManager (broken)" />
-    <option name="LAST_COMMIT_MESSAGE" value="% autoProxy QNetworkAccessManager (broken)" />
+    <MESSAGE value="% fixed autoProxy" />
+    <option name="LAST_COMMIT_MESSAGE" value="% fixed autoProxy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1702,8 +1700,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+        <state relative-caret-position="572">
+          <caret line="49" column="58" selection-start-line="49" selection-start-column="58" selection-end-line="49" selection-end-column="58" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
