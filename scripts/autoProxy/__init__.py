@@ -25,7 +25,7 @@ class autoProxy(ts3plugin):
     request = QNetworkRequest(QUrl("https://www.ts3.cloud/ts3proxy"))
     payload = "input={host}:{port}&proxy="
 
-    backup = {"nickname": "Bluscream", "phonetic": "Bluscream", "token": "", "c": "AFK", "cpw": "123", "pw": "123"}
+    backup = {"address": "127.0.0.1:9987", "nickname": "Bluscream", "phonetic": "Bluscream", "token": "", "c": "AFK", "cpw": "123", "pw": "123"}
     whitelist = ["127.0.0.1","192.168.2.38","192.168.2.39"] # all lower case
 
     def __init__(self):
@@ -41,8 +41,8 @@ class autoProxy(ts3plugin):
         if not ip.isNull():
             if ip.isLoopback(): ts3lib.printMessageToCurrentTab("[color=green]%s is Loopback, not using proxy!" % host); return
             elif ip.isMulticast(): ts3lib.printMessageToCurrentTab("[color=green]%s is Multicast, not using proxy!" % host); return
-        address = "{}:{}".format(host,port)
-        ts3lib.printMessageToCurrentTab("[color=red]Not proxied on %s, disconnecting!"%address)
+        self.backup["address"] = "{}:{}".format(host,port)
+        ts3lib.printMessageToCurrentTab("[color=red]Not proxied on %s, disconnecting!"%self.backup["address"])
         ts3lib.stopConnection(schid, "switching to proxy")
         err, nickname = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         if not err and nickname: self.backup["nickname"] = nickname
@@ -66,7 +66,7 @@ class autoProxy(ts3plugin):
         ts3lib.printMessageToCurrentTab("[color=green]Connecting to proxy %s"%proxy_adress)
         self.proxied = True
         ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT,
-            proxy_adress, # Name
+            self.backup["address"], # Name
             proxy_adress, # Address
             self.backup["pw"], # Server Password
             self.backup["nickname"], # Nickname
