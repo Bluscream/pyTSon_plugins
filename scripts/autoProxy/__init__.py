@@ -30,7 +30,7 @@ class autoProxy(ts3plugin):
         if self.proxied: self.proxied = False; return
         err, self.host, self.port, self.pw = ts3lib.getServerConnectInfo(schid)
         address = "{}:{}".format(self.host,self.port)
-        ts3lib.printMessageToCurrentTab("not proxied on %s, disconnecting!"%address)
+        ts3lib.printMessageToCurrentTab("[color=red]Not proxied on %s, disconnecting!"%address)
         ts3lib.stopConnection(schid, "switching to proxy")
         QTimer.singleShot(250, self.proxy)
 
@@ -39,5 +39,5 @@ class autoProxy(ts3plugin):
         # ts3lib.startConnection(schid, identity, proxy[0], proxy[1], nickname, [], "123", "123")
         address = '{}:{}'.format(proxy[0], proxy[1])
         self.proxied = True
-        ts3lib.printMessageToCurrentTab("connecting to proxy %s"%address)
+        ts3lib.printMessageToCurrentTab("[color=green]Connecting to proxy %s"%address)
         ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT, address, address, self.pw, "Bluscream", "", "", "", "", "", "", "", "", "")
