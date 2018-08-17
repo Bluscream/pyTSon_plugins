@@ -1,38 +1,70 @@
 import ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
+# from configparser import ConfigParser
 from PythonQt.QtCore import QUrl, QTimer, QByteArray
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply, QHostAddress
-from bluscream import timestamp
-# from ts3cloud_proxy import TS3CloudProxy
+from bluscream import timestamp, getScriptPath, msgBox, inputBox # , loadCfg, saveCfg
 from bs4 import BeautifulSoup
 
 class autoProxy(ts3plugin):
+    path = getScriptPath(__name__)
     name = "Automatic Proxy"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
     requestAutoload = False
     version = "1.2"
     author = "Bluscream"
-    description = "Uses ts3.cloud's ts3proxy service to switch to a proxy on every connection.\nRequires ts3cloud_proxy.py in your include folder!"
+    description = "Uses ts3.cloud's ts3proxy service to switch to a proxy on every connection."
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
     menuItems = []
-    hotkeys = []
+    hotkeys = [
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle %s"%name, "scripts/%s/proxy.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Proxy whitelist", "scripts/%s/whitelist.png"%__name__)
+    ]
     proxied = False
     nwmc = QNetworkAccessManager()
     request = QNetworkRequest(QUrl("https://www.ts3.cloud/ts3proxy"))
     payload = "input={host}:{port}&proxy="
-
-    backup = {"address": "127.0.0.1:9987", "nickname": "Bluscream", "phonetic": "Bluscream", "token": "", "c": "AFK", "cpw": "123", "pw": "123"}
-    whitelist = ["127.0.0.1","192.168.2.38","192.168.2.39"] # all lower case
+    whitelist_ini = "%s/whitelist.txt" % path
+    whitelist = []
+    # cfg = ConfigParser()
+    # cfg["general"] = {"whitelist": "127.0.0.1,ts.minopia.de"}
+    backup = {"address": "127.0.0.1:9987", "nickname": "", "phonetic": "", "token": "", "c": "AFK", "cpw": "123", "pw": "123"}
+    # whitelist = ["127.0.0.1","192.168.2.38","192.168.2.39"] # all lower case
+    enabled = True
 
     def __init__(self):
+        # loadCfg(self.ini, self.cfg)
+        content = []
+        with open(self.whitelist_ini, encoding="utf-8") as f:
+            content = f.readlines()
+        self.whitelist = [x.strip() for x in content]
         self.nwmc.connect("finished(QNetworkReply*)", self.reply)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
+    def stop(self):
+        pass # saveCfg(self.ini, self.cfg)
+
+    def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
+        if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
+        if menuItemID == 0: self.enabled = not self.enabled
+        elif menuItemID == 1:
+            err, host, port, pw = ts3lib.getServerConnectInfo(schid)
+            host = inputBox(self.name, "Server address:", host)
+            if host in self.whitelist:
+                self.whitelist.remove(host)
+                ts3lib.printMessageToCurrentTab("{} > Removed {} from whitelist!".format(self.name,host))
+            else:
+                self.whitelist.append(host)
+                ts3lib.printMessageToCurrentTab("{} > Added {} to whitelist!".format(self.name,host))
+            with open(self.whitelist_ini, "a") as myfile:
+                myfile.write('\n{0}'.format(host))
+
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if not self.enabled: return
         if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTING: return
         if self.proxied: self.proxied = False; return
         err, host, port, pw = ts3lib.getServerConnectInfo(schid)
