@@ -4,7 +4,8 @@ from pytson import getCurrentApiVersion
 # from configparser import ConfigParser
 from PythonQt.QtCore import QUrl, QTimer, QByteArray
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply, QHostAddress
-from bluscream import timestamp, getScriptPath, msgBox, inputBox # , loadCfg, saveCfg
+from bluscream import timestamp, getScriptPath, inputBox # , loadCfg, saveCfg
+from os import path
 from bs4 import BeautifulSoup
 
 class autoProxy(ts3plugin):
@@ -39,6 +40,8 @@ class autoProxy(ts3plugin):
     def __init__(self):
         # loadCfg(self.ini, self.cfg)
         content = []
+        if not path.exists(self.whitelist_ini):
+            with open(self.whitelist_ini, 'w'): pass
         with open(self.whitelist_ini, encoding="utf-8") as f:
             content = f.readlines()
         self.whitelist = [x.strip() for x in content]

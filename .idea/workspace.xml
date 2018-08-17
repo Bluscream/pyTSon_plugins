@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% autoProxy now uses the original address as tab name">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% autoProxy has now buttons to toggle itself and it's whitelist">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoProxy/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -41,8 +42,8 @@
           <entry key="gitignore" value="2" />
           <entry key="ini" value="23" />
           <entry key="md" value="469" />
-          <entry key="py" value="11619" />
-          <entry key="txt" value="1601" />
+          <entry key="py" value="11650" />
+          <entry key="txt" value="1652" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -50,8 +51,8 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="23" />
           <entry key="Markdown" value="469" />
-          <entry key="PLAIN_TEXT" value="1587" />
-          <entry key="Python" value="11619" />
+          <entry key="PLAIN_TEXT" value="1638" />
+          <entry key="Python" value="11650" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -137,11 +138,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="32" selection-start-line="32" selection-end-line="33" selection-end-column="63" />
+            <state relative-caret-position="756">
+              <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-                <marker date="1534533855778" expanded="true" signature="2207:2216" ph="..." />
+                <marker date="1534534121406" expanded="true" signature="2320:2329" ph="..." />
               </folding>
             </state>
           </provider>
@@ -742,13 +743,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00384" summary=":thinking:">
-      <created>1531761354377</created>
-      <option name="number" value="00384" />
-      <option name="presentableId" value="LOCAL-00384" />
-      <option name="project" value="LOCAL" />
-      <updated>1531761354377</updated>
-    </task>
     <task id="LOCAL-00385" summary=":thinking:">
       <created>1531761453554</created>
       <option name="number" value="00385" />
@@ -1085,7 +1079,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534524892806</updated>
     </task>
-    <option name="localTasksCounter" value="433" />
+    <task id="LOCAL-00433" summary="% autoProxy has now buttons to toggle itself and it's whitelist">
+      <created>1534533903265</created>
+      <option name="number" value="00433" />
+      <option name="presentableId" value="LOCAL-00433" />
+      <option name="project" value="LOCAL" />
+      <updated>1534533903267</updated>
+    </task>
+    <option name="localTasksCounter" value="434" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1249,7 +1250,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="% finally fixed autoFollow, it works now xD" />
     <MESSAGE value="+ added getChannelPassword() to antiChannelKick" />
     <MESSAGE value="+ getChannelPassword improvements" />
     <MESSAGE value="+ even more getChannelPassword improvements" />
@@ -1274,7 +1274,8 @@
     <MESSAGE value="% removed debug stuff" />
     <MESSAGE value="% autoProxy now saves some vars before reconnecting" />
     <MESSAGE value="% autoProxy now uses the original address as tab name" />
-    <option name="LAST_COMMIT_MESSAGE" value="% autoProxy now uses the original address as tab name" />
+    <MESSAGE value="% autoProxy has now buttons to toggle itself and it's whitelist" />
+    <option name="LAST_COMMIT_MESSAGE" value="% autoProxy has now buttons to toggle itself and it's whitelist" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1688,11 +1689,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="32" selection-start-line="32" selection-end-line="33" selection-end-column="63" />
+        <state relative-caret-position="756">
+          <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-            <marker date="1534533855778" expanded="true" signature="2207:2216" ph="..." />
+            <marker date="1534534121406" expanded="true" signature="2320:2329" ph="..." />
           </folding>
         </state>
       </provider>
