@@ -5,7 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/include/autorun.py" line="142" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% added additional checks to autoProxy">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% autoProxy QNetworkAccessManager (broken)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
@@ -45,16 +45,16 @@
         <counts>
           <entry key="gitignore" value="2" />
           <entry key="ini" value="23" />
-          <entry key="py" value="10065" />
-          <entry key="txt" value="1417" />
+          <entry key="py" value="10157" />
+          <entry key="txt" value="1458" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Git file" value="2" />
           <entry key="Ini" value="23" />
-          <entry key="PLAIN_TEXT" value="1403" />
-          <entry key="Python" value="10065" />
+          <entry key="PLAIN_TEXT" value="1444" />
+          <entry key="Python" value="10157" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -139,8 +139,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="53" column="94" selection-start-line="53" selection-start-column="94" selection-end-line="53" selection-end-column="94" />
+            <state relative-caret-position="536">
+              <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -743,13 +743,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00379" summary=":thinking:">
-      <created>1528989037679</created>
-      <option name="number" value="00379" />
-      <option name="presentableId" value="LOCAL-00379" />
-      <option name="project" value="LOCAL" />
-      <updated>1528989037688</updated>
-    </task>
     <task id="LOCAL-00380" summary=":thinking:">
       <created>1529685978315</created>
       <option name="number" value="00380" />
@@ -1087,7 +1080,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534517906460</updated>
     </task>
-    <option name="localTasksCounter" value="428" />
+    <task id="LOCAL-00428" summary="% autoProxy QNetworkAccessManager (broken)">
+      <created>1534522578796</created>
+      <option name="number" value="00428" />
+      <option name="presentableId" value="LOCAL-00428" />
+      <option name="project" value="LOCAL" />
+      <updated>1534522578796</updated>
+    </task>
+    <option name="localTasksCounter" value="429" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1251,7 +1251,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="- temporary removed psutil dependency (fixes #43)" />
     <MESSAGE value="% finally fixed autofollow&#10;+ autoFollow now works via UID so even when the client disconnected" />
     <MESSAGE value="% fixed some typos&#10;% now supressing permission errors in antiAFK (resets idle time even if no permissions)&#10;% added Create channel button to autoChannelCreate to test missing permissions" />
     <MESSAGE value="+ faking client and channel names is now working" />
@@ -1276,7 +1275,8 @@
     <MESSAGE value="% make autoProxy more fancy" />
     <MESSAGE value="% gave nickname a own variable (now it feels special)" />
     <MESSAGE value="% added additional checks to autoProxy" />
-    <option name="LAST_COMMIT_MESSAGE" value="% added additional checks to autoProxy" />
+    <MESSAGE value="% autoProxy QNetworkAccessManager (broken)" />
+    <option name="LAST_COMMIT_MESSAGE" value="% autoProxy QNetworkAccessManager (broken)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1702,8 +1702,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="53" column="94" selection-start-line="53" selection-start-column="94" selection-end-line="53" selection-end-column="94" />
+        <state relative-caret-position="536">
+          <caret line="56" column="23" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
