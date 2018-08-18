@@ -162,6 +162,7 @@ print("ts3lib.getResourcesPath(): %s"%ts3lib.getResourcesPath())
 print("ts3lib.getPluginPath(): %s"%ts3lib.getPluginPath())
 print("pytson.getConfigPath(): %s"%pytson.getConfigPath())
 print("pytson.getPluginPath(): %s"%pytson.getPluginPath())
+print("bluscream.getScriptPath(): %s"%getScriptPath("console"))
 i = 0
 for item in sys.path:
     print('sys.path[{}]"{}"'.format(i, item))

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% removed configparser stuff from autoProxy">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% autoProxy reworked yet again">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/autorun.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/autorun.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -42,8 +41,8 @@
           <entry key="gitignore" value="2" />
           <entry key="ini" value="23" />
           <entry key="md" value="469" />
-          <entry key="py" value="11891" />
-          <entry key="txt" value="1747" />
+          <entry key="py" value="11937" />
+          <entry key="txt" value="1766" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -51,8 +50,8 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="23" />
           <entry key="Markdown" value="469" />
-          <entry key="PLAIN_TEXT" value="1733" />
-          <entry key="Python" value="11891" />
+          <entry key="PLAIN_TEXT" value="1752" />
+          <entry key="Python" value="11937" />
           <entry key="Scratch" value="14" />
         </counts>
       </usages-collector>
@@ -63,8 +62,8 @@
           <entry key="gitignore" value="2" />
           <entry key="ini" value="1" />
           <entry key="md" value="2" />
-          <entry key="py" value="61" />
-          <entry key="txt" value="5" />
+          <entry key="py" value="62" />
+          <entry key="txt" value="6" />
           <entry key="url" value="1" />
         </counts>
       </usages-collector>
@@ -73,20 +72,20 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="1" />
           <entry key="Markdown" value="3" />
-          <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Python" value="61" />
+          <entry key="PLAIN_TEXT" value="7" />
+          <entry key="Python" value="62" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="32" />
+          <entry key="project.closed" value="34" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.100" value="1" />
           <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="2" />
-          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.15" value="4" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="2" />
@@ -103,8 +102,9 @@
           <entry key="project.open.time.37" value="1" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.43" value="1" />
+          <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.69" value="1" />
-          <entry key="project.opened" value="37" />
+          <entry key="project.opened" value="39" />
         </counts>
       </usages-collector>
     </session>
@@ -123,23 +123,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="true" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10602">
-              <caret line="604" column="7" selection-start-line="604" selection-start-column="7" selection-end-line="604" selection-end-column="7" />
-              <folding>
-                <element signature="e#46#75#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="50" column="35" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="35" />
+            <state relative-caret-position="734">
+              <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -147,22 +135,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/autoProxy/whitelist.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/passwordCracker/__init__.py">
+        <entry file="file://$PROJECT_DIR$/include/autorun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="115" selection-start-line="115" selection-end-line="124" selection-end-column="65" />
+            <state relative-caret-position="2664">
+              <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#94#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -309,7 +288,6 @@
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3enums.py" />
-        <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/faker/__init__.py" />
@@ -326,8 +304,9 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/include/ts3cloud_proxy.py" />
         <option value="$PROJECT_DIR$/scripts/autoProxy/README.md" />
-        <option value="$PROJECT_DIR$/scripts/autoProxy/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoProxy/whitelist.txt" />
+        <option value="$PROJECT_DIR$/include/autorun.py" />
+        <option value="$PROJECT_DIR$/scripts/autoProxy/__init__.py" />
       </list>
     </option>
   </component>
@@ -391,6 +370,11 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -751,13 +735,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00387" summary=":thinking:">
-      <created>1532047733967</created>
-      <option name="number" value="00387" />
-      <option name="presentableId" value="LOCAL-00387" />
-      <option name="project" value="LOCAL" />
-      <updated>1532047733970</updated>
-    </task>
     <task id="LOCAL-00388" summary=":thinking:">
       <created>1532128659733</created>
       <option name="number" value="00388" />
@@ -1094,7 +1071,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534534226959</updated>
     </task>
-    <option name="localTasksCounter" value="436" />
+    <task id="LOCAL-00436" summary="% autoProxy reworked yet again">
+      <created>1534534665912</created>
+      <option name="number" value="00436" />
+      <option name="presentableId" value="LOCAL-00436" />
+      <option name="project" value="LOCAL" />
+      <updated>1534534665913</updated>
+    </task>
+    <option name="localTasksCounter" value="437" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1258,7 +1242,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="+ even more getChannelPassword improvements" />
     <MESSAGE value="+ added ts3enums.py" />
     <MESSAGE value="%reworked regex for getChannelPassword&#10;%added more aliases to autorun.py" />
     <MESSAGE value="%improved autoFollow description" />
@@ -1283,7 +1266,8 @@
     <MESSAGE value="% autoProxy has now buttons to toggle itself and it's whitelist" />
     <MESSAGE value="% fixed autoProxy not starting without whitelist" />
     <MESSAGE value="% removed configparser stuff from autoProxy" />
-    <option name="LAST_COMMIT_MESSAGE" value="% removed configparser stuff from autoProxy" />
+    <MESSAGE value="% autoProxy reworked yet again" />
+    <option name="LAST_COMMIT_MESSAGE" value="% autoProxy reworked yet again" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1472,13 +1456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/autorun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="144" column="18" selection-start-line="144" selection-start-column="18" selection-end-line="144" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoFollow/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1644,30 +1621,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3cloud_proxy.py" />
-    <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="70" column="19" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10602">
-          <caret line="604" column="7" selection-start-line="604" selection-start-column="7" selection-end-line="604" selection-end-column="7" />
-          <folding>
-            <element signature="e#46#75#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10296">
-          <caret line="572" column="26" selection-start-line="572" selection-start-column="4" selection-end-line="572" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoProxy/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1675,6 +1628,13 @@
             <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/whitelist.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1688,20 +1648,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="50" column="35" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="35" />
+        <state relative-caret-position="838">
+          <caret line="604" column="7" selection-start-line="604" selection-start-column="7" selection-end-line="604" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="70" column="19" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/autorun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2664">
+          <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#94#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/whitelist.txt">
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        <state relative-caret-position="10296">
+          <caret line="572" column="26" selection-start-line="572" selection-start-column="4" selection-end-line="572" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="734">
+          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

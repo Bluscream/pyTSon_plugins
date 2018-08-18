@@ -1,7 +1,6 @@
 import ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
-# from configparser import ConfigParser
 from PythonQt.QtCore import QUrl, QTimer, QByteArray
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply, QHostAddress
 from bluscream import timestamp, getScriptPath, inputBox, msgBox
@@ -58,7 +57,7 @@ class autoProxy(ts3plugin):
                 self.whitelist.remove(host)
                 ts3lib.printMessageToCurrentTab("{} > Removed {} from whitelist!".format(self.name,host))
             else:
-                self.whitelist.append(host)
+                self.whitelist.append(host.lower())
                 ts3lib.printMessageToCurrentTab("{} > Added {} to whitelist!".format(self.name,host))
             with open(self.whitelist_ini, "a") as myfile:
                 myfile.write('\n{0}'.format(host))
