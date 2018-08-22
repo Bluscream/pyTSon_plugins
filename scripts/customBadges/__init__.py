@@ -1,5 +1,5 @@
 from ts3plugin import ts3plugin, PluginHost
-from PythonQt.QtCore import QTimer, Qt, QUrl, QFile, QIODevice
+from PythonQt.QtCore import QTimer, Qt, QUrl, QFile, QIODevice, QByteArray
 from PythonQt.QtSql import QSqlQuery
 from PythonQt.QtGui import QWidget, QListWidgetItem, QIcon, QPixmap, QToolTip
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
@@ -14,11 +14,12 @@ from re import compile
 import ts3defines, ts3lib, ts3client
 
 class customBadges(ts3plugin):
+    __path__ = getScriptPath(__name__)
     name = "Custom Badges"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
     requestAutoload = False
-    version = "0.9.4"
+    version = "0.9.5"
     author = "Bluscream"
     description = "Automatically sets some badges for you :)"
     offersConfigure = True
@@ -29,11 +30,13 @@ class customBadges(ts3plugin):
         # (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Generate Badge UIDs", "")
     ]
     hotkeys = []
-    ini = path.join(getPluginPath(), "scripts", "customBadges", "settings.ini")
-    ui = path.join(getPluginPath(), "scripts", "customBadges", "badges.ui")
+    ini = path.join(__path__, "settings.ini")
+    txt = path.join(__path__, "notice")
+    ui = path.join(__path__, "badges.ui")
     icons = path.join(ts3lib.getConfigPath(), "cache", "badges")
     # icons_ext = path.join(icons, "external")
     badges_ext_remote = "https://raw.githubusercontent.com/R4P3-NET/CustomBadges/master/badges.json"
+    badges_remote = "https://badges-content.teamspeak.com/list"
     cfg = ConfigParser()
     dlg = None
     cfg["general"] = {
@@ -41,8 +44,7 @@ class customBadges(ts3plugin):
         "debug": "False",
         "enabled": "True",
         "badges": "",
-        "overwolf": "False",
-        "lastnotice": ""
+        "overwolf": "False"
     }
     badges = {}
     extbadges = {}
@@ -51,7 +53,7 @@ class customBadges(ts3plugin):
     def __init__(self):
         try:
             loadCfg(self.ini, self.cfg)
-            (tstamp, self.badges, array) = loadBadges()
+            self.requestBadges()
             self.requestBadgesExt()
             self.notice.timeout.connect(self.checkNotice)
             self.notice.start(30*1000)
@@ -122,6 +124,20 @@ class customBadges(ts3plugin):
         for badge in lst:
             if badge == uid: return lst[badge]["name"]
 
+    def requestBadges(self):
+        self.nwmc_badges = QNetworkAccessManager()
+        self.nwmc_badges.connect("finished(QNetworkReply*)", self.loadBadges)
+        self.nwmc_badges.get(QNetworkRequest(QUrl(self.badges_remote)))
+
+    def loadBadges(self, reply):
+        try:
+            data = reply.readAll().data() # .decode('utf-8')
+            self.badges = parseBadgesBlob(QByteArray(data))[0]
+        except:
+            ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            (tstamp, self.badges, array) = loadBadges()
+        del self.nwmc_badges
+
     def requestBadgesExt(self):
         self.nwmc_ext = QNetworkAccessManager()
         self.nwmc_ext.connect("finished(QNetworkReply*)", self.loadBadgesExt)
@@ -139,6 +155,7 @@ class customBadges(ts3plugin):
                 self.requestExtIcon(_name)
                 self.requestExtIcon("{}_details".format(_name))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+        del self.nwmc_exti
 
     def requestExtIcon(self, filename):
         self.nwmc_exti[filename] = QNetworkAccessManager()
@@ -166,9 +183,23 @@ class customBadges(ts3plugin):
 
     def loadNotice(self, reply):
         data = reply.readAll().data().decode('utf-8')
-        if data.strip() == "" or data == self.cfg.get('general', 'lastnotice'): return
-        self.cfg.set('general', 'lastnotice', data)
-        msgBox(data, 0, "{} Notice!".format(self.name))
+        if not path.isfile(self.txt):
+            with open(self.txt, 'w'): pass
+        data_local = ""
+        with open(self.txt, 'r') as myfile:
+            data_local=myfile.read()
+            myfile.close()
+        data = data.strip()
+        # print("data:", data)
+        # print("data_local:", data_local)
+        if data == "" or data == data_local.strip(): return # self.cfg.get('general', 'lastnotice')
+        with open(self.txt, "w") as text_file:
+            text_file.write(data)
+            text_file.close()
+        # self.cfg.set('general', 'lastnotice', data)
+        title = "{} Notice!".format(self.name)
+        msgBox(data, 0, title)
+        ts3lib.printMessageToCurrentTab("{}\n\n{}".format(title, data))
 
     def stop(self):
         saveCfg(self.ini, self.cfg)

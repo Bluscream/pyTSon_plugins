@@ -72,6 +72,7 @@ class autoProxy(ts3plugin):
         if not ip.isNull():
             if ip.isLoopback(): ts3lib.printMessageToCurrentTab("[color=green]%s is Loopback, not using proxy!" % host); return
             elif ip.isMulticast(): ts3lib.printMessageToCurrentTab("[color=green]%s is Multicast, not using proxy!" % host); return
+        if not "." in host: ts3lib.printMessageToCurrentTab("[color=orange]%s is server nickname, can [b]not[/b] proxy!" % host); return
         self.backup["address"] = "{}:{}".format(host,port)
         ts3lib.printMessageToCurrentTab("[color=red]Not proxied on %s, disconnecting!"%self.backup["address"])
         ts3lib.stopConnection(schid, "switching to proxy")

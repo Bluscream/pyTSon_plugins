@@ -598,6 +598,38 @@ def buildCommand(cmd, parameters):
     return cmd
 
 
+def parseBadgesBlob(blob: QByteArray):
+    ret = {}
+    next = 12
+    guid_len = 0;guid = ""
+    name_len = 0;name = ""
+    url_len = 0;url = ""
+    filename = ""
+    desc_len = 0;desc = ""
+    for i in range(0, blob.size()):
+        try:
+            if i == next: #guid_len
+                guid_len = int(blob.at(i))
+                guid = str(blob.mid(i+1, guid_len))
+            elif i == (next + 1 + guid_len + 1):
+                name_len = int(blob.at(i))
+                name = str(blob.mid(i+1, name_len))
+            elif i == (next + 1 + guid_len + 1 + name_len + 2):
+                url_len = int(blob.at(i))
+                url = str(blob.mid(i+1, url_len))
+                filename = url.rsplit('/', 1)[1]
+            elif i == (next + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
+                desc_len = int(blob.at(i))
+                desc = str(blob.mid(i+1, desc_len))
+                ret[guid] = {"name": name, "url": url, "filename": filename, "description": desc}
+                next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
+            delimiter = blob.mid(0, 12)
+        except:
+            from traceback import format_exc; ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            pass
+    return ret, blob
+
+
 def loadBadges():
     """
     Loads Badges from ts3settings.db
@@ -607,38 +639,13 @@ def loadBadges():
     q = db.query("SELECT * FROM Badges") #  WHERE key = BadgesListData
     timestamp = 0
     ret = {}
-    badges = b''
+    badges = QByteArray()
     while q.next():
         key = q.value("key")
         if key == "BadgesListTimestamp":
             timestamp = q.value("value")
         elif key == "BadgesListData":
-            badges = q.value("value")
-            next = 12
-            guid_len = 0;guid = ""
-            name_len = 0;name = ""
-            url_len = 0;url = ""
-            filename = ""
-            desc_len = 0;desc = ""
-            try:
-                for i in range(0, badges.size()):
-                    if i == next: #guid_len
-                        guid_len = int(badges.at(i))
-                        guid = str(badges.mid(i+1, guid_len))
-                    elif i == (next + 1 + guid_len + 1):
-                        name_len = int(badges.at(i))
-                        name = str(badges.mid(i+1, name_len))
-                    elif i == (next + 1 + guid_len + 1 + name_len + 2):
-                        url_len = int(badges.at(i))
-                        url = str(badges.mid(i+1, url_len))
-                        filename = url.rsplit('/', 1)[1]
-                    elif i == (next + 1 + guid_len + 1 + name_len + 2 + url_len + 2):
-                        desc_len = int(badges.at(i))
-                        desc = str(badges.mid(i+1, desc_len))
-                        ret[guid] = {"name": name, "url": url, "filename": filename, "description": desc}
-                        next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
-                delimiter = badges.mid(0, 12)
-            except: from traceback import format_exc; ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            ret, badges = parseBadgesBlob(q.value("value"))
     del db
     return timestamp, ret, badges
 

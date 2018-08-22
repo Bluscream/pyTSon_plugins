@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/pyTSon_plugins.iml" filepath="$PROJECT_DIR$/.idea/pyTSon_plugins.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/pyTeamspeak/.idea/pyTeamspeak.iml" filepath="$USER_HOME$/PycharmProjects/pyTeamspeak/.idea/pyTeamspeak.iml" />
     </modules>
   </component>
 </project>
