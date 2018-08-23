@@ -26,6 +26,7 @@ class autoProxy(ts3plugin):
     hotkeys = []
     proxied = False
     nwmc = QNetworkAccessManager()
+    nwmc_resolver = QNetworkAccessManager()
     request = QNetworkRequest(QUrl("https://www.ts3.cloud/ts3proxy"))
     payload = "input={host}:{port}&proxy="
     whitelist_ini = "%s/whitelist.txt" % path
@@ -41,6 +42,7 @@ class autoProxy(ts3plugin):
             content = f.readlines()
         self.whitelist = [x.strip() for x in content]
         self.nwmc.connect("finished(QNetworkReply*)", self.reply)
+        self.nwmc_resolver.connect("finished(QNetworkReply*)", self.resolveReply)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
@@ -72,10 +74,15 @@ class autoProxy(ts3plugin):
         if not ip.isNull():
             if ip.isLoopback(): ts3lib.printMessageToCurrentTab("[color=green]%s is Loopback, not using proxy!" % host); return
             elif ip.isMulticast(): ts3lib.printMessageToCurrentTab("[color=green]%s is Multicast, not using proxy!" % host); return
-        if not "." in host: ts3lib.printMessageToCurrentTab("[color=orange]%s is server nickname, can [b]not[/b] proxy!" % host); return
-        self.backup["address"] = "{}:{}".format(host,port)
-        ts3lib.printMessageToCurrentTab("[color=red]Not proxied on %s, disconnecting!"%self.backup["address"])
+        is_nickname = False
+        if not "." in host:
+            ts3lib.printMessageToCurrentTab("[color=orange]%s is server nickname, resolving..." % host)
+            is_nickname = True
+        if not is_nickname:
+            self.backup["address"] = "{}:{}".format(host,port)
+            ts3lib.printMessageToCurrentTab("[color=red]Not proxied on %s, disconnecting!"%self.backup["address"])
         ts3lib.stopConnection(schid, "switching to proxy")
+        if pw: self.backup["pw"] = pw
         err, nickname = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         if not err and nickname: self.backup["nickname"] = nickname
         err, nickname_phonetic = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
@@ -86,7 +93,12 @@ class autoProxy(ts3plugin):
         if not err and cpw: self.backup["cpw"] = cpw
         err, default_token = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DEFAULT_TOKEN)
         if not err and default_token: self.backup["token"] = default_token
-        if pw: self.backup["pw"] = pw
+        if is_nickname:
+            self.nwmc_resolver.get(QNetworkRequest(QUrl("https://named.myteamspeak.com/lookup?name=%s"%host)))
+            return
+        self.proxy(host, port)
+
+    def proxy(self, host, port):
         payload = self.payload.format(host=host,port=port)
         self.nwmc.post(self.request, payload)
 
@@ -108,3 +120,9 @@ class autoProxy(ts3plugin):
             self.backup["token"], # Privilege Key
             self.backup["phonetic"] # Phonetic Nickname
         )
+
+    def resolveReply(self, reply):
+        resolved = reply.readAll().data().decode('utf-8').strip()
+        ts3lib.printMessageToCurrentTab("[color=green]Resolved server nickname to %s" % resolved)
+        resolved = resolved.split(":")
+        self.proxy(resolved[0], resolved[1] if len(resolved) > 1 else 9987)
