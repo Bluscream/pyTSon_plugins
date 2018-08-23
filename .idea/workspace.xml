@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="711" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="708" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% CustomBadges updated to 0.9.5&#10;% autoProxy now ignores servernicknames (resolving will come in the future)">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% too much stuff to make a brief description check yourself">
+      <change afterPath="$PROJECT_DIR$/scripts/aaa_requirements/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/aaa_requirements/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/devTools/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ts3enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/badges.ui" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/badges.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/update.bat" beforeDir="false" afterPath="$PROJECT_DIR$/update.bat" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -49,8 +51,8 @@
           <entry key="ini" value="27" />
           <entry key="md" value="469" />
           <entry key="notice" value="37" />
-          <entry key="py" value="13788" />
-          <entry key="txt" value="1945" />
+          <entry key="py" value="15948" />
+          <entry key="txt" value="2016" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -58,8 +60,8 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="27" />
           <entry key="Markdown" value="469" />
-          <entry key="PLAIN_TEXT" value="1931" />
-          <entry key="Python" value="13788" />
+          <entry key="PLAIN_TEXT" value="2002" />
+          <entry key="Python" value="15948" />
           <entry key="Scratch" value="14" />
           <entry key="UNKNOWN" value="37" />
         </counts>
@@ -72,8 +74,8 @@
           <entry key="ini" value="2" />
           <entry key="md" value="2" />
           <entry key="notice" value="1" />
-          <entry key="py" value="71" />
-          <entry key="txt" value="6" />
+          <entry key="py" value="74" />
+          <entry key="txt" value="8" />
           <entry key="url" value="1" />
         </counts>
       </usages-collector>
@@ -82,8 +84,8 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="2" />
           <entry key="Markdown" value="3" />
-          <entry key="PLAIN_TEXT" value="8" />
-          <entry key="Python" value="71" />
+          <entry key="PLAIN_TEXT" value="10" />
+          <entry key="Python" value="74" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -134,11 +136,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4951">
-              <caret line="690" column="16" selection-start-line="690" selection-start-column="16" selection-end-line="690" selection-end-column="16" />
+            <state relative-caret-position="371">
+              <caret line="495" column="48" selection-start-line="495" selection-start-column="48" selection-end-line="495" selection-end-column="48" />
               <folding>
                 <element signature="e#46#75#0" expanded="true" />
-                <marker date="1535040801955" expanded="true" signature="24699:24746" ph="..." />
+                <marker date="1535042279040" expanded="true" signature="24545:24592" ph="..." />
               </folding>
             </state>
           </provider>
@@ -156,10 +158,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1656">
+            <state relative-caret-position="-1008">
               <caret line="28" column="58" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="58" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
@@ -167,6 +169,33 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/aaa_requirements/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="406">
+              <caret line="68" column="141" selection-start-line="68" selection-start-column="141" selection-end-line="68" selection-end-column="141" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+                <marker date="1535048081914" expanded="true" signature="3514:3520" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/devTools/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -192,12 +221,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onservererro</find>
-      <find>inputb</find>
-      <find>getchannelpa</find>
-      <find>password</find>
-      <find>interval</find>
-      <find>self.mo</find>
       <find>onconnec</find>
       <find>move</find>
       <find>single</find>
@@ -222,6 +245,12 @@
       <find>getadd</find>
       <find>css_</find>
       <find>AddonStatus</find>
+      <find>print</find>
+      <find>readlines</find>
+      <find>pluginin</find>
+      <find>traceback</find>
+      <find>singlesh</find>
+      <find>css_html_js_minify</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -281,9 +310,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/recordSpam/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" />
-        <option value="$PROJECT_DIR$/../../pyTSon/eventlog.conf" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp03105/data/discord_main.py" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp29330/data/discord_main.py" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp32552/data/discord.py" />
@@ -330,8 +356,11 @@
         <option value="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
         <option value="$PROJECT_DIR$/scripts/customBadges/notice" />
         <option value="$PROJECT_DIR$/include/ts3enums.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/devTools/requirements.txt" />
+        <option value="$PROJECT_DIR$/scripts/aaa_requirements/__init__.py" />
       </list>
     </option>
   </component>
@@ -388,24 +417,19 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="antiAFK" type="462c0819:PsiDirectoryNode" />
+              <item name="aaa_requirements" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="customBadges" type="462c0819:PsiDirectoryNode" />
+              <item name="devTools" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -452,19 +476,19 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\autoConnect" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\welcomeBot" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\unlocker" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\tweakui" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\ressources" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\autoConnect" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\welcomeBot" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\unlocker" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\tweakui" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -759,13 +783,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
-    </task>
-    <task id="LOCAL-00390" summary=":thinking:">
-      <created>1532247014013</created>
-      <option name="number" value="00390" />
-      <option name="presentableId" value="LOCAL-00390" />
-      <option name="project" value="LOCAL" />
-      <updated>1532247014014</updated>
     </task>
     <task id="LOCAL-00391" summary=":thinking:">
       <created>1532249393428</created>
@@ -1103,7 +1120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534953186397</updated>
     </task>
-    <option name="localTasksCounter" value="439" />
+    <task id="LOCAL-00439" summary="% too much stuff to make a brief description check yourself">
+      <created>1535041428646</created>
+      <option name="number" value="00439" />
+      <option name="presentableId" value="LOCAL-00439" />
+      <option name="project" value="LOCAL" />
+      <updated>1535041428648</updated>
+    </task>
+    <option name="localTasksCounter" value="440" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1267,7 +1291,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="%improved autoFollow description" />
     <MESSAGE value="%increased autoFollow version" />
     <MESSAGE value="+added START_TALKING mode to autoCommander, closes #46" />
     <MESSAGE value="+removed debug stuff from autoCommander" />
@@ -1292,7 +1315,8 @@
     <MESSAGE value="% autoProxy reworked yet again" />
     <MESSAGE value="% autoProxy now properly casing added whitelist entries" />
     <MESSAGE value="% CustomBadges updated to 0.9.5&#10;% autoProxy now ignores servernicknames (resolving will come in the future)" />
-    <option name="LAST_COMMIT_MESSAGE" value="% CustomBadges updated to 0.9.5&#10;% autoProxy now ignores servernicknames (resolving will come in the future)" />
+    <MESSAGE value="% too much stuff to make a brief description check yourself" />
+    <option name="LAST_COMMIT_MESSAGE" value="% too much stuff to make a brief description check yourself" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1343,37 +1367,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="36" column="68" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/info/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="270" column="28" selection-start-line="270" selection-start-column="20" selection-end-line="270" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/patch-test/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoDrag/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1281">
-          <caret line="61" column="53" lean-forward="true" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1680">
@@ -1671,16 +1664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="35" column="44" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
@@ -1691,24 +1674,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+    <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4951">
-          <caret line="690" column="16" selection-start-line="690" selection-start-column="16" selection-end-line="690" selection-end-column="16" />
+        <state relative-caret-position="324">
+          <caret line="35" column="44" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="44" />
           <folding>
-            <element signature="e#46#75#0" expanded="true" />
-            <marker date="1535040801955" expanded="true" signature="24699:24746" ph="..." />
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBadges/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1656">
+        <state relative-caret-position="-1008">
           <caret line="28" column="58" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="58" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
             <marker date="1535041015558" expanded="true" signature="607:608" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="296" column="45" selection-start-line="296" selection-start-column="27" selection-end-line="296" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="495" column="48" selection-start-line="495" selection-start-column="48" selection-end-line="495" selection-end-column="48" />
+          <folding>
+            <element signature="e#46#75#0" expanded="true" />
+            <marker date="1535042279040" expanded="true" signature="24545:24592" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/devTools/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/aaa_requirements/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="68" column="141" selection-start-line="68" selection-start-column="141" selection-end-line="68" selection-end-column="141" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1535048081914" expanded="true" signature="3514:3520" ph="..." />
           </folding>
         </state>
       </provider>

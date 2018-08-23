@@ -488,15 +488,12 @@ def getAddonStatus(filename_without_extension="", name=""): # getAddonStatus("TS
     if filename_without_extension:
         p = Process(os.getpid())
         filename = filename_without_extension.lower()
-        print("filename {}".format(filename))
         # pattern = compile("^(?:.*)(_win64|_win32|_x64|_x86)?\.dll$", IGNORECASE|MULTILINE)
         for dll in p.memory_maps():
             # file = dll.path.lower().rsplit('\\', 1)[1].replace("_win64","").replace("_win32","").replace("_x86","").replace("_x64","").replace(".DLL","").replace(".dll","")
             file = dll.path.lower()
             if not file.endswith(".dll") and not file.endswith(".so"): continue
             file = r.sub(r'', dll.path).lower().rstrip('.dll')
-            print("file: {}".format(file))
-            # print("pattern: {}".format(pattern.sub("", file)))
             if file.endswith(filename): return AddonStatus.LOADED #, ExtendedAddonStatus.MEMORY # pattern.sub("", file)
     if name:
         addons = getAddons()

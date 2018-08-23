@@ -1,3 +1,4 @@
+# coding=utf-8
 import pytson, ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
 from datetime import datetime
@@ -45,6 +46,7 @@ class gommeHD(ts3plugin):
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     blockMSG = "Diesen Befehl kannst du nur als Channel-Admin ausführen!"
     welcomeMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"']
+    agreeMSG = ["Bevor du alle Funktionalitäten nutzen kannst, musst du unseren Nutzungsbedingungen und der Datenschutzerklärung zustimmen. Diese findest du auf https://gommehd.net/terms/teamspeak/de/", "Schreibe \"agree\" in den Chat, um deine Zustimmung zu erteilen."]
     steammsg = """
 Steam: [url]https://steamcommunity.com/profiles/76561198022446661[/url]
 Add as friend: [url]steam://friends/add/76561198022446661[/url]
@@ -146,6 +148,8 @@ Ich erklär dir auch wie's geht:
             QTimer.singleShot(self.delay, self.sendMessage)
         elif message in self.welcomeMSG: return True
         elif message == self.blockMSG: QTimer.singleShot(self.delay, self.sendMessage)
+        elif message == self.agreeMSG[0]: return True
+        elif message == self.agreeMSG[1]: ts3lib.requestSendPrivateTextMsg(self.schid, "agree", self.gommeBotID); return True
 
     def sendMessage(self):
         ts3lib.requestSendPrivateTextMsg(self.schid, "registriert", self.gommeBotID)
