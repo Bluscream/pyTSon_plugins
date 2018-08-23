@@ -14,8 +14,14 @@ from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
 from re import match, sub, compile, escape, search, IGNORECASE, MULTILINE
-# from psutil import Process # TODO: Auto-install
+try:
+    from psutil import Process
+except ImportError:
+    from devtools import PluginInstaller
+    PluginInstaller().installPackages(['psutil'])
+    from psutil import Process
 import ts3lib, ts3defines, os.path, string, random, ts3client, time, sys, codecs
+from ts3enums import *
 
 # GENERAL FUNCTIONS #
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -209,7 +215,7 @@ def serverURL(schid=None, name=None):
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
     if name is None:
-        try: (error, name) = ts3lib.getServerVariable(schid, schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+        try: (error, name) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
         except: name = schid
     return '[b][url=channelid://0]"{}"[/url][/b]'.format(name)
 
@@ -471,29 +477,37 @@ class network(object):
         """
 
 # Stuff #
-def getAddonStatus(filename_without_extension, name=""): # getAddonStatus("TS3Hook", "test")
+def getAddonStatus(filename_without_extension="", name=""): # getAddonStatus("TS3Hook", "TS3Hook") getAddonStatus("tspatch", "TS Patch")
     """
     :param filename_without_extension:
     :param name:
     :return: AddonStatus
     """
-    """ # TODO FIX PSUTIL
-    p = Process(os.getpid())
-    filename = filename_without_extension.lower()
-    print("filename {}".format(filename))
-    # pattern = compile("^(?:.*)(_win64|_win32|_x64|_x86)?\.dll$", IGNORECASE|MULTILINE)
-    for dll in p.memory_maps():
-        file = dll.path.lower().rsplit('\\', 1)[1].replace("_win64","").replace("_win32","").replace("_x86","").replace("_x64","").replace(".DLL","").replace(".dll","")
-        # if not file.endswith(".dll") and not file.endswith(".DLL"): continue # TODO: Remove
-        print("file: {}".format(file))
-        # print("pattern: {}".format(pattern.sub("", file)))
-        if file.endswith(filename): return AddonStatus.LOADED # pattern.sub("", file)
-    """
+    to_remove = ('_win64', '_win32', '_x64', '_x86')
+    r = compile(r'({})\.dll$'.format('|'.join(map(escape, to_remove))), flags=IGNORECASE)
+    if filename_without_extension:
+        p = Process(os.getpid())
+        filename = filename_without_extension.lower()
+        print("filename {}".format(filename))
+        # pattern = compile("^(?:.*)(_win64|_win32|_x64|_x86)?\.dll$", IGNORECASE|MULTILINE)
+        for dll in p.memory_maps():
+            # file = dll.path.lower().rsplit('\\', 1)[1].replace("_win64","").replace("_win32","").replace("_x86","").replace("_x64","").replace(".DLL","").replace(".dll","")
+            file = dll.path.lower()
+            if not file.endswith(".dll") and not file.endswith(".so"): continue
+            file = r.sub(r'', dll.path).lower().rstrip('.dll')
+            print("file: {}".format(file))
+            # print("pattern: {}".format(pattern.sub("", file)))
+            if file.endswith(filename): return AddonStatus.LOADED #, ExtendedAddonStatus.MEMORY # pattern.sub("", file)
     if name:
         addons = getAddons()
         for k in addons:
-            if addons[k]["name"] == name: return AddonStatus.INSTALLED
-    return AddonStatus.UNKNOWN
+            if addons[k]["name"] == name: return AddonStatus.INSTALLED #, ExtendedAddonStatus.DATABASE
+    if filename_without_extension:
+        for filename in os.listdir(ts3lib.getPluginPath()):
+            filename = r.sub(r'', filename).lower().rstrip('.dll')
+            if filename == filename_without_extension:
+                return  AddonStatus.INSTALLED #, ExtendedAddonStatus.FOLDER
+    return AddonStatus.UNKNOWN #, ExtendedAddonStatus.UNKNOWN
 
 # Database #
 def getAddons():
@@ -677,9 +691,10 @@ def buildBadges(badges=[], overwolf=False):
     blocks = [",".join(badges[i:i+3]) for i in range(0, len(badges), 3)]
     return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ":badges=".join(blocks))
 
-def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
+def sendCommand(name, cmd, schid=0, silent=True, reverse=False, mode=1):
     """
     Sends a command through TS3Hook.
+    :param mode: See enum: HookMode
     :param reverse:
     :param name:
     :param cmd:
@@ -689,7 +704,12 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
     if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
     if PluginHost.cfg.getboolean("general", "verbose") or not silent:
         ts3lib.printMessage(schid, '{timestamp} [color=orange]{name}[/color]:[color=white] {prefix}{message}'.format(timestamp=timestamp(), name=name, prefix="-" if reverse else "~", message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-    cmd = "{}{}".format("-" if reverse else "~", cmd) # .replace(" ", "~s")
+    print("mode:",mode)
+    if mode == HookMode.TS3HOOK:
+        cmd = "{}cmd{}".format("-" if reverse else "~", cmd.replace(" ", "~s"))
+    elif mode == HookMode.TSPATCH:
+        cmd = "{}{}".format("-" if reverse else "~", cmd)
+    else: raise SyntaxError("No HookMode specified!")
     (err, clid) = ts3lib.getClientID(schid)
     retcode = "" # "TS3Hook:Command:{}".format(ts3lib.createReturnCode(256))
     err = ts3lib.requestSendPrivateTextMsg(schid, cmd, clid, retcode)
@@ -700,212 +720,10 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False):
 
 dlpath = ""
 
-class AddonStatus(object):
-    UNKNOWN = 0
-    INSTALLED = 1
-    LOADED = 2
-    ENABLED = 3
-
-class ContactStatus(object):
-    """
-    Order is important!
-    """
-    FRIEND = 0
-    BLOCKED = 1
-    NEUTRAL = 2
-    UNKNOWN = 3
-
-class ServerInstanceType(object):
-    UNKNOWN = 0
-    VANILLA = 1
-    SDK = 2
-    TEASPEAK = 3
-
-class GroupType(object):
-    TEMPLATE = 0
-    REGULAR = 1
-    QUERY = 2
-    UNKNOWN = 3
-
-class AntiFloodPoints(object):
-    AUTH = 0
-    BANADD = 25
-    BANCLIENT = 25
-    BANDEL = 5
-    BANDELALL = 5
-    BANLIST = 25
-    BINDINGLIST = 0
-    CHANNELADDPERM = 5
-    CHANNELCLIENTADDPERM = 5
-    CHANNELCLIENTDELPERM = 5
-    CHANNELCLIENTLIST = 0
-    CHANNELCLIENTPERMLIST = 5
-    CHANNELCONNECTINFO = 0
-    CHANNELCREATE = 25
-    CHANNELCREATEPRIVATE = 25
-    CHANNELDELETE = 25
-    CHANNELDELPERM = 5
-    CHANNELEDIT = 25
-    CHANNELFIND = 0
-    CHANNELGETDESCRIPTION = 0
-    CHANNELGROUPADD = 5
-    CHANNELGROUPADDPERM = 5
-    CHANNELGROUPCLIENTLIST = 5
-    CHANNELGROUPCOPY = 5
-    CHANNELGROUPDEL = 5
-    CHANNELGROUPDELPERM = 5
-    CHANNELGROUPLIST = 5
-    CHANNELGROUPPERMLIST = 5
-    CHANNELGROUPRENAME = 5
-    CHANNELINFO = 0
-    CHANNELLIST = 0
-    CHANNELMOVE = 25
-    CHANNELPERMLIST = 5
-    CHANNELSUBSCRIBE = 15
-    CHANNELSUBSCRIBEALL = 20
-    CHANNELUNSUBSCRIBE = 5
-    CHANNELUNSUBSCRIBEALL = 25
-    CHANNELVARIABLE = 0
-    CLIENTADDPERM = 5
-    CLIENTCHATCLOSED = 5
-    CLIENTCHATCOMPOSING = 0
-    CLIENTDBDELETE = 25
-    CLIENTDBEDIT = 25
-    CLIENTDBFIND = 50
-    CLIENTDBINFO = 0
-    CLIENTDBLIST = 25
-    CLIENTDELPERM = 5
-    CLIENTDISCONNECT = 0
-    CLIENTEDIT = 25
-    CLIENTFIND = 0
-    CLIENTGETDBIDFROMUID = 5
-    CLIENTGETIDS = 5
-    CLIENTGETNAMEFROMDBID = 5
-    CLIENTGETNAMEFROMUID = 5
-    CLIENTGETUIDFROMCLID = 5
-    CLIENTGETVARIABLES = 0
-    CLIENTINFO = 0
-    CLIENTINIT = 0
-    CLIENTINITIV = 0
-    CLIENTKICK = 25
-    CLIENTLIST = 0
-    CLIENTMOVE = 10
-    CLIENTMUTE = 10
-    CLIENTNOTIFYREGISTER = 0
-    CLIENTNOTIFYUNREGISTER = 0
-    CLIENTPERMLIST = 5
-    CLIENTPOKE = 25
-    CLIENTSETSERVERQUERYLOGIN = 25
-    CLIENTSITEREPORT = 0
-    CLIENTUNMUTE = 10
-    CLIENTUPDATE = 15
-    CLIENTVARIABLE = 0
-    COMPLAINADD = 25
-    COMPLAINDEL = 5
-    COMPLAINDELALL = 25
-    COMPLAINLIST = 25
-    CONNECTIONINFOAUTOUPDATE = 0
-    CURRENTSCHANDLERID = 0
-    CUSTOMINFO = 0
-    CUSTOMSEARCH = 50
-    DUMMY_CONNECTFAILED = 0
-    DUMMY_CONNECTIONLOST = 0
-    DUMMY_NEWIP = 0
-    FTCREATEDIR = 5
-    FTDELETEFILE = 5
-    FTGETFILEINFO = 5
-    FTGETFILELIST = 0
-    FTINITDOWNLOAD = 0
-    FTINITUPLOAD = 0
-    FTLIST = 5
-    FTRENAMEFILE = 5
-    FTSTOP = 5
-    GETCONNECTIONINFO = 0
-    GM = 50
-    HASHPASSWORD = 0
-    HELP = 0
-    INSTANCEEDIT = 25
-    INSTANCEINFO = 0
-    LOGADD = 0
-    LOGIN = 0
-    LOGOUT = 0
-    LOGVIEW = 50
-    MESSAGEADD = 25
-    MESSAGEDEL = 5
-    MESSAGEGET = 20
-    MESSAGELIST = 25
-    MESSAGEUPDATEFLAG = 5
-    PERMFIND = 0
-    PERMGET = 0
-    PERMIDGETBYNAME = 0
-    PERMISSIONLIST = 5
-    PERMOVERVIEW = 5
-    PERMRESET = 0
-    PLUGINCMD = 5
-    PRIVILEGEKEYADD = 0
-    PRIVILEGEKEYDELETE = 0
-    PRIVILEGEKEYLIST = 0
-    PRIVILEGEKEYUSE = 0
-    QUIT = 0
-    SERVERCONNECTINFO = 0
-    SERVERCONNECTIONHANDLERLIST = 0
-    SERVERCREATE = 0
-    SERVERDELETE = 0
-    SERVEREDIT = 5
-    SERVERGETVARIABLES = 0
-    SERVERGROUPADD = 5
-    SERVERGROUPADDCLIENT = 25
-    SERVERGROUPADDPERM = 5
-    SERVERGROUPAUTOADDPERM = 0
-    SERVERGROUPAUTODELPERM = 0
-    SERVERGROUPCLIENTLIST = 5
-    SERVERGROUPCOPY = 5
-    SERVERGROUPDEL = 5
-    SERVERGROUPDELCLIENT = 25
-    SERVERGROUPDELPERM = 5
-    SERVERGROUPLIST = 5
-    SERVERGROUPPERMLIST = 5
-    SERVERGROUPRENAME = 5
-    SERVERGROUPSBYCLIENTID = 5
-    SERVERIDGETBYPORT = 0
-    SERVERINFO = 0
-    SERVERLIST = 0
-    SERVERNOTIFYREGISTER = 0
-    SERVERNOTIFYUNREGISTER = 0
-    SERVERPROCESSSTOP = 0
-    SERVERQUERYCMD = 5
-    SERVERREQUESTCONNECTIONINFO  = 0
-    SERVERSNAPSHOTCREATE = 0
-    SERVERSNAPSHOTDEPLOY = 0
-    SERVERSTART = 0
-    SERVERSTOP = 0
-    SERVERTEMPPASSWORDADD = 5
-    SERVERTEMPPASSWORDDEL = 5
-    SERVERTEMPPASSWORDLIST = 5
-    SERVERVARIABLE = 0
-    SETCLIENTCHANNELGROUP = 25
-    SETCONNECTIONINFO = 0
-    SETWHISPERLIST = 0
-    TEXTMESSAGESEND = 15
-    TOKENADD = 5
-    TOKENDELETE = 5
-    TOKENLIST = 5
-    TOKENUSE = 5
-    USE = 0
-    VERIFYCHANNELPASSWORD = 5
-    VERIFYSERVERPASSWORD = 5
-    VERSION = 0
-    WHOAMI = 0
-
-class color(object):
-    DEFAULT = "[color=white]"
-    DEBUG = "[color=grey]"
-    INFO = "[color=lightblue]"
-    SUCCESS = "[color=green]"
-    WARNING = "[color=orange]"
-    ERROR = "[color=red]"
-    FATAL = "[color=darkred]"
-    ENDMARKER = "[/color]"
+class HookMode(Enum):
+    NONE = 0
+    TS3HOOK = 1
+    TSPATCH = 2
 
 """
     def log(self, logLevel, message, schid=0):

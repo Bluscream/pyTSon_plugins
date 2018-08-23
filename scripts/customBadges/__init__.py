@@ -18,8 +18,8 @@ class customBadges(ts3plugin):
     name = "Custom Badges"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = False
-    version = "0.9.5"
+    requestAutoload = True
+    version = "0.9.5.1"
     author = "Bluscream"
     description = "Automatically sets some badges for you :)"
     offersConfigure = True
@@ -50,15 +50,17 @@ class customBadges(ts3plugin):
     extbadges = {}
     notice = QTimer()
     notice_nwmc = QNetworkAccessManager()
+    mode = HookMode.NONE
+
     def __init__(self):
-        try:
-            loadCfg(self.ini, self.cfg)
-            self.requestBadges()
-            self.requestBadgesExt()
-            self.notice.timeout.connect(self.checkNotice)
-            self.notice.start(30*1000)
-            if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+        if getAddonStatus("tspatch", "TS Patch").value > AddonStatus.INSTALLED.value: self.mode = HookMode.TSPATCH
+        elif getAddonStatus("TS3Hook", "TS3Hook").value > AddonStatus.INSTALLED.value: self.mode = HookMode.TS3HOOK
+        loadCfg(self.ini, self.cfg)
+        self.requestBadges()
+        self.requestBadgesExt()
+        self.notice.timeout.connect(self.checkNotice)
+        self.notice.start(30*1000)
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def infoData(self, schid, id, atype):
         if atype != ts3defines.PluginItemType.PLUGIN_CLIENT: return None
@@ -226,21 +228,22 @@ class customBadges(ts3plugin):
             self.setCustomBadges()
 
     def setCustomBadges(self):
-        try:
-            overwolf = self.cfg.getboolean('general', 'overwolf')
-            badges = self.cfg.get('general', 'badges').split(",")
-            # if len(badges) > 0: badges += ['0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript']
-            (err, schids) = ts3lib.getServerConnectionHandlerList()
-            reg = compile('3(?:\.\d+)* \[Build: \d+\]')
-            for schid in schids:
-                _badges = badges
-                err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
-                err, platform = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_PLATFORM)
-                if getServerType(schid, reg) in [ServerInstanceType.TEASPEAK, ServerInstanceType.UNKNOWN]:
-                    _badges = [x for x in badges if not x in self.extbadges][:3]
-                _badges = buildBadges(_badges, overwolf)
-                sendCommand(self.name, _badges, schid)
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+        # try:
+        if self.mode == HookMode.NONE: return
+        overwolf = self.cfg.getboolean('general', 'overwolf')
+        badges = self.cfg.get('general', 'badges').split(",")
+        # if len(badges) > 0: badges += ['0c4u2snt-ao1m-7b5a-d0gq-e3s3shceript']
+        (err, schids) = ts3lib.getServerConnectionHandlerList()
+        reg = compile('3(?:\.\d+)* \[Build: \d+\]')
+        for schid in schids:
+            _badges = badges
+            err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
+            err, platform = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_PLATFORM)
+            if getServerType(schid, reg) in [ServerInstanceType.TEASPEAK, ServerInstanceType.UNKNOWN]:
+                _badges = [x for x in badges if not x in self.extbadges][:3]
+            _badges = buildBadges(_badges, overwolf)
+            sendCommand(name=self.name, cmd=_badges, schid=schid, mode=self.mode)
+        # except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def openDialog(self):
         if not self.dlg: self.dlg = BadgesDialog(self)

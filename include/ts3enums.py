@@ -605,6 +605,12 @@ class AddonStatus(Enum):
     LOADED = 2
     ENABLED = 3
 
+class ExtendedAddonStatus(Enum):
+    UNKNOWN = 0
+    FOLDER = 1
+    DATABASE = 2
+    MEMORY = 3
+
 class ContactStatus(Enum):
     """
     Order is important!
