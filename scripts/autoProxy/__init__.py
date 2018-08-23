@@ -76,7 +76,8 @@ class autoProxy(ts3plugin):
             elif ip.isMulticast(): ts3lib.printMessageToCurrentTab("[color=green]%s is Multicast, not using proxy!" % host); return
         is_nickname = False
         if not "." in host:
-            ts3lib.printMessageToCurrentTab("[color=orange]%s is server nickname, resolving..." % host)
+            ts3lib.printMessageToCurrentTab("[color=orange]%s is a server nickname, resolving..." % host)
+            self.backup["address"] = host
             is_nickname = True
         if not is_nickname:
             self.backup["address"] = "{}:{}".format(host,port)
@@ -123,6 +124,6 @@ class autoProxy(ts3plugin):
 
     def resolveReply(self, reply):
         resolved = reply.readAll().data().decode('utf-8').strip()
-        ts3lib.printMessageToCurrentTab("[color=green]Resolved server nickname to %s" % resolved)
+        ts3lib.printMessageToCurrentTab("[color=green]Resolved server nickname %s to %s" % (self.backup["address"], resolved))
         resolved = resolved.split(":")
         self.proxy(resolved[0], resolved[1] if len(resolved) > 1 else 9987)
