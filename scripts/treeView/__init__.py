@@ -4,14 +4,6 @@ from ts3plugin import ts3plugin
 from bluscream import timestamp, getScriptPath
 from PythonQt.Qt import QApplication
 
-def widget(name):
-    instance = QApplication.instance()
-    widgets = instance.allWidgets()
-    del instance
-    for x in widgets:
-        if str(x.objectName) == name:
-            return x
-
 class treeView(ts3plugin):
     path = getScriptPath(__name__)
     name = "Tree View Test"
@@ -28,8 +20,18 @@ class treeView(ts3plugin):
     hotkeys = [
         ("tree_view_test", "Test")
     ]
+    app = QApplication.instance()
+    servertree = None
+
+    def widget(self, name):
+        widgets = self.app.allWidgets()
+        for x in widgets:
+            if str(x.objectName) == name:
+                return x
 
     def __init__(self):
+        self.servertree = self.widget("ServerTreeView")
+        print(self.name, "> servertree:", self.servertree)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
@@ -37,11 +39,16 @@ class treeView(ts3plugin):
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         if not keyword == "tree_view_test": return
-        servertree = widget("ServerTreeView")
-        print(dir(servertree))
-        selected = servertree.selectedIndexes()[0]
-        # print(self.name, "> selected:", selected)
+        selected = self.servertree.selectedIndexes()[0]
+        print(self.name, "> selected:", selected)
         # print(self.name, "> dir(selected):", dir(selected))
+        print(self.name, "> selected.data():", selected.data())
+        # print(self.name, "> selected.flags():", selected.flags())
+        # print(self.name, "> selected.internalId():", selected.internalId())
+        # print(self.name, "> selected.internalPointer():", selected.internalPointer())
+        # print(self.name, "> selected.row():", selected.row())
+
+        """
         for item in dir(selected):
             if item.startswith("__"): continue
             if item in ["help"]: continue
@@ -54,4 +61,6 @@ class treeView(ts3plugin):
             except: pass
             print(item+":", eval(item))
         # servertree.columnAt(selected.column())
-        servertree.collapseAll()
+        # servertree.setTreePosition(50)
+        print(servertree.treePosition())
+        """

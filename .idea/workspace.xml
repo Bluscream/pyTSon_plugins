@@ -4,10 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="753" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% autoProxy can now proxy server nicknames">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/autorun.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/autorun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
@@ -48,8 +46,8 @@
           <entry key="ini" value="27" />
           <entry key="md" value="762" />
           <entry key="notice" value="37" />
-          <entry key="py" value="17089" />
-          <entry key="txt" value="2123" />
+          <entry key="py" value="17240" />
+          <entry key="txt" value="2133" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -57,8 +55,8 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="27" />
           <entry key="Markdown" value="762" />
-          <entry key="PLAIN_TEXT" value="2108" />
-          <entry key="Python" value="17089" />
+          <entry key="PLAIN_TEXT" value="2118" />
+          <entry key="Python" value="17240" />
           <entry key="Scratch" value="15" />
           <entry key="UNKNOWN" value="37" />
         </counts>
@@ -72,7 +70,7 @@
           <entry key="md" value="3" />
           <entry key="notice" value="1" />
           <entry key="py" value="79" />
-          <entry key="txt" value="11" />
+          <entry key="txt" value="12" />
           <entry key="url" value="1" />
         </counts>
       </usages-collector>
@@ -83,7 +81,7 @@
           <entry key="Markdown" value="4" />
           <entry key="PLAIN_TEXT" value="12" />
           <entry key="Python" value="79" />
-          <entry key="Scratch" value="2" />
+          <entry key="Scratch" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -169,8 +167,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
+            <state relative-caret-position="380">
               <caret line="34" column="2" lean-forward="true" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="13" column="16" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -178,11 +185,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="788">
-              <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+            <state relative-caret-position="734">
+              <caret line="48" column="63" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="63" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
-                <marker date="1535073214652" expanded="true" signature="375:377" ph="..." />
+                <marker date="1535073864093" expanded="true" signature="183:185" ph="..." />
               </folding>
             </state>
           </provider>
@@ -227,8 +234,8 @@
       <find>singlesh</find>
       <find>css_html_js_minify</find>
       <find>print</find>
-      <find>&gt;&gt;&gt;</find>
       <find>QAPP</find>
+      <find>&gt;&gt;&gt;</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -289,7 +296,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../../../../Local/Temp/scp32552/data/discord.py" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp12740/data/discord.py" />
         <option value="$PROJECT_DIR$/../../../../Local/Temp/scp11315/data/discord.py" />
         <option value="$PROJECT_DIR$/scripts/patch-test/__init__.py" />
@@ -339,6 +345,7 @@
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
         <option value="$PROJECT_DIR$/include/autorun.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.txt" />
         <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
       </list>
     </option>
@@ -768,13 +775,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00396" summary=":thinking:">
-      <created>1532941407443</created>
-      <option name="number" value="00396" />
-      <option name="presentableId" value="LOCAL-00396" />
-      <option name="project" value="LOCAL" />
-      <updated>1532941407444</updated>
-    </task>
     <task id="LOCAL-00397" summary=":thinking:">
       <created>1532943085511</created>
       <option name="number" value="00397" />
@@ -1111,7 +1111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535069730014</updated>
     </task>
-    <option name="localTasksCounter" value="445" />
+    <task id="LOCAL-00445" summary=":thinking:">
+      <created>1535073256791</created>
+      <option name="number" value="00445" />
+      <option name="presentableId" value="LOCAL-00445" />
+      <option name="project" value="LOCAL" />
+      <updated>1535073256791</updated>
+    </task>
+    <option name="localTasksCounter" value="446" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1275,7 +1282,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="+ added twix script" />
     <MESSAGE value="% cleaned up tw1x script" />
     <MESSAGE value="% fixed returncodes for complaint reminder" />
     <MESSAGE value="% yet another try to fix remaining returncode issues for autoCommander" />
@@ -1300,7 +1306,8 @@
     <MESSAGE value="% added aaa_requirements, fixes https://github.com/pathmann/pyTSon/issues/103" />
     <MESSAGE value="% proper readme for aaa_requirements" />
     <MESSAGE value="% autoProxy can now proxy server nicknames" />
-    <option name="LAST_COMMIT_MESSAGE" value="% autoProxy can now proxy server nicknames" />
+    <MESSAGE value=":thinking:" />
+    <option name="LAST_COMMIT_MESSAGE" value=":thinking:" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1355,13 +1362,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/autoChannelCreate/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/pyTSon.url">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -1693,16 +1693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/autorun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="147" column="19" selection-start-line="147" selection-start-column="7" selection-end-line="147" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#94#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/settings/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-404">
@@ -1715,18 +1705,35 @@
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
+        <state relative-caret-position="380">
           <caret line="34" column="2" lean-forward="true" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/autorun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="147" column="19" selection-start-line="147" selection-start-column="7" selection-end-line="147" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#94#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="788">
-          <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+        <state relative-caret-position="734">
+          <caret line="48" column="63" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="63" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
-            <marker date="1535073214652" expanded="true" signature="375:377" ph="..." />
+            <marker date="1535073864093" expanded="true" signature="183:185" ph="..." />
           </folding>
         </state>
       </provider>
