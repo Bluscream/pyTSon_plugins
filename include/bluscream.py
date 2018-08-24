@@ -325,7 +325,6 @@ def getClientIDByName(name:str, schid:int=0, use_displayname:bool=False, multi:b
     for clid in clids:
         if use_displayname:(err, _name) = ts3lib.getClientDisplayName(schid, clid)
         else: (err, _name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        print(name, _name, name==_name)
         if name == _name:
             if multi: results.append(clid)
             else: return clid
