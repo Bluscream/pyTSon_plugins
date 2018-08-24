@@ -174,3 +174,12 @@ print("")
 class testClass(object):
     def __init__(): pass
     def testFunction(): pass
+
+def test(name):
+    name = name
+    instance = self.instance()
+    # widgets = instance.topLevelWidgets()
+    widgets = instance.allWidgets()
+    for x in widgets:
+        if str(x.objectName) == name:
+            return x

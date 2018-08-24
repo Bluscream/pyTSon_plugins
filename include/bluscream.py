@@ -454,6 +454,42 @@ def grabWidget(objName, byClass=False):
             if byClass and widget.className() == objName: return widget
             elif widget.objectName == objName: return widget
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+
+def findWidget(name):
+    try:
+        name = name.lower()
+        instance = QApplication.instance()
+        widgets = instance.topLevelWidgets()
+        widgets = widgets + instance.allWidgets()
+        ret = dict()
+        c = 0
+        for x in widgets:
+            c += 1
+            if name in x.objectName.lower() or name in str(x.__class__).lower():
+                ret["class:"+str(x.__class__)+str(c)] = "obj:"+x.objectName;continue
+            if hasattr(x, "text"):
+                if name in x.text.lower():
+                    ret["class:"+str(x.__class__)+str(c)] = "obj:"+x.objectName
+        return ret
+    except:
+        print("error")
+def widgetbyclass(name):
+    ret = []
+    instance = QApplication.instance()
+    widgets = instance.topLevelWidgets()
+    widgets = widgets + instance.allWidgets()
+    for x in widgets:
+        if name in str(x.__class__).replace("<class '","").replace("'>",""):
+            ret.extend(x)
+    return ret
+def widgetbyobject(name):
+    name = name.lower()
+    instance = QApplication.instance()
+    widgets = instance.topLevelWidgets()
+    widgets = widgets + instance.allWidgets()
+    for x in widgets:
+        if str(x.objectName).lower() == name:
+            return x
 #endregion
 #region Network
 class network(object):

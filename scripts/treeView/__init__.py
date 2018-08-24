@@ -1,7 +1,16 @@
 import ts3defines, ts3lib, pytson
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
-from bluscream import timestamp, getScriptPath,
+from bluscream import timestamp, getScriptPath
+from PythonQt.Qt import QApplication
+
+def widget(name):
+    instance = QApplication.instance()
+    widgets = instance.allWidgets()
+    del instance
+    for x in widgets:
+        if str(x.objectName) == name:
+            return x
 
 class treeView(ts3plugin):
     path = getScriptPath(__name__)
@@ -28,3 +37,21 @@ class treeView(ts3plugin):
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         if not keyword == "tree_view_test": return
+        servertree = widget("ServerTreeView")
+        print(dir(servertree))
+        selected = servertree.selectedIndexes()[0]
+        # print(self.name, "> selected:", selected)
+        # print(self.name, "> dir(selected):", dir(selected))
+        for item in dir(selected):
+            if item.startswith("__"): continue
+            if item in ["help"]: continue
+            item = "selected.{}".format(item)
+            var = eval(item)
+            try:
+                eval(item+"()")
+                if callable(var):
+                    item += "()"
+            except: pass
+            print(item+":", eval(item))
+        # servertree.columnAt(selected.column())
+        servertree.collapseAll()
