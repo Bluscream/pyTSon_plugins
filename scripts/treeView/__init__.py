@@ -1,7 +1,7 @@
 import ts3defines, ts3lib, pytson
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
-from bluscream import timestamp, getScriptPath, getIDByName
+from bluscream import timestamp, getScriptPath, getIDByName, getChannelPassword
 from ts3enums import ServerTreeItemType
 from PythonQt.Qt import QApplication
 
@@ -44,9 +44,10 @@ class treeView(ts3plugin):
         # print(self.name, "> selected:", selected)
         name = selected.data()
         item = getIDByName(name, schid)
+        ts3lib.printMessageToCurrentTab("[b]Selected Item: \"{}\"\nType: {} ID: {}".format(name, item[1], item[0]))
         if keyword == "tree_view_selected_name":
+            pass
             # print(self.name, "> dir(selected):", dir(selected))
-            ts3lib.printMessageToCurrentTab("[b]Selected Item: \"{}\"\nType: {} ID: {}".format(name, item[1], item[0]))
             # print(self.name, "> selected.flags():", selected.flags())
             # print(self.name, "> selected.internalId():", selected.internalId())
             # print(self.name, "> selected.internalPointer():", selected.internalPointer())
@@ -56,6 +57,11 @@ class treeView(ts3plugin):
             if item[1] == ServerTreeItemType.SERVER:
                 ts3lib.requestSendServerTextMsg(schid, msg)
             elif item[1] == ServerTreeItemType.CHANNEL:
-                ts3lib.requestSendChannelTextMsg(schid, msg, item[0])
+                (err, clid) = ts3lib.getClientID(schid)
+                (err, cid) = ts3lib.getChannelOfClient(schid, clid)
+                if cid != item[0]:
+                    pw = getChannelPassword(schid, item[0])
+                    err = ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")
+                if not err: ts3lib.requestSendChannelTextMsg(schid, msg, 0)
             elif item[1] == ServerTreeItemType.CLIENT:
                 ts3lib.requestSendPrivateTextMsg(schid, msg, item[0])

@@ -344,7 +344,7 @@ def getChannelIDByName(name:str, schid:int=0, multi:bool=False):
 def getIDByName(name:str, schid:int=0):
     if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
     err, sname = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-    if sname == name: return 0, ServerTreeItemType.CHANNEL
+    if sname == name: return 0, ServerTreeItemType.SERVER
     cid = getChannelIDByName(name, schid)
     if cid: return cid, ServerTreeItemType.CHANNEL
     clid = getClientIDByName(name, schid, use_displayname=True)
