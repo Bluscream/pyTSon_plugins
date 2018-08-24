@@ -146,6 +146,8 @@ def encoding():
     print("sys.stdout.isatty()", sys.stdout.isatty())
 
 self = QApplication.instance()
+timer = QTimer()
+timer.setTimerType(2)
 schid = getCurrentServerConnectionHandlerID()
 (_e, ownid) = getClientID(schid);clid=ownid;ownID=ownid
 (_e, owncid) = getChannelOfClient(schid, ownid);cid=owncid;ownCID=owncid
@@ -183,3 +185,12 @@ def test(name):
     for x in widgets:
         if str(x.objectName) == name:
             return x
+def check():
+    timer.timeout.connect(tick)
+    timer.start(1000)
+
+def tick():
+    print(self.activeWindow().className())
+
+def stop():
+    if timer.isActive():timer.stop()

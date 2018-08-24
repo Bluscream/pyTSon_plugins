@@ -37,21 +37,22 @@ class treeView(ts3plugin):
     def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
     def onHotkeyEvent(self, keyword): self.onHotkeyOrCommandEvent(keyword)
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
+        if not self.app.activeWindow().className() == "MainWindow": return
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         self.servertree = self.widget("ServerTreeView")
-        # print(self.name, "> servertree:", self.servertree)
-        selected = self.servertree.selectedIndexes()[0]
-        # print(self.name, "> selected:", selected)
+        print(self.name, "> servertree:", self.servertree)
+        selected = self.servertree.selectedIndexes()
+        print(self.name, "> selected:", selected)
+        selected = selected[0]
         name = selected.data()
         item = getIDByName(name, schid)
-        ts3lib.printMessageToCurrentTab("[b]Selected Item: \"{}\"\nType: {} ID: {}".format(name, item[1], item[0]))
         if keyword == "tree_view_selected_name":
-            pass
             # print(self.name, "> dir(selected):", dir(selected))
             # print(self.name, "> selected.flags():", selected.flags())
             # print(self.name, "> selected.internalId():", selected.internalId())
             # print(self.name, "> selected.internalPointer():", selected.internalPointer())
             # print(self.name, "> selected.row():", selected.row())
+            ts3lib.printMessageToCurrentTab("[b]Selected Item: \"{}\"\nType: {} ID: {}".format(name, item[1], item[0]))
         elif keyword == "tree_view_message_selected":
             msg = " "
             if item[1] == ServerTreeItemType.SERVER:
