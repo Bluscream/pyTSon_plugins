@@ -53,7 +53,7 @@ class treeView(ts3plugin):
             # print(self.name, "> selected.internalPointer():", selected.internalPointer())
             # print(self.name, "> selected.row():", selected.row())
         elif keyword == "tree_view_message_selected":
-            msg = "lol i found you!"
+            msg = " "
             if item[1] == ServerTreeItemType.SERVER:
                 ts3lib.requestSendServerTextMsg(schid, msg)
             elif item[1] == ServerTreeItemType.CHANNEL:
@@ -61,7 +61,16 @@ class treeView(ts3plugin):
                 (err, cid) = ts3lib.getChannelOfClient(schid, clid)
                 if cid != item[0]:
                     pw = getChannelPassword(schid, item[0])
+                    ts3lib.printMessageToCurrentTab("{} > PW: {}".format(self.name, pw))
                     err = ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")
                 if not err: ts3lib.requestSendChannelTextMsg(schid, msg, 0)
             elif item[1] == ServerTreeItemType.CLIENT:
                 ts3lib.requestSendPrivateTextMsg(schid, msg, item[0])
+        elif keyword == "tree_view_enter_channel":
+            if item[1] != ServerTreeItemType.CHANNEL: return
+            (err, clid) = ts3lib.getClientID(schid)
+            (err, cid) = ts3lib.getChannelOfClient(schid, clid)
+            if cid == item[0]: return
+            pw = getChannelPassword(schid, item[0])
+            ts3lib.printMessageToCurrentTab("{} > PW: {}".format(self.name, pw))
+            ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")

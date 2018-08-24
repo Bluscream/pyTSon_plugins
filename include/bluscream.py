@@ -273,20 +273,13 @@ def getChannelPassword(schid, cid, crack=False, ask=False):
     (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
     if err != ts3defines.ERROR_ok or not name: return err
     name = name.strip()
-    pattern = r"(?:p|pw|pass(?:wor[dt])?)[|:=]?\s*(.*)"
+    pattern = r"(?:pw|pass(?:wor[dt])?)[|:=]?\s*(.*)"
+    # pattern = r"^.*[kennwort|pw|password|passwort|pass|passwd](.*)$"
     regex = search(pattern, name, IGNORECASE)
     if regex:
         result = regex.group(1).strip()
         result = sub(r"[)|\]|\}]$", "", result)
         return result
-    """
-    pattern = r"^.*[kennwort|pw|password|passwort|pass|passwd](.*)$"
-    regex = search(pattern, name, IGNORECASE)
-    if regex:
-        result = regex.group(1).strip()
-        result = sub(r"[)|\]|\}]$", "", result)
-        return result
-    """
     if name.isdigit(): return name
     if crack:
         active = PluginHost.active
