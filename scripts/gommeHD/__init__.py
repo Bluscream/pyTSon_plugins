@@ -30,7 +30,7 @@ class gommeHD(ts3plugin):
     gommeBotNick = "Gomme-Bot"
     dynamicSilenceName = "msg me"
     delay = 1500
-    nick_enabled = False
+    nick_enabled = True
     nicknames = ["Qmx1c2NyZWFt=","Q2hyaXN0b3BoZXIgQXVyaWNo=","RGFubnkgUmFkbWFjaGVy="]
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
@@ -45,7 +45,7 @@ class gommeHD(ts3plugin):
     aka = (0, 0, "", "")
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     blockMSG = "Diesen Befehl kannst du nur als Channel-Admin ausführen!"
-    ignoreMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"', "Bevor du alle Funktionalitäten nutzen kannst, musst du unseren Nutzungsbedingungen und der Datenschutzerklärung zustimmen. Diese findest du auf https://gommehd.net/terms/teamspeak/de/"]
+    ignoreMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"', "Bevor du alle Funktionalitäten nutzen kannst, musst du unseren Nutzungsbedingungen und der Datenschutzerklärung zustimmen. Diese findest du auf https://gommehd.net/terms/teamspeak/de/", 'Dies kannst du jedoch mit "abort" rückgängig machen.']
     agreeMSG = "Schreibe \"agree\" in den Chat, um deine Zustimmung zu erteilen."
     steammsg = """
 Steam: [url]https://steamcommunity.com/profiles/76561198022446661[/url]
