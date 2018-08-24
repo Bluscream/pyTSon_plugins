@@ -1,5 +1,5 @@
 import os, json, configparser, webbrowser, traceback, urllib.parse, itertools, sys, locale, os
-import ts3defines, ts3lib, ts3client, ts3help, ts3Ext, pytson, pytsonui
+import ts3defines, ts3lib, ts3client, ts3help, pytson, pytsonui
 from datetime import datetime
 from ts3lib import *
 from ts3plugin import *
@@ -85,7 +85,14 @@ def widgetbyobject(name):
     for x in widgets:
         if str(x.objectName).lower() == name:
             return x
-
+def test(name):
+    name = name
+    instance = self.instance()
+    # widgets = instance.topLevelWidgets()
+    widgets = instance.allWidgets()
+    for x in widgets:
+        if str(x.objectName) == name:
+            return x
 
 def file(name, content):
     with open(os.path.expanduser("~/Desktop/"+name+".txt"), "w") as text_file:
@@ -146,14 +153,15 @@ def encoding():
     print("sys.stdout.isatty()", sys.stdout.isatty())
 
 self = QApplication.instance()
-timer = QTimer()
-timer.setTimerType(2)
+tree = [item for item in self.allWidgets() if item.objectName == "ServerTreeView"][0]
 schid = getCurrentServerConnectionHandlerID()
-last = ""
 (_e, ownid) = getClientID(schid);clid=ownid;ownID=ownid
 (_e, owncid) = getChannelOfClient(schid, ownid);cid=owncid;ownCID=owncid
-if "aaa_ts3Ext" in PluginHost.active: ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
-else: ts3host = ts3Ext.ts3SessionHost(next(iter(PluginHost.active.values())))
+try:
+    import ts3Ext
+    if "aaa_ts3Ext" in PluginHost.active: ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
+    else: ts3host = ts3Ext.ts3SessionHost(next(iter(PluginHost.active.values())))
+except ImportError: print("TS3Ext module not found, ts3host is not available!")
 
 print('(pyTSon v{} on {} | Console started at: {:%Y-%m-%d %H:%M:%S})'.format(pytson.getVersion(),pytson.platformstr(),datetime.now()))
 print("Client curAPI: {} | LibVer: {} | LibVerNum: {}".format(pytson.getCurrentApiVersion(),ts3lib.getClientLibVersion(),ts3lib.getClientLibVersionNumber()))
@@ -178,23 +186,25 @@ class testClass(object):
     def __init__(): pass
     def testFunction(): pass
 
-def test(name):
-    name = name
-    instance = self.instance()
-    # widgets = instance.topLevelWidgets()
-    widgets = instance.allWidgets()
-    for x in widgets:
-        if str(x.objectName) == name:
-            return x
-def check():
-    timer.timeout.connect(tick)
-    timer.start(500)
-
-def tick():
-    name = self.activeWindow().className()
-    if name != last:
-        last = name
-        print(name)
+class focusCheck(object):
+    app = None
+    timer = QTimer()
+    timer.setTimerType(2)
+    last = None
+    def __init__(self, app):
+        self.timer.timeout.connect(self.tick)
+        self.app = app
+        self.timer.start(500)
+    def tick(self):
+        name = self.app.activeWindow().className()
+        if name != self.last:
+            last = name
+            print(name)
 
 def stop():
-    if timer.isActive():timer.stop()
+    try:
+        if timer.timer.isActive():timer.timer.stop()
+    except: pass
+
+def check():
+    timer = focusCheck(self)
