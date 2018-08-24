@@ -41,10 +41,9 @@ class treeView(ts3plugin):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         self.servertree = self.widget("ServerTreeView")
         # print(self.name, "> servertree:", self.servertree)
-        selected = self.servertree.selectedIndexes()
-        if not selected or len(selected) < 1: return
+        selected = self.servertree.currentIndex()
+        if not selected: return
         # print(self.name, "> selected:", selected)
-        selected = selected[0]
         name = selected.data()
         item = getIDByName(name, schid)
         if keyword == "tree_view_selected_name":
