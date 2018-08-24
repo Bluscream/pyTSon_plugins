@@ -4,11 +4,10 @@
     <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="779" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% added hotkey tree_view_enter_channel which you can set to Enter to bypass channel passwords">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% now treeview stuff only happens when MainWindow is in focus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/autorun.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/autorun.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/treeView/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/treeView/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
@@ -46,8 +45,8 @@
           <entry key="ini" value="27" />
           <entry key="md" value="771" />
           <entry key="notice" value="37" />
-          <entry key="py" value="19305" />
-          <entry key="txt" value="2319" />
+          <entry key="py" value="19397" />
+          <entry key="txt" value="2381" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -55,8 +54,8 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="27" />
           <entry key="Markdown" value="771" />
-          <entry key="PLAIN_TEXT" value="2300" />
-          <entry key="Python" value="19303" />
+          <entry key="PLAIN_TEXT" value="2362" />
+          <entry key="Python" value="19395" />
           <entry key="Scratch" value="21" />
           <entry key="UNKNOWN" value="37" />
         </counts>
@@ -155,8 +154,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="55" column="51" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="51" />
+            <state relative-caret-position="194">
+              <caret line="45" column="10" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -167,12 +166,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/autorun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="730">
-              <caret line="192" column="41" selection-start-line="192" selection-start-column="10" selection-end-line="192" selection-end-column="41" />
+            <state relative-caret-position="856">
+              <caret line="194" column="18" selection-start-line="194" selection-start-column="18" selection-end-line="194" selection-end-column="18" />
               <folding>
                 <element signature="e#0#94#0" expanded="true" />
-                <marker date="1535081740389" expanded="true" signature="7845:7850" ph="..." />
-                <marker date="1535081740389" expanded="true" signature="7901:7906" ph="..." />
+                <marker date="1535081988309" expanded="true" signature="7938:7943" ph="..." />
+                <marker date="1535081988309" expanded="true" signature="7971:7976" ph="..." />
               </folding>
             </state>
           </provider>
@@ -789,13 +788,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00404" summary="% fixed some typos&#10;% now supressing permission errors in antiAFK (resets idle time even if no permissions)&#10;% added Create channel button to autoChannelCreate to test missing permissions">
-      <created>1533573339965</created>
-      <option name="number" value="00404" />
-      <option name="presentableId" value="LOCAL-00404" />
-      <option name="project" value="LOCAL" />
-      <updated>1533573339966</updated>
-    </task>
     <task id="LOCAL-00405" summary="+ faking client and channel names is now working">
       <created>1533594193903</created>
       <option name="number" value="00405" />
@@ -1132,7 +1124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535079924194</updated>
     </task>
-    <option name="localTasksCounter" value="453" />
+    <task id="LOCAL-00453" summary="% now treeview stuff only happens when MainWindow is in focus">
+      <created>1535081888269</created>
+      <option name="number" value="00453" />
+      <option name="presentableId" value="LOCAL-00453" />
+      <option name="project" value="LOCAL" />
+      <updated>1535081888269</updated>
+    </task>
+    <option name="localTasksCounter" value="454" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1297,7 +1296,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="% update gitignore" />
     <MESSAGE value="% added autoProxy (requires include/ts3cloud_proxy.py)" />
     <MESSAGE value="% make autoProxy more fancy" />
     <MESSAGE value="% gave nickname a own variable (now it feels special)" />
@@ -1322,7 +1320,8 @@
     <MESSAGE value="% removed debug stuff" />
     <MESSAGE value="% mäh" />
     <MESSAGE value="% added hotkey tree_view_enter_channel which you can set to Enter to bypass channel passwords" />
-    <option name="LAST_COMMIT_MESSAGE" value="% added hotkey tree_view_enter_channel which you can set to Enter to bypass channel passwords" />
+    <MESSAGE value="% now treeview stuff only happens when MainWindow is in focus" />
+    <option name="LAST_COMMIT_MESSAGE" value="% now treeview stuff only happens when MainWindow is in focus" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1701,20 +1700,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/autorun.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="192" column="41" selection-start-line="192" selection-start-column="10" selection-end-line="192" selection-end-column="41" />
+        <state relative-caret-position="856">
+          <caret line="194" column="18" selection-start-line="194" selection-start-column="18" selection-end-line="194" selection-end-column="18" />
           <folding>
             <element signature="e#0#94#0" expanded="true" />
-            <marker date="1535081740389" expanded="true" signature="7845:7850" ph="..." />
-            <marker date="1535081740389" expanded="true" signature="7901:7906" ph="..." />
+            <marker date="1535081988309" expanded="true" signature="7938:7943" ph="..." />
+            <marker date="1535081988309" expanded="true" signature="7971:7976" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="55" column="51" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="51" />
+        <state relative-caret-position="194">
+          <caret line="45" column="10" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>

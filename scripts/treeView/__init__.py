@@ -40,9 +40,10 @@ class treeView(ts3plugin):
         if not self.app.activeWindow().className() == "MainWindow": return
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         self.servertree = self.widget("ServerTreeView")
-        print(self.name, "> servertree:", self.servertree)
+        # print(self.name, "> servertree:", self.servertree)
         selected = self.servertree.selectedIndexes()
-        print(self.name, "> selected:", selected)
+        if not selected or len(selected) < 1: return
+        # print(self.name, "> selected:", selected)
         selected = selected[0]
         name = selected.data()
         item = getIDByName(name, schid)

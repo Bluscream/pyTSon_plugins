@@ -149,6 +149,7 @@ self = QApplication.instance()
 timer = QTimer()
 timer.setTimerType(2)
 schid = getCurrentServerConnectionHandlerID()
+last = ""
 (_e, ownid) = getClientID(schid);clid=ownid;ownID=ownid
 (_e, owncid) = getChannelOfClient(schid, ownid);cid=owncid;ownCID=owncid
 if "aaa_ts3Ext" in PluginHost.active: ts3host = PluginHost.active["aaa_ts3Ext"].ts3host
@@ -187,10 +188,13 @@ def test(name):
             return x
 def check():
     timer.timeout.connect(tick)
-    timer.start(1000)
+    timer.start(500)
 
 def tick():
-    print(self.activeWindow().className())
+    name = self.activeWindow().className()
+    if name != last:
+        last = name
+        print(name)
 
 def stop():
     if timer.isActive():timer.stop()
