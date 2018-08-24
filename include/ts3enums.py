@@ -605,13 +605,7 @@ class AddonStatus(Enum):
     LOADED = 2
     ENABLED = 3
 
-class ExtendedAddonStatus(Enum):
-    UNKNOWN = 0
-    FOLDER = 1
-    DATABASE = 2
-    MEMORY = 3
-
-class ContactStatus(Enum):
+class ContactStatus(object):
     """
     Order is important!
     """
@@ -619,6 +613,12 @@ class ContactStatus(Enum):
     BLOCKED = 1
     NEUTRAL = 2
     UNKNOWN = 3
+
+class ExtendedAddonStatus(Enum):
+    UNKNOWN = 0
+    FOLDER = 1
+    DATABASE = 2
+    MEMORY = 3
 
 class ServerInstanceType(Enum):
     UNKNOWN = 0

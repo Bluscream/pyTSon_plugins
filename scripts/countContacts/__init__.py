@@ -1,5 +1,6 @@
 from ts3plugin import ts3plugin, PluginHost
 from bluscream import *
+from ts3enums import ContactStatus
 from configparser import ConfigParser
 from getvalues import getValues, ValueType
 from pytsonui import setupUi
