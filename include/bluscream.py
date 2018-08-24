@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#region imports
 from datetime import datetime
 from PythonQt import BoolResult
 from PythonQt.Qt import QApplication
@@ -22,8 +23,8 @@ except ImportError:
     from psutil import Process
 import ts3lib, ts3defines, os.path, string, random, ts3client, time, sys, codecs
 from ts3enums import *
-
-# GENERAL FUNCTIONS #
+#endregion
+#region GENERAL FUNCTIONS
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
 def date(): return '{:%Y-%m-%d}'.format(datetime.now())
 def Time(): return '{:%H:%M:%S}'.format(datetime.now())
@@ -147,28 +148,6 @@ def getItemType(lst):
         return ts3defines.PluginItemType.PLUGIN_CLIENT, "Client"
     else: return None
 
-def getobjects(name, cls=True):
-    """
-    :param name:
-    :param cls:
-    :return:
-    """
-    objects = []
-    for obj in get_objects():
-        if (isinstance(obj, QObject) and
-                ((cls and obj.inherits(name)) or
-                 (not cls and obj.objectName() == name))):
-            objects.append(obj)
-    return objects
-
-def objects():
-    """
-    :return:
-    """
-    _ret = []
-    for x in get_objects(): _ret.extend(str(repr(x)))
-    return _ret
-
 def find_between(s, first, last):
     """
     :param s:
@@ -207,9 +186,8 @@ def generateAvatarFileName(schid, clid=0):
     if clid == 0: (error, clid) = ts3lib.getClientID(schid)
     (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
     return "avatar_"+b64encode(uid.encode('ascii')).decode("ascii").split('=')[0]
-
-# PARSING #
-
+#endregion
+#region PARSING
 def serverURL(schid=None, name=None):
     if schid is None:
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
@@ -339,8 +317,8 @@ def getServerType(schid, pattern=None):
 
 def parseTime(time_str):
     return datetime.strptime(time_str.rsplit('.', 1)[0], "%Y-%m-%d %H:%M:%S") # 2017-05-31 21:51:28.563532
-
-# AntiFlood
+#endregion
+#region AntiFlood
 def getAntiFloodSettings(schid):
     """
     :param schid:
@@ -369,8 +347,8 @@ def calculateInterval(schid, command, name="pyTSon"):
     interval = round(1000/(afreduce/command))
     ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command, locals()), command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
     return interval
-
-# I/O #
+#endregion
+#region I/O
 def loadCfg(path, cfg):
     """
     :param path:
@@ -387,7 +365,8 @@ def saveCfg(path, cfg):
     """
     with open(path, mode='w', encoding="utf-8") as cfgfile:
         cfg.write(cfgfile)
-# GUI #
+#endregion
+#region GUI
 def inputBox(title, text, default=""):
     """
     :param default:
@@ -446,7 +425,37 @@ def confirm(title, message):
     _x = QMessageBox.question(x, title, message, QMessageBox.Yes, QMessageBox.No)
     if _x == QMessageBox.Yes: return True if _x == QMessageBox.Yes else False
 
-# Network #
+def getobjects(name, cls=True):
+    """
+    :param name:
+    :param cls:
+    :return:
+    """
+    objects = []
+    for obj in get_objects():
+        if (isinstance(obj, QObject) and
+                ((cls and obj.inherits(name)) or
+                 (not cls and obj.objectName() == name))):
+            objects.append(obj)
+    return objects
+#endregion
+#region QT Manipulation
+def objects():
+    """
+    :return:
+    """
+    _ret = []
+    for x in get_objects(): _ret.extend(str(repr(x)))
+    return _ret
+
+def grabWidget(objName, byClass=False):
+    for widget in QApplication.instance().allWidgets():
+        try:
+            if byClass and widget.className() == objName: return widget
+            elif widget.objectName == objName: return widget
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+#endregion
+#region Network
 class network(object):
     nwmc = QNetworkAccessManager()
     def getFile(self, url):
@@ -475,8 +484,8 @@ class network(object):
         out QDataStream(fil);
         out << b;
         """
-
-# Stuff #
+#endregion
+#region Stuff
 def getAddonStatus(filename_without_extension="", name=""): # getAddonStatus("TS3Hook", "TS3Hook") getAddonStatus("tspatch", "TS Patch")
     """
     :param filename_without_extension:
@@ -505,8 +514,8 @@ def getAddonStatus(filename_without_extension="", name=""): # getAddonStatus("TS
             if filename == filename_without_extension:
                 return  AddonStatus.INSTALLED #, ExtendedAddonStatus.FOLDER
     return AddonStatus.UNKNOWN #, ExtendedAddonStatus.UNKNOWN
-
-# Database #
+#endregion
+#region Database
 def getAddons():
     """
     :return:
@@ -568,8 +577,8 @@ def getContactStatus(uid):
                 ret = int(l[-1])
     del db
     return ret
-
-# TS3Hook #
+#endregion
+#region TS3Hook
 def escapeStr(str,unescape=False):
     """
     :param str:
@@ -712,16 +721,15 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False, mode=1):
     err = ts3lib.requestSendPrivateTextMsg(schid, cmd, clid, retcode)
     if err != ts3defines.ERROR_ok: ts3lib.requestSendChannelTextMsg(schid, cmd, 0, retcode)
     if err != ts3defines.ERROR_ok: ts3lib.requestSendServerTextMsg(schid, cmd, retcode)
-
-# DEFINES #
-
+#endregion
+#region DEFINES
 dlpath = ""
 
 class HookMode(Enum):
     NONE = 0
     TS3HOOK = 1
     TSPATCH = 2
-
+#endregion
 """
     def log(self, logLevel, message, schid=0):
         ts3lib.logMessage(message, logLevel, self.name, schid)
