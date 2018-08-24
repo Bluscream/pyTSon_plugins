@@ -198,7 +198,7 @@ class focusCheck(object):
     def tick(self):
         name = self.app.activeWindow().className()
         if name != self.last:
-            last = name
+            self.last = name
             print(name)
 
 def stop():
@@ -208,3 +208,6 @@ def stop():
 
 def check():
     timer = focusCheck(self)
+
+def methods(func):
+    return [func.metaObject().method(i) for i in range(func.metaObject().methodCount())]

@@ -32,6 +32,11 @@ class treeView(ts3plugin):
                 return x
 
     def __init__(self):
+        try:
+            self.servertree = self.widget("ServerTreeView")
+            if not self.servertree.isAnimated():
+                self.servertree.setAnimated(True)
+        except: pass
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
@@ -39,7 +44,6 @@ class treeView(ts3plugin):
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
         if not self.app.activeWindow().className() == "MainWindow": return
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
-        self.servertree = self.widget("ServerTreeView")
         # print(self.name, "> servertree:", self.servertree)
         selected = self.servertree.currentIndex()
         if not selected: return
@@ -75,3 +79,9 @@ class treeView(ts3plugin):
             pw = getChannelPassword(schid, item[0])
             ts3lib.printMessageToCurrentTab("{} > PW: {}".format(self.name, pw))
             ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")
+
+    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
+        if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
+        self.servertree = self.widget("ServerTreeView")
+        if not self.servertree.isAnimated():
+            self.servertree.setAnimated(True)
