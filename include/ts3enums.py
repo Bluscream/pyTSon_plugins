@@ -626,6 +626,12 @@ class ServerInstanceType(Enum):
     SDK = 2
     TEASPEAK = 3
 
+class ServerTreeItemType(Enum):
+    UNKNOWN = 0
+    SERVER = 1
+    CHANNEL = 2
+    CLIENT = 3
+
 class GroupType(Enum):
     TEMPLATE = 0
     REGULAR = 1

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="753" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="787" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ts3enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3enums.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/treeView/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/treeView/__init__.py" afterDir="false" />
@@ -46,8 +48,8 @@
           <entry key="ini" value="27" />
           <entry key="md" value="762" />
           <entry key="notice" value="37" />
-          <entry key="py" value="17240" />
-          <entry key="txt" value="2133" />
+          <entry key="py" value="18635" />
+          <entry key="txt" value="2137" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -56,8 +58,8 @@
           <entry key="Ini" value="27" />
           <entry key="Markdown" value="762" />
           <entry key="PLAIN_TEXT" value="2118" />
-          <entry key="Python" value="17240" />
-          <entry key="Scratch" value="15" />
+          <entry key="Python" value="18635" />
+          <entry key="Scratch" value="19" />
           <entry key="UNKNOWN" value="37" />
         </counts>
       </usages-collector>
@@ -69,7 +71,7 @@
           <entry key="ini" value="2" />
           <entry key="md" value="3" />
           <entry key="notice" value="1" />
-          <entry key="py" value="79" />
+          <entry key="py" value="80" />
           <entry key="txt" value="12" />
           <entry key="url" value="1" />
         </counts>
@@ -80,7 +82,7 @@
           <entry key="Ini" value="2" />
           <entry key="Markdown" value="4" />
           <entry key="PLAIN_TEXT" value="12" />
-          <entry key="Python" value="79" />
+          <entry key="Python" value="80" />
           <entry key="Scratch" value="3" />
         </counts>
       </usages-collector>
@@ -133,21 +135,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="477" column="18" lean-forward="true" selection-start-line="477" selection-start-column="18" selection-end-line="477" selection-end-column="18" />
+            <state relative-caret-position="478">
+              <caret line="347" column="50" selection-start-line="347" selection-start-column="32" selection-end-line="347" selection-end-column="50" />
               <folding>
                 <element signature="e#46#75#0" expanded="true" />
                 <element signature="e#1036#1061#0" />
-                <element signature="e#5515#5530#0" />
                 <element signature="e#10855#10872#0" />
                 <element signature="e#12330#12341#0" />
                 <element signature="e#12705#12716#0" />
+                <element signature="e#14503#14526#0" />
                 <element signature="e#15127#15143#0" />
                 <element signature="e#15968#15982#0" />
                 <element signature="e#17622#17639#0" />
                 <element signature="e#19877#19892#0" />
-                <marker date="1535069852845" expanded="true" signature="26334:26391" ph="..." />
+                <marker date="1535075969314" expanded="true" signature="27979:28036" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="461">
+              <caret line="632" column="14" selection-start-line="632" selection-start-column="14" selection-end-line="632" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -168,7 +179,7 @@
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="380">
-              <caret line="34" column="2" lean-forward="true" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="21" />
+              <caret line="34" column="2" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -176,8 +187,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="16" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="16" />
+            <state relative-caret-position="594">
+              <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -185,11 +196,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="734">
-              <caret line="48" column="63" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="63" />
+            <state relative-caret-position="104">
+              <caret line="24" column="33" lean-forward="true" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
-                <marker date="1535073864093" expanded="true" signature="183:185" ph="..." />
+                <marker date="1535076416224" expanded="true" signature="237:238" ph="..." />
               </folding>
             </state>
           </provider>
@@ -206,7 +217,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>single</find>
       <find>create</find>
       <find>connectsta</find>
       <find>startConnection</find>
@@ -235,6 +245,7 @@
       <find>css_html_js_minify</find>
       <find>print</find>
       <find>QAPP</find>
+      <find>getclientlist</find>
       <find>&gt;&gt;&gt;</find>
     </findStrings>
     <replaceStrings>
@@ -335,17 +346,17 @@
         <option value="$USER_HOME$/PycharmProjects/pyTeamspeak/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
         <option value="$PROJECT_DIR$/scripts/customBadges/notice" />
-        <option value="$PROJECT_DIR$/include/ts3enums.py" />
         <option value="$PROJECT_DIR$/scripts/customBadges/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/devTools/requirements.txt" />
         <option value="$PROJECT_DIR$/scripts/aaa_requirements/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/aaa_requirements/README.md" />
         <option value="$PROJECT_DIR$/scripts/autoProxy/__init__.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
         <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.txt" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/include/ts3enums.py" />
         <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
       </list>
     </option>
@@ -399,11 +410,6 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -775,13 +781,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00397" summary=":thinking:">
-      <created>1532943085511</created>
-      <option name="number" value="00397" />
-      <option name="presentableId" value="LOCAL-00397" />
-      <option name="project" value="LOCAL" />
-      <updated>1532943085511</updated>
-    </task>
     <task id="LOCAL-00398" summary=":thinking:">
       <created>1532944620806</created>
       <option name="number" value="00398" />
@@ -1118,7 +1117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535073256791</updated>
     </task>
-    <option name="localTasksCounter" value="446" />
+    <task id="LOCAL-00446" summary=":thinking:">
+      <created>1535073874431</created>
+      <option name="number" value="00446" />
+      <option name="presentableId" value="LOCAL-00446" />
+      <option name="project" value="LOCAL" />
+      <updated>1535073874431</updated>
+    </task>
+    <option name="localTasksCounter" value="447" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1666,33 +1672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="599" selection-start-line="599" selection-end-line="600" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="477" column="18" lean-forward="true" selection-start-line="477" selection-start-column="18" selection-end-line="477" selection-end-column="18" />
-          <folding>
-            <element signature="e#46#75#0" expanded="true" />
-            <element signature="e#1036#1061#0" />
-            <element signature="e#5515#5530#0" />
-            <element signature="e#10855#10872#0" />
-            <element signature="e#12330#12341#0" />
-            <element signature="e#12705#12716#0" />
-            <element signature="e#15127#15143#0" />
-            <element signature="e#15968#15982#0" />
-            <element signature="e#17622#17639#0" />
-            <element signature="e#19877#19892#0" />
-            <marker date="1535069852845" expanded="true" signature="26334:26391" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/settings/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-404">
@@ -1703,17 +1682,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="347" column="50" selection-start-line="347" selection-start-column="32" selection-end-line="347" selection-end-column="50" />
+          <folding>
+            <element signature="e#46#75#0" expanded="true" />
+            <element signature="e#1036#1061#0" />
+            <element signature="e#10855#10872#0" />
+            <element signature="e#12330#12341#0" />
+            <element signature="e#12705#12716#0" />
+            <element signature="e#14503#14526#0" />
+            <element signature="e#15127#15143#0" />
+            <element signature="e#15968#15982#0" />
+            <element signature="e#17622#17639#0" />
+            <element signature="e#19877#19892#0" />
+            <marker date="1535075969314" expanded="true" signature="27979:28036" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
-          <caret line="34" column="2" lean-forward="true" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="21" />
+          <caret line="34" column="2" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="16" />
+        <state relative-caret-position="594">
+          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="632" column="14" selection-start-line="632" selection-start-column="14" selection-end-line="632" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -1729,11 +1735,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="48" column="63" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="63" />
+        <state relative-caret-position="104">
+          <caret line="24" column="33" lean-forward="true" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
-            <marker date="1535073864093" expanded="true" signature="183:185" ph="..." />
+            <marker date="1535076416224" expanded="true" signature="237:238" ph="..." />
           </folding>
         </state>
       </provider>

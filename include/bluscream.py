@@ -317,6 +317,40 @@ def getServerType(schid, pattern=None):
 
 def parseTime(time_str):
     return datetime.strptime(time_str.rsplit('.', 1)[0], "%Y-%m-%d %H:%M:%S") # 2017-05-31 21:51:28.563532
+
+def getClientIDByName(name:str, schid:int=0, use_displayname:bool=False, multi:bool=False):
+    if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+    if multi: results = []
+    (err, clids) = ts3lib.getClientList(schid)
+    for clid in clids:
+        if use_displayname:(err, _name) = ts3lib.getClientDisplayName(schid, clid)
+        else: (err, _name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        print(name, _name, name==_name)
+        if name == _name:
+            if multi: results.append(clid)
+            else: return clid
+    if multi and len(results): return results
+
+def getChannelIDByName(name:str, schid:int=0, multi:bool=False):
+    if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+    if multi: results = []
+    (err, cids) = ts3lib.getChannelList(schid)
+    for cid in cids:
+        (err, _name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        if name == _name:
+            if multi: results.append(cid)
+            else: return cid
+    if multi and len(results): return results
+
+def getIDByName(name:str, schid:int=0):
+    if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
+    err, sname = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+    if sname == name: return 0, ServerTreeItemType.CHANNEL
+    cid = getChannelIDByName(name, schid)
+    if cid: return cid, ServerTreeItemType.CHANNEL
+    clid = getClientIDByName(name, schid, use_displayname=True)
+    if clid: return clid, ServerTreeItemType.CLIENT
+    return 0, ServerTreeItemType.UNKNOWN
 #endregion
 #region AntiFlood
 def getAntiFloodSettings(schid):
