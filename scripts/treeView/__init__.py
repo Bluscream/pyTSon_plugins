@@ -65,7 +65,7 @@ class treeView(ts3plugin):
                 (err, clid) = ts3lib.getClientID(schid)
                 (err, cid) = ts3lib.getChannelOfClient(schid, clid)
                 if cid != item[0]:
-                    pw = getChannelPassword(schid, item[0])
+                    pw = getChannelPassword(schid, item[0], calculate=True)
                     ts3lib.printMessageToCurrentTab("{} > PW: {}".format(self.name, pw))
                     err = ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")
                 if not err: ts3lib.requestSendChannelTextMsg(schid, msg, 0)

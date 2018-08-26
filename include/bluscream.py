@@ -23,6 +23,9 @@ except ImportError:
     from psutil import Process
 import ts3lib, ts3defines, os.path, string, random, ts3client, time, sys, codecs
 from ts3enums import *
+from traceback import format_exc
+try: from calculator import NumericStringParser
+except: pass
 #endregion
 #region GENERAL FUNCTIONS
 def timestamp(): return '[{:%Y-%m-%d %H:%M:%S}] '.format(datetime.now())
@@ -256,7 +259,7 @@ def parseClientURL(url):
         return clid, uid, nickname_encoded, nickname
     return False
 
-def getChannelPassword(schid, cid, crack=False, ask=False):
+def getChannelPassword(schid, cid, crack=False, ask=False, calculate=False):
     """
     Tries several methods to get the channel password.
     :param schid: serverConnectionHandlerID
@@ -277,8 +280,22 @@ def getChannelPassword(schid, cid, crack=False, ask=False):
     # pattern = r"^.*[kennwort|pw|password|passwort|pass|passwd](.*)$"
     regex = search(pattern, name, IGNORECASE)
     if regex:
+        print("regex")
         result = regex.group(1).strip()
         result = sub(r"[)|\]|\}]$", "", result)
+        math_chars = ["/","%","+","-","^","*"]
+        for i in math_chars:
+            print(i,"in",result,":",i in result)
+        if calculate and any(i in result for i in math_chars):
+            print('"/","%","+","-","^","*" in', result)
+            try:
+                print("result:", result)
+                _result = eval(result)
+                print("_result:", _result)
+                result = str(_result)
+            except:
+                print("error while calculating")
+                print(format_exc())
         return result
     # if name.isdigit(): return name
     last = name.split(" ")[-1]
@@ -481,7 +498,7 @@ def grabWidget(objName, byClass=False):
         try:
             if byClass and widget.className() == objName: return widget
             elif widget.objectName == objName: return widget
-        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
 def findWidget(name):
     try:
@@ -595,7 +612,7 @@ def getAddons():
             for l in val.split('\n'):
                 l = l.split('=', 1)
                 ret[key][l[0]] = l[1]
-        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
     return ret
 
 def getContacts():
@@ -709,7 +726,7 @@ def parseBadgesBlob(blob: QByteArray):
                 next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
             delimiter = blob.mid(0, 12)
         except:
-            from traceback import format_exc; ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
             pass
     return ret, blob
 
