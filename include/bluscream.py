@@ -280,7 +280,9 @@ def getChannelPassword(schid, cid, crack=False, ask=False):
         result = regex.group(1).strip()
         result = sub(r"[)|\]|\}]$", "", result)
         return result
-    if name.isdigit(): return name
+    # if name.isdigit(): return name
+    last = name.split(" ")[-1]
+    if last.isdigit(): return last
     if crack:
         active = PluginHost.active
         if "PW Cracker" in active: active["PW Cracker"].onMenuItemEvent(schid, ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, cid)

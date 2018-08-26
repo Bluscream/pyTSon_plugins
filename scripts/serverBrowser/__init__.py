@@ -3,10 +3,11 @@ from ts3plugin import ts3plugin, PluginHost
 from pytsonui import setupUi
 from getvalues import getValues, ValueType
 from datetime import datetime
+from ts3client import CountryFlags, ServerCache, IconPack
 import ts3defines, os, json, configparser, webbrowser, traceback, urllib.parse
 import sip
 sip.setapi('QVariant', 2)
-from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication, QInputDialog, QInputDialog, QMessageBox
+from PythonQt.QtGui import QDialog, QListWidgetItem, QWidget, QComboBox, QPalette, QTableWidgetItem, QMenu, QAction, QCursor, QApplication, QInputDialog, QInputDialog, QMessageBox, QIcon
 from PythonQt.QtCore import Qt, QUrl, QTimer
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
 
@@ -137,6 +138,10 @@ class ServersDialog(QDialog):
         self.setAttribute(Qt.WA_DeleteOnClose)
         setupUi(self, os.path.join(ts3.getPluginPath(), "pyTSon", "scripts", "serverBrowser", "ui", "servers.ui"))
         self.setWindowTitle("PlanetTeamspeak Server Browser")
+        self.flags = CountryFlags()
+        self.flags.open()
+        self.icons = IconPack.current()
+        self.icons.open()
         #ts3.printMessageToCurrentTab("Countries: "+str(self.countries))
         #try:
             #self.serverList.doubleClicked.connect(self.table_doubleclicked)
@@ -383,15 +388,25 @@ class ServersDialog(QDialog):
                         palette = QPalette()
                         palette.setColor(QPalette.Foreground,Qt.red)
                         _list.setPalette(palette)
-                    _list.setItem(rowPosition, 2, QTableWidgetItem(self.getCountryNamebyID(key['country'])))
+                    item_country = QTableWidgetItem(self.getCountryNamebyID(key['country']))
+                    item_country.setIcon(QIcon(self.flags.flag(key['country'])))
+                    _list.setItem(rowPosition, 2, item_country)
+                    item_createchannels = QTableWidgetItem()
                     if key['createchannels']:
-                        _list.setItem(rowPosition, 3, QTableWidgetItem("Yes"))
+                        item_createchannels.setText("Yes")
+                        item_createchannels.setIcon(QIcon(IconPack.icon(self.icons,"channel_create")))
                     else:
-                        _list.setItem(rowPosition, 3, QTableWidgetItem("No"))
+                        item_createchannels.setText("No")
+                        item_createchannels.setIcon(QIcon(IconPack.icon(self.icons,"channel_delete")))
+                    _list.setItem(rowPosition, 3, item_createchannels)
+                    item_password = QTableWidgetItem()
                     if key['password']:
-                        _list.setItem(rowPosition, 4, QTableWidgetItem("Yes"))
+                        item_password.setText("Yes")
+                        item_password.setIcon(QIcon(IconPack.icon(self.icons,"channel_private")))
                     else:
-                        _list.setItem(rowPosition, 4, QTableWidgetItem("No"))
+                        item_password.setText("No")
+                        item_password.setIcon(QIcon(IconPack.icon(self.icons,"channel_green")))
+                    _list.setItem(rowPosition, 4, item_password)
                     _list.setItem(rowPosition, 5, QTableWidgetItem(key["address"]))
                     # first_cell = _list.item(rowPosition, 0)
                     # first_cell.setData(Qt.UserRole, key['address'])

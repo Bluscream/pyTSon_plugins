@@ -4,9 +4,10 @@ from datetime import datetime
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
 from pytson import getCurrentApiVersion
-from bluscream import timestamp, sendCommand, getAddons
+from bluscream import timestamp, sendCommand, getAddons, getScriptPath
 
 class antiAFK(ts3plugin):
+    path = getScriptPath(__name__)
     name = "Anti AFK"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
