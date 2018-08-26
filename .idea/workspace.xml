@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="798" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="805" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% 200% more icons for serverBrowser&#10;% improved getChannelPassword">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% calc showing false makes no sense">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
@@ -47,8 +46,8 @@
           <entry key="ini" value="27" />
           <entry key="md" value="771" />
           <entry key="notice" value="37" />
-          <entry key="py" value="21916" />
-          <entry key="txt" value="2513" />
+          <entry key="py" value="22689" />
+          <entry key="txt" value="2551" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -56,8 +55,8 @@
           <entry key="Git file" value="2" />
           <entry key="Ini" value="27" />
           <entry key="Markdown" value="771" />
-          <entry key="PLAIN_TEXT" value="2494" />
-          <entry key="Python" value="21914" />
+          <entry key="PLAIN_TEXT" value="2532" />
+          <entry key="Python" value="22687" />
           <entry key="Scratch" value="21" />
           <entry key="UNKNOWN" value="37" />
         </counts>
@@ -133,11 +132,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="true" current-in-tab="true">
+      <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+            <state relative-caret-position="450">
+              <caret line="25" column="47" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="47" />
               <folding>
                 <element signature="e#62#91#0" expanded="true" />
                 <element signature="e#1036#1061#0" />
@@ -149,8 +148,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/calculator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+            <state relative-caret-position="-792">
+              <caret line="4" column="49" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -167,41 +166,21 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15984">
+            <state relative-caret-position="236">
               <caret line="888" selection-start-line="888" selection-end-line="888" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="393" column="60" selection-start-line="393" selection-start-column="60" selection-end-line="393" selection-end-column="60" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="626">
-              <caret line="110" column="95" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="95" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+            <state relative-caret-position="540">
+              <caret line="54" column="57" selection-start-line="54" selection-start-column="57" selection-end-line="54" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+                <marker date="1535261537471" expanded="true" signature="4467:4713" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -226,8 +205,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getadd</find>
-      <find>css_</find>
       <find>AddonStatus</find>
       <find>readlines</find>
       <find>pluginin</find>
@@ -256,6 +233,8 @@
       <find>countries</find>
       <find>CountryFlags</find>
       <find>format_exc</find>
+      <find>debug</find>
+      <find>getchannelpa</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -364,9 +343,9 @@
         <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/antiSpam/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
         <option value="$PROJECT_DIR$/include/calculator.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
       </list>
     </option>
   </component>
@@ -796,20 +775,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00411" summary="+ even more getChannelPassword improvements">
-      <created>1533675999783</created>
-      <option name="number" value="00411" />
-      <option name="presentableId" value="LOCAL-00411" />
-      <option name="project" value="LOCAL" />
-      <updated>1533675999783</updated>
-    </task>
-    <task id="LOCAL-00412" summary="+ added ts3enums.py">
-      <created>1533676091303</created>
-      <option name="number" value="00412" />
-      <option name="presentableId" value="LOCAL-00412" />
-      <option name="project" value="LOCAL" />
-      <updated>1533676091306</updated>
-    </task>
     <task id="LOCAL-00413" summary="%reworked regex for getChannelPassword&#10;%added more aliases to autorun.py">
       <created>1533735137925</created>
       <option name="number" value="00413" />
@@ -1139,7 +1104,21 @@
       <option name="project" value="LOCAL" />
       <updated>1535255547206</updated>
     </task>
-    <option name="localTasksCounter" value="460" />
+    <task id="LOCAL-00460" summary="%">
+      <created>1535259139939</created>
+      <option name="number" value="00460" />
+      <option name="presentableId" value="LOCAL-00460" />
+      <option name="project" value="LOCAL" />
+      <updated>1535259139940</updated>
+    </task>
+    <task id="LOCAL-00461" summary="% calc showing false makes no sense">
+      <created>1535261190086</created>
+      <option name="number" value="00461" />
+      <option name="presentableId" value="LOCAL-00461" />
+      <option name="project" value="LOCAL" />
+      <updated>1535261190087</updated>
+    </task>
+    <option name="localTasksCounter" value="462" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1304,8 +1283,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="% autoProxy QNetworkAccessManager (broken)" />
-    <MESSAGE value="% fixed autoProxy" />
     <MESSAGE value="% autoProxy now saves some vars before reconnecting" />
     <MESSAGE value="% autoProxy now uses the original address as tab name" />
     <MESSAGE value="% autoProxy has now buttons to toggle itself and it's whitelist" />
@@ -1329,7 +1306,9 @@
     <MESSAGE value="% update autorun.py" />
     <MESSAGE value="% idekam" />
     <MESSAGE value="% 200% more icons for serverBrowser&#10;% improved getChannelPassword" />
-    <option name="LAST_COMMIT_MESSAGE" value="% 200% more icons for serverBrowser&#10;% improved getChannelPassword" />
+    <MESSAGE value="%" />
+    <MESSAGE value="% calc showing false makes no sense" />
+    <option name="LAST_COMMIT_MESSAGE" value="% calc showing false makes no sense" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1375,6 +1354,10 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/include/autorun.py</url>
           <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scripts/treeView/__init__.py</url>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1665,34 +1648,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15984">
-          <caret line="888" selection-start-line="888" selection-end-line="888" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="110" column="95" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="95" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -1706,6 +1665,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/calculator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-792">
+          <caret line="4" column="49" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="70" column="29" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="838">
@@ -1713,20 +1689,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/calculator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+        <state relative-caret-position="450">
+          <caret line="25" column="47" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="47" />
           <folding>
             <element signature="e#62#91#0" expanded="true" />
             <element signature="e#1036#1061#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="888" selection-start-line="888" selection-end-line="888" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="54" column="57" selection-start-line="54" selection-start-column="57" selection-end-line="54" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+            <marker date="1535261537471" expanded="true" signature="4467:4713" ph="..." />
           </folding>
         </state>
       </provider>
