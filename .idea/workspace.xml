@@ -4,16 +4,10 @@
     <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="794" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% möp">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ts3enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/treeView/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/treeView/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -46,20 +40,20 @@
     <session id="1604380212">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gitignore" value="2" />
+          <entry key="gitignore" value="3" />
           <entry key="ini" value="42" />
           <entry key="md" value="771" />
           <entry key="notice" value="37" />
           <entry key="py" value="22793" />
-          <entry key="txt" value="2554" />
+          <entry key="txt" value="2636" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Git file" value="2" />
+          <entry key="Git file" value="3" />
           <entry key="Ini" value="42" />
           <entry key="Markdown" value="771" />
-          <entry key="PLAIN_TEXT" value="2535" />
+          <entry key="PLAIN_TEXT" value="2617" />
           <entry key="Python" value="22791" />
           <entry key="Scratch" value="21" />
           <entry key="UNKNOWN" value="37" />
@@ -69,7 +63,7 @@
         <counts>
           <entry key="MD" value="1" />
           <entry key="conf" value="1" />
-          <entry key="gitignore" value="2" />
+          <entry key="gitignore" value="3" />
           <entry key="ini" value="3" />
           <entry key="md" value="4" />
           <entry key="notice" value="1" />
@@ -80,7 +74,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Git file" value="2" />
+          <entry key="Git file" value="3" />
           <entry key="Ini" value="3" />
           <entry key="Markdown" value="5" />
           <entry key="PLAIN_TEXT" value="13" />
@@ -90,7 +84,7 @@
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="48" />
+          <entry key="project.closed" value="49" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.100" value="1" />
           <entry key="project.open.time.11" value="2" />
@@ -107,7 +101,7 @@
           <entry key="project.open.time.21" value="2" />
           <entry key="project.open.time.22" value="3" />
           <entry key="project.open.time.23" value="1" />
-          <entry key="project.open.time.24" value="1" />
+          <entry key="project.open.time.24" value="2" />
           <entry key="project.open.time.25" value="2" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.28" value="2" />
@@ -121,7 +115,7 @@
           <entry key="project.open.time.43" value="1" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.69" value="1" />
-          <entry key="project.opened" value="54" />
+          <entry key="project.opened" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -139,11 +133,10 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-702">
+            <state relative-caret-position="5202">
               <caret line="303" column="18" selection-start-line="303" selection-start-column="18" selection-end-line="303" selection-end-column="18" />
               <folding>
                 <element signature="e#62#91#0" expanded="true" />
-                <element signature="e#1036#1061#0" />
               </folding>
             </state>
           </provider>
@@ -152,7 +145,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
+            <state relative-caret-position="3042">
               <caret line="181" column="123" selection-start-line="181" selection-start-column="123" selection-end-line="181" selection-end-column="123" />
               <folding>
                 <element signature="e#24#61#0" expanded="true" />
@@ -164,8 +157,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2481">
-              <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
+            <state relative-caret-position="3474">
+              <caret line="193" selection-start-line="193" selection-end-line="193" />
             </state>
           </provider>
         </entry>
@@ -173,17 +166,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/calculator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-792">
+            <state relative-caret-position="72">
               <caret line="4" column="49" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="true" current-in-tab="true">
+      <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="712">
-              <caret line="816" column="18" selection-start-line="816" selection-start-column="18" selection-end-line="816" selection-end-column="18" />
+            <state relative-caret-position="964">
+              <caret line="788" column="28" lean-forward="true" selection-start-line="788" selection-start-column="28" selection-end-line="788" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="413">
+              <caret line="250" column="23" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -191,7 +193,7 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
+            <state relative-caret-position="15984">
               <caret line="888" selection-start-line="888" selection-end-line="888" />
             </state>
           </provider>
@@ -336,7 +338,6 @@
         <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/include/ts3cloud_proxy.py" />
         <option value="$PROJECT_DIR$/scripts/autoProxy/README.md" />
         <option value="$PROJECT_DIR$/scripts/autoProxy/whitelist.txt" />
@@ -370,6 +371,7 @@
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3enums.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -416,12 +418,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -445,17 +463,6 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="treeView" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -799,13 +806,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00414" summary="%improved autoFollow description">
-      <created>1533748702731</created>
-      <option name="number" value="00414" />
-      <option name="presentableId" value="LOCAL-00414" />
-      <option name="project" value="LOCAL" />
-      <updated>1533748702732</updated>
-    </task>
     <task id="LOCAL-00415" summary="%increased autoFollow version">
       <created>1533748724088</created>
       <option name="number" value="00415" />
@@ -1142,7 +1142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535261607851</updated>
     </task>
-    <option name="localTasksCounter" value="463" />
+    <task id="LOCAL-00463" summary="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc">
+      <created>1535263004928</created>
+      <option name="number" value="00463" />
+      <option name="presentableId" value="LOCAL-00463" />
+      <option name="project" value="LOCAL" />
+      <updated>1535263004928</updated>
+    </task>
+    <option name="localTasksCounter" value="464" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1307,7 +1314,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="% autoProxy now uses the original address as tab name" />
     <MESSAGE value="% autoProxy has now buttons to toggle itself and it's whitelist" />
     <MESSAGE value="% fixed autoProxy not starting without whitelist" />
     <MESSAGE value="% removed configparser stuff from autoProxy" />
@@ -1332,7 +1338,8 @@
     <MESSAGE value="%" />
     <MESSAGE value="% calc showing false makes no sense" />
     <MESSAGE value="% möp" />
-    <option name="LAST_COMMIT_MESSAGE" value="% möp" />
+    <MESSAGE value="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc" />
+    <option name="LAST_COMMIT_MESSAGE" value="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1419,13 +1426,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="838">
           <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="249" column="27" selection-start-line="249" selection-start-column="27" selection-end-line="249" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1658,20 +1658,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/serverBrowser/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="393" column="60" selection-start-line="393" selection-start-column="60" selection-end-line="393" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1679,22 +1669,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="70" column="29" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5202">
+          <caret line="303" column="18" selection-start-line="303" selection-start-column="18" selection-end-line="303" selection-end-column="18" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#62#91#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3042">
+          <caret line="181" column="123" selection-start-line="181" selection-start-column="123" selection-end-line="181" selection-end-column="123" />
+          <folding>
+            <element signature="e#24#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3474">
+          <caret line="193" selection-start-line="193" selection-end-line="193" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/calculator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-792">
+        <state relative-caret-position="72">
           <caret line="4" column="49" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
+        <state relative-caret-position="15984">
           <caret line="888" selection-start-line="888" selection-end-line="888" />
         </state>
       </provider>
@@ -1709,38 +1723,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/commands.ini">
+    <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2481">
-          <caret line="193" lean-forward="true" selection-start-line="193" selection-end-line="193" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-702">
-          <caret line="303" column="18" selection-start-line="303" selection-start-column="18" selection-end-line="303" selection-end-column="18" />
-          <folding>
-            <element signature="e#62#91#0" expanded="true" />
-            <element signature="e#1036#1061#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/chatBot/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="181" column="123" selection-start-line="181" selection-start-column="123" selection-end-line="181" selection-end-column="123" />
-          <folding>
-            <element signature="e#24#61#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="54">
+          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="816" column="18" selection-start-line="816" selection-start-column="18" selection-end-line="816" selection-end-column="18" />
+        <state relative-caret-position="964">
+          <caret line="788" column="28" lean-forward="true" selection-start-line="788" selection-start-column="28" selection-end-line="788" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="250" column="23" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
         </state>
       </provider>
     </entry>
