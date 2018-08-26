@@ -1,9 +1,75 @@
 import ts3defines, ts3lib, pytson
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
-from bluscream import timestamp, getScriptPath, getIDByName, getChannelPassword
+from bluscream import timestamp, getScriptPath, getIDByName # , getChannelPassword
 from ts3enums import ServerTreeItemType
 from PythonQt.Qt import QApplication
+
+from re import search, sub, IGNORECASE
+from calculator import NumericStringParser
+from bluscream import inputBox
+
+def getChannelPassword(schid:int, cid:int, crack:bool=False, ask:bool=False, calculate:bool=False):
+    """
+    Tries several methods to get the channel password.
+    :param calculate: Wether to try to solve math riddles
+    :param schid: serverConnectionHandlerID
+    :param cid: channelID of the target channel
+    :param crack: wether to try a dictionary attack on the channel to get the password
+    :param ask: wether to ask the user for the password in case he knows
+    :return password: the possible password
+    """
+    # type: (int, int, bool, bool, bool) -> str
+    debug = False
+    if PluginHost.cfg.getboolean("general", "verbose"): debug = True
+    print(cid, "debug:",debug)
+    (err, passworded) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+    if err != ts3defines.ERROR_ok or not passworded:
+        if debug: print(cid, "error:", err, "passworded:", passworded)
+        return False
+    (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
+    if pw:
+        if debug: print(cid, "saved password found:", pw)
+        return pw
+    (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+    if err != ts3defines.ERROR_ok or not name: return err
+    name = name.strip()
+    pattern = r"(?:pw|pass(?:wor[dt])?)[|:=]?\s*(.*)"
+    # pattern = r"^.*[kennwort|pw|password|passwort|pass|passwd](.*)$"
+    regex = search(pattern, name, IGNORECASE)
+    if regex:
+        if debug: print(cid, "regex found:", regex)
+        result = regex.group(1).strip()
+        result = sub(r"[)|\]|\}]$", "", result)
+        print("before",calculate)
+        if calculate:
+            print("after")
+            if debug: print(cid, "calculate:", calculate)
+            math_chars = ["/","%","+","-","^","*"]
+            for math_char in math_chars:  # any(i in result for i in math_chars):
+                has_char = math_char in result
+                if debug: print(math_char, "in", result, ":", has_char)
+                if has_char:
+                    nsp = NumericStringParser()
+                    result = nsp.eval(result)
+        return result
+    # if name.isdigit(): return name
+    last = name.split(" ")[-1]
+    if last.isdigit():
+        if debug: print(cid, "last (", last, ") is digit:", last.isdigit())
+        return last
+    if crack:
+        if debug: print(cid, "trying to crack")
+        active = PluginHost.active
+        if "PW Cracker" in active: active["PW Cracker"].onMenuItemEvent(schid,
+                                                                        ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL,
+                                                                        1, cid)
+    if ask:
+        if debug: print(cid, "asking user")
+        pw = inputBox("Enter Channel Password", "Password:", name)
+        return pw
+    if debug: print(cid, "password not found!")
+    return name
 
 class treeView(ts3plugin):
     path = getScriptPath(__name__)
@@ -32,12 +98,16 @@ class treeView(ts3plugin):
                 return x
 
     def __init__(self):
+        self.setAnimated()
+        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
+
+    def setAnimated(self):
         try:
             self.servertree = self.widget("ServerTreeView")
+            if self.servertree is None: return
             if not self.servertree.isAnimated():
                 self.servertree.setAnimated(True)
         except: pass
-        if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
     def onHotkeyEvent(self, keyword): self.onHotkeyOrCommandEvent(keyword)
@@ -65,7 +135,7 @@ class treeView(ts3plugin):
                 (err, clid) = ts3lib.getClientID(schid)
                 (err, cid) = ts3lib.getChannelOfClient(schid, clid)
                 if cid != item[0]:
-                    pw = getChannelPassword(schid, item[0], calculate=True)
+                    pw = getChannelPassword(schid, item[0], crack=False, ask=False, calculate=True)
                     ts3lib.printMessageToCurrentTab("{} > PW: {}".format(self.name, pw))
                     err = ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")
                 if not err: ts3lib.requestSendChannelTextMsg(schid, msg, 0)
@@ -82,6 +152,4 @@ class treeView(ts3plugin):
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
-        self.servertree = self.widget("ServerTreeView")
-        if not self.servertree.isAnimated():
-            self.servertree.setAnimated(True)
+        self.setAnimated()
