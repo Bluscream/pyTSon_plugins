@@ -258,7 +258,7 @@ def parseClientURL(url):
         return clid, uid, nickname_encoded, nickname
     return False
 
-def getChannelPassword(schid, cid, crack=False, ask=False, calculate=False):
+def getChannelPassword(schid:int, cid:int, crack:bool=False, ask:bool=False, calculate:bool=False):
     """
     Tries several methods to get the channel password.
     :param calculate: Wether to try to solve math riddles
@@ -268,16 +268,12 @@ def getChannelPassword(schid, cid, crack=False, ask=False, calculate=False):
     :param ask: wether to ask the user for the password in case he knows
     :return password: the possible password
     """
-    # type: (int, int, bool, bool) -> str
-    debug = False
-    if PluginHost.cfg.getboolean("general", "verbose"): debug = True
+    # type: (int, int, bool, bool, bool) -> str
     (err, passworded) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
     if err != ts3defines.ERROR_ok or not passworded:
-        if debug: print(cid, "error:",err,"passworded:",passworded)
         return False
     (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
     if pw:
-        if debug: print(cid, "saved password found:", pw)
         return pw
     (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
     if err != ts3defines.ERROR_ok or not name: return err
@@ -286,33 +282,26 @@ def getChannelPassword(schid, cid, crack=False, ask=False, calculate=False):
     # pattern = r"^.*[kennwort|pw|password|passwort|pass|passwd](.*)$"
     regex = search(pattern, name, IGNORECASE)
     if regex:
-        if debug: print(cid, "regex found:",regex)
         result = regex.group(1).strip()
         result = sub(r"[)|\]|\}]$", "", result)
-        if calculate:
-            if debug: print(cid, "calculate:", calculate)
-            math_chars = ["/","%","+","-","^","*"]
-            for math_char in math_chars: # any(i in result for i in math_chars):
-                has_char = math_char in result
-                if debug: print(math_char,"in",result,":",has_char)
-                if has_char:
-                    nsp = NumericStringParser()
-                    result = nsp.eval(result)
+        if calculate and any(i in result for i in ["/","%","+","-","^","*"]):
+            nsp = NumericStringParser()
+            result = str(nsp.eval(result)).replace(".0", "")
         return result
     # if name.isdigit(): return name
     last = name.split(" ")[-1]
     if last.isdigit():
-        if debug: print(cid, "last (",last,") is digit:", last.isdigit())
         return last
     if crack:
-        if debug: print(cid, "trying to crack")
         active = PluginHost.active
         if "PW Cracker" in active: active["PW Cracker"].onMenuItemEvent(schid, ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, cid)
     if ask:
-        if debug: print(cid, "asking user")
         pw = inputBox("Enter Channel Password", "Password:", name)
         return pw
-    if debug: print(cid, "password not found!")
+    if calculate and any(i in name for i in ["/","%","+","-","^","*"]):
+        nsp = NumericStringParser()
+        try: return str(nsp.eval(name)).replace(".0", "")
+        except: pass
     return name
 
 def getClientIDByUID(schid, uid):

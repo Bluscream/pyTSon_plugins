@@ -12,6 +12,8 @@ from base64 import b64encode, b64decode
 from pytsonui import setupUi
 from pytson import *
 from bluscream import intList, clientURL, color
+try: from calculator import NumericStringParser
+except ImportError: print(format_exc())
 
 class chatBot(ts3plugin):
     name = "Chat Bot"
@@ -608,6 +610,9 @@ class chatBot(ts3plugin):
     def commandAbortShutdown(self, schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, "Executing \"shutdown -a\"")
         os.system('shutdown -a')
+
+    def commandCalc(self, schid, targetMode, toID, fromID, params=""):
+        self.answerMessage(schid, targetMode, toID, fromID, str(NumericStringParser().eval(params)))
 
     def commandToggleSupport(self, schid, targetMode, toID, fromID, params=""):
         (err, sgids) = ts3lib.getClientVariableAsString(schid, fromID, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)

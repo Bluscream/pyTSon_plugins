@@ -808,7 +808,7 @@ class AntiFloodPoints(Enum):
     VERSION = 0
     WHOAMI = 0
 
-class color(Enum):
+class color(object):
     DEFAULT = "[color=white]"
     DEBUG = "[color=grey]"
     INFO = "[color=lightblue]"
