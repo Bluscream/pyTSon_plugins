@@ -42,23 +42,25 @@ class autoJoin(ts3plugin):
         else: self.schid = schid; ts3lib.printMessageToCurrentTab("{} > Enabled for tab #{}!".format(self.name,schid))
 
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, invokerID, invokerName, invokerUniqueIdentifier):
-        if schid != self.schid: print("schid != self.schid"); return
+        if schid != self.schid: print(cid, "schid != self.schid"); return
         (err, ownID) = ts3lib.getClientID(schid)
-        if invokerID == ownID: print("invokerID == ownID"); return
+        if invokerID == ownID: print(cid, "invokerID == ownID"); return
         if isPermanent(schid, cid) or isSemiPermanent(schid, cid): print("isPermanent(schid, cid) or isSemiPermanent(schid, cid)"); return
         (error, maxclients) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
         # (error, maxfamilyclients) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_MAXFAMILYCLIENTS)
         if maxclients != -1:
             clients = channelClientCount(schid, cid)
-            if clients >= maxclients: print("clients >= maxclients"); return
+            if clients >= maxclients: print(cid, "clients >= maxclients"); return
         (err, needed_tp) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
         if needed_tp >=0:
             (err, ownTP) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_TALK_POWER)
             if int(ownTP) < needed_tp: self.request_tp = True
-        pw = getChannelPassword(schid, cid, False, False, True)
-        # ts3lib.verifyChannelPassword(schid, cid, pw, "passwordCracker:manual")
-        if not pw: return
-        ts3lib.requestClientMove(schid, ownID, cid, pw)
+        (err, pw) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
+        if err == ts3defines.ERROR_ok and pw:
+            pw = getChannelPassword(schid, cid, False, False, True)
+            # ts3lib.verifyChannelPassword(schid, cid, pw, "passwordCracker:manual")
+            if not pw: print(cid, "not pw"); return
+        ts3lib.requestClientMove(schid, ownID, cid, pw if pw else "123")
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
         if schid != self.schid: return
