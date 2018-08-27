@@ -211,3 +211,13 @@ def check():
 
 def methods(func):
     return [func.metaObject().method(i) for i in range(func.metaObject().methodCount())]
+
+def printMetadata(item):
+    meta = item.metaObject()
+    print(item.className)
+    print("--------------------------------Methods:--------------------------------")
+    for i in range(meta.methodCount()):
+        print("{}={}".format(i, meta.method(i).name()))
+    print("--------------------------------Properties:--------------------------------")
+    for i in range(meta.propertyCount()):
+        print("{}={}".format(i, meta.property(i).name()))
