@@ -4,7 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="794" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% ehhmm so zeug für autoJoin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/autoJoin/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoJoin/__init__.py" afterDir="false" />
@@ -44,8 +44,8 @@
           <entry key="ini" value="42" />
           <entry key="md" value="780" />
           <entry key="notice" value="37" />
-          <entry key="py" value="23774" />
-          <entry key="txt" value="2636" />
+          <entry key="py" value="23881" />
+          <entry key="txt" value="2663" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -53,8 +53,8 @@
           <entry key="Git file" value="3" />
           <entry key="Ini" value="42" />
           <entry key="Markdown" value="780" />
-          <entry key="PLAIN_TEXT" value="2617" />
-          <entry key="Python" value="23772" />
+          <entry key="PLAIN_TEXT" value="2644" />
+          <entry key="Python" value="23879" />
           <entry key="Scratch" value="21" />
           <entry key="UNKNOWN" value="37" />
         </counts>
@@ -133,8 +133,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="272" column="52" lean-forward="true" selection-start-line="271" selection-start-column="4" selection-end-line="272" selection-end-column="52" />
+            <state relative-caret-position="605">
+              <caret line="655" column="14" selection-start-line="655" selection-start-column="11" selection-end-line="655" selection-end-column="14" />
               <folding>
                 <element signature="e#62#91#0" expanded="true" />
               </folding>
@@ -145,8 +145,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1340">
-              <caret line="702" column="14" selection-start-line="702" selection-start-column="4" selection-end-line="702" selection-end-column="14" />
+            <state relative-caret-position="82">
+              <caret line="607" column="12" selection-start-line="607" selection-start-column="6" selection-end-line="607" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -155,7 +155,7 @@
         <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="540">
-              <caret line="114" column="62" lean-forward="true" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="62" />
+              <caret line="114" column="62" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -164,7 +164,7 @@
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-188">
-              <caret line="852" lean-forward="true" selection-start-line="852" selection-end-line="852" />
+              <caret line="852" selection-start-line="852" selection-end-line="852" />
             </state>
           </provider>
         </entry>
@@ -172,8 +172,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/autoJoin/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="62" column="60" lean-forward="true" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
+            <state relative-caret-position="626">
+              <caret line="64" column="38" lean-forward="true" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -228,7 +228,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&gt;&gt;&gt;</find>
       <find>print</find>
       <find>print(</find>
       <find>', '</find>
@@ -258,6 +257,7 @@
       <find>verifychan</find>
       <find>CLIENT_TALK_POWER</find>
       <find>onclientmov</find>
+      <find>getcon</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -381,7 +381,7 @@
   <component name="NamedScopeManager">
     <scope name="scripts" pattern="file[pyTSon_plugins]:scripts//*" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="974" />
@@ -798,13 +798,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00418" summary="+ added twix script">
-      <created>1534095271472</created>
-      <option name="number" value="00418" />
-      <option name="presentableId" value="LOCAL-00418" />
-      <option name="project" value="LOCAL" />
-      <updated>1534095271473</updated>
-    </task>
     <task id="LOCAL-00419" summary="% cleaned up tw1x script">
       <created>1534095314799</created>
       <option name="number" value="00419" />
@@ -1141,7 +1134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535407809510</updated>
     </task>
-    <option name="localTasksCounter" value="467" />
+    <task id="LOCAL-00467" summary="% ehhmm so zeug für autoJoin">
+      <created>1535408619951</created>
+      <option name="number" value="00467" />
+      <option name="presentableId" value="LOCAL-00467" />
+      <option name="project" value="LOCAL" />
+      <updated>1535408619951</updated>
+    </task>
+    <option name="localTasksCounter" value="468" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1306,7 +1306,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="% autoProxy has now buttons to toggle itself and it's whitelist" />
     <MESSAGE value="% fixed autoProxy not starting without whitelist" />
     <MESSAGE value="% removed configparser stuff from autoProxy" />
     <MESSAGE value="% autoProxy reworked yet again" />
@@ -1331,7 +1330,8 @@
     <MESSAGE value="% calc showing false makes no sense" />
     <MESSAGE value="% möp" />
     <MESSAGE value="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc" />
-    <option name="LAST_COMMIT_MESSAGE" value="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc" />
+    <MESSAGE value="% ehhmm so zeug für autoJoin" />
+    <option name="LAST_COMMIT_MESSAGE" value="% ehhmm so zeug für autoJoin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1690,14 +1690,7 @@
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-188">
-          <caret line="852" lean-forward="true" selection-start-line="852" selection-end-line="852" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1340">
-          <caret line="702" column="14" selection-start-line="702" selection-start-column="4" selection-end-line="702" selection-end-column="14" />
+          <caret line="852" selection-start-line="852" selection-end-line="852" />
         </state>
       </provider>
     </entry>
@@ -1714,7 +1707,7 @@
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
-          <caret line="114" column="62" lean-forward="true" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="62" />
+          <caret line="114" column="62" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -1724,16 +1717,6 @@
           <caret line="109" column="40" selection-start-line="109" selection-start-column="40" selection-end-line="109" selection-end-column="53" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="272" column="52" lean-forward="true" selection-start-line="271" selection-start-column="4" selection-end-line="272" selection-end-column="52" />
-          <folding>
-            <element signature="e#62#91#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1748,10 +1731,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="607" column="12" selection-start-line="607" selection-start-column="6" selection-end-line="607" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="655" column="14" selection-start-line="655" selection-start-column="11" selection-end-line="655" selection-end-column="14" />
+          <folding>
+            <element signature="e#62#91#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoJoin/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="62" column="60" lean-forward="true" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
+        <state relative-caret-position="626">
+          <caret line="64" column="38" lean-forward="true" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

@@ -1,7 +1,8 @@
 import ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
-from bluscream import timestamp, getScriptPath, getChannelPassword
+from bluscream import timestamp, getScriptPath, getChannelPassword, getContactStatus
+from ts3enums import ContactStatus
 
 def channelClientCount(schid, channelID):
     (error, clients) = ts3lib.getChannelClientList(schid, channelID)
@@ -60,6 +61,9 @@ class autoJoin(ts3plugin):
             pw = getChannelPassword(schid, cid, False, False, True)
             # ts3lib.verifyChannelPassword(schid, cid, pw, "passwordCracker:manual")
             if not pw: print(cid, "not pw"); return
+        (err, uid) = ts3lib.getClientVariable(schid, invokerID)
+        status = getContactStatus(uid)
+        if status == ContactStatus.BLOCKED: print(cid, "blocked"); return
         ts3lib.requestClientMove(schid, ownID, cid, pw if pw else "123")
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
