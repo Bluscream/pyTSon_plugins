@@ -1,7 +1,7 @@
 import ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
-from bluscream import timestamp, getScriptPath, getChannelPassword, getContactStatus
+from bluscream import timestamp, getScriptPath, getChannelPassword, getContactStatus, channelURL
 from ts3enums import ContactStatus
 
 def channelClientCount(schid, channelID):
@@ -61,9 +61,9 @@ class autoJoin(ts3plugin):
             pw = getChannelPassword(schid, cid, False, False, True)
             # ts3lib.verifyChannelPassword(schid, cid, pw, "passwordCracker:manual")
             if not pw: print(cid, "not pw"); return
-        (err, uid) = ts3lib.getClientVariable(schid, invokerID)
-        status = getContactStatus(uid)
-        if status == ContactStatus.BLOCKED: print(cid, "blocked"); return
+        status = getContactStatus(invokerUniqueIdentifier)
+        if status == ContactStatus.BLOCKED: print(cid, invokerUniqueIdentifier, "blocked"); return
+        ts3lib.printMessage(schid, "{} > Joining into {}".format(self.name,channelURL(schid, cid)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
         ts3lib.requestClientMove(schid, ownID, cid, pw if pw else "123")
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
@@ -72,4 +72,7 @@ class autoJoin(ts3plugin):
         if clientID != ownID: return
         if not self.request_tp: return
         self.request_tp = False
-        ts3lib.requestIsTalker(schid, True, "")
+        (err, needed_tp) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelPropertiesRare.CHANNEL_NEEDED_TALK_POWER)
+        if needed_tp >=0:
+            (err, ownTP) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_TALK_POWER)
+            if int(ownTP) < needed_tp: ts3lib.requestIsTalker(schid, True, "")
