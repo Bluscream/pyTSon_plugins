@@ -18,11 +18,13 @@ class customDisconnect(ts3plugin):
     infoTitle = None
     menuItems = [
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Disconnect", "scripts/%s/disconnect.svg"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Close Tab", "scripts/%s/tab_close_button.svg"%__name__)
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Close Tab", "scripts/%s/tab_close_button.svg"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 2, "Get Kicked", "scripts/%s/kick_server.svg"%__name__)
     ]
     hotkeys = [
         ("disconnect", "Prompts for disconnect message before disconnecting"),
-        ("close_tab", "Prompts for disconnect message before closing the current tab")
+        ("close_tab", "Prompts for disconnect message before closing the current tab"),
+        ("get_kicked", "Forces the server to kick you for \"protocol violation\"")
     ]
     schid = 0
 
@@ -60,6 +62,7 @@ class customDisconnect(ts3plugin):
     def onHotkeyOrCommandEvent(self, keyword, schid=0):
         if keyword == "disconnect": self.disconnect(schid)
         elif keyword == "close_tab": self.disconnect(schid, True)
+        elif keyword == "get_kicked": sendCommand(self.name, "clientinit", schid)
 
     def disconnect(self, schid=0, close_tab=False):
         if schid < 1: schid = ts3lib.getCurrentServerConnectionHandlerID()

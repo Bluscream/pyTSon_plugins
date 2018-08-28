@@ -59,6 +59,7 @@ class volumeLeveler(ts3plugin):
             if country in ["DE", "AT", "CH"]: msg = "[color=red]Du hast {violations} mal das Lautstaerkelimit von {limit} ueberschritten, deine Talk Power wurde entzogen!"
             tp = client.channel.neededTalkPower
             if not tp or tp < 1 or tp == "-1":
+                print('self.tabs', self.tabs)
                 ts3lib.requestSetClientChannelGroup(schid, [self.tabs[schid]["channelBanGroup"]], [client.channel.channelID], [client.databaseID])
             err = ts3lib.requestClientSetIsTalker(schid, clid, False)
             if err != ts3defines.ERROR_ok: return

@@ -632,7 +632,7 @@ class ServerTreeItemType(Enum):
     CHANNEL = 2
     CLIENT = 3
 
-class GroupType(Enum):
+class GroupType(object):
     TEMPLATE = 0
     REGULAR = 1
     QUERY = 2

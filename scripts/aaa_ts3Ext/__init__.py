@@ -17,16 +17,17 @@ class aaa_ts3Ext(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    guiLogLvl = logLevel.NONE
+    guiLogLvl = logLevel.DEBUG
     banned_names = ["BAN", "NOT WELCOME"]
     mod_names = ["MOD", "OPERATOR", "ADMIN"] # TODO CHECK
     tabs =  {}
 
     def __init__(self):
         self.ts3host = ts3SessionHost(self)
-        schid = ts3lib.getCurrentServerConnectionHandlerID()
-        (err, status) = ts3lib.getConnectionStatus(schid)
-        self.onConnectStatusChangeEvent(schid, status, err)
+        err, schids = ts3lib.getServerConnectionHandlerList()
+        for schid in schids:
+            (err, status) = ts3lib.getConnectionStatus(schid)
+            self.onConnectStatusChangeEvent(schid, status, err)
         if PluginHost.cfg.getboolean("general", "verbose"):
             i = 1
             for active in PluginHost.active: print(i, active); i += 1
@@ -40,8 +41,8 @@ class aaa_ts3Ext(ts3plugin):
                     "channelModGroup": None
                 }
             srv = self.ts3host.getServer(schid)
-            srv.requestServerGroupList()
-            srv.requestChannelGroupList()
+            srv.requestServerGroupList() # ts3lib.requestChannelGroupList(schid)
+            srv.requestChannelGroupList() # ts3lib.requestServerGroupList(schid)
         elif status == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
             if schid in self.tabs: del self.tabs[schid]
 
@@ -52,11 +53,18 @@ class aaa_ts3Ext(ts3plugin):
 
     def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
         if atype != GroupType.REGULAR: return
+        debug = PluginHost.cfg.getboolean("general", "verbose")
         tab = self.tabs[schid]
         for _name in self.banned_names:
-            if _name in name.upper(): tab["channelBanGroup"] = channelGroupID; break
+            if _name in name.upper():
+                tab["channelBanGroup"] = channelGroupID
+                if debug: print(schid, 'channelBanGroup', tab["channelBanGroup"])
+                break
         for _name in self.mod_names:
-            if _name in name.upper(): tab["channelModGroup"] = channelGroupID; break
+            if _name in name.upper():
+                tab["channelModGroup"] = channelGroupID
+                if debug: print(schid, 'channelModGroup', tab["channelModGroup"])
+                break
         srv = self.ts3host.getServer(schid)
         srv.updateChannelGroup(channelGroupID, name, iconID)
 

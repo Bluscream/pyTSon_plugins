@@ -7,7 +7,13 @@
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% ehhmm so zeug für autoJoin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoJoin/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoJoin/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ts3enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3enums.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverBrowser/cfg/serverBrowser.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -44,7 +50,7 @@
           <entry key="ini" value="42" />
           <entry key="md" value="780" />
           <entry key="notice" value="37" />
-          <entry key="py" value="23881" />
+          <entry key="py" value="24472" />
           <entry key="txt" value="2663" />
         </counts>
       </usages-collector>
@@ -54,7 +60,7 @@
           <entry key="Ini" value="42" />
           <entry key="Markdown" value="780" />
           <entry key="PLAIN_TEXT" value="2644" />
-          <entry key="Python" value="23879" />
+          <entry key="Python" value="24470" />
           <entry key="Scratch" value="21" />
           <entry key="UNKNOWN" value="37" />
         </counts>
@@ -67,9 +73,9 @@
           <entry key="ini" value="3" />
           <entry key="md" value="5" />
           <entry key="notice" value="1" />
-          <entry key="py" value="111" />
+          <entry key="py" value="114" />
           <entry key="txt" value="12" />
-          <entry key="url" value="2" />
+          <entry key="url" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -77,14 +83,14 @@
           <entry key="Git file" value="3" />
           <entry key="Ini" value="3" />
           <entry key="Markdown" value="6" />
-          <entry key="PLAIN_TEXT" value="13" />
-          <entry key="Python" value="105" />
+          <entry key="PLAIN_TEXT" value="14" />
+          <entry key="Python" value="108" />
           <entry key="Scratch" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="50" />
+          <entry key="project.closed" value="51" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.100" value="1" />
           <entry key="project.open.time.11" value="2" />
@@ -92,7 +98,7 @@
           <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.14" value="4" />
           <entry key="project.open.time.15" value="6" />
-          <entry key="project.open.time.16" value="2" />
+          <entry key="project.open.time.16" value="3" />
           <entry key="project.open.time.17" value="2" />
           <entry key="project.open.time.18" value="2" />
           <entry key="project.open.time.19" value="4" />
@@ -115,7 +121,7 @@
           <entry key="project.open.time.43" value="1" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.69" value="1" />
-          <entry key="project.opened" value="57" />
+          <entry key="project.opened" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -133,7 +139,7 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
+            <state relative-caret-position="11538">
               <caret line="655" column="14" selection-start-line="655" selection-start-column="11" selection-end-line="655" selection-end-column="14" />
               <folding>
                 <element signature="e#62#91#0" expanded="true" />
@@ -145,17 +151,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="607" column="12" selection-start-line="607" selection-start-column="6" selection-end-line="607" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="114" column="62" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="62" />
+            <state relative-caret-position="514">
+              <caret line="634" column="22" selection-start-line="634" selection-start-column="22" selection-end-line="634" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -163,17 +160,53 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-188">
+            <state relative-caret-position="15336">
               <caret line="852" selection-start-line="852" selection-end-line="852" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/autoJoin/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="626">
-              <caret line="64" column="38" lean-forward="true" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+            <state relative-caret-position="374">
+              <caret line="56" column="55" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/volumeLeveler/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="770">
+              <caret line="63" selection-start-line="61" selection-end-line="63" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="591">
+              <caret line="65" column="21" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="21" column="67" selection-start-line="21" selection-start-column="67" selection-end-line="21" selection-end-column="67" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -184,7 +217,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="752">
+            <state relative-caret-position="1854">
               <caret line="109" column="40" selection-start-line="109" selection-start-column="40" selection-end-line="109" selection-end-column="53" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -196,7 +229,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1854">
+            <state relative-caret-position="1764">
               <caret line="103" selection-start-line="103" selection-end-line="106" selection-end-column="30" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
@@ -208,7 +241,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
+            <state relative-caret-position="180">
               <caret line="15" selection-start-line="15" selection-end-line="18" selection-end-column="19" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -228,8 +261,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>print</find>
-      <find>print(</find>
       <find>', '</find>
       <find>name</find>
       <find>ContactStatus</find>
@@ -258,6 +289,8 @@
       <find>CLIENT_TALK_POWER</find>
       <find>onclientmov</find>
       <find>getcon</find>
+      <find>ts3lib.printMess</find>
+      <find>GroupType</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -318,8 +351,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/autoChannelCreate/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/passwordCracker/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoFollow/__init__.py" />
@@ -331,7 +362,6 @@
         <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
         <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3cloud_proxy.py" />
         <option value="$PROJECT_DIR$/scripts/autoProxy/README.md" />
         <option value="$PROJECT_DIR$/scripts/autoProxy/whitelist.txt" />
@@ -363,12 +393,15 @@
         <option value="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
-        <option value="$PROJECT_DIR$/include/ts3enums.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/autoJoin/README.md" />
         <option value="$PROJECT_DIR$/include/ts3lib.py" />
         <option value="$PROJECT_DIR$/scripts/autoJoin/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/volumeLeveler/__init__.py" />
+        <option value="$PROJECT_DIR$/include/ts3enums.py" />
+        <option value="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" />
       </list>
     </option>
   </component>
@@ -381,10 +414,10 @@
   <component name="NamedScopeManager">
     <scope name="scripts" pattern="file[pyTSon_plugins]:scripts//*" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="974" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="253" />
+    <option name="y" value="8" />
+    <option name="width" value="1385" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -415,17 +448,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -436,13 +458,30 @@
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="docs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="aaa_ts3Ext" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="autoTPRequest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="customDisconnect" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -455,6 +494,23 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="treeView" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="volumeLeveler" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -798,20 +854,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00419" summary="% cleaned up tw1x script">
-      <created>1534095314799</created>
-      <option name="number" value="00419" />
-      <option name="presentableId" value="LOCAL-00419" />
-      <option name="project" value="LOCAL" />
-      <updated>1534095314799</updated>
-    </task>
-    <task id="LOCAL-00420" summary="% fixed returncodes for complaint reminder">
-      <created>1534108735343</created>
-      <option name="number" value="00420" />
-      <option name="presentableId" value="LOCAL-00420" />
-      <option name="project" value="LOCAL" />
-      <updated>1534108735344</updated>
-    </task>
     <task id="LOCAL-00421" summary="% yet another try to fix remaining returncode issues for autoCommander">
       <created>1534187246370</created>
       <option name="number" value="00421" />
@@ -1141,7 +1183,21 @@
       <option name="project" value="LOCAL" />
       <updated>1535408619951</updated>
     </task>
-    <option name="localTasksCounter" value="468" />
+    <task id="LOCAL-00468" summary="% ehhmm so zeug für autoJoin">
+      <created>1535410454055</created>
+      <option name="number" value="00468" />
+      <option name="presentableId" value="LOCAL-00468" />
+      <option name="project" value="LOCAL" />
+      <updated>1535410454056</updated>
+    </task>
+    <task id="LOCAL-00469" summary="% ehhmm so zeug für autoJoin">
+      <created>1535416157344</created>
+      <option name="number" value="00469" />
+      <option name="presentableId" value="LOCAL-00469" />
+      <option name="project" value="LOCAL" />
+      <updated>1535416157345</updated>
+    </task>
+    <option name="localTasksCounter" value="470" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1390,24 +1446,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3cloud_proxy.py" />
-    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoProxy/whitelist.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -1565,13 +1603,6 @@
     <entry file="file://$PROJECT_DIR$/scripts/serverGroupChanger/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/pyTSon.url">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/antiAFK/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1628,9 +1659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="339" column="25" lean-forward="true" selection-start-line="339" selection-start-column="25" selection-end-line="339" selection-end-column="25" />
-          <folding>
-            <element signature="e#24#61#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1677,43 +1705,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" selection-start-line="15" selection-end-line="18" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-188">
-          <caret line="852" selection-start-line="852" selection-end-line="852" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2358">
           <caret line="385" lean-forward="true" selection-start-line="385" selection-end-line="385" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11538">
+          <caret line="655" column="14" selection-start-line="655" selection-start-column="11" selection-end-line="655" selection-end-column="14" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#62#91#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
+        <state relative-caret-position="1926">
           <caret line="114" column="62" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15336">
+          <caret line="852" selection-start-line="852" selection-end-line="852" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoTPRequest/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="752">
+        <state relative-caret-position="1854">
           <caret line="109" column="40" selection-start-line="109" selection-start-column="40" selection-end-line="109" selection-end-column="53" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
@@ -1723,7 +1748,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1854">
+        <state relative-caret-position="1764">
           <caret line="103" selection-start-line="103" selection-end-line="106" selection-end-column="30" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
@@ -1731,27 +1756,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+    <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="607" column="12" selection-start-line="607" selection-start-column="6" selection-end-line="607" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="655" column="14" selection-start-line="655" selection-start-column="11" selection-end-line="655" selection-end-column="14" />
+        <state relative-caret-position="180">
+          <caret line="15" selection-start-line="15" selection-end-line="18" selection-end-column="19" />
           <folding>
-            <element signature="e#62#91#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoJoin/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="64" column="38" lean-forward="true" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+        <state relative-caret-position="374">
+          <caret line="56" column="55" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/pyTSon.url">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="634" column="22" selection-start-line="634" selection-start-column="22" selection-end-line="634" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/volumeLeveler/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="63" selection-start-line="61" selection-end-line="63" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="65" column="21" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/customDisconnect/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="67" selection-start-line="21" selection-start-column="67" selection-end-line="21" selection-end-column="67" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
