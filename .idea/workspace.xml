@@ -4,16 +4,13 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="817" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="824" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="%">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% some random stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/countContacts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/countContacts/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/linkinfo/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/linkinfo/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/quickMod/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickMod/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
@@ -51,8 +48,8 @@
           <entry key="ini" value="42" />
           <entry key="md" value="780" />
           <entry key="notice" value="37" />
-          <entry key="py" value="29635" />
-          <entry key="txt" value="2729" />
+          <entry key="py" value="29655" />
+          <entry key="txt" value="2747" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -60,8 +57,8 @@
           <entry key="Git file" value="3" />
           <entry key="Ini" value="42" />
           <entry key="Markdown" value="780" />
-          <entry key="PLAIN_TEXT" value="2710" />
-          <entry key="Python" value="29633" />
+          <entry key="PLAIN_TEXT" value="2728" />
+          <entry key="Python" value="29653" />
           <entry key="Scratch" value="21" />
           <entry key="UNKNOWN" value="37" />
         </counts>
@@ -143,8 +140,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5472">
-              <caret line="504" selection-start-line="504" selection-end-line="504" />
+            <state relative-caret-position="299">
+              <caret line="506" column="38" selection-start-line="506" selection-start-column="26" selection-end-line="506" selection-end-column="38" />
               <folding>
                 <element signature="e#62#91#0" expanded="true" />
                 <element signature="e#832#949#0" />
@@ -228,7 +225,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/linkinfo/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1170">
+            <state relative-caret-position="18">
               <caret line="75" selection-start-line="75" selection-end-line="75" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -243,11 +240,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="93" column="33" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="33" />
+            <state relative-caret-position="432">
+              <caret line="96" column="47" selection-start-line="96" selection-start-column="47" selection-end-line="96" selection-end-column="47" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
-                <marker date="1535697392931" expanded="true" signature="329:331" ph="..." />
+                <marker date="1535721400297" expanded="true" signature="329:331" ph="..." />
               </folding>
             </state>
           </provider>
@@ -256,7 +253,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2034">
+            <state relative-caret-position="838">
               <caret line="123" column="18" selection-start-line="123" selection-start-column="11" selection-end-line="123" selection-end-column="18" />
               <folding>
                 <marker date="1535698504275" expanded="true" signature="6376:6382" ph="..." />
@@ -268,7 +265,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
+            <state relative-caret-position="-382">
               <caret line="12" column="27" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="27" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
@@ -298,7 +295,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CountryFlags</find>
       <find>format_exc</find>
       <find>debug</find>
       <find>getchannelpa</find>
@@ -328,6 +324,7 @@
       <find>hookmode</find>
       <find>widget</find>
       <find>getchannell</find>
+      <find>def widget(</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -437,11 +434,11 @@
         <option value="$PROJECT_DIR$/include/ts3enums.py" />
         <option value="$PROJECT_DIR$/scripts/recordSpam/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/linkinfo/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/countContacts/__init__.py" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
       </list>
     </option>
   </component>
@@ -931,13 +928,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00424" summary="% added autoProxy (requires include/ts3cloud_proxy.py)">
-      <created>1534515420873</created>
-      <option name="number" value="00424" />
-      <option name="presentableId" value="LOCAL-00424" />
-      <option name="project" value="LOCAL" />
-      <updated>1534515420873</updated>
-    </task>
     <task id="LOCAL-00425" summary="% make autoProxy more fancy">
       <created>1534515475020</created>
       <option name="number" value="00425" />
@@ -1274,7 +1264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535694657689</updated>
     </task>
-    <option name="localTasksCounter" value="473" />
+    <task id="LOCAL-00473" summary="% some random stuff">
+      <created>1535721299485</created>
+      <option name="number" value="00473" />
+      <option name="presentableId" value="LOCAL-00473" />
+      <option name="project" value="LOCAL" />
+      <updated>1535721299486</updated>
+    </task>
+    <option name="localTasksCounter" value="474" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1440,7 +1437,6 @@
       <path value="$PROJECT_DIR$/include/ts3Ext" />
       <path value="$PROJECT_DIR$/scripts/audiobot" />
     </ignored-roots>
-    <MESSAGE value="% removed configparser stuff from autoProxy" />
     <MESSAGE value="% autoProxy reworked yet again" />
     <MESSAGE value="% autoProxy now properly casing added whitelist entries" />
     <MESSAGE value="% CustomBadges updated to 0.9.5&#10;% autoProxy now ignores servernicknames (resolving will come in the future)" />
@@ -1465,7 +1461,8 @@
     <MESSAGE value="% ehhmm so zeug für autoJoin" />
     <MESSAGE value="% revert groupType enum&#10;% add getKicked button to customDisconnect" />
     <MESSAGE value="%" />
-    <option name="LAST_COMMIT_MESSAGE" value="%" />
+    <MESSAGE value="% some random stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="% some random stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1819,10 +1816,34 @@
     <entry file="file://$PROJECT_DIR$/scripts/quickMod/config.ini">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="601" column="17" selection-start-line="601" selection-start-column="6" selection-end-line="601" selection-end-column="17" />
+          <folding>
+            <element signature="e#23#46#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15336">
+          <caret line="852" selection-start-line="852" selection-end-line="852" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3798">
+          <caret line="217" column="31" selection-start-line="217" selection-start-column="23" selection-end-line="217" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5472">
-          <caret line="504" selection-start-line="504" selection-end-line="504" />
+        <state relative-caret-position="299">
+          <caret line="506" column="38" selection-start-line="506" selection-start-column="26" selection-end-line="506" selection-end-column="38" />
           <folding>
             <element signature="e#62#91#0" expanded="true" />
             <element signature="e#832#949#0" />
@@ -1881,26 +1902,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="601" column="17" selection-start-line="601" selection-start-column="6" selection-end-line="601" selection-end-column="17" />
-          <folding>
-            <element signature="e#23#46#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15336">
-          <caret line="852" selection-start-line="852" selection-end-line="852" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/linkinfo/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
+        <state relative-caret-position="18">
           <caret line="75" selection-start-line="75" selection-end-line="75" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
@@ -1913,7 +1917,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2034">
+        <state relative-caret-position="838">
           <caret line="123" column="18" selection-start-line="123" selection-start-column="11" selection-end-line="123" selection-end-column="18" />
           <folding>
             <marker date="1535698504275" expanded="true" signature="6376:6382" ph="..." />
@@ -1923,7 +1927,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="-382">
           <caret line="12" column="27" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="27" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
@@ -1932,20 +1936,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3798">
-          <caret line="217" column="31" selection-start-line="217" selection-start-column="23" selection-end-line="217" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="93" column="33" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="33" />
+        <state relative-caret-position="432">
+          <caret line="96" column="47" selection-start-line="96" selection-start-column="47" selection-end-line="96" selection-end-column="47" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
-            <marker date="1535697392931" expanded="true" signature="329:331" ph="..." />
+            <marker date="1535721400297" expanded="true" signature="329:331" ph="..." />
           </folding>
         </state>
       </provider>

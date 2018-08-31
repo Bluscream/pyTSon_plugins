@@ -506,6 +506,13 @@ def objects():
 def widget(name, app=None):
     if app is None: app = QApplication.instance()
     widgets = app.allWidgets()
+    for x in widgets:
+        if str(x.objectName) == name:
+            return x
+
+def widgets(name, app=None):
+    if app is None: app = QApplication.instance()
+    widgets = app.allWidgets()
     ret = []
     for x in widgets:
         if str(x.objectName) == name:

@@ -90,8 +90,7 @@ class quickMod(ts3plugin):
         elif keyword == "join_selected_channel_pw":
             window = self.app.activeWindow()
             if window is None or not window.className() == "MainWindow": return
-            tree = widget("ServerTreeView")
-            selected = tree[schid-1].currentIndex()
+            selected = widget("ServerTreeView", self.app).currentIndex()
             if not selected: return
             name = selected.data()
             item = getIDByName(name, schid)
