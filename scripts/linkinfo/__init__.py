@@ -64,7 +64,7 @@ class Linkinfo(ts3plugin):
     infoTitle = None
     hotkeys = []
     menuItems = []
-    wot_api_key = ""
+    wot_api_key = "7132a9b89377c75f81f2ef87aa10896da7c28544"
     bbcode_url = compile(r'\[url(?:|=[\'"]?([^]"\']+)[\'"]?]([^[]+)|](([^[]+)))\[\/url]', IGNORECASE)
     messages = []
     returnCode = ""

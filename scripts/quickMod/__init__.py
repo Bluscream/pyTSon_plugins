@@ -88,7 +88,8 @@ class quickMod(ts3plugin):
         elif keyword == "last_joined_server_to_customBan":
             self.toCustomBan(schid, self.last_joined_server)
         elif keyword == "join_selected_channel_pw":
-            if not self.app.activeWindow().className() == "MainWindow": return
+            window = self.app.activeWindow()
+            if window is None or not window.className() == "MainWindow": return
             tree = widget("ServerTreeView")
             selected = tree[schid-1].currentIndex()
             if not selected: return
@@ -99,8 +100,9 @@ class quickMod(ts3plugin):
             (err, cid) = ts3lib.getChannelOfClient(schid, clid)
             if cid == item[0]: return
             pw = getChannelPassword(schid, item[0], calculate=True)
+            if not pw: return
             # ts3lib.printMessageToCurrentTab("{} > Joining {} (pw: {})".format(self.name, name, pw))
-            ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")
+            ts3lib.requestClientMove(schid, clid, item[0], pw)
         elif keyword == "rejoin_last_channel_pw":
             (err, clid) = ts3lib.getClientID(schid)
             (err, cid) = ts3lib.getChannelOfClient(schid, clid)

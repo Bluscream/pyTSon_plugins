@@ -10,6 +10,16 @@ from PythonQt.QtCore import Qt
 from traceback import format_exc
 import ts3defines, ts3lib, ts3client, time
 
+def countChannels(schid, find:str, case_sensitive=False):
+    if not case_sensitive: find = find.lower()
+    (error, cids) = ts3lib.getChannelList(schid)
+    ret = {}
+    for cid in cids:
+        (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        if not case_sensitive: name = name.lower()
+        if find in name: ret[cid] = name
+    return ret
+
 class countContacts(ts3plugin):
     name = "Count Contacts"
     try: apiVersion = getCurrentApiVersion()
@@ -67,7 +77,15 @@ class countContacts(ts3plugin):
         elif atype == ts3defines.PluginItemType.PLUGIN_CLIENT:
             ts3lib.requestSendPrivateTextMsg(schid, self.contactStats(), selectedItemID)
 
-    def processCommand(self, schid, command): self.printContacts(); return True
+    def processCommand(self, schid, command):
+        command = command.split(' ')
+        if command[0].lower() == "chans":
+            cids = countChannels(schid, command[1])
+            msg = "Found [b]{}[/b] channels with \"{}\" in name: ".format(len(cids), command[1])
+            for cid, name in cids.items(): msg += "{}, ".format(channelURL(schid, cid, name))
+            ts3lib.printMessageToCurrentTab(msg)
+        else: self.printContacts()
+        return True
 
     def printContacts(self):
         ts3lib.printMessageToCurrentTab("{}{}".format(timestamp(), self.contactStats(True)))
