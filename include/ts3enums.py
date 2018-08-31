@@ -614,19 +614,19 @@ class ContactStatus(object):
     NEUTRAL = 2
     UNKNOWN = 3
 
-class ExtendedAddonStatus(Enum):
+class ExtendedAddonStatus(object):
     UNKNOWN = 0
     FOLDER = 1
     DATABASE = 2
     MEMORY = 3
 
-class ServerInstanceType(Enum):
+class ServerInstanceType(object):
     UNKNOWN = 0
     VANILLA = 1
     SDK = 2
     TEASPEAK = 3
 
-class ServerTreeItemType(Enum):
+class ServerTreeItemType(object):
     UNKNOWN = 0
     SERVER = 1
     CHANNEL = 2
@@ -638,7 +638,7 @@ class GroupType(object):
     QUERY = 2
     UNKNOWN = 3
 
-class AntiFloodPoints(Enum):
+class AntiFloodPoints(object):
     AUTH = 0
     BANADD = 25
     BANCLIENT = 25

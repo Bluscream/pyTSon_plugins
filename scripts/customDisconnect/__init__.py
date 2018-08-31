@@ -31,11 +31,10 @@ class customDisconnect(ts3plugin):
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
-
-
     def onMenuItemEvent(self, schid, atype, mID, selectedItemID):
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL: return
-        self.disconnect(schid, True if mID == 1 else False)
+        if mID == 2: sendCommand(self.name, "clientinit", schid)
+        else: self.disconnect(schid, True if mID == 1 else False)
 
     def menuCreated(self): self.checkServer()
     def currentServerConnectionChanged(self, schid):self.checkServer(schid)

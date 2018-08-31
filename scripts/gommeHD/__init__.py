@@ -31,7 +31,17 @@ class gommeHD(ts3plugin):
     dynamicSilenceName = "msg me"
     delay = 1500
     nick_enabled = True
-    nicknames = ["Qmx1c2NyZWFt=","Q2hyaXN0b3BoZXIgQXVyaWNo=","RGFubnkgUmFkbWFjaGVy="]
+    nicknames = [
+        "Qmx1c2NyZWFt=", # Bluscream
+        "Q2hyaXN0b3BoZXIgQXVyaWNo=", # Christopher Aurich
+        "RGFubnkgUmFkbWFjaGVy=", # Danny Radmacher
+        "aHR0cHM6Ly9yNHAzLm5ldA=", # https://r4p3.net
+        "player.getDisplayName()",
+        "ts3lib.getClientID(schid)",
+        "ts3lib.getClientDisplayName()",
+        "std::string tanga",
+        "bWlzcyBqZW5uaWZlcg=" # miss jennifer
+    ]
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
     askForAvatar = False
@@ -245,5 +255,8 @@ Ich erklär dir auch wie's geht:
         if not self.nick_enabled: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         if suid != self.suid: return
-        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, choice(self.nicknames))
+        (err, name) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        _name = choice(self.nicknames)
+        if _name == name: return
+        ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _name)
         ts3lib.flushClientSelfUpdates(schid)

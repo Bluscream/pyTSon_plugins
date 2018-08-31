@@ -17,7 +17,7 @@ class aaa_ts3Ext(ts3plugin):
     infoTitle = None
     menuItems = []
     hotkeys = []
-    guiLogLvl = logLevel.DEBUG
+    guiLogLvl = logLevel.NONE
     banned_names = ["BAN", "NOT WELCOME"]
     mod_names = ["MOD", "OPERATOR", "ADMIN"] # TODO CHECK
     tabs =  {}

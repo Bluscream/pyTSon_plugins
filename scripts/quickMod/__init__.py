@@ -1,8 +1,10 @@
 import ts3defines, ts3lib, pytson
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
-from bluscream import saveCfg, loadCfg, timestamp, intList, getScriptPath
+from bluscream import saveCfg, loadCfg, timestamp, intList, getScriptPath, widget, getIDByName, getChannelPassword
+from ts3enums import ServerTreeItemType
 from configparser import ConfigParser
+from PythonQt.Qt import QApplication
 
 class quickMod(ts3plugin):
     path = getScriptPath(__name__)
@@ -26,6 +28,8 @@ class quickMod(ts3plugin):
         ("restrict_last_joined_channel_from_local_channels", "Give the last user that joined your channel a cgid and sgid in certain channels"),
         ("last_joined_channel_to_customBan", "Gives the last user that joined your channel to the customBan dialog"),
         ("last_joined_server_to_customBan", "Gives the last user that joined your server to the customBan dialog"),
+        ("join_selected_channel_pw", "Joins the selected channel (Bypasses passwords)"),
+        ("rejoin_last_channel_pw", "Rejoins the last channel you left (Bypasses passwords)")
     ]
     last_joined_server = 0
     last_joined_channel = 0
@@ -36,13 +40,15 @@ class quickMod(ts3plugin):
     customBan = None
     ini = "%s/config.ini" % path
     cfg = ConfigParser()
-    cfg["ban"] = { "duration": "2678400", "reason": "Ban Evading / Bannumgehung", "poke": "[color=red][b]You we're banned from the server!", "name duration ": 120 }
+    cfg["ban"] = { "duration": "2678400", "reason": "Ban Evading / Bannumgehung", "poke": "[color=red][b]You were banned from the server!", "name duration ": 120 }
     cfg["restrict"] = { "sgids": "", "poke": "" }
     cfg["restrict local"] = { "cids": "", "sgids": "", "cgid": "", "poke": "" }
     moveBeforeBan = 277
     sgids = [129,127,126,124]
+    lastchans = {}
 
     def __init__(self):
+        self.app = QApplication.instance()
         loadCfg(self.ini, self.cfg)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
@@ -81,6 +87,29 @@ class quickMod(ts3plugin):
             self.toCustomBan(schid, self.last_joined_channel)
         elif keyword == "last_joined_server_to_customBan":
             self.toCustomBan(schid, self.last_joined_server)
+        elif keyword == "join_selected_channel_pw":
+            if not self.app.activeWindow().className() == "MainWindow": return
+            tree = widget("ServerTreeView")
+            selected = tree[schid-1].currentIndex()
+            if not selected: return
+            name = selected.data()
+            item = getIDByName(name, schid)
+            if item[1] != ServerTreeItemType.CHANNEL: return
+            (err, clid) = ts3lib.getClientID(schid)
+            (err, cid) = ts3lib.getChannelOfClient(schid, clid)
+            if cid == item[0]: return
+            pw = getChannelPassword(schid, item[0], calculate=True)
+            # ts3lib.printMessageToCurrentTab("{} > Joining {} (pw: {})".format(self.name, name, pw))
+            ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")
+        elif keyword == "rejoin_last_channel_pw":
+            (err, clid) = ts3lib.getClientID(schid)
+            (err, cid) = ts3lib.getChannelOfClient(schid, clid)
+            tcid = self.lastchans[schid]
+            if cid == tcid: return
+            pw = getChannelPassword(schid, tcid, calculate=True)
+            # (err, name) = ts3lib.getChannelVariable(schid, tcid, ts3defines.ChannelProperties.CHANNEL_NAME)
+            # ts3lib.printMessageToCurrentTab("{} > Rejoining {} (pw: {})".format(self.name, name, pw))
+            ts3lib.requestClientMove(schid, clid, tcid, pw if pw else "123")
 
     def toCustomBan(self, schid, clid):
         active = PluginHost.active
@@ -181,8 +210,9 @@ class quickMod(ts3plugin):
         ts3lib.banadd(schid, "", name, "", self.cfg.getint("ban", "name duration"), self.banReason())
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
-        if schid != ts3lib.getCurrentServerConnectionHandlerID(): return
         (err, ownID) = ts3lib.getClientID(schid)
+        if clid == ownID: self.lastchans[schid] = oldChannelID
+        if schid != ts3lib.getCurrentServerConnectionHandlerID(): return
         if clid == ownID: return
         (err, sgids) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_SERVERGROUPS)
         if sgids is not None:

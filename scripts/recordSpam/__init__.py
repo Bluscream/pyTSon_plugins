@@ -20,7 +20,7 @@ class recordSpam(ts3plugin):
         ("request_talk_power", "Request Talk Power")
     ]
     timer = QTimer()
-    hook = False
+    hook = True
     schid = 0
     tpr_name = "Talk Power bitte?"
 
@@ -56,12 +56,12 @@ class recordSpam(ts3plugin):
         self.timer.start(calculateInterval(schid, AntiFloodPoints.CLIENTUPDATE*2, self.name))
 
     def startVoiceRecording(self, schid):
-        if self.hook: sendCommand(self.name, "clientupdate client_is_recording=1", schid)
+        if self.hook: sendCommand(self.name, "clientupdate client_is_recording=1", schid, mode=2)
         else:
             # ts3lib.setClientSelfVariableAsInt(schid, ts3defines.ClientProperties.CLIENT_IS_RECORDING, True)
             ts3lib.startVoiceRecording(schid)
     def stopVoiceRecording(self, schid):
-        if self.hook: sendCommand(self.name, "clientupdate client_is_recording=0", schid)
+        if self.hook: sendCommand(self.name, "clientupdate client_is_recording=0", schid, mode=2)
         else:
             # ts3lib.setClientSelfVariableAsInt(schid, ts3defines.ClientProperties.CLIENT_IS_RECORDING, False)
             ts3lib.stopVoiceRecording(schid)
@@ -69,8 +69,8 @@ class recordSpam(ts3plugin):
     def tick(self):
         if not self.schid or self.schid < 1: self.timer.stop()
         if self.hook:
-            sendCommand(self.name, "clientupdate client_is_recording=1", self.schid)
-            sendCommand(self.name, "clientupdate client_is_recording=0", self.schid)
+            sendCommand(self.name, "clientupdate client_is_recording=1", self.schid, mode=2)
+            sendCommand(self.name, "clientupdate client_is_recording=0", self.schid, mode=2)
         else:
             ts3lib.startVoiceRecording(self.schid)
             ts3lib.stopVoiceRecording(self.schid)

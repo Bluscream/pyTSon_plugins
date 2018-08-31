@@ -224,7 +224,7 @@ def parseChannelURL(url):
         return cid, name
     return False
 
-def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
+def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded="", quote=True, mention=False):
     """
     :param schid:
     :param clid:
@@ -245,7 +245,7 @@ def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded=""):
     if not nickname_encoded:
         try: nickname_encoded = quote_plus(nickname)
         except: nickname_encoded = uid
-    return '[url=client://{0}/{1}~{2}]"{3}"[/url]'.format(clid, uid, nickname_encoded, nickname)
+    return '[url=client://{clid}/{uid}~{nickname_encoded}]{mention}{quote}{nickname}{quote}[/url]'.format(clid=clid, uid=uid, nickname_encoded=nickname_encoded, nickname=nickname, quote="\"" if quote else "", mention="@" if mention else "")
 
 def parseClientURL(url):
     pattern = "^\[URL=client:\/\/(\d+)\/(.*)~(.*)\](.*)\[\/URL\]$"
@@ -358,6 +358,20 @@ def getIDByName(name:str, schid:int=0):
     clid = getClientIDByName(name, schid, use_displayname=True)
     if clid: return clid, ServerTreeItemType.CLIENT
     return 0, ServerTreeItemType.UNKNOWN
+
+def answerMessage(schid:int, targetMode:int, fromID:int, message:str, returnCode:str="", prefix:bool=True):
+    mode = ts3defines.TextMessageTargetMode
+    if prefix and targetMode == mode.TextMessageTarget_CHANNEL: message = "{}: {}".format(clientURL(schid, fromID, quote=False, mention=True), message)
+    print(message)
+    message = [message[i:i + 900] for i in range(0, len(message), 900)]
+    if targetMode == mode.TextMessageTarget_SERVER:
+        for msg in message: ts3lib.requestSendServerTextMsg(schid, msg, returnCode)
+    elif targetMode == mode.TextMessageTarget_CHANNEL:
+        for msg in message: ts3lib.requestSendChannelTextMsg(schid, msg, 0, returnCode)
+    elif targetMode == mode.TextMessageTarget_CLIENT:
+        for msg in message: ts3lib.requestSendPrivateTextMsg(schid, msg, fromID, returnCode)
+    else: ts3lib.printMessageToCurrentTab("".join(message))
+
 #endregion
 #region AntiFlood
 def getAntiFloodSettings(schid):
@@ -488,6 +502,15 @@ def objects():
     _ret = []
     for x in get_objects(): _ret.extend(str(repr(x)))
     return _ret
+
+def widget(name, app=None):
+    if app is None: app = QApplication.instance()
+    widgets = app.allWidgets()
+    ret = []
+    for x in widgets:
+        if str(x.objectName) == name:
+            ret.append(x)
+    return ret
 
 def grabWidget(objName, byClass=False):
     for widget in QApplication.instance().allWidgets():
@@ -774,7 +797,7 @@ def buildBadges(badges=[], overwolf=False):
     blocks = [",".join(badges[i:i+3]) for i in range(0, len(badges), 3)]
     return "clientupdate client_badges=overwolf={}:badges={}".format(1 if overwolf else 0, ":badges=".join(blocks))
 
-def sendCommand(name, cmd, schid=0, silent=True, reverse=False, mode=1):
+def sendCommand(name, cmd, schid=0, silent=True, reverse=False, mode=2):
     """
     Sends a command through TS3Hook.
     :param mode: See enum: HookMode
@@ -802,7 +825,7 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False, mode=1):
 #region DEFINES
 dlpath = ""
 
-class HookMode(Enum):
+class HookMode(object):
     NONE = 0
     TS3HOOK = 1
     TSPATCH = 2
