@@ -1,76 +1,41 @@
 import ts3defines, ts3lib, pytson
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
-from bluscream import timestamp, getScriptPath, getIDByName, getChannelPassword, widget
-from ts3enums import ServerTreeItemType
+from bluscream import timestamp, getScriptPath, widget
 from PythonQt.Qt import QApplication
 
-class treeView(ts3plugin):
+class spacify(ts3plugin):
     path = getScriptPath(__name__)
-    name = "Tree View Test"
+    name = "Spacify"
     try: apiVersion = pytson.getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = ""
     offersConfigure = False
-    commandKeyword = "tv"
+    commandKeyword = ""
     infoTitle = None
     menuItems = []
-    hotkeys = [
-        ("tree_view_selected_name", "Print Selected name to current tab"),
-        ("tree_view_message_selected", "Message selected client, channel or server")
-    ]
-    servertree = None
+    hotkeys = []
+    widget = None
+    last = ""
+    # ignore = False
 
 
     def __init__(self):
-        self.app = QApplication.instance()
-        self.setAnimated()
+        self.widget = widget("ChatLineEdit")
+        result = self.widget.connect("textChanged()", self.textEdited)
+        print("Result", result)
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
-    def setAnimated(self):
-        try:
-            self.servertree = widget("ServerTreeView")[0]
-            if self.servertree is None: return
-            if not self.servertree.isAnimated():
-                self.servertree.setAnimated(True)
-        except: pass
+    def stop(self):
+        self.widget.disconnect("textChanged()", self.textEdited)
 
-    def processCommand(self, schid, keyword): self.onHotkeyOrCommandEvent(keyword, schid)
-    def onHotkeyEvent(self, keyword): self.onHotkeyOrCommandEvent(keyword)
-    def onHotkeyOrCommandEvent(self, keyword, schid=0):
-        if not self.app.activeWindow().className() == "MainWindow": return
-        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
-        # print(self.name, "> servertree:", self.servertree)
-        selected = self.servertree.currentIndex()
-        if not selected: return
-        # print(self.name, "> selected:", selected)
-        name = selected.data()
-        item = getIDByName(name, schid)
-        if keyword == "tree_view_selected_name":
-            print(self.name, "> dir(selected):", dir(selected))
-            print(self.name, "> selected.flags():", selected.flags())
-            print(self.name, "> selected.internalId():", selected.internalId())
-            print(self.name, "> selected.internalPointer():", selected.internalPointer())
-            print(self.name, "> selected.row():", selected.row())
-            ts3lib.printMessageToCurrentTab("[b]Selected Item: \"{}\"\nType: {} ID: {}".format(name, item[1], item[0]))
-        elif keyword == "tree_view_message_selected":
-            msg = " "
-            if item[1] == ServerTreeItemType.SERVER:
-                ts3lib.requestSendServerTextMsg(schid, msg)
-            elif item[1] == ServerTreeItemType.CHANNEL:
-                (err, clid) = ts3lib.getClientID(schid)
-                (err, cid) = ts3lib.getChannelOfClient(schid, clid)
-                if cid != item[0]:
-                    pw = getChannelPassword(schid, item[0])
-                    ts3lib.printMessageToCurrentTab("{} > PW: {}".format(self.name, pw))
-                    err = ts3lib.requestClientMove(schid, clid, item[0], pw if pw else "123")
-                if not err: ts3lib.requestSendChannelTextMsg(schid, msg, 0)
-            elif item[1] == ServerTreeItemType.CLIENT:
-                ts3lib.requestSendPrivateTextMsg(schid, msg, item[0])
-
-    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
-        self.setAnimated()
+    def textEdited(self):
+        text = self.widget.toPlainText()
+        if not text.endswith(" "):
+            self.widget.insert(" ")
+            # self.widget.cursorPosition(len(text)+1)
+            # self.ignore = True
+        self.last = self.widget.toPlainText()

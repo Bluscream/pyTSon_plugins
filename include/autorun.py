@@ -153,7 +153,9 @@ def encoding():
     print("sys.stdout.isatty()", sys.stdout.isatty())
 
 self = QApplication.instance()
-tree = [item for item in self.allWidgets() if item.objectName == "ServerTreeView"][0]
+for item in self.allWidgets():
+    if item.objectName == "ServerTreeView": tree = item
+    elif item.objectName == "ChatLineEdit": chatinput = item
 schid = getCurrentServerConnectionHandlerID()
 (_e, ownid) = getClientID(schid);clid=ownid;ownID=ownid
 (_e, owncid) = getChannelOfClient(schid, ownid);cid=owncid;ownCID=owncid
@@ -217,7 +219,7 @@ def printMetadata(item):
     print(item.className)
     print("--------------------------------Methods:--------------------------------")
     for i in range(meta.methodCount()):
-        print("{}={}".format(i, meta.method(i).name()))
+        print("[{}]{} {} (Type: {})".format(i, meta.method(i).returnType(), meta.method(i).methodSignature(), meta.method(i).methodType()))
     print("--------------------------------Properties:--------------------------------")
     for i in range(meta.propertyCount()):
-        print("{}={}".format(i, meta.property(i).name()))
+        print("[{}]{}".format(i, meta.property(i).name()))

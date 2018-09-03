@@ -7,12 +7,13 @@
     <bookmark url="file://$PROJECT_DIR$/include/bluscream.py" line="824" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% revert some of the stuff added in the last commit">
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="%">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/autorun.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/autorun.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/gommeHD/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/treeView/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/treeView/__init__.py" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -49,7 +50,7 @@
           <entry key="ini" value="42" />
           <entry key="md" value="780" />
           <entry key="notice" value="37" />
-          <entry key="py" value="29727" />
+          <entry key="py" value="30505" />
           <entry key="txt" value="2796" />
         </counts>
       </usages-collector>
@@ -59,7 +60,7 @@
           <entry key="Ini" value="42" />
           <entry key="Markdown" value="780" />
           <entry key="PLAIN_TEXT" value="2777" />
-          <entry key="Python" value="29725" />
+          <entry key="Python" value="30503" />
           <entry key="Scratch" value="21" />
           <entry key="UNKNOWN" value="37" />
         </counts>
@@ -72,7 +73,7 @@
           <entry key="ini" value="4" />
           <entry key="md" value="5" />
           <entry key="notice" value="1" />
-          <entry key="py" value="126" />
+          <entry key="py" value="128" />
           <entry key="txt" value="12" />
           <entry key="url" value="3" />
         </counts>
@@ -83,13 +84,13 @@
           <entry key="Ini" value="4" />
           <entry key="Markdown" value="6" />
           <entry key="PLAIN_TEXT" value="14" />
-          <entry key="Python" value="120" />
+          <entry key="Python" value="122" />
           <entry key="Scratch" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="59" />
+          <entry key="project.closed" value="60" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.100" value="1" />
           <entry key="project.open.time.11" value="2" />
@@ -99,7 +100,7 @@
           <entry key="project.open.time.15" value="6" />
           <entry key="project.open.time.16" value="4" />
           <entry key="project.open.time.17" value="2" />
-          <entry key="project.open.time.18" value="2" />
+          <entry key="project.open.time.18" value="3" />
           <entry key="project.open.time.19" value="4" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.20" value="3" />
@@ -124,7 +125,7 @@
           <entry key="project.open.time.46" value="1" />
           <entry key="project.open.time.49" value="1" />
           <entry key="project.open.time.69" value="1" />
-          <entry key="project.opened" value="65" />
+          <entry key="project.opened" value="66" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -142,8 +143,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5508">
-              <caret line="506" column="38" selection-start-line="506" selection-start-column="26" selection-end-line="506" selection-end-column="38" />
+            <state relative-caret-position="3142">
+              <caret line="598" column="9" selection-start-line="598" selection-start-column="9" selection-end-line="598" selection-end-column="9" />
               <folding>
                 <element signature="e#62#91#0" expanded="true" />
                 <element signature="e#832#949#0" />
@@ -218,48 +219,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15336">
+            <state relative-caret-position="838">
               <caret line="852" selection-start-line="852" selection-end-line="852" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/linkinfo/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1170">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-                <marker date="1535694667895" expanded="true" signature="2270:2587" ph="..." />
-                <marker date="1535694667895" expanded="true" signature="3179:3420" ph="..." />
-                <marker date="1535694667895" expanded="true" signature="5717:5902" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1512">
-              <caret line="99" column="37" lean-forward="true" selection-start-line="99" selection-start-column="37" selection-end-line="99" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-                <marker date="1535721400297" expanded="true" signature="329:331" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2034">
-              <caret line="123" column="18" selection-start-line="123" selection-start-column="11" selection-end-line="123" selection-end-column="18" />
-              <folding>
-                <marker date="1535698504275" expanded="true" signature="6376:6382" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -267,21 +228,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="12" column="27" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="27" />
+            <state relative-caret-position="270">
+              <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
-                <marker date="1535694253737" expanded="true" signature="1184:1428" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+        <entry file="file://$PROJECT_DIR$/include/autorun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
+            <state relative-caret-position="496">
+              <caret line="209" lean-forward="true" selection-start-line="209" selection-end-line="209" />
+              <folding>
+                <element signature="e#0#94#0" expanded="true" />
+                <marker date="1535980513247" expanded="true" signature="8080:8362" ph="..." />
+                <marker date="1535980513247" expanded="true" signature="8109:8118" ph="..." />
+                <marker date="1535980513247" expanded="true" signature="8228:8237" ph="..." />
+                <marker date="1535980513247" expanded="true" signature="8362:8364" ph="..." />
+                <marker date="1535980513247" expanded="true" signature="8384:8389" ph="..." />
+                <marker date="1535980513247" expanded="true" signature="8468:8473" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -297,7 +266,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>format_exc</find>
       <find>debug</find>
       <find>getchannelpa</find>
       <find>math</find>
@@ -327,6 +295,7 @@
       <find>widget</find>
       <find>getchannell</find>
       <find>def widget(</find>
+      <find>.connect(</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -425,7 +394,6 @@
         <option value="$PROJECT_DIR$/scripts/chatBot/commands.ini" />
         <option value="$PROJECT_DIR$/scripts/chatBot/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/autoJoin/README.md" />
         <option value="$PROJECT_DIR$/include/ts3lib.py" />
         <option value="$PROJECT_DIR$/scripts/autoJoin/__init__.py" />
@@ -435,12 +403,13 @@
         <option value="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" />
         <option value="$PROJECT_DIR$/include/ts3enums.py" />
         <option value="$PROJECT_DIR$/scripts/recordSpam/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/linkinfo/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/countContacts/__init__.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
+        <option value="$PROJECT_DIR$/include/autorun.py" />
+        <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
       </list>
     </option>
   </component>
@@ -453,7 +422,7 @@
   <component name="NamedScopeManager">
     <scope name="scripts" pattern="file[pyTSon_plugins]:scripts//*" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="253" />
     <option name="y" value="8" />
     <option name="width" value="1385" />
@@ -535,23 +504,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -587,6 +550,17 @@
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
               <item name="treeView" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="pyTSon" type="cbb8eebc:String" user="pyTSon" />
             </path>
           </expand>
           <select />
@@ -930,13 +904,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00426" summary="% gave nickname a own variable (now it feels special)">
-      <created>1534516607496</created>
-      <option name="number" value="00426" />
-      <option name="presentableId" value="LOCAL-00426" />
-      <option name="project" value="LOCAL" />
-      <updated>1534516607497</updated>
-    </task>
     <task id="LOCAL-00427" summary="% added additional checks to autoProxy">
       <created>1534517906459</created>
       <option name="number" value="00427" />
@@ -1273,7 +1240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535721553398</updated>
     </task>
-    <option name="localTasksCounter" value="475" />
+    <task id="LOCAL-00475" summary="%">
+      <created>1535976817159</created>
+      <option name="number" value="00475" />
+      <option name="presentableId" value="LOCAL-00475" />
+      <option name="project" value="LOCAL" />
+      <updated>1535976817166</updated>
+    </task>
+    <option name="localTasksCounter" value="476" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1292,9 +1266,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="253" y="8" width="1385" height="1047" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.11011591" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.15515961" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info id="Nl-Palette" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -1460,10 +1434,10 @@
     <MESSAGE value="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc" />
     <MESSAGE value="% ehhmm so zeug für autoJoin" />
     <MESSAGE value="% revert groupType enum&#10;% add getKicked button to customDisconnect" />
-    <MESSAGE value="%" />
     <MESSAGE value="% some random stuff" />
     <MESSAGE value="% revert some of the stuff added in the last commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="% revert some of the stuff added in the last commit" />
+    <MESSAGE value="%" />
+    <option name="LAST_COMMIT_MESSAGE" value="%" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1510,10 +1484,6 @@
           <url>file://$PROJECT_DIR$/include/autorun.py</url>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scripts/treeView/__init__.py</url>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -1522,13 +1492,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/customBadges/settings.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/devTools/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1697,22 +1660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/autorun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="838">
-          <caret line="218" column="23" selection-start-line="218" selection-start-column="19" selection-end-line="218" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#94#0" expanded="true" />
-            <marker date="1535305475974" expanded="true" signature="8018:8300" ph="..." />
-            <marker date="1535305475974" expanded="true" signature="8047:8056" ph="..." />
-            <marker date="1535305475974" expanded="true" signature="8166:8175" ph="..." />
-            <marker date="1535305475974" expanded="true" signature="8300:8302" ph="..." />
-            <marker date="1535305475974" expanded="true" signature="8322:8327" ph="..." />
-            <marker date="1535305475974" expanded="true" signature="8406:8411" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2358">
@@ -1817,10 +1764,88 @@
     <entry file="file://$PROJECT_DIR$/scripts/quickMod/config.ini">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/linkinfo/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1170">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1535694667895" expanded="true" signature="2270:2587" ph="..." />
+            <marker date="1535694667895" expanded="true" signature="3179:3420" ph="..." />
+            <marker date="1535694667895" expanded="true" signature="5717:5902" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1674">
+          <caret line="99" column="37" selection-start-line="99" selection-start-column="37" selection-end-line="99" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+            <marker date="1535721400297" expanded="true" signature="329:331" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2034">
+          <caret line="123" column="18" selection-start-line="123" selection-start-column="11" selection-end-line="123" selection-end-column="18" />
+          <folding>
+            <marker date="1535698504275" expanded="true" signature="6376:6382" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1270">
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp43062/home/blu/failover.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="52" column="15" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="15" />
+          <folding>
+            <element signature="e#124#153#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="601" column="17" selection-start-line="601" selection-start-column="6" selection-end-line="601" selection-end-column="17" />
+          <folding>
+            <element signature="e#23#46#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="838">
+          <caret line="852" selection-start-line="852" selection-end-line="852" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5508">
-          <caret line="506" column="38" selection-start-line="506" selection-start-column="26" selection-end-line="506" selection-end-column="38" />
+        <state relative-caret-position="3142">
+          <caret line="598" column="9" selection-start-line="598" selection-start-column="9" selection-end-line="598" selection-end-column="9" />
           <folding>
             <element signature="e#62#91#0" expanded="true" />
             <element signature="e#832#949#0" />
@@ -1879,72 +1904,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+    <entry file="file://$PROJECT_DIR$/include/autorun.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="601" column="17" selection-start-line="601" selection-start-column="6" selection-end-line="601" selection-end-column="17" />
+        <state relative-caret-position="496">
+          <caret line="209" lean-forward="true" selection-start-line="209" selection-end-line="209" />
           <folding>
-            <element signature="e#23#46#0" />
+            <element signature="e#0#94#0" expanded="true" />
+            <marker date="1535980513247" expanded="true" signature="8080:8362" ph="..." />
+            <marker date="1535980513247" expanded="true" signature="8109:8118" ph="..." />
+            <marker date="1535980513247" expanded="true" signature="8228:8237" ph="..." />
+            <marker date="1535980513247" expanded="true" signature="8362:8364" ph="..." />
+            <marker date="1535980513247" expanded="true" signature="8384:8389" ph="..." />
+            <marker date="1535980513247" expanded="true" signature="8468:8473" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15336">
-          <caret line="852" selection-start-line="852" selection-end-line="852" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/linkinfo/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <marker date="1535694667895" expanded="true" signature="2270:2587" ph="..." />
-            <marker date="1535694667895" expanded="true" signature="3179:3420" ph="..." />
-            <marker date="1535694667895" expanded="true" signature="5717:5902" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/countContacts/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2034">
-          <caret line="123" column="18" selection-start-line="123" selection-start-column="11" selection-end-line="123" selection-end-column="18" />
-          <folding>
-            <marker date="1535698504275" expanded="true" signature="6376:6382" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="12" column="27" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-            <marker date="1535694253737" expanded="true" signature="1184:1428" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1512">
-          <caret line="99" column="37" lean-forward="true" selection-start-line="99" selection-start-column="37" selection-end-line="99" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-            <marker date="1535721400297" expanded="true" signature="329:331" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/gommeHD/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
         </state>
       </provider>
     </entry>
