@@ -42,7 +42,7 @@ class discordify(ts3plugin):
         except ImportError:
             PluginInstaller().installPackages(['discoIPC'])
             from discoIPC import ipc
-        self.discord = ipc.DiscordIPC("450824928841957386")
+        self.discord = ipc.DiscordIPC("504997049226362891") # 450824928841957386
         try: self.discord.connect()
         except: ts3lib.logMessage("Discord not running!", ts3defines.LogLevel.LogLevel_WARNING, "pyTSon Discord Rich Presence", 0)
         self.timer.timeout.connect(self.tick)
@@ -120,7 +120,7 @@ class discordify(ts3plugin):
             self.activity["assets"]["large_image"] = "teamspeak"
         else:
             self.activity["assets"]["large_text"] = "Unknown"
-            self.activity["assets"]["large_image"] = "logo"
+            self.activity["assets"]["large_image"] = "broken_image"
         self.update = True
 
     def updateChannel(self, schid, ownID=0, ownCID=0):

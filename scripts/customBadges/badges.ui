@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>585</width>
+    <width>588</width>
     <height>544</height>
    </rect>
   </property>
@@ -99,7 +99,7 @@
           <item row="0" column="0">
            <widget class="QListWidget" name="lst_available_ext">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="sortingEnabled">
              <bool>true</bool>
