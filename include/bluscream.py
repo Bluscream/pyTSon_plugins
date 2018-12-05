@@ -33,8 +33,8 @@ def Time(): return '{:%H:%M:%S}'.format(datetime.now())
 def getScriptPath(name): return getPluginPath("scripts", name) # TODO: use plugin.name
 
 def boolean(_bool):
-    if _bool or int(_bool) or (_bool.lower() == "true"): return True
-    elif not _bool or (not int(_bool)) or (_bool.lower() == "false"): return False
+    if _bool or int(_bool) or _bool == "1" or (_bool.lower() == "true"): return True
+    elif not _bool or (not int(_bool)) or _bool == "0" or (_bool.lower() == "false"): return False
     else: return None
 
 def sanitize(s,hard=False):
