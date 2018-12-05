@@ -6,7 +6,7 @@ from PythonQt.QtCore import QTimer
 import ts3defines, ts3lib, re
 
 class silentError(ts3plugin):
-    name = "Anti Flood Timer"
+    name = "Anti Flood"
     apiVersion = 21
     requestAutoload = True
     version = "1"
@@ -18,7 +18,7 @@ class silentError(ts3plugin):
     menuItems = []
     hotkeys = []
     regex = r"^retry in (\d+)ms$"
-    timers = {}
+    timers = []
 
     def __init__(self):
         self.regex = re.compile(self.regex)
@@ -28,11 +28,14 @@ class silentError(ts3plugin):
         if error == ts3defines.ERROR_client_is_flooding:
             # print(self.name,"onServerErrorEvent", schid, errorMessage, error, returnCode, extraMessage)
             wait = int(self.regex.match(extraMessage).group(1))
-            self.timers[schid] = (wait, QTimer)
-            self.timers[schid][1].singleShot(wait, self.floodOver)
+            timer = QTimer
+            self.timers.append((schid, wait, timer))
+            timer.singleShot(wait, self.floodOver)
             d = timedelta(milliseconds=wait)
             ts3lib.printMessage(schid, "{} [color=red]Remaining Time: [b]{}[/b]".format(self.name, str(d)), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
     def floodOver(self):
-        cur = self.timers.popitem()
+        cur = self.timers.pop(0)
+        for timer in self.timers:
+            if timer[0] == cur[0]: return
         ts3lib.printMessage(cur[0], "{} [color=green][b]expired!".format(self.name), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
