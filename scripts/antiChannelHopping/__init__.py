@@ -21,13 +21,16 @@ class antiChannelHopping(ts3plugin):
     maxviolations = 2
     bancgid = 12
     modcgids = [10,11]
+    suid = "iUnUtUG0lCiYpjkxeUy7Df4EmSY="
 
     def __init__(self):
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
+        (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
+        if suid != self.suid: return
         (err, ownID) = ts3lib.getClientID(schid)
-        if clid == ownID: return #(err, clids) = ts3lib.getChannelClientList(schid, newChannelID)
+        if clid == ownID: return # (err, clids) = ts3lib.getChannelClientList(schid, newChannelID)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
         if newChannelID == 0:
             if clid in self.clients: del self.clients[clid]

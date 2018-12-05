@@ -8,17 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% rip">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/TS3AB/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/TS3AB/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/temp/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/ts3Ext" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3Ext" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/badges.ui" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/badges.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBadges/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/discordify/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/discordify/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/quickPerm/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickPerm/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/splamy/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/splamy/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/update.bat" beforeDir="false" afterPath="$PROJECT_DIR$/update.bat" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -55,17 +59,15 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7164">
-              <caret line="598" column="9" selection-start-line="598" selection-start-column="9" selection-end-line="598" selection-end-column="9" />
+            <state relative-caret-position="383">
+              <caret line="36" column="66" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="66" />
               <folding>
                 <element signature="e#62#91#0" expanded="true" />
                 <element signature="e#832#949#0" />
-                <element signature="e#1153#1178#0" />
                 <element signature="e#1196#1251#0" />
                 <element signature="e#1264#1307#0" />
                 <element signature="e#1320#1363#0" />
                 <element signature="e#1389#1450#0" />
-                <element signature="e#1476#1605#0" />
                 <element signature="e#1639#1725#0" />
                 <element signature="e#1749#2054#0" />
                 <element signature="e#1782#1829#0" />
@@ -117,33 +119,21 @@
         </entry>
       </file>
       <file pinned="true" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+        <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="601" column="17" selection-start-line="601" selection-start-column="6" selection-end-line="601" selection-end-column="17" />
-              <folding>
-                <element signature="e#23#46#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="true" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15336">
-              <caret line="852" selection-start-line="852" selection-end-line="852" />
+            <state relative-caret-position="273">
+              <caret line="43" column="22" lean-forward="true" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
+        <entry file="file://$PROJECT_DIR$/scripts/quickPerm/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-556">
-              <caret line="118" column="69" lean-forward="true" selection-start-line="118" selection-start-column="69" selection-end-line="118" selection-end-column="69" />
+            <state relative-caret-position="144">
+              <caret line="26" column="19" lean-forward="true" selection-start-line="26" selection-start-column="19" selection-end-line="48" selection-end-column="5" />
               <folding>
-                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -160,29 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>err, tp</find>
-      <find>requestclientmo</find>
-      <find>verifychan</find>
-      <find>CLIENT_TALK_POWER</find>
-      <find>onclientmov</find>
-      <find>getcon</find>
-      <find>ts3lib.printMess</find>
-      <find>GroupType</find>
-      <find>ServerInstanceType</find>
-      <find>ts3.</find>
-      <find>Qurl</find>
-      <find>onserverper</find>
-      <find>returnCode</find>
-      <find>ans</find>
-      <find>.join</find>
-      <find>onserverer</find>
-      <find>response</find>
-      <find>clientur</find>
-      <find>__get_reports_for_domains_collection</find>
-      <find>print</find>
-      <find>hookmode</find>
-      <find>widget</find>
-      <find>getchannell</find>
       <find>def widget(</find>
       <find>.connect(</find>
       <find>onconnects</find>
@@ -190,6 +157,29 @@
       <find>iconVariable</find>
       <find>findall</find>
       <find>(.*</find>
+      <find>small_image</find>
+      <find>stopc</find>
+      <find>ClientProperties</find>
+      <find>requestsend</find>
+      <find>onHotkeyEvent</find>
+      <find>hotkeys = [(</find>
+      <find>configure</find>
+      <find>error_o</find>
+      <find>PluginMessageTarget</find>
+      <find>= {</find>
+      <find>hotkeyor</find>
+      <find>split</find>
+      <find>bool</find>
+      <find>flood</find>
+      <find>insu</find>
+      <find>insufficient permission modify power</find>
+      <find>insufficient</find>
+      <find>print</find>
+      <find>modify</find>
+      <find>QTIMER.s</find>
+      <find>QTimer.singleShot(0, self.install)</find>
+      <find>qtimer.</find>
+      <find>getScriptPath</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -253,15 +243,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
-        <option value="$PROJECT_DIR$/scripts/countNick/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/autoCommander/__init__.py" />
-        <option value="$PROJECT_DIR$/include/ts3cloud_proxy.py" />
-        <option value="$PROJECT_DIR$/scripts/autoProxy/README.md" />
-        <option value="$PROJECT_DIR$/scripts/autoProxy/whitelist.txt" />
-        <option value="$USER_HOME$/PycharmProjects/pyTeamspeak/myTeamspeak.py" />
-        <option value="$USER_HOME$/PycharmProjects/pyTeamspeak/teamspeak.py" />
         <option value="$USER_HOME$/PycharmProjects/pyTeamspeak/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/customBadges/settings.ini" />
         <option value="$PROJECT_DIR$/scripts/customBadges/notice" />
@@ -296,14 +277,23 @@
         <option value="$PROJECT_DIR$/scripts/recordSpam/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/linkinfo/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/countContacts/__init__.py" />
-        <option value="$PROJECT_DIR$/include/bluscream.py" />
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
         <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/BetterServerTree/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverTreeViewRework/__init__.py" />
+        <option value="$PROJECT_DIR$/../../../../Local/Temp/scp47502/home/blu/failover.py" />
+        <option value="$PROJECT_DIR$/scripts/joinChannel/__init__.py" />
+        <option value="$PROJECT_DIR$/include/ts3defines.py" />
+        <option value="$PROJECT_DIR$/scripts/TS3AB/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/discordify/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py" />
+        <option value="$PROJECT_DIR$/scripts/temp/__init__.py" />
+        <option value="$PROJECT_DIR$/include/bluscream.py" />
+        <option value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.txt" />
+        <option value="$PROJECT_DIR$/scripts/quickPerm/__init__.py" />
       </list>
     </option>
   </component>
@@ -398,7 +388,34 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="quickPerm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="temp" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -423,7 +440,7 @@
     <property name="js-jscs-nodeInterpreter" value="D:\Bars-and-Tools\NodeJS\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last.edited.regexp" value="}" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/include" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pyTSon/pyTSon.conf" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="options.lastSelected" value="editor.preferences.smartKeys" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -440,19 +457,19 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\autoConnect" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\welcomeBot" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\unlocker" />
-      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\tweakui" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\include" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts_" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\ressources" />
       <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\chatBot\commands" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\autoConnect" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\welcomeBot" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\unlocker" />
+      <recent name="C:\Users\blusc\AppData\Roaming\TS3Client\plugins\pyTSon\scripts\tweakui" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -467,7 +484,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in JetBrains Toolbox">
+  <component name="RunManager" selected="Python.failover">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -693,6 +710,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="failover" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pyTSon_plugins" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\blusc\AppData\Local\Programs\Python\Python36\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../../../Local/Temp/scp47502/home/blu" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../../../Local/Temp/scp47502/home/blu/failover.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unittests in JetBrains Toolbox" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="pyTSon_plugins" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -727,10 +766,12 @@
     </configuration>
     <list>
       <item itemvalue="Python.__init__" />
+      <item itemvalue="Python.failover" />
       <item itemvalue="Python tests.Unittests in JetBrains Toolbox" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.failover" />
         <item itemvalue="Python.__init__" />
         <item itemvalue="Python tests.Unittests in JetBrains Toolbox" />
         <item itemvalue="Python tests.Unittests in JetBrains Toolbox" />
@@ -747,13 +788,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
-    </task>
-    <task id="LOCAL-00428" summary="% autoProxy QNetworkAccessManager (broken)">
-      <created>1534522578796</created>
-      <option name="number" value="00428" />
-      <option name="presentableId" value="LOCAL-00428" />
-      <option name="project" value="LOCAL" />
-      <updated>1534522578796</updated>
     </task>
     <task id="LOCAL-00429" summary="% fixed autoProxy">
       <created>1534522839033</created>
@@ -1091,7 +1125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535985592028</updated>
     </task>
-    <option name="localTasksCounter" value="477" />
+    <task id="LOCAL-00477" summary="% rip">
+      <created>1540527788167</created>
+      <option name="number" value="00477" />
+      <option name="presentableId" value="LOCAL-00477" />
+      <option name="project" value="LOCAL" />
+      <updated>1540527788169</updated>
+    </task>
+    <option name="localTasksCounter" value="478" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1122,8 +1163,8 @@
       <window_info id="Image Layers" order="6" />
       <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.7473348" visible="true" weight="0.324295" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32861805" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.324295" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32827735" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1153,45 +1194,6 @@
       <window_info anchor="right" id="Data View" order="11" />
       <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="12" sideWeight="0.4978678" side_tool="true" weight="0.21268657" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.10906217" />
-      <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
-      <window_info id="Nl-Palette" order="2" />
-      <window_info id="Capture Tool" order="3" />
-      <window_info id="Designer" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Image Layers" order="6" />
-      <window_info id="Favorites" order="7" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.7473348" weight="0.32535365" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32861805" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32535365" />
-      <window_info anchor="bottom" id="Changes" order="7" weight="0.32900432" />
-      <window_info anchor="bottom" id="Application Servers" order="8" />
-      <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.3275488" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.3362256" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.31344903" />
-      <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
-      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Floobits" order="14" sideWeight="0.49573562" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Version Control" order="15" sideWeight="0.25266525" side_tool="true" weight="0.32535365" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Maven Projects" order="5" />
-      <window_info anchor="right" id="Properties" order="6" />
-      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Capture Analysis" order="9" />
-      <window_info anchor="right" id="Theme Preview" order="10" />
-      <window_info anchor="right" id="Data View" order="11" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="12" sideWeight="0.4978678" side_tool="true" weight="0.21268657" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -1348,70 +1350,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/aaa_requirements/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="144">
-            <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/aaa_requirements/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/settings/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-404">
-          <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/treeView/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="34" column="2" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1872">
@@ -1543,13 +1481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1764">
-          <caret line="103" selection-start-line="103" selection-end-line="106" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1600,13 +1531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1170">
           <caret line="75" selection-start-line="75" selection-end-line="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1674">
-          <caret line="99" column="37" selection-start-line="99" selection-start-column="37" selection-end-line="99" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1666,19 +1590,109 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp47502/home/blu/failover.py" />
+    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoProxy/whitelist.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/joinChannel/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="55" column="67" lean-forward="true" selection-start-line="55" selection-start-column="67" selection-end-line="55" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/TS3AB/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-846">
+          <caret line="86" column="17" selection-start-line="86" selection-start-column="17" selection-end-line="86" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="37" column="119" selection-start-line="37" selection-start-column="96" selection-end-line="37" selection-end-column="119" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/temp/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" selection-start-line="19" selection-end-line="21" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/quickMod/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="839">
+          <caret line="120" column="51" selection-start-line="120" selection-start-column="51" selection-end-line="120" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/complaintReminder/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="64" column="16" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="601" column="17" selection-start-line="601" selection-start-column="6" selection-end-line="601" selection-end-column="17" />
+          <folding>
+            <element signature="e#23#46#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/bluscream.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7164">
-          <caret line="598" column="9" selection-start-line="598" selection-start-column="9" selection-end-line="598" selection-end-column="9" />
+        <state relative-caret-position="383">
+          <caret line="36" column="66" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="66" />
           <folding>
             <element signature="e#62#91#0" expanded="true" />
             <element signature="e#832#949#0" />
-            <element signature="e#1153#1178#0" />
             <element signature="e#1196#1251#0" />
             <element signature="e#1264#1307#0" />
             <element signature="e#1320#1363#0" />
             <element signature="e#1389#1450#0" />
-            <element signature="e#1476#1605#0" />
             <element signature="e#1639#1725#0" />
             <element signature="e#1749#2054#0" />
             <element signature="e#1782#1829#0" />
@@ -1728,29 +1742,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="601" column="17" selection-start-line="601" selection-start-column="6" selection-end-line="601" selection-end-column="17" />
-          <folding>
-            <element signature="e#23#46#0" />
-          </folding>
+        <state relative-caret-position="18">
+          <caret line="1" selection-start-line="1" selection-end-line="2" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15336">
-          <caret line="852" selection-start-line="852" selection-end-line="852" />
+        <state relative-caret-position="281">
+          <caret line="578" column="23" selection-start-line="578" selection-start-column="23" selection-end-line="578" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/discordify/__init__.py">
+    <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-556">
-          <caret line="118" column="69" lean-forward="true" selection-start-line="118" selection-start-column="69" selection-end-line="118" selection-end-column="69" />
+        <state relative-caret-position="273">
+          <caret line="43" column="22" lean-forward="true" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/quickPerm/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="26" column="19" lean-forward="true" selection-start-line="26" selection-start-column="19" selection-end-line="48" selection-end-column="5" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

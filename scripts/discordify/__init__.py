@@ -1,12 +1,15 @@
 import ts3lib, ts3defines, re
-from copy import deepcopy as copy
+# from copy import deepcopy as copy
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
-from time import time
+# from time import time
+from datetime import datetime
 from PythonQt.QtCore import QTimer
-from traceback import format_exc
+# from traceback import format_exc
 from devtools import PluginInstaller, installedPackages
 from bluscream import timestamp, parseCommand, sanitize, getServerType, ServerInstanceType
+
+# startTime = datetime.utcnow()
 
 class discordify(ts3plugin):
     name = "Discord Rich Presence"
@@ -33,6 +36,9 @@ class discordify(ts3plugin):
             "large_image": "logo"
         }
     }
+
+    def timestamp(self):
+        return int((datetime.utcnow() - datetime(1970, 1, 1)).total_seconds())
 
     def __init__(self):
         try: import unidecode
@@ -79,10 +85,8 @@ class discordify(ts3plugin):
         if status is None: (err, status) = ts3lib.getConnectionStatus(schid)
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, schid, status)
         if status == ts3defines.ConnectStatus.STATUS_DISCONNECTED:
-            if schid in self.tabs:
-                del self.tabs[schid]
-            start = time()
-            self.activity["timestamps"]["start"] = start
+            if schid in self.tabs: del self.tabs[schid]
+            self.activity["timestamps"]["start"] = self.timestamp()
             self.activity["details"] = "Disconnected"
             self.activity["state"] = ""
             if hasattr(self.activity, "party"): del self.activity["party"]
@@ -97,7 +101,7 @@ class discordify(ts3plugin):
             if schid in self.tabs:
                 self.activity["timestamps"]["start"] = self.tabs[schid]
             else:
-                start = time()
+                start = self.timestamp()
                 self.tabs[schid] = start
                 if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "self.tabs[schid]", self.tabs[schid])
                 self.activity["timestamps"]["start"] = start
@@ -135,6 +139,7 @@ class discordify(ts3plugin):
         (err, cmax) = ts3lib.getChannelVariable(schid, ownCID, ts3defines.ChannelProperties.CHANNEL_MAXCLIENTS)
         if cmax >= clients:
             if PluginHost.cfg.getboolean("general", "verbose"): print("cmax",cmax,">=","clients",clients)
+            if not "party" in self.activity: self.activity["party"] = {}
             self.activity["party"]["size"] = [clients, cmax]
         else:
             (err, smax) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_MAXCLIENTS)
@@ -143,9 +148,7 @@ class discordify(ts3plugin):
             self.activity["party"] = { "size": [clients, smax] }
         (err, ip) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
         (err, port) = ts3lib.getConnectionVariable(schid, ownID, ts3defines.ConnectionProperties.CONNECTION_SERVER_PORT)
-        self.activity["secrets"] = {
-            "join": "ts3server://{}?port={}&cid={}".format(ip, port, ownCID)
-        }
+        self.activity["secrets"] = { "join": "ts3server://{}?port={}&cid={}".format(ip, port, ownCID) }
         self.update = True
 
     def updateClient(self, schid):
