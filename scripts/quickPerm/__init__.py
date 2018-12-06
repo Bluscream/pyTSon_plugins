@@ -81,18 +81,28 @@ class quickPerm(ts3plugin):
         elif cmd == "id":
             (err, pid) = ts3lib.getPermissionIDByName(schid, args[0])
             ts3lib.printMessageToCurrentTab("{} = [b]{}".format(args[0], pid))
+        elif cmd == "sgadd":
+            sgid = int(args.pop(0))
+            if len(args): cldbid = int(args.pop(0))
+            ts3lib.requestServerGroupAddClient(schid, sgid, cldbid)
+        elif cmd == "sgrem":
+            sgid = int(args.pop(0))
+            if len(args): cldbid = int(args.pop(0))
+            ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
         else: return False
         return True
 
-    def onServerGroupClientAddedEvent(self, schid, clientID, clientName, clientUniqueIdentity, sgid, invokerClientID, invokerName, invokerUniqueIdentity):
+    def onServerGroupClientAddedEvent(self, schid, clid, clientName, clientUniqueIdentity, sgid, invokerClientID, invokerName, invokerUniqueIdentity):
         if invokerClientID < 1: return
         (err, ownID) = ts3lib.getClientID(schid)
-        if ownID != clientID: return
+        if ownID != clid: return
         # if invokerClientID == ownID: return
         (err, dgid) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_SERVER_GROUP)
         if sgid == dgid: return
-        self.getPerms(schid, clientID, sgid)
-        # for sgid in [167,169,165]:
+        # self.getPerms(schid, clientID, sgid)
+        for sgid in [167,169,165,168]:
+            (err, cldbid) = ts3lib.getClientVariable(schid, clid, ClientPropertiesRare.CLIENT_DATABASE_ID)
+            ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
             # ts3lib.requestServerGroupAddPerm(schid, sgid, 1, [166], [75], [0], [0])
 
     def getPerms(self, schid, clid = 0, sgid = 0):

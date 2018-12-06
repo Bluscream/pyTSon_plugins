@@ -29,11 +29,12 @@ class searchEverything(ts3plugin):
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 3, "Nickname (TS3Index)", "scripts/%s/ts3index.png"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 4, "Nickname (Google)", "scripts/%s/google.png"%__name__),
         (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 5, "Profile (GameTracker)", "scripts/%s/gametracker.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 6, "UID (TS3Index)", "scripts/%s/ts3index.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 7, "UID (Google)", "scripts/%s/google.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 8, "Owner (TSViewer)", "scripts/%s/tsviewer.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 9, "Badges (TS3Index)", "scripts/%s/ts3index.png"%__name__),
-        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 10, "== {0} ==".format(name), "")
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 6, "UID (TSViewer)", "scripts/%s/tsviewer.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 7, "UID (TS3Index)", "scripts/%s/ts3index.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 8, "UID (Google)", "scripts/%s/google.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 9, "Owner (TSViewer)", "scripts/%s/tsviewer.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 10, "Badges (TS3Index)", "scripts/%s/ts3index.png"%__name__),
+        (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 11, "== {0} ==".format(name), "")
     ]
 
     def __init__(self):
@@ -41,7 +42,7 @@ class searchEverything(ts3plugin):
 
     def menuCreated(self):
         if not self.name in PluginHost.active: return
-        for id in [0,10]:
+        for id in [0,11]:
             try: ts3lib.setPluginMenuEnabled(PluginHost.globalMenuID(self, id), False)
             except: pass
 
@@ -56,17 +57,19 @@ class searchEverything(ts3plugin):
                 elif menuItemID == 3: # Nickname (TS3Index)
                     url = "http://ts3index.com/?page=searchclient&nickname=%%CLIENT_NAME_PERCENT_ENCODED%%"
                 elif menuItemID == 4: # Nickname (Google)
-                    url = "https://www.google.com/search?q=%%CLIENT_NAME_PERCENT_ENCODED%%"
+                    url = "http://www.google.com/search?q=%%CLIENT_NAME_PERCENT_ENCODED%%"
                 elif menuItemID == 5: # Profil (GameTracker)
                     url = "http://www.gametracker.com/search/?search_by=profile_username&query=%%CLIENT_NAME_PERCENT_ENCODED%%"
-                elif menuItemID == 6: # UID (TS3Index)
+                elif menuItemID == 6: # UID (TSViewer)
+                    url = "http://www.tsviewer.com/index.php?page=userinfo&ident=%%CLIENT_UNIQUE_ID%%"
+                elif menuItemID == 7: # UID (TS3Index)
                     url = "http://ts3index.com/?page=searchclient&uid=%%CLIENT_UNIQUE_ID%%"
-                elif menuItemID == 7: # UID (Google)
-                    url = "https://www.google.com/search?q=%%CLIENT_UNIQUE_ID%%"
-                elif menuItemID == 8: # Besitzer (TSViewer)
+                elif menuItemID == 8: # UID (Google)
+                    url = "http://www.google.com/search?q=%%CLIENT_UNIQUE_ID%%"
+                elif menuItemID == 9: # Besitzer (TSViewer)
                     url = "http://www.tsviewer.com/index.php?page=search&action=ausgabe&suchbereich=ansprechpartner&suchinhalt=%%CLIENT_NAME_PERCENT_ENCODED%%"
-                elif menuItemID == 9: # Badges (TS3Index)
-                    url = "https://ts3index.com/?page=searchclient&badges=%%CLIENT_BADGES%%"
+                elif menuItemID == 10: # Badges (TS3Index)
+                    url = "http://ts3index.com/?page=searchclient&badges=%%CLIENT_BADGES%%"
                 else: return
                 # payload = {'username':'administrator', 'password':'xyz'}
                 # nickname_encoded = urlencode(nickname, quote_via=quote_plus)
