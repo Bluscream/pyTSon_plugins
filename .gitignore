@@ -245,6 +245,7 @@ VERSION
 !/docs/Error Codes.url
 !/docs/Permissions.url
 !/docs/Variables.url
+!/include/ts3lib.py
 !/include/ts3help.py
 !/include/ts3enums.py
 !/include/ts3cloud_proxy.py
@@ -259,3 +260,4 @@ VERSION
 /scripts/mySupport/config.ini
 /scripts/mySupport/description.txt
 /scripts/Steamlinker/
+/scripts_/

@@ -21,6 +21,7 @@
           <option value="cfgDialog.*" />
           <option value="ts3lib.*" />
           <option value="PythonQt" />
+          <option value="_ts3lib" />
         </list>
       </option>
     </inspection_tool>

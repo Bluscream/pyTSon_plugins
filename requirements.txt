@@ -1,0 +1,6 @@
+discoIPC==1.0.0
+packaging==18.0
+pip-review==1.0
+pycryptodome==3.6.6
+pyparsing==2.2.2
+six==1.11.0
