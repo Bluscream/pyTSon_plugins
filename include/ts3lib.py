@@ -260,17 +260,14 @@ def getConnectionVariable(schid, clientID, flag):
         return _ts3lib.getConnectionVariableAsString(schid, clientID, flag)
 
 
-
-def sendPluginCommand(schid, command, targetMode, targetIDs, *returnCode):
-    _PluginCommandHandler.sendPluginCommand(schid, command, targetMode,
-                                            targetIDs, *returnCode)
-
 def getPluginID():
     """
     Returns pyTSon's plugin id
     @return: the plugin id
     @rtype: string
     """
+    return ""
+
 
 def acquireCustomPlaybackData(deviceName, samples):
     """
@@ -282,6 +279,8 @@ def acquireCustomPlaybackData(deviceName, samples):
     @return: a tuple containing the errorcode and the buffer as list of ints
     @rtype: tuple(int, list[int])
     """
+    return 0,[0]
+
 
 def activateCaptureDevice(serverConnectionHandlerID):
     """
@@ -291,6 +290,8 @@ def activateCaptureDevice(serverConnectionHandlerID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def banadd(serverConnectionHandlerID, ipRegExp, nameRegexp, uniqueIdentity, timeInSeconds, banReason, returnCode):
     """
@@ -312,6 +313,8 @@ def banadd(serverConnectionHandlerID, ipRegExp, nameRegexp, uniqueIdentity, time
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def banclient(serverConnectionHandlerID, clientID, timeInSeconds, banReason, returnCode):
     """
@@ -328,6 +331,8 @@ def banclient(serverConnectionHandlerID, clientID, timeInSeconds, banReason, ret
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def banclientdbid(serverConnectionHandlerID, clientDBID, timeInSeconds, banReason, returnCode):
     """
@@ -345,6 +350,8 @@ def banclientdbid(serverConnectionHandlerID, clientDBID, timeInSeconds, banReaso
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def bandel(serverConnectionHandlerID, banID, returnCode):
     """
@@ -358,6 +365,8 @@ def bandel(serverConnectionHandlerID, banID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def bandelall(serverConnectionHandlerID, returnCode):
     """
@@ -369,6 +378,8 @@ def bandelall(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def channelPropertyStringToFlag(channelPropertyString):
     """
@@ -378,6 +389,8 @@ def channelPropertyStringToFlag(channelPropertyString):
     @return: a tuple, containing the errorcode and the flag (see ts3defines.ChannelProperties and ts3defines.ChannelPropertiesRare)
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def channelset3DAttributes(serverConnectionHandlerID, clientID, position):
     """
@@ -391,6 +404,8 @@ def channelset3DAttributes(serverConnectionHandlerID, clientID, position):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def cleanUpConnectionInfo(serverConnectionHandlerID, clientID):
     """
@@ -402,6 +417,8 @@ def cleanUpConnectionInfo(serverConnectionHandlerID, clientID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def clientChatClosed(serverConnectionHandlerID, clientUniqueIdentifier, clientID, returnCode):
     """
@@ -417,6 +434,8 @@ def clientChatClosed(serverConnectionHandlerID, clientUniqueIdentifier, clientID
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def clientChatComposing(serverConnectionHandlerID, clientID, returnCode):
     """
@@ -430,6 +449,8 @@ def clientChatComposing(serverConnectionHandlerID, clientID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def clientPropertyStringToFlag(clientPropertyString):
     """
@@ -439,6 +460,8 @@ def clientPropertyStringToFlag(clientPropertyString):
     @return: a tuple, containing the errorcode and the flag (see ts3defines.ClientProperties and ts3defines.ClientPropertiesRare)
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def closeCaptureDevice(serverConnectionHandlerID):
     """
@@ -448,6 +471,8 @@ def closeCaptureDevice(serverConnectionHandlerID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def closePlaybackDevice(serverConnectionHandlerID):
     """
@@ -457,6 +482,8 @@ def closePlaybackDevice(serverConnectionHandlerID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def closeWaveFileHandle(serverConnectionHandlerID, waveHandle):
     """
@@ -468,8 +495,12 @@ def closeWaveFileHandle(serverConnectionHandlerID, waveHandle):
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def createBookmark(bookmarkuuid, serverLabel, serverAddress, serverPassword, nickname, channel, channelPassword, captureProfile, playbackProfile, hotkeyProfile, soundProfile, uniqueUserId, oneTimeKey, phoneticName):
+
+def createBookmark(bookmarkuuid, serverLabel, serverAddress, serverPassword, nickname, channel, channelPassword,
+                   captureProfile, playbackProfile, hotkeyProfile, soundProfile, uniqueUserId, oneTimeKey,
+                   phoneticName):
     """
     Creates a new bookmark.
     @param serverLabel: the label of the connection
@@ -501,8 +532,10 @@ def createBookmark(bookmarkuuid, serverLabel, serverAddress, serverPassword, nic
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def createReturnCode(maxLen = 128):
+
+def createReturnCode(maxLen=128):
     """
     Creates a returnCode which can be passed to the other functions and will be passed to the event onServerErrorEvent.
     @param maxLen: length of the buffer, passed to the clientlib to store the path to, default value is 256
@@ -510,6 +543,8 @@ def createReturnCode(maxLen = 128):
     @return: the created returnCode
     @rtype: string
     """
+    return ""
+
 
 def destroyServerConnectionHandler(serverConnectionHandlerID):
     """
@@ -519,6 +554,8 @@ def destroyServerConnectionHandler(serverConnectionHandlerID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def flushChannelCreation(serverConnectionHandlerID, channelParentID, returnCode):
     """
@@ -532,6 +569,8 @@ def flushChannelCreation(serverConnectionHandlerID, channelParentID, returnCode)
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def flushChannelUpdates(serverConnectionHandlerID, channelID, returnCode):
     """
@@ -545,6 +584,8 @@ def flushChannelUpdates(serverConnectionHandlerID, channelID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def flushClientSelfUpdates(serverConnectionHandlerID, returnCode):
     """
@@ -556,8 +597,10 @@ def flushClientSelfUpdates(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def getAppPath(maxLen = 256):
+
+def getAppPath(maxLen=256):
     """
     Returns the ts3 application path.
     @param maxLen: length of the buffer, passed to the clientlib to store the path to, default value is 256
@@ -565,8 +608,10 @@ def getAppPath(maxLen = 256):
     @return: the application path
     @rtype: string
     """
+    return 0
 
-def getAvatar(serverConnectionHandlerID, clientID, maxLen = 256):
+
+def getAvatar(serverConnectionHandlerID, clientID, maxLen=256):
     """
     Returns the path on the system to the avatar image file of a client.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -578,6 +623,8 @@ def getAvatar(serverConnectionHandlerID, clientID, maxLen = 256):
     @return: a tuple, containing the errorcode and the path to the avatar
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getAverageTransferSpeed(transferID):
     """
@@ -587,6 +634,8 @@ def getAverageTransferSpeed(transferID):
     @return: a tuple, containing the errorcode and the speed
     @rtype: tuple (int, float)
     """
+    return 0,0.0
+
 
 def getBookmarkList():
     """
@@ -594,6 +643,8 @@ def getBookmarkList():
     @return: a tuple, containing the errorcode and a list of tuples (name, isFolder, uid, childs)
     @rtype: tuple (int, [tuple (string, int or bool, string or None, [childs])])
     """
+    return 0, ("",0, "", [])
+
 
 def getCaptureDeviceList(modeID):
     """
@@ -603,6 +654,8 @@ def getCaptureDeviceList(modeID):
     @return: A tuple, containing the errorcode and the list of capture devices as tuple (devicename, deviceid)
     @rtype: tuple (int, [(string, string)])
     """
+    return 0,[("","")]
+
 
 def getCaptureModeList():
     """
@@ -610,6 +663,8 @@ def getCaptureModeList():
     @return: A tuple, containing the errorcode and the list of capture modes
     @rtype: tuple (int, [string])
     """
+    return 0,[""]
+
 
 def getChannelClientList(serverConnectionHandlerID, channelID):
     """
@@ -621,6 +676,7 @@ def getChannelClientList(serverConnectionHandlerID, channelID):
     @return: a tuple, containing the errorcode and a list of client IDs or None if the call failed
     @rtype: tuple (int, [int]) or tuple(int, None)
     """
+    return 0,[0]
 
 def getChannelConnectInfo(serverConnectionHandlerID, channelID, maxLen):
     """
@@ -634,6 +690,8 @@ def getChannelConnectInfo(serverConnectionHandlerID, channelID, maxLen):
     @return: a tuple, containing the errorcode, the path and the password of a channel
     @rtype: tuple (int, string, string)
     """
+    return 0,"",""
+
 
 def getChannelIDFromChannelNames(serverConnectionHandlerID, channelNameArray):
     """
@@ -645,6 +703,8 @@ def getChannelIDFromChannelNames(serverConnectionHandlerID, channelNameArray):
     @return: a tuple, containing the errorcode and the ID of the channel
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getChannelList(serverConnectionHandlerID):
     """
@@ -654,6 +714,8 @@ def getChannelList(serverConnectionHandlerID):
     @return: a tuple, containing the errorcode and a list of channel IDs
     @rtype: tuple (int, [int])
     """
+    return 0,[0]
+
 
 def getChannelOfClient(serverConnectionHandlerID, clientID):
     """
@@ -665,6 +727,8 @@ def getChannelOfClient(serverConnectionHandlerID, clientID):
     @return: a tuple, containing the errorcode and the channel
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getChannelVariableAsInt(serverConnectionHandlerID, channelID, flag):
     """
@@ -678,6 +742,8 @@ def getChannelVariableAsInt(serverConnectionHandlerID, channelID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getChannelVariableAsString(serverConnectionHandlerID, channelID, flag):
     """
@@ -691,6 +757,8 @@ def getChannelVariableAsString(serverConnectionHandlerID, channelID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getChannelVariableAsUInt64(serverConnectionHandlerID, channelID, flag):
     """
@@ -704,8 +772,10 @@ def getChannelVariableAsUInt64(serverConnectionHandlerID, channelID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, int)
     """
+    return 0,0
 
-def getClientDisplayName(serverConnectionHandlerID, clientID, maxLen = 128):
+
+def getClientDisplayName(serverConnectionHandlerID, clientID, maxLen=128):
     """
     Returns the client display name receiving from the client's contacts settings.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -717,6 +787,8 @@ def getClientDisplayName(serverConnectionHandlerID, clientID, maxLen = 128):
     @return: a tuple, containing the errorcode and the display name
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getClientID(serverConnectionHandlerID):
     """
@@ -726,6 +798,8 @@ def getClientID(serverConnectionHandlerID):
     @return: a tuple, containing the errorcode and the client ID
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getClientLibVersion():
     """
@@ -733,6 +807,8 @@ def getClientLibVersion():
     @return: A tuple, containing the errorcode and the result
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getClientLibVersionNumber():
     """
@@ -740,6 +816,8 @@ def getClientLibVersionNumber():
     @return: A tuple, containing the errorcode and the result
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getClientList(serverConnectionHandlerID):
     """
@@ -749,6 +827,8 @@ def getClientList(serverConnectionHandlerID):
     @return: a tuple, containing the errorcode and the list of client IDs
     @rtype: tuple (int, [int])
     """
+    return 0,[0]
+
 
 def getClientNeededPermission(serverConnectionHandlerID, permissionName):
     """
@@ -760,6 +840,8 @@ def getClientNeededPermission(serverConnectionHandlerID, permissionName):
     @return: a tuple, containing the errorcode and the value of the permission
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getClientSelfVariableAsInt(serverConnectionHandlerID, flag):
     """
@@ -771,6 +853,8 @@ def getClientSelfVariableAsInt(serverConnectionHandlerID, flag):
     @return: a tuple, containing the errorcode and the value of the queried flag
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getClientSelfVariableAsString(serverConnectionHandlerID, flag):
     """
@@ -782,6 +866,8 @@ def getClientSelfVariableAsString(serverConnectionHandlerID, flag):
     @return: a tuple, containing the errorcode and the value of the queried flag
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getClientVariableAsInt(serverConnectionHandlerID, clientID, flag):
     """
@@ -795,6 +881,8 @@ def getClientVariableAsInt(serverConnectionHandlerID, clientID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getClientVariableAsString(serverConnectionHandlerID, clientID, flag):
     """
@@ -808,6 +896,8 @@ def getClientVariableAsString(serverConnectionHandlerID, clientID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getClientVariableAsUInt64(serverConnectionHandlerID, clientID, flag):
     """
@@ -821,8 +911,10 @@ def getClientVariableAsUInt64(serverConnectionHandlerID, clientID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, int)
     """
+    return 0,0
 
-def getConfigPath(maxLen = 256):
+
+def getConfigPath(maxLen=256):
     """
     Returns the ts3 config path.
     @param maxLen: length of the buffer, passed to the clientlib to store the path to, default value is 256
@@ -830,6 +922,8 @@ def getConfigPath(maxLen = 256):
     @return: the config path
     @rtype: string
     """
+    return ""
+
 
 def getConnectionStatus(serverConnectionHandlerID):
     """
@@ -839,6 +933,8 @@ def getConnectionStatus(serverConnectionHandlerID):
     @return: a tuple, containing the errorcode and the connection status
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getConnectionVariableAsDouble(serverConnectionHandlerID, clientID, flag):
     """
@@ -850,6 +946,8 @@ def getConnectionVariableAsDouble(serverConnectionHandlerID, clientID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, double)
     """
+    return 0,0.0
+
 
 def getConnectionVariableAsString(serverConnectionHandlerID, clientID, flag):
     """
@@ -861,6 +959,8 @@ def getConnectionVariableAsString(serverConnectionHandlerID, clientID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getConnectionVariableAsUInt64(serverConnectionHandlerID, clientID, flag):
     """
@@ -872,6 +972,8 @@ def getConnectionVariableAsUInt64(serverConnectionHandlerID, clientID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getCurrentCaptureDeviceName(serverConnectionHandlerID):
     """
@@ -881,6 +983,8 @@ def getCurrentCaptureDeviceName(serverConnectionHandlerID):
     @return: A tuple, containing the errorcode, the capture device's name and the status, if it's default
     @rtype: tuple (int, string, int)
     """
+    return 0,"",0
+
 
 def getCurrentCaptureMode(serverConnectionHandlerID):
     """
@@ -890,6 +994,8 @@ def getCurrentCaptureMode(serverConnectionHandlerID):
     @return: A tuple, containing the errorcode and the current capture mode
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getCurrentPlaybackDeviceName(serverConnectionHandlerID):
     """
@@ -899,6 +1005,8 @@ def getCurrentPlaybackDeviceName(serverConnectionHandlerID):
     @return: A tuple, containing the errorcode, the playback device's name and the status, if it's default
     @rtype: tuple (int, string, int)
     """
+    return 0,"",0
+
 
 def getCurrentPlayBackMode(serverConnectionHandlerID):
     """
@@ -908,6 +1016,8 @@ def getCurrentPlayBackMode(serverConnectionHandlerID):
     @return: A tuple, containing the errorcode and the current playback mode
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getCurrentServerConnectionHandlerID():
     """
@@ -915,6 +1025,8 @@ def getCurrentServerConnectionHandlerID():
     @return: the ID of the current serverconnection handler
     @rtype: int
     """
+    return 0
+
 
 def getCurrentTransferSpeed(transferID):
     """
@@ -924,6 +1036,8 @@ def getCurrentTransferSpeed(transferID):
     @return: a tuple, containing the errorcode and the speed
     @rtype: tuple (int, float)
     """
+    return 0,0.0
+
 
 def getDefaultCaptureDevice(modeID):
     """
@@ -933,6 +1047,8 @@ def getDefaultCaptureDevice(modeID):
     @return: A tuple, containing the errorcode and the default capture device as tuple (devicename, deviceid)
     @rtype: tuple (int, (string, string))
     """
+    return 0,("","")
+
 
 def getDefaultCaptureMode():
     """
@@ -940,6 +1056,8 @@ def getDefaultCaptureMode():
     @return: A tuple, containing the errorcode and the default capture mode
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getDefaultPlaybackDevice(modeID):
     """
@@ -949,6 +1067,8 @@ def getDefaultPlaybackDevice(modeID):
     @return: A tuple, containing the errorcode and the default playback device as tuple (devicename, deviceid)
     @rtype: tuple (int, (string, string))
     """
+    return 0,("","")
+
 
 def getDefaultPlayBackMode():
     """
@@ -956,8 +1076,10 @@ def getDefaultPlayBackMode():
     @return: A tuple, containing the errorcode and the default playback mode
     @rtype: tuple (int, string)
     """
+    return 0,""
 
-def getDirectories(path, maxLen = 256):
+
+def getDirectories(path, maxLen=256):
     """
     Returns a list of subdirectories of a path as space-separated string.
     @param path: the parent path
@@ -967,6 +1089,8 @@ def getDirectories(path, maxLen = 256):
     @return: the resulting path
     @rtype: string
     """
+    return ""
+
 
 def getEncodeConfigValue(serverConnectionHandlerID, ident):
     """
@@ -978,6 +1102,8 @@ def getEncodeConfigValue(serverConnectionHandlerID, ident):
     @return: A tuple, containing the errorcode and the flag's value
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getErrorMessage(errorCode):
     """
@@ -987,6 +1113,8 @@ def getErrorMessage(errorCode):
     @return: A tuple, containing the errorcode and the resulting string
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getHotkeyFromKeyword(keywords):
     """
@@ -996,6 +1124,8 @@ def getHotkeyFromKeyword(keywords):
     @return: a tuple containing the errorcode and the list of hotkeys
     @rtype: tuple(int, list[str])
     """
+    return 0,[""]
+
 
 def getParentChannelOfChannel(serverConnectionHandlerID, channelID):
     """
@@ -1007,6 +1137,8 @@ def getParentChannelOfChannel(serverConnectionHandlerID, channelID):
     @return: a tuple, containing the errorcode and the ID of the parent channel
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getPermissionIDByName(serverConnectionHandlerID, permissionName):
     """
@@ -1018,6 +1150,7 @@ def getPermissionIDByName(serverConnectionHandlerID, permissionName):
     @return: a tuple, containing the errorcode and the ID of the permission
     @rtype: tuple (int, int)
     """
+    return 0,0
 
 def getPlaybackConfigValueAsFloat(serverConnectionHandlerID, ident):
     """
@@ -1029,6 +1162,8 @@ def getPlaybackConfigValueAsFloat(serverConnectionHandlerID, ident):
     @return: A tuple, containing the errorcode and the flag's value
     @rtype: tuple (int, float)
     """
+    return 0,0.0
+
 
 def getPlaybackDeviceList(modeID):
     """
@@ -1038,6 +1173,8 @@ def getPlaybackDeviceList(modeID):
     @return: A tuple, containing the errorcode and the list of playback devices as tuple (devicename, deviceid)
     @rtype: tuple (int, [(string, string)])
     """
+    return 0,[("","")]
+
 
 def getPlaybackModeList():
     """
@@ -1045,6 +1182,8 @@ def getPlaybackModeList():
     @return: A tuple, containing the errorcode and the list of modes
     @rtype: tuple (int, [string])
     """
+    return 0,[""]
+
 
 def getPluginPath(maxLen):
     """
@@ -1054,6 +1193,8 @@ def getPluginPath(maxLen):
     @return: the pluginpath
     @rtype: str
     """
+    return ""
+
 
 def getPreProcessorInfoValue(serverConnectionHandlerID, ident):
     """
@@ -1065,6 +1206,8 @@ def getPreProcessorInfoValue(serverConnectionHandlerID, ident):
     @return: A tuple, containing the errorcode and the value of the queried flag
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getPreProcessorInfoValueFloat(serverConnectionHandlerID, ident):
     """
@@ -1076,6 +1219,8 @@ def getPreProcessorInfoValueFloat(serverConnectionHandlerID, ident):
     @return: A tuple, containing the errorcode and the value of the queried flag
     @rtype: tuple (int, float)
     """
+    return 0,0.0
+
 
 def getProfileList(profile):
     """
@@ -1085,8 +1230,10 @@ def getProfileList(profile):
     @return: a tuple, containing the errorcode, the default profile's index and the profile list
     @rtype: tuple (int, int, [string])
     """
+    return 0,0,[""]
 
-def getResourcesPath(maxLen = 256):
+
+def getResourcesPath(maxLen=256):
     """
     Returns the ts3 resources path.
     @param maxLen: length of the buffer, passed to the clientlib to store the path to. Optional, defaults to 256
@@ -1094,8 +1241,10 @@ def getResourcesPath(maxLen = 256):
     @return: the resources path
     @rtype: string
     """
+    return ""
 
-def getServerConnectInfo(serverConnectionHandlerID, maxLen = 256):
+
+def getServerConnectInfo(serverConnectionHandlerID, maxLen=256):
     """
     Returns the connect info (host, port and password) of a serverconnection.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -1105,6 +1254,8 @@ def getServerConnectInfo(serverConnectionHandlerID, maxLen = 256):
     @return: a tuple, containing the errorcode, the host, the port and the password of the serverconnection
     @rtype: tuple (int, string, int, string)
     """
+    return 0,"",0,""
+
 
 def getServerConnectionHandlerList():
     """
@@ -1112,6 +1263,8 @@ def getServerConnectionHandlerList():
     @return: a tuple, containing the errorcode and the list of serverconnection handler IDs
     @rtype: tuple (int, [int])
     """
+    return 0,[0]
+
 
 def getServerVariableAsInt(serverConnectionHandlerID, flag):
     """
@@ -1123,6 +1276,8 @@ def getServerVariableAsInt(serverConnectionHandlerID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getServerVariableAsString(serverConnectionHandlerID, flag):
     """
@@ -1134,6 +1289,8 @@ def getServerVariableAsString(serverConnectionHandlerID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getServerVariableAsUInt64(serverConnectionHandlerID, flag):
     """
@@ -1145,6 +1302,8 @@ def getServerVariableAsUInt64(serverConnectionHandlerID, flag):
     @return: a tuple, containing the errorcode and the value of the flag
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getServerVersion(serverConnectionHandlerID):
     """
@@ -1154,6 +1313,8 @@ def getServerVersion(serverConnectionHandlerID):
     @return: the server version
     @rtype: int
     """
+    return 0
+
 
 def getTransferFileName(transferID):
     """
@@ -1163,6 +1324,8 @@ def getTransferFileName(transferID):
     @return: a tuple, containing the errorcode and the filename
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getTransferFilePath(transferID):
     """
@@ -1172,6 +1335,8 @@ def getTransferFilePath(transferID):
     @return: a tuple, containing the errorcode and the filepath
     @rtype: tuple (int, string)
     """
+    return 0,""
+
 
 def getTransferFileSize(transferID):
     """
@@ -1181,6 +1346,8 @@ def getTransferFileSize(transferID):
     @return: a tuple, containing the errorcode and the filesize
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getTransferFileSizeDone(transferID):
     """
@@ -1190,6 +1357,8 @@ def getTransferFileSizeDone(transferID):
     @return: a tuple, containing the errorcode and the size
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getTransferRunTime(transferID):
     """
@@ -1199,6 +1368,8 @@ def getTransferRunTime(transferID):
     @return: a tuple, containing the errorcode and the runtime in seconds
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def getTransferStatus(transferID):
     """
@@ -1208,8 +1379,11 @@ def getTransferStatus(transferID):
     @return: a tuple, containing the errorcode and the status
     @rtype: tuple (int, int)
     """
+    return 0,0
 
-def guiConnect(connectTab, serverLabel, serverAddress, serverPassword, nickname, channel, channelPassword, captureProfile, playbackProfile, hotkeyProfile, userIdentity, oneTimeKey, phoneticName):
+
+def guiConnect(connectTab, serverLabel, serverAddress, serverPassword, nickname, channel, channelPassword,
+               captureProfile, playbackProfile, hotkeyProfile, userIdentity, oneTimeKey, phoneticName):
     """
     Connects to a server and displays it as tab in the client.
     @param connectTab: defines, which tab will be used, see ts3defines.PluginConnectTab
@@ -1241,6 +1415,8 @@ def guiConnect(connectTab, serverLabel, serverAddress, serverPassword, nickname,
     @return: a tuple, containing the errorcode and the ID of the created serverconnection handler
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def guiConnectBookmark(connectTab, bookmarkuuid):
     """
@@ -1252,6 +1428,8 @@ def guiConnectBookmark(connectTab, bookmarkuuid):
     @return: a tuple, containing the errorcode and the ID of the created serverconnection handler
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def haltTransfer(serverConnectionHandlerID, transferID, deleteUnfinishedFile, returnCode):
     """
@@ -1267,6 +1445,8 @@ def haltTransfer(serverConnectionHandlerID, transferID, deleteUnfinishedFile, re
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def initiateGracefulPlaybackShutdown(serverConnectionHandlerID):
     """
@@ -1276,6 +1456,8 @@ def initiateGracefulPlaybackShutdown(serverConnectionHandlerID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def isReceivingWhisper(serverConnectionHandlerID, clientID):
     """
@@ -1287,6 +1469,8 @@ def isReceivingWhisper(serverConnectionHandlerID, clientID):
     @return: a tuple, containing the errorcode and the status
     @rtype: tuple (int, int or bool)
     """
+    return 0,0
+
 
 def isTransferSender(transferID):
     """
@@ -1296,6 +1480,8 @@ def isTransferSender(transferID):
     @return: a tuple, containing the errorcode and 1 if it's an upload or 0 if it's a download
     @rtype: tuple (int, int or bool)
     """
+    return 0,0
+
 
 def isWhispering(serverConnectionHandlerID, clientID):
     """
@@ -1305,6 +1491,8 @@ def isWhispering(serverConnectionHandlerID, clientID):
     @return: a tuple, containing the errorcode and the status
     @rtype: tuple (int, int or bool)
     """
+    return 0,0
+
 
 def logMessage(logMessage, severity, channel, logID):
     """
@@ -1320,6 +1508,8 @@ def logMessage(logMessage, severity, channel, logID):
     @return: The errorcode
     @rtype: int
     """
+    return 0
+
 
 def openCaptureDevice(serverConnectionHandlerID, modeID, captureDevice):
     """
@@ -1333,6 +1523,8 @@ def openCaptureDevice(serverConnectionHandlerID, modeID, captureDevice):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def openPlaybackDevice(serverConnectionHandlerID, modeID, playbackDevice):
     """
@@ -1346,6 +1538,8 @@ def openPlaybackDevice(serverConnectionHandlerID, modeID, playbackDevice):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def pauseWaveFileHandle(serverConnectionHandlerID, waveHandle, pause):
     """
@@ -1359,6 +1553,8 @@ def pauseWaveFileHandle(serverConnectionHandlerID, waveHandle, pause):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def playWaveFile(serverConnectionHandlerID, path):
     """
@@ -1370,6 +1566,8 @@ def playWaveFile(serverConnectionHandlerID, path):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def playWaveFileHandle(serverConnectionHandlerID, path, loop):
     """
@@ -1383,6 +1581,8 @@ def playWaveFileHandle(serverConnectionHandlerID, path, loop):
     @return: A tuple, containing the errorcode and the handle, with which the sound can be paused and unpaused
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def printMessage(serverConnectionHandlerID, message, messageTarget):
     """
@@ -1394,6 +1594,8 @@ def printMessage(serverConnectionHandlerID, message, messageTarget):
     @param messageTarget: the target to send the message, see ts3defines.PluginMessageTarget
     @type messageTarget: int
     """
+    pass
+
 
 def printMessageToCurrentTab(message):
     """
@@ -1401,6 +1603,8 @@ def printMessageToCurrentTab(message):
     @param message: the message to send
     @type message: string
     """
+    pass
+
 
 def privilegeKeyUse(serverConnectionHandlerID, tokenKey, returnCode):
     """
@@ -1414,6 +1618,8 @@ def privilegeKeyUse(serverConnectionHandlerID, tokenKey, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def processCustomCaptureData(deviceName, buffer):
     """
@@ -1425,6 +1631,8 @@ def processCustomCaptureData(deviceName, buffer):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def registerCustomDevice(deviceID, deviceDisplayName, capFrequency, capChannels, playFrequency, playChannels):
     """
@@ -1444,6 +1652,8 @@ def registerCustomDevice(deviceID, deviceDisplayName, capFrequency, capChannels,
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestBanList(serverConnectionHandlerID, returnCode):
     """
@@ -1455,6 +1665,8 @@ def requestBanList(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelAddPerm(serverConnectionHandlerID, channelID, permissionIDArray, permissionValueArray, returnCode):
     """
@@ -1472,8 +1684,11 @@ def requestChannelAddPerm(serverConnectionHandlerID, channelID, permissionIDArra
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestChannelClientAddPerm(serverConnectionHandlerID, channelID, clientDatabaseID, permissionIDArray, permissionValueArray, returnCode):
+
+def requestChannelClientAddPerm(serverConnectionHandlerID, channelID, clientDatabaseID, permissionIDArray,
+                                permissionValueArray, returnCode):
     """
     Adds a list of permissions on a channel to a user.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -1491,6 +1706,8 @@ def requestChannelClientAddPerm(serverConnectionHandlerID, channelID, clientData
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelClientDelPerm(serverConnectionHandlerID, channelID, clientDatabaseID, permissionIDArray, returnCode):
     """
@@ -1508,6 +1725,8 @@ def requestChannelClientDelPerm(serverConnectionHandlerID, channelID, clientData
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelClientPermList(serverConnectionHandlerID, channelID, clientDatabaseID, returnCode):
     """
@@ -1523,6 +1742,8 @@ def requestChannelClientPermList(serverConnectionHandlerID, channelID, clientDat
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelDelete(serverConnectionHandlerID, channelID, force, returnCode):
     """
@@ -1538,6 +1759,8 @@ def requestChannelDelete(serverConnectionHandlerID, channelID, force, returnCode
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelDelPerm(serverConnectionHandlerID, channelID, permissionIDArray, returnCode):
     """
@@ -1553,6 +1776,8 @@ def requestChannelDelPerm(serverConnectionHandlerID, channelID, permissionIDArra
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelDescription(serverConnectionHandlerID, channelID, returnCode):
     """
@@ -1566,6 +1791,8 @@ def requestChannelDescription(serverConnectionHandlerID, channelID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelGroupAdd(serverConnectionHandlerID, groupName, groupType, returnCode):
     """
@@ -1581,8 +1808,11 @@ def requestChannelGroupAdd(serverConnectionHandlerID, groupName, groupType, retu
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestChannelGroupAddPerm(serverConnectionHandlerID, channelGroupID, continueonerror, permissionIDArray, permissionValueArray, returnCode):
+
+def requestChannelGroupAddPerm(serverConnectionHandlerID, channelGroupID, continueonerror, permissionIDArray,
+                               permissionValueArray, returnCode):
     """
     Adds a list of permissions to a channelgroup.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -1600,6 +1830,8 @@ def requestChannelGroupAddPerm(serverConnectionHandlerID, channelGroupID, contin
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelGroupDel(serverConnectionHandlerID, channelGroupID, force, returnCode):
     """
@@ -1615,8 +1847,11 @@ def requestChannelGroupDel(serverConnectionHandlerID, channelGroupID, force, ret
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestChannelGroupDelPerm(serverConnectionHandlerID, channelGroupID, continueOnError, permissionIDArray, returnCode):
+
+def requestChannelGroupDelPerm(serverConnectionHandlerID, channelGroupID, continueOnError, permissionIDArray,
+                               returnCode):
     """
     Deletes a list of permissions from a channelgroup.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -1632,6 +1867,8 @@ def requestChannelGroupDelPerm(serverConnectionHandlerID, channelGroupID, contin
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelGroupList(serverConnectionHandlerID, returnCode):
     """
@@ -1643,6 +1880,8 @@ def requestChannelGroupList(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelGroupPermList(serverConnectionHandlerID, channelGroupID, returnCode):
     """
@@ -1656,6 +1895,8 @@ def requestChannelGroupPermList(serverConnectionHandlerID, channelGroupID, retur
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelMove(serverConnectionHandlerID, channelID, newChannelParentID, newChannelOrder, returnCode):
     """
@@ -1673,6 +1914,8 @@ def requestChannelMove(serverConnectionHandlerID, channelID, newChannelParentID,
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelPermList(serverConnectionHandlerID, channelID, returnCode):
     """
@@ -1686,6 +1929,8 @@ def requestChannelPermList(serverConnectionHandlerID, channelID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelSubscribe(serverConnectionHandlerID, channelIDArray, returnCode):
     """
@@ -1699,6 +1944,8 @@ def requestChannelSubscribe(serverConnectionHandlerID, channelIDArray, returnCod
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelSubscribeAll(serverConnectionHandlerID, returnCode):
     """
@@ -1710,6 +1957,8 @@ def requestChannelSubscribeAll(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelUnsubscribe(serverConnectionHandlerID, channelIDArray, returnCode):
     """
@@ -1723,6 +1972,8 @@ def requestChannelUnsubscribe(serverConnectionHandlerID, channelIDArray, returnC
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestChannelUnsubscribeAll(serverConnectionHandlerID, returnCode):
     """
@@ -1734,8 +1985,11 @@ def requestChannelUnsubscribeAll(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestClientAddPerm(serverConnectionHandlerID, clientDatabaseID, permissionIDArray, permissionValueArray, permissionSkipArray, returnCode):
+
+def requestClientAddPerm(serverConnectionHandlerID, clientDatabaseID, permissionIDArray, permissionValueArray,
+                         permissionSkipArray, returnCode):
     """
     Adds a list of permissions to a user.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -1751,6 +2005,8 @@ def requestClientAddPerm(serverConnectionHandlerID, clientDatabaseID, permission
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientDBIDfromUID(serverConnectionHandlerID, clientUniqueIdentifier, returnCode):
     """
@@ -1764,6 +2020,8 @@ def requestClientDBIDfromUID(serverConnectionHandlerID, clientUniqueIdentifier, 
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientDelPerm(serverConnectionHandlerID, clientDatabaseID, permissionIDArray, returnCode):
     """
@@ -1779,6 +2037,8 @@ def requestClientDelPerm(serverConnectionHandlerID, clientDatabaseID, permission
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientEditDescription(serverConnectionHandlerID, clientID, clientDescription, returnCode):
     """
@@ -1794,6 +2054,8 @@ def requestClientEditDescription(serverConnectionHandlerID, clientID, clientDesc
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientIDs(serverConnectionHandlerID, clientUniqueIdentifier, returnCode):
     """
@@ -1807,6 +2069,8 @@ def requestClientIDs(serverConnectionHandlerID, clientUniqueIdentifier, returnCo
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientKickFromChannel(serverConnectionHandlerID, clientID, kickReason, returnCode):
     """
@@ -1820,6 +2084,8 @@ def requestClientKickFromChannel(serverConnectionHandlerID, clientID, kickReason
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientKickFromServer(serverConnectionHandlerID, clientID, kickReason, returnCode):
     """
@@ -1835,6 +2101,8 @@ def requestClientKickFromServer(serverConnectionHandlerID, clientID, kickReason,
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientMove(serverConnectionHandlerID, clientID, newChannelID, password, returnCode):
     """
@@ -1852,6 +2120,8 @@ def requestClientMove(serverConnectionHandlerID, clientID, newChannelID, passwor
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientNamefromDBID(serverConnectionHandlerID, clientDatabaseID, returnCode):
     """
@@ -1865,6 +2135,8 @@ def requestClientNamefromDBID(serverConnectionHandlerID, clientDatabaseID, retur
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientNamefromUID(serverConnectionHandlerID, clientUniqueIdentifier, returnCode):
     """
@@ -1878,6 +2150,8 @@ def requestClientNamefromUID(serverConnectionHandlerID, clientUniqueIdentifier, 
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientPermList(serverConnectionHandlerID, clientDatabaseID, returnCode):
     """
@@ -1891,6 +2165,8 @@ def requestClientPermList(serverConnectionHandlerID, clientDatabaseID, returnCod
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientPoke(serverConnectionHandlerID, clientID, message, returnCode):
     """
@@ -1906,6 +2182,8 @@ def requestClientPoke(serverConnectionHandlerID, clientID, message, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientSetIsTalker(serverConnectionHandlerID, clientID, isTalker, returnCode):
     """
@@ -1921,8 +2199,11 @@ def requestClientSetIsTalker(serverConnectionHandlerID, clientID, isTalker, retu
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestClientSetWhisperList(serverConnectionHandlerID, clientID, targetChannelIDArray, targetClientIDArray, returnCode):
+
+def requestClientSetWhisperList(serverConnectionHandlerID, clientID, targetChannelIDArray, targetClientIDArray,
+                                returnCode):
     """
     Modifies the whisper list of a client.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -1938,6 +2219,8 @@ def requestClientSetWhisperList(serverConnectionHandlerID, clientID, targetChann
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestClientVariables(serverConnectionHandlerID, clientID, returnCode):
     """
@@ -1951,6 +2234,8 @@ def requestClientVariables(serverConnectionHandlerID, clientID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestComplainAdd(serverConnectionHandlerID, targetClientDatabaseID, complainReason, returnCode):
     """
@@ -1966,6 +2251,8 @@ def requestComplainAdd(serverConnectionHandlerID, targetClientDatabaseID, compla
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestComplainDel(serverConnectionHandlerID, targetClientDatabaseID, fromClientDatabaseID, returnCode):
     """
@@ -1981,6 +2268,8 @@ def requestComplainDel(serverConnectionHandlerID, targetClientDatabaseID, fromCl
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestComplainDelAll(serverConnectionHandlerID, targetClientDatabaseID, returnCode):
     """
@@ -1994,6 +2283,8 @@ def requestComplainDelAll(serverConnectionHandlerID, targetClientDatabaseID, ret
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestComplainList(serverConnectionHandlerID, targetClientDatabaseID, returnCode):
     """
@@ -2007,6 +2298,8 @@ def requestComplainList(serverConnectionHandlerID, targetClientDatabaseID, retur
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestConnectionInfo(serverConnectionHandlerID, clientID, returnCode):
     """
@@ -2020,6 +2313,8 @@ def requestConnectionInfo(serverConnectionHandlerID, clientID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestCreateDirectory(serverConnectionHandlerID, channelID, channelPW, directoryPath, returnCode):
     """
@@ -2037,6 +2332,8 @@ def requestCreateDirectory(serverConnectionHandlerID, channelID, channelPW, dire
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestDeleteFile(serverConnectionHandlerID, channelID, channelPW, files, returnCode):
     """
@@ -2054,8 +2351,11 @@ def requestDeleteFile(serverConnectionHandlerID, channelID, channelPW, files, re
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestFile(serverConnectionHandlerID, channelID, channelPW, file, overwrite, resume, destinationDirectory, returnCode):
+
+def requestFile(serverConnectionHandlerID, channelID, channelPW, file, overwrite, resume, destinationDirectory,
+                returnCode):
     """
     Starts a filedownload from the server.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -2077,6 +2377,8 @@ def requestFile(serverConnectionHandlerID, channelID, channelPW, file, overwrite
     @return: a tuple, containing the errorcode and the ID of the filetransfer
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def requestFileInfo(serverConnectionHandlerID, channelID, channelPW, file, returnCode):
     """
@@ -2094,6 +2396,8 @@ def requestFileInfo(serverConnectionHandlerID, channelID, channelPW, file, retur
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestFileList(serverConnectionHandlerID, channelID, channelPW, path, returnCode):
     """
@@ -2111,6 +2415,8 @@ def requestFileList(serverConnectionHandlerID, channelID, channelPW, path, retur
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestHotkeyInputDialog(keyword, isDown, qParentWindow):
     """
@@ -2122,6 +2428,8 @@ def requestHotkeyInputDialog(keyword, isDown, qParentWindow):
     @param qParentWindow: the window on which the dialog is shown modal to, optional
     @type qParentWindow: QWidget
     """
+    pass
+
 
 def requestInfoUpdate(serverConnectionHandlerID, itemType, itemID):
     """
@@ -2135,6 +2443,8 @@ def requestInfoUpdate(serverConnectionHandlerID, itemType, itemID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestIsTalker(serverConnectionHandlerID, isTalkerRequest, isTalkerRequestMessage, returnCode):
     """
@@ -2150,6 +2460,8 @@ def requestIsTalker(serverConnectionHandlerID, isTalkerRequest, isTalkerRequestM
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestMessageAdd(serverConnectionHandlerID, toClientUID, subject, message, returnCode):
     """
@@ -2167,6 +2479,8 @@ def requestMessageAdd(serverConnectionHandlerID, toClientUID, subject, message, 
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestMessageDel(serverConnectionHandlerID, messageID, returnCode):
     """
@@ -2180,6 +2494,8 @@ def requestMessageDel(serverConnectionHandlerID, messageID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestMessageGet(serverConnectionHandlerID, messageID, returnCode):
     """
@@ -2193,6 +2509,8 @@ def requestMessageGet(serverConnectionHandlerID, messageID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestMessageList(serverConnectionHandlerID, returnCode):
     """
@@ -2204,6 +2522,8 @@ def requestMessageList(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestMessageUpdateFlag(serverConnectionHandlerID, messageID, flag, returnCode):
     """
@@ -2219,6 +2539,8 @@ def requestMessageUpdateFlag(serverConnectionHandlerID, messageID, flag, returnC
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestMuteClients(serverConnectionHandlerID, clientIDArray, returnCode):
     """
@@ -2232,6 +2554,8 @@ def requestMuteClients(serverConnectionHandlerID, clientIDArray, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestPermissionList(serverConnectionHandlerID, returnCode):
     """
@@ -2243,6 +2567,8 @@ def requestPermissionList(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestPermissionOverview(serverConnectionHandlerID, clientDBID, channelID, returnCode):
     """
@@ -2258,8 +2584,11 @@ def requestPermissionOverview(serverConnectionHandlerID, clientDBID, channelID, 
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestRenameFile(serverConnectionHandlerID, fromChannelID, channelPW, toChannelID, toChannelPW, oldFile, newFile, returnCode):
+
+def requestRenameFile(serverConnectionHandlerID, fromChannelID, channelPW, toChannelID, toChannelPW, oldFile, newFile,
+                      returnCode):
     """
     Renames a file or moves it to another channel.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -2281,6 +2610,8 @@ def requestRenameFile(serverConnectionHandlerID, fromChannelID, channelPW, toCha
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestSendChannelTextMsg(serverConnectionHandlerID, message, targetChannelID, returnCode):
     """
@@ -2296,6 +2627,8 @@ def requestSendChannelTextMsg(serverConnectionHandlerID, message, targetChannelI
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestSendClientQueryCommand(serverConnectionHandlerID, command, returnCode):
     """
@@ -2309,6 +2642,8 @@ def requestSendClientQueryCommand(serverConnectionHandlerID, command, returnCode
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestSendPrivateTextMsg(serverConnectionHandlerID, message, targetClientID, returnCode):
     """
@@ -2324,6 +2659,8 @@ def requestSendPrivateTextMsg(serverConnectionHandlerID, message, targetClientID
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestSendServerTextMsg(serverConnectionHandlerID, message, returnCode):
     """
@@ -2337,6 +2674,8 @@ def requestSendServerTextMsg(serverConnectionHandlerID, message, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupAdd(serverConnectionHandlerID, groupName, groupType, returnCode):
     """
@@ -2352,6 +2691,8 @@ def requestServerGroupAdd(serverConnectionHandlerID, groupName, groupType, retur
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupAddClient(serverConnectionHandlerID, serverGroupID, clientDatabaseID, returnCode):
     """
@@ -2367,8 +2708,11 @@ def requestServerGroupAddClient(serverConnectionHandlerID, serverGroupID, client
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestServerGroupAddPerm(serverConnectionHandlerID, serverGroupID, continueonerror, permissionIDArray, permissionValueArray, permissionNegatedArray, permissionSkipArray, returnCode):
+
+def requestServerGroupAddPerm(serverConnectionHandlerID, serverGroupID, continueonerror, permissionIDArray,
+                              permissionValueArray, permissionNegatedArray, permissionSkipArray, returnCode):
     """
     Adds a list of permissions to a servergroup.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -2390,6 +2734,8 @@ def requestServerGroupAddPerm(serverConnectionHandlerID, serverGroupID, continue
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupClientList(serverConnectionHandlerID, serverGroupID, withNames, returnCode):
     """
@@ -2405,6 +2751,8 @@ def requestServerGroupClientList(serverConnectionHandlerID, serverGroupID, withN
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupDel(serverConnectionHandlerID, serverGroupID, force, returnCode):
     """
@@ -2420,6 +2768,8 @@ def requestServerGroupDel(serverConnectionHandlerID, serverGroupID, force, retur
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupDelClient(serverConnectionHandlerID, serverGroupID, clientDatabaseID, returnCode):
     """
@@ -2435,6 +2785,8 @@ def requestServerGroupDelClient(serverConnectionHandlerID, serverGroupID, client
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupDelPerm(serverConnectionHandlerID, serverGroupID, continueOnError, permissionIDArray, returnCode):
     """
@@ -2452,6 +2804,8 @@ def requestServerGroupDelPerm(serverConnectionHandlerID, serverGroupID, continue
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupList(serverConnectionHandlerID, returnCode):
     """
@@ -2463,6 +2817,8 @@ def requestServerGroupList(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupPermList(serverConnectionHandlerID, serverGroupID, returnCode):
     """
@@ -2476,6 +2832,8 @@ def requestServerGroupPermList(serverConnectionHandlerID, serverGroupID, returnC
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerGroupsByClientID(serverConnectionHandlerID, clientDatabaseID, returnCode):
     """
@@ -2489,8 +2847,11 @@ def requestServerGroupsByClientID(serverConnectionHandlerID, clientDatabaseID, r
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestServerTemporaryPasswordAdd(serverConnectionHandlerID, password, description, duration, targetChannelID, targetChannelPW, returnCode):
+
+def requestServerTemporaryPasswordAdd(serverConnectionHandlerID, password, description, duration, targetChannelID,
+                                      targetChannelPW, returnCode):
     """
     Adds a temporary password to the server.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -2510,6 +2871,8 @@ def requestServerTemporaryPasswordAdd(serverConnectionHandlerID, password, descr
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerTemporaryPasswordDel(serverConnectionHandlerID, password, returnCode):
     """
@@ -2523,6 +2886,8 @@ def requestServerTemporaryPasswordDel(serverConnectionHandlerID, password, retur
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerTemporaryPasswordList(serverConnectionHandlerID, returnCode):
     """
@@ -2534,6 +2899,8 @@ def requestServerTemporaryPasswordList(serverConnectionHandlerID, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestServerVariables(serverConnectionHandlerID):
     """
@@ -2543,8 +2910,11 @@ def requestServerVariables(serverConnectionHandlerID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def requestSetClientChannelGroup(serverConnectionHandlerID, channelGroupIDArray, channelIDArray, clientDatabaseIDArray, returnCode):
+
+def requestSetClientChannelGroup(serverConnectionHandlerID, channelGroupIDArray, channelIDArray, clientDatabaseIDArray,
+                                 returnCode):
     """
     Adds a list of users to a list of channelgroups.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -2560,6 +2930,8 @@ def requestSetClientChannelGroup(serverConnectionHandlerID, channelGroupIDArray,
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def requestUnmuteClients(serverConnectionHandlerID, clientIDArray, returnCode):
     """
@@ -2573,6 +2945,8 @@ def requestUnmuteClients(serverConnectionHandlerID, clientIDArray, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def sendFile(serverConnectionHandlerID, channelID, channelPW, file, overwrite, resume, sourceDirectory, returnCode):
     """
@@ -2596,6 +2970,8 @@ def sendFile(serverConnectionHandlerID, channelID, channelPW, file, overwrite, r
     @return: a tuple, containing the errorcode and the ID of the filetransfer
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def sendPluginCommand(serverConnectionHandlerID, command, targetMode, targetIDs, returnCode):
     """
@@ -2611,6 +2987,8 @@ def sendPluginCommand(serverConnectionHandlerID, command, targetMode, targetIDs,
     @return: the errorcode (as this is wrapped in python, there could be errors)
     @rtype: int
     """
+    return 0
+
 
 def serverPropertyStringToFlag(serverPropertyString):
     """
@@ -2620,6 +2998,8 @@ def serverPropertyStringToFlag(serverPropertyString):
     @return: a tuple, containing the errorcode and the flag (see ts3defines.ClientProperties and ts3defines.ClientPropertiesRare)
     @rtype: tuple (int, int)
     """
+    return 0,0
+
 
 def set3DWaveAttributes(serverConnectionHandlerID, waveHandle, position):
     """
@@ -2633,6 +3013,8 @@ def set3DWaveAttributes(serverConnectionHandlerID, waveHandle, position):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def setChannelVariableAsInt(serverConnectionHandlerID, channelID, flag, value):
     """
@@ -2648,6 +3030,8 @@ def setChannelVariableAsInt(serverConnectionHandlerID, channelID, flag, value):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def setChannelVariableAsString(serverConnectionHandlerID, channelID, flag, value):
     """
@@ -2663,6 +3047,8 @@ def setChannelVariableAsString(serverConnectionHandlerID, channelID, flag, value
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def setChannelVariableAsUInt64(serverConnectionHandlerID, channelID, flag, value):
     """
@@ -2678,6 +3064,8 @@ def setChannelVariableAsUInt64(serverConnectionHandlerID, channelID, flag, value
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def setClientSelfVariableAsInt(serverConnectionHandlerID, flag, value):
     """
@@ -2691,6 +3079,8 @@ def setClientSelfVariableAsInt(serverConnectionHandlerID, flag, value):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def setClientSelfVariableAsString(serverConnectionHandlerID, flag, value):
     """
@@ -2704,6 +3094,8 @@ def setClientSelfVariableAsString(serverConnectionHandlerID, flag, value):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def setClientVolumeModifier(serverConnectionHandlerID, clientID, value):
     """
@@ -2717,6 +3109,8 @@ def setClientVolumeModifier(serverConnectionHandlerID, clientID, value):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def setPlaybackConfigValue(serverConnectionHandlerID, ident, value):
     """
@@ -2730,6 +3124,8 @@ def setPlaybackConfigValue(serverConnectionHandlerID, ident, value):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def setPluginMenuEnabled(menuID, enabled):
     """
@@ -2739,6 +3135,8 @@ def setPluginMenuEnabled(menuID, enabled):
     @param enabled: set to True to enable it, False otherwise
     @type enabled: bool
     """
+    pass
+
 
 def setPreProcessorConfigValue(serverConnectionHandlerID, ident, value):
     """
@@ -2752,11 +3150,15 @@ def setPreProcessorConfigValue(serverConnectionHandlerID, ident, value):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def showHotkeySetup():
     """
     Opens the hotkey settings in the TeamSpeak 3 client's settings dialog.
     """
+    pass
+
 
 def spawnNewServerConnectionHandler(port):
     """
@@ -2766,8 +3168,11 @@ def spawnNewServerConnectionHandler(port):
     @return: A tuple, containig the errorcode and the resulting ID
     @rtype: tuple (int, int)
     """
+    return 0,0
 
-def startConnection(serverConnectionHandlerID, identity, ip, port, nickname, defaultChannelArray, defaultChannelPassword, serverPassword):
+
+def startConnection(serverConnectionHandlerID, identity, ip, port, nickname, defaultChannelArray,
+                    defaultChannelPassword, serverPassword):
     """
     Starts a connection to the given server.
     @param serverConnectionHandlerID: the ID of the serverconnection
@@ -2789,6 +3194,8 @@ def startConnection(serverConnectionHandlerID, identity, ip, port, nickname, def
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def startVoiceRecording(serverConnectionHandlerID):
     """
@@ -2798,6 +3205,8 @@ def startVoiceRecording(serverConnectionHandlerID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def stopConnection(serverConnectionHandlerID, quitMessage):
     """
@@ -2809,6 +3218,8 @@ def stopConnection(serverConnectionHandlerID, quitMessage):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def stopVoiceRecording(serverConnectionHandlerID):
     """
@@ -2818,6 +3229,8 @@ def stopVoiceRecording(serverConnectionHandlerID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def systemset3DListenerAttributes(serverConnectionHandlerID, position, forward, up):
     """
@@ -2833,6 +3246,8 @@ def systemset3DListenerAttributes(serverConnectionHandlerID, position, forward, 
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def systemset3DSettings(serverConnectionHandlerID, distanceFactor, rolloffScale):
     """
@@ -2846,6 +3261,8 @@ def systemset3DSettings(serverConnectionHandlerID, distanceFactor, rolloffScale)
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def unregisterCustomDevice(deviceID):
     """
@@ -2855,8 +3272,10 @@ def unregisterCustomDevice(deviceID):
     @return: the errorcode
     @rtype: int
     """
+    return 0
 
-def urlsToBB(text, maxLen = 256):
+
+def urlsToBB(text, maxLen=256):
     """
     Converts an url to the BB-code respresentation.
     @param text: the url
@@ -2866,6 +3285,8 @@ def urlsToBB(text, maxLen = 256):
     @return: the BB-code representation
     @rtype: string
     """
+    pass
+
 
 def verifyChannelPassword(serverConnectionHandlerID, channelID, channelPassword, returnCode):
     """
@@ -2881,6 +3302,8 @@ def verifyChannelPassword(serverConnectionHandlerID, channelID, channelPassword,
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 def verifyServerPassword(serverConnectionHandlerID, serverPassword, returnCode):
     """
@@ -2894,8 +3317,14 @@ def verifyServerPassword(serverConnectionHandlerID, serverPassword, returnCode):
     @return: the errorcode
     @rtype: int
     """
+    return 0
+
 
 for func in dir(_ts3lib):
     if not func.startswith("__"):
-        if func not in globals():
-            globals()[func] = getattr(_ts3lib, func)
+        # if func not in globals():
+        globals()[func] = getattr(_ts3lib, func)
+
+def sendPluginCommand(schid, command, targetMode, targetIDs, *returnCode):
+    _PluginCommandHandler.sendPluginCommand(schid, command, targetMode,
+                                            targetIDs, *returnCode)
