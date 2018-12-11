@@ -22,6 +22,7 @@
           <option value="ts3lib.*" />
           <option value="PythonQt" />
           <option value="_ts3lib" />
+          <option value="pluginhost.PluginHost.*" />
         </list>
       </option>
     </inspection_tool>
