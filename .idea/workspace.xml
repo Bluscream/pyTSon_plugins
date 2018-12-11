@@ -9,7 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% gay LOL but works for python plugins">
       <change afterPath="$PROJECT_DIR$/scripts/bookmark/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/FileBrowser/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/FileBrowser/__init__.py" beforeDir="false" />
@@ -306,8 +305,8 @@
       <file pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/bluscream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+            <state relative-caret-position="173">
+              <caret line="688" column="13" selection-start-line="688" selection-start-column="4" selection-end-line="688" selection-end-column="13" />
               <folding>
                 <element signature="e#62#91#0" expanded="true" />
                 <element signature="e#832#949#0" />
@@ -323,8 +322,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2160">
-              <caret line="120" column="39" selection-start-line="120" selection-end-line="120" selection-end-column="39" />
+            <state relative-caret-position="632">
+              <caret line="538" column="29" selection-start-line="538" selection-start-column="29" selection-end-line="538" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -353,8 +352,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/exporter/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="61" column="17" lean-forward="true" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
+            <state relative-caret-position="645">
+              <caret line="124" column="38" lean-forward="true" selection-start-line="124" selection-start-column="38" selection-end-line="124" selection-end-column="38" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -373,11 +372,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>split</find>
-      <find>bool</find>
-      <find>flood</find>
-      <find>insu</find>
-      <find>insufficient permission modify power</find>
       <find>insufficient</find>
       <find>modify</find>
       <find>QTIMER.s</find>
@@ -403,6 +397,11 @@
       <find>ts3funcs</find>
       <find>^\s+pass</find>
       <find>processc</find>
+      <find>= 30</find>
+      <find>=</find>
+      <find>retcodes</find>
+      <find>\\</find>
+      <find>\\p</find>
     </findStrings>
     <replaceStrings>
       <replace>True</replace>
@@ -1000,13 +999,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00437" summary="% autoProxy now properly casing added whitelist entries">
-      <created>1534559905051</created>
-      <option name="number" value="00437" />
-      <option name="presentableId" value="LOCAL-00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1534559905052</updated>
-    </task>
     <task id="LOCAL-00438" summary="% CustomBadges updated to 0.9.5&#10;% autoProxy now ignores servernicknames (resolving will come in the future)">
       <created>1534953186396</created>
       <option name="number" value="00438" />
@@ -1343,7 +1335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544493581365</updated>
     </task>
-    <option name="localTasksCounter" value="486" />
+    <task id="LOCAL-00486" summary="% gay LOL but works for python plugins">
+      <created>1544497151349</created>
+      <option name="number" value="00486" />
+      <option name="presentableId" value="LOCAL-00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1544497151350</updated>
+    </task>
+    <option name="localTasksCounter" value="487" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1503,9 +1502,9 @@
     <MESSAGE value="%" />
     <MESSAGE value="% rip" />
     <MESSAGE value="% temp" />
-    <MESSAGE value="% gay LOL but works for python plugins" />
     <MESSAGE value="fixed ts3lib" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed ts3lib" />
+    <MESSAGE value="% gay LOL but works for python plugins" />
+    <option name="LAST_COMMIT_MESSAGE" value="% gay LOL but works for python plugins" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1560,13 +1559,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scripts/autoJoin/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="936">
-          <caret line="56" column="55" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoSubscribe/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1824,28 +1816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
-          <folding>
-            <element signature="e#62#91#0" expanded="true" />
-            <element signature="e#832#949#0" />
-            <element signature="e#1196#1251#0" />
-            <element signature="e#1264#1307#0" />
-            <element signature="e#1320#1363#0" />
-            <element signature="e#1389#1450#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2160">
-          <caret line="120" column="39" selection-start-line="120" selection-end-line="120" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../pyTSon/pyTSon.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="882">
@@ -1870,6 +1840,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="632">
+          <caret line="538" column="29" selection-start-line="538" selection-start-column="29" selection-end-line="538" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3Ext/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="839">
@@ -1880,10 +1857,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/bluscream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="688" column="13" selection-start-line="688" selection-start-column="4" selection-end-line="688" selection-end-column="13" />
+          <folding>
+            <element signature="e#62#91#0" expanded="true" />
+            <element signature="e#832#949#0" />
+            <element signature="e#1196#1251#0" />
+            <element signature="e#1264#1307#0" />
+            <element signature="e#1320#1363#0" />
+            <element signature="e#1389#1450#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/pluginhost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/exporter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="61" column="17" lean-forward="true" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
+        <state relative-caret-position="645">
+          <caret line="124" column="38" lean-forward="true" selection-start-line="124" selection-start-column="38" selection-end-line="124" selection-end-column="38" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
