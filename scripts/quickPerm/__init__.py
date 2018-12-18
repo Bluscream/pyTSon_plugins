@@ -37,7 +37,7 @@ class quickPerm(ts3plugin):
             # if len(perm) < 2: return False
             # if len(perm) == 2: perm.append(False).append(False)
             skip = args[2] if len(args) > 2 else False
-            val = boolean(perm[1]) if len(args) > 1 else True
+            val = boolean(args[1]) if len(args) > 1 else True
             perm = args[0]
             (err, pid) = ts3lib.getPermissionIDByName(schid, perm)
             ts3lib.printMessageToCurrentTab("Requesting \"{}\" ({})".format(perm,pid))
@@ -99,11 +99,13 @@ class quickPerm(ts3plugin):
         # if invokerClientID == ownID: return
         (err, dgid) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_SERVER_GROUP)
         if sgid == dgid: return
-        # self.getPerms(schid, clientID, sgid)
+        self.getPerms(schid, clid, sgid)
+        """
         for sgid in [167,169,165,168]:
             (err, cldbid) = ts3lib.getClientVariable(schid, clid, ClientPropertiesRare.CLIENT_DATABASE_ID)
             ts3lib.requestServerGroupDelClient(schid, sgid, cldbid)
             # ts3lib.requestServerGroupAddPerm(schid, sgid, 1, [166], [75], [0], [0])
+        """
 
     def getPerms(self, schid, clid = 0, sgid = 0):
         if self.flood: return
