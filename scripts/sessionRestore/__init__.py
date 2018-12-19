@@ -1,11 +1,12 @@
-import ts3lib
-from json import dump, dumps
+import ts3lib, os
+from json import dump, load
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
-from bluscream import timestamp, log
-from ts3defines import LogLevel, ConnectStatus, ClientProperties, VirtualServerProperties, PluginConnectTab, ERROR_ok
+from bluscream import log, getScriptPath
+from ts3defines import LogLevel, ConnectStatus, PluginConnectTab, ERROR_ok
 
 class sessionRestore(ts3plugin):
+    path = getScriptPath(__name__)
     name = "Session Restore"
     apiVersion = 22
     requestAutoload = True
@@ -18,9 +19,13 @@ class sessionRestore(ts3plugin):
     menuItems = []
     hotkeys = []
     timer = QTimer()
+    restoretimers = []
     delay = 2500
     ts3host = None
     tabs = {}
+    _tabs = {}
+    backup_file = os.path.join(path, "session.json")
+    first = True
 
     def __init__(self):
         if "aaa_ts3Ext" in PluginHost.active:
@@ -43,10 +48,13 @@ class sessionRestore(ts3plugin):
             if self.timer.isActive(): self.timer.stop()
 
     def saveTabs(self):
-        print(self.tabs)
-        print(dumps(self.tabs))
-        with open('data.json', 'w') as outfile:
-            dump(self.tabs, outfile)
+        tabs = {}
+        for tab in self.tabs:
+            if self.tabs[tab]["status"] == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+                tabs[tab] = self.tabs[tab]
+        if not len(tabs): return
+        with open(self.backup_file, 'w') as outfile:
+            dump(tabs, outfile)
 
     def restoreTabs(self):
         err, schids = ts3lib.getServerConnectionHandlerList()
@@ -56,27 +64,33 @@ class sessionRestore(ts3plugin):
             (err, status) = ts3lib.getConnectionStatus(schid)
             if err != ERROR_ok: return
             if status != ConnectStatus.STATUS_DISCONNECTED: return
-        for tab in self.tabs:
-            if self.tabs[tab]["status"] == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-                self.restoreTab(self.tabs[tab])
+        self._tabs = {}
+        self.restoretimers = {}
+        with open(self.backup_file) as f:
+            self._tabs = load(f)
+        for tab in self._tabs:
+            # if self._tabs[tab]["status"] == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
+            self.restoretimers[tab] = QTimer().singleShot(self.delay, self.restoreTab)
 
-    def restoreTab(self, tab):
-        print("Restoring tab: {0}".format(self.tabs[tab]))
+    def restoreTab(self):
+        tab = self._tabs.pop(0)
+        print("Restoring tab: {0}".format(tab))
         args = [
-            PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, # connectTab: int,
-            self.tabs[tab]["name"], # serverLabel: Union[str, unicode],
-            '{}:{}'.format(self.tabs[tab]["host"], self.tabs[tab]["port"]) if hasattr(self.tabs[tab], 'port') else self.tabs[tab]["host"], # serverAddress: Union[str, unicode],
-            self.tabs[tab]["pw"], # serverPassword: Union[str, unicode],
-            self.tabs[tab]["nick"], # nickname: Union[str, unicode],
-            self.tabs[tab]["cpath"], # channel: Union[str, unicode],
-            self.tabs[tab]["cpw"], # channelPassword: Union[str, unicode]
+            PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED if self.first else PluginConnectTab.PLUGIN_CONNECT_TAB_NEW, # connectTab: int,
+            tab["name"], # serverLabel: Union[str, unicode],
+            '{}:{}'.format(tab["host"], tab["port"]) if hasattr(tab, 'port') else tab["host"], # serverAddress: Union[str, unicode],
+            tab["pw"], # serverPassword: Union[str, unicode],
+            tab["nick"], # nickname: Union[str, unicode],
+            tab["cpath"], # channel: Union[str, unicode],
+            tab["cpw"], # channelPassword: Union[str, unicode]
             "", # captureProfile: Union[str, unicode],
             "", # playbackProfile: Union[str, unicode]
             "", # hotkeyProfile: Union[str, unicode],
             "Default Sound Pack (Female)", # soundPack
-            self.tabs[tab]["uid"], # userIdentity: Union[str, unicode],
-            self.tabs[tab]["token"], # oneTimeKey: Union[str, unicode],
-            self.tabs[tab]["name_phonetic"] # phoneticName: Union[str, unicode]
+            tab["uid"], # userIdentity: Union[str, unicode],
+            tab["token"], # oneTimeKey: Union[str, unicode],
+            tab["nick_phonetic"] # phoneticName: Union[str, unicode]
         ]
         print("ts3lib.guiConnect({})".format("\", \"".join(str(x) for x in args)))
         ts3lib.guiConnect(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12], args[13])
+        if self.first: self.first = False
