@@ -1,14 +1,14 @@
 import ts3lib, ts3defines
 from datetime import datetime
-from ts3plugin import ts3plugin
+from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
-from bluscream import timestamp
-from ts3defines import LogLevel
+from bluscream import timestamp, log
+from ts3defines import LogLevel, TextMessageTargetMode
 
 class antiServerKick(ts3plugin):
     name = "Anti Server Kick"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Auto rejoin servers after you got kicked."
@@ -20,65 +20,61 @@ class antiServerKick(ts3plugin):
     debug = False
     whitelistUIDs = ["serveradmin"]
     delay = 2500
+    timer = QTimer()
     tabs = {}
     schid = 0
 
-
-    def log(self, logLevel, message, schid=0):
-        ts3lib.logMessage(message, logLevel, self.name, schid)
-        if logLevel in [LogLevel.LogLevel_DEBUG, LogLevel.LogLevel_DEVEL] and self.debug:
-            ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=timestamp(), name=self.name, message=message), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
-
     def __init__(self):
-        schid = ts3lib.getCurrentServerConnectionHandlerID()
-        (err, status) = ts3lib.getConnectionStatus(schid)
-        if err == ts3defines.ERROR_ok and status == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.saveTab(schid)
-        self.log(LogLevel.LogLevel_DEBUG, "Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author))
-
-    def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
-        if newStatus == ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: self.saveTab(schid)
-
-    def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):
-        if schid not in self.tabs: return
-        if clientID != self.tabs[schid]["clid"]: return
-        # (err, pw) = ts3lib.getChannelVariable(schid, newChannelID, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-        (err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"]) = ts3lib.getChannelConnectInfo(schid, newChannelID)
-        self.log(LogLevel.LogLevel_DEBUG, "Tab updated: {}".format(self.tabs[schid]), schid)
-
-    def onClientSelfVariableUpdateEvent(self, schid, flag, oldValue, newValue):
-        if flag != ts3defines.ClientProperties.CLIENT_NICKNAME: return
-        if schid not in self.tabs: return
-        self.tabs[schid]["nick"] = newValue
-        self.log(LogLevel.LogLevel_DEBUG, "Tab updated: {}".format(self.tabs[schid]), schid)
+        if "aaa_ts3Ext" in PluginHost.active:
+            self.tabs = PluginHost.active["aaa_ts3Ext"].tabs
+            ts3lib.logMessage("{}: Dependency loaded".format(self.name), ts3defines.LogLevel.LogLevel_WARNING, "pyTSon", 0)
+        else:
+            retry = 1000
+            self.timer.singleShot(retry, self.__init__)
+            # ts3lib.logMessage("{}: Dependency not yet loaded, retrying in {} second(s)!".format(self.name, retry/1000), ts3defines.LogLevel.LogLevel_WARNING, "pyTSon", 0)
+            return
+        log(self, LogLevel.LogLevel_DEBUG, "[color=orange]{0}[/color] Plugin for pyTSon by [url=https://github.com/{1}]{1}[/url] loaded.".format(self.name, self.author), 0)
 
     def onClientKickFromServerEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
-        self.log(LogLevel.LogLevel_DEBUG, "kicked")
         if kickerID == clientID: return
-        if clientID != self.tabs[schid]["clid"]: return
-        if kickerUniqueIdentifier in self.whitelistUIDs: return
+        print(self.tabs)
         if schid not in self.tabs: return
+        print("test1")
+        if clientID != self.tabs[schid]["clid"]: return
+        print("test2")
+        if kickerUniqueIdentifier in self.whitelistUIDs: return
+        print("test3")
         if self.delay > 0:
             self.schid = schid
             QTimer.singleShot(self.delay, self.reconnect)
         else: self.reconnect(schid)
 
-    def saveTab(self, schid):
-        if schid not in self.tabs:
-            self.tabs[schid] = {}
-        (err, self.tabs[schid]["name"]) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-        (err, self.tabs[schid]["host"], self.tabs[schid]["port"], self.tabs[schid]["pw"]) = ts3lib.getServerConnectInfo(schid)
-        (err, self.tabs[schid]["clid"]) = ts3lib.getClientID(schid)
-        (err, self.tabs[schid]["nick"]) = ts3lib.getClientDisplayName(schid, self.tabs[schid]["clid"])
-        (err, cid) = ts3lib.getChannelOfClient(schid, self.tabs[schid]["clid"])
-        (err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"]) = ts3lib.getChannelConnectInfo(schid, cid)
-        self.log(LogLevel.LogLevel_DEBUG, "Saved Tab: {}".format(self.tabs[schid]), schid)
-
     def reconnect(self, schid=None):
-        schid = schid if schid else self.schid
-        self.log(LogLevel.LogLevel_DEBUG, "Reconnecting to tab: {0}".format(self.tabs[schid]))
-        # ts3lib.startConnection
-        ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT, self.tabs[schid]["name"],
-                       '{}:{}'.format(self.tabs[schid]["host"], self.tabs[schid]["port"]) if hasattr(self.tabs[schid], 'port') else self.tabs[schid]["host"],
-                        self.tabs[schid]["pw"],
-                       self.tabs[schid]["nick"], self.tabs[schid]["cpath"], self.tabs[schid]["cpw"], "", "", "", "", "", "", "")
-        self.schid = 0
+        try:
+            print("test4")
+            schid = schid if schid else self.schid
+            print("test5")
+            args = [
+                ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, # connectTab: int,
+                self.tabs[schid]["name"], # serverLabel: Union[str, unicode],
+                self.tabs[schid]["address"], # serverAddress: Union[str, unicode],
+                self.tabs[schid]["pw"], # serverPassword: Union[str, unicode],
+                self.tabs[schid]["nick"], # nickname: Union[str, unicode],
+                self.tabs[schid]["cpath"], # channel: Union[str, unicode],
+                self.tabs[schid]["cpw"], # channelPassword: Union[str, unicode]
+                "", # captureProfile: Union[str, unicode],
+                "", # playbackProfile: Union[str, unicode]
+                "", # hotkeyProfile: Union[str, unicode],
+                "Default Sound Pack (Female)", # soundPack
+                self.tabs[schid]["uid"], # userIdentity: Union[str, unicode],
+                self.tabs[schid]["token"], # oneTimeKey: Union[str, unicode],
+                self.tabs[schid]["nick_phonetic"] # phoneticName: Union[str, unicode]
+            ]
+            print("test6")
+            print("ts3lib.guiConnect({})".format("\", \"".join(str(x) for x in args)))
+            print("test7")
+            ts3lib.guiConnect(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12], args[13])
+            self.schid = 0
+            print("test6")
+        except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
