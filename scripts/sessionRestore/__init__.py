@@ -19,8 +19,8 @@ class sessionRestore(ts3plugin):
     menuItems = []
     hotkeys = []
     timer = QTimer()
-    restoretimers = []
-    delay = 2500
+    delay = 500
+    increase = 2000
     ts3host = None
     tabs = {}
     _tabs = {}
@@ -65,12 +65,13 @@ class sessionRestore(ts3plugin):
             if err != ERROR_ok: return
             if status != ConnectStatus.STATUS_DISCONNECTED: return
         self._tabs = {}
-        self.restoretimers = {}
+        self.restoretimers = []
         with open(self.backup_file) as f:
             self._tabs = load(f)
         for tab in self._tabs:
             # if self._tabs[tab]["status"] == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            self.restoretimers[tab] = QTimer().singleShot(self.delay, self.restoreTab)
+            QTimer().singleShot(self.delay, self.restoreTab)
+            self.delay += self.increase
 
     def restoreTab(self):
         tab = self._tabs.pop(0)
