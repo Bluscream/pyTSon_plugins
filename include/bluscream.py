@@ -16,13 +16,14 @@ from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
 from re import match, sub, compile, escape, search, IGNORECASE, MULTILINE
+import ts3lib, os.path, string, random, ts3client, time, sys, codecs, ts3enums
+from ts3enums import GroupType, AntiFloodPoints, color, ServerInstanceType, ContactStatus
+from ts3defines import *
 try: from psutil import Process
 except ImportError:
     from devtools import PluginInstaller
     PluginInstaller().installPackages(['psutil'])
     from psutil import Process
-import ts3lib, ts3defines, os.path, string, random, ts3client, time, sys, codecs
-from ts3enums import *
 try: from calculator import NumericStringParser
 except ImportError: print(format_exc())
 #endregion
@@ -52,7 +53,7 @@ class EncodedOut:
     def __exit__(self, exc_ty, exc_val, tb):
         sys.stdout = self.stdout
 
-def log(message, channel=ts3defines.LogLevel.LogLevel_INFO, server=0):
+def log(message, channel=LogLevel.LogLevel_INFO, server=0):
     """
     :param message:
     :param channel:
@@ -142,12 +143,12 @@ def getItemType(lst):
     :param lst:
     :return:
     """
-    if lst in [ts3defines.VirtualServerProperties, ts3defines.VirtualServerPropertiesRare]:
-        return ts3defines.PluginItemType.PLUGIN_SERVER, "Server"
-    elif lst in [ts3defines.ChannelProperties, ts3defines.ChannelPropertiesRare]:
-        return ts3defines.PluginItemType.PLUGIN_CHANNEL, "Channel"
-    elif lst in [ts3defines.ConnectionProperties, ts3defines.ConnectionPropertiesRare, ts3defines.ClientProperties, ts3defines.ClientPropertiesRare]:
-        return ts3defines.PluginItemType.PLUGIN_CLIENT, "Client"
+    if lst in [VirtualServerProperties, VirtualServerPropertiesRare]:
+        return PluginItemType.PLUGIN_SERVER, "Server"
+    elif lst in [ChannelProperties, ChannelPropertiesRare]:
+        return PluginItemType.PLUGIN_CHANNEL, "Channel"
+    elif lst in [ConnectionProperties, ConnectionPropertiesRare, ClientProperties, ClientPropertiesRare]:
+        return PluginItemType.PLUGIN_CLIENT, "Client"
     else: return None
 
 def find_between(s, first, last):
@@ -186,8 +187,13 @@ def generateAvatarFileName(schid, clid=0):
     :return:
     """
     if clid == 0: (error, clid) = ts3lib.getClientID(schid)
-    (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+    (error, uid) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
     return "avatar_"+b64encode(uid.encode('ascii')).decode("ascii").split('=')[0]
+
+def log(plugin, logLevel, message, schid=0, target=TextMessageTargetMode.TextMessageTarget_SERVER):
+    err = ts3lib.logMessage(message, logLevel, plugin.name, schid)  # type: int
+    if err != ERROR_ok or (logLevel in [LogLevel.LogLevel_DEBUG, LogLevel.LogLevel_DEVEL] and PluginHost.cfg.getboolean("general", "verbose")):
+        ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=timestamp(), name=plugin.name, message=message), target)
 #endregion
 #region PARSING
 def serverURL(schid=None, name=None):
@@ -195,7 +201,7 @@ def serverURL(schid=None, name=None):
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
     if name is None:
-        try: (error, name) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+        try: (error, name) = ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_NAME)
         except: name = schid
     return '[b][url=channelid://0]"{}"[/url][/b]'.format(name)
 
@@ -210,7 +216,7 @@ def channelURL(schid=None, cid=0, name=None):
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
     if name is None:
-        try: (error, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        try: (error, name) = ts3lib.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
         except: name = cid
     return '[b][url=channelid://{0}]"{1}"[/url][/b]'.format(cid, name)
 
@@ -237,10 +243,10 @@ def clientURL(schid=0, clid=0, uid="", nickname="", nickname_encoded="", quote=T
         try: schid = ts3lib.getCurrentServerConnectionHandlerID()
         except: pass
     if not uid:
-        try: (error, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        try: (error, uid) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         except: pass
     if not nickname:
-        try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        try: (error, nickname) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_NICKNAME)
         except: nickname = uid
     if not nickname_encoded:
         try: nickname_encoded = quote_plus(nickname)
@@ -269,14 +275,14 @@ def getChannelPassword(schid:int, cid:int, crack:bool=False, ask:bool=False, cal
     :return password: the possible password
     """
     # type: (int, int, bool, bool, bool) -> str
-    (err, passworded) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_FLAG_PASSWORD)
-    if err != ts3defines.ERROR_ok or not passworded:
+    (err, passworded) = ts3lib.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_FLAG_PASSWORD)
+    if err != ERROR_ok or not passworded:
         return False
     (err, path, pw) = ts3lib.getChannelConnectInfo(schid, cid)
     if pw:
         return pw
-    (err, name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
-    if err != ts3defines.ERROR_ok or not name: return err
+    (err, name) = ts3lib.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
+    if err != ERROR_ok or not name: return err
     name = name.strip()
     pattern = r"(?:pw|pass(?:wor[dt])?)[|:=]?\s*(.*)"
     # pattern = r"^.*[kennwort|pw|password|passwort|pass|passwd](.*)$"
@@ -294,7 +300,7 @@ def getChannelPassword(schid:int, cid:int, crack:bool=False, ask:bool=False, cal
         return last
     if crack:
         active = PluginHost.active
-        if "PW Cracker" in active: active["PW Cracker"].onMenuItemEvent(schid, ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, cid)
+        if "PW Cracker" in active: active["PW Cracker"].onMenuItemEvent(schid, PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, cid)
     if ask:
         pw = inputBox("Enter Channel Password", "Password:", name)
         return pw
@@ -307,15 +313,15 @@ def getChannelPassword(schid:int, cid:int, crack:bool=False, ask:bool=False, cal
 def getClientIDByUID(schid, uid):
     (err, clids) = ts3lib.getClientList(schid)
     for clid in clids:
-        (err, _uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        (err, _uid) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if uid == _uid: return clid
     return False
 
 def getServerType(schid, pattern=None):
-    err, ver = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_VERSION)
-    if err != ts3defines.ERROR_ok or not ver: return ServerInstanceType.UNKNOWN
-    err, platform = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_PLATFORM)
-    if err != ts3defines.ERROR_ok or not platform: return ServerInstanceType.UNKNOWN
+    err, ver = ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_VERSION)
+    if err != ERROR_ok or not ver: return ServerInstanceType.UNKNOWN
+    err, platform = ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_PLATFORM)
+    if err != ERROR_ok or not platform: return ServerInstanceType.UNKNOWN
     valid_platform = platform in ["Windows", "Linux", "OS X", "FreeBSD"]
     if pattern is not None: valid_version = pattern.match(ver)
     else: valid_version = match('3(?:\.\d+)* \[Build: \d+\]', ver)
@@ -332,7 +338,7 @@ def getClientIDByName(name:str, schid:int=0, use_displayname:bool=False, multi:b
     (err, clids) = ts3lib.getClientList(schid)
     for clid in clids:
         if use_displayname:(err, _name) = ts3lib.getClientDisplayName(schid, clid)
-        else: (err, _name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        else: (err, _name) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_NICKNAME)
         if name == _name:
             if multi: results.append(clid)
             else: return clid
@@ -343,7 +349,7 @@ def getChannelIDByName(name:str, schid:int=0, multi:bool=False):
     if multi: results = []
     (err, cids) = ts3lib.getChannelList(schid)
     for cid in cids:
-        (err, _name) = ts3lib.getChannelVariable(schid, cid, ts3defines.ChannelProperties.CHANNEL_NAME)
+        (err, _name) = ts3lib.getChannelVariable(schid, cid, ChannelProperties.CHANNEL_NAME)
         if name == _name:
             if multi: results.append(cid)
             else: return cid
@@ -351,7 +357,7 @@ def getChannelIDByName(name:str, schid:int=0, multi:bool=False):
 
 def getIDByName(name:str, schid:int=0):
     if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
-    err, sname = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
+    err, sname = ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_NAME)
     if sname == name: return 0, ServerTreeItemType.SERVER
     cid = getChannelIDByName(name, schid)
     if cid: return cid, ServerTreeItemType.CHANNEL
@@ -360,7 +366,7 @@ def getIDByName(name:str, schid:int=0):
     return 0, ServerTreeItemType.UNKNOWN
 
 def answerMessage(schid:int, targetMode:int, fromID:int, message:str, returnCode:str="", prefix:bool=True):
-    mode = ts3defines.TextMessageTargetMode
+    mode = TextMessageTargetMode
     if prefix and targetMode == mode.TextMessageTarget_CHANNEL: message = "{}: {}".format(clientURL(schid, fromID, quote=False, mention=True), message)
     print(message)
     message = [message[i:i + 900] for i in range(0, len(message), 900)]
@@ -379,9 +385,9 @@ def getAntiFloodSettings(schid):
     :param schid:
     :return:
     """
-    (err, cmdblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
-    (err, ipblock) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
-    (err, afreduce) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
+    (err, cmdblock) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_COMMAND_BLOCK)
+    (err, ipblock) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_NEEDED_IP_BLOCK)
+    (err, afreduce) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_ANTIFLOOD_POINTS_TICK_REDUCE)
     return err, cmdblock, ipblock, afreduce
 
 def calculateInterval(schid, command, name="pyTSon"):
@@ -396,11 +402,11 @@ def calculateInterval(schid, command, name="pyTSon"):
     # strange = False
     # for var in [cmdblock, ipblock, afreduce]:
         # if not var or var < 0 or var == "": strange = True
-    # if err != ts3defines.ERROR_ok or strange:
+    # if err != ERROR_ok or strange:
         # ts3lib.requestServerVariables(schid)
         # (err, cmdblock, ipblock, afreduce) = getAntiFloodSettings(schid)
     interval = round(1000/(afreduce/command))
-    ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command, locals()), command, interval), ts3defines.LogLevel.LogLevel_INFO, "pyTSon", 0)
+    ts3lib.logMessage("{}: schid = {} | err = {} | afreduce = {} | cmdblock = {} | ipblock = {} | points_per_{} = {} |interval = {}".format(name, schid, err, afreduce, cmdblock, ipblock, varname(command, locals()), command, interval), LogLevel.LogLevel_INFO, "pyTSon", 0)
     return interval
 #endregion
 #region I/O
@@ -524,7 +530,7 @@ def grabWidget(objName, byClass=False):
         try:
             if byClass and widget.className() == objName: return widget
             elif widget.objectName == objName: return widget
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "PyTSon", 0)
+        except: ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "PyTSon", 0)
 
 def findWidget(name):
     try:
@@ -621,6 +627,22 @@ def getAddonStatus(filename_without_extension="", name=""): # getAddonStatus("TS
             if filename == filename_without_extension:
                 return  AddonStatus.INSTALLED #, ExtendedAddonStatus.FOLDER
     return AddonStatus.UNKNOWN #, ExtendedAddonStatus.UNKNOWN
+
+def getClientCounts(schid):
+    ret = {"total": {}, "visible": {}, "hidden": {}}
+    err, visible = ts3lib.getClientList(schid)
+    ret["visible"]["users"] = 0
+    ret["visible"]["queries"] = 0
+    for clid in visible:
+        (err, ctype) = ts3lib.getClientVariable(schid, clid, ClientPropertiesRare.CLIENT_TYPE)
+        if ctype == ClientType.ClientType_NORMAL: ret["visible"]["users"] += 1
+        elif ctype == ClientType.ClientType_SERVERQUERY: ret["visible"]["queries"] += 1
+    ret["visible"]["total"] = ret["visible"]["users"]+ret["visible"]["queries"] # len(visible)
+    (err, ret["total"]["clients"]) = ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_CLIENTS_ONLINE)
+    (err, ret["total"]["queries"]) = ts3lib.getServerVariable(schid, VirtualServerPropertiesRare.VIRTUALSERVER_QUERYCLIENTS_ONLINE)
+    (err, ret["max"]) = ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_MAXCLIENTS)
+    ret["hidden"]["total"] = ret["total"]["clients"]-ret["visible"]["total"]
+    return ret
 #endregion
 #region Database
 def getAddons():
@@ -638,7 +660,7 @@ def getAddons():
             for l in val.split('\n'):
                 l = l.split('=', 1)
                 ret[key][l[0]] = l[1]
-        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
+        except: ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "pyTSon", 0);continue
     return ret
 
 def getContacts():
@@ -752,7 +774,7 @@ def parseBadgesBlob(blob: QByteArray):
                 next = (next + guid_len + 2 + name_len + 2 + url_len + 2 + desc_len + 13)
             delimiter = blob.mid(0, 12)
         except:
-            ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "pyTSon", 0)
             pass
     return ret, blob
 
@@ -816,7 +838,7 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False, mode=2):
     """
     if schid == 0: schid = ts3lib.getCurrentServerConnectionHandlerID()
     if PluginHost.cfg.getboolean("general", "verbose") or not silent:
-        ts3lib.printMessage(schid, '{timestamp} [color=orange]{name}[/color]:[color=white] {prefix}{message}'.format(timestamp=timestamp(), name=name, prefix="-" if reverse else "~", message=cmd), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        ts3lib.printMessage(schid, '{timestamp} [color=orange]{name}[/color]:[color=white] {prefix}{message}'.format(timestamp=timestamp(), name=name, prefix="-" if reverse else "~", message=cmd), PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
     print("mode:",mode)
     if mode == HookMode.TS3HOOK:
         cmd = "{}cmd{}".format("-" if reverse else "~", cmd.replace(" ", "~s"))
@@ -826,8 +848,8 @@ def sendCommand(name, cmd, schid=0, silent=True, reverse=False, mode=2):
     (err, clid) = ts3lib.getClientID(schid)
     retcode = "" # "TS3Hook:Command:{}".format(ts3lib.createReturnCode(256))
     err = ts3lib.requestSendPrivateTextMsg(schid, cmd, clid, retcode)
-    if err != ts3defines.ERROR_ok: ts3lib.requestSendChannelTextMsg(schid, cmd, 0, retcode)
-    if err != ts3defines.ERROR_ok: ts3lib.requestSendServerTextMsg(schid, cmd, retcode)
+    if err != ERROR_ok: ts3lib.requestSendChannelTextMsg(schid, cmd, 0, retcode)
+    if err != ERROR_ok: ts3lib.requestSendServerTextMsg(schid, cmd, retcode)
 #endregion
 #region DEFINES
 dlpath = ""
@@ -840,8 +862,8 @@ class HookMode(object):
 """
     def log(self, logLevel, message, schid=0):
         ts3lib.logMessage(message, logLevel, self.name, schid)
-        if logLevel in [ts3defines.LogLevel.LogLevel_DEBUG, ts3defines.LogLevel.LogLevel_DEVEL] and self.debug:
-            ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=self.timestamp(), name=self.name, message=message), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+        if logLevel in [LogLevel.LogLevel_DEBUG, LogLevel.LogLevel_DEVEL] and self.debug:
+            ts3lib.printMessage(schid if schid else ts3lib.getCurrentServerConnectionHandlerID(), '{timestamp} [color=orange]{name}[/color]: {message}'.format(timestamp=self.timestamp(), name=self.name, message=message), PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
 """
 """
