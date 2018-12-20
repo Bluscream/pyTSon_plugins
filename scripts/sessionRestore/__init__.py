@@ -70,7 +70,7 @@ class sessionRestore(ts3plugin):
             self._tabs = load(f)
         for tab in self._tabs:
             # if self._tabs[tab]["status"] == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
-            QTimer().singleShot(self.delay, self.restoreTab)
+            self.restoretimers.append(QTimer().singleShot(self.delay, self.restoreTab))
             self.delay += self.increase
 
     def restoreTab(self):
