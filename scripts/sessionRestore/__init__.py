@@ -3,7 +3,7 @@ from json import dump, load
 from ts3plugin import ts3plugin, PluginHost
 from PythonQt.QtCore import QTimer
 from bluscream import log, getScriptPath, msgBox
-from ts3defines import LogLevel, ConnectStatus, PluginConnectTab, ERROR_ok
+from ts3defines import LogLevel, ConnectStatus, PluginConnectTab, ERROR_ok, ClientProperties
 from traceback import format_exc
 
 class sessionRestore(ts3plugin):
@@ -99,8 +99,10 @@ class sessionRestore(ts3plugin):
             ]
             if self.first: self.first = False
             print("ts3lib.guiConnect({})".format("\", \"".join(str(x) for x in args)))
-            ts3lib.guiConnect(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12], args[13])
+            err, schid = ts3lib.guiConnect(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12], args[13])
             self._timers.pop(0)
+            ts3lib.setClientSelfVariableAsString(schid, ClientProperties.CLIENT_INPUT_MUTED, tab["input_muted"])
+            ts3lib.setClientSelfVariableAsString(schid, ClientProperties.CLIENT_OUTPUT_MUTED, tab["output_muted"])
         except: ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def menuCreated(self):
