@@ -211,6 +211,7 @@ class BanDialog(QDialog):
                 reason = "§" + reason
             duration = self.int_duration.value
             if self.moveBeforeBan: ts3lib.requestClientMove(self.schid, self.clid, 26, "")
+            # if uid:
             if ip:
                 check = True
                 if len(self.whitelist) < 1: check = confirm("Empty IP Whitelist!", "The IP whitelist is empty! Are you sure you want to ban \"{}\"?\n\nMake sure your whitelist URL\n{}\nis working!".format(ip, self.cfg.get("general", "whitelist")))

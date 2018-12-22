@@ -8,7 +8,7 @@ class recordSpam(ts3plugin):
     name = "Record Spam"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "( .) ( .)"

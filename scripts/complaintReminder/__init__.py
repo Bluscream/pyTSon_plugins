@@ -10,7 +10,7 @@ class complaintReminder(ts3plugin):
     name = "Complaint Reminder"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Reminds you about due complaints."

@@ -18,7 +18,7 @@ except ImportError: print(format_exc())
 class chatBot(ts3plugin):
     name = "Chat Bot"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "A simple chatbot for Teamspeak 3 Clients"

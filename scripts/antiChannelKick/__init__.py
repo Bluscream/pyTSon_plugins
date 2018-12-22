@@ -7,7 +7,7 @@ from bluscream import intList, getChannelPassword
 class antiChannelKick(ts3plugin):
     name = "Anti Channel Kick"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Auto rejoin channels you got kicked from."

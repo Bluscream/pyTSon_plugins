@@ -14,7 +14,7 @@ def inputBox(title, text):
 class autoTPRequest(ts3plugin):
     name = "Auto Talk Power Request"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Automatically request talk power when switching channels.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

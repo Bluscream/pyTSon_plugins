@@ -35,7 +35,7 @@ try:
         banned = False
         banned_names = ["BAN", "NOT WELCOME"]
         mod_names = ["MOD", "OPERATOR"]
-        admin_names = ["ADMIN"]
+        # admin_names = ["ADMIN"]
         sbgroup = 0
         smgroup = 0
         sagroup = 0

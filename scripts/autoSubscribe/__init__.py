@@ -56,7 +56,7 @@ class autoSubscribe(ts3plugin):
     name = "Auto Subscribe"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Manage your channel subscriptions the way YOU want."

@@ -228,9 +228,12 @@ Changelog.html
 VERSION
 
 #Own includes
-!include/autorun.py
-!include/getvalues.py
-!include/bluscream.py
+!/include/autorun.py
+!/include/getvalues.py
+!/include/bluscream.py
+!/include/ts3enums.py
+!/include/calculator.py
+!/include/ts3Ext/
 
 #Additional docs
 !docs/pyQt 5.url
@@ -247,9 +250,7 @@ VERSION
 !/docs/Variables.url
 !/include/ts3lib.py
 !/include/ts3help.py
-!/include/ts3enums.py
 !/include/ts3cloud_proxy.py
-!/include/calculator.py
 /scripts/pip.exe
 /scripts/pip3.5.exe
 /scripts/pip3.exe

@@ -1,2 +1,0 @@
-# Sream Chat pyTSon script
-

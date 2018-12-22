@@ -12,7 +12,7 @@ class autoProxy(ts3plugin):
     name = "Automatic Proxy"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = False
+    requestAutoload = True
     version = "1.2"
     author = "Bluscream"
     description = "Uses ts3.cloud's ts3proxy service to switch to a proxy on every connection."
@@ -32,7 +32,7 @@ class autoProxy(ts3plugin):
     whitelist_ini = "%s/whitelist.txt" % path
     whitelist = []
     backup = {"address": "127.0.0.1:9987", "nickname": "", "phonetic": "", "token": "", "c": "AFK", "cpw": "123", "pw": "123"}
-    enabled = True
+    enabled = False
 
     def __init__(self):
         content = []

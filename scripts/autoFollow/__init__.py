@@ -8,7 +8,7 @@ from bluscream import timestamp, clientURL, channelURL, getChannelPassword, getC
 class autoFollow(ts3plugin):
     name = "Auto Follow (former Love Plugin)"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.1"
     author = "Bluscream"
     description = """Auto Follow specified users around. Supports several methods to read channel passwords.

@@ -12,7 +12,7 @@ import ts3defines, ts3lib, pytson
 class massAction(ts3plugin):
     name = "Mass Actions"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Gives you the ability to take actions to all users in a channel or the server."

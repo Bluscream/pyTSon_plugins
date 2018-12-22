@@ -8,7 +8,7 @@ from bluscream import timestamp, clientURL, channelURL, inputBox
 class joinChannel(ts3plugin):
     name = "Channel Queue"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Let's you join a channel instantly after enough slots have been free'd."

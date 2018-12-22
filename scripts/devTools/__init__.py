@@ -381,7 +381,7 @@ try:
 
     class devTools(ts3plugin):
         name = "Developer Tools"
-        requestAutoload = False
+        requestAutoload = True
         version = "1.3"
         apiVersion = 22
         author = "Thomas \"PLuS\" Pathmann, Bluscream"

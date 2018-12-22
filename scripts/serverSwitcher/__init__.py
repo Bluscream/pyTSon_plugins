@@ -16,7 +16,7 @@ class serverSwitcher(ts3plugin):
     tag = "tabs"
     name = 'Server Switcher'
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = '1.0'
     author = 'Bluscream'
     description = 'Show others that you just switched to another tab.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins.'

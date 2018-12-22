@@ -4,7 +4,7 @@ from PythonQt.QtCore import QTimer
 
 class autopoke(ts3plugin):
     name = "kickoldself"
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     apiVersion = 22
     author = "Thomas \"PLuS\" Pathmann, Edited by Bluscream"

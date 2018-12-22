@@ -260,6 +260,11 @@ def getConnectionVariable(schid, clientID, flag):
         return _ts3lib.getConnectionVariableAsString(schid, clientID, flag)
 
 
+
+def sendPluginCommand(schid, command, targetMode, targetIDs, *returnCode):
+    _PluginCommandHandler.sendPluginCommand(schid, command, targetMode,
+                                            targetIDs, *returnCode)
+
 def getPluginID():
     """
     Returns pyTSon's plugin id
@@ -496,7 +501,6 @@ def closeWaveFileHandle(serverConnectionHandlerID, waveHandle):
     @rtype: int
     """
     return 0
-
 
 def createBookmark(bookmarkuuid, serverLabel, serverAddress, serverPassword, nickname, channel, channelPassword,
                    captureProfile, playbackProfile, hotkeyProfile, soundProfile, uniqueUserId, oneTimeKey,
@@ -1686,7 +1690,6 @@ def requestChannelAddPerm(serverConnectionHandlerID, channelID, permissionIDArra
     """
     return 0
 
-
 def requestChannelClientAddPerm(serverConnectionHandlerID, channelID, clientDatabaseID, permissionIDArray,
                                 permissionValueArray, returnCode):
     """
@@ -1810,7 +1813,6 @@ def requestChannelGroupAdd(serverConnectionHandlerID, groupName, groupType, retu
     """
     return 0
 
-
 def requestChannelGroupAddPerm(serverConnectionHandlerID, channelGroupID, continueonerror, permissionIDArray,
                                permissionValueArray, returnCode):
     """
@@ -1848,7 +1850,6 @@ def requestChannelGroupDel(serverConnectionHandlerID, channelGroupID, force, ret
     @rtype: int
     """
     return 0
-
 
 def requestChannelGroupDelPerm(serverConnectionHandlerID, channelGroupID, continueOnError, permissionIDArray,
                                returnCode):
@@ -1986,7 +1987,6 @@ def requestChannelUnsubscribeAll(serverConnectionHandlerID, returnCode):
     @rtype: int
     """
     return 0
-
 
 def requestClientAddPerm(serverConnectionHandlerID, clientDatabaseID, permissionIDArray, permissionValueArray,
                          permissionSkipArray, returnCode):
@@ -2201,7 +2201,6 @@ def requestClientSetIsTalker(serverConnectionHandlerID, clientID, isTalker, retu
     """
     return 0
 
-
 def requestClientSetWhisperList(serverConnectionHandlerID, clientID, targetChannelIDArray, targetClientIDArray,
                                 returnCode):
     """
@@ -2352,7 +2351,6 @@ def requestDeleteFile(serverConnectionHandlerID, channelID, channelPW, files, re
     @rtype: int
     """
     return 0
-
 
 def requestFile(serverConnectionHandlerID, channelID, channelPW, file, overwrite, resume, destinationDirectory,
                 returnCode):
@@ -2586,7 +2584,6 @@ def requestPermissionOverview(serverConnectionHandlerID, clientDBID, channelID, 
     """
     return 0
 
-
 def requestRenameFile(serverConnectionHandlerID, fromChannelID, channelPW, toChannelID, toChannelPW, oldFile, newFile,
                       returnCode):
     """
@@ -2709,7 +2706,6 @@ def requestServerGroupAddClient(serverConnectionHandlerID, serverGroupID, client
     @rtype: int
     """
     return 0
-
 
 def requestServerGroupAddPerm(serverConnectionHandlerID, serverGroupID, continueonerror, permissionIDArray,
                               permissionValueArray, permissionNegatedArray, permissionSkipArray, returnCode):
@@ -2849,7 +2845,6 @@ def requestServerGroupsByClientID(serverConnectionHandlerID, clientDatabaseID, r
     """
     return 0
 
-
 def requestServerTemporaryPasswordAdd(serverConnectionHandlerID, password, description, duration, targetChannelID,
                                       targetChannelPW, returnCode):
     """
@@ -2911,7 +2906,6 @@ def requestServerVariables(serverConnectionHandlerID):
     @rtype: int
     """
     return 0
-
 
 def requestSetClientChannelGroup(serverConnectionHandlerID, channelGroupIDArray, channelIDArray, clientDatabaseIDArray,
                                  returnCode):
@@ -3170,7 +3164,6 @@ def spawnNewServerConnectionHandler(port):
     """
     return 0,0
 
-
 def startConnection(serverConnectionHandlerID, identity, ip, port, nickname, defaultChannelArray,
                     defaultChannelPassword, serverPassword):
     """
@@ -3274,7 +3267,6 @@ def unregisterCustomDevice(deviceID):
     """
     return 0
 
-
 def urlsToBB(text, maxLen=256):
     """
     Converts an url to the BB-code respresentation.
@@ -3322,6 +3314,8 @@ def verifyServerPassword(serverConnectionHandlerID, serverPassword, returnCode):
 
 for func in dir(_ts3lib):
     if not func.startswith("__"):
+        if func not in globals():
+            globals()[func] = getattr(_ts3lib, func)
         # if func not in globals():
         globals()[func] = getattr(_ts3lib, func)
 

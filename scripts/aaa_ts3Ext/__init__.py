@@ -47,18 +47,23 @@ class aaa_ts3Ext(ts3plugin):
                 "channelModGroup": None,
                 # "srv": srv,
             }
-            err, self.tabs[schid]["name"] = ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_NAME)
-            err, self.tabs[schid]["host"], self.tabs[schid]["port"], self.tabs[schid]["pw"] = ts3lib.getServerConnectInfo(schid)
-            self.tabs[schid]["address"] = '{}:{}'.format(self.tabs[schid]["host"], self.tabs[schid]["port"]) if hasattr(self.tabs[schid], 'port') else self.tabs[schid]["host"]
-            err, self.tabs[schid]["clid"] = ts3lib.getClientID(schid)
-            err, self.tabs[schid]["nick"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_NICKNAME) # ts3lib.getClientVariable(schid, self.tabs[schid]["clid"], ClientProperties.CLIENT_NICKNAME)
-            err, self.tabs[schid]["nick_phonetic"] = ts3lib.getClientSelfVariable(schid, ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
-            err, self.tabs[schid]["uid"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
-            err, self.tabs[schid]["token"] = ts3lib.getClientSelfVariable(schid, ClientPropertiesRare.CLIENT_DEFAULT_TOKEN)
-            err, self.tabs[schid]["cid"] = ts3lib.getChannelOfClient(schid, self.tabs[schid]["clid"])
-            err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"] = ts3lib.getChannelConnectInfo(schid, self.tabs[schid]["cid"])
             srv.requestServerGroupList()
             srv.requestChannelGroupList()
+            self.tabs[schid]["name"] = srv.name # ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_NAME)
+            err, self.tabs[schid]["host"], self.tabs[schid]["port"], self.tabs[schid]["pw"] = ts3lib.getServerConnectInfo(schid)
+            self.tabs[schid]["address"] = '{}:{}'.format(self.tabs[schid]["host"], self.tabs[schid]["port"]) if hasattr(self.tabs[schid], 'port') else self.tabs[schid]["host"]
+            self.tabs[schid]["clid"] = srv.me.clientID
+            self.tabs[schid]["nick"] = srv.me.name # ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_NICKNAME) # ts3lib.getClientVariable(schid, self.tabs[schid]["clid"], ClientProperties.CLIENT_NICKNAME)
+            err, self.tabs[schid]["nick_phonetic"] = ts3lib.getClientSelfVariable(schid, ClientPropertiesRare.CLIENT_NICKNAME_PHONETIC)
+            self.tabs[schid]["uid"] = srv.me.uid # ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+            err, self.tabs[schid]["token"] = ts3lib.getClientSelfVariable(schid, ClientPropertiesRare.CLIENT_DEFAULT_TOKEN)
+            self.tabs[schid]["cid"] = srv.me.channel.channelID # ts3lib.getChannelOfClient(schid, self.tabs[schid]["clid"])
+            err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"] = ts3lib.getChannelConnectInfo(schid, self.tabs[schid]["cid"])
+            self.tabs[schid]["input_muted"] = srv.me.isInputMuted
+            err, self.tabs[schid]["input_deactivated"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_INPUT_DEACTIVATED)
+            err, self.tabs[schid]["input_enabled"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_INPUT_HARDWARE)
+            self.tabs[schid]["output_muted"] = srv.me.isOutputMuted
+            err, self.tabs[schid]["output_enabled"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_OUTPUT_HARDWARE)
         # elif status == ConnectStatus.STATUS_DISCONNECTED:
         if schid in self.tabs: self.tabs[schid]["status"] = status
 
@@ -69,17 +74,17 @@ class aaa_ts3Ext(ts3plugin):
 
     def onChannelGroupListEvent(self, schid, channelGroupID, name, atype, iconID, saveDB):
         if atype != GroupType.REGULAR: return
+        srv = self.ts3host.getServer(schid)
+        srv.updateChannelGroup(channelGroupID, name, iconID)
         tab = self.tabs[schid]
         for _name in self.banned_names:
             if _name in name.upper():
                 tab["channelBanGroup"] = channelGroupID
-                break
+                return
         for _name in self.mod_names:
             if _name in name.upper():
                 tab["channelModGroup"] = channelGroupID
-                break
-        srv = self.ts3host.getServer(schid)
-        srv.updateChannelGroup(channelGroupID, name, iconID)
+                return
 
     def onTalkStatusChangeEvent(self, schid, status, isReceivedWhisper, clientID):
         self.ts3host.getServer(schid).updateTalkStatus(clientID, status, isReceivedWhisper)
@@ -100,6 +105,16 @@ class aaa_ts3Ext(ts3plugin):
             self.tabs[schid]["uid"] = newValue
         elif flag == ClientPropertiesRare.CLIENT_DEFAULT_TOKEN:
             self.tabs[schid]["token"] = newValue
+        elif flag == ClientProperties.CLIENT_INPUT_MUTED:
+            self.tabs[schid]["input_muted"] = newValue
+        elif flag == ClientProperties.CLIENT_INPUT_DEACTIVATED:
+            self.tabs[schid]["input_deactivated"] = newValue
+        elif flag == ClientProperties.CLIENT_INPUT_HARDWARE:
+            self.tabs[schid]["input_enabled"] = newValue
+        elif flag == ClientProperties.CLIENT_OUTPUT_MUTED:
+            self.tabs[schid]["output_muted"] = newValue
+        elif flag == ClientProperties.CLIENT_OUTPUT_HARDWARE:
+            self.tabs[schid]["output_enabled"] = newValue
 
     def onPacketOut(self, msg, schid):
         if schid in self.tabs:

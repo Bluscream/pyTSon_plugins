@@ -11,7 +11,7 @@ from pytsonui import setupUi
 class channelGroupChanger(ts3plugin):
     name = "Channel Group Changer"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Change Channelgroup of clients that are not in the target channel.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

@@ -7,7 +7,7 @@ from bluscream import timestamp, clientURL, channelURL
 class autoDrag(ts3plugin):
     name = "Auto Drag"
     apiVersion = 22
-    requestAutoload = False
+    requestAutoload = True
     version = "1.0"
     author = "Bluscream"
     description = "Auto drag specified users around."

@@ -37,13 +37,9 @@ class antiServerKick(ts3plugin):
 
     def onClientKickFromServerEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, kickerID, kickerName, kickerUniqueIdentifier, kickMessage):
         if kickerID == clientID: return
-        print(self.tabs)
         if schid not in self.tabs: return
-        print("test1")
         if clientID != self.tabs[schid]["clid"]: return
-        print("test2")
         if kickerUniqueIdentifier in self.whitelistUIDs: return
-        print("test3")
         if self.delay > 0:
             self.schid = schid
             QTimer.singleShot(self.delay, self.reconnect)
@@ -51,9 +47,7 @@ class antiServerKick(ts3plugin):
 
     def reconnect(self, schid=None):
         try:
-            print("test4")
             schid = schid if schid else self.schid
-            print("test5")
             args = [
                 ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, # connectTab: int,
                 self.tabs[schid]["name"], # serverLabel: Union[str, unicode],
@@ -70,11 +64,8 @@ class antiServerKick(ts3plugin):
                 self.tabs[schid]["token"], # oneTimeKey: Union[str, unicode],
                 self.tabs[schid]["nick_phonetic"] # phoneticName: Union[str, unicode]
             ]
-            print("test6")
             print("ts3lib.guiConnect({})".format("\", \"".join(str(x) for x in args)))
-            print("test7")
             ts3lib.guiConnect(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12], args[13])
             self.schid = 0
-            print("test6")
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 

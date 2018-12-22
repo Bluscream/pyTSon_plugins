@@ -2,10 +2,11 @@ import ts3lib, ts3defines
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
 from PythonQt.QtCore import QTimer
-from bluscream import timestamp, intList, getContactStatus, ContactStatus, sendCommand
+from bluscream import timestamp, sendCommand, getScriptPath
 # from ts3Ext import ts3SessionHost as ts3host
 
 class dontHide(ts3plugin):
+    path = getScriptPath(__name__)
     name = "Don't Hide"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 22
@@ -20,6 +21,7 @@ class dontHide(ts3plugin):
     hotkeys = []
     timer = QTimer()
     ts3host = None
+    schid = None
 
     def __init__(self):
         if "aaa_ts3Ext" in PluginHost.active:
@@ -39,13 +41,17 @@ class dontHide(ts3plugin):
 
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
-        counts = self.getClientCounts(schid)
+        self.schid = schid
+        self.timer.singleShot(1000, self.printHidden)
+
+    def printHidden(self):
+        counts = self.getClientCounts(self.schid)
         if counts["hidden"]["total"] > 0:
-            ts3lib.printMessage(schid, "[color=orange][b]{}[/b] hidden users on this server!".format(counts["hidden"]["total"]), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
+            ts3lib.printMessage(self.schid, "[color=orange][b]{}[/b] users are hidden on this server!".format(counts["hidden"]["total"]), ts3defines.PluginMessageTarget.PLUGIN_MESSAGE_TARGET_SERVER)
 
     def getClientCounts(self, schid):
         ret = {"total": {}, "visible": {}, "hidden": {}}
-        visible = self.ts3host.getServer(schid).users
+        visible = self.ts3host.getServer(schid).users # err, visible = ts3lib.getClientList(schid)
         ret["visible"]["users"] = 0
         ret["visible"]["queries"] = 0
         for user in visible:
@@ -63,7 +69,7 @@ class dontHide(ts3plugin):
         if atype != ts3defines.PluginItemType.PLUGIN_SERVER: return
         counts = self.getClientCounts(schid)
         # if counts["hidden"]["total"] > 0:
-        return ["Shown Clients: %s"%counts["visible"]["users"], "Shown Queries: %s"%counts["visible"]["queries"], "Hidden: %s"%counts["hidden"]["total"], "{}".format(counts)]
+        return ["Shown Clients: %s"%counts["visible"]["users"], "Shown Queries: %s"%counts["visible"]["queries"], "Hidden: %s"%counts["hidden"]["total"]] #, "{}".format(counts)
         # return None # ["clients:%s"%clients, "queries:%s"%queries, "max:%s"%max, "visible_users:%s"%visible_users, "visible_queries:%s"%visible_queries]
 
     def onClientMoveEvent(self, schid, clid, oldChannelID, newChannelID, visibility, moveMessage):
