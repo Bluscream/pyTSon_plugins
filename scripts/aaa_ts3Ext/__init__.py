@@ -29,7 +29,7 @@ class aaa_ts3Ext(ts3plugin):
         for schid in schids:
             (err, status) = ts3lib.getConnectionStatus(schid)
             self.onConnectStatusChangeEvent(schid, status, err)
-        log(self, LogLevel.LogLevel_DEBUG, "{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(), self.name, self.author), 0)
+        log(self, LogLevel.LogLevel_DEBUG, "[color=orange]{name}[/color] Plugin for pyTSon by [url=https://github.com/{author}]{author}[/url] loaded.".format(name=self.name, author=self.author), 0)
 
     def processCommand(self, schid, keyword):
             args = keyword.split(' ')
@@ -45,7 +45,7 @@ class aaa_ts3Ext(ts3plugin):
             self.tabs[schid] = {
                 "channelBanGroup": None,
                 "channelModGroup": None,
-                "srv": srv,
+                # "srv": srv,
             }
             err, self.tabs[schid]["name"] = ts3lib.getServerVariable(schid, VirtualServerProperties.VIRTUALSERVER_NAME)
             err, self.tabs[schid]["host"], self.tabs[schid]["port"], self.tabs[schid]["pw"] = ts3lib.getServerConnectInfo(schid)
@@ -59,8 +59,8 @@ class aaa_ts3Ext(ts3plugin):
             err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"] = ts3lib.getChannelConnectInfo(schid, self.tabs[schid]["cid"])
             srv.requestServerGroupList()
             srv.requestChannelGroupList()
-        elif status == ConnectStatus.STATUS_DISCONNECTED:
-            if schid in self.tabs: self.tabs[schid]["status"] = status
+        # elif status == ConnectStatus.STATUS_DISCONNECTED:
+        if schid in self.tabs: self.tabs[schid]["status"] = status
 
     def onServerGroupListEvent(self, schid, serverGroupID, name, atype, iconID, saveDB):
         if atype != GroupType.REGULAR: return
