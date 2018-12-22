@@ -8,58 +8,8 @@
     <bookmark url="file://$PROJECT_DIR$/scripts/addonList/settings.ini" line="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment="% gay LOL but works for python plugins">
-      <change afterPath="$PROJECT_DIR$/scripts/test/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/pyTSon.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ts3lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/ts3lib.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/addonList/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/addonList/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiMove/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiMove/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoDrag/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoDrag/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFlee/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFlee/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/avatarScanner/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/avatarScanner/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/channelWatcher/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/countContacts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/countContacts/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/devTools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/devTools/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dontHide/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dontHide/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/info/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/info/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/kickself/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/kickself/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/massAction/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/massAction/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/metaScanner/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/metaScanner/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/pingHighScore/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/pingHighScore/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/recordSpam/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/recordSpam/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/searchEverything/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/searchEverything/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/shittyExploits/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/shittyExploits/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/shittyExploits/refresh.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/showQueries/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/showQueries/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/silentError/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/silentError/__init__.py" beforeDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -93,20 +43,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="true" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="548" column="42" selection-start-line="548" selection-start-column="42" selection-end-line="548" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+        <entry file="file://$PROJECT_DIR$/include/autorun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="236" lean-forward="true" selection-start-line="236" selection-end-line="236" />
+            <state relative-caret-position="164">
+              <caret line="169" column="80" lean-forward="true" selection-start-line="169" selection-start-column="80" selection-end-line="169" selection-end-column="80" />
+              <folding>
+                <element signature="e#0#94#0" expanded="true" />
+                <marker date="1545465072229" expanded="true" signature="8080:8362" ph="..." />
+                <marker date="1545465072229" expanded="true" signature="8109:8118" ph="..." />
+                <marker date="1545465072229" expanded="true" signature="8228:8237" ph="..." />
+                <marker date="1545465072229" expanded="true" signature="8362:8364" ph="..." />
+                <marker date="1545465072229" expanded="true" signature="8384:8389" ph="..." />
+                <marker date="1545465072229" expanded="true" signature="8468:8473" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -230,7 +180,6 @@
         <option value="$PROJECT_DIR$/scripts/countContacts/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/quickMod/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/gommeHD/__init__.py" />
-        <option value="$PROJECT_DIR$/include/autorun.py" />
         <option value="$PROJECT_DIR$/scripts/treeView/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/BetterServerTree/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverTreeViewRework/__init__.py" />
@@ -266,8 +215,9 @@
         <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/sessionRestore/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" />
-        <option value="$PROJECT_DIR$/include/ts3Ext/__init__.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/include/ts3Ext/__init__.py" />
+        <option value="$PROJECT_DIR$/include/autorun.py" />
       </list>
     </option>
   </component>
@@ -308,12 +258,6 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="include" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
-              <item name="ts3Ext" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -708,20 +652,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00452" summary="% added hotkey tree_view_enter_channel which you can set to Enter to bypass channel passwords">
-      <created>1535079924188</created>
-      <option name="number" value="00452" />
-      <option name="presentableId" value="LOCAL-00452" />
-      <option name="project" value="LOCAL" />
-      <updated>1535079924194</updated>
-    </task>
-    <task id="LOCAL-00453" summary="% now treeview stuff only happens when MainWindow is in focus">
-      <created>1535081888269</created>
-      <option name="number" value="00453" />
-      <option name="presentableId" value="LOCAL-00453" />
-      <option name="project" value="LOCAL" />
-      <updated>1535081888269</updated>
-    </task>
     <task id="LOCAL-00454" summary="% ehh more treeview stuff">
       <created>1535082168227</created>
       <option name="number" value="00454" />
@@ -1051,7 +981,21 @@
       <option name="project" value="LOCAL" />
       <updated>1545462315687</updated>
     </task>
-    <option name="localTasksCounter" value="501" />
+    <task id="LOCAL-00501" summary=":thinking:">
+      <created>1545464727232</created>
+      <option name="number" value="00501" />
+      <option name="presentableId" value="LOCAL-00501" />
+      <option name="project" value="LOCAL" />
+      <updated>1545464727232</updated>
+    </task>
+    <task id="LOCAL-00502" summary=":thinking:">
+      <created>1545465079300</created>
+      <option name="number" value="00502" />
+      <option name="presentableId" value="LOCAL-00502" />
+      <option name="project" value="LOCAL" />
+      <updated>1545465079302</updated>
+    </task>
+    <option name="localTasksCounter" value="503" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1091,7 +1035,7 @@
       <window_info anchor="bottom" id="Changes" order="7" weight="0.32900432" />
       <window_info anchor="bottom" id="Application Servers" order="8" />
       <window_info anchor="bottom" id="Python Console" order="9" sideWeight="0.49051633" weight="0.3275488" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" visible="true" weight="0.18518518" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49733475" weight="0.18518518" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.49946696" side_tool="true" weight="0.3121693" />
       <window_info anchor="bottom" id="Database Changes" order="12" sideWeight="0.49946696" weight="0.3297062" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
@@ -1276,22 +1220,6 @@
     <entry file="file://$PROJECT_DIR$/../../../../Local/Temp/scp43062/home/blu/failover.py" />
     <entry file="file://$PROJECT_DIR$/scripts/BetterServerTree/__init__.py" />
     <entry file="file://$PROJECT_DIR$/scripts/treeView/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/include/autorun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3456">
-          <caret line="209" selection-start-line="209" selection-end-line="209" />
-          <folding>
-            <element signature="e#0#94#0" expanded="true" />
-            <marker date="1535980513247" expanded="true" signature="8080:8362" ph="..." />
-            <marker date="1535980513247" expanded="true" signature="8109:8118" ph="..." />
-            <marker date="1535980513247" expanded="true" signature="8228:8237" ph="..." />
-            <marker date="1535980513247" expanded="true" signature="8362:8364" ph="..." />
-            <marker date="1535980513247" expanded="true" signature="8384:8389" ph="..." />
-            <marker date="1535980513247" expanded="true" signature="8468:8473" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/ts3widgets/serverview.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1060">
@@ -1611,16 +1539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3Ext/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
-          <caret line="746" column="31" lean-forward="true" selection-start-line="746" selection-start-column="31" selection-end-line="746" selection-end-column="31" />
-          <folding>
-            <element signature="e#166#197#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -1631,17 +1549,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="548" column="42" selection-start-line="548" selection-start-column="42" selection-end-line="548" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="236" lean-forward="true" selection-start-line="236" selection-end-line="236" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="547" column="9" selection-start-line="547" selection-start-column="9" selection-end-line="547" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3Ext/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="724" column="21" selection-start-line="724" selection-start-column="21" selection-end-line="724" selection-end-column="21" />
+          <folding>
+            <element signature="e#166#197#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/autorun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="169" column="80" lean-forward="true" selection-start-line="169" selection-start-column="80" selection-end-line="169" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#94#0" expanded="true" />
+            <marker date="1545465072229" expanded="true" signature="8080:8362" ph="..." />
+            <marker date="1545465072229" expanded="true" signature="8109:8118" ph="..." />
+            <marker date="1545465072229" expanded="true" signature="8228:8237" ph="..." />
+            <marker date="1545465072229" expanded="true" signature="8362:8364" ph="..." />
+            <marker date="1545465072229" expanded="true" signature="8384:8389" ph="..." />
+            <marker date="1545465072229" expanded="true" signature="8468:8473" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
