@@ -1,1 +1,0 @@
-# TeaSpeak pyTSon script

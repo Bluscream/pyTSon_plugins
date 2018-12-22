@@ -1,2 +1,0 @@
-# TeaSpeak Bot pyTSon script
-

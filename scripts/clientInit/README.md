@@ -1,2 +1,0 @@
-# Client Init pyTSon script
-

@@ -1,2 +1,0 @@
-# Rotate Nickname pyTSon script
-

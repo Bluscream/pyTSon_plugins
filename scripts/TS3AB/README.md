@@ -1,1 +1,0 @@
-# Auto Join pyTSon script

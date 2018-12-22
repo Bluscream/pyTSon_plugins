@@ -1,2 +1,0 @@
-# MSG Redirect pyTSon script
-

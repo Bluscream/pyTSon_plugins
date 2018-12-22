@@ -1,2 +1,0 @@
-# My Support pyTSon script
-

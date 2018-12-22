@@ -1,2 +1,0 @@
-# Long Messages pyTSon script
-

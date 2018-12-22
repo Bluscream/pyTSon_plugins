@@ -1,2 +1,0 @@
-# Auto Support pyTSon script
-

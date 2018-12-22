@@ -1,2 +1,0 @@
-# Channel Watcher pyTSon script
-

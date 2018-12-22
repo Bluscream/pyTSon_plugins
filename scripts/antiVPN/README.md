@@ -1,2 +1,0 @@
-# Anti VPN pyTSon script
-

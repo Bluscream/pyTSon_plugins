@@ -1,2 +1,0 @@
-# Purge Contacts pyTSon script
-

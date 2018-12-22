@@ -1,2 +1,0 @@
-# Anti Spam pyTSon script
-

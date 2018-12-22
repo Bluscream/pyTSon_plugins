@@ -1,2 +1,0 @@
-# Friend Notifications pyTSon script
-

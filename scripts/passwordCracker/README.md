@@ -1,2 +1,0 @@
-# PW Cracker pyTSon script
-

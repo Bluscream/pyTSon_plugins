@@ -1,2 +1,0 @@
-# Notifier pyTSon script
-

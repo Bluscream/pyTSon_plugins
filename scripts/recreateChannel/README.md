@@ -1,2 +1,0 @@
-# Recreate Channel pyTSon script
-

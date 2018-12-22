@@ -1,2 +1,0 @@
-# Custom Badges pyTSon script
-

@@ -1,2 +1,0 @@
-# Auto Encode pyTSon script
-

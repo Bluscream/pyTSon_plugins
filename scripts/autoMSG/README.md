@@ -1,2 +1,0 @@
-# Auto Message pyTSon script
-

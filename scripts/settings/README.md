@@ -1,2 +1,0 @@
-# Extended Settings pyTSon script
-

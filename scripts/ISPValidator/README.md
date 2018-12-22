@@ -1,2 +1,0 @@
-# ISP Validator pyTSon script
-

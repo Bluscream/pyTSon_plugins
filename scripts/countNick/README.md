@@ -1,2 +1,0 @@
-# Count Nickname pyTSon script
-
