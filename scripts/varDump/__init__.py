@@ -16,17 +16,29 @@ class varDump(ts3plugin):
     hotkeys = []
     filepath = "vars.txt"
     req = 0
+    retcode = "";schid = 0
 
     def __init__(self):
         pass
 
+    def onIncomingClientQueryEvent(self, schid, commandText):
+        if not schid == self.schid and not self.retcode: return
+        self.retcode = "";self.schid = 0
+        ts3lib.printMessageToCurrentTab(commandText)
 
     # 2018-12-23 18:44:16.901684|CRITICAL|Variables     |   |checkItemIndexValid() on unregistered variable | Index:64
-    # noinspection PyArgumentList
+    # noinspection PyArgumentList,PyTypeChecker
     def processCommand(self, schid, keyword):
         args = keyword.split()
         cmd = args.pop(0).lower()
-        if cmd == "req":
+        if cmd == "com":
+            command = " ".join(args)
+            self.retcode = ts3lib.createReturnCode(); self.schid = schid
+            err = ts3lib.requestSendClientQueryCommand(schid, command, self.retcode)
+            if err != ts3defines.ERROR_ok:
+                (_err, msg) = ts3lib.getErrorMessage(err)
+                ts3lib.printMessageToCurrentTab("(%s) %s: %s"%(schid, command, msg))
+        elif cmd == "req":
             clid = int(args.pop(0))
             self.req = clid
             ts3lib.requestClientVariables(schid, clid)
@@ -46,9 +58,6 @@ class varDump(ts3plugin):
                 msg = "%s"%i
                 values = set(item.value for item in ts3enums.ClientProperties)
                 if i in values: msg += " ({})".format(ts3enums.ClientProperties(i))
-                else:
-                    values = set(item.value for item in ts3enums.ClientPropertiesRare)
-                    if i in values: msg += " ({})".format(ts3enums.ClientPropertiesRare(i))
                 msg += ": "
                 (err, var) = ts3lib.getClientSelfVariableAsString(schid, i)
                 if err != ts3defines.ERROR_ok:
@@ -69,9 +78,6 @@ class varDump(ts3plugin):
                 msg = "%s"%i
                 values = set(item.value for item in ts3enums.ClientProperties)
                 if i in values: msg += " ({})".format(ts3enums.ClientProperties(i))
-                else:
-                    values = set(item.value for item in ts3enums.ClientPropertiesRare)
-                    if i in values: msg += " ({})".format(ts3enums.ClientPropertiesRare(i))
                 msg += ": "
                 (err, var) = ts3lib.getClientVariableAsString(schid, clid, i)
                 if err != ts3defines.ERROR_ok:
@@ -92,9 +98,6 @@ class varDump(ts3plugin):
                 msg = "%s"%i
                 values = set(item.value for item in ts3enums.ConnectionProperties)
                 if i in values: msg += " ({})".format(ts3enums.ConnectionProperties(i))
-                else:
-                    values = set(item.value for item in ts3enums.ConnectionPropertiesRare)
-                    if i in values: msg += " ({})".format(ts3enums.ConnectionPropertiesRare(i))
                 msg += ": "
                 (err, var) = ts3lib.getConnectionVariableAsString(schid, clid, i)
                 if err != ts3defines.ERROR_ok:

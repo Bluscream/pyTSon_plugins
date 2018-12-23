@@ -3,12 +3,13 @@ from pluginhost import PluginHost
 from ts3plugin import ts3plugin
 from ts3client import CountryFlags
 from json import loads
+from datetime import timedelta
 from pytsonui import setupUi
 from collections import OrderedDict
 from PythonQt.QtGui import QDialog, QComboBox, QListWidget, QListWidgetItem
 from PythonQt.QtCore import Qt, QUrl
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply, QHostAddress
-from bluscream import saveCfg, loadCfg, timestamp, getScriptPath, confirm #, percent
+from bluscream import saveCfg, loadCfg, timestamp, getScriptPath, confirm, escapeStr, parseCommand, getServerType, ServerInstanceType
 from configparser import ConfigParser
 from traceback import format_exc
 
@@ -30,9 +31,11 @@ class customBan(ts3plugin):
     dlg = None
     cfg = ConfigParser()
     cfg["general"] = { "template": "", "whitelist": "", "ipapi": "True" , "stylesheet": "alternate-background-color: white;background-color: black;"}
-    cfg["last"] = { "ip": "False", "name": "False", "uid": "True", "reason": "", "duration": "0", "expanded": "False", "height": "", "alternate": "False", "ban on doubleclick": "False" }
+    cfg["last"] = { "ip": "False", "name": "False", "uid": "True", "mytsid": "True", "hwid": "True", "reason": "", "duration": "0", "expanded": "False", "height": "", "alternate": "False", "ban on doubleclick": "False" }
     templates = {}
     whitelist = ["127.0.0.1"]
+    waiting_for = (0,0)
+    mytsids = {}
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -51,23 +54,50 @@ class customBan(ts3plugin):
     def stop(self):
         saveCfg(self.ini, self.cfg)
 
+    def onIncomingClientQueryEvent(self, schid, command):
+        cmd = parseCommand(command)
+        if cmd[0] == "notifycliententerview":
+            if not cmd[1]["client_myteamspeak_id"]: return
+            if not schid in self.mytsids: self.mytsids[schid] = {}
+            self.mytsids[schid][cmd[1]["clid"]] = cmd[1]["client_myteamspeak_id"]
+        elif cmd[0] == "notifyclientleftview":
+            if not schid in self.mytsids: return
+            if not cmd[1]["clid"] in self.mytsids[schid]: return
+            del self.mytsids[schid][cmd[1]["clid"]]
+
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
+        print(self.mytsids)
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT or menuItemID != 0: return
-        (err, uid) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        self.waiting_for = (schid, selectedItemID)
+        ts3lib.requestClientVariables(schid, selectedItemID)
+
+    def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUID):
+        if schid != self.waiting_for[0]: return
+        if clid != self.waiting_for[1]: return
+        self.waiting_for = (0, 0)
+        (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if err != ts3defines.ERROR_ok: uid = ""
-        (err, name) = ts3lib.getClientVariable(schid, selectedItemID, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        (err, mytsid) = ts3lib.getClientVariable(schid, clid, 61)
+        if err != ts3defines.ERROR_ok or not mytsid:
+            if schid in self.mytsids and clid in self.mytsids[schid]:
+                mytsid = self.mytsids[schid][clid]
+            else: mytsid = ""
+        (err, name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         if err != ts3defines.ERROR_ok: name = ""
-        (err, ip) = ts3lib.getConnectionVariable(schid, selectedItemID, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        self.clid = selectedItemID
-        if err or not ip: ip = "";ts3lib.requestConnectionInfo(schid, selectedItemID); print("requested for", selectedItemID, "on", schid) #TODO: Check
-        if not self.dlg: self.dlg = BanDialog(self, schid, selectedItemID, uid, name, ip)
-        else: self.dlg.setup(self, schid, selectedItemID, uid, name, ip)
+        self.clid = clid; type = getServerType(schid)
+        (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
+        if err != ts3defines.ERROR_ok or not ip:
+            retCode = ts3lib.createReturnCode()
+            ts3lib.requestConnectionInfo(schid, clid, retCode)
+            (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
+        if not self.dlg: self.dlg = BanDialog(self, schid, clid, uid, name, ip, mytsid, "", type)
+        else: self.dlg.setup(self, schid, clid, uid, name, ip, mytsid, "", type)
         self.dlg.show()
         self.dlg.raise_()
         self.dlg.activateWindow()
 
     def onConnectionInfoEvent(self, schid, clid):
-        print(self.name,"> onConnectionInfoEvent", schid, clid)
+        if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"> onConnectionInfoEvent", schid, clid)
         if not hasattr(self, "clid") or clid != self.clid: return
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         if ip and self.dlg: self.dlg.txt_ip.setText(ip)
@@ -94,7 +124,7 @@ class customBan(ts3plugin):
 class BanDialog(QDialog):
     moveBeforeBan = False
     clid = 0
-    def __init__(self, script, schid, clid, uid, name, ip, parent=None):
+    def __init__(self, script, schid, clid, uid, name, ip, mytsid, hwid, servertype, parent=None):
         try:
             super(QDialog, self).__init__(parent)
             setupUi(self, "%s/ban.ui"%script.path)
@@ -118,12 +148,13 @@ class BanDialog(QDialog):
                 self.lst_reasons.addItem(reason)
                 self.box_reason.addItem(reason)
             self.box_reason.setEditText(script.cfg.get("last", "reason")) # setItemText(0, )
-            self.setup(script, schid, clid, uid, name, ip)
+            self.setup(script, schid, clid, uid, name, ip, mytsid, hwid, servertype)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
-    def setup(self, script, schid, clid, uid, name, ip):
+    def setup(self, script, schid, clid, uid, name, ip, mytsid, hwid, servertype):
         self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
         self.clid = clid
+        if not ip: (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         url = script.cfg.getboolean("general", "ipapi")
         if url:
             self.nwmc_ip = QNetworkAccessManager()
@@ -134,10 +165,23 @@ class BanDialog(QDialog):
         self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
         if ip: self.txt_ip.setText(ip)
         self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
-        if name: self.txt_name.setText(name)
+        if name:
+            regex = ""
+            name = name.strip()
+            # name = re.escape(name)
+            for char in name:
+                if char.isalpha(): regex += "[%s%s]"%(char.upper(), char.lower())
+                else: regex += char
+            self.txt_name.setText(".*%s.*"%regex)
         self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
         if uid: self.txt_uid.setText(uid)
-        self.int_duration.setValue(script.cfg.getint("last", "duration"))
+        self.grp_mytsid.setChecked(script.cfg.getboolean("last", "mytsid"))
+        if mytsid: self.txt_mytsid.setText(mytsid)
+        if servertype == ServerInstanceType.TEASPEAK:
+            self.grp_hwid.setChecked(script.cfg.getboolean("last", "hwid"))
+            if hwid: self.txt_hwid.setText(hwid)
+        else: self.grp_hwid.setVisible(False)
+        self.setDuration(script.cfg.getint("last", "duration"))
 
     def disableReasons(self, enable=False):
         for item in [self.lst_reasons,self.line,self.chk_alternate,self.chk_doubleclick,self.chk_keep]:
@@ -187,7 +231,7 @@ class BanDialog(QDialog):
 
     def on_box_reason_currentTextChanged(self, text):
         if not text in self.templates: return
-        self.int_duration.setValue(self.templates[text])
+        self.setDuration(self.templates[text])
 
     def on_lst_reasons_itemClicked(self, item):
         try: self.box_reason.setEditText(item.text())
@@ -201,15 +245,40 @@ class BanDialog(QDialog):
     def on_chk_alternate_toggled(self, enabled):
         self.disableAlt(enabled)
 
+    def setDuration(self, bantime:int):
+        delta = timedelta(seconds=bantime)
+        days, seconds = delta.days, delta.seconds
+        hours = days * 24 + seconds // 3600
+        minutes = (seconds % 3600) // 60
+        seconds = (seconds % 60)
+        self.int_duration.setValue(seconds)
+        self.int_duration_m.setValue(minutes)
+        self.int_duration_h.setValue(hours)
+        self.int_duration_d.setValue(days)
+
+    """
+    def on_grp_hwid_toggled(self, enabled:bool):
+        if enabled:
+            self.grp_ip.setChecked(True)
+            self.grp_uid.setChecked(True)
+            self.grp_mytsid.setChecked(True)
+            self.grp_name.setEnabled(False)
+        else:
+            self.grp_name.setEnabled(True)
+    """
+
     def on_btn_ban_clicked(self):
         try:
             ip = self.txt_ip.text if self.grp_ip.isChecked() else ""
             name = self.txt_name.text if self.grp_name.isChecked() else ""
             uid = self.txt_uid.text if self.grp_uid.isChecked() else ""
+            mytsid = self.txt_mytsid.text if self.grp_mytsid.isChecked() else ""
+            hwid = self.txt_hwid.text if self.grp_hwid.isVisible() and self.grp_hwid.isChecked() else ""
             reason = self.box_reason.currentText
             if reason[0].isdigit():
                 reason = "§" + reason
-            duration = self.int_duration.value
+            delta = timedelta(seconds=self.int_duration.value,minutes=self.int_duration_m.value,hours=self.int_duration_h.value,days=self.int_duration_d.value)
+            duration = delta.seconds
             if self.moveBeforeBan: ts3lib.requestClientMove(self.schid, self.clid, 26, "")
             # if uid:
             if ip:
@@ -219,11 +288,15 @@ class BanDialog(QDialog):
                 elif check: ts3lib.banadd(self.schid, ip, "", "", duration, reason)
             if name: ts3lib.banadd(self.schid, "", name, "", duration, reason)
             if uid: ts3lib.banadd(self.schid, "", "", uid, duration, reason)
+            if mytsid: ts3lib.requestSendClientQueryCommand(self.schid, "banadd mytsid={} banreason={} time={}".format(mytsid, escapeStr(reason), duration))
+            if hwid: ts3lib.requestSendClientQueryCommand(self.schid, "banadd hwid={} banreason={} time={}".format(hwid, escapeStr(reason), duration))
             # msgBox("schid: %s\nip: %s\nname: %s\nuid: %s\nduration: %s\nreason: %s"%(self.schid, ip, name, uid, duration, reason))
             self.cfg["last"] = {
                 "ip": str(self.grp_ip.isChecked()),
                 "name": str(self.grp_name.isChecked()),
                 "uid": str(self.grp_uid.isChecked()),
+                "mytsid": str(self.grp_mytsid.isChecked()),
+                "hwid": str(self.grp_hwid.isChecked()),
                 "reason": reason,
                 "duration": str(duration),
                 "expanded": str(self.lst_reasons.isVisible()),
