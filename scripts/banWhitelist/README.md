@@ -1,0 +1,1 @@
+# Ban Whitelist pyTSon script

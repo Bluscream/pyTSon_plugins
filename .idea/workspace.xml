@@ -9,13 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
-      <change afterPath="$PROJECT_DIR$/scripts/autoChannelKick/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoChannelKick/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/sessionRestore/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/sessionRestore/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/serverSwitcher/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverSwitcher/settings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/test/__init__.py" beforeDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
@@ -53,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
+            <state relative-caret-position="18900">
               <caret line="1050" column="37" selection-start-line="1050" selection-start-column="35" selection-end-line="1050" selection-end-column="37" />
             </state>
           </provider>
@@ -62,7 +58,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
+            <state relative-caret-position="9954">
               <caret line="553" column="31" selection-start-line="553" selection-start-column="24" selection-end-line="553" selection-end-column="31" />
             </state>
           </provider>
@@ -71,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="253" column="66" lean-forward="true" selection-start-line="253" selection-start-column="37" selection-end-line="253" selection-end-column="66" />
+            <state relative-caret-position="4320">
+              <caret line="253" column="66" selection-start-line="253" selection-start-column="37" selection-end-line="253" selection-end-column="66" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -84,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/scripts/autoChannelKick/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="486">
-              <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+              <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -95,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="100" column="13" lean-forward="true" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
+            <state relative-caret-position="1692">
+              <caret line="100" column="13" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
@@ -107,8 +103,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="875">
-              <caret line="126" column="82" lean-forward="true" selection-start-line="126" selection-start-column="82" selection-end-line="126" selection-end-column="82" />
+            <state relative-caret-position="2052">
+              <caret line="126" column="82" selection-start-line="126" selection-start-column="82" selection-end-line="126" selection-end-column="82" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -715,20 +711,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00460" summary="%">
-      <created>1535259139939</created>
-      <option name="number" value="00460" />
-      <option name="presentableId" value="LOCAL-00460" />
-      <option name="project" value="LOCAL" />
-      <updated>1535259139940</updated>
-    </task>
-    <task id="LOCAL-00461" summary="% calc showing false makes no sense">
-      <created>1535261190086</created>
-      <option name="number" value="00461" />
-      <option name="presentableId" value="LOCAL-00461" />
-      <option name="project" value="LOCAL" />
-      <updated>1535261190087</updated>
-    </task>
     <task id="LOCAL-00462" summary="% möp">
       <created>1535261607851</created>
       <option name="number" value="00462" />
@@ -1058,7 +1040,21 @@
       <option name="project" value="LOCAL" />
       <updated>1545613232868</updated>
     </task>
-    <option name="localTasksCounter" value="509" />
+    <task id="LOCAL-00509" summary=":thinking:">
+      <created>1545664655825</created>
+      <option name="number" value="00509" />
+      <option name="presentableId" value="LOCAL-00509" />
+      <option name="project" value="LOCAL" />
+      <updated>1545664655826</updated>
+    </task>
+    <task id="LOCAL-00510" summary=":thinking:">
+      <created>1545664681362</created>
+      <option name="number" value="00510" />
+      <option name="presentableId" value="LOCAL-00510" />
+      <option name="project" value="LOCAL" />
+      <updated>1545664681362</updated>
+    </task>
+    <option name="localTasksCounter" value="511" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1078,6 +1074,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.13804004" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
@@ -1682,44 +1679,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/__init__.py">
+    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="100" column="13" lean-forward="true" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="18900">
+          <caret line="1050" column="37" selection-start-line="1050" selection-start-column="35" selection-end-line="1050" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9954">
+          <caret line="553" column="31" selection-start-line="553" selection-start-column="24" selection-end-line="553" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="253" column="66" lean-forward="true" selection-start-line="253" selection-start-column="37" selection-end-line="253" selection-end-column="66" />
+        <state relative-caret-position="4320">
+          <caret line="253" column="66" selection-start-line="253" selection-start-column="37" selection-end-line="253" selection-end-column="66" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
+    <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="553" column="31" selection-start-line="553" selection-start-column="24" selection-end-line="553" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3defines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
-          <caret line="1050" column="37" selection-start-line="1050" selection-start-column="35" selection-end-line="1050" selection-end-column="37" />
+        <state relative-caret-position="1692">
+          <caret line="100" column="13" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/serverSwitcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="126" column="82" lean-forward="true" selection-start-line="126" selection-start-column="82" selection-end-line="126" selection-end-column="82" />
+        <state relative-caret-position="2052">
+          <caret line="126" column="82" selection-start-line="126" selection-start-column="82" selection-end-line="126" selection-end-column="82" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
@@ -1729,7 +1726,7 @@
     <entry file="file://$PROJECT_DIR$/scripts/autoChannelKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
-          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
