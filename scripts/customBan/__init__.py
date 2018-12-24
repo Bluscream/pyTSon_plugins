@@ -1,12 +1,12 @@
 import ts3defines, ts3lib, re, pytson
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
-from ts3client import CountryFlags
+from ts3client import CountryFlags, IconPack
 from json import loads
 from datetime import timedelta
 from pytsonui import setupUi
 from collections import OrderedDict
-from PythonQt.QtGui import QDialog, QComboBox, QListWidget, QListWidgetItem, QValidator, QRegExpValidator
+from PythonQt.QtGui import QDialog, QComboBox, QListWidget, QListWidgetItem, QValidator, QRegExpValidator, QIcon, QLineEdit
 from PythonQt.QtCore import Qt, QUrl, QRegExp
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply, QHostAddress
 from bluscream import saveCfg, loadCfg, timestamp, getScriptPath, confirm, escapeStr, parseCommand, getServerType, ServerInstanceType
@@ -124,10 +124,18 @@ class customBan(ts3plugin):
 class BanDialog(QDialog):
     moveBeforeBan = False
     clid = 0
+    countries = None
+    icon_warning = None
+
     def __init__(self, script, schid, clid, uid, name, ip, mytsid, hwid, servertype, parent=None):
         try:
             super(QDialog, self).__init__(parent)
             setupUi(self, "%s/ban.ui"%script.path)
+            try:
+                icons = IconPack.current()
+                icons.open()
+                self.icon_warning = QIcon(icons.icon("WARNING"))
+            except: pass
             self.setAttribute(Qt.WA_DeleteOnClose)
             self.cfg = script.cfg
             self.ini = script.ini
@@ -174,24 +182,16 @@ class BanDialog(QDialog):
             self.countries.open()
         self.disableISP()
         self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
-        self.txt_ip.setText(ip)
+        self.txt_ip.setText(ip); self.on_txt_ip_textChanged(ip)
         self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
-        if name:
-            regex = ""
-            name = name.strip()
-            name = re.escape(name)
-            for char in name:
-                if char.isalpha(): regex += "[%s%s]"%(char.upper(), char.lower())
-                else: regex += char
-            self.txt_name.setText(".*%s.*"%regex)
-        else: self.txt_name.setText("")
+        self.txt_name.setText(name); self.on_txt_name_textChanged(name)
         self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
-        self.txt_uid.setText(uid)
+        self.txt_uid.setText(uid); self.on_txt_uid_textChanged(uid)
         self.grp_mytsid.setChecked(script.cfg.getboolean("last", "mytsid"))
-        self.txt_mytsid.setText(mytsid)
+        self.txt_mytsid.setText(mytsid); self.on_txt_mytsid_textChanged(mytsid)
         if servertype == ServerInstanceType.TEASPEAK:
             self.grp_hwid.setChecked(script.cfg.getboolean("last", "hwid"))
-            self.txt_hwid.setText(hwid)
+            self.txt_hwid.setText(hwid); self.on_txt_hwid_textChanged(hwid)
         else: self.grp_hwid.setVisible(False)
         self.setDuration(script.cfg.getint("last", "duration"))
 
@@ -241,24 +241,39 @@ class BanDialog(QDialog):
             self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
+    def on_txt_name_textChanged(self, text):
+        self.validate(self.txt_name, '^.{3,32}$', text)
+
     def on_txt_uid_textChanged(self, text):
-        if not text: return
-        valid = re.match('^[\w+\/]{27}=$', text)
-        valid_teaspeak = re.match('^music#[\w]{15}$', text)
-        if not valid and not valid_teaspeak: self.txt_uid.setStyleSheet("background-color:#5C4601")
-        else: self.txt_uid.setStyleSheet("")
+        self.validate(self.txt_uid, '^[\w+\/]{27}=$', text) # '^music#[\w]{15}$'
 
     def on_txt_mytsid_textChanged(self, text):
-        if not text: return
-        valid = re.match('^[\w+\/]{44}$', text)
-        if not valid: self.txt_mytsid.setStyleSheet("background-color:#5C4601")
-        else: self.txt_mytsid.setStyleSheet("")
+        self.validate(self.txt_mytsid, '^[\w+\/]{44}$', text)
 
     def on_txt_hwid_textChanged(self, text):
-        if not text: return
-        valid = re.match('^[a-z0-9]{32},[a-z0-9]{32}$', text)
-        if not valid: self.txt_hwid.setStyleSheet("background-color:#5C4601")
-        else: self.txt_hwid.setStyleSheet("")
+        self.validate(self.txt_hwid, '^[a-z0-9]{32},[a-z0-9]{32}$', text)
+
+    def validate(self, elem, pattern, text):
+        try:
+            actions = elem.actions()
+            if not text:
+                elem.setToolTip("")
+                if self.icon_warning:
+                    if len(actions): elem.removeAction(actions[0])
+                else: elem.setStyleSheet("")
+            valid = re.match(pattern, text)
+            if not valid:
+                elem.setToolTip("This %s seems to be invalid!"%elem.parentWidget().title)
+                if self.icon_warning:
+                    if not len(actions): elem.addAction(self.icon_warning, QLineEdit.LeadingPosition)
+                else:
+                    elem.setStyleSheet("background-color:#5C4601")
+            else:
+                elem.setToolTip("")
+                if self.icon_warning:
+                    if len(actions): elem.removeAction(actions[0])
+                else: elem.setStyleSheet("")
+        except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_box_reason_currentTextChanged(self, text):
         if not text in self.templates: return
@@ -297,6 +312,16 @@ class BanDialog(QDialog):
         else:
             self.grp_name.setEnabled(True)
     """
+
+    def on_btn_regex_clicked(self):
+        regex = ""
+        name = self.txt_name.text.strip()
+        self.txt_name.setText(name)
+        name = re.escape(name)
+        for char in name:
+            if char.isalpha(): regex += "[%s%s]"%(char.upper(), char.lower())
+            else: regex += char
+        self.txt_name.setText(".*%s.*"%regex)
 
     def on_btn_ban_clicked(self):
         try:

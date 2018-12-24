@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>725</width>
+    <width>901</width>
     <height>636</height>
    </rect>
   </property>
@@ -100,6 +100,13 @@
            <widget class="QLineEdit" name="txt_name">
             <property name="clearButtonEnabled">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QToolButton" name="btn_regex">
+            <property name="text">
+             <string>R</string>
             </property>
            </widget>
           </item>
