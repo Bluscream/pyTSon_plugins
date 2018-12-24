@@ -378,6 +378,12 @@ def answerMessage(schid:int, targetMode:int, fromID:int, message:str, returnCode
         for msg in message: ts3lib.requestSendPrivateTextMsg(schid, msg, fromID, returnCode)
     else: ts3lib.printMessageToCurrentTab("".join(message))
 
+def validateUid(uid:string):
+    return match('[\w+\/]{27}=', uid) # 'music#[\w]{15}'
+
+def validateMyTSID(mytsid:string):
+    return match('[\w+\/]{44}', mytsid)
+
 #endregion
 #region AntiFlood
 def getAntiFloodSettings(schid):

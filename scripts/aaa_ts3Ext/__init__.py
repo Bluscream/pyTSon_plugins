@@ -1,7 +1,7 @@
 import ts3lib
 from ts3plugin import ts3plugin, PluginHost
 from pytson import getCurrentApiVersion
-from bluscream import timestamp, GroupType, log
+from bluscream import GroupType, log, parseCommand
 from ts3Ext import ts3SessionHost, logLevel
 from ts3defines import *
 
@@ -39,13 +39,24 @@ class aaa_ts3Ext(ts3plugin):
             else: return False
             return True
 
+    """
+    def onIncomingClientQueryEvent(self, schid, command):
+        cmd = parseCommand(command)
+        if cmd[0] == "notifycliententerview":
+            if schid in self.tabs:
+                self.tabs[schid]["clients"][cmd[1]["clid"]] = {
+                    "integrations": cmd[1]["client_integrations"],
+                    "myteamspeak_id": cmd[1]["client_myteamspeak_id"],
+                }
+    """
+
     def onConnectStatusChangeEvent(self, schid, status, errorNumber):
         if status == ConnectStatus.STATUS_CONNECTION_ESTABLISHED:
             srv = self.ts3host.getServer(schid)
             self.tabs[schid] = {
                 "channelBanGroup": None,
                 "channelModGroup": None,
-                # "srv": srv,
+                # "clients": {}
             }
             srv.requestServerGroupList()
             srv.requestChannelGroupList()

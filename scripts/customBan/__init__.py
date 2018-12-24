@@ -6,8 +6,8 @@ from json import loads
 from datetime import timedelta
 from pytsonui import setupUi
 from collections import OrderedDict
-from PythonQt.QtGui import QDialog, QComboBox, QListWidget, QListWidgetItem
-from PythonQt.QtCore import Qt, QUrl
+from PythonQt.QtGui import QDialog, QComboBox, QListWidget, QListWidgetItem, QValidator, QRegExpValidator
+from PythonQt.QtCore import Qt, QUrl, QRegExp
 from PythonQt.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply, QHostAddress
 from bluscream import saveCfg, loadCfg, timestamp, getScriptPath, confirm, escapeStr, parseCommand, getServerType, ServerInstanceType
 from configparser import ConfigParser
@@ -148,6 +148,17 @@ class BanDialog(QDialog):
                 self.lst_reasons.addItem(reason)
                 self.box_reason.addItem(reason)
             self.box_reason.setEditText(script.cfg.get("last", "reason")) # setItemText(0, )
+
+            """
+            ipREX = QRegExp("[\w+\/]{27}=")
+            ipREX.setCaseSensitivity(Qt.CaseInsensitive)
+            ipREX.setPatternSyntax(QRegExp.RegExp)
+
+            regValidator = QRegExpValidator(ipREX,0)
+            self.txt_ip.setValidator(regValidator)
+            """
+            self.txt_ip.setInputMask( "000.000.000.000" );
+
             self.setup(script, schid, clid, uid, name, ip, mytsid, hwid, servertype)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -163,23 +174,24 @@ class BanDialog(QDialog):
             self.countries.open()
         self.disableISP()
         self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
-        if ip: self.txt_ip.setText(ip)
+        self.txt_ip.setText(ip)
         self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
         if name:
             regex = ""
             name = name.strip()
-            # name = re.escape(name)
+            name = re.escape(name)
             for char in name:
                 if char.isalpha(): regex += "[%s%s]"%(char.upper(), char.lower())
                 else: regex += char
             self.txt_name.setText(".*%s.*"%regex)
+        else: self.txt_name.setText("")
         self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
-        if uid: self.txt_uid.setText(uid)
+        self.txt_uid.setText(uid)
         self.grp_mytsid.setChecked(script.cfg.getboolean("last", "mytsid"))
-        if mytsid: self.txt_mytsid.setText(mytsid)
+        self.txt_mytsid.setText(mytsid)
         if servertype == ServerInstanceType.TEASPEAK:
             self.grp_hwid.setChecked(script.cfg.getboolean("last", "hwid"))
-            if hwid: self.txt_hwid.setText(hwid)
+            self.txt_hwid.setText(hwid)
         else: self.grp_hwid.setVisible(False)
         self.setDuration(script.cfg.getint("last", "duration"))
 
@@ -228,6 +240,25 @@ class BanDialog(QDialog):
             if text.strip() in ["127.0.0.1", "0.0.0.0", "255.255.255"]: self.disableISP(); return
             self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+
+    def on_txt_uid_textChanged(self, text):
+        if not text: return
+        valid = re.match('^[\w+\/]{27}=$', text)
+        valid_teaspeak = re.match('^music#[\w]{15}$', text)
+        if not valid and not valid_teaspeak: self.txt_uid.setStyleSheet("background-color:#5C4601")
+        else: self.txt_uid.setStyleSheet("")
+
+    def on_txt_mytsid_textChanged(self, text):
+        if not text: return
+        valid = re.match('^[\w+\/]{44}$', text)
+        if not valid: self.txt_mytsid.setStyleSheet("background-color:#5C4601")
+        else: self.txt_mytsid.setStyleSheet("")
+
+    def on_txt_hwid_textChanged(self, text):
+        if not text: return
+        valid = re.match('^[a-z0-9]{32},[a-z0-9]{32}$', text)
+        if not valid: self.txt_hwid.setStyleSheet("background-color:#5C4601")
+        else: self.txt_hwid.setStyleSheet("")
 
     def on_box_reason_currentTextChanged(self, text):
         if not text in self.templates: return
