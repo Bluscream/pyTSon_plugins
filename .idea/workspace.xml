@@ -10,10 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/bluscream.py" beforeDir="false" afterPath="$PROJECT_DIR$/include/bluscream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/addonList/settings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/addonList/settings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -105,8 +102,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="75" column="62" selection-start-line="75" selection-start-column="62" selection-end-line="75" selection-end-column="62" />
+            <state relative-caret-position="504">
+              <caret line="76" column="82" selection-start-line="76" selection-start-column="61" selection-end-line="76" selection-end-column="82" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -743,13 +740,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00463" summary="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc">
-      <created>1535263004928</created>
-      <option name="number" value="00463" />
-      <option name="presentableId" value="LOCAL-00463" />
-      <option name="project" value="LOCAL" />
-      <updated>1535263004928</updated>
-    </task>
     <task id="LOCAL-00464" summary="% getChannelPassword kann jetzt rechnen&#10;% chatBot kann auch rechnen mit !calc">
       <created>1535265014878</created>
       <option name="number" value="00464" />
@@ -1086,7 +1076,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545688921681</updated>
     </task>
-    <option name="localTasksCounter" value="512" />
+    <task id="LOCAL-00512" summary=":thinking:">
+      <created>1545690687420</created>
+      <option name="number" value="00512" />
+      <option name="presentableId" value="LOCAL-00512" />
+      <option name="project" value="LOCAL" />
+      <updated>1545690687420</updated>
+    </task>
+    <option name="localTasksCounter" value="513" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1756,8 +1753,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="75" column="62" selection-start-line="75" selection-start-column="62" selection-end-line="75" selection-end-column="62" />
+        <state relative-caret-position="504">
+          <caret line="76" column="82" selection-start-line="76" selection-start-column="61" selection-end-line="76" selection-end-column="82" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
