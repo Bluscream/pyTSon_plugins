@@ -384,6 +384,9 @@ def validateUid(uid:string):
 def validateMyTSID(mytsid:string):
     return match('[\w+\/]{44}', mytsid)
 
+def validateHWID(hwid:string):
+    return match('^[a-z0-9]{32},[a-z0-9]{32}$', hwid)
+
 #endregion
 #region AntiFlood
 def getAntiFloodSettings(schid):

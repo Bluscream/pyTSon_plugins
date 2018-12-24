@@ -130,7 +130,7 @@ class serverSwitcher(ts3plugin):
 
         err, host, port, pw = ts3.getServerConnectInfo(schid)
         err, name = ts3.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_NAME)
-        err, nick = ts3.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_NICKNAME)
+        err, nick = ts3.getServerVariable(schid, 83) # ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_NICKNAME
         if err == ts3defines.ERROR_ok and nick.strip(): nick = nick.split(":")
         err, ip = ts3.getConnectionVariableAsString(schid, ownid, ts3defines.ConnectionProperties.CONNECTION_SERVER_IP)
         if err != ts3defines.ERROR_ok or not ip.strip():
