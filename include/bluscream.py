@@ -16,8 +16,8 @@ from gc import get_objects
 from base64 import b64encode
 from pytson import getPluginPath
 from re import match, sub, compile, escape, search, IGNORECASE, MULTILINE
-import ts3lib, os.path, string, random, ts3client, time, sys, codecs, ts3enums
-from ts3enums import GroupType, AntiFloodPoints, color, ServerInstanceType, ContactStatus
+import ts3lib, os.path, string, random, ts3client, time, sys, codecs
+from ts3enums import GroupType, AntiFloodPoints, color, ServerInstanceType, ContactStatus, AddonStatus
 from ts3defines import *
 try: from psutil import Process
 except ImportError:

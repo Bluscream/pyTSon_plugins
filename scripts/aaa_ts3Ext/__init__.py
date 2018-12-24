@@ -70,11 +70,11 @@ class aaa_ts3Ext(ts3plugin):
             err, self.tabs[schid]["token"] = ts3lib.getClientSelfVariable(schid, ClientPropertiesRare.CLIENT_DEFAULT_TOKEN)
             self.tabs[schid]["cid"] = srv.me.channel.channelID # ts3lib.getChannelOfClient(schid, self.tabs[schid]["clid"])
             err, self.tabs[schid]["cpath"], self.tabs[schid]["cpw"] = ts3lib.getChannelConnectInfo(schid, self.tabs[schid]["cid"])
-            self.tabs[schid]["input_muted"] = srv.me.isInputMuted
+            self.tabs[schid]["input_muted"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_INPUT_MUTED) # srv.me.isInputMuted
             err, self.tabs[schid]["input_deactivated"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_INPUT_DEACTIVATED)
             err, self.tabs[schid]["input_enabled"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_INPUT_HARDWARE)
-            self.tabs[schid]["output_muted"] = srv.me.isOutputMuted
-            err, self.tabs[schid]["output_enabled"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_OUTPUT_HARDWARE)
+            self.tabs[schid]["output_muted"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_OUTPUT_MUTED) # srv.me.isOutputMuted
+            err, self.tabs[schid]["output_enabled"] = ts3lib.getClientSel(schid, ClientProperties.CLIENT_OUTPUT_HARDWARE)
         # elif status == ConnectStatus.STATUS_DISCONNECTED:
         if schid in self.tabs: self.tabs[schid]["status"] = status
 
