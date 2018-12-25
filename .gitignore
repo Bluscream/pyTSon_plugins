@@ -228,7 +228,7 @@ Changelog.html
 VERSION
 
 #Own includes
-#!/include/ts3Ext/
+!/include/ts3Ext/
 !/include/autorun.py
 !/include/getvalues.py
 !/include/bluscream.py
