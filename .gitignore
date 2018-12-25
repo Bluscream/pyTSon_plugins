@@ -228,12 +228,15 @@ Changelog.html
 VERSION
 
 #Own includes
+#!/include/ts3Ext/
 !/include/autorun.py
 !/include/getvalues.py
 !/include/bluscream.py
 !/include/ts3enums.py
 !/include/calculator.py
-!/include/ts3Ext/
+!/include/ts3lib.py
+!/include/ts3help.py
+!/include/ts3cloud_proxy.py
 
 #Additional docs
 !docs/pyQt 5.url
@@ -248,9 +251,6 @@ VERSION
 !/docs/Error Codes.url
 !/docs/Permissions.url
 !/docs/Variables.url
-!/include/ts3lib.py
-!/include/ts3help.py
-!/include/ts3cloud_proxy.py
 /scripts/pip.exe
 /scripts/pip3.5.exe
 /scripts/pip3.exe
@@ -263,3 +263,5 @@ VERSION
 /scripts/Steamlinker/
 /scripts_/
 /scripts/sessionRestore/session.json
+scripts/easy_install-3.5.exe
+scripts/easy_install.exe
