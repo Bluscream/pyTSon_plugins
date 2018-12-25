@@ -58,7 +58,7 @@ class Linkinfo(ts3plugin):
     except: apiVersion = 21
     author = "Bluscream, Luemmel"
     description = "Prints a Linkinfolink to the chat."
-    requestAutoload = True
+    requestAutoload = False
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None

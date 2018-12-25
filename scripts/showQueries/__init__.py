@@ -32,7 +32,7 @@ def clientURL(schid=None, clid=0, uid=None, nickname=None, encodednick=None):
 class showQueries(ts3plugin):
     name = "Query Viewer"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Shows you queries in channels.\n\nHomepage: https://github.com/Bluscream/Extended-Info-Plugin\n\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

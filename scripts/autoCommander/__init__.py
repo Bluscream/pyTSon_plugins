@@ -12,7 +12,7 @@ class autoCommanderMode(Enum):
 class autoCommander(ts3plugin):
     name = "Auto Channel Commander"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.1"
     author = "Bluscream"
     description = "Automatically enable channel commander when switching channels.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

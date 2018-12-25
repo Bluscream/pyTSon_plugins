@@ -7,7 +7,7 @@ import chatCommand
 class commandAbout(chatCommand):
     name = "time"
     version = 1
-    requestAutoload = True
+    requestAutoload = False
 
     def __init__(schid, targetMode, toID, fromID, params=""):
         self.answerMessage(schid, targetMode, toID, fromID, "%s v%s by %s" % (self.name, self.version, self.author))

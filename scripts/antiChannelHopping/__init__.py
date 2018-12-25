@@ -8,7 +8,7 @@ class antiChannelHopping(ts3plugin):
     name = "Anti Channel Hopping"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "( .) ( .)"

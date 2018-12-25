@@ -12,7 +12,7 @@ class autoProxy(ts3plugin):
     name = "Automatic Proxy"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.2"
     author = "Bluscream"
     description = "Uses ts3.cloud's ts3proxy service to switch to a proxy on every connection."

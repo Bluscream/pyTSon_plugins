@@ -7,7 +7,7 @@ class autoConnect(ts3plugin):
     name = "Auto Connect"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = ""

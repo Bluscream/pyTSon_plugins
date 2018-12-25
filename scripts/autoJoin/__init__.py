@@ -22,7 +22,7 @@ class autoJoin(ts3plugin):
     name = "Auto Join"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = ""

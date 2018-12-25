@@ -4,7 +4,7 @@ import ts3lib, ts3defines
 
 class testplugin(ts3plugin):
     name = "test"
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     apiVersion = 21
     author = "Splamy"

@@ -4,7 +4,7 @@ import ts3lib, ts3defines, _ts3lib, inspect
 
 class bookmark(ts3plugin):
     name = "Bookmark"
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     apiVersion = 21
     author = "Bluscream"

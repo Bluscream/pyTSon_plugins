@@ -14,7 +14,7 @@ class exporter(ts3plugin):
     name = "Teamspeak Export/Import"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Like YaTQA, just as plugin.\n\nCheck out https://r4p3.net/forums/plugins.68/ for more plugins."

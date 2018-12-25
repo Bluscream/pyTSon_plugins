@@ -5,7 +5,7 @@ from bluscream import timestamp, inputBox
 class forceNick(ts3plugin):
     name = "Force Nickname"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = ""

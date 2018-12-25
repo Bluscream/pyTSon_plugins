@@ -8,7 +8,7 @@ import datetime, os, time
 class fakeMuter(ts3plugin):
     name = "fakeMuter"
     apiVersion = pytson.getCurrentApiVersion()
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Exp"
     description = ""

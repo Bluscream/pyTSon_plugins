@@ -15,7 +15,7 @@ class discordify(ts3plugin):
     name = "Discord Rich Presence"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Show off your big Teamspeak cock on Discord"

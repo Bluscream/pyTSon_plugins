@@ -18,7 +18,7 @@ class customBadges(ts3plugin):
     name = "Custom Badges"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "0.9.5.1"
     author = "Bluscream"
     description = "Automatically sets some badges for you :)"

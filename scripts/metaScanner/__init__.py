@@ -8,7 +8,7 @@ class metaScanner(ts3plugin):
     name = "Scan Meta Data"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1"
     author = "Bluscream"
     description = "Let's you scan the subscribed channels for users that have metaData set"

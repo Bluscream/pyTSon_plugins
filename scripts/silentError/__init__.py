@@ -8,7 +8,7 @@ import ts3defines, ts3lib, re
 class silentError(ts3plugin):
     name = "Anti Flood"
     apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1"
     author = "Bluscream"
     description = ""

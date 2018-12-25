@@ -11,7 +11,7 @@ class YaTQA(ts3plugin):
     name = "YaTQA"
     try: apiVersion = pytson.getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Script to utilize YaTQA"

@@ -185,7 +185,7 @@ class EventlogDialog(QDialog):
         self.model.callback(name, *args)
 
 class eventlog(ts3plugin):
-    requestAutoload = True
+    requestAutoload = False
     name = "eventlog"
     version = "1.0.0"
     apiVersion = 21

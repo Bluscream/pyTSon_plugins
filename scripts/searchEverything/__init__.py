@@ -14,7 +14,7 @@ class searchEverything(ts3plugin):
     name = "Search"
     try: apiVersion = pytson.getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Let's you quickyly search for all kinds of stuff"

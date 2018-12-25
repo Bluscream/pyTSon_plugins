@@ -30,7 +30,7 @@ def clientURL(schid=None, clid=0, uid=None, nickname=None):
 class pingHighScore(ts3plugin):
     name = "Ping High Score"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = ""

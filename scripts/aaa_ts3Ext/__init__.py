@@ -9,7 +9,7 @@ class aaa_ts3Ext(ts3plugin):
     name = "aaa_ts3Ext"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "ts3Ext library implementation"

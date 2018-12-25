@@ -24,7 +24,7 @@ class countContacts(ts3plugin):
     name = "Count Contacts"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 21
-    requestAutoload = True
+    requestAutoload = False
     version = "1"
     author = "Bluscream"
     description = "Gives you numbers"

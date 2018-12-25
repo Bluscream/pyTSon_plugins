@@ -5,7 +5,7 @@ from bluscream import clientURL
 class autoChannelKick(ts3plugin):
     name = "Auto Channel Kick"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = ""

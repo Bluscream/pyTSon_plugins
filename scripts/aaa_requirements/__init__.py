@@ -21,7 +21,7 @@ class aaa_requirements(ts3plugin):
     name = "aaa_requirements"
     try: apiVersion = getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Auto-installs requirements.txt from script directories"

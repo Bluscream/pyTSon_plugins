@@ -4,13 +4,13 @@ from PythonQt.QtCore import QTimer
 from random import randint
 from bluscream import timestamp, clientURL, channelURL
 
-class autoDrag(ts3plugin):
-    name = "Auto Drag"
+class autoKeep(ts3plugin):
+    name = "Auto Keep"
     apiVersion = 22
     requestAutoload = False
     version = "1.0"
     author = "Bluscream"
-    description = "Auto drag specified users around."
+    description = "Auto keep someone around you."
     offersConfigure = False
     commandKeyword = ""
     infoTitle = None
@@ -57,15 +57,8 @@ class autoDrag(ts3plugin):
         if not schid in self.targets: return
         (err, ownID) = ts3lib.getClientID(schid)
         if not clientID in [ownID,self.targets[schid]] : return
-        # (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
+        if newChannelID == ownCID: return
         delay = randint(self.delay[0], self.delay[1])
         ts3lib.printMessageToCurrentTab("{} {}: Auto-dragging {} in channel {} in {}ms".format(timestamp(),self.name,clientURL(schid, self.targets[schid]), channelURL(schid, newChannelID), delay))
         QTimer.singleShot(delay, self.dragTarget)
-
-    def onClientMoveMovedEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moverID, moverName, moverUniqueIdentifier, moveMessage):
-        if not schid in self.targets: return
-        if self.targets[schid] != clientID: return
-        (err, ownID) = ts3lib.getClientID(schid)
-        if clientID != ownID or moverID == ownID: return
-        ts3lib.printMessageToCurrentTab("{} {}: [color=orange]No longer auto-dragging[/color] {} because we were moved!".format(timestamp(),self.name,clientURL(schid, self.targets[schid])))
-        del self.targets[schid]

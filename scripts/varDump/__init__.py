@@ -4,7 +4,7 @@ import ts3lib, ts3defines, ts3enums
 
 class varDump(ts3plugin):
     name = "Dump Variables"
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     apiVersion = 21
     author = "Bluscream"

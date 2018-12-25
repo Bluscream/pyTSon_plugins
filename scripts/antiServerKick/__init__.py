@@ -8,7 +8,7 @@ from ts3defines import LogLevel, TextMessageTargetMode
 class antiServerKick(ts3plugin):
     name = "Anti Server Kick"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Auto rejoin servers after you got kicked."

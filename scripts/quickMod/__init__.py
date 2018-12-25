@@ -11,7 +11,7 @@ class quickMod(ts3plugin):
     name = "Quick Moderation"
     try: apiVersion = pytson.getCurrentApiVersion()
     except: apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Allows you to set hotkeys for quick moderation (ban/restrict/remove tp)"

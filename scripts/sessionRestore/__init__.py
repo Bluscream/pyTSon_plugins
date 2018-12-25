@@ -10,7 +10,7 @@ class sessionRestore(ts3plugin):
     path = getScriptPath(__name__)
     name = "Session Restore"
     apiVersion = 22
-    requestAutoload = True
+    requestAutoload = False
     version = "1.0"
     author = "Bluscream"
     description = "Restores your last session on startup"
@@ -102,6 +102,7 @@ class sessionRestore(ts3plugin):
             if self.first: self.first = False
             print("ts3lib.guiConnect({})".format("\", \"".join(str(x) for x in args)))
             err, schid = ts3lib.guiConnect(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12], args[13])
+            print("TAB: ",tab)
             ts3lib.setClientSelfVariableAsInt(schid, ClientProperties.CLIENT_INPUT_MUTED, tab["input_muted"])
             ts3lib.setClientSelfVariableAsInt(schid, ClientProperties.CLIENT_OUTPUT_MUTED, tab["output_muted"])
             ts3lib.requestChannelSubscribeAll(schid)
