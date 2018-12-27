@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>901</width>
-    <height>636</height>
+    <width>903</width>
+    <height>519</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -171,6 +171,19 @@
         </widget>
        </item>
        <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QLabel" name="label_3">
@@ -232,7 +245,7 @@
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>t</string>
+            <string>d</string>
            </property>
           </widget>
          </item>
@@ -284,8 +297,11 @@
              <height>0</height>
             </size>
            </property>
+           <property name="showGroupSeparator" stdset="0">
+            <bool>false</bool>
+           </property>
            <property name="minimum">
-            <number>-1</number>
+            <number>0</number>
            </property>
            <property name="maximum">
             <number>999999999</number>

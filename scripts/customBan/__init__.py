@@ -165,7 +165,7 @@ class BanDialog(QDialog):
             regValidator = QRegExpValidator(ipREX,0)
             self.txt_ip.setValidator(regValidator)
             """
-            self.txt_ip.setInputMask( "000.000.000.000" );
+            # self.txt_ip.setInputMask( "000.000.000.000" )
 
             self.setup(script, schid, clid, uid, name, ip, mytsid, hwid, servertype)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
@@ -219,8 +219,8 @@ class BanDialog(QDialog):
         try:
             data = reply.readAll().data().decode('utf-8')
             # if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"> checkIP() data:",data)
-            data = loads(data)
             if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Resolved IP ", self.txt_ip.text,":", data)
+            data = loads(data)
             if data["status"] != "success": self.disableISP(); return
             self.txt_isp.setText(data["isp"])
             self.txt_loc.setText("{}, {}, {}".format(data["city"], data["regionName"], data["country"]))
@@ -291,10 +291,12 @@ class BanDialog(QDialog):
     def on_chk_alternate_toggled(self, enabled):
         self.disableAlt(enabled)
 
-    def setDuration(self, bantime:int):
-        delta = timedelta(seconds=bantime)
-        days, seconds = delta.days, delta.seconds
-        hours = days * 24 + seconds // 3600
+    def setDuration(self, bantime):
+        seconds = int(bantime)
+        # delta = timedelta(seconds=bantime)
+        # days, seconds = delta.days, delta.seconds
+        days = seconds // 86400
+        hours = seconds % 86400 // 3600
         minutes = (seconds % 3600) // 60
         seconds = (seconds % 60)
         self.int_duration.setValue(seconds)

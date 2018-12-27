@@ -9,73 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3a1b586-3f40-4ec2-a3d1-1bbb0e4e0c99" name="Default" comment=":thinking:">
-      <change afterPath="$PROJECT_DIR$/.idea/jsonSchemas.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoKeep/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/autoKeep/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/sessionRestore/exit_codes.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/YaTQA/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/YaTQA/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/aaa_requirements/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/aaa_requirements/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/addonList/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/addonList/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiAFK/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiChannelHopping/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiChannelKick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiMove/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiMove/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/antiServerKick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoChannelKick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoChannelKick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoCommander/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoConnect/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoConnect/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoDrag/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoDrag/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFlee/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFlee/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoFollow/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoJoin/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoJoin/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoProxy/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoSubscribe/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/autoTPRequest/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/avatarScanner/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/avatarScanner/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/bookmark/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/bookmark/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/channelGroupChanger/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandAbout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandEval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/chatBot/commands/commandTime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/complaintReminder/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/countContacts/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/countContacts/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/crasher_3_1_7/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customBadges/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBadges/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/customBan/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customDisconnect/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/devTools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/devTools/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/discordify/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/discordify/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/eventlog/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/eventlog/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/exporter/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/exporter/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/fakeMuter/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/fakeMuter/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/forceNick/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/forceNick/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/info/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/info/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/joinChannel/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/kickself/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/kickself/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/linkinfo/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/linkinfo/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/massAction/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/massAction/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/metaScanner/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/metaScanner/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/patch-test/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/patch-test/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/penTest/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/penTest/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/pingHighScore/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/pingHighScore/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/quickMod/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickMod/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/quickPerm/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/quickPerm/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/recordSpam/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/recordSpam/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/searchEverything/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/searchEverything/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverBrowser/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/sessionRestore/TeamSpeak 3 Client Auto Restart.bat" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/sessionRestore/TeamSpeak 3 Client Auto Restart.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/sessionRestore/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/sessionRestore/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/shittyExploits/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/shittyExploits/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/showQueries/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/showQueries/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/silentError/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/silentError/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/teaspeakBot/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/teaspeakBot/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/temp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/temp/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/treeView/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/treeView/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/varDump/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/varDump/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/ban.ui" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/ban.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/customBan/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/customBan/config.ini" afterDir="false" />
     </list>
     <list id="871b1e78-fce4-4839-abed-085bca522c9a" name="Revert: " comment="" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -110,48 +47,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/ts3enums.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10458">
-              <caret line="581" column="17" selection-start-line="581" selection-start-column="6" selection-end-line="581" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/bluscream.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/aaa_ts3Ext/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/autoKeep/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="9" column="27" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1656">
@@ -163,23 +58,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/autoDrag/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/TeamSpeak 3 Client Auto Restart.bat">
+        <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
+            <state relative-caret-position="321">
+              <caret line="302" column="36" selection-start-line="302" selection-start-column="28" selection-end-line="302" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -189,15 +75,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="918">
               <caret line="51" selection-start-line="51" selection-end-line="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/ts3Ext/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12996">
-              <caret line="730" column="20" selection-start-line="730" selection-start-column="20" selection-end-line="730" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -348,7 +225,6 @@
         <option value="$PROJECT_DIR$/include/ts3enums.py" />
         <option value="$PROJECT_DIR$/scripts/customBan/config.ini" />
         <option value="$PROJECT_DIR$/scripts/varDump/__init__.py" />
-        <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/serverSwitcher/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/autoChannelKick/__init__.py" />
         <option value="$PROJECT_DIR$/include/bluscream.py" />
@@ -361,6 +237,7 @@
         <option value="$PROJECT_DIR$/scripts/sessionRestore/__init__.py" />
         <option value="$PROJECT_DIR$/scripts/sessionRestore/exit_codes.csv" />
         <option value="$PROJECT_DIR$/scripts/sessionRestore/TeamSpeak 3 Client Auto Restart.bat" />
+        <option value="$PROJECT_DIR$/scripts/customBan/__init__.py" />
       </list>
     </option>
   </component>
@@ -406,13 +283,7 @@
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
               <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoDrag" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pyTSon" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="autoKeep" type="462c0819:PsiDirectoryNode" />
+              <item name="customBan" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pyTSon" type="b2602c69:ProjectViewProjectNode" />
@@ -797,13 +668,6 @@
       <option name="presentableId" value="Default" />
       <updated>1531761307235</updated>
     </task>
-    <task id="LOCAL-00468" summary="% ehhmm so zeug für autoJoin">
-      <created>1535410454055</created>
-      <option name="number" value="00468" />
-      <option name="presentableId" value="LOCAL-00468" />
-      <option name="project" value="LOCAL" />
-      <updated>1535410454056</updated>
-    </task>
     <task id="LOCAL-00469" summary="% ehhmm so zeug für autoJoin">
       <created>1535416157344</created>
       <option name="number" value="00469" />
@@ -1140,7 +1004,14 @@
       <option name="project" value="LOCAL" />
       <updated>1545739977924</updated>
     </task>
-    <option name="localTasksCounter" value="517" />
+    <task id="LOCAL-00517" summary=":thinking:">
+      <created>1545760908655</created>
+      <option name="number" value="00517" />
+      <option name="presentableId" value="LOCAL-00517" />
+      <option name="project" value="LOCAL" />
+      <updated>1545760908655</updated>
+    </task>
+    <option name="localTasksCounter" value="518" />
     <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
@@ -1159,10 +1030,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1057" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.14605543" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49919486" visible="true" weight="0.14925373" />
       <window_info id="Structure" order="1" sideWeight="0.50080514" side_tool="true" weight="0.124200426" />
       <window_info id="Nl-Palette" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -1638,16 +1509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4320">
-          <caret line="253" column="66" selection-start-line="253" selection-start-column="37" selection-end-line="253" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/autoChannelKick/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -1731,22 +1592,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/ts3Ext/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12996">
+          <caret line="730" column="20" selection-start-line="730" selection-start-column="20" selection-end-line="730" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/'" />
+    <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/TeamSpeak 3 Client Auto Restart.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="10" lean-forward="true" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/autoDrag/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1656">
           <caret line="98" column="36" selection-start-line="98" selection-start-column="36" selection-end-line="98" selection-end-column="36" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/autoDrag/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1758,20 +1634,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ts3Ext/__init__.py">
+    <entry file="file://$PROJECT_DIR$/scripts/customBan/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12996">
-          <caret line="730" column="20" selection-start-line="730" selection-start-column="20" selection-end-line="730" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/'">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/sessionRestore/TeamSpeak 3 Client Auto Restart.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
+        <state relative-caret-position="321">
+          <caret line="302" column="36" selection-start-line="302" selection-start-column="28" selection-end-line="302" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
