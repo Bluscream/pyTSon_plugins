@@ -1,3 +1,4 @@
+# coding=utf-8
 import ts3defines, ts3lib, re, pytson
 from pluginhost import PluginHost
 from ts3plugin import ts3plugin
@@ -30,12 +31,14 @@ class customBan(ts3plugin):
     ini = "%s/config.ini"%path
     dlg = None
     cfg = ConfigParser()
-    cfg["general"] = { "template": "", "whitelist": "", "ipapi": "True" , "stylesheet": "alternate-background-color: white;background-color: black;"}
+    cfg["general"] = { "template": "", "whitelist": "", "ipapi": "http://ip-api.com/json/{ip}" , "stylesheet": "alternate-background-color: white;background-color: black;"}
     cfg["last"] = { "ip": "False", "name": "False", "uid": "True", "mytsid": "True", "hwid": "True", "reason": "", "duration": "0", "expanded": "False", "height": "", "alternate": "False", "ban on doubleclick": "False" }
     templates = {}
     whitelist = ["127.0.0.1"]
     waiting_for = (0,0)
     mytsids = {}
+    regex_time = re.compile(r'^((?P<years>\d+?)y)?((?P<months>\d+?)M)?((?P<days>\d+?)d)?((?P<hours>\d+?)h)?((?P<minutes>\d+?)m)?((?P<seconds>\d+?)s)?$')
+    suffix = ""; prefix = "";
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -66,7 +69,6 @@ class customBan(ts3plugin):
             del self.mytsids[schid][cmd[1]["clid"]]
 
     def onMenuItemEvent(self, schid, atype, menuItemID, selectedItemID):
-        print(self.mytsids)
         if atype != ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT or menuItemID != 0: return
         self.waiting_for = (schid, selectedItemID)
         ts3lib.requestClientVariables(schid, selectedItemID)
@@ -103,10 +105,45 @@ class customBan(ts3plugin):
         if ip and self.dlg: self.dlg.txt_ip.setText(ip)
         del self.clid
 
+    def parse_time(self, time_str):
+        parts = self.regex_time.match(time_str)
+        if not parts:
+            return False
+        parts = parts.groupdict()
+        time_params = {}
+        for (_name, param) in parts.items():
+            if not param: continue
+            name = _name.lower()
+            param = int(param)
+            if name in ["years","year","y"]:
+                name = "days"
+                param = param * 365
+            elif name in ["months","month"] or _name == "M":
+                name = "days"
+                param = param * 30.417
+            time_params[name] = int(param)
+        return timedelta(**time_params)
+
     def loadTemplates(self, reply):
         try:
             data = reply.readAll().data().decode('utf-8')
-            self.templates = loads(data, object_pairs_hook=OrderedDict)
+            # if PluginHost.cfg.getboolean("general", "verbose"):
+            json_data = loads(data, object_pairs_hook=OrderedDict)
+            if "prefix" in json_data: self.prefix = json_data["prefix"]
+            if "suffix" in json_data: self.suffix = json_data["suffix"]
+            templates = json_data["templates"]
+            for reason, duration in templates.items():
+                try:
+                    if isinstance(duration, int): continue
+                    if duration.isdigit(): templates[reason] = int(duration)
+                    elif isinstance(duration, str):
+                        if duration.lower() in ["max","perm","permanent","infinite"]:
+                            templates[reason] = 0; continue
+                        delta = self.parse_time(duration)
+                        if not delta: print("Can't load",reason,duration);continue
+                        templates[reason] = int(delta.total_seconds())
+                except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
+            self.templates = templates
             if PluginHost.cfg.getboolean("general", "verbose"): print(self.name, "> Downloaded ban templates:", self.templates)
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
@@ -142,6 +179,8 @@ class BanDialog(QDialog):
             self.schid = schid
             self.templates = script.templates
             self.whitelist = script.whitelist
+            self.prefix = script.prefix
+            self.suffix = script.suffix
             self.name = script.name
             if script.cfg.getboolean("last", "expanded"):
                 self.disableReasons(True)
@@ -174,7 +213,7 @@ class BanDialog(QDialog):
         self.setWindowTitle("Ban \"{}\" ({})".format(name, clid))
         self.clid = clid
         if not ip: (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        url = script.cfg.getboolean("general", "ipapi")
+        url = script.cfg.get("general", "ipapi")
         if url:
             self.nwmc_ip = QNetworkAccessManager()
             self.nwmc_ip.connect("finished(QNetworkReply*)", self.checkIP)
@@ -238,7 +277,7 @@ class BanDialog(QDialog):
             ip = QHostAddress(text)
             if ip.isNull() or ip.isLoopback() or ip.isMulticast(): self.disableISP(); return
             if text.strip() in ["127.0.0.1", "0.0.0.0", "255.255.255"]: self.disableISP(); return
-            self.nwmc_ip.get(QNetworkRequest(QUrl("http://ip-api.com/json/{ip}".format(ip=text))))
+            self.nwmc_ip.get(QNetworkRequest(QUrl(self.cfg.get("general","ipapi").format(ip=text))))
         except: ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0)
 
     def on_txt_name_textChanged(self, text):
@@ -253,7 +292,7 @@ class BanDialog(QDialog):
     def on_txt_hwid_textChanged(self, text):
         self.validate(self.txt_hwid, '^[a-z0-9]{32},[a-z0-9]{32}$', text)
 
-    def validate(self, elem, pattern, text):
+    def validate(self, elem, pattern, text, reason=None):
         try:
             actions = elem.actions()
             if not text:
@@ -263,7 +302,8 @@ class BanDialog(QDialog):
                 else: elem.setStyleSheet("")
             valid = re.match(pattern, text)
             if not valid:
-                elem.setToolTip("This %s seems to be invalid!"%elem.parentWidget().title)
+                if reason: elem.setToolTip(reason)
+                else: elem.setToolTip("This {name} seems to be invalid!".format(name=elem.parentWidget().title))
                 if self.icon_warning:
                     if not len(actions): elem.addAction(self.icon_warning, QLineEdit.LeadingPosition)
                 else:
@@ -278,6 +318,7 @@ class BanDialog(QDialog):
     def on_box_reason_currentTextChanged(self, text):
         if not text in self.templates: return
         self.setDuration(self.templates[text])
+        self.validate(self.txt_reason, '^[\w+\/]{{,80}}$', text, "This {name} is too long! (max 80 chars)")
 
     def on_lst_reasons_itemClicked(self, item):
         try: self.box_reason.setEditText(item.text())
@@ -299,7 +340,7 @@ class BanDialog(QDialog):
         hours = seconds % 86400 // 3600
         minutes = (seconds % 3600) // 60
         seconds = (seconds % 60)
-        self.int_duration.setValue(seconds)
+        self.int_duration_s.setValue(seconds)
         self.int_duration_m.setValue(minutes)
         self.int_duration_h.setValue(hours)
         self.int_duration_d.setValue(days)
@@ -332,11 +373,15 @@ class BanDialog(QDialog):
             uid = self.txt_uid.text if self.grp_uid.isChecked() else ""
             mytsid = self.txt_mytsid.text if self.grp_mytsid.isChecked() else ""
             hwid = self.txt_hwid.text if self.grp_hwid.isVisible() and self.grp_hwid.isChecked() else ""
-            reason = self.box_reason.currentText
-            if reason[0].isdigit():
-                reason = "§" + reason
-            delta = timedelta(seconds=self.int_duration.value,minutes=self.int_duration_m.value,hours=self.int_duration_h.value,days=self.int_duration_d.value)
-            duration = delta.seconds
+            _reason = self.box_reason.currentText
+            duration = self.templates[_reason]
+            err, ownnick = ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            reason = "{}{}{}".format(self.prefix,_reason,self.suffix)
+            delta = timedelta(seconds=duration)
+            reason = reason.replace("%ownnick%", ownnick).replace("%duration%", str(delta))
+            # if reason[0].isdigit(): reason = "§" + reason
+            delta = timedelta(seconds=self.int_duration_s.value,minutes=self.int_duration_m.value,hours=self.int_duration_h.value,days=self.int_duration_d.value)
+            duration = int(delta.total_seconds())
             if self.moveBeforeBan: ts3lib.requestClientMove(self.schid, self.clid, 26, "")
             # if uid:
             if ip:
@@ -346,8 +391,8 @@ class BanDialog(QDialog):
                 elif check: ts3lib.banadd(self.schid, ip, "", "", duration, reason)
             if name: ts3lib.banadd(self.schid, "", name, "", duration, reason)
             if uid: ts3lib.banadd(self.schid, "", "", uid, duration, reason)
-            if mytsid: ts3lib.requestSendClientQueryCommand(self.schid, "banadd mytsid={} banreason={} time={}".format(mytsid, escapeStr(reason), duration))
-            if hwid: ts3lib.requestSendClientQueryCommand(self.schid, "banadd hwid={} banreason={} time={}".format(hwid, escapeStr(reason), duration))
+            if mytsid: ts3lib.requestSendClientQueryCommand(self.schid, "banadd mytsid={id} banreason={reason} time={duration}".format(id=mytsid, reason=escapeStr(reason), duration=duration))
+            if hwid: ts3lib.requestSendClientQueryCommand(self.schid, "banadd hwid={id} banreason={reason} time={duration}".format(id=hwid, reason=escapeStr(reason), duration=duration))
             # msgBox("schid: %s\nip: %s\nname: %s\nuid: %s\nduration: %s\nreason: %s"%(self.schid, ip, name, uid, duration, reason))
             self.cfg["last"] = {
                 "ip": str(self.grp_ip.isChecked()),
@@ -355,7 +400,7 @@ class BanDialog(QDialog):
                 "uid": str(self.grp_uid.isChecked()),
                 "mytsid": str(self.grp_mytsid.isChecked()),
                 "hwid": str(self.grp_hwid.isChecked()),
-                "reason": reason,
+                "reason": _reason,
                 "duration": str(duration),
                 "expanded": str(self.lst_reasons.isVisible()),
                 "height": str(self.height),

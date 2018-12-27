@@ -717,14 +717,14 @@ def getContactStatus(uid):
     return ret
 #endregion
 #region TS3Hook
-def escapeStr(str,unescape=False):
+def escapeStr(str,unescape=True):
     """
     :param str:
     :param unescape:
     :return:
     """
-    if unescape: return str.replace(" ","\s").replace("|","\p").replace("    ","\t")
-    return str.replace("\s"," ").replace("\p","|").replace("\t","    ")
+    if unescape: return str.replace("\s"," ").replace("\p","|").replace("\t","    ")
+    return str.replace(" ","\s").replace("|","\p").replace("    ","\t")
 
 def parseCommand(cmd):
     """
