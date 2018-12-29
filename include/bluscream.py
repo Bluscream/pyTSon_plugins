@@ -17,7 +17,7 @@ from base64 import b64encode
 from pytson import getPluginPath
 from re import match, sub, compile, escape, search, IGNORECASE, MULTILINE
 import ts3lib, os.path, string, random, ts3client, time, sys, codecs
-from ts3enums import GroupType, AntiFloodPoints, color, ServerInstanceType, ContactStatus, AddonStatus
+from ts3enums import GroupType, AntiFloodPoints, color, ServerInstanceType, ContactStatus, AddonStatus, ServerTreeItemType
 from ts3defines import *
 try: from psutil import Process
 except ImportError:
@@ -339,6 +339,7 @@ def getClientIDByName(name:str, schid:int=0, use_displayname:bool=False, multi:b
     for clid in clids:
         if use_displayname:(err, _name) = ts3lib.getClientDisplayName(schid, clid)
         else: (err, _name) = ts3lib.getClientVariable(schid, clid, ClientProperties.CLIENT_NICKNAME)
+        # print(name, _name, name==_name)
         if name == _name:
             if multi: results.append(clid)
             else: return clid

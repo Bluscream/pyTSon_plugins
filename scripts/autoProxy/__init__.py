@@ -31,7 +31,7 @@ class autoProxy(ts3plugin):
     payload = "input={host}:{port}&proxy="
     whitelist_ini = "%s/whitelist.txt" % path
     whitelist = []
-    backup = {"address": "127.0.0.1:9987", "nickname": "", "phonetic": "", "token": "", "c": "AFK", "cpw": "123", "pw": "123"}
+    backup = {"address": "127.0.0.1:9987", "nickname": "", "phonetic": "", "token": "", "c": "AFK", "cpw": "123", "pw": "123", "uid": ""}
     enabled = False
 
     def __init__(self):
@@ -94,6 +94,8 @@ class autoProxy(ts3plugin):
         if not err and cpw: self.backup["cpw"] = cpw
         err, default_token = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_DEFAULT_TOKEN)
         if not err and default_token: self.backup["token"] = default_token
+        err, uid = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if not err and uid: self.backup["uid"] = uid
         if is_nickname:
             self.nwmc_resolver.get(QNetworkRequest(QUrl("https://named.myteamspeak.com/lookup?name=%s"%host)))
             return
@@ -110,17 +112,26 @@ class autoProxy(ts3plugin):
         proxy_adress = div_alert.find("center").find("b").text
         ts3lib.printMessageToCurrentTab("[color=green]Connecting to proxy %s"%proxy_adress)
         self.proxied = True
-        ts3lib.guiConnect(ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_CURRENT,
-            self.backup["address"], # Name
-            proxy_adress, # Address
-            self.backup["pw"], # Server Password
-            self.backup["nickname"], # Nickname
-            self.backup["c"], # Channel Path
-            self.backup["cpw"], # Channel Password
-            "", "", "", "", "",
-            self.backup["token"], # Privilege Key
-            self.backup["phonetic"] # Phonetic Nickname
-        )
+        args = [
+            ts3defines.PluginConnectTab.PLUGIN_CONNECT_TAB_NEW_IF_CURRENT_CONNECTED, # connectTab: int,
+            self.backup["address"], # serverLabel: Union[str, unicode],
+            proxy_adress, # serverAddress: Union[str, unicode],
+            self.backup["pw"], # serverPassword: Union[str, unicode],
+            self.backup["nickname"], # nickname: Union[str, unicode],
+            self.backup["c"], # channel: Union[str, unicode],
+            self.backup["cpw"], # channelPassword: Union[str, unicode]
+            "", # captureProfile: Union[str, unicode],
+            "", # playbackProfile: Union[str, unicode]
+            "", # hotkeyProfile: Union[str, unicode],
+            "Default Sound Pack (Female)", # soundPack
+            self.backup["uid"], # userIdentity: Union[str, unicode],
+            self.backup["token"], # oneTimeKey: Union[str, unicode],
+            self.backup["phonetic"] # phoneticName: Union[str, unicode]
+        ]
+        print("ts3lib.guiConnect({})".format("\", \"".join(str(x) for x in args)))
+        err, schid = ts3lib.guiConnect(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12], args[13])
+        ts3lib.requestChannelSubscribeAll(schid)
+        print("BACKUP: ",self.backup)
 
     def resolveReply(self, reply):
         resolved = reply.readAll().data().decode('utf-8').strip()

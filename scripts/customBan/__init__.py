@@ -378,6 +378,7 @@ class BanDialog(QDialog):
             err, ownnick = ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
             reason = "{}{}{}".format(self.prefix,_reason,self.suffix)
             delta = timedelta(seconds=duration)
+            print(delta)
             reason = reason.replace("%ownnick%", ownnick).replace("%duration%", str(delta))
             # if reason[0].isdigit(): reason = "§" + reason
             delta = timedelta(seconds=self.int_duration_s.value,minutes=self.int_duration_m.value,hours=self.int_duration_h.value,days=self.int_duration_d.value)
