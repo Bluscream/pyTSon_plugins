@@ -39,6 +39,8 @@ class customBan(ts3plugin):
     mytsids = {}
     regex_time = re.compile(r'^((?P<years>\d+?)y)?((?P<months>\d+?)M)?((?P<days>\d+?)d)?((?P<hours>\d+?)h)?((?P<minutes>\d+?)m)?((?P<seconds>\d+?)s)?$')
     suffix = ""; prefix = "";
+    times = 0
+    retcodes = []
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)
@@ -73,6 +75,18 @@ class customBan(ts3plugin):
         self.waiting_for = (schid, selectedItemID)
         ts3lib.requestClientVariables(schid, selectedItemID)
 
+    def checkVars(self, schid, clid):
+        (err, ownID) = ts3lib.getClientID(schid)
+        (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if ownID == clid: (err, uid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        if err != ts3defines.ERROR_ok or not uid: uid = False
+        (err, mytsid) = ts3lib.getClientVariable(schid, clid, 61)
+        if ownID == clid: (err, mytsid) = ts3lib.getClientList(schid, 61)
+        if err != ts3defines.ERROR_ok or not mytsid: mytsid = False
+        (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
+        if err != ts3defines.ERROR_ok or not ip: ip = False
+        return uid, mytsid, ip
+
     def onUpdateClientEvent(self, schid, clid, invokerID, invokerName, invokerUID):
         if schid != self.waiting_for[0]: return
         if clid != self.waiting_for[1]: return
@@ -88,12 +102,13 @@ class customBan(ts3plugin):
         if err != ts3defines.ERROR_ok: name = ""
         self.clid = clid; type = getServerType(schid)
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        if err != ts3defines.ERROR_ok or not ip:
-            retCode = ts3lib.createReturnCode()
-            ts3lib.requestConnectionInfo(schid, clid, retCode)
+        if (err != ts3defines.ERROR_ok or not ip) or (ip and ip == "None"):
+            retcode = ts3lib.createReturnCode()
+            self.retcodes.append(retcode)
+            ts3lib.requestConnectionInfo(schid, clid, retcode)
             (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        if not self.dlg: self.dlg = BanDialog(self, schid, clid, uid, name, ip, mytsid, "", type)
-        else: self.dlg.setup(self, schid, clid, uid, name, ip, mytsid, "", type)
+        if not self.dlg: self.dlg = BanDialog(self, schid, clid, uid, name, ip , mytsid, "", type)
+        else: self.dlg.setup(self, schid, clid, uid, name, ip, mytsid, ip, type)
         self.dlg.show()
         self.dlg.raise_()
         self.dlg.activateWindow()
@@ -102,8 +117,23 @@ class customBan(ts3plugin):
         if PluginHost.cfg.getboolean("general", "verbose"): print(self.name,"> onConnectionInfoEvent", schid, clid)
         if not hasattr(self, "clid") or clid != self.clid: return
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        if ip and self.dlg: self.dlg.txt_ip.setText(ip)
+        if ip:
+            if ip == "None":
+                retCode = ts3lib.createReturnCode()
+                ts3lib.requestConnectionInfo(schid, clid, retCode)
+                return
+            elif self.dlg: self.dlg.txt_ip.setText(ip)
         del self.clid
+
+    def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
+        if not returnCode in self.retcodes: return
+        self.retcodes.remove(returnCode)
+        (err, ip) = ts3lib.getConnectionVariable(schid, self.clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
+        if not ip or ip != "None": return
+        retCode = ts3lib.createReturnCode()
+        ts3lib.requestConnectionInfo(schid, self.clid, retCode)
+
+    def checkIP(self): pass
 
     def parse_time(self, time_str):
         parts = self.regex_time.match(time_str)
@@ -221,7 +251,7 @@ class BanDialog(QDialog):
             self.countries.open()
         self.disableISP()
         self.grp_ip.setChecked(script.cfg.getboolean("last", "ip"))
-        self.txt_ip.setText(ip); self.on_txt_ip_textChanged(ip)
+        if ip != "None": self.txt_ip.setText(ip); self.on_txt_ip_textChanged(ip)
         self.grp_name.setChecked(script.cfg.getboolean("last", "name"))
         self.txt_name.setText(name); self.on_txt_name_textChanged(name)
         self.grp_uid.setChecked(script.cfg.getboolean("last", "uid"))
