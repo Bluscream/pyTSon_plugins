@@ -120,18 +120,20 @@ class customBan(ts3plugin):
         if ip:
             if ip == "None":
                 retCode = ts3lib.createReturnCode()
+                self.retcodes.append(retCode)
                 ts3lib.requestConnectionInfo(schid, clid, retCode)
                 return
             elif self.dlg: self.dlg.txt_ip.setText(ip)
-        del self.clid
+            del self.clid
 
     def onServerErrorEvent(self, schid, errorMessage, error, returnCode, extraMessage):
         if not returnCode in self.retcodes: return
         self.retcodes.remove(returnCode)
         (err, ip) = ts3lib.getConnectionVariable(schid, self.clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        if not ip or ip != "None": return
-        retCode = ts3lib.createReturnCode()
-        ts3lib.requestConnectionInfo(schid, self.clid, retCode)
+        if ip and ip != "None":
+            retCode = ts3lib.createReturnCode()
+            self.retcodes.append(retCode)
+            ts3lib.requestConnectionInfo(schid, self.clid, retCode)
 
     def checkIP(self): pass
 
@@ -404,14 +406,14 @@ class BanDialog(QDialog):
             mytsid = self.txt_mytsid.text if self.grp_mytsid.isChecked() else ""
             hwid = self.txt_hwid.text if self.grp_hwid.isVisible() and self.grp_hwid.isChecked() else ""
             _reason = self.box_reason.currentText
-            duration = self.templates[_reason]
+            delta = timedelta(seconds=self.int_duration_s.value,minutes=self.int_duration_m.value,hours=self.int_duration_h.value,days=self.int_duration_d.value)
+            # duration = self.templates[_reason]
             err, ownnick = ts3lib.getClientSelfVariable(self.schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
             reason = "{}{}{}".format(self.prefix,_reason,self.suffix)
-            delta = timedelta(seconds=duration)
+            # delta = timedelta(seconds=duration)
             print(delta)
             reason = reason.replace("%ownnick%", ownnick).replace("%duration%", str(delta))
-            # if reason[0].isdigit(): reason = "§" + reason
-            delta = timedelta(seconds=self.int_duration_s.value,minutes=self.int_duration_m.value,hours=self.int_duration_h.value,days=self.int_duration_d.value)
+            # if reason[0].isdigit(): reason = "" + reason
             duration = int(delta.total_seconds())
             if self.moveBeforeBan: ts3lib.requestClientMove(self.schid, self.clid, 26, "")
             # if uid:

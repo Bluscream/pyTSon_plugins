@@ -1,3 +1,6 @@
+SET ERROR_-1073741819=Access Violation
+SET ERROR_-1073740940=A heap has been corrupted.
+SET ERROR_-1073740791=STATUS_STACK_BUFFER_OVERRUN
 SET ERROR_-1=Unknown Error
 SET ERROR_0=The operation completed successfully.
 SET ERROR_1=Incorrect function.
@@ -1782,4 +1785,3 @@ SET ERROR_14077=An HRESULT could not be translated to a corresponding Win32 erro
 SET ERROR_14078=Assembly Protection Error: The catalog for an assembly is missing.
 SET ERROR_14079=The supplied assembly identity is missing one or more attributes which must be present in this context.
 SET ERROR_14080=The supplied assembly identity has one or more attribute names that contain characters not permitted in XML names.
-SET ERROR_-1073741819=Access Violation

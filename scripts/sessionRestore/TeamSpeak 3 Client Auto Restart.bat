@@ -8,8 +8,8 @@ REM set log=%tmp%\logs\autorestart.log
 call "%~dp0\exit_codes.bat"
 setlocal EnableDelayedExpansion
 set ERRORMSG=!ERROR_%LAST_TS_ERROR%!
-echo %ERRORMSG%
-echo "Program terminated at %Date% %Time% with Error %LAST_TS_ERROR% (%ERRORMSG%)"
+REM echo %ERRORMSG%
+echo Program terminated at %Date% %Time% with Error %LAST_TS_ERROR% (%ERRORMSG%)
 FOR /F "eol=| delims=" %%I IN ('DIR %mypath%logs\*.log" /A-D /B /O-D /TW 2^>nul') DO (
     SET NewestFile=%%I
     GOTO FoundFile
@@ -24,7 +24,7 @@ powershell -command "& {Get-Content %NewestFile% | Select-Object -last 15}"
 :CLEAN
 REM start /wait cmd.exe /c "C:\Users\blusc\AppData\Roaming\TS3Client\tools\ts_clear_cache.bat"
 cd %mypath%"
-ECHO Cleaning Caches...
+ECHO Cleaning Caches in "%mypath%"...
 rmdir /s /q %mypath%crashdumps" >NUL 2>NUL
 rmdir /s /q %mypath%logs" >NUL 2>NUL
 rmdir /s /q %mypath%chats" >NUL 2>NUL
