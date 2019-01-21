@@ -1,4 +1,6 @@
+SET ERROR_-805306369=Out of Memory
 SET ERROR_-1073741819=Access Violation
+SET ERROR_-1073741510=CMD Prompt Window was closed during execution of the script
 SET ERROR_-1073740940=A heap has been corrupted.
 SET ERROR_-1073740791=STATUS_STACK_BUFFER_OVERRUN
 SET ERROR_-1=Unknown Error

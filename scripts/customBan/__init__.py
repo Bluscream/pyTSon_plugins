@@ -41,6 +41,7 @@ class customBan(ts3plugin):
     suffix = ""; prefix = "";
     times = 0
     retcodes = []
+    clid = 0
 
     def __init__(self):
         loadCfg(self.ini, self.cfg)

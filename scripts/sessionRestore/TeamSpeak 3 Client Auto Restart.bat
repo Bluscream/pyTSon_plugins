@@ -21,9 +21,14 @@ set NewestFile=%mypath%logs\%NewestFile%"
 ECHO Last log: %NewestFile%
 ECHO ...
 powershell -command "& {Get-Content %NewestFile% | Select-Object -last 15}"
+cd %mypath%"
+:FIXES
+IF %LAST_TS_ERROR%==-1(
+    ren TeaConnect_win64.dll TeaConnect_win64.dll.OFF
+)
+REM %mypath%plugins\
 :CLEAN
 REM start /wait cmd.exe /c "C:\Users\blusc\AppData\Roaming\TS3Client\tools\ts_clear_cache.bat"
-cd %mypath%"
 ECHO Cleaning Caches in "%mypath%"...
 rmdir /s /q %mypath%crashdumps" >NUL 2>NUL
 rmdir /s /q %mypath%logs" >NUL 2>NUL
