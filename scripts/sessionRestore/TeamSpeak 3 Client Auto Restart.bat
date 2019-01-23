@@ -1,6 +1,11 @@
 @Echo off
+set /A CRASHES=0
+set /A RESTARTS=0
+set /A UNKNOWN_ERRORS=0
+set STARTED="%time%"
 :Start
-title TS3Client Auto Restart [%date% - %time%]
+title %date% %time% ^| TS3Client Auto Restart ^| %RESTARTS% Restarts, %CRASHES% Crashes, %UNKNOWN_ERRORS% Unknown Errors since %STARTED%
+set /A RESTARTS=%RESTARTS%+1
 start /wait "TeamSpeak 3 Client (x64) [Console|Plugins]" /AboveNormal "C:\Program Files\TeamSpeak 3 Client\ts3client_win64.exe" -nosingleinstance -console
 SET LAST_TS_ERROR=%ErrorLevel%
 set mypath="%AppData%\TS3Client\
@@ -21,15 +26,27 @@ set NewestFile=%mypath%logs\%NewestFile%"
 ECHO Last log: %NewestFile%
 ECHO ...
 powershell -command "& {Get-Content %NewestFile% | Select-Object -last 15}"
-cd %mypath%"
 :FIXES
-IF %LAST_TS_ERROR%==-1(
-    ren TeaConnect_win64.dll TeaConnect_win64.dll.OFF
+IF %LAST_TS_ERROR%==0 (
+	ECHO TeamSpeak was shut down normally, to restart anyway press any button.
+	pause
 )
-REM %mypath%plugins\
+set /A CRASHES=%CRASHES%+1
+IF %LAST_TS_ERROR%==-1 (
+	set /A UNKNOWN_ERRORS=%UNKNOWN_ERRORS%+1
+	echo Got Unknown Error, trying to fix TeaConnect!
+	cd %mypath%plugins\"
+	copy %mypath%plugins\TeaConnect\config.bak.cfg" %mypath%plugins\TeaConnect\config.cfg"
+	IF %UNKNOWN_ERRORS%==3 (
+		echo Got %UNKNOWN_ERRORS% Unknown Errors already, disabling TeaConnect!
+		set /A UNKNOWN_ERRORS=0
+		ren %mypath%plugins\TeaConnect_win64.dll" %mypath%plugins\TeaConnect_win64.dll.OFF"
+	)
+)
 :CLEAN
+cd %mypath%"
 REM start /wait cmd.exe /c "C:\Users\blusc\AppData\Roaming\TS3Client\tools\ts_clear_cache.bat"
-ECHO Cleaning Caches in "%mypath%"...
+ECHO Cleaning Caches in %mypath%"...
 rmdir /s /q %mypath%crashdumps" >NUL 2>NUL
 rmdir /s /q %mypath%logs" >NUL 2>NUL
 rmdir /s /q %mypath%chats" >NUL 2>NUL

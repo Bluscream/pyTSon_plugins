@@ -1440,6 +1440,7 @@ SET ERROR_9010=DNS name in update or prereq is not in zone.
 SET ERROR_9016=DNS signature failed to verify.
 SET ERROR_9017=DNS bad key.
 SET ERROR_9018=DNS signature validity expired.
+SET ERROR_9059=Start command failed! Make sure the path to TeamSpeak is correct.
 SET ERROR_9501=No records found for given DNS query.
 SET ERROR_9502=Bad DNS packet.
 SET ERROR_9503=No DNS packet.
