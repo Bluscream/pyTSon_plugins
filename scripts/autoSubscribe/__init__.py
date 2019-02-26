@@ -174,6 +174,7 @@ class autoSubscribe(ts3plugin):
                 return ts3lib.requestChannelSubscribe(schid, [cid])
         elif subscribed:
             if (passworded and not pwinname) or blacklisted or music:
+                """
                 ts3lib.printMessageToCurrentTab("==== #{0} ====".format(cid))
                 ts3lib.printMessageToCurrentTab("Subscribed: {0}".format(subscribed))
                 ts3lib.printMessageToCurrentTab("Passworded: {0}".format(passworded))
@@ -181,4 +182,5 @@ class autoSubscribe(ts3plugin):
                 ts3lib.printMessageToCurrentTab("Blacklisted: {0}".format(blacklisted))
                 ts3lib.printMessageToCurrentTab("MusicChannel: {0}".format(music))
                 ts3lib.printMessageToCurrentTab("==== #{0} ====".format(cid))
+                """
                 return ts3lib.requestChannelUnsubscribe(schid, [cid])

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/pyTSon_plugins.iml" filepath="$PROJECT_DIR$/.idea/pyTSon_plugins.iml" />
+      <module fileurl="file://G:/Backup/vonny/home/ts3proxy/.idea/ts3proxy.iml" filepath="G:/Backup/vonny/home/ts3proxy/.idea/ts3proxy.iml" />
     </modules>
   </component>
 </project>

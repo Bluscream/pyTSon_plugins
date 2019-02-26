@@ -15,7 +15,7 @@ class gommeHD(ts3plugin):
     author = "Bluscream"
     description = ""
     offersConfigure = False
-    commandKeyword = ""
+    commandKeyword = "gomme"
     infoTitle = None
     hotkeys = []
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 1, "Ask for avatar", "scripts/%s/ask_for_avatar.png"%__name__),
@@ -37,10 +37,14 @@ class gommeHD(ts3plugin):
         "RGFubnkgUmFkbWFjaGVy=", # Danny Radmacher
         "aHR0cHM6Ly9yNHAzLm5ldA=", # https://r4p3.net
         "player.getDisplayName()",
+        "player.setDisplayName(\"Notch\")",
+        "player.setDisplayName(\"Steve\")",
         "ts3lib.getClientID(schid)",
         "ts3lib.getClientDisplayName()",
         "std::string tanga",
-        "bWlzcyBqZW5uaWZlcg=" # miss jennifer
+        "bWlzcyBqZW5uaWZlcg=", # miss jennifer
+        "{ver} auf {os}",
+        "{con}ste Verbindung :o"
     ]
     settings = { "maxclients": 10, "tp": 23 }
     violations = defaultdict(int)
@@ -55,6 +59,7 @@ class gommeHD(ts3plugin):
     aka = (0, 0, "", "")
     msg = "um nur Personen ab dem ausgewählen Rang die Möglichkeit zu geben, in deinen Channel zu joinen."
     blockMSG = "Diesen Befehl kannst du nur als Channel-Admin ausführen!"
+    successMSG = "Es können nun nur noch Spieler ab dem Rang "
     ignoreMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"', "Bevor du alle Funktionalitäten nutzen kannst, musst du unseren Nutzungsbedingungen und der Datenschutzerklärung zustimmen. Diese findest du auf https://gommehd.net/terms/teamspeak/de/", 'Dies kannst du jedoch mit "abort" rückgängig machen.', 'Viel Spaß auf dem Teamspeak!']
     agreeMSG = 'Schreibe "agree" in den Chat, um deine Zustimmung zu erteilen.'
     steammsg = """
@@ -150,6 +155,8 @@ Ich erklär dir auch wie's geht:
         self.alreadyAsked.append(uid)
         del self.clids[0]
 
+    waitForAgree = False
+
     def onTextMessageEvent(self, schid, targetMode, toID, fromID, fromName, fromUniqueIdentifier, message, ffIgnored):
         if fromUniqueIdentifier != "serveradmin": return
         if fromName != self.gommeBotNick: return
@@ -157,8 +164,9 @@ Ich erklär dir auch wie's geht:
         self.schid = schid; self.gommeBotID = fromID
         if message.endswith(self.msg):
             QTimer.singleShot(self.delay, self.sendMessage)
-        elif message == self.blockMSG: QTimer.singleShot(self.delay, self.sendMessage)
-        elif message == self.agreeMSG: ts3lib.requestSendPrivateTextMsg(self.schid, "agree", self.gommeBotID); return True
+        elif message == self.blockMSG and self.waitForAgree: QTimer.singleShot(self.delay, self.sendMessage)
+        elif message == self.agreeMSG: self.waitForAgree = True; ts3lib.requestSendPrivateTextMsg(self.schid, "agree", self.gommeBotID); return True
+        elif message.startswith(self.successMSG): self.waitForAgree = False
         elif message in self.ignoreMSG: return True
 
     def sendMessage(self):
@@ -258,6 +266,23 @@ Ich erklär dir auch wie's geht:
         if suid != self.suid: return
         (err, name) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_NICKNAME)
         _name = choice(self.nicknames)
+        if "{" in _name:
+            (err, ownID) = ts3lib.getClientID(schid)
+            if "{ver}" in _name:
+                (err, ver) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientProperties.CLIENT_VERSION)
+                _name = _name.replace("{ver}", ver.split(" ")[0])
+            if "{os}" in _name:
+                (err, os) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientProperties.CLIENT_PLATFORM)
+                _name = _name.replace("{os}", os)
+            if "{con}" in _name:
+                # ts3lib.requestClientVariables(schid, ownID)
+                (err, os) = ts3lib.getClientVariable(schid, ownID, ts3defines.ClientPropertiesRare.CLIENT_TOTALCONNECTIONS)
+                _name = _name.replace("{con}", str(os))
         if _name == name: return
         ts3lib.setClientSelfVariableAsString(schid, ts3defines.ClientProperties.CLIENT_NICKNAME, _name)
         ts3lib.flushClientSelfUpdates(schid)
+
+    def processCommand(self, schid, cmd):
+        cmd = cmd.split(' ', 1)
+        command = cmd[0].lower()
+        if command == "nick": self.onConnectStatusChangeEvent(schid, ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED, 0); return True

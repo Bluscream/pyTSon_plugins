@@ -104,7 +104,7 @@ class sessionRestore(ts3plugin):
             err, schid = ts3lib.guiConnect(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12], args[13])
             print("TAB: ",tab)
             ts3lib.setClientSelfVariableAsInt(schid, ClientProperties.CLIENT_INPUT_MUTED, tab["input_muted"])
-            ts3lib.setClientSelfVariableAsInt(schid, ClientProperties.CLIENT_OUTPUT_MUTED, tab["output_muted"])
+            ts3lib.setClientSelfVariableAsInt(schid, ClientProperties.CLIENT_OUTPUT_MUTED, int(tab["output_muted"]))
             ts3lib.requestChannelSubscribeAll(schid)
         except: ts3lib.logMessage(format_exc(), LogLevel.LogLevel_ERROR, "pyTSon", 0)
 

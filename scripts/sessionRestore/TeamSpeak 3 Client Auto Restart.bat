@@ -1,12 +1,23 @@
 @Echo off
+rem Bypass "Terminate Batch Job" prompt.
+if "%~1"=="-FIXED_CTRL_C" (
+   REM Remove the -FIXED_CTRL_C parameter
+   SHIFT
+) ELSE (
+   REM Run the batch with <NUL and -FIXED_CTRL_C
+   CALL <NUL %0 -FIXED_CTRL_C %*
+   GOTO :EOF
+)
 set /A CRASHES=0
 set /A RESTARTS=0
 set /A UNKNOWN_ERRORS=0
 set STARTED="%time%"
+set FLAGS=
 :Start
 title %date% %time% ^| TS3Client Auto Restart ^| %RESTARTS% Restarts, %CRASHES% Crashes, %UNKNOWN_ERRORS% Unknown Errors since %STARTED%
 set /A RESTARTS=%RESTARTS%+1
-start /wait "TeamSpeak 3 Client (x64) [Console|Plugins]" /AboveNormal "C:\Program Files\TeamSpeak 3 Client\ts3client_win64.exe" -nosingleinstance -console
+start /wait "TeamSpeak 3 Client (x64) [Console|Plugins]" /AboveNormal "C:\Program Files\TeamSpeak 3 Client\ts3client_win64.exe" -nosingleinstance -console %FLAGS%
+SET FLAGS=
 SET LAST_TS_ERROR=%ErrorLevel%
 set mypath="%AppData%\TS3Client\
 REM set log=%tmp%\logs\autorestart.log
@@ -34,14 +45,18 @@ IF %LAST_TS_ERROR%==0 (
 set /A CRASHES=%CRASHES%+1
 IF %LAST_TS_ERROR%==-1 (
 	set /A UNKNOWN_ERRORS=%UNKNOWN_ERRORS%+1
-	echo Got Unknown Error, trying to fix TeaConnect!
-	cd %mypath%plugins\"
-	copy %mypath%plugins\TeaConnect\config.bak.cfg" %mypath%plugins\TeaConnect\config.cfg"
+	REM echo Got Unknown Error, trying to fix TeaConnect!
+	REM copy %mypath%plugins\TeaConnect\config.bak.cfg" %mypath%plugins\TeaConnect\config.cfg"
 	IF %UNKNOWN_ERRORS%==3 (
 		echo Got %UNKNOWN_ERRORS% Unknown Errors already, disabling TeaConnect!
-		set /A UNKNOWN_ERRORS=0
-		ren %mypath%plugins\TeaConnect_win64.dll" %mypath%plugins\TeaConnect_win64.dll.OFF"
+		cd %mypath%plugins\"
+		ren TeaConnect_win64.dll TeaConnect_win64.dll.OFF
+	) ELSE IF %UNKNOWN_ERRORS%==5 (
+		echo Got %UNKNOWN_ERRORS% Unknown Errors already, setting safemode
+		set FLAGS=-safemode
 	)
+) ELSE (
+	set /A UNKNOWN_ERRORS=0
 )
 :CLEAN
 cd %mypath%"

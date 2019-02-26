@@ -73,7 +73,7 @@ class aaa_ts3Ext(ts3plugin):
             err, self.tabs[schid]["input_muted"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_INPUT_MUTED) # srv.me.isInputMuted
             err, self.tabs[schid]["input_deactivated"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_INPUT_DEACTIVATED)
             err, self.tabs[schid]["input_enabled"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_INPUT_HARDWARE)
-            err, self.tabs[schid]["output_muted"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_OUTPUT_MUTED) # srv.me.isOutputMuted
+            err, self.tabs[schid]["output_muted"] = ts3lib.getClientSelfVariableAsInt(schid, ClientProperties.CLIENT_OUTPUT_MUTED) # srv.me.isOutputMuted
             err, self.tabs[schid]["output_enabled"] = ts3lib.getClientSelfVariable(schid, ClientProperties.CLIENT_OUTPUT_HARDWARE)
         # elif status == ConnectStatus.STATUS_DISCONNECTED:
         if schid in self.tabs: self.tabs[schid]["status"] = status
@@ -123,7 +123,7 @@ class aaa_ts3Ext(ts3plugin):
         elif flag == ClientProperties.CLIENT_INPUT_HARDWARE:
             self.tabs[schid]["input_enabled"] = newValue
         elif flag == ClientProperties.CLIENT_OUTPUT_MUTED:
-            self.tabs[schid]["output_muted"] = newValue
+            self.tabs[schid]["output_muted"] = int(newValue)
         elif flag == ClientProperties.CLIENT_OUTPUT_HARDWARE:
             self.tabs[schid]["output_enabled"] = newValue
 

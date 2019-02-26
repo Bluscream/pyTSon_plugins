@@ -42,7 +42,7 @@ class dontHide(ts3plugin):
     def onConnectStatusChangeEvent(self, schid, newStatus, errorNumber):
         if newStatus != ts3defines.ConnectStatus.STATUS_CONNECTION_ESTABLISHED: return
         self.schid = schid
-        self.timer.singleShot(1000, self.printHidden)
+        self.timer.singleShot(2000, self.printHidden)
 
     def printHidden(self):
         counts = self.getClientCounts(self.schid)
