@@ -112,6 +112,8 @@ class autoFollow(ts3plugin):
         clid = getClientIDByUID(schid, self.targets[schid])
         if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, clid)
         if ownCID == cid: return
-        pw = getChannelPassword(schid, cid, True)
-        ts3lib.requestClientMove(schid, ownID, cid, pw if pw else "")
+        pw = getChannelPassword(schid, cid, False, False, True)
+        pw = pw if pw else "123"
+        print(schid, ownID, cid, pw)
+        ts3lib.requestClientMove(schid, ownID, cid, pw)
         self.cid = 0

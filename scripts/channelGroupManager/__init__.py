@@ -20,7 +20,7 @@ class channelGroupManager(ts3plugin):
     author = "Bluscream, shitty720"
     description = ""
     offersConfigure = False
-    commandKeyword = ""
+    commandKeyword = "cgm"
     infoTitle = None
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle {}".format(name), ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Manage Members", "")]
     hotkeys = []
@@ -69,7 +69,7 @@ class channelGroupManager(ts3plugin):
             self.execSQL("DROP TABLE '{}';".format(name))
 
     def loadVars(self, schid=False):
-        if not schid: return; schid = ts3lib.getCurrentServerConnectionHandlerID()
+        if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         self.purgeDB(schid)
         # for cid in clist:
         if schid in self.cgroups: return
@@ -85,8 +85,8 @@ class channelGroupManager(ts3plugin):
             if schid in self.cgroups: del self.cgroups[schid]
 
     def onServerUpdatedEvent(self, schid):
-        return # TODO: Check
-        if not self.requestedRVars: return
+        # return # TODO: Check
+        # if not self.requestedRVars: return
         self.requestedRVars = False
         (err, dcgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)
         (err, acgid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_ADMIN_GROUP)
@@ -117,16 +117,43 @@ class channelGroupManager(ts3plugin):
 
     def dbInsert(self, schid, cid, clid, cgid, dbid=None, invokerName="", invokerUID=""):
         if PluginHost.cfg.getboolean("general", "verbose"): print("got clid:", clid)
+        # print("schid",schid,"cid", cid,"clid", clid, "cgid", cgid,"dbid", dbid,"invokerName", invokerName, "invokerUID", invokerUID)
+        # schid 1 cid 3558662 clid 22 cgid 10 dbid None invokerName Server invokerUID
         for v in [schid, cid, clid, cgid]:
             if v is None: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         uuid = "{}|{}".format(suid, cid)
         self.execSQL("CREATE TABLE IF NOT EXISTS `{}` (`TIMESTAMP` NUMERIC, `NAME` TEXT, `UID` TEXT, `DBID` NUMERIC UNIQUE, `CGID` NUMERIC, `INVOKERNAME` TEXT, `INVOKERUID` TEXT);".format(uuid))
-        (err, name) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
-        (err, uid) = ts3lib.getClientVariableAsString(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        ts3lib.requestClientVariables(schid, clid)
+        (err, name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        # if err == ts3defines.ERROR_client_invalid_id:
+            # ts3lib.requestChannelSubscribe(schid, [cid])
+            # (err, name) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+        #  print("CLIENT_NICKNAME", err, ts3lib.getErrorMessage(err)[1], name)
+        (err, uid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
+        # print("CLIENT_UNIQUE_IDENTIFIER", err, ts3lib.getErrorMessage(err)[1], uid)
         if dbid is None: (err, dbid) = ts3lib.getClientVariableAsInt(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_DATABASE_ID)
+        # print("CLIENT_DATABASE_ID", err, ts3lib.getErrorMessage(err)[1], dbid)
+        # NEW CHANNEL CREATED BY 22 as 10
+        # schid 1 cid 3558672 clid 22 cgid 10 dbid None invokerName Server invokerUID
+        # CLIENT_NICKNAME 512 invalid clientID None
+        # CLIENT_UNIQUE_IDENTIFIER 512 invalid clientID None
+        # CLIENT_DATABASE_ID 512 invalid clientID None
+        # INSERT OR REPLACE INTO 'QTRtPmYiSKpMS8Oyd4hyztcvLqU=|3558672' (TIMESTAMP, NAME, UID, DBID, CGID, INVOKERNAME, INVOKERUID) VALUES (1551254795, 'None', 'None', None, 10, 'Server', '')
         q = "INSERT OR REPLACE INTO '{}' (TIMESTAMP, NAME, UID, DBID, CGID, INVOKERNAME, INVOKERUID) VALUES ({}, '{}', '{}', {}, {}, '{}', '{}')".format(uuid, int(time.time()), name, uid, dbid, cgid, invokerName, invokerUID)
+        print(q)
         self.execSQL(q)
+
+    # NEW CHANNEL CREATED BY 22 as 10
+    # schid 1 cid 3558674 clid 22 cgid 10 dbid None invokerName Server invokerUID
+    # Error calling method onNewChannelCreatedEvent of plugin Channel Group Manager: Traceback (most recent call last):
+    #   File "C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/scripts\pluginhost.py", line 395, in invokePlugins
+    #     ret.append(meth(*args))
+    #   File "C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/scripts\channelGroupManager\__init__.py", line 160, in onNewChannelCreatedEvent
+    #     self.dbInsert(schid, cid, clid, self.cgroups[schid]["admin"], None, "Server", "")
+    #   File "C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/scripts\channelGroupManager\__init__.py", line 130, in dbInsert
+    #     ts3lib.requestChannelSubscribe(schid, cid)
+    # AttributeError: Conversion failed with error "No PyList given in function pyListToArray<uint64>"
 
     def onClientChannelGroupChangedEvent(self, schid, channelGroupID, channelID, clientID, invokerClientID, invokerName, invokerUniqueIdentity):
         if not self.toggle: return
@@ -140,6 +167,7 @@ class channelGroupManager(ts3plugin):
     def onNewChannelCreatedEvent(self, schid, cid, channelParentID, clid, invokerName, invokerUniqueIdentifier):
         if not self.toggle: return
         if not schid in self.cgroups: return
+        # print("NEW CHANNEL CREATED BY", clid, "as", self.cgroups[schid]["admin"])
         self.dbInsert(schid, cid, clid, self.cgroups[schid]["admin"], None, "Server", "")
 
     def onDelChannelEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentifier):
@@ -147,6 +175,14 @@ class channelGroupManager(ts3plugin):
         if not schid in self.cgroups: return
         (err, suid) = ts3lib.getServerVariable(schid, ts3defines.VirtualServerProperties.VIRTUALSERVER_UNIQUE_IDENTIFIER)
         self.execSQL("DROP TABLE IF EXISTS '{}|{}';".format(suid,channelID))
+
+    def processCommand(self, schid, cmd):
+        cmd = cmd.split(' ', 1)
+        command = cmd[0].lower()
+        if command == "info":
+            print(self.cgroups)
+            print("toggle:", self.toggle, "requestedCGroups:", self.requestedCGroups, "requestedRVars:", self.requestedRVars)
+            return True
 
 class channelGroupMembersDialog(QWidget): # TODO: https://stackoverflow.com/questions/1332110/selecting-qcombobox-in-qtablewidget
     def __init__(self, channelGroupManager, schid, cid, parent=None):

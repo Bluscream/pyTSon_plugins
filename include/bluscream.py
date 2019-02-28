@@ -294,10 +294,9 @@ def getChannelPassword(schid:int, cid:int, crack:bool=False, ask:bool=False, cal
             nsp = NumericStringParser()
             result = str(nsp.eval(result)).replace(".0", "")
         return result
-    # if name.isdigit(): return name
+    if name.isdigit(): return name
     last = name.split(" ")[-1]
-    if last.isdigit():
-        return last
+    if last.isdigit(): return last
     if crack:
         active = PluginHost.active
         if "PW Cracker" in active: active["PW Cracker"].onMenuItemEvent(schid, PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 1, cid)
