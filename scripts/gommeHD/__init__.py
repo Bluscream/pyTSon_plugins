@@ -63,9 +63,9 @@ class gommeHD(ts3plugin):
     ignoreMSG = ['Gomme-Bot geöffnet! Tippe "ruhe", um den Ruhe-Rang zu erhalten!','Du möchtest nicht mehr angeschrieben werden? Tippe "togglebot"', "Bevor du alle Funktionalitäten nutzen kannst, musst du unseren Nutzungsbedingungen und der Datenschutzerklärung zustimmen. Diese findest du auf https://gommehd.net/terms/teamspeak/de/", 'Dies kannst du jedoch mit "abort" rückgängig machen.', 'Viel Spaß auf dem Teamspeak!']
     agreeMSG = 'Schreibe "agree" in den Chat, um deine Zustimmung zu erteilen.'
     steammsg = """
-Steam: [url]https://steamcommunity.com/profiles/76561198022446661[/url]
+Steam: [url]https://steamcommunity.com/profiles/76561198022446661[/url] ([url=steam://openurl/https://steamcommunity.com/profiles/76561198022446661]In steam[/url])
 Add as friend: [url]steam://friends/add/76561198022446661[/url]
-Common games: [url]https://steamcommunity.com/profiles/76561198022446661/games/?tab=all&games_in_common=1[/url]
+Common games: [url]https://steamcommunity.com/profiles/76561198022446661/games/?tab=all&games_in_common=1[/url] ([url=steam://openurl/https://steamcommunity.com/profiles/76561198022446661/games/?tab=all&games_in_common=1]In steam[/url])
 Account Value: [url]https://steamdb.info/calculator/76561198022446661/?cc=eu[/url]
 Trade URL: [url]https://steamcommunity.com/tradeoffer/new/?partner=62180933&token=fSMYHMGM[/url]
 Live Broadcast: [url]https://steamcommunity.com/broadcast/watch/76561198022446661[/url]

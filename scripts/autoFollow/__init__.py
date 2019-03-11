@@ -101,11 +101,12 @@ class autoFollow(ts3plugin):
         if not cid: (err, cid) = ts3lib.getChannelOfClient(schid, self.targets[schid])
         if ownCID == cid: return
         delay = randint(self.delay[0], self.delay[1])
-        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, clid), channelURL(schid, cid), delay))
+        # pw = getChannelPassword(schid, cid, False, False, True)
+        ts3lib.printMessageToCurrentTab("{} {}: Auto-following {} in channel {} in {}ms".format(timestamp(), self.name, clientURL(schid, clid), channelURL(schid, cid), delay)) # with pw \"{}\" pw
         self.cid = cid
         QTimer.singleShot(delay, self.joinTarget)
 
-    def joinTarget(self, schid = 0, cid = 0):
+    def joinTarget(self, schid = 0, cid = 0, pw = ""):
         if not schid: schid = ts3lib.getCurrentServerConnectionHandlerID()
         (err, ownID) = ts3lib.getClientID(schid)
         (err, ownCID) = ts3lib.getChannelOfClient(schid, ownID)
@@ -114,6 +115,7 @@ class autoFollow(ts3plugin):
         if ownCID == cid: return
         pw = getChannelPassword(schid, cid, False, False, True)
         pw = pw if pw else "123"
-        print(schid, ownID, cid, pw)
+        # print(schid, ownID, cid, pw)
+        ts3lib.printMessageToCurrentTab("{} {}: Now following {} in channel {} with pw \"{}\"".format(timestamp(), self.name, clientURL(schid, clid), channelURL(schid, cid), pw))
         ts3lib.requestClientMove(schid, ownID, cid, pw)
         self.cid = 0

@@ -21,7 +21,7 @@ class channelGroupManager(ts3plugin):
     description = ""
     offersConfigure = False
     commandKeyword = "cgm"
-    infoTitle = None
+    infoTitle = "[b]Channel Members:[/b]"
     menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_GLOBAL, 0, "Toggle {}".format(name), ""), (ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CHANNEL, 0, "Manage Members", "")]
     hotkeys = []
     dbpath = path.join(getPluginPath(), "scripts", "channelGroupManager", "members.db")
@@ -31,7 +31,15 @@ class channelGroupManager(ts3plugin):
     requestedCGroups = False
     waitForDBID = {}
     toggle = True
-
+    """
+    def infoData(self, schid, id, atype):
+        try:
+            if atype == ts3defines.PluginItemType.PLUGIN_CHANNEL:
+                
+                if len(i) < 1: return
+                else: return i
+        except: return
+    """
     def __init__(self):
         # if not self.toggle: self.stop(); return
         self.db = QSqlDatabase.addDatabase("QSQLITE", self.__class__.__name__)
@@ -160,11 +168,18 @@ class channelGroupManager(ts3plugin):
         if not schid in self.waitForDBID: return
         for item in self.waitForDBID[schid]:
             if item[0] != uid: continue
-            ts3lib.printMessageToCurrentTab(str(item))
+            # ts3lib.printMessageToCurrentTab(str(item))
             self.dbInsert(schid, item[3], item[2], self.cgroups[schid]["admin"], dbid, item[5], item[4], item[1], item[0])
             if len(self.waitForDBID[schid]) < 2: del self.waitForDBID[schid]
-            else: self.waitForDBID[schid].remove()
+            # else: self.waitForDBID[schid].remove()
             return
+
+# Error calling method onClientDBIDfromUIDEvent of plugin Channel Group Manager: Traceback (most recent call last):
+    #   File "C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/scripts\pluginhost.py", line 395, in invokePlugins
+    #     ret.append(meth(*args))
+    #   File "C:/Users/blusc/AppData/Roaming/TS3Client/plugins/pyTSon/scripts\channelGroupManager\__init__.py", line 174, in onClientDBIDfromUIDEvent
+    #     else: self.waitForDBID[schid].remove()
+    # TypeError: remove() takes exactly one argument (0 given)
 
     def onDelChannelEvent(self, schid, channelID, invokerID, invokerName, invokerUniqueIdentifier):
         if not self.toggle: return

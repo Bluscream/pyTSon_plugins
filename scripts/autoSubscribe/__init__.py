@@ -8,6 +8,8 @@ from PythonQt.QtCore import QTimer
 blacklist = [".fm", "radio", "music", "musik"]
 passwords = ["pw", "pass"]
 
+# Todo filter godzilla: "7705880"
+
 def isSubscribed(schid, cid):
     (error, subscribed) = ts3lib.getChannelVariableAsInt(schid, cid, ts3defines.ChannelPropertiesRare.CHANNEL_FLAG_ARE_SUBSCRIBED)
     if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("Channel #{} is {}".format(cid, "[color=red]subscribed" if subscribed else "[color=green]not subscribed"))
