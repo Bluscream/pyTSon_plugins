@@ -24,7 +24,9 @@ class rewinsideTV(ts3plugin):
         err, clid = ts3lib.getClientID(schid)
         err, cid = ts3lib.getChannelOfClient(schid, clid)
         (err, cgid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
-        if cgid == 9: self.mychan = cid
+        if cgid == 9:
+            self.mychan = cid
+            ts3lib.printMessageToCurrentTab("{} > New channel is {}".format(self.name, channelURL(schid, cid)))
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
 
     def onClientMoveEvent(self, schid, clientID, oldChannelID, newChannelID, visibility, moveMessage):

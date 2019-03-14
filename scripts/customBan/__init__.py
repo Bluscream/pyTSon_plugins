@@ -82,7 +82,7 @@ class customBan(ts3plugin):
         if ownID == clid: (err, uid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientProperties.CLIENT_UNIQUE_IDENTIFIER)
         if err != ts3defines.ERROR_ok or not uid: uid = False
         (err, mytsid) = ts3lib.getClientVariable(schid, clid, 61)
-        if ownID == clid: (err, mytsid) = ts3lib.getClientList(schid, 61)
+        if ownID == clid: (err, mytsid) = ts3lib.getClientSelfVariableAsString(schid, 61)
         if err != ts3defines.ERROR_ok or not mytsid: mytsid = False
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         if err != ts3defines.ERROR_ok or not ip: ip = False
@@ -119,7 +119,8 @@ class customBan(ts3plugin):
         if not hasattr(self, "clid") or clid != self.clid: return
         (err, ip) = ts3lib.getConnectionVariable(schid, clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
         if ip:
-            if ip == "None":
+            (err, ownid) = ts3lib.getClientID(schid)
+            if ip == "None" and clid != ownid:
                 retCode = ts3lib.createReturnCode()
                 self.retcodes.append(retCode)
                 ts3lib.requestConnectionInfo(schid, clid, retCode)
@@ -131,7 +132,8 @@ class customBan(ts3plugin):
         if not returnCode in self.retcodes: return
         self.retcodes.remove(returnCode)
         (err, ip) = ts3lib.getConnectionVariable(schid, self.clid, ts3defines.ConnectionProperties.CONNECTION_CLIENT_IP)
-        if ip and ip != "None":
+        (err, ownid) = ts3lib.getClientID(schid)
+        if ip and ip != "None" and self.clid != ownid:
             retCode = ts3lib.createReturnCode()
             self.retcodes.append(retCode)
             ts3lib.requestConnectionInfo(schid, self.clid, retCode)
