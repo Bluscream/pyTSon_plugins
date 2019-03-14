@@ -22,9 +22,10 @@ class rewinsideTV(ts3plugin):
     def __init__(self):
         schid = ts3lib.getCurrentServerConnectionHandlerID()
         err, clid = ts3lib.getClientID(schid)
-        err, cid = ts3lib.getChannelOfClient(schid, clid)
-        (err, cgid) = ts3lib.getClientSelfVariable(schid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
+        (err, cgid) = ts3lib.getClientVariable(schid, clid, ts3defines.ClientPropertiesRare.CLIENT_CHANNEL_GROUP_ID)
+        # ts3lib.printMessageToCurrentTab("{}".format(cgid))
         if cgid == 9:
+            err, cid = ts3lib.getChannelOfClient(schid, clid)
             self.mychan = cid
             ts3lib.printMessageToCurrentTab("{} > New channel is {}".format(self.name, channelURL(schid, cid)))
         if PluginHost.cfg.getboolean("general", "verbose"): ts3lib.printMessageToCurrentTab("{0}[color=orange]{1}[/color] Plugin for pyTSon by [url=https://github.com/{2}]{2}[/url] loaded.".format(timestamp(),self.name,self.author))
