@@ -52,7 +52,7 @@ class calendarDialog(QDialog):
         else: self.txt_filter.setEnabled(False)
 
     def on_buttonBox_accepted(self):
-        dlg = calendarDialog(self.purgeContacts, self.box_type.currentText(), self.txt_filter.text(), self.calendarWidget.selectedDate())
+        dlg = previewDialog(self.purgeContacts, self.box_type.currentText(), self.txt_filter.text(), self.calendarWidget.selectedDate())
         dlg.show()
         dlg.raise_()
         dlg.activateWindow()
