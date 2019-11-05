@@ -1,5 +1,5 @@
 packaging==19.2
 pip-review==1.0
 pycryptodome==3.9.0
-pyparsing==2.4.2
+pyparsing==2.4.4
 six==1.12.0
