@@ -1,4 +1,4 @@
-packaging==20.5
+packaging==20.7
 pip-review==1.1.0
 pycryptodome==3.9.9
 pyparsing==2.4.7
