@@ -46,7 +46,7 @@ class channelGroupChanger(ts3plugin):
                 (e, cgid) = ts3lib.getServerVariableAsUInt64(schid, ts3defines.VirtualServerPropertiesRare.VIRTUALSERVER_DEFAULT_CHANNEL_GROUP)
                 x = QDialog()
                 x.setAttribute(Qt.WA_DeleteOnClose)
-                dbid = QInputDialog.getInt(x, "Manually change channel group", "Enter DBID", QLineEdit.Normal)
+                dbid = QInputDialog.getInt(x, "Manually change channel group", "Enter DBID", 0, -2147483647, 2147483647, QLineEdit.Normal)
                 if self.channel == 0:
                     (e, ownID) = ts3lib.getClientID(schid)
                     (e, cid) = ts3lib.getChannelOfClient(schid, ownID)
@@ -117,6 +117,7 @@ class ChannelGroupDialog(QDialog): # https://raw.githubusercontent.com/pathmann/
             self.channelGroups.connect("itemChanged(QListWidgetItem*)", self.onSelectedChannelGroupChangedEvent)
             self.btn_set.connect("clicked(QPushButton*)", self.on_btn_set_clicked)
             self.schid = schid;self.dbid = dbid;self.channel = channel[0]
+	    self.spn_id.setRange(-2147483647, 2147483647);
         except: from traceback import format_exc;ts3lib.logMessage(format_exc(), ts3defines.LogLevel.LogLevel_ERROR, "pyTSon", 0);pass
 
     def onSelectedChannelGroupChangedEvent(self, item):
